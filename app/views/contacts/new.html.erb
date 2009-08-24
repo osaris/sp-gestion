@@ -1,0 +1,28 @@
+<h2 class="title-01">Une question, un besoin ? Contactez-nous !</h2>
+
+<div class="in">
+  <div class="yiiForm">
+    <%- form_tag(:action => :create) do -%>
+        <%= error_messages_for(:form_contact) %>
+        <div class="simple">
+          <label for="form_contact_nom">Nom</label>
+          <%= text_field(:form_contact, :name, :style => 'width: 120px;') %>
+        </div>
+        <div class="simple">
+          <label for="form_contact_email">Adresse email</label>
+          <%= text_field(:form_contact, :email, :style => 'width: 120px;') %>
+        </div>
+        <div class="simple">
+          <label for="form_contact_subject">Sujet</label>
+          <%= text_field(:form_contact, :subject, :style => 'width: 250px;') %>
+        </div>
+        <div class="simple">
+          <label for="form_contact_subject">Message</label>
+          <%= text_area(:form_contact, :message, :style => 'width: 250px; height:100px') %>
+        </div>
+        <div class="action">
+          <%= submit_tag("Envoyer") %>
+        </div>
+    <%- end -%>
+  </div>
+</div>

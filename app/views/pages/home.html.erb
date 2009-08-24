@@ -1,0 +1,156 @@
+<h2 class="title-01">Gérer tous les aspects de votre CIS grâce à notre logiciel en ligne</h2>
+
+<div class="in">
+
+    <!-- Topstory -->
+    <div class="box">
+        <div id="topstory-img">
+          <%= image_tag("front/screenshot.png") %>
+        </div>
+        <div id="topstory-txt">
+
+            <h3>Simplicité, efficacité, rapidité</h3>
+
+            <p class="nomb">Oubliez les listes papier, les tableaux et les lettres types, SP-Gestion va <b>simplifier   
+              toute la gestion de votre centre</b>. Avec SP-Gestion vous <b>gagnez du temps</b>, vous <b>accédez aux 
+              informations</b> dont vous avez besoin quand vous en avez besoin et vous <b>prenez ainsi les bonnes
+              décisions</b>.</p>
+              
+            <div style="margin-top:10px; border:2px solid #df0000; padding:5px;">
+              <div style="width:100%; text-align:center;font-size:110%;font-weight:bold;margin-bottom: 5px;">
+                Soyez informé de la disponibilité de SP-Gestion !
+              </div>
+			
+              <?php $this->renderPartial('/newsletter/_form',array(
+                  'newsletter'=>$newsletter
+              )); ?>			
+
+              <span style="font-size:80%;">Vous recevrez un seul email lorsque SP-Gestion sera disponible, aucune pub ou pourriel/spam.</span>
+            </div>
+
+        </div> <!-- /topstory-txt -->
+
+    </div> <!-- /box -->
+
+    <!-- Older articles -->
+    <h4 class="title-02"><span>Fonctionnalités</span></h4>
+
+    <div class="cols5050 box">
+
+        <!-- Left column -->
+        <div class="col">
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/contact_list.png", :alt => "Gestion du personnel") %>                  
+                </div>
+                <div class="article-txt">
+                    <h4>Personnel</h4>
+                    <p>Actifs, vétérans, JSP, formations, disponibilités...</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/history.png", :alt => "Gestion et saisie des gardes") %>
+                </div>
+                <div class="article-txt">
+                    <h4>Gardes</h4>
+                    <p>Saisie des disponibilités et préparation des feuilles de gardes.</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/money.png", :alt => "Calcul des vacations en fonction des grades, des durées d'intervention, des périodes...") %>                  
+                </div>
+                <div class="article-txt">
+                    <h4>Vacations</h4>
+                    <p>Calcul du montant des vacations par SP d'un simple clic.</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+        </div> <!-- /col -->
+
+        <!-- Right column -->
+        <div class="col">
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/delivery.png", :alt => "Statistiques sur les véhicules (VPI, VTU, VTULE, FPTL)") %>
+                </div>
+                <div class="article-txt">
+                    <h4>Véhicules</h4>
+                    <p>Suivi du nombre d'interventions par véhicules, du matériel...</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/exec.png", :alt => "Listing de matériel, rappel de péremption, check list") %>
+                </div>
+                <div class="article-txt">
+                    <h4>Matériel</h4>
+                    <p>Liste de matériel, gestion des dates de péremptions...</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/chart.png", :alt => "Statistiques des types d'intervention (feu, accidents, secours à victime)") %>
+                </div>
+                <div class="article-txt">
+                    <h4>Statistiques</h4>
+                    <p>Nombre d'interventions, répartition...</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+
+        </div> <!-- /col -->                       
+
+        <!-- Right column -->
+        <div class="col f-right">
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/documents.png", :alt => "Rapports d'interventions pour obtenir des statistiques (heure de sortie, véhicules, moyens utilisés, personnel)") %>
+                </div>
+                <div class="article-txt">
+                    <h4>Rapports d'interventions</h4>
+                    <p>Saisie des interventions pour obtenir les statistiques.</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/mail.png", :alt => "Convocations, saisie des dates, choix des tenues, historique des convocations passées, rappel de cérémonies") %>
+                </div>
+                <div class="article-txt">
+                    <h4>Convocations</h4>
+                    <p>Préparation des convocations, statistiques de présence...</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+            <!-- Article -->
+            <div class="article box">
+                <div class="article-img">
+                  <%= image_tag("front/user.png", :alt => "Gestion des tenues pour le fourrier (liste du matériel prêté à chaque SP ou JSP)") %>                  
+                </div>
+                <div class="article-txt">
+                    <h4>Tenues</h4>
+                    <p>Listes des prêts, suivi des échanges, stock...</p>
+                </div> <!-- /article-txt -->
+            </div> <!-- /article -->
+
+        </div> <!-- /col -->
+
+    </div> <!-- /cols5050 -->
+
+</div> <!-- /in -->
