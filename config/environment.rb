@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -42,7 +42,7 @@ Rails::Initializer.run do |config|
   config.action_controller.session_store = :sql_session_store
   
   config.gem "authlogic",         :version => '2.1.1'  
-  config.gem "haml",              :version => "2.2.2"
+  config.gem "haml",              :version => "2.2.3"
   config.gem "google_analytics",  :version => "1.1.5",  :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
 end
 

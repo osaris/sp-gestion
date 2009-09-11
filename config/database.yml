@@ -18,11 +18,11 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: sp-gestion_development
+  database: spgestion_development
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,18 +31,18 @@ test:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: sp-gestion_test
+  database: spgestion_test
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
+  host: localhost
 
 production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: sp-gestion_production
+  database: spgestion_production
   pool: 5
   username: root
   password: 
-  socket: /tmp/mysql.sock
+  host: localhost
