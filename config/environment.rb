@@ -6,6 +6,10 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+require 'memcache'
+
+SESSION_CACHE = MemCache.new('localhost:11211', :namespace => 'spgestion_session')
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -33,21 +37,19 @@ Rails::Initializer.run do |config|
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
-  config.time_zone = 'UTC'
+  # config.time_zone = 'UTC'
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
-  # config.i18n.default_locale = :de
+  config.i18n.default_locale = :fr
   
-  config.action_controller.session_store = :sql_session_store
+  config.action_controller.session_store = :mem_cache_store
+  config.action_controller.session = {:cache => SESSION_CACHE, :key => '_spgestion_session', :expires => 1.hour}  
   
-  config.gem "authlogic",         :version => '2.1.1'  
-  config.gem "haml",              :version => "2.2.3"
-  config.gem "google_analytics",  :version => "1.1.5",  :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
+  config.gem "authlogic",           :version => "2.1.2"
+  config.gem "haml",                :version => "2.2.5"
+  config.gem "google_analytics",    :version => "1.1.5",  :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
 end
-
-# use SqlSessionStore for performance
-SqlSessionStore.session_class = MysqlSession
 
 # Google Analytics configuration
 Rubaidh::GoogleAnalytics.tracker_id = "UA-1194205-7"

@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class PagesControllerTest < ActionController::TestCase
+class NewsletterTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
-    #FIXME write a functional test    
+    #FIXME write a unit test    
     assert true
   end
 end

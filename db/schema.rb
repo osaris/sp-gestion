@@ -9,20 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090624201936) do
+ActiveRecord::Schema.define(:version => 20090913193059) do
 
   create_table "newsletters", :force => true do |t|
-    t.string "email",                    :null => false
-    t.string "activation", :limit => 35, :null => false
-  end
-
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id"
-    t.text     "data"
+    t.string   "email"
+    t.string   "activation_key", :limit => 64
+    t.datetime "activated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "sessions", ["session_id"], :name => "session_id_idx"
 
 end

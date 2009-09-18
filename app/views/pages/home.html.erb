@@ -20,11 +20,16 @@
               <div style="width:100%; text-align:center;font-size:110%;font-weight:bold;margin-bottom: 5px;">
                 Soyez informé de la disponibilité de SP-Gestion !
               </div>
-			
-              <?php $this->renderPartial('/newsletter/_form',array(
-                  'newsletter'=>$newsletter
-              )); ?>			
-
+                     
+              <%- if flash[:notice] -%>
+                <%= flash_helper() %>
+              <%- elsif flash[:error] -%>
+                <%= flash_helper() %>
+                <%= render(:partial => "newsletters/new") %>
+              <%- else -%>
+                <%= render(:partial => "newsletters/new") %>              
+              <%- end -%>
+                            
               <span style="font-size:80%;">Vous recevrez un seul email lorsque SP-Gestion sera disponible, aucune pub ou pourriel/spam.</span>
             </div>
 

@@ -9,9 +9,9 @@
 
     <link rel="shortcut icon" href="/images/favicon.ico" />
 
-    <%= stylesheet_link_tag("reset","main","style", :media => "screen, projection", :cache => "global_public") %>
-    <%= stylesheet_link_tag("print", :media => "print")%>
-    <!--[if lte IE 6]><%= stylesheet_link_tag("main-msie")%><![endif]-->
+    <%= stylesheet_link_tag("front/reset","front/main","front/style", :media => "screen, projection", :cache => "global_public") %>
+    <%= stylesheet_link_tag("front/print", :media => "print") %>
+    <!--[if lte IE 6]><%= stylesheet_link_tag("front/main-msie")%><![endif]-->
     
     <title>SP-Gestion - Gestion de centres d'intervention et de secours</title>
 </head>
@@ -33,8 +33,8 @@
       <!-- Navigation -->
       <div id="nav" class="box">
         <ul>
-          <li class="<%= params[:action] == "home" ? 'active' : '' %>"><a href="/home">Accueil</a></li>
-          <li class="<%= params[:action] == "contact" ? 'active' : '' %>"><a href="/contact">Contact</a></li>
+          <li class="active"><%= link_to("Accueil", home_page_path())%></li>
+          <li><%= link_to("Blog", "http://blog.sp-gestion.fr") %></li>          
         </ul>
       </div> <!-- /nav -->
 
@@ -62,7 +62,7 @@
       <!-- Footer -->
       <div id="footer" class="box">
 
-          <p class="f-left">Copyright &copy; 2009 imagineapp</p>
+          <p class="f-left">Copyright &copy; 2009 imagineapp - <%= link_to("Contactez-nous !", "http://blog.sp-gestion.fr")%></p>
 
       </div> <!-- /box -->
 
