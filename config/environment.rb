@@ -44,11 +44,13 @@ Rails::Initializer.run do |config|
   config.i18n.default_locale = :fr
   
   config.action_controller.session_store = :mem_cache_store
-  config.action_controller.session = {:cache => SESSION_CACHE, :key => '_spgestion_session', :expires => 1.hour}  
+  config.action_controller.session = {:cache => SESSION_CACHE, :key => '_spgestion_session',
+                                      :secret => "41da19045c1289f045a2797ace137c01908f49d5522ade1da1549022bd40202d663891fbca9dfc4d0f7a092e36ff5b325d38fe6cb22055d843802f37228c1868"}
   
-  config.gem "authlogic",           :version => "2.1.2"
-  config.gem "haml",                :version => "2.2.5"
-  config.gem "google_analytics",    :version => "1.1.5",  :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
+  config.gem "authlogic",                 :version => "2.1.2"
+  config.gem "haml",                      :version => "2.2.5"
+  config.gem "google_analytics",          :version => "1.1.5",    :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
+  config.gem "fiveruns-memcache-client",  :version => "1.5.0.5",  :lib => "memcache"
 end
 
 # Google Analytics configuration
