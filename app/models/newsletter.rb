@@ -21,7 +21,7 @@ class Newsletter < ActiveRecord::Base
   end
   
   def send_activation_email
-    NewsletterMailer.deliver_activation_email(self)
+    #NewsletterMailer.deliver_activation_email(self)
   end
   
   def rand_str(len)

@@ -8,6 +8,5 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   
-  # FIXME write CSS for fieldsWithError and Flash
   # TODO create newsletter mailing model
 end
