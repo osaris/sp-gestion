@@ -15,7 +15,7 @@ class NewslettersController < ApplicationController
     if @newsletter
       @newsletter.activate!
       flash.now[:notice] = "Nous avons validé votre adresse email. Vous recevrez un email dès que SP-Gestion sera disponible."
-      render('pages/home')      
+      render('pages/home')
     else
       redirect_to(home_page_path)
     end

@@ -21,13 +21,11 @@
                 Soyez informé de la disponibilité de SP-Gestion !
               </div>
                      
-              <%- if flash[:notice] -%>
-                <%= flash_helper() %>
-              <%- elsif flash[:error] -%>
-                <%= flash_helper() %>
+              <%- if @newsletter.new_record? -%>
+				<%= flash_helper() unless @newsletter.errors.empty? %>
                 <%= render(:partial => "newsletters/new") %>
               <%- else -%>
-                <%= render(:partial => "newsletters/new") %>              
+                <%= flash_helper() %>
               <%- end -%>
                             
               <span style="font-size:80%;">Vous recevrez un seul email lorsque SP-Gestion sera disponible, aucune pub ou pourriel/spam.</span>
