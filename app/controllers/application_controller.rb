@@ -2,11 +2,18 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
+  layout("front")
+
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  filter_parameter_logging :password
   
-  # TODO create newsletter mailing model
+  rescue_from ActionController::RoutingError, :with => :redirect_to_homepage
+  
+  private
+
+  def redirect_to_homepage
+    redirect_to(root_pub_path)
+  end    
 end

@@ -1,9 +1,38 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class NewsletterTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    #FIXME write a unit test    
-    assert true
+
+  context "create an instance" do
+    setup do
+      NewsletterMailer.expects(:deliver_activation_instructions).once
+      @nl = Newsletter.create(:email => "test@test.com")
+    end
+
+    should "init activation_key" do
+      assert_not_nil(@nl.activation_key)
+    end    
   end
+  
+  context "with an instance" do
+    setup do
+      @nl = Newsletter.create(:email => "test@test.com")
+    end
+    
+    context "validate!" do
+      setup do
+        @nl.activate!
+      end
+
+      should "clear activation_key" do
+        assert_equal("", @nl.activation_key)
+      end
+      
+      should "set activated_at" do
+        assert_not_nil(@nl.activated_at)
+      end
+    end
+
+  end
+  
+
 end

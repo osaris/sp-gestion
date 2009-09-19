@@ -1,9 +1,17 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class PagesControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    #FIXME write a functional test    
-    assert true
+  
+  context "requesting GET :home" do
+    setup do
+      get :home
+    end
+
+    should_respond_with(:success)
+    should_render_template("home")
+    should_render_with_layout("front")
+    
+    should_assign_to(:newsletter) { @newsletter }
   end
+  
 end

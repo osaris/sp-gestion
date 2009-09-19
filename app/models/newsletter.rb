@@ -6,13 +6,17 @@ class Newsletter < ActiveRecord::Base
   validates_uniqueness_of :email
   
   before_create :generate_activation_key
-  after_save    :send_activation_email
+  after_create  :send_activation_email
   
-  def validate!
+  def activate!
     self.activated_at = Time.now
-    self.activation_key.clear
+    self.activation_key = ""
     self.save!
   end
+  
+  def to_param
+    self.activation_key
+  end  
     
   private
   
@@ -21,7 +25,7 @@ class Newsletter < ActiveRecord::Base
   end
   
   def send_activation_email
-    #NewsletterMailer.deliver_activation_email(self)
+    NewsletterMailer.deliver_activation_instructions(self)
   end
   
   def rand_str(len)
