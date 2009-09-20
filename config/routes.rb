@@ -39,6 +39,9 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
 
+  map.resource  :user_session
+  map.resources :stations, :collection => { :checkurl => :post }
+
   map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
   
   map.resource  :page, :collection => { :home => :get }, :only => [:home], :conditions => { :subdomain => 'www' }
