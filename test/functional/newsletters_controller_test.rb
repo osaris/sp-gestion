@@ -42,8 +42,7 @@ class NewslettersControllerTest < ActionController::TestCase
     end
     
     should_respond_with(:success)
-    should_render_template("pages/home")
-    should_render_with_layout("front")    
+    should_render_with_layout("front")
     
     should "have activated newsletter" do
       assert_equal("", @nl.activation_key)
