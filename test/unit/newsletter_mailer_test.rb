@@ -12,6 +12,7 @@ class NewsletterMailerTest < ActionMailer::TestCase
       assert_sent_email do |email|
         email.subject = "Disponibilité de SP-Gestion"
         email.body.include?(@nl.activation_key)
+        email.body.include?("www.#{BASE_URL}")
       end
     end
   end

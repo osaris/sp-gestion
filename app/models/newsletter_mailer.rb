@@ -4,14 +4,17 @@ class NewsletterMailer < ActionMailer::Base
     setup(newsletter.email)
     subject("Disponibilité de SP-Gestion")
 
-    content_type    "multipart/alternative"
+    content_type("multipart/alternative")
 
-    part "text/html" do |p|
-      p.body = render_message("activation_instructions.html", :newsletter => newsletter)
-    end
+    activation_url = activate_newsletter_url(newsletter)
 
     part "text/plain" do |p|
-      p.body = render_message("activation_instructions.plain", :newsletter => newsletter)
+      p.body = render_message("activation_instructions.plain", :activation_url => activation_url)
+      p.transfer_encoding = "base64"
+    end
+
+    part "text/html" do |p|
+      p.body = render_message("activation_instructions.html", :activation_url => activation_url)
       p.transfer_encoding = "base64"
     end
   end  
