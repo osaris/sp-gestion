@@ -21,7 +21,7 @@ class Newsletter < ActiveRecord::Base
   private
   
   def generate_activation_key
-    self.activation_key = SecureRandom.hex(64)
+    self.activation_key = ActiveSupport::SecureRandom.hex(64)
   end
   
   def send_activation_email
