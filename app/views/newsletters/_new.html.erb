@@ -1,0 +1,7 @@
+<%- form_for(@newsletter) do |f| -%>
+  <fieldset>
+    <%= f.label(:email, "Votre adresse email") %>
+    <%= f.text_field(:email) %> 
+    <%= f.submit("Envoyer") %>
+  </fieldset>
+<%- end -%>

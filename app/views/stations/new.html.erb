@@ -1,0 +1,87 @@
+<%- content_for(:header) do -%>
+  <%=javascript_include_tag("jquery.pstrength.1.2") %>
+<%- end -%>
+
+<h2 class="title-01">Inscrivez-vous gratuitement pour découvrir SP-Gestion</h2>
+
+<div class="in">
+  <div class="box">
+    <%- form_for(@station) do |f| -%>
+      <table>
+        <%- fields_for :station do |c| -%>
+          <tr>
+            <td colspan="2">
+              <h4>Créer votre site SP-Gestion</h4>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= c.label(:name, 'Nom du centre') %>
+            </td>
+            <td>
+              <%= c.text_field(:name, :tabindex => 1) %>
+              <%= error_message_on(:station, :name) %>
+              <%= observe_field(:station_name, :function => "sanitize_for_subdomain($('#station_name'), $('#station_url'))") %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <p>Chaque corps qui utilise SP-Gestion dispose de son propre accès. Si vous souhaitez que votre compte SP-Gestion soit à l'adresse http://cpi-staff.sp-gestion.fr vous entrez cpi-staff dans le champ suivant. Uniquement des lettres et des chiffres.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= c.label(:url, 'Site') %>
+            </td>
+            <td>
+              <%= c.text_field(:url, :tabindex => 2) %>.sp-gestion.fr
+              <%= error_message_on(:station, :url) %>
+            </td>
+          </tr>
+        <%- end -%>
+        <%- fields_for :user do |u| -%>
+          <tr>
+            <td colspan="2">
+              <h4>Créer votre compte utilisateur</h4>
+              <p>Vous pourrez vous identifier sur le site SP-Gestion de votre corps grâce à votre adresse email. Vous pourrez choisir votre mot de passe lors de l'activation de votre compte.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= u.label(:email, 'Adresse email') %>
+            </td>
+            <td>
+              <%= u.text_field(:email, :tabindex => 3) %>
+              <%= error_message_on(:user, :email) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= u.label(:password, "Mot de passe") %>
+            </td>
+            <td>
+              <%= u.password_field(:password, :tabindex => 4) %>
+              <%= javascript_for_password_strength %>
+              <%= error_message_on(:user, :password) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= u.label(:password_confirmation, "Confirmation") %>
+            </td>
+            <td>
+              <%= u.password_field(:password_confirmation, :tabindex => 4) %>
+              <%= error_message_on(:user, :password_confirmation) %>
+              <p>Saisissez à nouveau votre mot de passe</p>
+            </td>
+          </tr>
+        <%- end -%>
+          <tr>
+            <td colspan="3" style="text-align:center;">
+              <%= f.submit("Créer mon compte !") %>
+            </td>
+          </tr>
+      </table>
+    <%- end -%>
+  </div>
+</div>

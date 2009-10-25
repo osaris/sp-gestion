@@ -31,7 +31,7 @@ class NewslettersControllerTest < ActionController::TestCase
       get :activate, :id => 123
     end
     
-    should_redirect_to("homepage") { home_page_path }
+    should_redirect_to("homepage") { home_path }
   end
   
   context "requesting GET :activate with good data" do

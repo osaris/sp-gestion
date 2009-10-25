@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/*
+	This file is part of a site template for sale at ThemeForest.net.
+	See: http://themeforest.net/user/GeertDD/portfolio
+	Copyright ©2009 Geert De Deckere <geert@idoe.be>
+*/
+
+/* INTERNET EXPLORER 7 STYLES FOR SCREEN */
+@media screen, projection {
+
+/* Prevent staircase navigation */
+#mainnav li, #nav .subnav li, #content .tabs .head li { display:inline; }
+
+/* Hard-coded colors because of the lack of “inherit” support */
+#mainnav .active a:hover { color:#466c83; }
+#nav .subnav .active a:hover { color:#fff; }
+#content .tabs .head a { zoom:1; color:#466c83; }
+#content .tabs .head .active a:hover { color:#fff; }
+#footer a { color:#85a6ba; }
+
+/* Make form buttons a bit smaller, IE seems to add extra padding
+   relative to the amount of text on the button. */
+#content button { padding:0 6px; }
+#content button.small { padding:0 2px; }
+
+/* Stuff that has been set manually to be hidden from IE7 */
+.ie7-hide, .ie-hide { display:none; }
+
+}

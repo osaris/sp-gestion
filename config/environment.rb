@@ -40,20 +40,22 @@ Rails::Initializer.run do |config|
   # config.time_zone = 'UTC'
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-  # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   config.i18n.default_locale = :fr
+  config.i18n.exception_handler = :missing_translations_handler
   
   config.action_controller.session_store = :mem_cache_store
   config.action_controller.session = {:cache => SESSION_CACHE, :key => '_spgestion_session',
                                       :secret => "41da19045c1289f045a2797ace137c01908f49d5522ade1da1549022bd40202d663891fbca9dfc4d0f7a092e36ff5b325d38fe6cb22055d843802f37228c1868"}
   
   config.gem "authlogic",                 :version => "2.1.2"
-  config.gem "haml",                      :version => "2.2.5"
-  config.gem "google_analytics",          :version => "1.1.5",    :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
-  config.gem "fiveruns-memcache-client",  :version => "1.5.0.5",  :lib => "memcache"
+  config.gem "google_analytics",          :version => "1.1.5", :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
+  config.gem "tabs_on_rails",             :version => "0.8.2", :source => "http://gemcutter.org/"
 end
 
 # Google Analytics configuration
 Rubaidh::GoogleAnalytics.tracker_id = "UA-1194205-7"
 Rubaidh::GoogleAnalytics.domain_name  = "sp-gestion.fr"
 Rubaidh::GoogleAnalytics.environments = ["production"]
+
+# App config
+BETA = true

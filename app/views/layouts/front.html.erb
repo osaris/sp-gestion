@@ -9,10 +9,11 @@
 
     <link rel="shortcut icon" href="/images/favicon.ico" />
 
-    <%= stylesheet_link_tag("front/reset","front/main","front/style", :media => "screen, projection", :cache => "front") %>
+    <%= stylesheet_link_tag("front/reset","front/main","front/style", "front/form", :media => "screen, projection", :cache => "front") %>
     <%= stylesheet_link_tag("front/print", :media => "print") %>
     <!--[if lte IE 6]><%= stylesheet_link_tag("front/main-msie")%><![endif]-->
-    
+    <%= javascript_include_tag(:defaults) %>
+    <%= yield(:header) %>
     <title>SP-Gestion - Gestion de centres d'intervention et de secours</title>
 </head>
 
@@ -33,8 +34,9 @@
       <!-- Navigation -->
       <div id="nav" class="box">
         <ul>
-          <li class="active"><%= link_to("Accueil", home_page_path())%></li>
-          <li><%= link_to("Blog", "http://blog.sp-gestion.fr") %></li>          
+			<li><%= link_to("Accueil", home_path())%></li>
+      <%- if !BETA -%><li class="active"><%= link_to("Créer un compte", signup_path()) %></li><%- end -%>
+			<li><%= link_to("Blog", "http://blog.sp-gestion.fr") %></li>
         </ul>
       </div> <!-- /nav -->
 
@@ -62,7 +64,7 @@
       <!-- Footer -->
       <div id="footer" class="box">
 
-          <p class="f-left">Copyright &copy; 2009 imagineapp - <%= link_to("Contactez-nous !", "http://blog.sp-gestion.fr")%></p>
+          <p class="f-left">Copyright &copy; 2009 imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous !")%></p>
 
       </div> <!-- /box -->
 

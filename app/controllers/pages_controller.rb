@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < FrontController
   
   def home
     @newsletter = Newsletter.new

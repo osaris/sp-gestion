@@ -1,0 +1,56 @@
+fr:
+  authlogic:
+    error_messages:
+      login_blank: can not be blank
+      login_not_found: is not valid
+      login_invalid: "should use only letters, numbers, spaces, and .-_@ please."
+      consecutive_failed_logins_limit_exceeded: "Consecutive failed logins limit exceeded, account is disabled."
+      email_invalid: "L'adresse email doit avoir la forme nom@domaine.com"
+      password_blank: can not be blank
+      password_invalid: is not valid
+      not_active: Your account is not active
+      not_confirmed: Your account is not confirmed
+      not_approved: Your account is not approved
+      no_authentication_details: You did not provide any details for authentication.
+    models:
+      user_session: UserSession
+    attributes:
+      user_session:
+        login: login
+        email: email
+        password: password
+        remember_me: remember me
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "{{model}} non valide"
+      template:
+        header:
+          one:    "Un champ a empêché ce {{model}} d'être sauvegardé"
+          other:  "{{count}} champs ont empêché ce {{model}} d'être sauvegardé"
+        # The variable :count is also available
+        body: "Des problèmes sont survenus pour les champs suivants :"
+      # The values :model, :attribute and :value are always available for interpolation
+      # The value :count is available when applicable. Can be used for pluralization.
+      messages:
+        inclusion: "n'est pas inclut dans la liste"
+        exclusion: "est réservé"
+        invalid: "est invalide"
+        confirmation: "ne correspond pas à la confirmation"
+        accepted: "doit être accepté"
+        empty: "ne peut pas être vide"
+        blank: "ne peut pas être vierge"
+        too_long: "est trop long ({{count}} caractères maximum)"
+        too_short: "est trop court({{count}} caractères minimum)"
+        wrong_length: "n'est pas de la bonne longueur (devrait être de {{count}} caractères)"
+        taken: "est déjà pris"
+        not_a_number: "n'est pas un nombre"
+        greater_than: "doit être plus grand que {{count}}"
+        greater_than_or_equal_to: "doit être plus grand ou égal à {{count}}"
+        equal_to: "doit être égal à {{count}}"
+        less_than: "doit être plus petit que {{count}}"
+        less_than_or_equal_to: "doit être plus petit ou égal à {{count}}"
+        odd: "doit être impair"
+        even: "doit être pair"
+  

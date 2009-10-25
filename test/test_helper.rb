@@ -41,3 +41,18 @@ class ActiveSupport::TestCase
   
   # setup :activate_authlogic    
 end
+
+def login(station = Station.make, user = User.make(:confirmed_at => 1.day.ago))
+  @station = station
+  @user = user
+  @user.station = @station
+
+  @request.host = "#{@station.url}.sp-gestion.fr"
+  
+  UserSession.create(@user)
+end
+
+def logout(user)
+  session = UserSession.find(user)
+  session.destroy
+end

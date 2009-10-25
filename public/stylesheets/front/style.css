@@ -32,20 +32,7 @@ a:hover {color:#000;}
 2) HTML styles
 ---------------------------------------------------------------------------------------------------------- */
 
-.fieldWithErrors {
-	display:inline;
-}
-
-.fieldWithErrors input {
-  background: #FEE;
-	border-color: #C00;	
-}
-
-.fieldWithErrors label {
-  color: #C00;
-}
-
-.flash {
+.message {
   border:1px solid;
   padding:5px;
   margin: 5px 0px 5px 0px;

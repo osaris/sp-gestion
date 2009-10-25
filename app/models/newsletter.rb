@@ -16,20 +16,16 @@ class Newsletter < ActiveRecord::Base
   
   def to_param
     self.activation_key
-  end  
+  end
     
   private
   
   def generate_activation_key
-    self.activation_key = rand_str(64)    
+    self.activation_key = SecureRandom.hex(64)
   end
   
   def send_activation_email
     NewsletterMailer.deliver_activation_instructions(self)
   end
-  
-  def rand_str(len)
-    Array.new(len/2) { rand(256) }.pack('C*').unpack('H*').first
-  end  
-  
+
 end

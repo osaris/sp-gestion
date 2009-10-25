@@ -4,10 +4,23 @@
 
     <!-- Topstory -->
     <div class="box">
-        <div id="topstory-img">
-          <%= image_tag("front/screenshot.png") %>
+        <div class="topstory-txt left">
+              <div id="newsletter">
+                <p class="header">
+                  Soyez informé de la disponibilité de SP-Gestion !
+                </p>
+                <%- if @newsletter.new_record? -%>
+  				        <%= flash_helper() unless @newsletter.errors.empty? %>
+                  <%= render(:partial => "newsletters/new") %>
+                <%- else -%>
+                  <%= flash_helper() %>
+                <%- end -%>
+                <p class="help">
+                  Vous recevrez un seul email lorsque SP-Gestion sera disponible, aucune pub ou pourriel/spam.
+                </p>
+              </div>
         </div>
-        <div id="topstory-txt">
+        <div class="topstory-txt right">
 
             <h3>Simplicité, efficacité, rapidité</h3>
 
@@ -15,21 +28,6 @@
               toute la gestion de votre centre</b>. Avec SP-Gestion vous <b>gagnez du temps</b>, vous <b>accédez aux 
               informations</b> dont vous avez besoin quand vous en avez besoin et vous <b>prenez ainsi les bonnes
               décisions</b>.</p>
-              
-            <div style="margin-top:10px; border:2px solid #df0000; padding:5px;">
-              <div style="width:100%; text-align:center;font-size:110%;font-weight:bold;margin-bottom: 5px;">
-                Soyez informé de la disponibilité de SP-Gestion !
-              </div>
-                     
-              <%- if @newsletter.new_record? -%>
-				<%= flash_helper() unless @newsletter.errors.empty? %>
-                <%= render(:partial => "newsletters/new") %>
-              <%- else -%>
-                <%= flash_helper() %>
-              <%- end -%>
-                            
-              <span style="font-size:80%;">Vous recevrez un seul email lorsque SP-Gestion sera disponible, aucune pub ou pourriel/spam.</span>
-            </div>
 
         </div> <!-- /topstory-txt -->
 

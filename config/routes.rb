@@ -39,12 +39,21 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
 
-  map.resource  :user_session
-  map.resources :stations, :collection => { :checkurl => :post }
-
   map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
-  
-  map.resource  :page, :collection => { :home => :get }, :only => [:home], :conditions => { :subdomain => 'www' }
+  map.resources :password_resets, :only => [:new, :create, :edit, :update], :conditions => { :subdomain => /.+/  }
+  map.resources :stations, :only => [:new, :create], :conditions => { :subdomain => 'www' }
+  map.resources :vehicles, :conditions => { :subdomain => /.+/  }
+  map.resources :firemen, :conditions => { :subdomain => /.+/  }
 
-  map.root_pub '/', :controller => 'pages',  :action => 'home', :conditions => { :subdomain => 'www' }
+  map.activate     '/activate/:id', :controller => 'confirmations', :action => 'create', :conditions => { :subdomain => /.+/  }
+  map.home         '/home', :controller => 'pages', :action => 'home', :conditions => { :subdomain => 'www' }
+  map.authenticate '/login/authenticate', :controller => 'user_sessions', :action => 'create', :conditions => { :subdomain => /.+/ }  
+  map.login        '/login', :controller => 'user_sessions', :action => 'new', :conditions => { :subdomain => /.+/ }
+  map.logout       '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :subdomain => /.+/ }  
+  map.signup       '/signup', :controller => 'stations', :action => 'new', :conditions => { :subdomain => 'www' }
+
+  map.root_front   '/', :controller => 'pages',  :action => 'home', :conditions => { :subdomain => 'www' }
+  map.root_back    '/', :controller => 'dashboard', :action => 'index', :conditions => { :subdomain => /.+/  }
+  
+  map.error_404    '*url', :controller => 'dashboard', :action => 'index'
 end

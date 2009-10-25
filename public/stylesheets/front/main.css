@@ -77,12 +77,15 @@ h1, h2, h3, h4, h5, h6, p, address, blockquote, table, dl, fieldset {margin:15px
 #breadcrumbs a:hover {text-decoration:none;}
 #breadcrumbs span {margin:0 3px;}
 
-#topstory-img {float:left; width:200px;}
-#topstory-img img {display:block;}
-#topstory-txt {float:right; width:600px;}
-#topstory-txt h3 {margin:0; font-weight:normal;color:#df0000;font-size:140%;}
-#topstory-txt #topstory-info {margin:0; font-size:90%;}
-#topstory-txt .comment {padding-left:12px; background:url("/images/front/ico-comment.gif") 0 2px no-repeat;}
+.topstory-txt.left {float:left; width:450px;}
+.topstory-txt.right {float:right; width:350px;}
+.topstory-txt h3 {margin:0; font-weight:normal;color:#df0000;font-size:140%;}
+.topstory-txt #topstory-info {margin:0; font-size:90%;}
+.topstory-txt .comment {padding-left:12px; background:url("/images/front/ico-comment.gif") 0 2px no-repeat;}
+
+#newsletter { margin-top:10px; border:2px solid #df0000; padding:5px; }
+#newsletter p.header { width:100%; text-align:center;font-size:110%;font-weight:bold;margin: 0px 0px 5px 0px; padding: 0; }
+#newsletter p.help { font-size: 80%; padding:0 ; margin: 5px 0px 0px 0px;}
 
 .cols5050 {clear:both; background:url("/images/front/dot-01.gif") 0 100% repeat-x;}
 .cols5050 .col {float:left; width:290px;}

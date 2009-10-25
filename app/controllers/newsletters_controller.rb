@@ -1,4 +1,4 @@
-class NewslettersController < ApplicationController
+class NewslettersController < FrontController
   
   def create
     @newsletter = Newsletter.new(params[:newsletter])
@@ -17,7 +17,7 @@ class NewslettersController < ApplicationController
       flash.now[:notice] = render_to_string(:partial => "activate")
       render('pages/home')
     else
-      redirect_to(home_page_path)
+      redirect_to(home_path)
     end
   end
   

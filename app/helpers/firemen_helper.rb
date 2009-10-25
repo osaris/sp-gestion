@@ -1,0 +1,2 @@
+module FiremenHelper
+end

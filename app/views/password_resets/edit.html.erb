@@ -1,0 +1,16 @@
+<h1>Mise à jour de votre mot de passe</h1>
+<%- form_for(@user, :url => password_reset_path, :method => :put) do |f| -%>
+  <p>
+    <%= f.label(:password, "Mot de passe") %>
+    <%= f.password_field(:password, :size => 36) %>
+    <%= error_message_on(:user, :password) %>
+  </p>
+  <p>
+    <%= f.label(:password_confirmation, "Confirmation du mot de passe") %>
+    <%= f.password_field(:password_confirmation, :size => 36) %>
+    <%= error_message_on(:user, :password_confirmation) %>    
+  </p>
+  <p class="submit">
+    <%= button_tag(:submit, "Valider") %>
+  </p>
+<%- end -%>

@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+/*
+	This file is part of a site template for sale at ThemeForest.net.
+	See: http://themeforest.net/user/GeertDD/portfolio
+	Copyright ©2009 Geert De Deckere <geert@idoe.be>
+*/
+
+/* INTERNET EXPLORER 6 STYLES FOR SCREEN */
+@media screen, projection {
+
+/* Prevent staircase navigation */
+#mainnav li, #nav .subnav li, #content .tabs .head li { display:inline; }
+
+/* Hard-coded colors because of the lack of “inherit” support */
+#mainnav .active a:hover { color:#466c83; }
+#nav .subnav .active a:hover { color:#fff; }
+#content .tabs .head a { zoom:1; color:#466c83; }
+#content .tabs .head .active a:hover { color:#fff; }
+#footer a { color:#85a6ba; }
+
+/* Make form buttons a bit smaller, IE seems to add extra padding
+   relative to the amount of text on the button. */
+#content button { padding:0 6px; }
+#content button.small { padding:0 2px; }
+
+/* Fix double margin bug in grid system */
+.span-1, .span-2, .span-3, .span-4, .span-5, .span-6 { display:inline; }
+
+/* Sometimes subnav items start below the existing ones, extremely weird stuff!
+   It could be this bug: http://www.positioniseverything.net/explorer/dup-characters.html */
+#nav .subnav, #nav .subnav a { float:none; }
+
+/* Remove the white and gray gradient PNG backgrounds */
+#mainnav .active, #nav .subnav .active a, #content .even, #content .odd, #content .message, #content .tabs .head .active a, #content button { background-image:none; }
+
+/* Stuff that has been set manually to be hidden from IE6 */
+.ie6-hide, .ie-hide { display:none; }
+
+}
