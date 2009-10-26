@@ -50,12 +50,10 @@ Rails::Initializer.run do |config|
   config.gem "authlogic",                 :version => "2.1.2"
   config.gem "google_analytics",          :version => "1.1.5", :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
   config.gem "tabs_on_rails",             :version => "0.8.2", :source => "http://gemcutter.org/"
+  config.gem "will_paginate",             :version => "2.3.11", :source => "http://gemcutter.org/"
 end
 
 # Google Analytics configuration
 Rubaidh::GoogleAnalytics.tracker_id = "UA-1194205-7"
 Rubaidh::GoogleAnalytics.domain_name  = "sp-gestion.fr"
 Rubaidh::GoogleAnalytics.environments = ["production"]
-
-# App config
-BETA = true

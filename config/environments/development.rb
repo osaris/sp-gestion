@@ -18,3 +18,6 @@ config.action_mailer.raise_delivery_errors = false
 
 # URL
 BASE_URL = "sp-gestion.dyndns.org:3000"
+
+# App config
+BETA = false
