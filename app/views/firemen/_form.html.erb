@@ -1,0 +1,19 @@
+<%- form_for(@fireman) do |f| -%>
+  <p>
+    <%= f.label(:firstname, "Prénom", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:firstname, :class => "span-2 first") %>
+      <%= error_message_on(:fireman, :firstname, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
+    <%= f.label(:lastname, "Nom", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:lastname, :class => "span-2 first") %>
+      <%= error_message_on(:fireman, :lastname, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p class="span-3 first prefix-1">
+    <%= button_tag(:submit, "Enregistrer") %> ou <%= link_to("Annuler", firemen_path)%>
+  </p>
+<%- end -%>

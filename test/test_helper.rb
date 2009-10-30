@@ -40,9 +40,11 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   
   # setup :activate_authlogic    
+  
+  setup { Sham.reset }
 end
 
-def login(station = Station.make, user = User.make(:confirmed_at => 1.day.ago))
+def login(station = Station.make, user = User.make(:confirmed))
   @station = station
   @user = user
   @user.station = @station

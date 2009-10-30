@@ -11,7 +11,7 @@ module SpanErrorMessages
     options = {:tag => 'span'}.merge(args.extract_options!.symbolize_keys)
     prepend_text = args[0] || options[:prepend_text] || "<span>&uarr;&nbsp;</span>"
     append_text =  args[1] || options[:append_text]  || ''
-    css_class =    args[2] || options[:css_class]    || 'formError'
+    css_class = (args[2] || options[:css_class] || '') + ' formError'
     if (
       obj = (object.respond_to?(:errors) ?
       object :

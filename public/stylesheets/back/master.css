@@ -107,23 +107,12 @@ img { vertical-align:text-bottom; }
 /* FORMS */
 #content form { margin-bottom:20px; }
 #content form p { float:left; }
-#content form .alert label { font-weight:bold; color: red; }
-#content form .alert small { color: red; }
 #content form small { clear:left; display:block; color:#284FA4; }
 
 /* FORMS ERROR */
-.fieldWithErrors {
-  display:inline;
-}
-
-.fieldWithErrors input {
-  background: #FEE;
-	border-color: #C00;	
-}
-
-.formError {
-  color: red;
-}
+.fieldWithErrors { display:inline; }
+.fieldWithErrors input { background: #FEE; border-color: #C00; }
+.formError { display:block; color:red; }
 
 /* Take off 10px from the width to account for native border and padding: */
 #content input.span-1, #content textarea.span-1 { width:130px; }

@@ -4,8 +4,15 @@ require 'faker'
 
 Sham.define do
   email       { Faker::Internet.email }
+  firstname   { Faker::Name.first_name }
+  lastname    { Faker::Name.last_name }
   name        { Faker::Company.name }
   url         { Faker::Internet.domain_word }
+end
+
+Fireman.blueprint do
+  firstname
+  lastname
 end
 
 Newsletter.blueprint do
@@ -30,4 +37,8 @@ User.blueprint(:confirmed) do
   password(pass = 'test1234')
   password_confirmation(pass)
   confirmed_at(1.day.ago)  
+end
+
+Vehicle.blueprint do
+  name
 end
