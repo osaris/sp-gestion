@@ -6,7 +6,7 @@ class PasswordResetsController < BackController
   
   layout('login')
   
-  set_tab(:password_resets)
+  navigation(:password_resets)
   
   def new
   end  

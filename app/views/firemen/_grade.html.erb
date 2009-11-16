@@ -1,0 +1,3 @@
+<span class="span-1 first"><%= Grade::GRADE.index(f.object.kind) %></span>
+<%= f.text_field(:date, :class => "span-1") %>
+<%= f.hidden_field(:kind, :value => f.object.kind)%>

@@ -54,7 +54,7 @@ class FiremenControllerTest < ActionController::TestCase
     
     context "requesting POST with good data" do
       setup do
-        post :create, :fireman => {:firstname => 'test', :lastname => 'test'}
+        post :create, :fireman => {:firstname => 'test', :lastname => 'test', :status => Fireman::STATUS['JSP']}
       end
     
       should_respond_with(:success)
@@ -67,7 +67,7 @@ class FiremenControllerTest < ActionController::TestCase
     
     context "with an existing fireman" do
       setup do
-        @fireman = @station.firemen.make
+        @fireman = make_fireman_with_grades(:station => @station)
       end
   
       context "requesting GET on existing fireman" do

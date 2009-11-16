@@ -1,10 +1,11 @@
 class VehiclesController < BackController
   
-  set_tab(:vehicles)
+  navigation(:vehicles)  
   
   before_filter :load_vehicle, :except => [:index, :new, :create]  
   
   def index
+    current_navigation(:vehicles_list)
     @vehicles = @station.vehicles.paginate(:page => params[:page], :order => 'name')
   end
   
@@ -12,10 +13,12 @@ class VehiclesController < BackController
   end
   
   def new
+    current_navigation(:vehicles_new)
     @vehicle = @station.vehicles.new
   end
   
   def create
+    current_navigation(:vehicles_new)
     @vehicle = @station.vehicles.new(params[:vehicle])
     if(@vehicle.save)
       render(:action => :show)

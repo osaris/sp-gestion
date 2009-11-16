@@ -1,4 +1,6 @@
 <tr class="<%= cycle("odd","even") %>">
+  <td><%= Grade::GRADE.index(fireman.grade) %></td>
   <td><%= link_to(fireman.firstname, fireman) %></td>
   <td><%= fireman.lastname %></td>
+  <td><%= Fireman::STATUS.index(fireman.status) %></td>
 </tr>

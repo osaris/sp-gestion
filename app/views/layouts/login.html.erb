@@ -19,12 +19,7 @@
     <div id="loginbox" class="tabs span-2 first">
 
     	<div class="head">
-    	  <ul>
-          <% tabs_tag(:builder => MenuTabBuilder) do |tab| %>
-            <%= tab.user_sessions("Connexion", login_path) %>
-            <%= tab.password_resets("Mot de passe perdu", new_password_reset_path) %>
-          <% end %>
-        </ul>
+    	  <%= render_navigation(:context => :login, :level => 1) %>
     	</div>
 
     	<div id="login" class="body clearfix">

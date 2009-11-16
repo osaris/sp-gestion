@@ -1,18 +1,15 @@
-<div class="span-5 first">
+<div class="span-6 first">
   <table>
     <thead>
       <tr>
+        <th>Grade</th>
         <th>Prénom</th>
         <th>Nom</th>
+        <th>Statut</th>
     </thead>
     <tbody>
       <%= render(:partial => @firemen) || "<tr><td colspan='2'>Pas encore de personne !</td></tr>" %>
     </tbody>
   </table>
   <%= will_paginate(@firemen, :previous_label => "", :next_label => "") %>
-</div>
-<div class="span-1">
-  <p class="light box">
-    <%= link_to("Nouveau", new_fireman_path) %>
-  </p>
 </div>

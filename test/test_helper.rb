@@ -58,3 +58,13 @@ def logout(user)
   session = UserSession.find(user)
   session.destroy
 end
+
+# data
+
+def make_fireman_with_grades(attributes = {})
+  f = Fireman.make_unsaved(attributes)
+  f.grades = Grade::new_defaults
+  f.grades.last.date = Time.now
+  f.save
+  f
+end

@@ -5,7 +5,7 @@ class UserSessionsController < BackController
   
   layout('login')
   
-  set_tab(:user_sessions)  
+  navigation(:user_sessions)
   
   def new
     @user_session = UserSession.new

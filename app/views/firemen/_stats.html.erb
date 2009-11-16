@@ -1,0 +1,11 @@
+<%= @firemen_stats_status.inject(0){|sum,item| sum + item[1]} %> personnes :
+<ul>
+  <%- @firemen_stats_status.each do |stat_status| -%>
+    <li><%= Fireman::STATUS.index(stat_status[0]) %> : <%= stat_status[1] %></li>
+  <%- end -%>
+  <ul>
+    <%- @firemen_stats_grade.each do |stat_grade| -%>
+      <li><%= Fireman::GRADE_CATEGORY.index(stat_grade[0]) %> : <%= stat_grade[1] %></li>
+    <%- end -%>
+  </ul>
+</ul>
