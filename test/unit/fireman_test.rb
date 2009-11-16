@@ -21,7 +21,7 @@ class FiremanTest < ActiveSupport::TestCase
       
     context "and a grade set" do
       setup do
-        @fireman.grades.first.date = Date.today - 3.weeks
+        @fireman.grades.last.date = Date.today - 3.weeks
       end
       
       should "return current_grade" do
