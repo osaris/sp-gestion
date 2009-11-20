@@ -36,7 +36,7 @@ class Fireman < ActiveRecord::Base
   
   def validate
     if self.status != STATUS['JSP'] and self.grades.reject{ |g| g.date.blank? }.size == 0
-      self.errors.add(:base, "Doit avoir un grade !")
+      self.errors.add(:grades, "Un membre actif ou vétéran doit avoir un grade")
     end
   end
   

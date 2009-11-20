@@ -1,5 +1,4 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%= error_messages_for(:fireman) %>
 <%- form_for(@fireman) do |f| -%>
   <div class="span-4 first">
   <p>
@@ -36,6 +35,7 @@
       <%= render :partial => 'grade', :locals => { :f => g } %>
     <%- end -%>
     <%= js_for_grade_date %>
+    <%= error_message_on(:fireman, :grades, :css_class => "span-2 first") %>    
   </div>
   <div class="span-5 first">
     <%= button_tag(:submit, "Enregistrer") %> ou <%= link_to("Annuler", firemen_path) %>
