@@ -31,6 +31,7 @@
   </p>
   </div>
   <div class="span-2" id="grades" style="<%= style_for_grade(@fireman) %>">
+    <p><b>Grade (*)</b><br />Saisissez la date de nomination à côté de chaque grade obtenu.</p>
     <%- f.fields_for(:grades) do |g| -%>
       <%= render :partial => 'grade', :locals => { :f => g } %>
     <%- end -%>
