@@ -3,10 +3,13 @@ require 'sham'
 require 'faker'
 
 Sham.define do
+  code        { Faker::Lorem.words(1) }
+  description { Faker::Lorem.sentences(2) }  
   email       { Faker::Internet.email }
   firstname   { Faker::Name.first_name }
   lastname    { Faker::Name.last_name }
   name        { Faker::Company.name }
+  title       { Faker::Lorem.words(3) }
   url         { Faker::Internet.domain_word }
 end
 
@@ -22,6 +25,12 @@ end
 Station.blueprint do
   name
   url
+end
+
+Uniform.blueprint do
+  title
+  code
+  description
 end
 
 User.blueprint do

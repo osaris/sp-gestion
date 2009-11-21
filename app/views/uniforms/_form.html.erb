@@ -1,0 +1,26 @@
+<%- form_for(@uniform) do |f| -%>
+  <p>
+    <%= f.label(:title, "Titre", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:title, :class => "span-2 first") %>
+      <%= error_message_on(:uniform, :title, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
+    <%= f.label(:code, "Code", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:code, :class => "span-2 first") %>
+      <%= error_message_on(:uniform, :code, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
+    <%= f.label(:description, "Description", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_area(:description, :rows => 5, :class => "span-2 first") %>
+      <%= error_message_on(:uniform, :description, :css_class => "span-2 first") %>
+    </span>
+  </p>  
+  <p class="span-3 first prefix-1">
+    <%= button_tag(:submit, "Enregistrer") %> ou <%= link_to("Annuler", uniforms_path) %>
+  </p>
+<%- end -%>

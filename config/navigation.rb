@@ -30,21 +30,21 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item(:dashboard, 'Accueil', root_back_path)
     
-    primary.item(:firemen, 'Personnel', firemen_path) do |firemen|
-      firemen.item(:firemen_list, 'Liste', firemen_path)
-      firemen.item(:firemen_new, 'Nouveau', new_fireman_path)
+    primary.item(:personnel, 'Personnel', firemen_path) do |personnel|
+      personnel.item(:firemen, 'Hommes', firemen_path)
+      personnel.item(:convocations, 'Convocations', firemen_path)
       
-      firemen.auto_highlight = false
-      firemen.dom_class = 'subnav'      
+      personnel.auto_highlight = false
+      personnel.dom_class = 'subnav'
     end
     
-    primary.item(:vehicles, 'Véhicules', vehicles_path) do |vehicles|
-      vehicles.item(:vehicles_list, 'Liste', vehicles_path)
-      vehicles.item(:vehicles_new, 'Nouveau', new_vehicle_path)
+    primary.item(:config, 'Configuration', vehicles_path, :class => 'right') do |configuration|
+      configuration.item(:vehicles, 'Véhicules', vehicles_path)
+      configuration.item(:uniforms, 'Tenues', uniforms_path)
       
-      vehicles.auto_highlight = false      
-      vehicles.dom_class = 'subnav'
-    end    
+      configuration.auto_highlight = false
+      configuration.dom_class = 'subnav'      
+    end
     
     primary.dom_id = 'mainnav'
     

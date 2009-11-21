@@ -1,0 +1,15 @@
+<div class="span-6 first">
+  <p class="right"><%= link_to(image_tag("back/icons/add.png") + "&nbsp;Créer une nouvelle tenue", new_uniform_path)%></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Titre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render(:partial => @uniforms) || "<tr><td colspan='2'>Pas encore de tenue !</td></tr>" %>
+    </tbody>
+  </table>
+  <%= will_paginate(@uniforms, :previous_label => "", :next_label => "") %>
+</div>

@@ -16,21 +16,21 @@ input, select, textarea { font:inherit; }
 .skip { position:absolute; top:-9999px; left:-9999px; font-size:1px; }
 
 /* GLOBAL STYLES */
-body { margin:40px auto; width:960px; background:#F5F5F5; font-family:'helvetica neue',helvetica,arial,sans-serif; font-size:13px; color:#172E60; line-height:20px; }
+body { margin:20px auto; width:960px; background:#F5F5F5; font-family:'helvetica neue',helvetica,arial,sans-serif; font-size:13px; color:#172E60; line-height:20px; }
 a { color: red; }
 a:visited { color: red; }
 a:hover { text-decoration:none; }
 img { vertical-align:text-bottom; }
 
 /* HEADER */
-#header { float:left; margin:0 0 40px; width:304px; }
+#header { float:left; margin:0 0 20px; width:304px; }
 #header a { float:left; width:304px; text-decoration:none; font-size: 1.4em;}
 
 /* USER */
-#user { float:right; margin:0 0 40px; width:304px; text-align:right; }
+#user { float:right; margin:0 0 20px; width:304px; text-align:right; }
 
 /* NAVIGATION */
-#nav { clear:both; float:left; margin:0 0 40px; font-size:11px; text-transform:uppercase; letter-spacing:0.02em; }
+#nav { clear:both; float:left; margin:0 0 20px; font-size:11px; text-transform:uppercase; letter-spacing:0.02em; }
 #nav a { text-decoration:none; }
 #nav .active a:hover { color:inherit; cursor:default; }
 #mainnav { float:left; padding:9px 20px 0; width:918px; background:#BBBBBB; border:1px solid #172E60; }
@@ -38,7 +38,7 @@ img { vertical-align:text-bottom; }
 #mainnav a:hover { color:#223540; }
 #mainnav li.active { float:left; position:relative; top:1px; margin:0 20px; background:#f9fcff url("../../images/back/gradient-white.png") repeat-x 0 0; border:1px solid #172E60; border-bottom:0; }
 #mainnav a.active  { padding:4px 20px;}
-#mainnav .right { float:right; }
+#mainnav li.right { float:right; }
 #nav .subnav { clear:both; float:left; padding:10px 0 9px 20px; width:938px; background:#f9fcff; border:1px solid #172E60; border-top:0; }
 #nav .subnav a { float:left; margin:0 20px 0 0; color:#172E60; }
 #nav .subnav a:hover { color:#466c83; }
@@ -78,6 +78,7 @@ img { vertical-align:text-bottom; }
 #content table { width:100%; margin-bottom:20px; border:1px solid #172E60; border-width:1px 0; }
 #content th { padding:10px 0 9px 20px; background:#f9fcff; font-size:11px; font-weight:normal; color:#284FA4; text-transform:uppercase; letter-spacing:0.02em; text-align:left; }
 #content tbody td { padding:4px 0 5px 20px; border-top:1px solid #d6e2ea; }
+#content tbody tr:hover {background-color:#a8aaaa;}
 #content .center { padding:4px 10px 5px 10px; text-align:center; }
 #content .right { padding:4px 20px 5px 0; text-align:right; }
 #content .even { background:#e9e9e9 url("../../images/back/gradient-gray.png") repeat-x 0 -8px; }
@@ -112,6 +113,7 @@ img { vertical-align:text-bottom; }
 /* FORMS ERROR */
 .fieldWithErrors { display:inline; }
 .fieldWithErrors input { background: #FEE; border-color: #C00; }
+.fieldWithErrors textarea { background: #FEE; border-color: #C00; }
 .formError { display:block; color:red; }
 
 /* Take off 10px from the width to account for native border and padding: */
