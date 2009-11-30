@@ -6,10 +6,6 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-require 'memcache'
-
-SESSION_CACHE = MemCache.new('localhost:11211', :namespace => 'spgestion_session')
-
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -44,14 +40,14 @@ Rails::Initializer.run do |config|
   config.i18n.exception_handler = :missing_translations_handler
   
   config.action_controller.session_store = :mem_cache_store
-  config.action_controller.session = {:cache => SESSION_CACHE, :key => '_spgestion_session',
+  config.action_controller.session = {:key => '_spgestion_session',
                                       :secret => "41da19045c1289f045a2797ace137c01908f49d5522ade1da1549022bd40202d663891fbca9dfc4d0f7a092e36ff5b325d38fe6cb22055d843802f37228c1868"}
   
   config.gem "authlogic",         :version => "2.1.2"
   config.gem "google_analytics",  :version => "1.1.5", :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
+  config.gem "prawn",             :version => "0.6.3", :lib => "prawn"
   config.gem "simple-navigation", :version => "2.0.1", :lib => 'simple_navigation', :source => "http://gemcutter.org/"
   config.gem "will_paginate",     :version => "2.3.11", :source => "http://gemcutter.org/"
-  config.gem "delocalize",        :source => 'http://gemcutter.org'
 end
 
 # Google Analytics configuration
