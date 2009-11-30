@@ -67,6 +67,24 @@ fr:
       long: "%e %B %Y"
       long_ordinal: "%e %B %Y"
       only_day: "%e"
+  datetime:
+    prompts:
+      day: "Jour"
+      month: "Mois"
+      year: "Année"
+      hour: "Heure"
+      minute: "Minute"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      time: "%H:%M"
+      short: "%d %b %H:%M"
+      long: "%A %d %B %Y %H:%M:%S %Z"
+      long_ordinal: "%A %d %B %Y %H:%M:%S %Z"
+      filename: "%d_%B_%Y_%H_%M"
+      only_second: "%S"
+    am: 'am'
+    pm: 'pm'
   number:
     format:
       precision: 3
