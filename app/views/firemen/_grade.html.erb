@@ -1,7 +1,8 @@
 <tr style="<%= !(f.object.date.blank?) ? "background-color:#a8aaaa;" : "" %>">
   <td><%= img_grade(f.object.kind) %></td>
   <td>
-    <%= f.date_select(:date, :include_blank => true, :use_short_month => true) %>
+    <%= f.date_select(:date, :include_blank => true, :use_short_month => true, :start_year => Date.today.year) %>
     <%= f.hidden_field(:kind, :value => f.object.kind) %>
+    <%= f.error_message_on(:date) %>
   </td>
 </tr>

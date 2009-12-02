@@ -24,4 +24,8 @@ class Grade < ActiveRecord::Base
     end
   end
   
+  def validate
+    self.errors.add(:date, "Ne peut pas être dans le futur !") if !date.blank? and date > Date.today
+  end
+  
 end

@@ -1,6 +1,9 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
 <%- form_for(@fireman) do |f| -%>
   <div class="span-4 first">
+  <%- if !@fireman.errors.blank? -%>
+    <p class="message error">Veuillez corriger les erreurs avant de pouvoir continuer.</p>
+  <%- end -%>    
   <p>
     <%= f.label(:firstname, "Prénom *", :class => "span-1 first") %>
     <span class="span-3">
@@ -26,7 +29,7 @@
   <p>
     <%= f.label(:birthday, "Date de naissance", :class => "span-1 first") %>
     <span class="span-3">
-      <%= f.date_select(:birthday, :class => "span-1 first", :start_year => Time.now.year - 50, :end_year => Time.now.year - 10, :prompt => true) %>
+      <%= f.date_select(:birthday, :class => "span-1 first", :start_year => Time.now.year - 50, :end_year => Date.today.year - 10, :prompt => true) %>
     </span>
   </p>
   </div>
