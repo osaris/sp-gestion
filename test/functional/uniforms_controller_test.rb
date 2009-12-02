@@ -56,9 +56,8 @@ class UniformsControllerTest < ActionController::TestCase
         post :create, :uniform => Uniform.plan
       end
     
-      should_respond_with(:success)
-      should_render_template("show")
-      should_render_with_layout("back")
+      should_respond_with(:redirect)
+      should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
       
       should_assign_to(:uniform)
       should_change("number of uniform", :by => 1) { Uniform.count }
@@ -104,9 +103,8 @@ class UniformsControllerTest < ActionController::TestCase
           put :update, :id => @uniform.id, :uniform => Uniform.plan
         end
   
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+        should_respond_with(:redirect)
+        should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
       end       
       
       context "requesting DELETE :destroy" do

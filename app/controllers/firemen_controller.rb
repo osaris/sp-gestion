@@ -18,7 +18,7 @@ class FiremenController < BackController
   def create
     @fireman = @station.firemen.new(params[:fireman])
     if(@fireman.save)
-      render(:action => :show)
+      redirect_to(@fireman)
     else
       render(:action => :new)
     end
@@ -29,7 +29,7 @@ class FiremenController < BackController
   
   def update
     if @fireman.update_attributes(params[:fireman])
-      render(:action => :show)
+      redirect_to(@fireman)
     else
       render(:action => :edit)
     end

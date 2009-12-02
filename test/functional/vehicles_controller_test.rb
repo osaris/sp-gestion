@@ -57,9 +57,8 @@ class VehiclesControllerTest < ActionController::TestCase
         post :create, :vehicle => Vehicle.plan
       end
     
-      should_respond_with(:success)
-      should_render_template("show")
-      should_render_with_layout("back")
+      should_respond_with(:redirect)
+      should_redirect_to("vehicle") { vehicle_path(assigns(:vehicle)) }
       
       should_assign_to(:vehicle)
       should_change("number of vehicle", :by => 1) { Vehicle.count }
@@ -105,9 +104,8 @@ class VehiclesControllerTest < ActionController::TestCase
           put :update, :id => @vehicle.id, :vehicle => Vehicle.plan
         end
   
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+        should_respond_with(:redirect)
+        should_redirect_to("vehicle") { vehicle_path(assigns(:vehicle)) }
       end       
       
       context "requesting DELETE :destroy" do

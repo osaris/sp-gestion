@@ -57,9 +57,8 @@ class FiremenControllerTest < ActionController::TestCase
         post :create, :fireman => {:firstname => 'test', :lastname => 'test', :status => Fireman::STATUS['JSP']}
       end
     
-      should_respond_with(:success)
-      should_render_template("show")
-      should_render_with_layout("back")
+      should_respond_with(:redirect)
+      should_redirect_to("fireman") { fireman_path(assigns(:fireman)) }
       
       should_assign_to(:fireman)
       should_change("number of firemen", :by => 1) { Fireman.count }
@@ -105,9 +104,8 @@ class FiremenControllerTest < ActionController::TestCase
           put :update, :id => @fireman.id, :fireman => Fireman.plan
         end
   
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+        should_respond_with(:redirect)
+        should_redirect_to("fireman") { fireman_path(assigns(:fireman)) }
       end       
       
       context "requesting DELETE :destroy without associations" do

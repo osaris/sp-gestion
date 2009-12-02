@@ -18,7 +18,7 @@ class VehiclesController < BackController
   def create
     @vehicle = @station.vehicles.new(params[:vehicle])
     if(@vehicle.save)
-      render(:action => :show)
+      redirect_to(@vehicle)
     else
       render(:action => :new)
     end
@@ -29,7 +29,7 @@ class VehiclesController < BackController
   
   def update
     if @vehicle.update_attributes(params[:vehicle])
-      render(:action => :show)
+      redirect_to(@vehicle)
     else
       render(:action => :edit)
     end    

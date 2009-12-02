@@ -18,7 +18,7 @@ class UniformsController < BackController
   def create
     @uniform = @station.uniforms.new(params[:uniform])
     if(@uniform.save)
-      render(:action => :show)
+      redirect_to(@uniform)
     else
       render(:action => :new)
     end
@@ -29,7 +29,7 @@ class UniformsController < BackController
   
   def update
     if @uniform.update_attributes(params[:uniform])
-      render(:action => :show)
+      redirect_to(@uniform)
     else
       render(:action => :edit)
     end    
