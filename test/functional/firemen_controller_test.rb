@@ -110,7 +110,7 @@ class FiremenControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end       
       
-      context "requesting DELETE :destroy" do
+      context "requesting DELETE :destroy without associations" do
         setup do
           delete :destroy, :id => @fireman.id
         end
@@ -119,6 +119,19 @@ class FiremenControllerTest < ActionController::TestCase
         
         should_change("number of firemen", :by => -1) { Fireman.count }
       end
+      
+      context "requesting DELETE :destroy with associations" do
+        setup do
+          Fireman.any_instance.stubs(:destroy).returns(false)
+          delete :destroy, :id => @fireman.id
+        end
+        
+        should_respond_with(:success)
+        should_render_template("show")
+        should_render_with_layout("back")
+        
+        should_not_change("number of firemen") { Fireman.count }
+      end      
     end
   end
 end

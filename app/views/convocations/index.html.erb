@@ -1,0 +1,15 @@
+<div class="span-6 first">
+  <p class="right"><%= link_to(image_tag("back/icons/add.png") + "&nbsp;Créer une nouvelle convocation", new_convocation_path)%></p>  
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Titre</th>
+        <th>Tenue</th>
+    </thead>
+    <tbody>
+      <%= render(:partial => @convocations) || "<tr><td colspan='3'>Pas encore de convocation !</td></tr>" %>
+    </tbody>
+  </table>
+  <%= will_paginate(@convocations, :previous_label => "", :next_label => "") %>
+</div>

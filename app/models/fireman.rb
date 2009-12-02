@@ -1,15 +1,18 @@
 class Fireman < ActiveRecord::Base
   
   belongs_to :station
-  has_many :grades, :order => 'kind DESC'
-
+  has_many :grades, :order => 'kind DESC', :dependent => :destroy
+  has_many :convocation_firemen
+  has_many :convocations, :through => :convocation_firemen, :order => 'date DESC'
+  
   accepts_nested_attributes_for :grades
-
+  
   validates_presence_of :firstname, :message => "Le prénom est obligatoire."
   validates_presence_of :lastname, :message => "Le nom est obligatoire."
   validates_presence_of :status
   
   before_save :denormalize_grade
+  before_destroy :check_associations
   
   STATUS = {
     'JSP' => 1,
@@ -41,6 +44,13 @@ class Fireman < ActiveRecord::Base
   end
   
   private
+  
+  def check_associations
+    unless self.convocations.size == 0
+      self.errors.add_to_base("Impossible de supprimer ce membre car il possède des convocations.")
+      return false
+    end
+  end
   
   def denormalize_grade
     if self.status == STATUS['JSP']

@@ -68,3 +68,10 @@ def make_fireman_with_grades(attributes = {})
   f.save
   f
 end
+
+def make_convocation_with_firemen(attributes = {})
+  c = Convocation.make_unsaved(attributes)
+  c.firemen << make_fireman_with_grades()
+  c.save
+  c
+end

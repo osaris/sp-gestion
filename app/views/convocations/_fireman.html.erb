@@ -1,0 +1,4 @@
+<li>
+  <%= check_box_tag("convocation[fireman_ids][]", fireman.id, checked.include?(fireman), :class => "status_#{status}") %>
+  <label class="fireman_id"><%= fireman.firstname %>&nbsp;<%= fireman.lastname %></label>
+</li>

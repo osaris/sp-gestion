@@ -1,0 +1,2 @@
+module ConvocationsHelper
+end

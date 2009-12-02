@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class FiremanTest < ActiveSupport::TestCase
-    
+      
   context "with an instance" do
     setup do
       @fireman = Fireman.new(:firstname => 'Test', :lastname => 'Test')
@@ -30,6 +30,16 @@ class FiremanTest < ActiveSupport::TestCase
       
       should "be valid" do
         assert(@fireman.valid?)
+      end
+      
+      context "and a convocation" do
+        setup do
+          @fireman.convocations << Convocation.make_unsaved
+        end
+        
+        should "not be destroyable" do
+          assert_equal(false, @fireman.destroy)
+        end
       end
       
       context "saved" do

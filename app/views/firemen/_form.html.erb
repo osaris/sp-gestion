@@ -19,23 +19,24 @@
     <%= f.label(:status, "Statut *", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.select(:status, Fireman::STATUS.sort, :class => "span-2 first") %>
-      <%= js_for_status %>      
+      <%= js_for_status %>
       <%= error_message_on(:fireman, :status, :css_class => "span-2 first") %>
     </span>    
   </p>
   <p>
     <%= f.label(:birthday, "Date de naissance", :class => "span-1 first") %>
     <span class="span-3">
-      <%= f.text_field(:birthday, :class => "span-1 first") + js_for_birthday %>
+      <%= f.date_select(:birthday, :class => "span-1 first", :start_year => Time.now.year - 50, :end_year => Time.now.year - 10, :prompt => true) %>
     </span>
   </p>
   </div>
   <div class="span-2" id="grades" style="<%= style_for_grade(@fireman) %>">
-    <p><b>Grade (*)</b><br />Saisissez la date de nomination à côté de chaque grade obtenu.</p>
+    <div><b>Grade (*)</b><br />Saisissez la date de nomination à côté de chaque grade obtenu.</div>
+    <table>
     <%- f.fields_for(:grades) do |g| -%>
       <%= render :partial => 'grade', :locals => { :f => g } %>
     <%- end -%>
-    <%= js_for_grade_date %>
+    </table>
     <%= error_message_on(:fireman, :grades, :css_class => "span-2 first") %>    
   </div>
   <div class="span-5 first">

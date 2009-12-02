@@ -3,14 +3,20 @@ require 'sham'
 require 'faker'
 
 Sham.define do
-  code        { Faker::Lorem.words(1) }
-  description { Faker::Lorem.sentences(2) }  
+  code        { Faker::Lorem.words(1).join(' ') }
+  description { Faker::Lorem.sentences(2).join(' ') } 
   email       { Faker::Internet.email }
   firstname   { Faker::Name.first_name }
   lastname    { Faker::Name.last_name }
   name        { Faker::Company.name }
-  title       { Faker::Lorem.words(3) }
+  title       { Faker::Lorem.words(3).join(' ') }
   url         { Faker::Internet.domain_word }
+end
+
+Convocation.blueprint do
+  title
+  date(2.weeks.from_now)  
+  uniform
 end
 
 Fireman.blueprint do

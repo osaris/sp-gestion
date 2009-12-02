@@ -2,6 +2,7 @@ class Station < ActiveRecord::Base
   
   authenticates_many :user_sessions
   has_many :users
+  has_many :convocations
   has_many :firemen
   has_many :uniforms  
   has_many :vehicles

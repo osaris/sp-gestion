@@ -32,7 +32,7 @@ SimpleNavigation::Configuration.run do |navigation|
     
     primary.item(:personnel, 'Personnel', firemen_path) do |personnel|
       personnel.item(:firemen, 'Hommes', firemen_path)
-      personnel.item(:convocations, 'Convocations', firemen_path)
+      personnel.item(:convocations, 'Convocations', convocations_path)
       
       personnel.auto_highlight = false
       personnel.dom_class = 'subnav'
@@ -43,7 +43,7 @@ SimpleNavigation::Configuration.run do |navigation|
       configuration.item(:uniforms, 'Tenues', uniforms_path)
       
       configuration.auto_highlight = false
-      configuration.dom_class = 'subnav'      
+      configuration.dom_class = 'subnav'
     end
     
     primary.dom_id = 'mainnav'

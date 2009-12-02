@@ -1,3 +1,19 @@
-<h1><%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></h1>
-<%= img_grade(@fireman) %>
-<p><%= link_to("Editer", edit_fireman_path(@fireman))%> - <%= link_to("Supprimer", fireman_path(@fireman), :method => :delete)%></p>
+<h1><%= Grade::GRADE.index(@fireman.grade) %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></h1>
+
+<h2>Convocations</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Titre</th>
+      <th>Tenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(@fireman.convocations) %>
+  </tbody>
+</table>
+<p>
+  <%= link_to("Editer", edit_fireman_path(@fireman))%> - 
+  <%= link_to("Supprimer", fireman_path(@fireman), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
+</p>

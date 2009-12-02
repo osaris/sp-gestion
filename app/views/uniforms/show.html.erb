@@ -1,3 +1,6 @@
 <h1><%= @uniform.title %></h1>
 <p><%= @uniform.description %></p>
-<p><%= link_to("Editer", edit_uniform_path(@uniform))%> - <%= link_to("Supprimer", uniform_path(@uniform), :method => :delete)%></p>
+<p>
+  <%= link_to("Editer", edit_uniform_path(@uniform))%> - 
+  <%= link_to("Supprimer", uniform_path(@uniform), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
+</p>

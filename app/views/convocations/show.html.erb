@@ -1,0 +1,23 @@
+<h1><%= @convocation.title %> (<%= l(@convocation.date) %>)</h1>
+<p>Tenue : <%= @convocation.uniform.description %></p>
+
+<h2>Convoqués</h2>
+<table>
+  <%-@convocation.convocation_firemen.group_by(&:status).sort.reverse.each do |group, convocation_firemen| -%>
+    <tr>
+      <th colspan="3"><%= Fireman::STATUS.index(group) %></th>
+    </tr>
+    <%- convocation_firemen.each do |cf| %>
+      <tr>
+        <td><%= Grade::GRADE.index(cf.grade) %></td>
+        <td><%= cf.fireman.firstname %></td>
+        <td><%= cf.fireman.lastname %></td>
+      </tr>
+    <%- end -%>
+  <%- end -%>
+</table>
+<p>
+  <%= link_to("Editer", edit_convocation_path(@convocation))%> - 
+  <%= link_to("Supprimer", convocation_path(@convocation), :method => :delete, :confirm => "Êtes-vous sûr ?")%> - 
+  <%= link_to("Imprimer", convocation_path(@convocation, :format => :pdf))%>
+</p>

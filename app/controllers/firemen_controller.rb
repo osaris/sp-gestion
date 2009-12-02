@@ -5,9 +5,7 @@ class FiremenController < BackController
   before_filter :load_fireman, :except => [:index, :new, :create]  
   
   def index
-    @firemen = @station.firemen.paginate(:page => params[:page], :order => 'lastname')
-    # @firemen_stats_status = Fireman::count_status(@station.id)
-    # @firemen_stats_grade = Fireman::count_grade(@station.id)    
+    @firemen = @station.firemen.paginate(:page => params[:page], :order => 'firemen.grade DESC, firemen.lastname ASC')
   end
   
   def show
@@ -38,14 +36,18 @@ class FiremenController < BackController
   end
   
   def destroy
-    @fireman.destroy
-    redirect_to(firemen_path)
+    if @fireman.destroy
+      redirect_to(firemen_path)
+    else
+      flash.now[:error] = @fireman.errors.full_messages
+      render(:action => :show)
+    end
   end
   
   private
   
   def load_fireman
-    @fireman = @station.firemen.find(params[:id])
+    @fireman = @station.firemen.find(params[:id], :include => :convocations)
    rescue ActiveRecord::RecordNotFound
     redirect_to(firemen_path)
   end

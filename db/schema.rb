@@ -9,7 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091120161234) do
+ActiveRecord::Schema.define(:version => 20091122102349) do
+
+  create_table "convocation_firemen", :force => true do |t|
+    t.integer  "convocation_id"
+    t.integer  "fireman_id"
+    t.boolean  "presence",       :default => false
+    t.integer  "grade"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "convocations", :force => true do |t|
+    t.string   "title"
+    t.datetime "date"
+    t.integer  "uniform_id"
+    t.integer  "station_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "firemen", :force => true do |t|
     t.string   "firstname"
