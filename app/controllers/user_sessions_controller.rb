@@ -16,7 +16,7 @@ class UserSessionsController < BackController
     if @user_session.save
       redirect_to(root_back_path)
     else
-      flash[:error] = "Erreur dans votre adresse email ou votre mot de passe."      
+      flash.now[:error] = "Erreur dans votre adresse email ou votre mot de passe."
       render(:action => :new)
     end
   end
