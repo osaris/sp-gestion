@@ -39,7 +39,7 @@
       </table>
       <%= javascript_tag("
         $('.fireman_id').click(function(){
-          var checkbox = $(this).prev(':checkbox')
+          var checkbox = $(this).prev(':checkbox');
           checkbox.attr('checked', !checkbox.attr('checked'));
         });
       ")%>
