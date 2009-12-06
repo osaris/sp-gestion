@@ -15,6 +15,13 @@
     </span>
   </p>
   <p>
+    <%= f.label(:place, "Lieu (*)", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:place, :class => "span-2 first") %>
+      <%= error_message_on(:convocation, :place, :css_class => "span-2 first") %>
+    </span>
+  </p>  
+  <p>
     <%= f.label(:uniform, "Tenue (*)", :class => "span-1 first") %>
     <span class="span-3">
       <%= collection_select(:convocation, :uniform_id, Uniform.all, :id, :title) %>

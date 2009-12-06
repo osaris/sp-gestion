@@ -5,10 +5,11 @@
       <tr>
         <th>Date</th>
         <th>Titre</th>
+        <th>Lieu</th>
         <th>Tenue</th>
     </thead>
     <tbody>
-      <%= render(:partial => @convocations) || "<tr><td colspan='3'>Pas encore de convocation !</td></tr>" %>
+      <%= render(:partial => @convocations) || "<tr><td colspan='4'>Pas encore de convocation !</td></tr>" %>
     </tbody>
   </table>
   <%= will_paginate(@convocations, :previous_label => "", :next_label => "") %>

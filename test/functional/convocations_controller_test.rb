@@ -44,7 +44,7 @@ class ConvocationsControllerTest < ActionController::TestCase
     
     context "requesting POST with bad data" do
       setup do
-        post :create, :convocation => {:title => '', :date => '', :uniform_id => '', :firemen => {}}
+        post :create, :convocation => {:title => '', :date => '', :place => '', :uniform_id => '', :firemen => {}}
       end
     
       should_respond_with(:success)
@@ -56,7 +56,7 @@ class ConvocationsControllerTest < ActionController::TestCase
     
     context "requesting POST with good data" do
       setup do
-        post :create, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, 
+        post :create, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, :place => "Test lieu",
                                        :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
       end
     
@@ -85,7 +85,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       context "requesting PUT with good data" do
         setup do
-          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, 
+          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, :place => "Test lieu",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
   
@@ -133,7 +133,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       context "requesting PUT with bad data" do
         setup do
-          put :update, :id => @convocation.id, :convocation => {:title => "", :date => 2.weeks.from_now.to_s, 
+          put :update, :id => @convocation.id, :convocation => {:title => "", :date => 2.weeks.from_now.to_s, :place => "",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
   
@@ -144,7 +144,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       context "requesting PUT with good data" do
         setup do
-          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, 
+          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, :place => "Test lieu",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
   
