@@ -14,10 +14,7 @@ class ConvocationsController < BackController
     respond_to do |format|
       format.html
       format.pdf do
-        filename = "convocation_"+l(@convocation.date, :format => :filename)+".pdf"
-        send_data(@convocation.pdf.render, 
-                  :filename => filename, 
-                  :type => "application/pdf")
+        prawnto :prawn => { :page_layout => :landscape, :page_size => "A5"}, :inline => false
       end
     end
   end

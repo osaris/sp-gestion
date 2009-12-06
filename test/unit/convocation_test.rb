@@ -20,17 +20,7 @@ class ConvocationTest < ActiveSupport::TestCase
     should "be editable" do
       assert(@convocation.editable?)
     end
-    
-    context "print pdf version" do
-      setup do
-        @pdf = @convocation.pdf
-      end
-      
-      should "not be nil" do
-        assert_not_nil(@pdf)
-      end
-    end
-            
+
     context "and date in past" do
       setup do
         @convocation.date = 3.weeks.ago

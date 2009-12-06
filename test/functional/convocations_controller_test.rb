@@ -113,12 +113,12 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       context "requesting GET on existing convocation with PDF format" do
         setup do
+          @request.env["SERVER_PROTOCOL"] = "http"
           get :show, :id => @convocation.id, :format => 'pdf'
         end
         
         should_respond_with(:success)
-        
-        should_assign_to(:convocation)
+        should_render_template("show")
       end      
       
       context "requesting GET :edit" do
