@@ -7,10 +7,12 @@
       <th>Date</th>
       <th>Titre</th>
       <th>Tenue</th>
+      <th>Présent ?</th>
     </tr>
   </thead>
   <tbody>
-    <%= render(@fireman.convocations) || "<tr><td colspan='3'>Pas encore de convocation !</td></tr>" %>
+    <%= render(:partial => "convocation_fireman", :collection => @fireman.convocation_firemen) || 
+        "<tr><td colspan='4'>Pas encore de convocation !</td></tr>" %>
   </tbody>
 </table>
 <p>

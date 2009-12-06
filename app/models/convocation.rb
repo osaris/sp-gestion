@@ -2,7 +2,7 @@ class Convocation < ActiveRecord::Base
   
   belongs_to :station
   belongs_to :uniform
-  has_many :convocation_firemen, :dependent => :destroy
+  has_many :convocation_firemen, :dependent => :destroy, :order => 'convocation_firemen.grade DESC'
   has_many :firemen, :through => :convocation_firemen
   
   validates_presence_of :title, :message => "Le titre est obligatoire."

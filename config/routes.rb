@@ -47,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :firemen, :conditions => { :subdomain => /.+/  }
   map.resources :uniforms, :conditions => { :subdomain => /.+/  }
   map.resources :convocations, :conditions => { :subdomain => /.+/  }
+  map.resources :convocation_firemen, :only => [:edit, :update], :conditions => { :subdomain => /.+/  }
 
   map.activate     '/activate/:id', :controller => 'confirmations', :action => 'create', :conditions => { :subdomain => /.+/  }
   map.home         '/home', :controller => 'pages', :action => 'home', :conditions => { :subdomain => 'www' }

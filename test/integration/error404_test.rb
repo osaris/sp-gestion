@@ -13,14 +13,14 @@ class Error404Test < ActionController::IntegrationTest
   
   context "a request to a non existing page on a subdomain" do
     setup do
-      @company = Station.make()
-      host!("#{@company.url}.test.local")
+      @station = Station.make()
+      host!("#{@station.url}.test.local")
       get "/3485943"
     end
   
-    should_redirect_to("back login page") { "http://#{@company.url}.test.local/login" }
+    should_redirect_to("back login page") { "http://#{@station.url}.test.local/login" }
   end
-
+  
   context "a request to a non existing page on a non existing subdomain" do
     setup do
       host!("subdomain.test.local")

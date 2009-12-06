@@ -63,7 +63,7 @@ class ConvocationsController < BackController
   private
   
   def load_convocation
-    @convocation = @station.convocations.find(params[:id], :include => {:convocation_firemen => :fireman}, :order => 'firemen.grade DESC, firemen.lastname ASC')
+    @convocation = @station.convocations.find(params[:id], :include => {:convocation_firemen => :fireman}, :order => 'convocation_firemen.grade DESC, firemen.lastname ASC')
    rescue ActiveRecord::RecordNotFound
     redirect_to(convocations_path)
   end

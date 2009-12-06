@@ -16,11 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def redirect_to_homepage
-    if @station.nil?
-      redirect_to("http://www.#{BASE_URL}")
-    else
-      redirect_to(root_back_url)
-    end
+    redirect_to("http://www.#{BASE_URL}")
   end
 
   def current_user_session

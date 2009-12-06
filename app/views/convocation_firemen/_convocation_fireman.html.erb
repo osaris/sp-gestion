@@ -1,0 +1,6 @@
+<tr class="<%= cycle("odd","even") %>">
+  <td><%= Grade::GRADE.index(convocation_fireman.grade) %></td>
+  <td><%= convocation_fireman.fireman.firstname %></td>
+  <td><%= convocation_fireman.fireman.lastname %></td>
+  <td><%= check_box_tag(:convocation_fireman, :presence, convocation_fireman.presence, :disabled => true) %></td>
+</tr>

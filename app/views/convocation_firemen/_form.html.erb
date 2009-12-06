@@ -1,0 +1,36 @@
+<%- form_tag(convocation_fireman_path, :method => :put) do -%>
+  <table>
+    <thead>
+      <tr>
+        <th>Grade</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Présent ?</th>
+      </tr>
+    </thead>
+    <tbody id="convocation_firemen_body">
+      <%- @convocation_firemen.group_by(&:status).each do |group, convocation_firemen| -%>
+        <tr>
+          <th colspan="4"><%= Fireman::STATUS.index(group) %></th>
+        </tr>
+          <%- convocation_firemen.each do |convocation_fireman| -%>
+            <%- fields_for("convocation_firemen[]", convocation_fireman) do |f| -%>          
+            <tr class="<%= cycle("odd","even") %>">
+              <td><%= Grade::GRADE.index(convocation_fireman.grade) %></td>
+              <td><%= convocation_fireman.fireman.firstname %></td>
+              <td><%= convocation_fireman.fireman.lastname %></td>
+              <td><%= f.check_box(:presence) %></td>
+            </tr>
+          <%- end -%>
+        <%- end -%>
+      <%- end -%>
+    </tbody>
+    <%= javascript_tag("
+      $('#convocation_firemen_body tr').click(function(){
+        var checkbox = $(this).find(':checkbox');
+        checkbox.attr('checked', !checkbox.attr('checked'));
+      });
+    ")%>
+  </table>
+  <%= button_tag(:submit, "Enregistrer") %> ou <%= link_to("Annuler", convocation_path(@convocation)) %>
+<%- end -%>
