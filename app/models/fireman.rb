@@ -23,7 +23,7 @@ class Fireman < ActiveRecord::Base
   def initialize(params = nil)
     super
     self.status ||= 3
-    self.grades = Grade.new_defaults() if self.grades.size != Grade::GRADE.size
+    self.grades = Grade.new_defaults() if self.grades.length != Grade::GRADE.length
   end
   
   def current_grade
@@ -38,7 +38,7 @@ class Fireman < ActiveRecord::Base
   end
   
   def validate
-    if self.status != STATUS['JSP'] and self.grades.reject{ |g| g.date.blank? }.size == 0
+    if self.status != STATUS['JSP'] and self.grades.reject{ |g| g.date.blank? }.length == 0
       self.errors.add(:grades, "Un membre actif ou vétéran doit avoir un grade.")
     end
   end
