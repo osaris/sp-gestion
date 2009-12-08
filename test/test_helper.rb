@@ -60,7 +60,7 @@ def logout(user)
 end
 
 def send_file_to_disk(content, filename)
-  mkdir("#{RAILS_ROOT}/tmp/tests/")
+  File.mkdir("#{RAILS_ROOT}/tmp/tests/")
   File.open("#{RAILS_ROOT}/tmp/tests/"+filename, "w") do |f|
     f.write(content)
   end
