@@ -61,8 +61,8 @@ end
 
 def send_file_to_disk(content, filename)
   test_file_path = "#{RAILS_ROOT}/tmp/tests/"
-  FileUtils.mkdir(test_file_path) unless File.exists?(test_file_path)
-  File.open("#{RAILS_ROOT}/tmp/tests/"+filename, "w") do |f|
+  FileUtils.mkdir_p(test_file_path)
+  File.open(test_file_path+filename, "w") do |f|
     f.write(content)
   end
 end
