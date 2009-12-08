@@ -59,6 +59,12 @@ def logout(user)
   session.destroy
 end
 
+def send_file_to_disk(content, filename)
+  File.open("#{RAILS_ROOT}/tmp/tests/"+filename, "w") do |f|
+    f.write(content)
+  end
+end
+
 # data
 
 def make_fireman_with_grades(attributes = {})

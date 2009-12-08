@@ -119,6 +119,9 @@ class ConvocationsControllerTest < ActionController::TestCase
         
         should_respond_with(:success)
         should_render_template("show")
+        should "send a file" do
+          send_file_to_disk(@response.body, "convocation.pdf")
+        end
       end      
       
       context "requesting GET :edit" do
