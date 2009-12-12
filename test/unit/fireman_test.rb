@@ -18,6 +18,10 @@ class FiremanTest < ActiveSupport::TestCase
     should "not be valid" do
       assert_equal(false, @fireman.valid?)
     end
+    
+    should "return nil for current_grade" do
+      assert_nil(@fireman.current_grade)
+    end
       
     context "and a grade set" do
       setup do
