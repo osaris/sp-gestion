@@ -24,7 +24,7 @@
             var E = "#" + F + "_text";
             if (nPerc == -200) {
                 strColor = "#f00";
-                strText = "Unsafe password word!";
+                strText = "Mot de passe non sécurisé !";
                 A(B).css({
                     width: "0%"
                 })
