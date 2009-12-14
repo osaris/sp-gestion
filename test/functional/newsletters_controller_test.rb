@@ -38,14 +38,13 @@ class NewslettersControllerTest < ActionController::TestCase
     setup do
       @nl = Newsletter.make
       get :activate, :id => @nl.activation_key
-      @nl.reload
     end
     
     should_respond_with(:success)
     should_render_with_layout("front")
     
     should "have activated newsletter" do
-      assert_equal("", @nl.activation_key)
+      assert_equal("", assigns(:newsletter).activation_key)
     end
   end
   

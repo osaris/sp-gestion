@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 
   belongs_to :station
-
+  has_many :messages
+  
   acts_as_authentic do |c| 
     c.validations_scope = :station_id
     # only to be able to set the message
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
     self.save(false)
     UserMailer.deliver_confirmation_instructions(self)
   end
-  
+    
   def deliver_password_reset_instructions!  
     reset_perishable_token!  
     UserMailer.deliver_password_reset_instructions(self)

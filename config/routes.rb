@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-    
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -48,6 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :uniforms, :conditions => { :subdomain => /.+/  }
   map.resources :convocations, :conditions => { :subdomain => /.+/  }
   map.resources :convocation_firemen, :only => [:edit, :update], :conditions => { :subdomain => /.+/  }
+  map.resources :messages, :member => { :mark_as_read => :post }, :only => [:index, :show], :conditions => { :subdomain => /.+/  }
 
   map.activate     '/activate/:id', :controller => 'confirmations', :action => 'create', :conditions => { :subdomain => /.+/  }
   map.home         '/home', :controller => 'pages', :action => 'home', :conditions => { :subdomain => 'www' }

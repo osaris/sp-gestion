@@ -37,9 +37,8 @@ class ConfirmationsControllerTest < ActionController::TestCase
         should_respond_with(:redirect)
         should_redirect_to("back root") { root_back_path }
         
-        should "be active" do
-          @user.reload          
-          assert(@user.confirmed?)
+        should "be active" do        
+          assert(assigns(:user).confirmed?)
         end        
         should_be_logged_in
       end

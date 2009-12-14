@@ -29,8 +29,14 @@ class StationsControllerTest < ActionController::TestCase
     end
     
     should_respond_with(:success)
-    should_render_template("create")
-    should_render_with_layout("front")    
+    # FIXME assert_template is broken when using render_to_string
+    # http://dev.rubyonrails.org/ticket/8990
+    # should_render_template("create")
+    should_render_with_layout("front")
+    
+    should "add a message to the default user" do
+      assert_equal(1, assigns(:user).messages.length)
+    end
   end
   
   

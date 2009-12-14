@@ -1,0 +1,10 @@
+<tr class="<%= cycle("odd", "even") %>" id="message_<%= message.id %>">
+  <td>
+    <%= link_to_remote(image_tag("back/icons/email.png", :alt => "Marquer comme lu"),
+                       :url => mark_as_read_message_path(message),
+                       :confirm => "Voulez-vous marquer ce message comme lu ?",
+                       :success => visual_effect(:fade, "message_#{message.id}")) %>
+  </td>
+  <td><%= l(message.created_at, :format => :default) %></td>
+  <td><%= link_to(message.title, message) %></td>
+</tr>

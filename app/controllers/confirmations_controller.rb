@@ -7,7 +7,7 @@ class ConfirmationsController < BackController
     @user = @station.users.find_using_perishable_token(params[:id])
     if @user.nil? or @user.confirmed?
       flash[:error] = "Compte inexistant ou inactif."
-      redirect_to(login_path)      
+      redirect_to(login_path)
     else
       @user.confirm!
       UserSession.create(@user)

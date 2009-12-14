@@ -3,6 +3,7 @@ require 'sham'
 require 'faker'
 
 Sham.define do
+  body        { Faker::Lorem.sentences(5).join(' ') }
   code        { Faker::Lorem.words(1).join(' ') }
   description { Faker::Lorem.sentences(2).join(' ') } 
   email       { Faker::Internet.email }
@@ -24,6 +25,11 @@ end
 Fireman.blueprint do
   firstname
   lastname
+end
+
+Message.blueprint do
+  title
+  body
 end
 
 Newsletter.blueprint do

@@ -17,6 +17,8 @@ class DashboardControllerTest < ActionController::TestCase
       should_respond_with(:success)
       should_render_template("index")
       should_render_with_layout("back")
+      
+      should_assign_to(:messages)
     end
   end
 
