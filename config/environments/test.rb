@@ -29,6 +29,3 @@ config.action_mailer.delivery_method = :test
 
 # URL
 BASE_URL = "test.local"
-
-# App config
-BETA = false

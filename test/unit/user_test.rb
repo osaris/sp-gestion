@@ -4,19 +4,44 @@ class UserTest < ActiveSupport::TestCase
 
   setup(:activate_authlogic)
 
-  context "with an instance not activated" do
+  context "with an instance unsaved" do
     setup do
-      @user = User.make(:email => 'test@test.com')
+      @user = User.make_unsaved(:beta_code => '')
+    end
+        
+    should "not be valid?" do
+      assert(!@user.valid?)
     end
     
-    context "call confirmed?" do
+    context "with valid beta code" do
       setup do
-        @result = @user.confirmed?
+        @bc = BetaCode.make
+        @user.beta_code = @bc.code
       end
+      
+      should "be valid" do
+        assert(@user.valid?)
+      end
+      
+      context "saving" do
+        setup do
+          @user.save
+        end
 
-      should "return false" do
-        assert_equal(false, @result)
+        should "set user_id to BetaCode" do
+          assert_equal(@user.id, @bc.reload.user_id)
+        end
       end
+    end
+  end
+
+  context "with an instance saved and not activated" do
+    setup do
+      @user = User.make(:beta)
+    end
+        
+    should "not be confirmed?" do
+      assert(!@user.confirmed?)
     end
     
     context "after a call to confirm!" do
@@ -26,6 +51,10 @@ class UserTest < ActiveSupport::TestCase
 
       should "be confirmed" do
         assert(@user.confirmed?)
+      end
+      
+      should "set BetaCode to used" do
+        assert(@user.beta_codes.first.used)
       end
     end
 

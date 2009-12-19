@@ -25,7 +25,7 @@ class StationsControllerTest < ActionController::TestCase
   
   context "requesting POST :create with good data" do
     setup do
-      post :create, :station => Station.plan, :user => User.plan
+      post :create, :station => Station.plan, :user => User.plan(:beta_code => BetaCode.make.code)
     end
     
     should_respond_with(:success)

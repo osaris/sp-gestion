@@ -22,6 +22,3 @@ config.middleware.use "Rack::Bug"
 
 # URL
 BASE_URL = "sp-gestion.dyndns.org:3000"
-
-# App config
-BETA = false

@@ -2,6 +2,11 @@ class User < ActiveRecord::Base
 
   belongs_to :station
   has_many :messages
+  has_many :beta_codes
+  
+  attr_accessor :beta_code
+  
+  after_create :assign_beta_code
   
   acts_as_authentic do |c| 
     c.validations_scope = :station_id
@@ -11,6 +16,11 @@ class User < ActiveRecord::Base
     # because we reset password on the same page as profile
     c.ignore_blank_passwords = true
     c.validates_confirmation_of_password_field_options(:message => "Le mot de passe ne correspond pas à la confirmation.")
+  end
+  
+  def validate_on_create
+    bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
+    self.errors.add(:beta_code, "Ce code n'est pas valide.") if bc.blank?
   end
   
   def reset_password!(new_password, new_password_confirmation)
@@ -25,6 +35,9 @@ class User < ActiveRecord::Base
 
   def confirm!
     update_attribute(:confirmed_at, Time.now.utc)
+    self.beta_codes.each do |beta_code|
+      beta_code.update_attribute(:used, true)
+    end
   end
   
   def deliver_confirmation_instructions!
@@ -38,6 +51,13 @@ class User < ActiveRecord::Base
   def deliver_password_reset_instructions!  
     reset_perishable_token!  
     UserMailer.deliver_password_reset_instructions(self)
+  end
+
+  private
+  
+  def assign_beta_code
+    bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
+    bc.update_attribute(:user_id, self.id)
   end
 
 end

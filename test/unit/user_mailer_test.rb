@@ -4,7 +4,7 @@ class UserMailerTest < ActionMailer::TestCase
 
   context "with a user" do
     setup do
-      @user = User.make(:email => "test@test.com")
+      @user = User.make(:beta, :email => "test@test.com")
     end
     
     context "deliver confirmation instructions" do

@@ -8,3 +8,12 @@ namespace :test do
     system("open doc/coverage/index.html") if PLATFORM['darwin']
   end
 end
+
+namespace :spg do
+  desc 'Generate beta code and display them (usage : nb=XX)'
+  task :create_beta_codes => :environment do
+    ENV['nb'].to_i.times do
+      puts BetaCode.create().code
+    end
+  end
+end

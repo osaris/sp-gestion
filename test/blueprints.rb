@@ -15,6 +15,9 @@ Sham.define do
   url         { Faker::Internet.domain_word }
 end
 
+BetaCode.blueprint do
+end
+
 Convocation.blueprint do
   title
   date(2.weeks.from_now)
@@ -54,12 +57,21 @@ User.blueprint do
   password_confirmation(pass)
 end
 
+User.blueprint(:beta) do
+  email
+  station
+  password(pass = Authlogic::Random.hex_token)
+  password_confirmation(pass)
+  beta_code(BetaCode.make.code)
+end
+
 User.blueprint(:confirmed) do
   email
   station
   password(pass = 'test1234')
   password_confirmation(pass)
-  confirmed_at(1.day.ago)  
+  confirmed_at(1.day.ago)
+  beta_code(BetaCode.make.code)  
 end
 
 Vehicle.blueprint do

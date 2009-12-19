@@ -35,7 +35,8 @@
       <div id="nav" class="box">
         <ul>
 			<li><%= link_to("Accueil", home_path())%></li>
-      <%- if !BETA -%><li class="active"><%= link_to("Créer un compte", signup_path()) %></li><%- end -%>
+			<%# TODO end of beta %>
+			<%- if false -%><li class="active"><%= link_to("Créer un compte", signup_path()) %></li><%- end -%>
 			<li><%= link_to("Blog", "http://blog.sp-gestion.fr") %></li>
         </ul>
       </div> <!-- /nav -->
