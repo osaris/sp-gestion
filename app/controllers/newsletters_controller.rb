@@ -5,7 +5,7 @@ class NewslettersController < FrontController
     if @newsletter.save
       flash.now[:notice] = "Nous avons envoyé un email sur votre adresse #{@newsletter.email} afin de valider votre inscription à notre avant-première."
     else
-      flash.now[:error] = "L'adresse email ne semble pas valide ou est déjà abonnée !"
+      flash.now[:error] = "L'adresse email ne semble pas valide ou est déjà inscrite !"
     end
     render('pages/home')
   end
