@@ -3,7 +3,7 @@ class NewslettersController < FrontController
   def create
     @newsletter = Newsletter.new(params[:newsletter])
     if @newsletter.save
-      flash.now[:notice] = "Nous avons envoyé un email sur votre adresse #{@newsletter.email} afin de valider votre inscription."
+      flash.now[:notice] = "Nous avons envoyé un email sur votre adresse #{@newsletter.email} afin de valider votre inscription à notre avant-première."
     else
       flash.now[:error] = "L'adresse email ne semble pas valide ou est déjà abonnée !"
     end

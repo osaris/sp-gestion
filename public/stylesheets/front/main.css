@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6, p, address, blockquote, table, dl, fieldset {margin:15px
 #breadcrumbs span {margin:0 3px;}
 
 .topstory-txt.left {float:left; width:450px;}
-.topstory-txt.right {float:right; width:350px;}
+.topstory-txt.right {float:right; width:400px;}
 .topstory-txt h3 {margin:0; font-weight:normal;color:#df0000;font-size:140%;}
 .topstory-txt #topstory-info {margin:0; font-size:90%;}
 .topstory-txt .comment {padding-left:12px; background:url("/images/front/ico-comment.gif") 0 2px no-repeat;}
