@@ -5,9 +5,9 @@ module FiremenHelper
       $(function() {
         $('#fireman_status').change(function() {
           if ($(this).val() == 1)
-            $('#grades').hide();
+            $('#grades').fadeOut();
           else
-            $('#grades').show();
+            $('#grades').fadeIn();
         });
       });
     ")
