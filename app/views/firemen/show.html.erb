@@ -1,5 +1,8 @@
 <h1><%= Grade::GRADE.index(@fireman.grade) %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></h1>
-
+<p>
+  <%= link_to("Editer", edit_fireman_path(@fireman))%> - 
+  <%= link_to("Supprimer", fireman_path(@fireman), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
+</p>
 <h2>Convocations</h2>
 <table>
   <thead>
@@ -16,7 +19,3 @@
         "<tr><td colspan='5'>Pas encore de convocation !</td></tr>" %>
   </tbody>
 </table>
-<p>
-  <%= link_to("Editer", edit_fireman_path(@fireman))%> - 
-  <%= link_to("Supprimer", fireman_path(@fireman), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
-</p>

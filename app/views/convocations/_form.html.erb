@@ -10,7 +10,7 @@
   <p>
     <%= f.label(:date, "Date (*)", :class => "span-1 first") %>
     <span class="span-3">
-      <%= f.datetime_select(:date, :class => "span-2 first", :prompt => true, :start_year => Date.today.year) %>
+      <%= f.datetime_select(:date, :class => "span-2 first", :default => Time.now, :start_year => Date.today.year) %>
       <%= error_message_on(:convocation, :date, :css_class => "span-2 first") %>  
     </span>
   </p>

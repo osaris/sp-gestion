@@ -1,6 +1,12 @@
 <h1><%= @convocation.title %> (<%= l(@convocation.date) %>)</h1>
 <p>Lieu : <%= @convocation.place %></p>
 <p>Tenue : <%= @convocation.uniform.description %></p>
+<p>
+  <%= link_to("Editer", edit_convocation_path(@convocation))%> - 
+  <%= link_to("Supprimer", convocation_path(@convocation), :method => :delete, :confirm => "Êtes-vous sûr ?")%> - 
+  <%= link_to("Imprimer", convocation_path(@convocation, :format => :pdf))%> -
+  <%= link_to("Présences", edit_convocation_fireman_path(@convocation))%>
+</p>
 <h2>Convoqués</h2>
 <table>
   <thead>
@@ -20,9 +26,3 @@
     <%- end -%>
   </tbody>
 </table>
-<p>
-  <%= link_to("Editer", edit_convocation_path(@convocation))%> - 
-  <%= link_to("Supprimer", convocation_path(@convocation), :method => :delete, :confirm => "Êtes-vous sûr ?")%> - 
-  <%= link_to("Imprimer", convocation_path(@convocation, :format => :pdf))%> -
-  <%= link_to("Présences", edit_convocation_fireman_path(@convocation))%>
-</p>
