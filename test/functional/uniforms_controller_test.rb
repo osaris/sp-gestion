@@ -107,7 +107,7 @@ class UniformsControllerTest < ActionController::TestCase
         should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
       end       
       
-      context "requesting DELETE :destroy" do
+      context "requesting DELETE :destroy without associations" do
         setup do
           delete :destroy, :id => @uniform.id
         end
@@ -115,6 +115,19 @@ class UniformsControllerTest < ActionController::TestCase
         should_redirect_to("uniforms list") { uniforms_path }
         
         should_change("number of uniforms", :by => -1) { Uniform.count }
+      end
+      
+      context "requesting DELETE :destroy with associations" do
+        setup do
+          Uniform.any_instance.stubs(:destroy).returns(false)
+          delete :destroy, :id => @uniform.id
+        end
+        
+        should_respond_with(:success)
+        should_render_template("show")
+        should_render_with_layout("back")
+        
+        should_not_change("number of uniform") { Uniform.count }
       end
     end
   end

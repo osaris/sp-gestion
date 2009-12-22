@@ -47,8 +47,7 @@ class Fireman < ActiveRecord::Base
   
   def check_associations
     unless self.convocations.size == 0
-      self.errors.add_to_base("Impossible de supprimer ce membre car il possède des convocations.")
-      return false
+      self.errors.add_to_base("Impossible de supprimer ce membre car il possède des convocations.") and return false
     end
   end
   

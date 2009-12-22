@@ -36,8 +36,12 @@ class UniformsController < BackController
   end
   
   def destroy
-    @uniform.destroy
-    redirect_to(uniforms_path)
+    if @uniform.destroy
+      redirect_to(uniforms_path)
+    else
+      flash.now[:error] = @uniform.errors.full_messages
+      render(:action => :show)
+    end
   end
   
   private
