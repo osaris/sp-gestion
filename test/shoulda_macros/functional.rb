@@ -16,7 +16,7 @@ class Test::Unit::TestCase
   
   def self.should_set_the_flash(level = nil, val = :any)
     val = /.*/i if val == :any
-    return should_set_the_flash_to val unless level
+    return should_set_the_flash_to(val) unless level
     if val.blank?
       should "have nothing in the #{level} flash" do
         assert(flash[level].blank?, "but had: #{flash[level].inspect}")
