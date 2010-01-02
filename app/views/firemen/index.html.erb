@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => @firemen) || "<tr><td colspan='2'>Pas encore de personne !</td></tr>" %>
+      <%= render(:partial => @firemen) || "<tr><td colspan='4'>Pas encore de personne !</td></tr>" %>
     </tbody>
   </table>
   <%= will_paginate(@firemen, :previous_label => "", :next_label => "") %>
