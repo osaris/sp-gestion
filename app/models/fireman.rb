@@ -20,8 +20,7 @@ class Fireman < ActiveRecord::Base
     'Actif' => 3
   }.freeze
 
-  def initialize(params = nil)
-    super
+  def after_initialize
     self.status ||= 3
     self.grades = Grade.new_defaults() if self.grades.length != Grade::GRADE.length
   end
