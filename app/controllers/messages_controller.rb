@@ -9,11 +9,11 @@ class MessagesController < BackController
   end
   
   def show
-    @message.mark_as_read
+    @message.read!
   end
   
   def mark_as_read
-    @message.mark_as_read
+    @message.read!
     render(:nothing => :true)
   end
   

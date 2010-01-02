@@ -2,10 +2,14 @@ class Message < ActiveRecord::Base
   
   belongs_to :user
   
-  named_scope :unread, :conditions => {:read => false}
-  
-  def mark_as_read
-    update_attribute(:read, true) unless self.read
+  named_scope :unread, :conditions => {:read_at => nil}
+
+  def read?
+    !self.read_at.blank?
+  end
+
+  def read!
+    update_attribute(:read_at, Time.now) unless self.read?
   end
   
 end

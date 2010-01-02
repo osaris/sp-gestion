@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091220095020) do
+ActiveRecord::Schema.define(:version => 20091231081446) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(:version => 20091220095020) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "body"
-    t.boolean  "read"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "read_at"
   end
 
   create_table "newsletters", :force => true do |t|

@@ -32,7 +32,7 @@ class MessagesControllerTest < ActionController::TestCase
     
     context "with a message" do
       setup do
-        @message = @user.messages.make(:read => false)
+        @message = @user.messages.make
       end
       
       context "requesting GET on existing message" do
@@ -51,7 +51,7 @@ class MessagesControllerTest < ActionController::TestCase
         end
         
         should "mark message as read" do
-          assert(assigns(:message).read)
+          assert(assigns(:message).read?)
         end
       end
     end

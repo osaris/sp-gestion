@@ -11,17 +11,18 @@ class MessageTest < ActiveSupport::TestCase
       assert(!@message.read?)
     end
     
-    context "call mark_as_read" do
+    context "call read!" do
       setup do
-        @message.mark_as_read
+        @message.read!
       end
-      
-      should "set read to true" do
-        assert(@message.read)
+
+      should "set read_at" do
+        assert_not_nil(@message.read_at)
+      end
+
+      should "do read? return true" do
+        assert(@message.read?)
       end
     end
-    
-    
   end
-
 end
