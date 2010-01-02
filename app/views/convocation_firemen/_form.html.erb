@@ -8,7 +8,7 @@
         <th>Présent ?</th>
       </tr>
     </thead>
-    <tbody id="convocation_firemen_body">
+    <tbody>
       <%- @convocation_firemen.group_by(&:status).each do |group, convocation_firemen| -%>
         <tr>
           <th colspan="4"><%= Fireman::STATUS.index(group) %></th>
@@ -16,9 +16,9 @@
           <%- convocation_firemen.each do |convocation_fireman| -%>
             <%- fields_for("convocation_firemen[]", convocation_fireman) do |f| -%>          
             <tr class="<%= cycle("odd","even") %>">
-              <td><%= Grade::GRADE.index(convocation_fireman.grade) %></td>
-              <td><%= convocation_fireman.fireman.firstname %></td>
-              <td><%= convocation_fireman.fireman.lastname %></td>
+              <td class="clickable"><%= Grade::GRADE.index(convocation_fireman.grade) %></td>
+              <td class="clickable"><%= convocation_fireman.fireman.firstname %></td>
+              <td class="clickable"><%= convocation_fireman.fireman.lastname %></td>
               <td><%= f.check_box(:presence) %></td>
             </tr>
           <%- end -%>
@@ -26,8 +26,8 @@
       <%- end -%>
     </tbody>
     <%= javascript_tag("
-      $('#convocation_firemen_body tr').click(function(){
-        var checkbox = $(this).find(':checkbox');
+      $('.clickable').click(function(){
+        var checkbox = $(this).parent().find(':checkbox');
         checkbox.attr('checked', !checkbox.attr('checked'));
       });
     ")%>
