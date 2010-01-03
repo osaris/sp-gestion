@@ -11,10 +11,6 @@ class Convocation < ActiveRecord::Base
   validates_presence_of :uniform, :message => "La tenue est obligatoire."
   validates_presence_of :firemen, :message => "Les personnes convoquées sont obligatoires."
   
-  named_scope :lastfive,  lambda { |limit|
-    {:order => "created_at DESC", :limit => limit}
-  }
-    
   def validate
     self.errors.add(:date, "Ne peut pas être dans le passé !") if !editable?
   end
