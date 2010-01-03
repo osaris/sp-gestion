@@ -56,7 +56,7 @@ class ConvocationsControllerTest < ActionController::TestCase
     
     context "requesting POST with good data" do
       setup do
-        post :create, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, :place => "Test lieu",
+        post :create, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                        :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
       end
     
@@ -85,7 +85,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       context "requesting PUT with good data" do
         setup do
-          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, :place => "Test lieu",
+          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
   
@@ -136,7 +136,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       context "requesting PUT with bad data" do
         setup do
-          put :update, :id => @convocation.id, :convocation => {:title => "", :date => 2.weeks.from_now.to_s, :place => "",
+          put :update, :id => @convocation.id, :convocation => {:title => "", :date => I18n.localize(2.weeks.from_now), :place => "",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
   
@@ -147,7 +147,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       context "requesting PUT with good data" do
         setup do
-          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => 2.weeks.from_now.to_s, :place => "Test lieu",
+          put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
   

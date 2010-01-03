@@ -10,6 +10,7 @@ class Fireman < ActiveRecord::Base
   validates_presence_of :firstname, :message => "Le prénom est obligatoire."
   validates_presence_of :lastname, :message => "Le nom est obligatoire."
   validates_presence_of :status
+  validates_date :birthday, :allow_blank => true
   
   before_save :denormalize_grade
   before_destroy :check_associations
@@ -21,7 +22,9 @@ class Fireman < ActiveRecord::Base
   }.freeze
 
   def after_initialize
-    self.status ||= 3
+    # FIXME can't use self there because of Rails bug
+    # https://rails.lighthouseapp.com/projects/8994/tickets/3165-activerecordmissingattributeerror-after-update-to-rails-v-234
+    write_attribute(:status, 3) unless read_attribute(:status)
     self.grades = Grade.new_defaults() if self.grades.length != Grade::GRADE.length
   end
   

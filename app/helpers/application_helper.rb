@@ -8,5 +8,13 @@ module ApplicationHelper
   def img_grade(grade)
     image_tag("back/grades/#{grade}.png", :alt => Grade::GRADE.index(grade))
   end
+
+  def l!(object, options = {})
+    begin
+      I18n.localize(object, options)
+    rescue
+      return ""
+    end
+  end
   
 end

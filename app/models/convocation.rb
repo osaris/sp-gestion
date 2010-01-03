@@ -9,6 +9,8 @@ class Convocation < ActiveRecord::Base
   validates_presence_of :date, :message => "La date est obligatoire."
   validates_presence_of :place, :message => "Le lieu est obligatoire."
   validates_presence_of :uniform, :message => "La tenue est obligatoire."
+  # FIXME record is saved even if this validation failed, it's a Rails bug
+  # https://rails.lighthouseapp.com/projects/8994/tickets/922-has_many-through-transaction-rollback
   validates_presence_of :firemen, :message => "Les personnes convoquées sont obligatoires."
   
   def validate

@@ -10,7 +10,7 @@
   <p>
     <%= f.label(:date, "Date (*)", :class => "span-1 first") %>
     <span class="span-3">
-      <%= f.datetime_select(:date, :class => "span-2 first", :default => Time.now, :start_year => Date.today.year) %>
+      <%= f.text_field(:date, :value => l!(f.object.date), :class => "span-2 first date") %>
       <%= error_message_on(:convocation, :date, :css_class => "span-2 first") %>  
     </span>
   </p>
@@ -57,3 +57,23 @@
     <%= button_tag(:submit, "Enregistrer") %> ou <%= link_to("Annuler", convocations_path) %>
   </div>
 <%- end -%>
+<%- content_for(:header) do -%>
+  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-1.7.2.custom.css")%>
+  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js") %>
+<%- end -%>
+<%= javascript_tag("
+    $(function() {
+      $.datepicker.setDefaults($.datepicker.regional['fr']);
+      $('.date').datepicker({ showMonthAfterYear: false,
+                              changeYear: true,
+                              changeMonth: true,
+                              dateFormat: 'dd/mm/yy',
+                              constrainInput: true,
+                              minDate: '+0',
+                              maxDate: '+1y',
+                              duration: '',
+                              showTime: true,
+                              time24h: true,
+                              stepMinutes: 5});
+    });
+    ") %>

@@ -1,6 +1,8 @@
 class Grade < ActiveRecord::Base
   
   belongs_to :fireman
+
+  validates_date :date, :allow_blank => true
   
   GRADE_CATEGORY = {
     'Officier' => 1,
