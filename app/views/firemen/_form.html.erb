@@ -54,12 +54,12 @@
       $(function() {
         $.datepicker.setDefaults($.datepicker.regional['fr']);
         $('.date').datepicker({ showMonthAfterYear: false,
+                                showButtonPanel: true,
                                 changeYear: true,
                                 changeMonth: true,
                                 dateFormat: 'dd/mm/yy',
                                 constrainInput: true,
-                                minDate: '-50y',
                                 maxDate: '+0',
-                                yearRange: '#{Date.today.year-50}:#{Date.today.year}'});
+                                yearRange: '#{Date.today.year-70}:#{Date.today.year}'});
       });
       ") %>
