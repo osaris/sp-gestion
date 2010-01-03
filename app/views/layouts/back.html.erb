@@ -11,6 +11,11 @@
   <%= yield(:header) %>
 </head>
 <body>
+  <noscript>
+    <p id="js_disabled">
+      Pour profiter pleinement de SP-Gestion, vous devez activer les scripts Javascript ! <%= mail_to("contact@sp-gestion.fr", "Contactez-nous pour obtenir de l'aide concernant ce message.") %>
+    </p>
+  </noscript>
   <p id="header">
     <%= link_to(@station.name, root_back_path)%>
   </p><!-- #header -->
