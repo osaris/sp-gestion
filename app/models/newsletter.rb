@@ -8,7 +8,10 @@ class Newsletter < ActiveRecord::Base
   after_create  :send_activation_email
   
   def after_initialize
-    self.activation_key ||= ActiveSupport::SecureRandom.hex(32) # this create 64 chars length string
+    # FIXME can't use self there because of Rails bug
+    # https://rails.lighthouseapp.com/projects/8994/tickets/3165-activerecordmissingattributeerror-after-update-to-rails-v-234
+    # this create 64 chars length string
+    write_attribute(:activation_key, ActiveSupport::SecureRandom.hex(32)) unless read_attribute(:activation_key)
   end
   
   def activate!
