@@ -21,10 +21,9 @@ class Fireman < ActiveRecord::Base
     'Actif' => 3
   }.freeze
 
-  def after_initialize
-    # FIXME can't use self there because of Rails bug
-    # https://rails.lighthouseapp.com/projects/8994/tickets/3165-activerecordmissingattributeerror-after-update-to-rails-v-234
-    write_attribute(:status, 3) unless read_attribute(:status)
+  def initialize(params = nil)
+    super
+    self.status ||= 3
     self.grades = Grade.new_defaults() if self.grades.length != Grade::GRADE.length
   end
   
