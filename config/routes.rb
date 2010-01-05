@@ -42,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
   map.resources :password_resets, :only => [:new, :create, :edit, :update], :conditions => { :subdomain => /.+/  }
-  map.resources :stations, :only => [:new, :create], :conditions => { :subdomain => 'www' }
+  map.resources :stations, :collection => { :check => :get }, :only => [:new, :create, :check], :conditions => { :subdomain => 'www' }
   map.resources :vehicles, :conditions => { :subdomain => /.+/  }
   map.resources :firemen, :conditions => { :subdomain => /.+/  }
   map.resources :uniforms, :conditions => { :subdomain => /.+/  }

@@ -14,14 +14,23 @@
               <h4>Créer votre site SP-Gestion</h4>
             </td>
           </tr>
+          <tr id="name_warning" style="display:none;">
+            <td colspan="2">
+              <%= image_tag("front/warn.png", :title => "Attention !", :alt => "Attention !") %>
+              Un centre avec un nom similaire existe déjà. La personne qui a créé le compte peut vous y donner accès.
+              Avez-vous vérifiez avec votre entourage si un compte SP-Gestion a déjà été créé pour votre corps ?</td>
+          </tr>
           <tr>
             <td>
               <%= c.label(:name, 'Nom du centre') %>
             </td>
             <td>
-              <%= c.text_field(:name, :tabindex => 1) %>
+              <%= c.text_field(:name, :tabindex => 1) %>              
               <%= error_message_on(:station, :name) %>
-              <%= observe_field(:station_name, :function => "sanitize_for_subdomain($('#station_name'), $('#station_url'))") %>
+              <%= observe_field(:station_name, :url => check_stations_url,
+                                               :method => :get,
+                                               :with => 'name',
+                                               :before => "sanitize_for_subdomain($('#station_name'), $('#station_url'))") %>
             </td>
           </tr>
           <tr>
