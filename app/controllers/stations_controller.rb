@@ -19,14 +19,6 @@ class StationsController < FrontController
   end
 
   def check
-    search = "%#{params[:name]}%"
-    station = Station.find(:first, :conditions => ["(url LIKE ?) OR (name LIKE ?)", search, search])
-    render(:update) do |page|
-      if station.nil?
-        page[:name_warning].hide
-      else
-        page[:name_warning].show
-      end
-    end
+    @station = Station::check(params[:name])
   end
 end

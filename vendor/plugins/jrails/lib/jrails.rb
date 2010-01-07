@@ -408,3 +408,48 @@ module ActionView
     
   end
 end
+
+# 1. Add this code to your test_helper.rb
+# 2. Make sure to use '#' prefix when referring to element IDs in assert_select_rjs(),
+#    like this:
+#            assert_select_rjs :replace_html, '#someid'
+#    instead of standard convention:
+#             assert_select_rjs :replace_html, 'someid'
+#
+# We monkey-patch some RJS-matching constants for assert_select_rjs to work
+# with jQuery-based code as opposed to Prototype's:
+#
+module ActionController
+    module Assertions
+        module SelectorAssertions
+            silence_warnings do
+                RJS_PATTERN_HTML  = "\"((\\\\\"|[^\"])*)\""
+                RJS_ANY_ID        = "\"([^\"])*\""
+
+                RJS_STATEMENTS    = {
+                  :chained_replace      => "\\$\\(#{RJS_ANY_ID}\\)\\.replaceWith\\(#{RJS_PATTERN_HTML}\\)",
+                  :chained_replace_html => "\\$\\(#{RJS_ANY_ID}\\)\\.updateWith\\(#{RJS_PATTERN_HTML}\\)",
+                  :replace_html         => "\\$\\(#{RJS_ANY_ID}\\)\\.html\\(#{RJS_PATTERN_HTML}\\)",
+                  :replace              => "\\$\\(#{RJS_ANY_ID}\\)\\.replaceWith\\(#{RJS_PATTERN_HTML}\\)",
+                  :insert_top           => "\\(#{RJS_ANY_ID}\\)\\.prepend\\(#{RJS_PATTERN_HTML}\\)"
+=begin TODO:
+                  :insert_bottom => ""
+                  :insert_after => "",
+                  :insert_before => "",
+=end
+
+                }
+
+                [:remove, :show, :hide, :toggle].each do |action|
+                   RJS_STATEMENTS[action] = "\\$\\(#{RJS_ANY_ID}\\)\\.#{action}\\(\\)"
+                end
+
+                # TODO:
+                #RJS_STATEMENTS[:insert_html] = "Element.insert\\(#{RJS_ANY_ID}, \\{ (#{RJS_INSERTIONS.join('|')}): #{RJS_PATTERN_HTML} \\}\\)"
+
+                RJS_STATEMENTS[:any] = Regexp.new("(#{RJS_STATEMENTS.values.join('|')})")
+                RJS_PATTERN_UNICODE_ESCAPED_CHAR = /\\u([0-9a-zA-Z]{4})/
+            end
+        end
+    end
+end

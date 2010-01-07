@@ -38,6 +38,38 @@ class StationsControllerTest < ActionController::TestCase
       assert_equal(1, assigns(:user).messages.length)
     end
   end
-  
+
+  context "requesting GET :check with existing station" do
+    setup do
+      Station.stubs(:find).returns(Station.plan)
+      get :check, :name => 'test'
+    end
+
+    should_respond_with(:success)
+    should_render_template("check")
+    should_render_without_layout
+
+    should_assign_to(:station)
+    should "show name_warning" do
+      assert_select_rjs(:show, '#name_warning')
+    end
+  end
+
+   context "requesting GET :check with non existing station" do
+    setup do
+      get :check, :name => 'test'
+    end
+
+    should_respond_with(:success)
+    should_render_template("check")
+    should_render_without_layout
+
+    should "have station set to nil" do
+      assert(assigns(:station).nil?)
+    end
+    should "hide name_warning" do
+      assert_select_rjs(:hide, '#name_warning')
+    end
+  end
   
 end

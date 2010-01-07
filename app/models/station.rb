@@ -17,5 +17,14 @@ class Station < ActiveRecord::Base
   validates_length_of     :name, :minimum => 5, :message => "Le nom du centre doit avoir au minimum 5 caractères."
   validates_exclusion_of  :url, :in => RESERVED_URL, :message => "Cette adresse est déjà utilisée, veuillez en choisir une autre."
   validates_format_of     :url, :with => /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*$/ix, :message => "L'adresse ne doit contenir que des chiffres, des lettres et des tirets."
-  
+
+  def self.check(q)
+    station = nil
+    unless q.blank?
+      search = "%#{q}%"
+      station = self.find(:first, :conditions => ["(url LIKE ?) OR (name LIKE ?)", search, search])
+    end
+    station
+  end
+
 end
