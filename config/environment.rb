@@ -1,5 +1,5 @@
 # Be sure to restart your server when you modify this file
-;
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
@@ -43,7 +43,7 @@ Rails::Initializer.run do |config|
   config.action_controller.session = {:key => '_spgestion_session',
                                       :secret => "41da19045c1289f045a2797ace137c01908f49d5522ade1da1549022bd40202d663891fbca9dfc4d0f7a092e36ff5b325d38fe6cb22055d843802f37228c1868"}
   
-  config.gem "authlogic",           :version => "2.1.3"
+  config.gm "authlogic",           :version => "2.1.3"
   config.gem "google_analytics",    :version => "1.1.5", :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
   config.gem "prawn",               :version => "0.7.1", :lib => "prawn"
   config.gem "simple-navigation",   :version => "2.1.0", :lib => 'simple_navigation', :source => "http://gemcutter.org/"
