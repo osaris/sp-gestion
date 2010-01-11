@@ -33,6 +33,20 @@
       <%= error_message_on(:fireman, :birthday, :css_class => "span-2 first") %>
     </span>
   </p>
+  <p>
+    <span class="span-1 first">Fonction(s)</span>
+    <span class="span-3">
+      <%= f.label(:chief, "Chef de centre") %><%= f.check_box(:chief) %>
+      <%= f.label(:chief_assistant, "Adjoint") %><%= f.check_box(:chief_assistant) %>
+      <%= f.label(:quartermaster, "Fourrier") %><%= f.check_box(:quartermaster) %>
+    </span>
+  </p>
+  <p>
+    <%= f.label(:rem, "Remarque", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_area(:rem, :class => "span-2 first", :rows => 5) %>
+    </span>
+  </p>
   </div>
   <div class="span-2" id="grades" style="<%= style_for_grades(@fireman) %>">
     <div><b>Grade (*)</b><br />Saisissez la date de nomination à côté de chaque grade obtenu.</div>

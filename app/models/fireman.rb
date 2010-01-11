@@ -25,6 +25,9 @@ class Fireman < ActiveRecord::Base
     super
     self.status ||= 3
     self.grades = Grade.new_defaults() if self.grades.length != Grade::GRADE.length
+    self.chief ||= false
+    self.chief_assitant ||= false
+    self.quartermaster ||= false
   end
   
   def current_grade

@@ -1,4 +1,17 @@
 <h1><%= Grade::GRADE.index(@fireman.grade) %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></h1>
+<%- if @fireman.chief or @fireman.chief_assistant or @fireman.quartermaster -%>
+<p>
+  Fonction(s) :
+  <ul>
+    <%- if @fireman.chief -%><li>Chef du centre</li><%- end -%>
+    <%- if @fireman.chief_assistant %><li>Adjoint au chef de centre</li><%- end -%>
+    <%- if @fireman.quartermaster %><li>Fourrier</li><%- end -%>
+  </ul>
+</p>
+<%- end -%>
+<%- if @fireman.rem.length > 0 -%>
+  <p>Remarque : <%= h(@fireman.rem) %></p>
+<%- end -%>
 <p>
   <%= link_to("Editer", edit_fireman_path(@fireman))%> - 
   <%= link_to("Supprimer", fireman_path(@fireman), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
