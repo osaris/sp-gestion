@@ -158,6 +158,9 @@ body.login, body.login #content { width:304px; }
 
 }
 
+/* GRADE FORM */
+#grades .set { background-color: #a8aaaa;}
+
 /* STYLES FOR PRINT */
 @media print {
 

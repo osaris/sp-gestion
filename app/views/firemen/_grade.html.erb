@@ -1,4 +1,4 @@
-<tr style="<%= !(f.object.date.blank?) ? "background-color:#a8aaaa;" : "" %>">
+<tr class="<%= class_for_grade(f.object) %>">
   <td><%= img_grade(f.object.kind) %></td>
   <td>
     <%= f.text_field(:date, :value => l!(f.object.date), :class => "date") %>
