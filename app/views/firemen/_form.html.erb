@@ -30,6 +30,7 @@
     <%= f.label(:birthday, "Date de naissance", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.text_field(:birthday, :value => l!(f.object.birthday), :class => "span-1 first", :class => "date") %>
+      <%= error_message_on(:fireman, :birthday, :css_class => "span-2 first") %>
     </span>
   </p>
   </div>

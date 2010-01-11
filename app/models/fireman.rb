@@ -10,7 +10,7 @@ class Fireman < ActiveRecord::Base
   validates_presence_of :firstname, :message => "Le prénom est obligatoire."
   validates_presence_of :lastname, :message => "Le nom est obligatoire."
   validates_presence_of :status
-  validates_date :birthday, :allow_blank => true
+  validates_date :birthday, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
   
   before_save :denormalize_grade
   before_destroy :check_associations

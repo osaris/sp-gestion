@@ -2,7 +2,7 @@ class Grade < ActiveRecord::Base
   
   belongs_to :fireman
 
-  validates_date :date, :allow_blank => true
+  validates_date :date, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
   
   GRADE_CATEGORY = {
     'Officier' => 1,
