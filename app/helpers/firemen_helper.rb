@@ -13,13 +13,13 @@ module FiremenHelper
     ")
   end
   
-  def style_for_grade(fireman)
+  def style_for_grades(fireman)
     fireman.status == 1 ? 'display:none;' : ''
   end
 
   def class_for_grade(grade)
     result = ""
-    result += "set" unless grade.date.blank?
+    result += "set " unless grade.date.blank?
     result
   end
   
