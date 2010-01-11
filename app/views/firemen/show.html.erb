@@ -9,7 +9,7 @@
   </ul>
 </p>
 <%- end -%>
-<%- if @fireman.rem.length > 0 -%>
+<%- unless @fireman.rem.blank? -%>
   <p>Remarque : <%= h(@fireman.rem) %></p>
 <%- end -%>
 <p>
