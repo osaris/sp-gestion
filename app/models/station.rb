@@ -7,7 +7,7 @@ class Station < ActiveRecord::Base
   has_many :uniforms  
   has_many :vehicles
   
-  RESERVED_URL =  %w(www blog api ftp sp-gestion spgestion).freeze
+  RESERVED_URL =  %w(sp-gestion spgestion).freeze
   
   validates_presence_of   :url, :message => "L'adresse de votre site est obligatoire."
   validates_presence_of   :name, :message => "Le nom du centre est obligatoire."
