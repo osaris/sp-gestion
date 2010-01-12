@@ -22,5 +22,16 @@ module FiremenHelper
     result += "set " unless grade.date.blank?
     result
   end
-  
+
+  def display_role(fireman)
+    roles = []
+    roles << "Chef de centre" if fireman.chief
+    roles << "Adjoint" if fireman.chief_assistant
+    roles << "Fourrier" if fireman.quartermaster
+
+    result = "-"
+    result = roles.join(" / ") if roles.size > 0
+    result
+  end
+
 end

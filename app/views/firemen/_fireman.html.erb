@@ -3,4 +3,5 @@
   <td><%= link_to(fireman.firstname, fireman) %></td>
   <td><%= fireman.lastname %></td>
   <td><%= Fireman::STATUS.index(fireman.status) %></td>
+  <td><%= display_role(fireman)  %></td>
 </tr>

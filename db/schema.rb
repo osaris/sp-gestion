@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091231081446) do
+ActiveRecord::Schema.define(:version => 20100111203420) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -49,6 +49,10 @@ ActiveRecord::Schema.define(:version => 20091231081446) do
     t.integer  "status"
     t.integer  "grade_category"
     t.date     "birthday"
+    t.text     "rem"
+    t.boolean  "chief"
+    t.boolean  "chief_assistant"
+    t.boolean  "quartermaster"
   end
 
   create_table "grades", :force => true do |t|
