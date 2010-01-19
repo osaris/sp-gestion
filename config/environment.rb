@@ -48,7 +48,7 @@ Rails::Initializer.run do |config|
   config.gem "prawn",               :version => "0.7.1", :lib => "prawn"
   config.gem "simple-navigation",   :version => "2.2.1", :lib => 'simple_navigation', :source => "http://gemcutter.org/"
   config.gem "validates_timeliness",:version => "2.2.2"
-  config.gem "will_paginate",       :version => "2.3.1", :source => "http://gemcutter.org/"
+  config.gem "will_paginate",       :version => "2.3.12", :source => "http://gemcutter.org/"
 end
 
 # Google Analytics configuration
