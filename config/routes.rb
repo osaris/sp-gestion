@@ -42,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :convocations, :conditions => { :subdomain => /.+/  }
   map.resources :convocation_firemen, :only => [:edit, :update], :conditions => { :subdomain => /.+/  }
-  map.resources :check_lists, :conditions => { :subdomain => /.+/ } do |check_list|
+  map.resources :check_lists, :member => { :copy => :post }, :conditions => { :subdomain => /.+/ } do |check_list|
     check_list.resources :items, :except => [:index, :show], :conditions => { :subdomain => /.+/ }
   end
   map.resources :firemen, :conditions => { :subdomain => /.+/  }

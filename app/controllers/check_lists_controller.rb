@@ -44,6 +44,11 @@ class CheckListsController < BackController
     end
   end
 
+  def copy
+    flash[:success] = "Nouvelle liste"
+    redirect_to(@check_list)
+  end
+
   def destroy
     @check_list.destroy
     flash[:success] = "La liste a été supprimée."
