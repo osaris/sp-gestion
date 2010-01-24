@@ -1,0 +1,14 @@
+<div class="span-6 first">
+  <p class="right"><%= link_to(image_tag("back/icons/add.png") + "&nbsp;Créer une nouvelle liste de matériel", new_check_list_path)%></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Titre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render(:partial => @check_lists) || "<tr><td>Pas encore de liste de matériel !</td></tr>" %>
+    </tbody>
+  </table>
+  <%= will_paginate(@check_lists, :previous_label => "", :next_label => "") %>
+</div>

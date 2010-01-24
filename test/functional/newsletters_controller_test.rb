@@ -12,6 +12,7 @@ class NewslettersControllerTest < ActionController::TestCase
     should_render_with_layout("front")   
     
     should_not_change("number of newsletters") { Newsletter.count }
+    should_set_the_flash(:error)
   end
 
   context "requesting POST :create with good data" do
@@ -24,6 +25,7 @@ class NewslettersControllerTest < ActionController::TestCase
     should_render_with_layout("front")
     
     should_change("number of newsletters", :by => 1) { Newsletter.count }
+    should_set_the_flash(:success)
   end
   
   context "requesting GET :activate with bad data" do
@@ -46,6 +48,7 @@ class NewslettersControllerTest < ActionController::TestCase
     should "have activated newsletter" do
       assert_equal("", assigns(:newsletter).activation_key)
     end
+    should_set_the_flash(:success)
   end
   
 

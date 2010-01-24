@@ -22,6 +22,7 @@ class MessagesController < BackController
   def load_message
     @message = current_user.messages.find(params[:id])
    rescue ActiveRecord::RecordNotFound
+    flash[:error] = "Le message n'existe pas."
     redirect_to(messages_path)
   end
   

@@ -43,6 +43,13 @@ SimpleNavigation::Configuration.run do |navigation|
       personnel.auto_highlight = false
       personnel.dom_class = 'subnav'
     end
+
+    primary.item(:materiel, 'Matériel', check_lists_path) do |materiel|
+      materiel.item(:check_lists, 'Listes', check_lists_path)
+
+      materiel.auto_highlight = false
+      materiel.dom_class = 'subnav'
+    end
     
     primary.item(:config, 'Configuration', vehicles_path, :class => 'right') do |configuration|
       configuration.item(:vehicles, 'Véhicules', vehicles_path)

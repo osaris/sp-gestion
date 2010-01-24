@@ -18,6 +18,7 @@ class VehiclesController < BackController
   def create
     @vehicle = @station.vehicles.new(params[:vehicle])
     if(@vehicle.save)
+      flash[:success] = "Le véhicule a été créé."
       redirect_to(@vehicle)
     else
       render(:action => :new)
@@ -29,6 +30,7 @@ class VehiclesController < BackController
   
   def update
     if @vehicle.update_attributes(params[:vehicle])
+      flash[:success] = "Le véhicule a été mis à jour."
       redirect_to(@vehicle)
     else
       render(:action => :edit)
@@ -37,6 +39,7 @@ class VehiclesController < BackController
   
   def destroy
     @vehicle.destroy
+    flash[:success] = "Le véhicule a été supprimé."
     redirect_to(vehicles_path)    
   end
   
@@ -45,6 +48,7 @@ class VehiclesController < BackController
   def load_vehicle
     @vehicle = @station.vehicles.find(params[:id])
    rescue ActiveRecord::RecordNotFound
+    flash[:error] = "Le véhicule n'existe pas."
     redirect_to(vehicles_path)    
   end
   

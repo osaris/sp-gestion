@@ -69,7 +69,7 @@ class UserSessionsControllerTest < ActionController::TestCase
         should_redirect_to("login page") { login_path }
         
         should_not_be_logged_in
-        should_set_the_flash(:notice)
+        should_set_the_flash(:success)
       end      
     end
   end

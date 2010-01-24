@@ -16,6 +16,8 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
       
       should_respond_with(:redirect)
       should_redirect_to("convocations") { convocations_path }
+
+      should_set_the_flash(:error)
     end
     
     context "with an existing convocation" do
@@ -49,6 +51,7 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         should "set the presence of firemen" do
           assert(@convocation.convocation_firemen.first.presence)
         end
+        should_set_the_flash(:success)
       end
       
       

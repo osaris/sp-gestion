@@ -18,6 +18,10 @@ end
 BetaCode.blueprint do
 end
 
+CheckList.blueprint do
+  title
+end
+
 Convocation.blueprint do
   title
   date(2.weeks.from_now)
@@ -28,6 +32,11 @@ end
 Fireman.blueprint do
   firstname
   lastname
+end
+
+Item.blueprint do
+  title
+  quantity(1)
 end
 
 Message.blueprint do

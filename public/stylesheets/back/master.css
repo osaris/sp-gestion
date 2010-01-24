@@ -89,7 +89,7 @@ img { vertical-align:text-bottom; }
 /* MESSAGES */
 #content p.message { margin:0; padding:10px; margin-bottom:20px; border:0; color:#fff; background: #172E60; }
 #content p.error { background: #FF3333 url("../../images/back/gradient-gray.png") repeat-x 0 0; }
-#content p.notice { background: #FF8533 url("../../images/back/gradient-gray.png") repeat-x 0 0; }
+#content p.warning { background: #FF8533 url("../../images/back/gradient-gray.png") repeat-x 0 0; }
 #content p.success { background: #4D9900 url("../../images/back/gradient-gray.png") repeat-x 0 0; }
 
 /* TAB BOXES */

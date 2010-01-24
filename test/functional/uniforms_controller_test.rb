@@ -26,7 +26,9 @@ class UniformsControllerTest < ActionController::TestCase
       end
       
       should_respond_with(:redirect)
-      should_redirect_to(":index") { uniforms_path }      
+      should_redirect_to(":index") { uniforms_path }
+
+      should_set_the_flash(:error)
     end    
         
     context "requesting GET :new" do
@@ -61,6 +63,8 @@ class UniformsControllerTest < ActionController::TestCase
       
       should_assign_to(:uniform)
       should_change("number of uniform", :by => 1) { Uniform.count }
+
+      should_set_the_flash(:success)
     end    
     
     context "with an existing uniform" do
@@ -105,6 +109,8 @@ class UniformsControllerTest < ActionController::TestCase
   
         should_respond_with(:redirect)
         should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
+
+        should_set_the_flash(:success)
       end       
       
       context "requesting DELETE :destroy without associations" do
@@ -115,19 +121,21 @@ class UniformsControllerTest < ActionController::TestCase
         should_redirect_to("uniforms list") { uniforms_path }
         
         should_change("number of uniforms", :by => -1) { Uniform.count }
+        should_set_the_flash(:success)
       end
       
       context "requesting DELETE :destroy with associations" do
         setup do
           Uniform.any_instance.stubs(:destroy).returns(false)
+          # because there is no stub_chain for any_instance in mocha
+          Uniform.any_instance.stubs(:errors).returns(mock(:full_messages => ["erreur"]))
           delete :destroy, :id => @uniform.id
         end
         
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+        should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
         
         should_not_change("number of uniform") { Uniform.count }
+        should_set_the_flash(:error)
       end
     end
   end

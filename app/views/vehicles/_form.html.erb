@@ -1,6 +1,7 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
 <%- form_for(@vehicle) do |f| -%>
   <p>
-    <%= f.label(:name, "Nom", :class => "span-1 first") %>
+    <%= f.label(:name, "Nom (*)", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.text_field(:name, :class => "span-2 first") %>
       <%= error_message_on(:vehicle, :name, :css_class => "span-2 first") %>

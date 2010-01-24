@@ -48,7 +48,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
       should_render_template("new")
       should_render_with_layout("login")
       
-      should_set_the_flash(:notice)
+      should_set_the_flash(:warning)
     end
     
     context "requesting GET :edit with bad data" do

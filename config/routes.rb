@@ -40,15 +40,18 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
 
+  map.resources :convocations, :conditions => { :subdomain => /.+/  }
+  map.resources :convocation_firemen, :only => [:edit, :update], :conditions => { :subdomain => /.+/  }
+  map.resources :check_lists, :conditions => { :subdomain => /.+/ } do |check_list|
+    check_list.resources :items, :except => [:index, :show], :conditions => { :subdomain => /.+/ }
+  end
+  map.resources :firemen, :conditions => { :subdomain => /.+/  }
+  map.resources :messages, :member => { :mark_as_read => :post }, :only => [:index, :show], :conditions => { :subdomain => /.+/  }
   map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
   map.resources :password_resets, :only => [:new, :create, :edit, :update], :conditions => { :subdomain => /.+/  }
   map.resources :stations, :collection => { :check => :get }, :only => [:new, :create, :check], :conditions => { :subdomain => 'www' }
-  map.resources :vehicles, :conditions => { :subdomain => /.+/  }
-  map.resources :firemen, :conditions => { :subdomain => /.+/  }
   map.resources :uniforms, :conditions => { :subdomain => /.+/  }
-  map.resources :convocations, :conditions => { :subdomain => /.+/  }
-  map.resources :convocation_firemen, :only => [:edit, :update], :conditions => { :subdomain => /.+/  }
-  map.resources :messages, :member => { :mark_as_read => :post }, :only => [:index, :show], :conditions => { :subdomain => /.+/  }
+  map.resources :vehicles, :conditions => { :subdomain => /.+/  }
 
   map.activate     '/activate/:id', :controller => 'confirmations', :action => 'create', :conditions => { :subdomain => /.+/  }
   map.home         '/home', :controller => 'pages', :action => 'home', :conditions => { :subdomain => 'www' }

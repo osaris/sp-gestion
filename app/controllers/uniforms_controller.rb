@@ -18,6 +18,7 @@ class UniformsController < BackController
   def create
     @uniform = @station.uniforms.new(params[:uniform])
     if(@uniform.save)
+      flash[:success] = "La tenue a été créée."
       redirect_to(@uniform)
     else
       render(:action => :new)
@@ -29,6 +30,7 @@ class UniformsController < BackController
   
   def update
     if @uniform.update_attributes(params[:uniform])
+      flash[:success] = "La tenue a été mise à jour."
       redirect_to(@uniform)
     else
       render(:action => :edit)
@@ -37,10 +39,11 @@ class UniformsController < BackController
   
   def destroy
     if @uniform.destroy
+      flash[:success] = "La tenue a été supprimée."
       redirect_to(uniforms_path)
     else
-      flash.now[:error] = @uniform.errors.full_messages
-      render(:action => :show)
+      flash[:error] = @uniform.errors.full_messages.join("")
+      redirect_to(@uniform)
     end
   end
   
@@ -49,6 +52,7 @@ class UniformsController < BackController
   def load_uniform
     @uniform = @station.uniforms.find(params[:id])
    rescue ActiveRecord::RecordNotFound
+    flash[:error] = "La tenue n'existe pas."
     redirect_to(uniforms_path)
   end
   

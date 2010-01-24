@@ -27,6 +27,7 @@ class ConvocationsController < BackController
   def create
     @convocation = @station.convocations.new(params[:convocation])
     if(@convocation.save)
+      flash[:success] = "La convocation a été créée."
       redirect_to(@convocation)
     else
       render(:action => :new)
@@ -46,6 +47,7 @@ class ConvocationsController < BackController
       redirect_to(@convocation)
     else    
       if @convocation.update_attributes(params[:convocation])
+        flash[:success] = "La convocation a été mise à jour."
         redirect_to(@convocation)
       else
         render(:action => :edit)
@@ -55,6 +57,7 @@ class ConvocationsController < BackController
   
   def destroy
     @convocation.destroy
+    flash[:success] = "La convocation a été supprimée."
     redirect_to(convocations_path)    
   end
   
@@ -63,6 +66,7 @@ class ConvocationsController < BackController
   def load_convocation
     @convocation = @station.convocations.find(params[:id], :include => {:convocation_firemen => :fireman}, :order => 'convocation_firemen.grade DESC, firemen.lastname ASC')
    rescue ActiveRecord::RecordNotFound
+    flash[:error] = "La convocation n'existe pas."
     redirect_to(convocations_path)
   end
   

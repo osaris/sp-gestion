@@ -15,7 +15,7 @@ class PasswordResetsController < BackController
     @user = @station.users.find_by_email(params[:email])
     if @user and @user.confirmed?
       @user.deliver_password_reset_instructions!
-      flash.now[:notice] = "Les instructions pour recevoir votre nouveau mot de passe vous ont été transmises par email."
+      flash.now[:warning] = "Les instructions pour recevoir votre nouveau mot de passe vous ont été transmises par email."
     else  
       flash.now[:error] = "Aucun utilisateur trouvé avec cette adresse email."
     end
@@ -27,7 +27,7 @@ class PasswordResetsController < BackController
   
   def update
     if @user.reset_password!(params[:user][:password], params[:user][:password_confirmation])
-      flash[:notice] = "Mot de passe mis à jour avec succès."
+      flash[:success] = "Mot de passe mis à jour avec succès."
       UserSession.create(@user)
       redirect_to(root_back_url)
     else

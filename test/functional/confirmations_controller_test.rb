@@ -41,6 +41,7 @@ class ConfirmationsControllerTest < ActionController::TestCase
           assert(assigns(:user).confirmed?)
         end        
         should_be_logged_in
+        should_set_the_flash(:success)
       end
     end
   end

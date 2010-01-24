@@ -28,6 +28,8 @@ class FiremenControllerTest < ActionController::TestCase
       
       should_respond_with(:redirect)
       should_redirect_to(":index") { firemen_path }
+
+      should_set_the_flash(:error)
     end
         
     context "requesting GET :new" do
@@ -62,6 +64,7 @@ class FiremenControllerTest < ActionController::TestCase
       
       should_assign_to(:fireman)
       should_change("number of firemen", :by => 1) { Fireman.count }
+      should_set_the_flash(:success)
     end
     
     context "with an existing fireman" do
@@ -106,6 +109,8 @@ class FiremenControllerTest < ActionController::TestCase
   
         should_respond_with(:redirect)
         should_redirect_to("fireman") { fireman_path(assigns(:fireman)) }
+
+        should_set_the_flash(:success)
       end       
       
       context "requesting DELETE :destroy without associations" do
@@ -116,19 +121,21 @@ class FiremenControllerTest < ActionController::TestCase
         should_redirect_to("firemen list") { firemen_path }
         
         should_change("number of firemen", :by => -1) { Fireman.count }
+        should_set_the_flash(:success)
       end
       
       context "requesting DELETE :destroy with associations" do
         setup do
           Fireman.any_instance.stubs(:destroy).returns(false)
+          # because there is no stub_chain for any_instance in mocha
+          Fireman.any_instance.stubs(:errors).returns(mock(:full_messages => ["erreur"]))
           delete :destroy, :id => @fireman.id
         end
         
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+        should_redirect_to("fireman") { fireman_path(assigns(:fireman)) }
         
         should_not_change("number of firemen") { Fireman.count }
+        should_set_the_flash(:error)
       end      
     end
   end

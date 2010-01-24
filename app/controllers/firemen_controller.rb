@@ -18,6 +18,7 @@ class FiremenController < BackController
   def create
     @fireman = @station.firemen.new(params[:fireman])
     if(@fireman.save)
+      flash[:success] = "La personne a été créée."
       redirect_to(@fireman)
     else
       render(:action => :new)
@@ -29,6 +30,7 @@ class FiremenController < BackController
   
   def update
     if @fireman.update_attributes(params[:fireman])
+      flash[:success] = "La personne a été mise à jour."
       redirect_to(@fireman)
     else
       render(:action => :edit)
@@ -37,10 +39,11 @@ class FiremenController < BackController
   
   def destroy
     if @fireman.destroy
+      flash[:success] = "La personne a été supprimée."
       redirect_to(firemen_path)
     else
-      flash.now[:error] = @fireman.errors.full_messages
-      render(:action => :show)
+      flash[:error] = @fireman.errors.full_messages.join("")
+      redirect_to(@fireman)
     end
   end
   
@@ -49,6 +52,7 @@ class FiremenController < BackController
   def load_fireman
     @fireman = @station.firemen.find(params[:id], :include => :convocations)
    rescue ActiveRecord::RecordNotFound
+    flash[:error] = "La personne n'existe pas."
     redirect_to(firemen_path)
   end
   

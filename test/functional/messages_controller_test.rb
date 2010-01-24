@@ -28,6 +28,8 @@ class MessagesControllerTest < ActionController::TestCase
       
       should_respond_with(:redirect)
       should_redirect_to(":index") { messages_path }
+
+      should_set_the_flash(:error)
     end    
     
     context "with a message" do
@@ -47,7 +49,7 @@ class MessagesControllerTest < ActionController::TestCase
       
       context "requestion POST :mark_as_read on existing message" do
         setup do
-          post :mark_as_read, :id => @message.id
+          xhr :post, :mark_as_read, :id => @message.id
         end
         
         should "mark message as read" do

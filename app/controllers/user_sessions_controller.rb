@@ -23,7 +23,7 @@ class UserSessionsController < BackController
   
   def destroy
     current_user_session.destroy
-    flash[:notice] = "Vous êtes désormais déconnecté."
+    flash[:success] = "Vous êtes désormais déconnecté."
     redirect_to(login_path)
   end  
   

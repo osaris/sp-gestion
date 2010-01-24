@@ -30,6 +30,8 @@ class ConvocationsControllerTest < ActionController::TestCase
       
       should_respond_with(:redirect)
       should_redirect_to(":index") { convocations_path }
+
+      should_set_the_flash(:error)
     end
         
     context "requesting GET :new" do
@@ -64,6 +66,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
       
       should_change("number of convocations", :by => 1) { Convocation.count }
+      should_set_the_flash(:success)
     end
     
     context "with an existing convocation not editable" do
@@ -91,6 +94,8 @@ class ConvocationsControllerTest < ActionController::TestCase
   
         should_respond_with(:redirect)
         should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+
+        should_set_the_flash(:error)
       end      
     end
     
@@ -153,6 +158,8 @@ class ConvocationsControllerTest < ActionController::TestCase
   
         should_respond_with(:redirect)
         should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+
+        should_set_the_flash(:success)
       end
       
       context "requesting DELETE :destroy" do
@@ -163,6 +170,7 @@ class ConvocationsControllerTest < ActionController::TestCase
         should_redirect_to("convocations list") { convocations_path }
         
         should_change("number of convocations", :by => -1) { Convocation.count }
+        should_set_the_flash(:success)
       end    
     end
   end

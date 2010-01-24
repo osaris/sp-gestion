@@ -11,6 +11,7 @@ class ConfirmationsController < BackController
     else
       @user.confirm!
       UserSession.create(@user)
+      flash[:success] = render_to_string(:partial => "welcome")
       redirect_to(root_back_path)
     end
   end
