@@ -1,3 +1,4 @@
 <tr class="<%= cycle("odd","even") %>">
   <td><%= link_to(h(check_list.title), check_list_path(check_list)) %></td>
+  <td class="center"><%= link_to(image_tag("back/icons/copy.png", :alt => "Copier la liste", :title => "Copier la liste"), copy_check_list_path(check_list), :method => :post, :confirm => "Êtes-vous sûr ?")%></td>
 </tr>

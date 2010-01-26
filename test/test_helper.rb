@@ -83,3 +83,10 @@ def make_convocation_with_firemen(attributes = {})
   c.save
   c
 end
+
+def make_check_list_with_items(attributes = {})
+  cl = CheckList.make(attributes)
+  5.times { cl.items << Item.make }
+  cl.save
+  cl
+end

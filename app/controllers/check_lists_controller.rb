@@ -5,7 +5,7 @@ class CheckListsController < BackController
   before_filter :load_check_list, :except => [:index, :new, :create]
 
   def index
-    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title DESC')
+    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title')
   end
 
   def show
@@ -45,8 +45,9 @@ class CheckListsController < BackController
   end
 
   def copy
-    flash[:success] = "Nouvelle liste"
-    redirect_to(@check_list)
+    @check_list = @check_list.copy
+    flash[:success] = "La liste a été copiée."
+    redirect_to(check_lists_path)
   end
 
   def destroy

@@ -135,6 +135,17 @@ class CheckListsControllerTest < ActionController::TestCase
         should_change("number of check_lists", :by => -1) { CheckList.count }
         should_set_the_flash(:success)
       end
+
+      context "requesting POST :copy" do
+        setup do
+          post :copy, :id => @check_list.id
+        end
+        
+        should_redirect_to("check_lists list") { check_lists_path }
+
+        should_change("number of check_lists", :by => 1) { CheckList.count }
+        should_set_the_flash(:success)
+      end
     end
   end
 end
