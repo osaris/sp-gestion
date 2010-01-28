@@ -30,7 +30,7 @@ class ItemsControllerTest < ActionController::TestCase
       end
 
       should_respond_with(:success)
-      should_render_template("show")
+      should_render_template("expirings")
       should "send a file" do
         send_file_to_disk(@response.body, "check_list_expiration.pdf")
       end
