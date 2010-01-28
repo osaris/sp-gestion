@@ -1,0 +1,17 @@
+<div class="span-6 first">
+  <p>Liste du matériel expiré dans les 30 jours à venir.</p>
+  <p class="right"><%= link_to(image_tag("back/icons/print.png", :alt => "Imprimer") + "&nbsp;Imprimer", expirings_items_path(:format => :pdf))%></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Liste</th>
+        <th>Quantité</th>
+        <th>Expire le</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render(:partial => 'expiring_item', :collection => @items) || "<tr><td>Aucun matériel expiré !</td></tr>" %>
+    </tbody>
+  </table>
+</div>

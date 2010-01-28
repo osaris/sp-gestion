@@ -9,7 +9,7 @@ items << ["","",""] if items.length == 0
 
 pdf.table items, :border_style => :grid,
                       :row_colors => ["FFFFFF","DDDDDD"],
-                      :headers => [Prawn::Table::Cell.new(:text => "Désignation", :font_style => :bold),
+                      :headers => [Prawn::Table::Cell.new(:text => "Titre", :font_style => :bold),
                                    Prawn::Table::Cell.new(:text =>"Quantité", :font_style => :bold),
                                    Prawn::Table::Cell.new(:text => "Contrôle", :font_style => :bold)],
                       :column_widths => { 0 => 400, 1 => 60, 2 => 60 },

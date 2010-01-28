@@ -32,7 +32,7 @@
     <%- if not @item.new_record? -%>
     ou <%= link_to("Supprimer", check_list_item_path(@check_list, @item), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
     <%- end -%>
-    ou <%= link_to("Annuler", check_list_path(@check_list))%>
+    ou <%= link_to("Annuler", (session[:back_path] || check_list_path(@check_list)))%>
   </p>
 <%- end -%>
 <%- content_for(:header) do -%>

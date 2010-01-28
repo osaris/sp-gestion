@@ -46,6 +46,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item(:materiel, 'Matériel', check_lists_path) do |materiel|
       materiel.item(:check_lists, 'Listes', check_lists_path)
+      materiel.item(:expirings, 'Expiration', expirings_items_path)
 
       materiel.auto_highlight = false
       materiel.dom_class = 'subnav'

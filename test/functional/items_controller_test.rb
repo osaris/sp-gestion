@@ -10,6 +10,32 @@ class ItemsControllerTest < ActionController::TestCase
       @check_list = @station.check_lists.make
     end
 
+    context "requesting list of expired items" do
+      setup do
+        get :expirings
+      end
+
+      should_respond_with(:success)
+      should_render_template("expirings")
+      should_render_with_layout("back")
+
+      should_assign_to(:items)
+      should_set_session(:back_path) { expirings_items_path }
+    end
+
+    context "requesting list of expired items with PDF format" do
+      setup do
+        @request.env["SERVER_PROTOCOL"] = "http"
+        get :expirings, :format => 'pdf'
+      end
+
+      should_respond_with(:success)
+      should_render_template("show")
+      should "send a file" do
+        send_file_to_disk(@response.body, "check_list_expiration.pdf")
+      end
+    end
+
     context "requesting an item on a non existing check_list" do
       setup do
         get :edit, :check_list_id => rand(10), :id => rand(10)
@@ -103,6 +129,18 @@ class ItemsControllerTest < ActionController::TestCase
         should_set_the_flash(:success)
       end
 
+      context "requesting PUT with good data and back_path set to expiring" do
+        setup do
+          session[:back_path] = expirings_items_path
+          put :update, :check_list_id => @check_list.id, :id => @item.id, :item => {:title => 'Test', :quantity => '1'}
+        end
+
+        should_respond_with(:redirect)
+        should_redirect_to("expirings") { expirings_items_path }
+
+        should_set_the_flash(:success)
+      end
+
       context "requesting DELETE :destroy" do
         setup do
           delete :destroy, :check_list_id => @check_list.id, :id => @item.id
@@ -111,6 +149,18 @@ class ItemsControllerTest < ActionController::TestCase
         should_redirect_to("check_list") { check_list_path(assigns(:check_list)) }
 
         should_change("number of items", :by => -1) { Item.count }
+        should_set_the_flash(:success)
+      end
+
+      context "requesting DELETE :destroy and back_path set to expiring" do
+        setup do
+          session[:back_path] = expirings_items_path
+          delete :destroy, :check_list_id => @check_list.id, :id => @item.id
+        end
+
+        should_respond_with(:redirect)
+        should_redirect_to("expirings") { expirings_items_path }
+        
         should_set_the_flash(:success)
       end
     end

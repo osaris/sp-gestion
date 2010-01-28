@@ -3,9 +3,10 @@ class CheckListsController < BackController
   navigation(:check_lists)
 
   before_filter :load_check_list, :except => [:index, :new, :create]
+  before_filter :reset_back_path # for expirings items back link
 
   def index
-    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title')
+    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title')    
   end
 
   def show
@@ -57,6 +58,10 @@ class CheckListsController < BackController
   end
 
   private
+
+  def reset_back_path
+    session[:back_path] = nil
+  end
 
   def load_check_list
     @check_list = @station.check_lists.find(params[:id], :include => [:items], :order => 'items.title')

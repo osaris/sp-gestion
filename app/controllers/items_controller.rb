@@ -2,8 +2,24 @@ class ItemsController < BackController
 
   navigation(:check_lists)
 
-  before_filter :load_check_list
-  before_filter :load_item, :except => [:new, :create]
+  before_filter :load_check_list, :except => [:expirings]
+  before_filter :load_item, :except => [:new, :create, :expirings]
+
+  def expirings    
+    @items = Item.find(:all, :include => :check_list,
+                             :conditions => ['items.expiry < ? AND check_lists.station_id = ?', 30.days.from_now, @station.id],
+                             :order => 'items.expiry ASC')
+    respond_to do |format|
+      format.html do
+        current_navigation(:expirings)
+        session[:back_path] = expirings_items_path
+      end
+      format.pdf do
+        prawnto :prawn => { :page_size => "A4"},
+                :inline => false, :filename => "liste_expiration_#{l(Time.now, :format => :filename)}.pdf"
+      end
+    end
+  end
 
   def new
     @item = @check_list.items.new
@@ -25,7 +41,7 @@ class ItemsController < BackController
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = "Le matériel a été mis à jour."
-      redirect_to(@check_list)
+      redirect_to(session[:back_path] || @check_list)
     else
       render(:action => :edit)
     end
@@ -34,7 +50,7 @@ class ItemsController < BackController
   def destroy
     @item.destroy
     flash[:success] = "Le matériel a été supprimé."
-    redirect_to(@check_list)
+    redirect_to(session[:back_path] || @check_list)
   end
 
   private
