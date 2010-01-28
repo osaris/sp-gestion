@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => 'expiring_item', :collection => @items) || "<tr><td>Aucun matériel expiré !</td></tr>" %>
+      <%= render(:partial => 'expiring_item', :collection => @items) || "<tr><td colspan='4'>Aucun matériel expiré !</td></tr>" %>
     </tbody>
   </table>
 </div>
