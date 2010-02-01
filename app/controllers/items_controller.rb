@@ -7,9 +7,7 @@ class ItemsController < BackController
   before_filter :load_places, :only => [:new, :create, :edit, :update]
 
   def expirings    
-    @items = Item.find(:all, :include => :check_list,
-                             :conditions => ['items.expiry < ? AND check_lists.station_id = ?', 30.days.from_now, @station.id],
-                             :order => 'items.expiry ASC')
+    @items = Item.expirings(30, @station.id)
     respond_to do |format|
       format.html do
         current_navigation(:expirings)

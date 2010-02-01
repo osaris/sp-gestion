@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>SP-Gestion</title>
+  <title>SP-Gestion - <%= h(@station.name) %></title>
   <link rel="shortcut icon" href="/images/favicon.ico" />
   <%= stylesheet_link_tag("back/master.css")%>
   <!--[if lte IE 6]><%= stylesheet_link_tag("back/ie6.css")%><![endif]-->
@@ -11,7 +11,7 @@
 </head>
 <body class="login">
   <p id="header">
-    <%= link_to(@station.name, root_back_path)%>
+    <%= link_to(h(@station.name), root_back_path)%>
   </p><!-- #header -->
   <div id="content">
     <div id="loginbox" class="tabs span-2 first">

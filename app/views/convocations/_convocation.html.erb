@@ -1,6 +1,6 @@
 <tr class="<%= cycle("odd","even") %>">
   <td><%= l(convocation.date) %></td>
-  <td><%= link_to(convocation.title, convocation) %></td>
-  <td><%= convocation.place %></td>
-  <td><%= convocation.uniform.title %></td>
+  <td><%= link_to(h(convocation.title), convocation) %></td>
+  <td><%= h(convocation.place) %></td>
+  <td><%= h(convocation.uniform.title) %></td>
 </tr>

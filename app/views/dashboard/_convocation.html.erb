@@ -1,5 +1,5 @@
 <tr class="<%= cycle("odd", "even") %>">
   <td><%= l(convocation.created_at, :format => :default) %></td>
-  <td><%= link_to(convocation.title, convocation) %></td>
-  <td><%= convocation.place %></td>
+  <td><%= link_to(h(convocation.title), convocation) %></td>
+  <td><%= h(convocation.place) %></td>
 </tr>

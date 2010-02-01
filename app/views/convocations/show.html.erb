@@ -1,6 +1,6 @@
-<h1><%= @convocation.title %> (<%= l(@convocation.date) %>)</h1>
-<p>Lieu : <%= @convocation.place %></p>
-<p>Tenue : <%= @convocation.uniform.description %></p>
+<h1><%= h(@convocation.title) %> (<%= l(@convocation.date) %>)</h1>
+<p>Lieu : <%= h(@convocation.place) %></p>
+<p>Tenue : <%= h(@convocation.uniform.description) %></p>
 <p>
   <%= link_to("Editer", edit_convocation_path(@convocation))%> - 
   <%= link_to("Supprimer", convocation_path(@convocation), :method => :delete, :confirm => "Êtes-vous sûr ?")%> - 

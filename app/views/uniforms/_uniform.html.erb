@@ -1,4 +1,4 @@
 <tr class="<%= cycle("odd","even") %>">
-  <td><%= uniform.code %></td>
-  <td><%= link_to(uniform.title, uniform) %></td>
+  <td><%= h(uniform.code) %></td>
+  <td><%= link_to(h(uniform.title), uniform) %></td>
 </tr>

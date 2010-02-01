@@ -1,7 +1,5 @@
-<tr>
+<tr class="<%= cycle("odd", "even") %>">
   <td><%= link_to(h(expiring_item.title), edit_check_list_item_path(expiring_item.check_list, expiring_item)) %></td>
-  <td><%= link_to(h(expiring_item.check_list.title), expiring_item.check_list) %></td>
-  <td><%= h(expiring_item.place) %></td>
   <td><%= expiring_item.quantity %></td>
   <td><%= l(expiring_item.expiry) %></td>
 </tr>

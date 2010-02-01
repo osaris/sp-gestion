@@ -1,43 +1,68 @@
 <div class="span-3 first">
-	<div class="tabs">
-		<div class="head">
-		  Derniers messages
-		</div>
-  	<div class="body">
-  	  <table>
-  	    <thead>
-  	      <tr>
-  	        <th></th>
-  	        <th>Date</th>	        
-  	        <th>Titre</th>
-  	      </tr>
-  	    </thead>
-  	    <tbody>
-  	      <%= render(:partial => 'dashboard/message', :collection => @messages) || "<tr><td colspan='3'>Aucun nouveau message</td></tr>" %>
-  	    </tbody>
-  	  </table>
-  	</div>
-	</div>
+  <div class="tabs">
+    <div class="head">
+      Derniers messages
+    </div>
+    <div class="body">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Date</th>
+            <th>Titre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render(:partial => 'dashboard/message', :collection => @messages) || "<tr><td colspan='3'>Aucun nouveau message</td></tr>" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
 <div class="span-3">
-	<div class="tabs">
-		<div class="head">
-		  Dernières convocations
-		</div>
-  	<div id="tabbox1" class="body">
-  	  <table>
-  	    <thead>
-  	      <tr>
-  	        <th>Date</th>	        
-  	        <th>Titre</th>
-  	        <th>Lieu</th>
-  	      </tr>
-  	    </thead>
-  	    <tbody>
-  	      <%= render(:partial => 'dashboard/convocation', :collection => @convocations) || "<tr><td colspan='3'>Aucune convocation</td></tr>" %>
-  	    </tbody>
-  	  </table>
-  	</div>
-	</div>
+  <div class="tabs">
+    <div class="head">
+      Dernières convocations
+    </div>
+    <div id="tabbox1" class="body">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Titre</th>
+            <th>Lieu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render(:partial => 'dashboard/convocation', :collection => @convocations) || "<tr><td colspan='3'>Aucune convocation</td></tr>" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="span-3 first">
+  <div class="tabs">
+    <div class="head">
+      Matériel expirant dans les 30 prochains jours
+    </div>
+    <div id="tabbox1" class="body">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Quantité</th>
+            <th>Expire le</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render(:partial => 'dashboard/expiring_item', :collection => @items) || "<tr><td colspan='3'>Aucun matériel</td></tr>" %>
+          <%- unless @items.blank? -%>
+            <tr>
+              <td colspan="3" class="right"><%= link_to("Voir toute la liste", expirings_items_path) %></td>
+            </tr>
+          <%- end -%>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

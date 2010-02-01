@@ -1,19 +1,19 @@
 <%- form_for(@user_session, :url => authenticate_path) do |f| -%>
   <%= flash_helper %>
-	<p>
-		<%= f.label(:email, "Adresse email") %><br />
-		<%= f.text_field(:email, :size => 36) %>
-	</p>
-	<p>
-		<%= f.label(:password, "Mot de passe") %><br />
-		<%= f.password_field(:password, :size => 36) %>
-	</p>
-	<p>
-		<%= f.check_box(:remember_me) %>
-		<%= f.label(:email, "Rester connecté") %>
-	</p>
-	<p class="submit">
-		<%= button_tag(:submit, "Connexion") %>
-	</p>
+  <p>
+    <%= f.label(:email, "Adresse email") %><br />
+    <%= f.text_field(:email, :size => 36) %>
+  </p>
+  <p>
+    <%= f.label(:password, "Mot de passe") %><br />
+    <%= f.password_field(:password, :size => 36) %>
+  </p>
+  <p>
+    <%= f.check_box(:remember_me) %>
+    <%= f.label(:email, "Rester connecté") %>
+  </p>
+  <p class="submit">
+    <%= button_tag(:submit, "Connexion") %>
+  </p>
 <%- end -%>
 <!--[if lte IE 7]><div class="clear">&nbsp;</div><![endif]-->

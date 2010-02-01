@@ -13,7 +13,13 @@ class Convocation < ActiveRecord::Base
   # https://rails.lighthouseapp.com/projects/8994/tickets/922-has_many-through-transaction-rollback
   validates_presence_of :firemen, :message => "Les personnes convoquées sont obligatoires."
   validates_datetime :date, :invalid_datetime_message => "Format incorrect (JJ/MM/AAAA HH:MM)"
-  
+
+  named_scope :newer, { :order => 'date DESC' }
+
+  named_scope :limit, lambda { |num|
+    {:limit => num }
+  }
+
   def validate
     self.errors.add(:date, "Ne peut pas être dans le passé !") if !editable?
   end

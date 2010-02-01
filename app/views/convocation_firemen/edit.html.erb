@@ -1,4 +1,4 @@
 <div class="span-6 first">
-  <h1>Edition des présences - <%= @convocation.title %> (<%= l(@convocation.date) %>)</h1>
+  <h1>Edition des présences - <%= h(@convocation.title) %> (<%= l(@convocation.date) %>)</h1>
   <%= render(:partial => 'form') %>
 </div>

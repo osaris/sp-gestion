@@ -1,4 +1,4 @@
-<h1><%= Grade::GRADE.index(@fireman.grade) %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></h1>
+<h1><%= Grade::GRADE.index(@fireman.grade) %>&nbsp;<%= h(@fireman.firstname) %>&nbsp;<%= h(@fireman.lastname) %></h1>
 <%- if @fireman.chief or @fireman.chief_assistant or @fireman.quartermaster -%>
 <p>
   Fonction(s) :
@@ -29,6 +29,6 @@
   </thead>
   <tbody>
     <%= render(:partial => "convocation_fireman", :collection => @fireman.convocation_firemen) || 
-        "<tr><td colspan='5'>Pas encore de convocation !</td></tr>" %>
+               "<tr><td colspan='5'>Pas encore de convocation !</td></tr>" %>
   </tbody>
 </table>
