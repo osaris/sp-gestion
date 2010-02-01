@@ -15,6 +15,12 @@
     </span>
   </p>
   <p>
+    <%= f.label(:place, "Emplacement", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:place, :class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
     <%= f.label(:birthday, "Date d'expiration", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.text_field(:expiry, :value => l!(f.object.expiry), :class => "span-1 first", :class => "date") %>
@@ -29,15 +35,12 @@
   </p>
   <p class="span-3 first prefix-1">
     <%= button_tag(:submit, "Enregistrer") %>
-    <%- if not @item.new_record? -%>
-    ou <%= link_to("Supprimer", check_list_item_path(@check_list, @item), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
-    <%- end -%>
-    ou <%= link_to("Annuler", (session[:back_path] || check_list_path(@check_list)))%>
+    ou <%= link_to("Annuler", (session[:back_path] || check_list_path(@check_list)))%>   
   </p>
 <%- end -%>
 <%- content_for(:header) do -%>
-  <%= stylesheet_link_tag("back/jquery-ui-1.7.2.custom.css")%>
-  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js") %>
+  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-1.7.2.custom.css", "back/jquery.autocomplete.css")%>
+  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js","jquery.autocomplete.pack.js") %>
 <%- end -%>
 <%= javascript_tag("
       $(function() {
@@ -50,5 +53,12 @@
                                 constrainInput: true,
                                 maxDate: '+5y',
                                 yearRange: '#{Date.today.year-5}:#{Date.today.year+5}'});
+        $('input#item_place').autocomplete(#{@places.to_json}, {
+                                            minChars: 0,
+                                            selectFirst: false
+                                          });
+        $('input#item_place').focus(function(){
+          $('input#item_place').click().click();
+        });
       });
-      ") %>
+    ") %>

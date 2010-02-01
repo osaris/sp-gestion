@@ -10,10 +10,12 @@
   <thead>
     <tr>
       <th>Titre</th>
+      <th>Emplacement</th>
       <th>Quantité</th>
+      <th class="actions">Supprimer</th>
     </tr>
   </thead>
   <tbody>
-    <%= render(@check_list.items) || "<tr><td colspan='2'>Pas de matériel dans cette liste</td></tr>" %>
+    <%= render(@check_list.items) || "<tr><td colspan='4'>Pas de matériel dans cette liste</td></tr>" %>
   </tbody>
 </table>

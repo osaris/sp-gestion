@@ -6,12 +6,13 @@
       <tr>
         <th>Titre</th>
         <th>Liste</th>
+        <th>Emplacement</th>
         <th>Quantité</th>
         <th>Expire le</th>
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => 'expiring_item', :collection => @items) || "<tr><td colspan='4'>Aucun matériel expiré !</td></tr>" %>
+      <%= render(:partial => 'expiring_item', :collection => @items) || "<tr><td colspan='5'>Aucun matériel expiré !</td></tr>" %>
     </tbody>
   </table>
 </div>

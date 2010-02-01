@@ -161,9 +161,9 @@ body.login, body.login #content { width:304px; }
 /* GRADE FORM */
 #grades .set { background-color: #a8aaaa;}
 
-/* CHECK LISTS TABLE */
-#check_lists .actions { width:100px; }
-#check_lists .center {text-align: center;}
+/* TABLE */
+table .actions { width:100px; }
+table .center {text-align: center;}
 
 /* STYLES FOR PRINT */
 @media print {
