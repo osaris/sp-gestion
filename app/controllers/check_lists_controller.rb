@@ -6,7 +6,7 @@ class CheckListsController < BackController
   before_filter :reset_back_path # for expirings items back link
 
   def index
-    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title')    
+    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title')
   end
 
   def show
@@ -64,7 +64,7 @@ class CheckListsController < BackController
   end
 
   def load_check_list
-    @check_list = @station.check_lists.find(params[:id], :include => [:items], :order => 'items.title')
+    @check_list = @station.check_lists.find(params[:id], :include => [:items], :order => 'items.place, items.title')
    rescue ActiveRecord::RecordNotFound
     flash[:error] = "La liste n'existe pas."
     redirect_to(check_lists_path)

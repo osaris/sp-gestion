@@ -74,7 +74,8 @@ class ItemsController < BackController
     @places = ActiveRecord::Base.connection.select_values("SELECT DISTINCT place
                                                            FROM items
                                                            WHERE items.place IS NOT NULL
-                                                           AND items.check_list_id = #{@check_list.id}")
+                                                           AND items.check_list_id = #{@check_list.id}
+                                                           ORDER BY place")
   end
 
 end
