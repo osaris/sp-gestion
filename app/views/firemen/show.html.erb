@@ -25,10 +25,11 @@
       <th>Lieu</th>      
       <th>Tenue</th>
       <th>Présent ?</th>
+      <th class="actions">Imprimer</th>
     </tr>
   </thead>
   <tbody>
-    <%= render(:partial => "convocation_fireman", :collection => @fireman.convocation_firemen) || 
-               "<tr><td colspan='5'>Pas encore de convocation !</td></tr>" %>
+    <%= render(:partial => "convocation_fireman", :collection => @fireman.convocation_firemen.newer) ||
+               "<tr><td colspan='6'>Pas encore de convocation !</td></tr>" %>
   </tbody>
 </table>

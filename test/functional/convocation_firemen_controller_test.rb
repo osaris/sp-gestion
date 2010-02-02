@@ -11,7 +11,7 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         
     context "requesting GET :edit on non existing convocation" do
       setup do
-        get :edit, :id => 10
+        get :edit_all, :convocation_id => 10
       end
       
       should_respond_with(:redirect)
@@ -27,7 +27,7 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
       
       context "requesting GET :edit on existing convocation" do
         setup do
-          get :edit, :id => @convocation.id
+          get :edit_all, :convocation_id => @convocation.id
         end
         
         should_respond_with(:success)
@@ -37,11 +37,24 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         should_assign_to(:convocation)
         should_assign_to(:convocation_firemen)        
       end
+
+      context "requesting GET on existing convocation_fireman with PDF format" do
+        setup do
+          @request.env["SERVER_PROTOCOL"] = "http"
+          get :show, :convocation_id => @convocation.id, :id => @convocation.convocation_firemen.first.id, :format => 'pdf'
+        end
+
+        should_respond_with(:success)
+        should_render_template("show")
+        should "send a file" do
+          send_file_to_disk(@response.body, "convocation_unique.pdf")
+        end
+      end
       
       context "requesting PUT" do
         setup do
-          convocation_firemen_id = @convocation.convocation_firemen.first.id  
-          post :update, :id => @convocation.id, :convocation_firemen => { convocation_firemen_id.to_s => {:presence => 1 }}
+          convocation_firemen_id = @convocation.convocation_firemen.first.id
+          post :update_all, :convocation_id => @convocation.id, :convocation_firemen => { convocation_firemen_id.to_s => {:presence => 1 }}
         end
 
         should_respond_with(:redirect)
@@ -53,8 +66,6 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         end
         should_set_the_flash(:success)
       end
-      
-      
     end    
   end
 end

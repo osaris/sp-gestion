@@ -5,7 +5,7 @@
   <%= link_to("Editer", edit_convocation_path(@convocation))%> - 
   <%= link_to("Supprimer", convocation_path(@convocation), :method => :delete, :confirm => "Êtes-vous sûr ?")%> - 
   <%= link_to("Imprimer", convocation_path(@convocation, :format => :pdf))%> -
-  <%= link_to("Présences", edit_convocation_fireman_path(@convocation))%>
+  <%= link_to("Présences", edit_all_convocation_convocation_firemen_path(@convocation))%>
 </p>
 <h2>Convoqués</h2>
 <table>

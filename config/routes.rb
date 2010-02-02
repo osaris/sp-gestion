@@ -40,8 +40,9 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
 
-  map.resources :convocations, :conditions => { :subdomain => /.+/  }
-  map.resources :convocation_firemen, :only => [:edit, :update], :conditions => { :subdomain => /.+/  }
+  map.resources :convocations, :conditions => { :subdomain => /.+/  } do |convocation|
+    convocation.resources :convocation_firemen, :only => [:show], :collection => {:edit_all => :get, :update_all => :put}, :conditions => { :subdomain => /.+/  }
+  end
   map.resources :check_lists, :member => { :copy => :post }, :conditions => { :subdomain => /.+/ } do |check_list|
     check_list.resources :items, :except => [:index, :show], :conditions => { :subdomain => /.+/ }
   end
