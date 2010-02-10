@@ -1,0 +1,43 @@
+# Typus Models Configuration File
+#
+# Use the README file as a reference to customize settings.
+
+BetaCode:
+  fields:
+    list: code, used, user
+    form: code, used, user
+  order_by: 
+  relationships: user
+  filters:  used
+  search:
+  application: SP-Gestion
+
+Newsletter:
+  fields:
+    list: email, activation_key, activated_at, invited_at
+    form: email, activation_key, activated_at, invited_at
+  order_by: 
+  relationships: 
+  filters: activated_at
+  search: email
+  application: SP-Gestion
+
+Station:
+  fields:
+    list: name, url
+    form: name, url
+  order_by: 
+  relationships: users
+  filters: 
+  search: name
+  application: SP-Gestion
+
+User:
+  fields:
+    list: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, current_login_ip, last_login_ip, confirmed_at, confirmation_sent_at, station
+    form: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, current_login_ip, last_login_ip, confirmed_at, confirmation_sent_at, station
+  order_by: 
+  relationships: beta_codes, station
+  filters: 
+  search: email
+  application: SP-Gestion

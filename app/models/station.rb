@@ -1,12 +1,12 @@
 class Station < ActiveRecord::Base
   
   authenticates_many :user_sessions
-  has_many :users
-  has_many :convocations
-  has_many :check_lists
-  has_many :firemen
-  has_many :uniforms
-  has_many :vehicles
+  has_many :users, :dependent => :destroy
+  has_many :convocations, :dependent => :destroy
+  has_many :check_lists, :dependent => :destroy
+  has_many :firemen, :dependent => :destroy
+  has_many :uniforms, :dependent => :destroy
+  has_many :vehicles, :dependent => :destroy
   
   RESERVED_URL =  %w(sp-gestion spgestion).freeze
   

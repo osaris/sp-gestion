@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   belongs_to :station
-  has_many :messages
+  has_many :messages, :dependent => :destroy
   has_many :beta_codes
   
   attr_accessor :beta_code
