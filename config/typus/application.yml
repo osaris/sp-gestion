@@ -14,8 +14,8 @@ BetaCode:
 
 Newsletter:
   fields:
-    list: email, activation_key, activated_at, invited_at
-    form: email, activation_key, activated_at, invited_at
+    list: email, activated_at, invited_at
+    form: email, activated_at, invited_at
   order_by: 
   relationships: 
   filters: activated_at
