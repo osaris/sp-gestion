@@ -17,6 +17,26 @@ class Newsletter < ActiveRecord::Base
   def to_param
     self.activation_key
   end
+  
+  def invite_to_beta
+    if self.activated_at.blank? or not(self.invited_at.blank?)
+      return false
+    else
+      bc = BetaCode.create(:email => self.email)
+      update_attribute(:invited_at, Time.now)
+      return true
+    end
+  end
+  
+  def boost_activation
+    if self.activated_at.blank?
+      NewsletterMailer.deliver_boost_activation(self)
+      update_attribute(:last_boosted_at, Time.now)
+      return true
+    else
+      return false
+    end
+  end
     
   private
 
