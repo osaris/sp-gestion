@@ -41,8 +41,8 @@ Station:
 
 User:
   fields:
-    list: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, current_login_ip, last_login_ip, confirmed_at, confirmation_sent_at, station
-    form: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, current_login_ip, last_login_ip, confirmed_at, confirmation_sent_at, station
+    list: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, confirmed_at, confirmation_sent_at, station
+    form: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, confirmed_at, confirmation_sent_at, station
     options:
       date_formats:
         last_request_at: short
