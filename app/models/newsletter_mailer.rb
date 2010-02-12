@@ -1,4 +1,4 @@
-class NewsletterMailer < BaseMailer
+class NewsletterMailer < ApplicationMailer
   
   def activation_instructions(newsletter)
     setup(newsletter.email)
