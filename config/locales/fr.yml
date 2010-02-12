@@ -95,3 +95,10 @@ fr:
         unit: '€'
         precision: 2
         format: '%n %u'
+  support:
+    array:
+      sentence_connector: 'et'
+      skip_last_comma: true
+      words_connector: ", "
+      two_words_connector: " et "
+      last_word_connector: " et "
