@@ -5,6 +5,9 @@ class BetaCode < ActiveRecord::Base
   before_create :generate_code
   after_create :send_welcome_email
   
+  named_scope :unused, { :conditions => ['user_id IS NULL'] }
+  named_scope :inactive, { :conditions => { :used => false } }  
+  
   def initialize(params = nil)
     super
     self.used ||= false

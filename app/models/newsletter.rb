@@ -8,6 +8,9 @@ class Newsletter < ActiveRecord::Base
   before_create :generate_activation_key
   after_create  :send_activation_email
   
+  named_scope :inactive, { :conditions => {:activated_at => nil} }
+  named_scope :to_invite, { :conditions => ['activated_at IS NOT NULL AND invited_at IS NULL']}
+  
   def activate!
     self.activated_at = Time.now
     self.activation_key = ""
