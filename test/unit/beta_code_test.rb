@@ -16,6 +16,10 @@ class BetaCodeTest < ActiveSupport::TestCase
         @bc.save
       end
       
+      before_should "expect one mail is delivered" do
+        BetaCodeMailer.expects(:deliver_welcome_instructions).once
+      end      
+      
       should "have a code" do
         assert_not_nil(@bc.code)
       end

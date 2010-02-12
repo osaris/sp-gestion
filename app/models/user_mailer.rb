@@ -1,4 +1,4 @@
-class UserMailer < ActionMailer::Base
+class UserMailer < ApplicationMailer
   
   def confirmation_instructions(user)
     setup(user)

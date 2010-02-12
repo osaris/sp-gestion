@@ -16,6 +16,7 @@ Sham.define do
 end
 
 BetaCode.blueprint do
+  email
 end
 
 CheckList.blueprint do

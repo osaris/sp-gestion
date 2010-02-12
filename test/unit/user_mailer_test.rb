@@ -31,8 +31,6 @@ class UserMailerTest < ActionMailer::TestCase
           email.body.match(@user.station.url)
         end      
       end
-    end    
-    
+    end
   end
-  
 end
