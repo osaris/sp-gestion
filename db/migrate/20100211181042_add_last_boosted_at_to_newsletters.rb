@@ -4,6 +4,6 @@ class AddLastBoostedAtToNewsletters < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column(:newsletters, :last_boosted_at, :datetime)
+    remove_column(:newsletters, :last_boosted_at)
   end
 end

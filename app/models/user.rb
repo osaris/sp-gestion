@@ -52,7 +52,17 @@ class User < ActiveRecord::Base
     reset_perishable_token!  
     UserMailer.deliver_password_reset_instructions(self)
   end
-
+  
+  def boost_activation
+    if self.confirmed_at.blank?
+      UserMailer.deliver_boost_activation(self)
+      update_attribute(:last_boosted_at, Time.now)
+      return true
+    else
+      return false
+    end
+  end
+  
   private
   
   def assign_beta_code

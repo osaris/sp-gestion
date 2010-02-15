@@ -36,6 +36,24 @@ class UserMailer < ApplicationMailer
     end
   end
   
+  def boost_activation(user)
+    setup(user)
+    subject("Activation de votre compte SP-Gestion.fr")
+
+    confirmation_url = activate_url(user.perishable_token)
+
+    content_type("multipart/alternative")
+    part "text/plain" do |p|
+      p.body = render_message("boost_activation.plain", :confirmation_url => confirmation_url)
+      p.transfer_encoding = "base64"
+    end
+
+    part "text/html" do |p|
+      p.body = render_message("boost_activation.html", :confirmation_url => confirmation_url)
+      p.transfer_encoding = "base64"
+    end
+  end  
+  
   private
 
   def setup(user)

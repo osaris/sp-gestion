@@ -9,15 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100211181042) do
+ActiveRecord::Schema.define(:version => 20100213174000) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
-    t.boolean  "used",       :default => false
+    t.boolean  "used",            :default => false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+    t.datetime "last_boosted_at"
   end
 
   create_table "check_lists", :force => true do |t|
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20100211181042) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_boosted_at"
   end
 
   create_table "vehicles", :force => true do |t|

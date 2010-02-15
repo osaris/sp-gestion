@@ -10,6 +10,7 @@ class Newsletter < ActiveRecord::Base
   
   named_scope :inactive, { :conditions => {:activated_at => nil} }
   named_scope :to_invite, { :conditions => ['activated_at IS NOT NULL AND invited_at IS NULL']}
+  named_scope :invited, { :conditions => ['invited_at IS NOT NULL']}
   
   def activate!
     self.activated_at = Time.now

@@ -4,18 +4,23 @@
 
 BetaCode:
   fields:
-    list: code, email, used, user
+    list: code, email, used, user, last_boosted_at
     form: code, email, used, user
+  options:
+    date_formats:
+      last_boosted_at: short    
   order_by: 
   relationships: user
-  filters:  used
+  filters:
   search:
   application: SP-Gestion
+  actions:
+    edit: boost_activation
 
 Newsletter:
   fields:
     list: email, activated_at, last_boosted_at, invited_at
-    form: email, activated_at, last_boosted_at, invited_at
+    form: email
     options:
       date_formats:
         activated_at: short
@@ -23,7 +28,7 @@ Newsletter:
         invited_at: short
   order_by:
   relationships: 
-  filters: activated_at
+  filters:
   search: email
   application: SP-Gestion
   actions:
@@ -41,17 +46,19 @@ Station:
 
 User:
   fields:
-    list: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, confirmed_at, confirmation_sent_at, station
-    form: email, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, confirmed_at, confirmation_sent_at, station
+    list: email, login_count, failed_login_count, last_login_at, confirmed_at, confirmation_sent_at, last_boosted_at, station
+    form: email, station
+    show: email, station, perishable_token
     options:
       date_formats:
-        last_request_at: short
-        current_login_at: short
         last_login_at: short
         confirmed_at: short
         confirmation_sent_at: short
+        last_boosted_at: short
   order_by: 
   relationships: beta_codes, station
   filters: 
   search: email
   application: SP-Gestion
+  actions:
+    edit: boost_activation

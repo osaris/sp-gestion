@@ -8,29 +8,14 @@
 
 <h2><%= params[:controller].split('/').last.titleize.capitalize %></h2>
 
-<h3>Newsletter</h3>
+<%= image_tag(Gchart.pie_3d(:title => 'Newsletters', :size => '400x200',
+                            :data => [@nb_nl_inactive, @nb_nl_to_invite, @nb_nl_invited], 
+                            :labels => ["Inactives #{@nb_nl_inactive}", 
+                                        "A inviter #{@nb_nl_to_invite}", 
+                                        "Invitées #{@nb_nl_invited}"])) %>
 
-<p>Total : <%= @nb_nl%></p>
-<p>
-  Non activées : <%= @nb_nl_inactive %>
-  <%- if @nb_nl > 0 -%>
-    (<%= @nb_nl_inactive*100/@nb_nl %> %)
-  <%- end -%>
-</p>
-<p>A inviter : <%= @nb_nl_to_invite %></p>
-
-<h3>Beta</h3>
-
-<p>Total : <%= @nb_bc %></p>
-<p>
-  Non utilisés : <%= @nb_bc_unused %>
-  <%- if @nb_bc > 0 -%>
-    (<%= @nb_bc_unused*100/@nb_bc %> %)
-  <%- end -%>
-</p>
-<p>
-  Non confirmés : <%= @nb_bc_inactive %>
-  <%- if @nb_bc > 0 -%>
-    (<%= @nb_bc_inactive*100/@nb_bc %> %)
-  <%- end -%>
-</p>
+<%= image_tag(Gchart.pie_3d(:title => 'Beta', :size => '400x200',
+                            :data => [@nb_bc_unused, @nb_bc_inactive, @nb_bc_used], 
+                            :labels => ["Inutilisés #{@nb_bc_unused}", 
+                                        "Inactifs #{@nb_bc_inactive}", 
+                                        "Utilisés #{@nb_bc_used}"])) %>

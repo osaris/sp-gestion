@@ -6,11 +6,22 @@ class BetaCode < ActiveRecord::Base
   after_create :send_welcome_email
   
   named_scope :unused, { :conditions => ['user_id IS NULL'] }
-  named_scope :inactive, { :conditions => { :used => false } }  
+  named_scope :inactive, { :conditions => ['used = ? AND user_id IS NOT NULL', false] }
+  named_scope :used, { :conditions => ['user_id IS NOT NULL AND used = ?', true]}  
   
   def initialize(params = nil)
     super
     self.used ||= false
+  end
+  
+  def boost_activation
+    if self.user_id.blank?
+      BetaCodeMailer.deliver_boost_activation(self)
+      update_attribute(:last_boosted_at, Time.now)
+      return true
+    else
+      return false
+    end
   end
 
   private

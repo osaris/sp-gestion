@@ -3,8 +3,8 @@
 # Use the README file as a reference to customize settings.
 
 admin:
-  BetaCode: create, read, update, delete
+  BetaCode: create, read, update, delete, boost_activation
   Newsletter: create, read, update, delete, invite_to_beta, boost_activation
   Station: create, read, update, delete
-  User: create, read, update, delete
+  User: create, read, update, delete, boost_activation
   Statistics: index
