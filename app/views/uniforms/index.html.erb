@@ -1,10 +1,13 @@
 <div class="span-6 first">
-  <p class="right"><%= link_to(image_tag("back/icons/add.png") + "&nbsp;Créer une nouvelle tenue", new_uniform_path)%></p>
+  <p class="right">
+    <%= link_to(image_tag("back/icons/add.png") + "&nbsp;Créer une nouvelle tenue", new_uniform_path)%> - 
+    <%= link_to("Créer les tenues par défaut", reset_uniforms_path, :method => :post, :confirm => "Etes-vous sûr de vouloir ajouter les tenues standard à celles déjà existantes ?")%>
+  </p>
   <table>
     <thead>
       <tr>
-        <th>Code</th>
         <th>Titre</th>
+        <th>Code</th>
       </tr>
     </thead>
     <tbody>

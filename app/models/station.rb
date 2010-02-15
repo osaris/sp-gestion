@@ -19,6 +19,8 @@ class Station < ActiveRecord::Base
   validates_exclusion_of  :url, :in => RESERVED_URL, :message => "Cette adresse est déjà utilisée, veuillez en choisir une autre."
   validates_format_of     :url, :with => /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*$/ix, :message => "L'adresse ne doit contenir que des chiffres, des lettres et des tirets."
 
+  after_create :create_defaults_uniforms
+
   def self.check(q)
     station = nil
     unless q.blank?
@@ -26,6 +28,12 @@ class Station < ActiveRecord::Base
       station = self.find(:first, :conditions => ["(url LIKE ?) OR (name LIKE ?)", search, search])
     end
     station
+  end
+  
+  private
+  
+  def create_defaults_uniforms
+    Uniform.create_defaults(self)
   end
 
 end

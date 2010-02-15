@@ -2,7 +2,7 @@ class UniformsController < BackController
   
   navigation(:uniforms)
   
-  before_filter :load_uniform, :except => [:index, :new, :create]
+  before_filter :load_uniform, :except => [:index, :new, :create, :reset]
   
   def index
     @uniforms = @station.uniforms.paginate(:page => params[:page], :order => 'code, title')
@@ -45,6 +45,12 @@ class UniformsController < BackController
       flash[:error] = @uniform.errors.full_messages.join("")
       redirect_to(@uniform)
     end
+  end
+  
+  def reset
+    Uniform.create_defaults(@station)
+    flash[:success] = "Les tenues par défaut ont été ajoutées."
+    redirect_to(uniforms_path)
   end
   
   private

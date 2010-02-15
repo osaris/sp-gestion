@@ -123,12 +123,12 @@ ActiveRecord::Schema.define(:version => 20100213174000) do
   end
 
   create_table "uniforms", :force => true do |t|
-    t.string   "code"
     t.string   "title"
     t.string   "description"
     t.integer  "station_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
   end
 
   create_table "users", :force => true do |t|

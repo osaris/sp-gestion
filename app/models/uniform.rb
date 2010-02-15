@@ -8,6 +8,18 @@ class Uniform < ActiveRecord::Base
   
   before_destroy :check_associations
   
+  DEFAULTS = [
+    {:title => "Tenue d'intervention", :description => "Casquette, veste F1, pantalon F1, rangers ou bottes."},
+    {:title => "Tenue de feu", :description => "Casque F1, cagoule, veste de feu, gants, ceinturons, surpantalon, rangers ou bottes."},
+    {:title => "Tenue de cérémonie", :description => "Casque F1, veste F1, pantalon F1, rangers ou bottes."}
+  ]
+  
+  def self.create_defaults(station)
+    DEFAULTS.each do |uniform|
+      self.create(uniform.merge(:station => station))
+    end
+  end
+  
   private
   
   def check_associations
