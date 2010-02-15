@@ -6,9 +6,9 @@ BetaCode:
   fields:
     list: code, email, used, user, last_boosted_at
     form: code, email, used, user
-  options:
-    date_formats:
-      last_boosted_at: short    
+    options:
+      date_formats:
+        last_boosted_at: short
   order_by: 
   relationships: user
   filters:
