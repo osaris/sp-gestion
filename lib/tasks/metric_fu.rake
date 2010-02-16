@@ -12,7 +12,7 @@ begin
                     :test_files => ['test/**/*_test.rb'],
                     :rcov_opts => ["-Itest",
                                    "--sort coverage", 
-                                   "--no-html", 
+                                   "--html", 
                                    "--text-coverage",
                                    "--no-color",
                                    "--profile",
