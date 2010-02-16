@@ -12,12 +12,12 @@ begin
                     :test_files => ['test/**/*_test.rb', 
                                     'spec/**/*_spec.rb'],
                     :rcov_opts => ["--sort coverage", 
-                                   "--no-html", 
+                                   "--no-html test/unit/*_test.rb test/unit/helpers/*_test.rb test/functional/*_test.rb", 
                                    "--text-coverage",
                                    "--no-color",
                                    "--profile",
                                    "--rails",
-                                   "--exclude /gems/,/Library/,spec"]}
+                                   "--exclude \" rubygems/*, gems/*, rcov*\""]}
   end
   
 rescue LoadError  
