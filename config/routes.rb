@@ -41,7 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing the them or commenting them out if you're using named routes and resources.
 
   map.resources :convocations, :conditions => { :subdomain => /.+/  } do |convocation|
-    convocation.resources :convocation_firemen, :only => [:show], :collection => {:edit_all => :get, :update_all => :put}, :conditions => { :subdomain => /.+/  }
+    convocation.resources :convocation_firemen, :only => [:show], :collection => {:show_all => :get, :edit_all => :get, :update_all => :put}, :conditions => { :subdomain => /.+/  }
   end
   map.resources :check_lists, :member => { :copy => :post }, :conditions => { :subdomain => /.+/ } do |check_list|
     check_list.resources :items, :except => [:index, :show], :conditions => { :subdomain => /.+/ }

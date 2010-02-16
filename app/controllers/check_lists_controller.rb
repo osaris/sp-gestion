@@ -13,7 +13,7 @@ class CheckListsController < BackController
     respond_to do |format|
       format.html
       format.pdf do
-        prawnto :prawn => { :page_size => "A4"},
+        prawnto :prawn => { :page_size => "A4" },
                 :inline => false, :filename => "liste_#{@check_list.id}.pdf"
       end
     end

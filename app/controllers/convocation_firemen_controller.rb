@@ -25,6 +25,15 @@ class ConvocationFiremenController < BackController
     redirect_to(convocation_path(@convocation))
   end
   
+  def show_all
+    respond_to do |format|
+      format.pdf do
+        prawnto :prawn => { :page_size => "A4"},
+                :inline => false, :filename => "presence_convocation_#{@convocation.id}.pdf"
+      end
+    end    
+  end
+  
   private
   
   def load_convocation
