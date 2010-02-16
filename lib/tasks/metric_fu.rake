@@ -3,7 +3,7 @@ begin
   
   MetricFu::Configuration.run do |config|  
     config.metrics = [:flog, :flay, :rcov]  
-    config.graphs  = [:flog, :flay, :rcov]
+    config.graphs  = []
     
     config.flog = { :dirs_to_flog => ['app'] }  
     config.flay = { :dirs_to_flay => ['app', 'lib'],
@@ -12,7 +12,7 @@ begin
                     :test_files => ['test/**/*_test.rb'],
                     :rcov_opts => ["-Itest",
                                    "--sort coverage", 
-                                   "--html", 
+                                   "--no-html", 
                                    "--text-coverage",
                                    "--no-color",
                                    "--profile",
