@@ -9,7 +9,7 @@ begin
     config.flay = { :dirs_to_flay => ['app', 'lib'],
                     :minimum_score => 100  }
     config.rcov = { :environment => 'test',
-                    :test_files => ['test/**/*_test.rb'],
+                    :test_files => ['test/unit/*_test.rb', 'test/unit/helpers/*_test.rb', 'test/functional/*_test.rb'],
                     :rcov_opts => ["-Itest",
                                    "--sort coverage", 
                                    "--no-html", 
