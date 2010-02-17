@@ -19,7 +19,8 @@ begin
                         :formater => "text"} #this needs to be set to "text"
     config.churn    = { :start_date => "1 year ago", :minimum_churn_count => 10}
     config.rcov     = { :environment => 'test',
-                        :test_files => ['test/unit/*_test.rb', 'test/unit/helpers/*_test.rb', 'test/functional/*_test.rb'],
+                        :test_files => ['test/unit/**/*_test.rb', #'test/unit/helpers/*_test.rb', 
+                                        'test/functional/**/*_test.rb'] #, 'test/functional/admin/*_test.rb'],
                         :rcov_opts => ["-Itest",
                                        "--sort coverage", 
                                        "--no-html", 
