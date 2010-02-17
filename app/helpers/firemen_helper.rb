@@ -14,13 +14,11 @@ module FiremenHelper
   end
   
   def style_for_grades(fireman)
-    fireman.status == 1 ? 'display:none;' : ''
+    fireman.status == 1 ? "display:none;" : ""
   end
 
   def class_for_grade(grade)
-    result = ""
-    result += "set " unless grade.date.blank?
-    result
+    grade.date.blank? ? "" : "set"
   end
 
   def display_role(fireman)
@@ -29,9 +27,7 @@ module FiremenHelper
     roles << "Adjoint" if fireman.chief_assistant
     roles << "Fourrier" if fireman.quartermaster
 
-    result = "-"
-    result = roles.join(" / ") if roles.size > 0
-    result
+    roles.size > 0 ? roles.join(" / ") : "-"
   end
 
 end
