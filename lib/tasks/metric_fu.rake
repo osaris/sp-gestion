@@ -28,9 +28,6 @@ begin
                                        "--profile",
                                        "--rails",
                                        "--exclude \" rubygems/*, gems/*, rcov*\""]}
-    
-    config.graph_engine = :gchart
-  end
-  
+end
 rescue LoadError  
 end
