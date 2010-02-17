@@ -27,7 +27,7 @@ begin
                                        "--no-color",
                                        "--profile",
                                        "--rails",
-                                       "--exclude \"test/functional/admin/*, rubygems/*, gems/*, rcov*\""]}
+                                       "--exclude \"app/controllers/admin/*, rubygems/*, gems/*, rcov*\""]}
 end
 rescue LoadError  
 end
