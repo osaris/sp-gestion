@@ -10,7 +10,7 @@ class Admin::StatisticsControllerTest < ActionController::TestCase
       @request.session[:typus_user_id] = typus_users(:admin).id
     end
     
-    context "get :index" do
+    context "requesting GET :index" do
       setup do
         get :index
       end
@@ -21,6 +21,5 @@ class Admin::StatisticsControllerTest < ActionController::TestCase
       should_assign_to(:nb_nl_invited)
       should_assign_to(:nb_bc_used)
     end
-    
   end
 end
