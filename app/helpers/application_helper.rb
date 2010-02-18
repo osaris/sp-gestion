@@ -1,8 +1,8 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
-  def flash_helper(autohide = true)
-    [:success, :warning, :error].map { |f| content_tag(:p, flash[f], :class => "message #{f}") if flash[f] }
+  def flash_helper
+    [:success, :warning, :error].map { |type| content_tag(:p, flash[type], :class => "message #{type}") if flash[type] }
   end
   
   def img_grade(grade)
