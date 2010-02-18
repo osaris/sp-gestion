@@ -19,5 +19,18 @@ class BetaCodeMailerTest < ActionMailer::TestCase
         end      
       end
     end
+    
+    context "deliver boost activation" do
+      setup do
+        BetaCodeMailer.deliver_boost_activation(@bc)
+      end
+
+      should "send an email" do
+        assert_sent_email do |email|
+          email.to.include?("test@test.com") &&
+          email.body.match(@bc.code)
+        end      
+      end
+    end
   end
 end
