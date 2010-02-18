@@ -49,6 +49,23 @@ Newsletter.blueprint do
   email
 end
 
+Newsletter.blueprint(:invited) do
+  email
+  activated_at(Time.now)
+  invited_at(Time.now)
+end
+
+Newsletter.blueprint(:inactive) do
+  email
+  activated_at(nil)
+end
+
+Newsletter.blueprint(:active) do
+  email
+  activated_at(Time.now)
+  invited_at(nil)
+end
+
 Station.blueprint do
   name
   url
