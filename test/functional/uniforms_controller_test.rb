@@ -65,7 +65,19 @@ class UniformsControllerTest < ActionController::TestCase
       should_change("number of uniform", :by => 1) { Uniform.count }
 
       should_set_the_flash(:success)
-    end    
+    end
+    
+    context "requesting POST :reset" do
+      setup do
+        post :reset
+      end
+      
+      should_respond_with(:redirect)
+      
+      should_change("number of uniform", :by => 3) { Uniform.count }
+      
+      should_set_the_flash(:success)
+    end
     
     context "with an existing uniform" do
       setup do
