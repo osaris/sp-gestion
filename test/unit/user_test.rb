@@ -101,6 +101,37 @@ class UserTest < ActiveSupport::TestCase
         assert_sent_email()
       end
     end
+  end
+  
+  context "boost_activation on a confirmed instance" do
+    setup do
+      @u = User.make(:confirmed)
+      @result = @u.boost_activation
+    end
     
+    should "return false" do
+      assert_equal(false, @result)
+    end
+    should "not set last_boosted_at" do
+      assert_nil(@u.last_boosted_at)
+    end
+  end
+  
+  context "boost_activation on a non confirmed instance" do
+    setup do
+      @u = User.make(:beta)
+      @result = @u.boost_activation
+    end
+    
+    before_should "expect one mail is delivered" do
+      UserMailer.expects(:deliver_boost_activation).once
+    end
+    
+    should "return true" do
+      assert_equal(true, @result)
+    end
+    should "set last_boosted_at" do
+      assert_not_nil(@u.last_boosted_at)
+    end
   end
 end
