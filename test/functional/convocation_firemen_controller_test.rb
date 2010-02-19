@@ -25,7 +25,7 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         @convocation = make_convocation_with_firemen(:station => @station)
       end
       
-      context "requesting GET :edit on existing convocation" do
+      context "requesting GET :edit_all" do
         setup do
           get :edit_all, :convocation_id => @convocation.id
         end
@@ -38,7 +38,7 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         should_assign_to(:convocation_firemen)        
       end
 
-      context "requesting GET on existing convocation_fireman with PDF format" do
+      context "requesting GET :show with PDF format" do
         setup do
           @request.env["SERVER_PROTOCOL"] = "http"
           get :show, :convocation_id => @convocation.id, :id => @convocation.convocation_firemen.first.id, :format => 'pdf'
@@ -51,7 +51,20 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         end
       end
       
-      context "requesting PUT" do
+      context "requesting GET :show_all with PDF format" do
+        setup do
+          @request.env["SERVER_PROTOCOL"] = "http"
+          get :show_all, :convocation_id => @convocation.id, :format => 'pdf'
+        end
+
+        should_respond_with(:success)
+        should_render_template("show")
+        should "send a file" do
+          send_file_to_disk(@response.body, "liste_appel.pdf")
+        end
+      end
+      
+      context "requesting PUT :update_all" do
         setup do
           convocation_firemen_id = @convocation.convocation_firemen.first.id
           post :update_all, :convocation_id => @convocation.id, :convocation_firemen => { convocation_firemen_id.to_s => {:presence => 1 }}
