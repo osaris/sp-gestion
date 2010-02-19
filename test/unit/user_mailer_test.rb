@@ -32,5 +32,18 @@ class UserMailerTest < ActionMailer::TestCase
         end      
       end
     end
+    
+    context "deliver boost activation" do
+      setup do
+        UserMailer.deliver_boost_activation(@user)
+      end
+
+      should "send an email" do
+        assert_sent_email do |email|
+          email.to.include?("test@test.com") &&
+          email.body.match(@user.perishable_token)
+        end      
+      end
+    end
   end
 end

@@ -106,6 +106,4 @@ class NewsletterTest < ActiveSupport::TestCase
       assert_not_nil(@nl.last_boosted_at)
     end
   end
-  
-  
 end

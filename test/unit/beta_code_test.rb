@@ -25,4 +25,36 @@ class BetaCodeTest < ActiveSupport::TestCase
       end
     end
   end
+  
+  context "boost_activation with an instance linked to a user" do
+    setup do
+      @bc = make_beta_code_with_user()
+      @result = @bc.boost_activation
+    end
+    
+    should "return false" do
+      assert_equal(false, @result)
+    end
+    should "not set last_boosted_at" do
+      assert_nil(@bc.last_boosted_at)
+    end
+  end
+  
+  context "boost_activation with an instance not linked to a user" do
+    setup do
+      @bc = BetaCode.make()
+      @result = @bc.boost_activation
+    end
+
+    before_should "expect one mail is delivered" do
+      BetaCodeMailer.expects(:deliver_boost_activation).once
+    end
+
+    should "return true" do
+      assert_equal(true, @result)
+    end
+    should "set last_boosted_at" do
+      assert_not_nil(@bc.last_boosted_at)
+    end
+  end
 end
