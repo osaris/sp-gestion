@@ -110,7 +110,7 @@ class UserTest < ActiveSupport::TestCase
     end
     
     should "return false" do
-      assert_equal(false, @result)
+      assert_equal(true, @result)
     end
     should "not set last_boosted_at" do
       assert_nil(@u.last_boosted_at)
