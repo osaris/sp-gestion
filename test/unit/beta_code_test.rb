@@ -28,7 +28,8 @@ class BetaCodeTest < ActiveSupport::TestCase
   
   context "boost_activation with an instance linked to a user" do
     setup do
-      @bc = make_beta_code_with_user()
+      @bc = BetaCode.make()
+      @bc.stubs(:user_id).returns(10)
       @result = @bc.boost_activation
     end
     
