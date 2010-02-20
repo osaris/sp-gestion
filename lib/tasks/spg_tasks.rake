@@ -1,8 +1,10 @@
 namespace :spg do
   desc "Run test and metric_fu if tests are ok"
-  task :qa => :environment do
+  task :qa do
     exit_code = 0
     begin
+      RAILS_ENV = 'test'
+      Rake::Task["db:migrate"].invoke
       Rake::Task["test"].invoke
       Rake::Task["metrics:all"].invoke
     rescue Exception => e

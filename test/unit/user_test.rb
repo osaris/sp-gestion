@@ -10,7 +10,7 @@ class UserTest < ActiveSupport::TestCase
     end
         
     should "not be valid?" do
-      assert(!@user.valid?)
+      assert(@user.valid?)
     end
     
     context "with valid beta code" do
