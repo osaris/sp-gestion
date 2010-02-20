@@ -5,7 +5,7 @@ namespace :spg do
     begin
       Rake::Task["test"].invoke
       Rake::Task["metrics:all"].invoke
-    rescue Exception = e
+    rescue Exception => e
       exit_code = 1
     end
     Kernel.exit(exit_code)
