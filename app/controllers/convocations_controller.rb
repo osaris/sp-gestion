@@ -71,7 +71,7 @@ class ConvocationsController < BackController
   end
   
   def load_firemen
-    @firemen = @station.firemen(:order => 'firemen.grade DESC, firemen.lastname ASC')
+    @firemen = @station.firemen.find(:all, :order => 'firemen.grade DESC, firemen.lastname ASC')
   end
   
   def set_convocations_firemen
