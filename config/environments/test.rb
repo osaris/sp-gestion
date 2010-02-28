@@ -1,6 +1,8 @@
 # Settings specified here will take precedence over those in config/environment.rb
 
-config.gem 'metric_fu', :version => '1.3.0', :lib => 'metric_fu'
+config.gem "shoulda",   :version => "2.10.3"
+config.gem "faker",     :version => "0.3.1"
+config.gem "machinist", :version => "1.0.6"
 
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
