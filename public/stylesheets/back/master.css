@@ -37,13 +37,13 @@ img { vertical-align:text-bottom; }
 #mainnav { float:left; padding:9px 20px 0; width:918px; background:#BBBBBB; border:1px solid #172E60; }
 #mainnav a { float:left; padding:4px 20px; color:#172E60; }
 #mainnav a:hover { color:#223540; }
-#mainnav li.active { float:left; position:relative; top:1px; margin:0 20px; background:#f9fcff url("../../images/back/gradient-white.png") repeat-x 0 0; border:1px solid #172E60; border-bottom:0; }
+#mainnav li.active { float:left; position:relative; top:1px; margin:0 20px; background:#f9fcff url("/images/back/gradient-white.png") repeat-x 0 0; border:1px solid #172E60; border-bottom:0; }
 #mainnav a.active  { padding:4px 20px;}
 #mainnav li.right { float:right; }
 #nav .subnav { clear:both; float:left; padding:10px 0 9px 20px; width:938px; background:#f9fcff; border:1px solid #172E60; border-top:0; }
 #nav .subnav a { float:left; margin:0 20px 0 0; color:#172E60; }
 #nav .subnav a:hover { color:#466c83; }
-#nav .subnav a.active  { padding:0 10px; background: red url("../../images/back/gradient-gray.png") repeat-x 0 0; color:#FFFFFF;}
+#nav .subnav a.active  { padding:0 10px; background: red url("/images/back/gradient-gray.png") repeat-x 0 0; color:#FFFFFF;}
 #nav .subnav .right a { float:right; }
 
 /* CONTENT */
@@ -83,14 +83,14 @@ img { vertical-align:text-bottom; }
 #content tbody tr:hover {background-color:#a8aaaa;}
 #content .center { padding:4px 10px 5px 10px; text-align:center; }
 #content .right { padding:4px 20px 5px 0; text-align:right; }
-#content .even { background:#e9e9e9 url("../../images/back/gradient-gray.png") repeat-x 0 -8px; }
-#content .odd { background:#ffffff url("../../images/back/layout/gradient-white.png") repeat-x 0 -12px; }
+#content .even { background:#e9e9e9 url("/images/back/gradient-gray.png") repeat-x 0 -8px; }
+#content .odd { background:#ffffff url("/images/back/gradient-white.png") repeat-x 0 -12px; }
 
 /* MESSAGES */
 #content p.message { margin:0; padding:10px; margin-bottom:20px; border:0; color:#fff; background: #172E60; }
-#content p.error { background: #FF3333 url("../../images/back/gradient-gray.png") repeat-x 0 0; }
-#content p.warning { background: #FF8533 url("../../images/back/gradient-gray.png") repeat-x 0 0; }
-#content p.success { background: #4D9900 url("../../images/back/gradient-gray.png") repeat-x 0 0; }
+#content p.error { background: #FF3333 url("/images/back/gradient-gray.png") repeat-x 0 0; }
+#content p.warning { background: #FF8533 url("/images/back/gradient-gray.png") repeat-x 0 0; }
+#content p.success { background: #4D9900 url("/images/back/gradient-gray.png") repeat-x 0 0; }
 
 /* TAB BOXES */
 #content .tabs { margin:0 0 20px; }
@@ -98,7 +98,7 @@ img { vertical-align:text-bottom; }
 #content .tabs .head { padding:10px 20px 9px; background:#BBBBBB; border:1px solid #172E60; color:#172E60; }
 #content .tabs .head a { float:left; margin:0 20px 0 0; font-size:11px; color:inherit; text-decoration:none; text-transform:uppercase; letter-spacing:0.02em; }
 #content .tabs .head a:hover { color:#223540; }
-#content .tabs .head .active a { padding:0 10px; background: red url("../../images/back/gradient-gray.png") repeat-x 0 0; color:#fff;}
+#content .tabs .head .active a { padding:0 10px; background: red url("/images/back/gradient-gray.png") repeat-x 0 0; color:#fff;}
 #content .tabs .body { padding:10px 20px 0; background:#f9fcff; border:1px solid #172E60; border-top:0; }
 #content .tabs .no-padding { padding:0 0 5px; background:#f9fcff; border:1px solid #172E60; border-top:0; }
 #content .tabs .no-padding table { margin:0; border:0; }
@@ -126,10 +126,10 @@ img { vertical-align:text-bottom; }
 #content input.span-4, #content textarea.span-4 { width:622px; }
 #content input.span-5, #content textarea.span-5 { width:786px; }
 #content input.span-6, #content textarea.span-6 { width:950px; }
-#content button { margin:0 10px 0 0; padding:7px 19px; background:#172E60 url("../../images/back/gradient-white.png") repeat-x 0 -5px; border:1px solid #284FA4; font:inherit; color: white; font-size:11px; text-transform:uppercase; letter-spacing:0.02em;}
+#content button { margin:0 10px 0 0; padding:7px 19px; background:#172E60 url("/images/back/gradient-white.png") repeat-x 0 -5px; border:1px solid #284FA4; font:inherit; color: white; font-size:11px; text-transform:uppercase; letter-spacing:0.02em;}
 #content button.small { margin:0 4px 4px 0; padding:0 9px; }
-#content button:hover { background: red url("../../images/back/gradient-white.png") repeat-x 0 -5px; }
-#content button:active { background-image:url("../../images/back/gradient-gray.png"); }
+#content button:hover { background: red url("/images/back/gradient-white.png") repeat-x 0 -5px; }
+#content button:active { background-image:url("/images/back/gradient-gray.png"); }
 
 /* PAGINATION */
 #content ul.pagination { float:left; padding:0 14px; background:#f9fcff; border:1px solid #172E60; list-style:none; }
