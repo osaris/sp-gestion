@@ -4,7 +4,7 @@
 <p>
   <%= link_to("Editer", edit_convocation_path(@convocation))%> - 
   <%= link_to("Supprimer", convocation_path(@convocation), :method => :delete, :confirm => "Êtes-vous sûr ?")%> - 
-  <%= link_to("Imprimer", convocation_path(@convocation, :format => :pdf))%> -
+  <%= link_to(image_tag("back/icons/print.png", :alt => "Imprimer les convocations") + "&nbsp;Imprimer les convocations", convocation_path(@convocation, :format => :pdf))%> -
   <%= link_to("Présences", edit_all_convocation_convocation_firemen_path(@convocation))%>
 </p>
 <h2>Convoqués</h2>
@@ -12,8 +12,8 @@
   <thead>
     <tr>
       <th>Grade</th>
+      <th>Nom</th>    
       <th>Prénom</th>
-      <th>Nom</th>
       <th>Présent ?</th>                  
     </tr>
   </thead>

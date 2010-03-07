@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th>Grade</th>
-        <th>Prénom</th>
         <th>Nom</th>
+        <th>Prénom</th>
         <th>Présent ?</th>
       </tr>
     </thead>
@@ -17,8 +17,8 @@
             <%- fields_for("convocation_firemen[]", convocation_fireman) do |f| -%>          
             <tr class="<%= cycle("odd","even") %>">
               <td class="clickable"><%= Grade::GRADE.index(convocation_fireman.grade) %></td>
-              <td class="clickable"><%= h(convocation_fireman.fireman.firstname) %></td>
               <td class="clickable"><%= h(convocation_fireman.fireman.lastname) %></td>
+              <td class="clickable"><%= h(convocation_fireman.fireman.firstname) %></td>
               <td><%= f.check_box(:presence) %></td>
             </tr>
           <%- end -%>
