@@ -2,6 +2,8 @@ class FiremenController < BackController
   
   navigation(:firemen)
   
+  helper(:interventions)
+  
   before_filter :load_fireman, :except => [:index, :new, :create]  
   
   def index

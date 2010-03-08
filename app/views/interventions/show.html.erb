@@ -1,0 +1,22 @@
+<h1>Intervention n°<%= @intervention.number %></h1>
+<p>
+  <%= link_to("Editer", edit_intervention_path(@intervention))%> - 
+  <%= link_to("Supprimer", intervention_path(@intervention), :method => :delete, :confirm => "Êtes-vous sûr ?")%>
+</p>
+<p>Type : <%= display_kind(@intervention)%></p>
+<p>Début : <%= l(@intervention.start_date) %></p>
+<p>Fin : <%= l(@intervention.end_date) %></p>
+<p>Véhicules : <%= display_vehicles(@intervention) %></p>
+<h2>Personnel</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Grade</th>
+      <th>Nom</th>    
+      <th>Prénom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(@intervention.fireman_interventions) %>
+  </tbody>
+</table>

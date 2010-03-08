@@ -43,6 +43,26 @@
 <div class="span-3 first">
   <div class="tabs">
     <div class="head">
+      Dernières interventions
+    </div>
+    <div id="tabbox1" class="body">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render(:partial => 'dashboard/intervention', :collection => @interventions) || "<tr><td colspan='2'>Aucune intervention</td></tr>" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="span-3">
+  <div class="tabs">
+    <div class="head">
       Matériel expirant dans les 30 prochains jours
     </div>
     <div id="tabbox1" class="body">

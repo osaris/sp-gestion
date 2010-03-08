@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100213174000) do
+ActiveRecord::Schema.define(:version => 20100307181106) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -64,10 +64,37 @@ ActiveRecord::Schema.define(:version => 20100213174000) do
     t.boolean  "quartermaster"
   end
 
+  create_table "firemen_interventions", :force => true do |t|
+    t.integer  "fireman_id"
+    t.integer  "intervention_id"
+    t.integer  "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "grades", :force => true do |t|
     t.integer "fireman_id"
     t.integer "kind"
     t.date    "date"
+  end
+
+  create_table "interventions", :force => true do |t|
+    t.integer  "station_id"
+    t.integer  "kind"
+    t.string   "number"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "place"
+    t.text     "rem"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "interventions_vehicles", :id => false, :force => true do |t|
+    t.integer  "intervention_id"
+    t.integer  "vehicle_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "items", :force => true do |t|

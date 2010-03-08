@@ -35,6 +35,12 @@ Fireman.blueprint do
   lastname
 end
 
+Intervention.blueprint do
+  place
+  start_date(3.days.ago)
+  end_date(2.days.ago)
+end
+
 Item.blueprint do
   title
   quantity(1)

@@ -1,0 +1,8 @@
+<h1>Statistiques de l'année <%= Date.today.year.to_s %></h1>
+
+<p>
+<%= image_tag(Gchart.pie_3d(:title => 'Interventions par type', :size => '500x200',
+                            :data => Intervention::KIND.to_a.map { |kind, i| @by_type[i].to_i },
+                            :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
+                            :background => 'F5F5F5')) %>
+</p>

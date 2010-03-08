@@ -38,6 +38,11 @@ class ConvocationsController < BackController
     if not @convocation.editable?
       flash[:error] = "Vous ne pouvez pas éditer une convocation passée."
       redirect_to(@convocation)
+    else
+      @participants = Hash.new
+      @convocation.convocation_firemen.each do |cf|
+        @participants[cf.fireman_id] = true
+      end
     end
   end
   

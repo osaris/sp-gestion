@@ -51,6 +51,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages, :member => { :mark_as_read => :post }, :only => [:index, :show], :conditions => { :subdomain => /.+/  }
   map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
   map.resources :password_resets, :only => [:new, :create, :edit, :update], :conditions => { :subdomain => /.+/  }
+  map.resources :interventions, :collection => {:stats => :get }, :conditions => { :subdomain => /.+/  }
   map.resources :stations, :collection => { :check => :get }, :only => [:new, :create, :check], :conditions => { :subdomain => 'www' }
   map.resources :uniforms, :collection => { :reset => :post }, :conditions => { :subdomain => /.+/  }
   map.resources :vehicles, :conditions => { :subdomain => /.+/  }

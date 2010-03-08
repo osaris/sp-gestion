@@ -38,14 +38,14 @@
             <td><%= link_to_function("Cocher/décocher", "$('.status_#{status}').attr('checked',!$('.status_#{status}').attr('checked'));")%></td>
             <td>
               <ul>
-                <%= render :partial => "fireman", :collection => firemen, :locals => {:checked => @convocation.firemen, :status => status} %>
+                <%= render :partial => "fireman", :collection => firemen, :locals => {:status => status} %>
               </ul>
             </td>
           </tr>
         <%- end -%>
       </table>
       <%= javascript_tag("
-        $('.fireman_id').click(function(){
+        $('.click_prev_checkbox').click(function(){
           var checkbox = $(this).prev(':checkbox');
           checkbox.attr('checked', !checkbox.attr('checked'));
         });

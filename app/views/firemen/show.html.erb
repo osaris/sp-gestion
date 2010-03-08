@@ -16,7 +16,22 @@
   <%= link_to("Editer", edit_fireman_path(@fireman))%> - 
   <%= link_to("Supprimer", fireman_path(@fireman), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
 </p>
-<h2>Convocations</h2>
+<h2>5 dernières interventions</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Numéro</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Lieu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => "fireman_intervention", :collection => @fireman.fireman_interventions.newer) ||
+               "<tr><td colspan='4'>Pas encore d'intervention !</td></tr>" %>
+  </tbody>
+</table>
+<h2>5 Dernières convocations</h2>
 <table>
   <thead>
     <tr>

@@ -52,6 +52,14 @@ SimpleNavigation::Configuration.run do |navigation|
       materiel.dom_class = 'subnav'
     end
     
+    primary.item(:intervention, 'Interventions', interventions_path) do |intervention|
+      intervention.item(:interventions_list, 'Liste', interventions_path)
+      intervention.item(:interventions_stats, 'Statistiques', stats_interventions_path)
+
+      intervention.auto_highlight = false
+      intervention.dom_class = 'subnav'
+    end
+    
     primary.item(:config, 'Configuration', vehicles_path, :class => 'right') do |configuration|
       configuration.item(:vehicles, 'Véhicules', vehicles_path)
       configuration.item(:uniforms, 'Tenues', uniforms_path)

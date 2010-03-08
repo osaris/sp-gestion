@@ -1,4 +1,10 @@
 fr:
+  intervention:
+    kind:
+      sap: "Secours à personne"
+      inc: "Incendie"
+      div: "Divers"
+      sr: "Secours routier"
   authlogic:
     error_messages:
       login_blank: can not be blank

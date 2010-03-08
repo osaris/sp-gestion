@@ -4,6 +4,8 @@ class Fireman < ActiveRecord::Base
   has_many :grades, :order => 'kind DESC', :dependent => :destroy
   has_many :convocation_firemen
   has_many :convocations, :through => :convocation_firemen, :order => 'date DESC'
+  has_many :fireman_interventions
+  has_many :interventions, :through => :fireman_interventions
   
   accepts_nested_attributes_for :grades
   
@@ -30,9 +32,10 @@ class Fireman < ActiveRecord::Base
     self.quartermaster ||= false
   end
   
-  def current_grade
+  def current_grade_at(the_date = Time.now)
+    the_date ||= Time.now
     self.grades.each do |g|
-      return g if (!g.date.blank?) and (g.date <= Date.today)
+      return g if (!g.date.blank?) and (g.date <= the_date.to_date)
     end
     return nil
   end
@@ -60,6 +63,7 @@ class Fireman < ActiveRecord::Base
       self.grade = nil
       self.grade_category = nil
     else
+      current_grade = current_grade_at(Time.now)
       self.grade = current_grade.nil? ? nil : current_grade.kind
       self.grade_category = Grade::GRADE_CATEGORY_MATCH[self.grade]
     end

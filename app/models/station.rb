@@ -5,6 +5,7 @@ class Station < ActiveRecord::Base
   has_many :convocations, :dependent => :destroy
   has_many :check_lists, :dependent => :destroy
   has_many :firemen, :dependent => :destroy
+  has_many :interventions, :dependent => :destroy
   has_many :uniforms, :dependent => :destroy
   has_many :vehicles, :dependent => :destroy
   

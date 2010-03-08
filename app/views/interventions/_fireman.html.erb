@@ -1,0 +1,4 @@
+<li>
+  <%= check_box_tag("intervention[fireman_ids][]", fireman.id, @participants.has_key?(fireman.id)) %>
+  <label class="click_prev_checkbox"><%= Grade::GRADE.index(fireman.grade) %>-<%= h(fireman.firstname) %>&nbsp;<%= h(fireman.lastname) %></label>
+</li>
