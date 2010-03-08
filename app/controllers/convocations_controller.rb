@@ -22,6 +22,7 @@ class ConvocationsController < BackController
   
   def new
     @convocation = @station.convocations.new
+    set_attendees
   end
   
   def create
@@ -30,6 +31,7 @@ class ConvocationsController < BackController
       flash[:success] = "La convocation a été créée."
       redirect_to(@convocation)
     else
+      set_attendees
       render(:action => :new)
     end
   end
@@ -39,10 +41,7 @@ class ConvocationsController < BackController
       flash[:error] = "Vous ne pouvez pas éditer une convocation passée."
       redirect_to(@convocation)
     else
-      @participants = Hash.new
-      @convocation.convocation_firemen.each do |cf|
-        @participants[cf.fireman_id] = true
-      end
+      set_attendees
     end
   end
   
@@ -55,6 +54,7 @@ class ConvocationsController < BackController
         flash[:success] = "La convocation a été mise à jour."
         redirect_to(@convocation)
       else
+        set_attendees
         render(:action => :edit)
       end
     end   
@@ -81,6 +81,13 @@ class ConvocationsController < BackController
   
   def set_convocations_firemen
     params[:convocation][:fireman_ids] ||= []
+  end
+  
+  def set_attendees
+    @attendees = Hash.new
+    @convocation.firemen.each do |f|
+      @attendees[f.id] = true
+    end
   end
   
 end

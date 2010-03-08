@@ -3,10 +3,11 @@ require 'test_helper'
 class InterventionTest < ActiveSupport::TestCase
 
   should_validate_presence_of(:place, :message => /lieu/)
+  should_validate_presence_of(:firemen, :message => /personnel/)  
   
   context "with an instance" do
     setup do
-      @i = Intervention.make_unsaved(:station => Station.make)
+      @i = make_intervention_with_firemen(:station => Station.make)
     end
 
     should "initialize kind to sap" do
@@ -48,14 +49,8 @@ class InterventionTest < ActiveSupport::TestCase
       end
     end
     
-    context "saved" do
-      setup do
-        @i.save
-      end
-
-      should "have a number" do
-        assert_not_nil(@i.number)
-      end
+    should "have a number" do
+      assert_not_nil(@i.number)
     end
   end
 end

@@ -46,7 +46,7 @@ class ConvocationsControllerTest < ActionController::TestCase
     
     context "requesting POST with bad data" do
       setup do
-        post :create, :convocation => {:title => '', :date => '', :place => '', :uniform_id => '', :firemen => {}}
+        post :create, :convocation => {:title => '', :date => '', :place => '', :uniform_id => '', :fireman_ids => []}
       end
     
       should_respond_with(:success)

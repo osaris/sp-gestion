@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20100307181106) do
     t.string   "place"
   end
 
+  create_table "fireman_interventions", :force => true do |t|
+    t.integer  "fireman_id"
+    t.integer  "intervention_id"
+    t.integer  "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "firemen", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -62,14 +70,6 @@ ActiveRecord::Schema.define(:version => 20100307181106) do
     t.boolean  "chief"
     t.boolean  "chief_assistant"
     t.boolean  "quartermaster"
-  end
-
-  create_table "firemen_interventions", :force => true do |t|
-    t.integer  "fireman_id"
-    t.integer  "intervention_id"
-    t.integer  "grade"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "grades", :force => true do |t|

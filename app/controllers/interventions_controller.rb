@@ -17,6 +17,7 @@ class InterventionsController < BackController
   
   def new
     @intervention = @station.interventions.new
+    set_participants
   end
   
   def create
@@ -25,15 +26,14 @@ class InterventionsController < BackController
       flash[:success] = "L'intervention a été créée."
       redirect_to(@intervention)
     else
+      set_participants
       render(:action => :new)
     end
   end
   
   def edit
     @participants = Hash.new
-    @intervention.fireman_interventions.each do |fi|
-      @participants[fi.fireman_id] = true
-    end    
+    set_participants
   end
   
   def update
@@ -41,6 +41,7 @@ class InterventionsController < BackController
       flash[:success] = "L'intervention a été mise à jour."
       redirect_to(@intervention)
     else
+      set_participants
       render(:action => :edit)
     end
   end
@@ -76,6 +77,13 @@ class InterventionsController < BackController
   
   def set_fireman_interventions
     params[:intervention][:fireman_ids] ||= []
-  end  
+  end
+  
+  def set_participants
+    @participants = Hash.new
+    @intervention.firemen.each do |f|
+      @participants[f.id] = true
+    end
+  end
   
 end

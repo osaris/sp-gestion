@@ -1,4 +1,9 @@
 <li>
-  <%= check_box_tag("convocation[fireman_ids][]", fireman.id, @participants.has_key?(fireman.id), :class => "status_#{status}") %>
-  <label class="click_prev_checkbox"><%= h(fireman.firstname) %>&nbsp;<%= h(fireman.lastname) %></label>
+  <%= check_box_tag("convocation[fireman_ids][]", fireman.id, @attendees.has_key?(fireman.id), :class => "status_#{status}") %>
+  <label class="click_prev_checkbox">
+    <%- if fireman.status != Fireman::STATUS['JSP'] -%>
+      <%= Grade::GRADE.index(fireman.grade) %>-
+    <%- end -%>
+    <%= h(fireman.firstname) %>&nbsp;<%= h(fireman.lastname) %>
+  </label>
 </li>

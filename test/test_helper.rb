@@ -90,3 +90,10 @@ def make_check_list_with_items(attributes = {})
   cl.save
   cl
 end
+
+def make_intervention_with_firemen(attributes = {})
+  i = Intervention.make_unsaved(attributes)
+  i.firemen << make_fireman_with_grades()
+  i.save
+  i
+end

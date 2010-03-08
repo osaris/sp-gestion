@@ -6,6 +6,7 @@ class InterventionsControllerTest < ActionController::TestCase
 
   context "an user logged in" do
     setup do
+      @fireman = make_fireman_with_grades
       login
     end
     
@@ -13,7 +14,7 @@ class InterventionsControllerTest < ActionController::TestCase
       setup do
         get :index
       end
-
+    
       should_respond_with(:success)
       should_render_template("index")
       should_render_with_layout("back")
@@ -28,7 +29,7 @@ class InterventionsControllerTest < ActionController::TestCase
       
       should_respond_with(:redirect)
       should_redirect_to(":index") { interventions_path }
-
+    
       should_set_the_flash(:error)
     end
         
@@ -44,7 +45,7 @@ class InterventionsControllerTest < ActionController::TestCase
     
     context "requesting POST with bad data" do
       setup do
-        post :create, :intervention => {:place => '', :kind => '', :start_date => '', :end_date => ''}
+        post :create, :intervention => {:place => '', :kind => '', :start_date => '', :end_date => '', :fireman_ids => []}
       end
     
       should_respond_with(:success)
@@ -56,9 +57,12 @@ class InterventionsControllerTest < ActionController::TestCase
     
     context "requesting POST with good data" do
       setup do
-        post :create, :intervention => Intervention.plan
+        post :create, :intervention => {:place => 'Test', :kind => '1', 
+                                        :start_date => I18n.localize(3.hours.ago), 
+                                        :end_date => I18n.localize(2.hours.ago), 
+                                        :fireman_ids => [@fireman.id.to_s]}
       end
-    
+      
       should_respond_with(:redirect)
       should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
       
@@ -69,14 +73,14 @@ class InterventionsControllerTest < ActionController::TestCase
     
     context "with an existing intervention" do
       setup do
-        @intervention = @station.interventions.make
+        @intervention = make_intervention_with_firemen(:station => @station)
       end
-
+    
       context "requesting GET" do
         setup do
           get :show, :id => @intervention.id
         end
-  
+      
         should_respond_with(:success)
         should_render_template("show")
         should_render_with_layout("back")
@@ -86,7 +90,7 @@ class InterventionsControllerTest < ActionController::TestCase
         setup do
           get :edit, :id => @intervention.id
         end
-  
+      
         should_respond_with(:success)
         should_render_template("edit")
         should_render_with_layout("back")
@@ -94,7 +98,7 @@ class InterventionsControllerTest < ActionController::TestCase
       
       context "requesting PUT with bad data" do
         setup do
-          put :update, :id => @intervention.id, :intervention => {:place => '', :kind => '', :start_date => '', :end_date => ''}
+          put :update, :id => @intervention.id, :intervention => {:place => '', :kind => '', :start_date => '', :end_date => '', :fireman_ids => []}
         end
         
         should_respond_with(:success)
@@ -104,12 +108,15 @@ class InterventionsControllerTest < ActionController::TestCase
       
       context "requesting PUT with good data" do
         setup do
-          put :update, :id => @intervention.id, :intervention => Intervention.plan
+          put :update, :id => @intervention.id, :intervention => {:place => 'Test', :kind => '1', 
+                                                                  :start_date => I18n.localize(3.hours.ago), 
+                                                                  :end_date => I18n.localize(2.hours.ago), 
+                                                                  :fireman_ids => [@fireman.id.to_s]}
         end
-  
+        
         should_respond_with(:redirect)
         should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
-  
+        
         should_set_the_flash(:success)
       end
       
