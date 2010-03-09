@@ -53,4 +53,25 @@ class InterventionTest < ActiveSupport::TestCase
       assert_not_nil(@i.number)
     end
   end
+  
+  context "with many interventions" do
+    setup do
+      @station = Station.make
+      # 3 interventions of kind 1,2 and 2 interventions of kind 3,4
+      10.times do |i|
+        make_intervention_with_firemen(:station => @station,
+                                       :kind => (i%4)+1)
+      end
+    end
+
+    context "stats_by_type" do
+      setup do
+        @stats_by_type = Intervention.stats_by_type(@station)
+      end
+
+      should "return number of intervention grouped by type" do
+        assert_equal({1 => 3, 2 => 3, 3 => 2, 4 => 2}, @stats_by_type)
+      end
+    end
+  end
 end

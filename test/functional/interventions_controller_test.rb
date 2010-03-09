@@ -22,6 +22,19 @@ class InterventionsControllerTest < ActionController::TestCase
       should_assign_to(:interventions)
     end
     
+    context "requesting stats" do
+      setup do
+        get :stats
+      end
+
+      should_respond_with(:success)
+      should_render_template("stats")
+      should_render_with_layout("back")
+      
+      should_assign_to(:by_type)
+    end
+    
+    
     context "requesting a non existing intervention" do
       setup do
         get :show, :id => 2458437589
