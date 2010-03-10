@@ -1,7 +1,8 @@
 class Intervention < ActiveRecord::Base
   
   belongs_to :station
-  has_and_belongs_to_many :vehicles
+  has_many :intervention_vehicles
+  has_many :vehicles, :through => :intervention_vehicles
   has_many :fireman_interventions, :order => 'fireman_interventions.grade DESC'
   has_many :firemen, :through => :fireman_interventions
   

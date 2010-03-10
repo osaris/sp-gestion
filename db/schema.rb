@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100307181106) do
+ActiveRecord::Schema.define(:version => 20100310075455) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(:version => 20100307181106) do
     t.date    "date"
   end
 
+  create_table "intervention_vehicles", :force => true do |t|
+    t.integer  "intervention_id"
+    t.integer  "vehicle_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "interventions", :force => true do |t|
     t.integer  "station_id"
     t.integer  "kind"
@@ -86,13 +93,6 @@ ActiveRecord::Schema.define(:version => 20100307181106) do
     t.datetime "end_date"
     t.string   "place"
     t.text     "rem"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "interventions_vehicles", :id => false, :force => true do |t|
-    t.integer  "intervention_id"
-    t.integer  "vehicle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
