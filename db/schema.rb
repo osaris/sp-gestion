@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20100310075455) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "last_grade_update_at"
   end
 
   create_table "typus_users", :force => true do |t|

@@ -79,7 +79,7 @@ end
 
 def make_convocation_with_firemen(attributes = {})
   c = Convocation.make_unsaved(attributes)
-  c.firemen << make_fireman_with_grades()
+  c.firemen << make_fireman_with_grades(:station => c.station)
   c.save
   c
 end

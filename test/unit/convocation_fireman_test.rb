@@ -4,7 +4,7 @@ class ConvocationFiremanTest < ActiveSupport::TestCase
   
   context "with an instance of convocation, add a fireman and save" do
     setup do
-      @fireman = make_fireman_with_grades()
+      @fireman = make_fireman_with_grades(:station => Station.make)
       
       @convocation = Convocation.make_unsaved
       @convocation.firemen << @fireman
@@ -17,7 +17,6 @@ class ConvocationFiremanTest < ActiveSupport::TestCase
     
     should "set the convocation_firemen status to firemen status" do
       assert_equal(@fireman.status, @convocation.convocation_firemen.first.status)
-    end    
+    end
   end
-    
 end

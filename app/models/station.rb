@@ -21,12 +21,7 @@ class Station < ActiveRecord::Base
   validates_format_of     :url, :with => /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*$/ix, :message => "L'adresse ne doit contenir que des chiffres, des lettres et des tirets."
 
   after_create :create_defaults_uniforms
-
-  def initialize(params = nil)
-    super
-    self.last_grade_update_at ||= Time.mktime(1900, 1, 1)
-  end
-
+  
   def self.check(q)
     station = nil
     unless q.blank?
