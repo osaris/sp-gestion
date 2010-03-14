@@ -4,11 +4,13 @@ class Grade < ActiveRecord::Base
 
   validates_date :date, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
   
+  after_save :set_last_grade_update_at
+  
   GRADE_CATEGORY = {
     'Officier' => 1,
     'Sous-officier' => 2,
     'Homme du rang' => 3
-  }.freeze  
+  }.freeze
   
   GRADE = {
     'Médecin capitaine' => 16,  'Infirmier' => 15,
@@ -30,6 +32,12 @@ class Grade < ActiveRecord::Base
   
   def validate
     self.errors.add(:date, "Ne peut pas être dans le futur !") if !date.blank? and date > Date.today
+  end
+  
+  private
+  
+  def set_last_grade_update_at
+    self.fireman.station.reset_last_grade_update_at if self.date_changed?
   end
   
 end

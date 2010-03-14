@@ -46,6 +46,10 @@ class Intervention < ActiveRecord::Base
     count(:all, :group => 'kind', :conditions => {:station_id => station.id})
   end
   
+  def editable?
+    !(self.start_date.blank?) and (self.start_date > self.station.last_grade_update_at)
+  end
+  
   private
   
   def init_number

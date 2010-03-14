@@ -14,6 +14,8 @@ class Fireman < ActiveRecord::Base
   validates_presence_of :status
   validates_date :birthday, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
   
+  attr_accessor :validate_grade_update
+  
   before_save :denormalize_grade
   before_destroy :check_associations
   
@@ -44,9 +46,18 @@ class Fireman < ActiveRecord::Base
   end
   
   def validate
-    if self.status != STATUS['JSP'] and self.grades.reject{ |g| g.date.blank? }.length == 0
-      self.errors.add(:grades, "Une personne ayant le statut actif ou vétéran doit avoir un grade.")
+    if self.status != STATUS['JSP'] 
+      if self.grades.reject{ |g| g.date.blank? }.length == 0
+        self.errors.add(:grades, "Une personne ayant le statut actif ou vétéran doit avoir un grade.")
+      end
+      if max_grade > self.station.last_grade_update_at and (self.validate_grade_update.to_i != 1)
+        self.errors.add(:validate_grade_update)
+      end
     end
+  end
+  
+  def max_grade
+    self.grades.collect { |g| g.date }.compact.max
   end
   
   private

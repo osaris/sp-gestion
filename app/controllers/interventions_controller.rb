@@ -32,17 +32,26 @@ class InterventionsController < BackController
   end
   
   def edit
-    @participants = Hash.new
-    set_participants
-  end
-  
-  def update
-    if @intervention.update_attributes(params[:intervention])
-      flash[:success] = "L'intervention a été mise à jour."
+    if not @intervention.editable?
+      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont été modifiés."
       redirect_to(@intervention)
     else
       set_participants
-      render(:action => :edit)
+    end    
+  end
+  
+  def update
+    if not @intervention.editable?
+      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont été modifiés."
+      redirect_to(@intervention)
+    else
+      if @intervention.update_attributes(params[:intervention])
+        flash[:success] = "L'intervention a été mise à jour."
+        redirect_to(@intervention)
+      else
+        set_participants
+        render(:action => :edit)
+      end
     end
   end
   

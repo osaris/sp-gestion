@@ -22,6 +22,11 @@ class Station < ActiveRecord::Base
 
   after_create :create_defaults_uniforms
 
+  def initialize(params = nil)
+    super
+    self.last_grade_update_at ||= Time.mktime(1900, 1, 1)
+  end
+
   def self.check(q)
     station = nil
     unless q.blank?
@@ -29,6 +34,13 @@ class Station < ActiveRecord::Base
       station = self.find(:first, :conditions => ["(url LIKE ?) OR (name LIKE ?)", search, search])
     end
     station
+  end
+  
+  def reset_last_grade_update_at
+    max_grade_date = Grade.maximum(:date, 
+                                   :joins => "INNER JOIN firemen ON (firemen.id = grades.fireman_id)",
+                                   :conditions => ["firemen.station_id = ?", self.id])
+    self.update_attribute(:last_grade_update_at, max_grade_date)
   end
   
   private
