@@ -16,7 +16,7 @@ class UniformTest < ActiveSupport::TestCase
     
     context "used in a convocation" do
       setup do
-        make_convocation_with_firemen(:uniform => @uniform)
+        make_convocation_with_firemen(:uniform => @uniform, :station => Station.make)
       end
       
       should "not be destroyable" do
