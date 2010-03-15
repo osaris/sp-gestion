@@ -93,7 +93,7 @@ end
 
 def make_intervention_with_firemen(attributes = {})
   i = Intervention.make_unsaved(attributes)
-  i.firemen << make_fireman_with_grades()
+  i.firemen << make_fireman_with_grades(:station => i.station)
   i.save
   i
 end

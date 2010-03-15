@@ -4,7 +4,7 @@ class FiremanTest < ActiveSupport::TestCase
       
   context "with an instance" do
     setup do
-      @fireman = Fireman.new(:firstname => 'Test', :lastname => 'Test')
+      @fireman = Fireman.new(:firstname => 'Test', :lastname => 'Test', :station => Station.make)
     end
     
     should "initialize status to actif" do
