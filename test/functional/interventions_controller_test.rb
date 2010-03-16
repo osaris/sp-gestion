@@ -6,8 +6,8 @@ class InterventionsControllerTest < ActionController::TestCase
 
   context "an user logged in" do
     setup do
-      @fireman = make_fireman_with_grades
       login
+      @fireman = make_fireman_with_grades(:station => @station)
     end
     
     context "requesting index" do
