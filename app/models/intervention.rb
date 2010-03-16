@@ -47,7 +47,7 @@ class Intervention < ActiveRecord::Base
   end
   
   def editable?
-    !(self.station.last_grade_update_at.blank?) and (self.start_date > self.station.last_grade_update_at)
+    (self.station.last_grade_update_at.blank?) or (self.start_date > self.station.last_grade_update_at)
   end
   
   private
