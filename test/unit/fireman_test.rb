@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FiremanTest < ActiveSupport::TestCase
       
-  context "with an instance" do
+  context "with an instance and station last_grade_update_at nil" do
     setup do
       @fireman = Fireman.new(:firstname => 'Test', :lastname => 'Test', :station => Station.make)
     end
@@ -55,6 +55,28 @@ class FiremanTest < ActiveSupport::TestCase
           assert_equal(Grade::GRADE_CATEGORY['Homme du rang'], @fireman.grade_category)
           assert_equal(Grade::GRADE['2e classe'], @fireman.grade)
         end
+      end
+    end
+  end
+  
+  context "with an instance and station last_grade_update_at set" do
+    setup do
+      @station = Station.make(:last_grade_update_at => 2.days.ago)
+      @fireman = Fireman.new(:firstname => 'Test', :lastname => 'Test', :station => @station)
+    end
+    
+    context "update a grade after last_grade_update_at" do
+      setup do
+        @fireman.grades.first.date = Date.today
+      end
+      
+      should "fail save without validate_grade_update" do
+        assert_equal(false, @fireman.save)
+      end
+      
+      should "successfuly save with validate_grade_update" do
+        @fireman.validate_grade_update = 1
+        assert_equal(true, @fireman.save)
       end
     end
   end
