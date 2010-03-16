@@ -5,7 +5,7 @@ class InterventionTest < ActiveSupport::TestCase
   should_validate_presence_of(:place, :message => /lieu/)
   should_validate_presence_of(:firemen, :message => /personnel/)  
   
-  context "with an instance" do
+  context "with an instance and station last_grade_update_at nil" do
     setup do
       @i = make_intervention_with_firemen(:station => Station.make)
     end
@@ -52,7 +52,26 @@ class InterventionTest < ActiveSupport::TestCase
     should "have a number" do
       assert_not_nil(@i.number)
     end
+    
+    should "be editable" do
+      assert(@i.editable?)
+    end
   end
+  
+  context "with an instance and station last_grade_update_at set" do
+    setup do
+      @s = Station.make(:last_grade_update_at => 2.days.ago)
+      @i = make_intervention_with_firemen(:start_date => 4.days.ago, :end_date => 3.days.ago, :station => @s)
+    end
+    
+    should "be valid" do
+      assert(@i.valid?)
+    end
+    
+    should "not be editable" do
+      assert_equal(false, @i.editable?)
+    end
+  end  
   
   context "with many interventions" do
     setup do
