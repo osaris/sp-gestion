@@ -6,9 +6,9 @@ class ConvocationsControllerTest < ActionController::TestCase
 
   context "an user logged in" do
     setup do
-      @uniform = Uniform.make
-      @fireman = make_fireman_with_grades      
       login
+      @uniform = Uniform.make
+      @fireman = make_fireman_with_grades(:station => @station)      
     end
     
     context "requesting index" do
