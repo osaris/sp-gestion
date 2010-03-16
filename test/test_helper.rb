@@ -72,7 +72,7 @@ end
 def make_fireman_with_grades(attributes = {})
   f = Fireman.make_unsaved(attributes)
   f.grades = Grade::new_defaults
-  f.grades.last.date = 2.days.ago
+  f.grades.last.date = 2.months.ago
   f.save
   f
 end
