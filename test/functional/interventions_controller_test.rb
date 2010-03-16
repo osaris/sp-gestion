@@ -84,9 +84,42 @@ class InterventionsControllerTest < ActionController::TestCase
       should_set_the_flash(:success)
     end
     
-    context "with an existing intervention" do
+    context "with an existing intervention not editable" do
       setup do
         @intervention = make_intervention_with_firemen(:station => @station)
+        Intervention.any_instance.stubs(:editable?).returns(false)
+      end
+      
+      context "requesting GET :edit" do
+        setup do
+          get :edit, :id => @intervention.id
+        end
+      
+        should_respond_with(:redirect)
+        should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
+        
+        should_set_the_flash(:error)
+      end
+      
+      context "requesting PUT with good data" do
+        setup do
+          put :update, :id => @intervention.id, :intervention => {:place => 'Test', :kind => '1', 
+                                                                  :start_date => I18n.localize(3.hours.ago), 
+                                                                  :end_date => I18n.localize(2.hours.ago), 
+                                                                  :fireman_ids => [@fireman.id.to_s]}
+        end
+        
+        should_respond_with(:redirect)
+        should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
+        
+        should_set_the_flash(:error)
+      end      
+    end
+    
+    context "with an existing intervention editable" do
+      setup do
+        @intervention = make_intervention_with_firemen(:station => @station)
+        Intervention.any_instance.stubs(:editable?).returns(true)
       end
     
       context "requesting GET" do
@@ -107,7 +140,7 @@ class InterventionsControllerTest < ActionController::TestCase
         should_respond_with(:success)
         should_render_template("edit")
         should_render_with_layout("back")
-      end  
+      end
       
       context "requesting PUT with bad data" do
         setup do
