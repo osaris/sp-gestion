@@ -69,7 +69,7 @@
                               changeYear: true,
                               changeMonth: true,
                               dateFormat: 'dd/mm/yy',
-                              minDate: '-#{Date.today-@station.last_grade_update_at}d',
+                              minDate: '-#{Date.today-@station.last_grade_update_at.to_i}d',
                               maxDate: '+0d',
                               constrainInput: true,
                               duration: '',
