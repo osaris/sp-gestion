@@ -33,7 +33,7 @@ class InterventionsController < BackController
   
   def edit
     if not @intervention.editable?
-      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont été modifiés."
+      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont évolué."
       redirect_to(@intervention)
     else
       set_participants
@@ -42,7 +42,7 @@ class InterventionsController < BackController
   
   def update
     if not @intervention.editable?
-      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont été modifiés."
+      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont évolué."
       redirect_to(@intervention)
     else
       if @intervention.update_attributes(params[:intervention])

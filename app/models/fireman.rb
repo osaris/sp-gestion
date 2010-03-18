@@ -50,7 +50,8 @@ class Fireman < ActiveRecord::Base
       if self.grades.reject{ |g| g.date.blank? }.length == 0
         self.errors.add(:grades, "Une personne ayant le statut actif ou vétéran doit avoir un grade.")
       end
-      if !(self.station.last_grade_update_at.blank?) and (max_grade > self.station.last_grade_update_at) and (self.validate_grade_update.to_i != 1)
+      if !(self.station.last_grade_update_at.blank?) and (self.station.interventions.count > 0) and 
+          (max_grade > self.station.last_grade_update_at) and (self.validate_grade_update.to_i != 1)
         self.errors.add(:validate_grade_update)
       end
     end
