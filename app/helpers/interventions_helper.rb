@@ -12,4 +12,10 @@ module InterventionsHelper
     intervention.vehicles.collect { |vehicle| vehicle.name }.join(" / ")
   end
   
+  def min_date_intervention(station)
+    unless station.last_grade_update_at.blank?
+      "-#{Date.today-station.last_grade_update_at}d"
+    end
+  end
+  
 end
