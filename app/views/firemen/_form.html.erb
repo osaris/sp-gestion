@@ -4,7 +4,7 @@
   <%- if !@fireman.errors.blank? -%>
     <%- if @fireman.errors.on(:validate_grade_update) -%>
       <p class="message warning span-3">
-        Vous ne pourrez plus modifier tous rapports d'interventions ayant eu lieu avant le <%= l(@fireman.max_grade) %>.<br /> <%= f.check_box(:validate_grade_update) %><b><%= f.label(:validate_grade_update, "Je confirme la modification (*)") %></b>
+        Vous ne pourrez plus modifier tous rapports d'interventions ayant eu lieu avant le <%= l(@fireman.max_grade_date) %>.<br /> <%= f.check_box(:validate_grade_update) %><b><%= f.label(:validate_grade_update, "Je confirme la modification (*)") %></b>
       </p>      
     <%- else -%>
       <p class="message error">Veuillez corriger les erreurs avant de pouvoir continuer.</p>
