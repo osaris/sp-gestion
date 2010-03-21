@@ -38,6 +38,18 @@ class Station < ActiveRecord::Base
     self.update_attribute(:last_grade_update_at, max_grade_date)
   end
   
+  def confirm_last_grade_update_at?(max_grade)
+    result = true
+    if self.last_grade_update_at.blank?
+      result = false
+    elsif self.interventions.count == 0
+      result = false
+    elsif max_grade <= self.last_grade_update_at
+      result = false
+    end
+    result
+  end
+  
   private
   
   def create_defaults_uniforms

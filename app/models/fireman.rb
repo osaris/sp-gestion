@@ -49,15 +49,13 @@ class Fireman < ActiveRecord::Base
     if self.status != STATUS['JSP'] 
       if self.grades.reject{ |g| g.date.blank? }.length == 0
         self.errors.add(:grades, "Une personne ayant le statut actif ou vétéran doit avoir un grade.")
-      end
-      if !(self.station.last_grade_update_at.blank?) and (self.station.interventions.count > 0) and 
-          (max_grade > self.station.last_grade_update_at) and (self.validate_grade_update.to_i != 1)
+      elsif self.station.confirm_last_grade_update_at?(max_grade_date) and (self.validate_grade_update.to_i != 1)
         self.errors.add(:validate_grade_update)
       end
     end
   end
   
-  def max_grade
+  def max_grade_date
     self.grades.collect { |g| g.date }.compact.max
   end
   
