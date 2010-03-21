@@ -22,8 +22,9 @@ class InterventionsControllerTest < ActionController::TestCase
       should_assign_to(:interventions)
     end
     
-    context "requesting stats" do
+    context "requesting stats with interventions" do
       setup do
+        Station.any_instance.stubs(:interventions).returns(mock(:empty? => false))
         get :stats
       end
 
@@ -34,6 +35,17 @@ class InterventionsControllerTest < ActionController::TestCase
       should_assign_to(:by_type)
     end
     
+    context "requesting stats without intervention" do
+      setup do
+        Station.any_instance.stubs(:interventions).returns(mock(:empty? => true))
+        get :stats
+      end
+
+      should_respond_with(:redirect)
+      should_redirect_to(":index") { interventions_path }
+    
+      should_set_the_flash(:warning)
+    end
     
     context "requesting a non existing intervention" do
       setup do

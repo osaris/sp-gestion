@@ -62,8 +62,13 @@ class InterventionsController < BackController
   end
   
   def stats
-    @by_type = Intervention::stats_by_type(@station)
-    current_navigation(:interventions_stats)
+    if @station.interventions.empty?
+      flash[:warning] = "Il faut au moins une intervention pour avoir des statistiques."
+      redirect_to(interventions_path)
+    else
+      @by_type = Intervention::stats_by_type(@station)
+      current_navigation(:interventions_stats)
+    end
   end
   
   private
