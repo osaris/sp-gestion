@@ -26,7 +26,7 @@ class StationTest < ActiveSupport::TestCase
     setup do
       @station = Station.make(:last_grade_update_at => Date.today)
       # because there is no stub_chain for any_instance in mocha
-      Station.any_instance.stubs(:interventions).returns(mock(:count => 12))
+      Station.any_instance.stubs(:interventions).returns(mock(:empty? => false))
     end
 
     should "not confirm last_grade_update_at" do

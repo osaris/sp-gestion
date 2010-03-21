@@ -23,7 +23,7 @@ class Uniform < ActiveRecord::Base
   private
   
   def check_associations
-    unless self.convocations.size == 0
+    unless self.convocations.empty?
       self.errors.add_to_base("Impossible de supprimer cette tenue car elle est utilisée par une ou plusieurs convocations.") and return false
     end
   end

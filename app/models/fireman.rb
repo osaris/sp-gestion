@@ -47,7 +47,7 @@ class Fireman < ActiveRecord::Base
   
   def validate
     if self.status != STATUS['JSP'] 
-      if self.grades.reject{ |g| g.date.blank? }.length == 0
+      if self.grades.reject{ |g| g.date.blank? }.empty?
         self.errors.add(:grades, "Une personne ayant le statut actif ou vétéran doit avoir un grade.")
       elsif self.station.confirm_last_grade_update_at?(max_grade_date) and (self.validate_grade_update.to_i != 1)
         self.errors.add(:validate_grade_update)
@@ -62,10 +62,10 @@ class Fireman < ActiveRecord::Base
   private
   
   def check_associations
-    unless self.convocations.size == 0
+    unless self.convocations.empty?
       self.errors.add_to_base("Impossible de supprimer cette personne car elle possède des convocations.") and return false
     end
-    unless self.interventions.size == 0
+    unless self.interventions.empty?
       self.errors.add_to_base("Impossible de supprimer cette personne car elle a effectué des interventions.") and return false
     end
   end
