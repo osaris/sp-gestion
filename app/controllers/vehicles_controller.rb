@@ -38,9 +38,13 @@ class VehiclesController < BackController
   end
   
   def destroy
-    @vehicle.destroy
-    flash[:success] = "Le véhicule a été supprimé."
-    redirect_to(vehicles_path)    
+    if @vehicle.destroy
+      flash[:success] = "Le véhicule a été supprimé."
+      redirect_to(vehicles_path)
+    else
+      flash[:error] = @vehicle.errors.full_messages.join("")
+      redirect_to(@vehicle)
+    end
   end
   
   private

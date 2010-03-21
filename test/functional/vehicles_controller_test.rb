@@ -113,7 +113,7 @@ class VehiclesControllerTest < ActionController::TestCase
         should_set_the_flash(:success)
       end       
       
-      context "requesting DELETE :destroy" do
+      context "requesting DELETE :destroy without association" do
         setup do
           delete :destroy, :id => @vehicle.id
         end
@@ -122,6 +122,20 @@ class VehiclesControllerTest < ActionController::TestCase
         
         should_change("number of vehicles", :by => -1) { Vehicle.count }
         should_set_the_flash(:success)
+      end
+      
+      context "requesting DELETE :destroy with association" do
+        setup do
+          Vehicle.any_instance.stubs(:destroy).returns(false)
+          # because there is no stub_chain for any_instance in mocha
+          Vehicle.any_instance.stubs(:errors).returns(mock(:full_messages => ["erreur"]))
+          delete :destroy, :id => @vehicle.id          
+        end
+
+        should_redirect_to("vehicle") { vehicle_path(assigns(:vehicle)) }
+        
+        should_not_change("number of vehicle") { Vehicle.count }
+        should_set_the_flash(:error)
       end
     end
   end
