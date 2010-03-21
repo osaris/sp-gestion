@@ -63,6 +63,17 @@ class FiremanTest < ActiveSupport::TestCase
     end
   end
   
+  context "with an instance valid and an intervention" do
+    setup do
+      @fireman = make_fireman_with_grades(:station => Station.make, :interventions => [Intervention.make_unsaved])
+    end
+
+    should "not be destroyable" do
+      assert_equal(false, @fireman.destroy)
+    end
+  end
+  
+  
   # test validation for JSP
   context "with an instance JSP" do
     setup do

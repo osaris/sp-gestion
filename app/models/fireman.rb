@@ -65,6 +65,9 @@ class Fireman < ActiveRecord::Base
     unless self.convocations.size == 0
       self.errors.add_to_base("Impossible de supprimer cette personne car elle possède des convocations.") and return false
     end
+    unless self.interventions.size == 0
+      self.errors.add_to_base("Impossible de supprimer cette personne car elle a effectué des interventions.") and return false
+    end
   end
   
   def denormalize_grade
