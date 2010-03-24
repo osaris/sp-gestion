@@ -11,6 +11,7 @@ class ConvocationsController < BackController
   end
   
   def show
+    @presence = @convocation.presence
     respond_to do |format|
       format.html
       format.pdf do

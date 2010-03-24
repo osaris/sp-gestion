@@ -20,7 +20,9 @@
   <tbody>
     <%-@convocation.convocation_firemen.group_by(&:status).each do |group, convocation_firemen| -%>
       <tr>
-        <th colspan="4"><%= Fireman::STATUS.index(group) %></th>
+        <th colspan="4">
+          <%= Fireman::STATUS.index(group) %>&nbsp;-&nbsp;<%= display_presence(group) %>
+        </th>
       </tr>
       <%= render(convocation_firemen) %>
     <%- end -%>

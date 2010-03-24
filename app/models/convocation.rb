@@ -24,6 +24,18 @@ class Convocation < ActiveRecord::Base
     self.errors.add(:date, "Ne peut pas être dans le passé !") if !editable?
   end
   
+  def presence
+    result = ActiveRecord::Base.connection.select_all("SELECT 
+                                                       COUNT(*) AS total,
+                                                       SUM(IF(presence = 0,1,0)) AS missings, 
+                                                       SUM(IF(presence=1,1,0)) as presents,
+                                                       status
+                                                       FROM convocation_firemen 
+                                                       WHERE convocation_id = #{self.id}
+                                                       GROUP BY status")
+    result.each { |t| t.symbolize_keys! }
+  end
+  
   def editable?
     !(self.date.blank?) and (self.date > Time.now)
   end
