@@ -85,7 +85,7 @@ class InterventionTest < ActiveSupport::TestCase
 
     context "stats_by_type" do
       setup do
-        @stats_by_type = Intervention.stats_by_type(@station)
+        @stats_by_type = Intervention.stats_by_type(@station, Date.today.year)
       end
 
       should "return number of intervention grouped by type" do

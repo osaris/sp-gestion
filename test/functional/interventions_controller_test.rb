@@ -25,6 +25,7 @@ class InterventionsControllerTest < ActionController::TestCase
     context "requesting stats with interventions" do
       setup do
         Station.any_instance.stubs(:interventions).returns(mock(:empty? => false))
+        Intervention.stubs(:min_max_year).returns([Date.today.year, Date.today.year])
         get :stats
       end
 
@@ -33,6 +34,7 @@ class InterventionsControllerTest < ActionController::TestCase
       should_render_with_layout("back")
       
       should_assign_to(:by_type)
+      should_assign_to(:by_month)
     end
     
     context "requesting stats without intervention" do
