@@ -42,10 +42,24 @@ class Intervention < ActiveRecord::Base
     end
   end
   
-  def self.stats_by_type(station)
-    count(:all, :group => 'kind', :conditions => {:station_id => station.id})
+  def self.stats_by_type(station, year)
+    count(:all, :group => 'kind', :conditions => ["station_id = ? AND YEAR(start_date) = ?", station.id, year])
   end
   
+  def self.stats_by_month(station, year)
+    result = count(:all, :group => 'MONTH(start_date)', :conditions => ["station_id = ? AND YEAR(start_date) = ?", station.id, year])
+    result = Hash["1",0,"2",0,"3",0,"4",0,"5",0,"6",0,"7",0,"8",0,"9",0,"10",0,"11",0,"12",0].merge(result)
+    result.sort { |a,b| a[0].to_i <=> b[0].to_i }.map{ |m,d| d }
+  end
+  
+  def self.min_max_year(station)
+    result = ActiveRecord::Base.connection.select_one("SELECT MIN(YEAR(start_date)) AS min_year,
+                                                      MAX(YEAR(end_date)) AS max_year
+                                                      FROM interventions
+                                                      WHERE interventions.station_id = #{station.id}")
+    [result["min_year"], result["max_year"]]
+  end
+    
   def editable?
     (self.station.last_grade_update_at.blank?) or (self.start_date > self.station.last_grade_update_at)
   end

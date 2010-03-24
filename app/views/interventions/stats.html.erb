@@ -1,8 +1,31 @@
-<h1>Statistiques de l'année <%= Date.today.year.to_s %></h1>
+<h1>
+  Statistiques de l'année 
+  <%- form_tag(stats_interventions_path, :method => :get, 
+                                         :id => :form_stats_interventions, 
+                                         :style => "display:inline;") do -%>
+    <%= select_tag(:year, options_for_select((@min_year..@max_year), @current_year)) %>
+    <%= observe_field(:year, :function => "$('#form_stats_interventions').submit();") %>
+  <%- end -%>
+</h1>
 
-<p>
-<%= image_tag(Gchart.pie_3d(:title => 'Interventions par type', :size => '500x200',
-                            :data => Intervention::KIND.to_a.map { |kind, i| @by_type[i].to_i },
-                            :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
-                            :background => 'F5F5F5')) %>
-</p>
+<%- if @by_month.max == 0 -%>
+  <p class="message warning">
+    Pas assez de données pour cette période.
+  </p>
+<%- else -%>
+  <p style="text-align:center">
+  <%= image_tag(Gchart.pie_3d(:title => 'Interventions par type', :size => '500x200',
+                              :data => Intervention::KIND.to_a.map { |kind, i| @by_type[i].to_i },
+                              :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
+                              :background => 'F5F5F5')) %>
+  </p>
+  <p style="text-align:center;margin-top:50px;">
+    <%= image_tag(Gchart.bar( :title => 'Interventions par mois', :size => '500x200',
+                              :data => @by_month,
+                              :axis_with_labels => 'x,y',
+                              :axis_labels => [['Jan','Fév','Mar','Avr','Mai','Juin','Jui','Aou','Sep','Oct''Nov','Déc'], 
+                                               ['0', @by_month.max]],
+                              :bar_width_and_spacing => [25,15],
+                              :background => 'F5F5F5')) %>
+  </p>
+<%- end -%>
