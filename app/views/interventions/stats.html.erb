@@ -13,19 +13,19 @@
     Pas assez de données pour cette période.
   </p>
 <%- else -%>
-  <p style="text-align:center">
-  <%= image_tag(Gchart.pie_3d(:title => 'Interventions par type', :size => '500x200',
-                              :data => Intervention::KIND.to_a.map { |kind, i| @by_type[i].to_i },
-                              :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
-                              :background => 'F5F5F5')) %>
-  </p>
-  <p style="text-align:center;margin-top:50px;">
+  <p class="center">
+    <%= image_tag(Gchart.pie_3d(:title => 'Interventions par type', :size => '500x200',
+                                :data => Intervention::KIND.to_a.map { |kind, i| @by_type[i].to_i },
+                                :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
+                                :background => 'F5F5F5')) %>
+
     <%= image_tag(Gchart.bar( :title => 'Interventions par mois', :size => '500x200',
                               :data => @by_month,
                               :axis_with_labels => 'x,y',
                               :axis_labels => [['Jan','Fév','Mar','Avr','Mai','Juin','Jui','Aou','Sep','Oct''Nov','Déc'], 
                                                ['0', @by_month.max]],
                               :bar_width_and_spacing => [25,15],
-                              :background => 'F5F5F5')) %>
+                              :background => 'F5F5F5'),
+                  :style => "padding-top: 50px;") %>
   </p>
 <%- end -%>
