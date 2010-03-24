@@ -9,6 +9,12 @@
   </ul>
 </p>
 <%- end -%>
+<p>Statistiques :
+  <ul>
+    <li>Interventions : <%= @fireman.stats_interventions[:total] %></li>
+    <li>Convocations : <%= display_stats_convocation %></li>
+  </ul>
+</p>
 <%- unless @fireman.rem.blank? -%>
   <p>Remarque : <%= h(@fireman.rem) %></p>
 <%- end -%>

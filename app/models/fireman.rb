@@ -59,6 +59,21 @@ class Fireman < ActiveRecord::Base
     self.grades.collect { |g| g.date }.compact.max
   end
   
+  def stats_interventions
+    result = ActiveRecord::Base.connection.select_one("SELECT COUNT(*) AS total FROM fireman_interventions WHERE fireman_id = #{self.id}")
+    result.symbolize_keys!
+  end
+  
+  def stats_convocations
+    result = ActiveRecord::Base.connection.select_one("SELECT 
+                                                       COUNT(*) AS total,
+                                                       COALESCE(SUM(IF(presence = 0,1,0)),0) AS missing, 
+                                                       COALESCE(SUM(IF(presence=1,1,0)),0) as present
+                                                       FROM convocation_firemen 
+                                                       WHERE fireman_id = #{self.id}")
+    result.symbolize_keys!
+  end
+  
   private
   
   def check_associations
