@@ -7,14 +7,14 @@ class BetaCodeMailer < ApplicationMailer
 
     content_type("multipart/alternative")
     
-    part "text/plain" do |p|
-      p.body = render_message("welcome_instructions.plain", :code => beta_code.code)
-      p.transfer_encoding = "base64"
+    part "text/plain" do |plain_part|
+      plain_part.body = render_message("welcome_instructions.plain", :code => beta_code.code)
+      plain_part.transfer_encoding = "base64"
     end
 
-    part "text/html" do |p|
-      p.body = render_message("welcome_instructions.html", :code => beta_code.code)
-      p.transfer_encoding = "base64"
+    part "text/html" do |html_part|
+      html_part.body = render_message("welcome_instructions.html", :code => beta_code.code)
+      html_part.transfer_encoding = "base64"
     end    
   end
 
@@ -24,14 +24,14 @@ class BetaCodeMailer < ApplicationMailer
 
     content_type("multipart/alternative")
     
-    part "text/plain" do |p|
-      p.body = render_message("boost_activation.plain", :code => beta_code.code)
-      p.transfer_encoding = "base64"
+    part "text/plain" do |plain_part|
+      plain_part.body = render_message("boost_activation.plain", :code => beta_code.code)
+      plain_part.transfer_encoding = "base64"
     end
 
-    part "text/html" do |p|
-      p.body = render_message("boost_activation.html", :code => beta_code.code)
-      p.transfer_encoding = "base64"
+    part "text/html" do |html_part|
+      html_part.body = render_message("boost_activation.html", :code => beta_code.code)
+      html_part.transfer_encoding = "base64"
     end    
   end
 

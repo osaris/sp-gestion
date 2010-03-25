@@ -8,14 +8,14 @@ class UserMailer < ApplicationMailer
     confirmation_url = activate_url(user.perishable_token)
 
     content_type("multipart/alternative")
-    part "text/plain" do |p|
-      p.body = render_message("confirmation_instructions.plain", :confirmation_url => confirmation_url)
-      p.transfer_encoding = "base64"
+    part "text/plain" do |plain_part|
+      plain_part.body = render_message("confirmation_instructions.plain", :confirmation_url => confirmation_url)
+      plain_part.transfer_encoding = "base64"
     end
 
-    part "text/html" do |p|
-      p.body = render_message("confirmation_instructions.html", :confirmation_url => confirmation_url)
-      p.transfer_encoding = "base64"
+    part "text/html" do |html_part|
+      html_part.body = render_message("confirmation_instructions.html", :confirmation_url => confirmation_url)
+      html_part.transfer_encoding = "base64"
     end
   end
   
@@ -26,14 +26,14 @@ class UserMailer < ApplicationMailer
     password_reset_url = edit_password_reset_url(user.perishable_token)
     
     content_type("multipart/alternative")
-    part "text/plain" do |p|
-      p.body = render_message("password_reset_instructions.plain", :password_reset_url => password_reset_url)
-      p.transfer_encoding = "base64"
+    part "text/plain" do |plain_part|
+      plain_part.body = render_message("password_reset_instructions.plain", :password_reset_url => password_reset_url)
+      plain_part.transfer_encoding = "base64"
     end
 
-    part "text/html" do |p|
-      p.body = render_message("password_reset_instructions.html", :password_reset_url => password_reset_url)
-      p.transfer_encoding = "base64"
+    part "text/html" do |html_part|
+      html_part.body = render_message("password_reset_instructions.html", :password_reset_url => password_reset_url)
+      html_part.transfer_encoding = "base64"
     end
   end
   
@@ -44,14 +44,14 @@ class UserMailer < ApplicationMailer
     confirmation_url = activate_url(user.perishable_token)
 
     content_type("multipart/alternative")
-    part "text/plain" do |p|
-      p.body = render_message("boost_activation.plain", :confirmation_url => confirmation_url)
-      p.transfer_encoding = "base64"
+    part "text/plain" do |plain_part|
+      plain_part.body = render_message("boost_activation.plain", :confirmation_url => confirmation_url)
+      plain_part.transfer_encoding = "base64"
     end
 
-    part "text/html" do |p|
-      p.body = render_message("boost_activation.html", :confirmation_url => confirmation_url)
-      p.transfer_encoding = "base64"
+    part "text/html" do |html_part|
+      html_part.body = render_message("boost_activation.html", :confirmation_url => confirmation_url)
+      html_part.transfer_encoding = "base64"
     end
   end  
   
