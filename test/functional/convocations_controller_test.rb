@@ -11,7 +11,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       @fireman = make_fireman_with_grades(:station => @station)      
     end
     
-    context "requesting index" do
+    context "requesting GET :index" do
       setup do
         get :index
       end
@@ -23,7 +23,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       should_assign_to(:convocations)
     end
     
-    context "requesting a non existing convocation" do
+    context "requesting GET :show for a non existing convocation" do
       setup do
         get :show, :id => 2458437589
       end
@@ -44,7 +44,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       should_render_with_layout("back")
     end
     
-    context "requesting POST with bad data" do
+    context "requesting POST :create with bad data" do
       setup do
         post :create, :convocation => {:title => '', :date => '', :place => '', :uniform_id => '', :fireman_ids => []}
       end
@@ -56,7 +56,7 @@ class ConvocationsControllerTest < ActionController::TestCase
       should_not_change("number of convocations") { Convocation.count }
     end
     
-    context "requesting POST with good data" do
+    context "requesting POST :create with good data" do
       setup do
         post :create, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                        :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
@@ -86,7 +86,7 @@ class ConvocationsControllerTest < ActionController::TestCase
         should_set_the_flash(:error)
       end
       
-      context "requesting PUT with good data" do
+      context "requesting PUT :update with good data" do
         setup do
           put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
@@ -104,7 +104,7 @@ class ConvocationsControllerTest < ActionController::TestCase
         @convocation = make_convocation_with_firemen(:station => @station)
       end
       
-      context "requesting GET on existing convocation" do
+      context "requesting GET :show on existing convocation" do
         setup do
           get :show, :id => @convocation.id
         end
@@ -116,7 +116,7 @@ class ConvocationsControllerTest < ActionController::TestCase
         should_assign_to(:convocation)
       end
       
-      context "requesting GET on existing convocation with PDF format" do
+      context "requesting GET :show on existing convocation with PDF format" do
         setup do
           @request.env["SERVER_PROTOCOL"] = "http"
           get :show, :id => @convocation.id, :format => 'pdf'
@@ -139,7 +139,7 @@ class ConvocationsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end
       
-      context "requesting PUT with bad data" do
+      context "requesting PUT :update with bad data" do
         setup do
           put :update, :id => @convocation.id, :convocation => {:title => "", :date => I18n.localize(2.weeks.from_now), :place => "",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
@@ -150,7 +150,7 @@ class ConvocationsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end
       
-      context "requesting PUT with good data" do
+      context "requesting PUT :update with good data" do
         setup do
           put :update, :id => @convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}

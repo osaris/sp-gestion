@@ -9,7 +9,7 @@ class CheckListsControllerTest < ActionController::TestCase
       login
     end
 
-    context "requesting index" do
+    context "requesting GET :index" do
       setup do
         get :index
       end
@@ -21,7 +21,7 @@ class CheckListsControllerTest < ActionController::TestCase
       should_assign_to(:check_lists)
     end
 
-    context "requesting a non existing check-list" do
+    context "requesting GET :show for a non existing check-list" do
       setup do
         get :show, :id => rand(10)
       end
@@ -42,7 +42,7 @@ class CheckListsControllerTest < ActionController::TestCase
       should_render_with_layout("back")
     end
 
-    context "requesting POST with bad data" do
+    context "requesting POST :create with bad data" do
       setup do
         post :create, :check_list => {:title => ''}
       end
@@ -54,7 +54,7 @@ class CheckListsControllerTest < ActionController::TestCase
       should_not_change("number of check_lists") { CheckList.count }
     end
 
-    context "requesting POST with good data" do
+    context "requesting POST :create with good data" do
       setup do
         post :create, :check_list => CheckList.plan
       end
@@ -72,7 +72,7 @@ class CheckListsControllerTest < ActionController::TestCase
         @check_list = @station.check_lists.make
       end
 
-      context "requesting GET on existing check_list" do
+      context "requesting GET :show on existing check_list" do
         setup do
           get :show, :id => @check_list.id
         end
@@ -82,7 +82,7 @@ class CheckListsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end
 
-      context "requesting GET on existing check_list with PDF format" do
+      context "requesting GET :show on existing check_list with PDF format" do
         setup do
           @request.env["SERVER_PROTOCOL"] = "http"
           get :show, :id => @check_list.id, :format => 'pdf'
@@ -105,7 +105,7 @@ class CheckListsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end
 
-      context "requesting PUT with bad data" do
+      context "requesting PUT :update with bad data" do
         setup do
           put :update, :id => @check_list.id, :check_list => {:title => ''}
         end
@@ -115,7 +115,7 @@ class CheckListsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end
 
-      context "requesting PUT with good data" do
+      context "requesting PUT :update with good data" do
         setup do
           put :update, :id => @check_list.id, :check_list => CheckList.plan
         end

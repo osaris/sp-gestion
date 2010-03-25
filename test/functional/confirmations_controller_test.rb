@@ -13,7 +13,7 @@ class ConfirmationsControllerTest < ActionController::TestCase
         @user = @station.users.make(:confirmed)
       end
 
-      context "which GET :create with good confirmation code" do
+      context "requesting GET :create with good confirmation code" do
         setup do
           get :create, :id => @user.perishable_token
         end
@@ -29,7 +29,7 @@ class ConfirmationsControllerTest < ActionController::TestCase
         @user = @station.users.make(:beta)
       end
       
-      context "which GET :create with good confirmation code" do
+      context "requesting GET :create with good confirmation code" do
         setup do
           get :create, :id => @user.perishable_token
         end

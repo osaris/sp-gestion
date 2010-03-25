@@ -9,7 +9,7 @@ class FiremenControllerTest < ActionController::TestCase
       login
     end
     
-    context "requesting index" do
+    context "requesting GET :index" do
       setup do
         get :index
       end
@@ -21,7 +21,7 @@ class FiremenControllerTest < ActionController::TestCase
       should_assign_to(:firemen)
     end
     
-    context "requesting a non existing fireman" do
+    context "requesting GET :show for a non existing fireman" do
       setup do
         get :show, :id => 2458437589
       end
@@ -42,7 +42,7 @@ class FiremenControllerTest < ActionController::TestCase
       should_render_with_layout("back")
     end
     
-    context "requesting POST with bad data" do
+    context "requesting POST :create with bad data" do
       setup do
         post :create, :fireman => {:firstname => '', :lastname => ''}
       end
@@ -54,9 +54,9 @@ class FiremenControllerTest < ActionController::TestCase
       should_not_change("number of firemen") { Fireman.count }
     end   
     
-    context "requesting POST with good data" do
+    context "requesting POST :create with good data" do
       setup do
-        post :create, :fireman => {:firstname => 'test', :lastname => 'test', :status => Fireman::STATUS['JSP']}
+        post :create, :fireman => Fireman.plan
       end
     
       should_respond_with(:redirect)
@@ -72,7 +72,7 @@ class FiremenControllerTest < ActionController::TestCase
         @fireman = make_fireman_with_grades(:station => @station)
       end
   
-      context "requesting GET on existing fireman" do
+      context "requesting GET :show on existing fireman" do
         setup do
           get :show, :id => @fireman.id
         end
@@ -92,7 +92,7 @@ class FiremenControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end  
       
-      context "requesting PUT with bad data" do
+      context "requesting PUT :update with bad data" do
         setup do
           put :update, :id => @fireman.id, :fireman => {:firstname => '', :lastname => ''}
         end
@@ -102,7 +102,7 @@ class FiremenControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end  
       
-      context "requesting PUT with good data" do
+      context "requesting PUT :update with good data" do
         setup do
           put :update, :id => @fireman.id, :fireman => Fireman.plan
         end

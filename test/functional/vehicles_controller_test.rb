@@ -9,7 +9,7 @@ class VehiclesControllerTest < ActionController::TestCase
       login
     end
     
-    context "requesting index" do
+    context "requesting GET :index" do
       setup do
         get :index
       end
@@ -21,7 +21,7 @@ class VehiclesControllerTest < ActionController::TestCase
       should_assign_to(:vehicles)
     end    
     
-    context "requesting a non existing vehicle" do
+    context "requesting GET :show for a non existing vehicle" do
       setup do
         get :show, :id => rand(10)
       end
@@ -42,7 +42,7 @@ class VehiclesControllerTest < ActionController::TestCase
       should_render_with_layout("back")
     end
     
-    context "requesting POST with bad data" do
+    context "requesting POST :create with bad data" do
       setup do
         post :create, :vehicle => {:name => ''}
       end
@@ -54,7 +54,7 @@ class VehiclesControllerTest < ActionController::TestCase
       should_not_change("number of vehicles") { Vehicle.count }
     end   
     
-    context "requesting POST with good data" do
+    context "requesting POST :create with good data" do
       setup do
         post :create, :vehicle => Vehicle.plan
       end
@@ -72,7 +72,7 @@ class VehiclesControllerTest < ActionController::TestCase
         @vehicle = @station.vehicles.make
       end
   
-      context "requesting GET on existing vehicle" do
+      context "requesting GET :show on existing vehicle" do
         setup do
           get :show, :id => @vehicle.id
         end
@@ -92,7 +92,7 @@ class VehiclesControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end  
       
-      context "requesting PUT with bad data" do
+      context "requesting PUT :update with bad data" do
         setup do
           put :update, :id => @vehicle.id, :vehicle => {:name => ''}
         end
@@ -102,7 +102,7 @@ class VehiclesControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end  
       
-      context "requesting PUT with good data" do
+      context "requesting PUT :update with good data" do
         setup do
           put :update, :id => @vehicle.id, :vehicle => Vehicle.plan
         end

@@ -9,7 +9,7 @@ class MessagesControllerTest < ActionController::TestCase
       login
     end
     
-    context "requesting index" do
+    context "requesting GET :index" do
       setup do
         get :index
       end
@@ -21,7 +21,7 @@ class MessagesControllerTest < ActionController::TestCase
       should_assign_to(:messages)
     end
     
-    context "requesting a non existing message" do
+    context "requesting GET :show for a non existing message" do
       setup do
         get :show, :id => 2458437589
       end
@@ -37,7 +37,7 @@ class MessagesControllerTest < ActionController::TestCase
         @message = @user.messages.make
       end
       
-      context "requesting GET on existing message" do
+      context "requesting GET :show on existing message" do
         setup do
           get :show, :id => @message.id
         end

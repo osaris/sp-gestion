@@ -10,7 +10,7 @@ class ItemsControllerTest < ActionController::TestCase
       @check_list = @station.check_lists.make
     end
 
-    context "requesting list of expired items" do
+    context "requesting GET :expirings" do
       setup do
         get :expirings
       end
@@ -23,7 +23,7 @@ class ItemsControllerTest < ActionController::TestCase
       should_set_session(:back_path) { expirings_items_path }
     end
 
-    context "requesting list of expired items with PDF format" do
+    context "requesting GET :expirings with PDF format" do
       setup do
         @request.env["SERVER_PROTOCOL"] = "http"
         get :expirings, :format => 'pdf'
@@ -36,7 +36,7 @@ class ItemsControllerTest < ActionController::TestCase
       end
     end
 
-    context "requesting an item on a non existing check_list" do
+    context "requesting GET :edit for a non existing check_list" do
       setup do
         get :edit, :check_list_id => rand(10), :id => rand(10)
       end
@@ -47,7 +47,7 @@ class ItemsControllerTest < ActionController::TestCase
       should_set_the_flash(:error)
     end
 
-    context "requesting a non existing item on an existing check_list" do
+    context "requesting GET :edit for a non existing item on an existing check_list" do
       setup do
         get :edit, :check_list_id => @check_list.id, :id => rand(10)
       end
@@ -68,7 +68,7 @@ class ItemsControllerTest < ActionController::TestCase
       should_render_with_layout("back")
     end
 
-    context "requesting POST with bad data" do
+    context "requesting POST :create with bad data" do
       setup do
         post :create, :check_list_id => @check_list.id, :item => {:title => ''}
       end
@@ -80,7 +80,7 @@ class ItemsControllerTest < ActionController::TestCase
       should_not_change("number of items") { Item.count }
     end
 
-    context "requesting POST with good data" do
+    context "requesting POST :create with good data" do
       setup do
         post :create, :check_list_id => @check_list.id, :item => {:title => 'Test', :quantity => '1'}
       end
@@ -108,7 +108,7 @@ class ItemsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end
 
-      context "requesting PUT with bad data" do
+      context "requesting PUT :update with bad data" do
         setup do
           put :update, :check_list_id => @check_list.id, :id => @item.id, :item => {:title => '', :quantity => '1'}
         end
@@ -118,7 +118,7 @@ class ItemsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end
 
-      context "requesting PUT with good data" do
+      context "requesting PUT :update with good data" do
         setup do
           put :update, :check_list_id => @check_list.id, :id => @item.id, :item => {:title => 'Test', :quantity => '1'}
         end
@@ -129,7 +129,7 @@ class ItemsControllerTest < ActionController::TestCase
         should_set_the_flash(:success)
       end
 
-      context "requesting PUT with good data and back_path set to expiring" do
+      context "requesting PUT :update with good data and back_path set to expiring" do
         setup do
           session[:back_path] = expirings_items_path
           put :update, :check_list_id => @check_list.id, :id => @item.id, :item => {:title => 'Test', :quantity => '1'}

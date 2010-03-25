@@ -8,7 +8,7 @@ class UniformsControllerTest < ActionController::TestCase
       login
     end
     
-    context "requesting index" do
+    context "requesting GET :index" do
       setup do
         get :index
       end
@@ -20,7 +20,7 @@ class UniformsControllerTest < ActionController::TestCase
       should_assign_to(:uniforms)
     end    
     
-    context "requesting a non existing uniform" do
+    context "requesting GET :show for a non existing uniform" do
       setup do
         get :show, :id => rand(10)
       end
@@ -41,7 +41,7 @@ class UniformsControllerTest < ActionController::TestCase
       should_render_with_layout("back")
     end
     
-    context "requesting POST with bad data" do
+    context "requesting POST :create with bad data" do
       setup do
         post :create, :uniform => {:title => '', :code => '2b', :description => 'test'}
       end
@@ -53,7 +53,7 @@ class UniformsControllerTest < ActionController::TestCase
       should_not_change("number of uniforms") { Uniform.count }
     end   
     
-    context "requesting POST with good data" do
+    context "requesting POST :create with good data" do
       setup do
         post :create, :uniform => Uniform.plan
       end
@@ -84,7 +84,7 @@ class UniformsControllerTest < ActionController::TestCase
         @uniform = @station.uniforms.make
       end
   
-      context "requesting GET on existing uniform" do
+      context "requesting GET :show on existing uniform" do
         setup do
           get :show, :id => @uniform.id
         end
@@ -104,7 +104,7 @@ class UniformsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end  
       
-      context "requesting PUT with bad data" do
+      context "requesting PUT :update with bad data" do
         setup do
           put :update, :id => @uniform.id, :uniform => {:title => '', :code => '2b', :description => 'test'}
         end
@@ -114,7 +114,7 @@ class UniformsControllerTest < ActionController::TestCase
         should_render_with_layout("back")
       end  
       
-      context "requesting PUT with good data" do
+      context "requesting PUT :update with good data" do
         setup do
           put :update, :id => @uniform.id, :uniform => Uniform.plan
         end
