@@ -8,7 +8,9 @@ begin
     config.flay     = { :dirs_to_flay => ['app', 'lib'],
                         :minimum_score => 100  }
     config.flog     = { :dirs_to_flog => ['app', 'lib']  }
-    config.reek     = { :dirs_to_reek => ['app', 'lib']  }
+    # FIXME reek reports lots of false positives for Rails so we restrict it to app/models
+    # http://wiki.github.com/kevinrutherford/reek/working-with-rails
+    config.reek     = { :dirs_to_reek => ['app/models', 'lib']  }
     config.roodi    = { :dirs_to_roodi => ['app', 'lib'] }
     config.saikuro  = { :output_directory => 'scratch_directory/saikuro', 
                         :input_directory => ['app', 'lib'],
