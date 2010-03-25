@@ -2,8 +2,8 @@
 class Admin::UsersController < Admin::MasterController
 
   def boost_activation
-    u = User.find(params[:id])
-    if u.boost_activation
+    user = User.find(params[:id])
+    if user.boost_activation
       flash[:success] = "Relance envoyée !"
       redirect_to(:action => :index)
     else

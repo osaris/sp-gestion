@@ -1,3 +1,4 @@
+# User relative notifications
 class UserMailer < ApplicationMailer
   
   def confirmation_instructions(user)

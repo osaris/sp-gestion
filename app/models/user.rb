@@ -1,3 +1,4 @@
+# User used for auth
 class User < ActiveRecord::Base
 
   belongs_to :station
@@ -8,14 +9,14 @@ class User < ActiveRecord::Base
   
   after_create :assign_beta_code
   
-  acts_as_authentic do |c| 
-    c.validations_scope = :station_id
+  acts_as_authentic do |config| 
+    config.validations_scope = :station_id
     # only to be able to set the message
-    c.validates_length_of_email_field_options(:within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.")
-    c.validates_length_of_password_field_options(:minimum => 6, :message => "Le mot de passe doit avoir au moins 6 caractères.")
+    config.validates_length_of_email_field_options(:within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.")
+    config.validates_length_of_password_field_options(:minimum => 6, :message => "Le mot de passe doit avoir au moins 6 caractères.")
     # because we reset password on the same page as profile
-    c.ignore_blank_passwords = true
-    c.validates_confirmation_of_password_field_options(:message => "Le mot de passe ne correspond pas à la confirmation.")
+    config.ignore_blank_passwords = true
+    config.validates_confirmation_of_password_field_options(:message => "Le mot de passe ne correspond pas à la confirmation.")
   end
   
   def validate_on_create

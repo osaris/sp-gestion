@@ -56,7 +56,7 @@ class FiremenControllerTest < ActionController::TestCase
     
     context "requesting POST :create with good data" do
       setup do
-        post :create, :fireman => Fireman.plan
+        post :create, :fireman => Fireman.plan(:status => Fireman::STATUS['JSP'])
       end
     
       should_respond_with(:redirect)
