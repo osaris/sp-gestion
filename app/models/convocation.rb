@@ -1,3 +1,4 @@
+# The boring part
 class Convocation < ActiveRecord::Base
   
   belongs_to :station

@@ -1,3 +1,4 @@
+# Newsletter relative notifications
 class NewsletterMailer < ApplicationMailer
   
   def activation_instructions(newsletter)

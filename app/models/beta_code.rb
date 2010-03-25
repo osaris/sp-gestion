@@ -1,3 +1,4 @@
+# Beta code linked to user for beta-test
 class BetaCode < ActiveRecord::Base
   
   belongs_to :user

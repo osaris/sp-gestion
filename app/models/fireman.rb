@@ -1,3 +1,4 @@
+# The guy
 class Fireman < ActiveRecord::Base
   
   belongs_to :station

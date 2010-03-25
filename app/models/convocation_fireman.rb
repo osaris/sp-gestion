@@ -1,3 +1,4 @@
+# Relation table for fireman presence at convocation
 class ConvocationFireman < ActiveRecord::Base
   
   belongs_to :convocation

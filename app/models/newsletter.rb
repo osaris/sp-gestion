@@ -1,3 +1,4 @@
+# Store email of user requesting beta access
 class Newsletter < ActiveRecord::Base
   
   attr_accessible :email

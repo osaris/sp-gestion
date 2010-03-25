@@ -1,3 +1,4 @@
+# BetaCode relative notifications
 class BetaCodeMailer < ApplicationMailer
   
   def welcome_instructions(beta_code)

@@ -1,3 +1,4 @@
+# Check list of items
 class CheckList < ActiveRecord::Base
 
   belongs_to :station

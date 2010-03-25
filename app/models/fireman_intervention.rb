@@ -1,3 +1,4 @@
+# Relation table for fireman present in intervention
 class FiremanIntervention < ActiveRecord::Base
   
   belongs_to :fireman

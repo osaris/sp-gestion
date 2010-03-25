@@ -1,3 +1,4 @@
+# Used in interventions
 class Vehicle < ActiveRecord::Base
   
   belongs_to :station

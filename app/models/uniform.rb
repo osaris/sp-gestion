@@ -1,3 +1,4 @@
+# Very important for convocation
 class Uniform < ActiveRecord::Base
   
   belongs_to :station

@@ -1,3 +1,4 @@
+# All items belongs to the station
 class Station < ActiveRecord::Base
   
   authenticates_many :user_sessions
