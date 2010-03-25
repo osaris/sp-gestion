@@ -36,8 +36,8 @@ class Fireman < ActiveRecord::Base
   end
   
   def current_grade
-    self.grades.each do |g|
-      return g if (!g.date.blank?) and (g.date <= Date.today)
+    self.grades.each do |grade|
+      return grade if (!grade.date.blank?) and (grade.date <= Date.today)
     end
     return nil
   end
@@ -48,7 +48,7 @@ class Fireman < ActiveRecord::Base
   
   def validate
     if self.status != STATUS['JSP'] 
-      if self.grades.reject{ |g| g.date.blank? }.empty?
+      if self.grades.reject{ |grade| grade.date.blank? }.empty?
         self.errors.add(:grades, "Une personne ayant le statut actif ou vétéran doit avoir un grade.")
       elsif self.station.confirm_last_grade_update_at?(max_grade_date) and (self.validate_grade_update.to_i != 1)
         self.errors.add(:validate_grade_update)
@@ -57,7 +57,7 @@ class Fireman < ActiveRecord::Base
   end
   
   def max_grade_date
-    self.grades.collect { |g| g.date }.compact.max
+    self.grades.collect { |grade| grade.date }.compact.max
   end
   
   def stats_interventions

@@ -50,7 +50,7 @@ class Intervention < ActiveRecord::Base
   def self.stats_by_month(station, year)
     result = count(:all, :group => 'MONTH(start_date)', :conditions => ["station_id = ? AND YEAR(start_date) = ?", station.id, year])
     result = Hash["1",0,"2",0,"3",0,"4",0,"5",0,"6",0,"7",0,"8",0,"9",0,"10",0,"11",0,"12",0].merge(result)
-    result.sort { |result1, result2| result1[0].to_i <=> result2[0].to_i }.map{ |month, number| number }
+    result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |month, number| number }
   end
   
   def self.min_max_year(station)

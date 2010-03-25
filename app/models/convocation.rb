@@ -34,7 +34,7 @@ class Convocation < ActiveRecord::Base
                                                        FROM convocation_firemen 
                                                        WHERE convocation_id = #{self.id}
                                                        GROUP BY status")
-    result.each { |t| t.symbolize_keys! }
+    result.each { |line| line.symbolize_keys! }
   end
   
   def editable?

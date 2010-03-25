@@ -23,10 +23,10 @@ class Station < ActiveRecord::Base
 
   after_create :create_defaults_uniforms
   
-  def self.check(q)
+  def self.check(query)
     station = nil
-    unless q.blank?
-      search = "%#{q}%"
+    unless query.blank?
+      search = "%#{query}%"
       station = self.find(:first, :conditions => ["(url LIKE ?) OR (name LIKE ?)", search, search])
     end
     station
