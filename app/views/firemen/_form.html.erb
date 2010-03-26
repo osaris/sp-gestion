@@ -40,6 +40,13 @@
     </span>
   </p>
   <p>
+    <%= f.label(:checkup, "Visite médicale", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:checkup, :value => l!(f.object.checkup), :class => "span-1 first", :class => "date") %>
+      <%= error_message_on(:fireman, :checkup, :css_class => "span-2 first") %>
+    </span>
+  </p>  
+  <p>
     <span class="span-1 first">Fonction(s)</span>
     <span class="span-3">
       <%= f.label(:chief, "Chef de centre") %><%= f.check_box(:chief) %>

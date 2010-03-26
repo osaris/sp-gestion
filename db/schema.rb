@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100326171805) do
+ActiveRecord::Schema.define(:version => 20100326213010) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20100326171805) do
     t.boolean  "chief"
     t.boolean  "chief_assistant"
     t.boolean  "quartermaster"
+    t.date     "checkup"
   end
 
   create_table "grades", :force => true do |t|
