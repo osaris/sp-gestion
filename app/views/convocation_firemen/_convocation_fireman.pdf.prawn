@@ -12,3 +12,7 @@ _pdf.move_down(20)
 _pdf.text("Lieu : " + h(convocation.place))
 _pdf.move_down(20)
 _pdf.text("Date et heure : " + I18n.l(convocation.date, :format => :default))
+unless convocation.rem.blank?
+  _pdf.move_down(20)
+  _pdf.text("Remarque : " + h(convocation.rem))
+end
