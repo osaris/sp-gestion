@@ -43,6 +43,7 @@ Rails::Initializer.run do |config|
   config.action_controller.session = {:key => '_spgestion_session',
                                       :secret => "41da19045c1289f045a2797ace137c01908f49d5522ade1da1549022bd40202d663891fbca9dfc4d0f7a092e36ff5b325d38fe6cb22055d843802f37228c1868"}
   
+  config.gem "acts-as-taggable-on", :version => "1.1.9"
   config.gem "authlogic",           :version => "2.1.3"
   config.gem "google_analytics",    :version => "1.1.5", :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
   config.gem "googlecharts",        :version => "1.5.1", :source => "http://gems.github.com"

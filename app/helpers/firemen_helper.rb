@@ -20,16 +20,7 @@ module FiremenHelper
   def class_for_grade(grade)
     grade.date.blank? ? "" : "set"
   end
-
-  def display_role(fireman)
-    roles = []
-    roles << "Chef de centre" if fireman.chief
-    roles << "Adjoint" if fireman.chief_assistant
-    roles << "Fourrier" if fireman.quartermaster
-
-    roles.size > 0 ? roles.join(" / ") : "-"
-  end
-  
+    
   def display_stats_convocation
     presence = @fireman.stats_convocations
     if presence[:total].to_i > 0

@@ -33,6 +33,13 @@
     </span>    
   </p>
   <p>
+    <%= f.label(:tag_list, "Etiquette(s)", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:tag_list, :class => "span-2 first") %>
+      <%= error_message_on(:fireman, :tag_list, :css_class => "span-2 first") %>
+    </span>
+  </p>  
+  <p>
     <%= f.label(:birthday, "Date de naissance", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.text_field(:birthday, :value => l!(f.object.birthday), :class => "span-1 first", :class => "date") %>
@@ -44,14 +51,6 @@
     <span class="span-3">
       <%= f.text_field(:checkup, :value => l!(f.object.checkup), :class => "span-1 first", :class => "date") %>
       <%= error_message_on(:fireman, :checkup, :css_class => "span-2 first") %>
-    </span>
-  </p>  
-  <p>
-    <span class="span-1 first">Fonction(s)</span>
-    <span class="span-3">
-      <%= f.label(:chief, "Chef de centre") %><%= f.check_box(:chief) %>
-      <%= f.label(:chief_assistant, "Adjoint") %><%= f.check_box(:chief_assistant) %>
-      <%= f.label(:quartermaster, "Fourrier") %><%= f.check_box(:quartermaster) %>
     </span>
   </p>
   <p>
@@ -75,11 +74,22 @@
   </div>
 <%- end -%>
 <%- content_for(:header) do -%>
-  <%= stylesheet_link_tag("back/jquery-ui-1.7.2.custom.css")%>
-  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js") %>
+  <%= stylesheet_link_tag("back/jquery-ui-1.7.2.custom.css", "back/TextboxList.css", "back/TextboxList.Autocomplete.css")%>
+  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js", "GrowingInput.js", "TextboxList.js", "TextboxList.Autocomplete.js") %>
 <%- end -%>
 <%= javascript_tag("
       $(function() {
+        var t = new $.TextboxList('#fireman_tag_list', {
+                        unique: true, 
+                        plugins: {
+                          autocomplete: {
+                            queryRemote: false,
+                            placeholder: 'Saisir une nouvelle étiquette ou quelques lettres pour en choisir une existante...'
+                          }
+                        }
+                      });
+        t.plugins['autocomplete'].setValues(#{@tags});
+        
         $.datepicker.setDefaults($.datepicker.regional['fr']);
         $('.date').datepicker({ showMonthAfterYear: false,
                                 showButtonPanel: true,

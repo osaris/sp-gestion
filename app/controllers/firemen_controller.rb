@@ -4,7 +4,8 @@ class FiremenController < BackController
   
   helper(:interventions)
   
-  before_filter :load_fireman, :except => [:index, :new, :create]  
+  before_filter :load_fireman, :except => [:index, :new, :create, :tag]  
+  before_filter :load_tags, :only => [:new, :create, :edit, :update]
   
   def index
     @firemen = @station.firemen.paginate(:page => params[:page], :order => 'firemen.grade DESC, firemen.lastname ASC')
@@ -56,6 +57,10 @@ class FiremenController < BackController
    rescue ActiveRecord::RecordNotFound
     flash[:error] = "La personne n'existe pas."
     redirect_to(firemen_path)
+  end
+  
+  def load_tags
+    @tags = Fireman.distinct_tags(@station).to_json
   end
   
 end

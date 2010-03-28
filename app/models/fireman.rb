@@ -20,19 +20,18 @@ class Fireman < ActiveRecord::Base
   before_save :denormalize_grade
   before_destroy :check_associations
   
+  acts_as_taggable_on :tags
+  
   STATUS = {
     'JSP' => 1,
     'Vétéran' => 2,
     'Actif' => 3
   }.freeze
-
+  
   def initialize(params = nil)
     super
     self.status ||= 3
     self.grades = Grade.new_defaults() if self.grades.length != Grade::GRADE.length
-    self.chief ||= false
-    self.chief_assistant ||= false
-    self.quartermaster ||= false
   end
   
   def current_grade
@@ -66,13 +65,26 @@ class Fireman < ActiveRecord::Base
   end
   
   def stats_convocations
-    result = ActiveRecord::Base.connection.select_one("SELECT 
-                                                       COUNT(*) AS total,
-                                                       COALESCE(SUM(IF(presence = 0,1,0)),0) AS missing, 
-                                                       COALESCE(SUM(IF(presence=1,1,0)),0) as present
-                                                       FROM convocation_firemen 
-                                                       WHERE fireman_id = #{self.id}")
+    result = ActiveRecord::Base.connection.select_one("
+               SELECT 
+               COUNT(*) AS total,
+               COALESCE(SUM(IF(presence = 0,1,0)),0) AS missing, 
+               COALESCE(SUM(IF(presence=1,1,0)),0) as present
+               FROM convocation_firemen 
+               WHERE fireman_id = #{self.id}")
     result.symbolize_keys!
+  end
+  
+  def self.distinct_tags(station)
+    result = ActiveRecord::Base.connection.select_all("
+              SELECT tags.name
+              FROM tags
+              INNER JOIN taggings ON (taggings.tag_id = tags.id)
+              INNER JOIN firemen ON (firemen.id = taggings.taggable_id)
+              WHERE firemen.station_id = #{station.id}
+              ORDER BY tags.name")
+    result.each { |line| line.symbolize_keys! }
+    result.map! { |line| [line[:name], line[:name], line[:name]] }
   end
   
   private

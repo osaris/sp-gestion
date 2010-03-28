@@ -41,24 +41,4 @@ class FiremenHelperTest < ActionView::TestCase
       assert_equal("", @class_for_grade)
     end
   end
-  
-  context "display_role for fireman with no role" do
-    setup do
-      @display_role = display_role(Fireman.new)
-    end
-    
-    should "render a -" do
-      assert_equal("-", @display_role)
-    end
-  end
-
-  context "display_role for fireman with roles" do
-    setup do
-      @display_role = display_role(Fireman.new(:chief => true, :quartermaster => true))
-    end
-
-    should "render roles slash separated" do
-      assert_match("/", @display_role)
-    end
-  end
 end
