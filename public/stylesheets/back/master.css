@@ -159,8 +159,8 @@ body.login, body.login #content { width:304px; }
 }
 
 /* FIREMAN FORM */
-.new_fireman .textboxlist, .edit_fireman .textboxlist { width: 294px; }
-#content .edit_fireman ul, #content .new_fireman ul {padding: 0; margin: 0;}
+.new_fireman .textboxlist, .edit_fireman .textboxlist { width: 294px; background-color: white; }
+#content .edit_fireman ul.textboxlist-bits, #content .new_fireman ul.textboxlist-bits {padding: 0; margin: 0;}
 
 /* GRADE FORM */
 #grades .set { background-color: #a8aaaa;}
