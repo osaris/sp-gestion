@@ -12,10 +12,11 @@
 </head>
 <body>
   <noscript>
-    <p id="js_disabled">
+    <p id="browser_capabilities_warning">
       Pour profiter pleinement de SP-Gestion, vous devez activer les scripts Javascript ! <%= mail_to("contact@sp-gestion.fr", "Contactez-nous pour obtenir de l'aide concernant ce message.") %>
     </p>
   </noscript>
+  <!--[if lte IE 6]><%= render(:partial => "/layouts/ie6_warning") %><![endif]-->
   <p id="header">
     <%= link_to(h(@station.name), root_back_path)%>
   </p><!-- #header -->

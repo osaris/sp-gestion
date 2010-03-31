@@ -23,7 +23,7 @@ a:hover { text-decoration:none; }
 img { vertical-align:text-bottom; }
 
 /* HEADER */
-#js_disabled { text-align:center;padding:1em 0;margin:1em 2em;border:#f00 solid 5px;background:#fee;color:#000; }
+.browser_capabilities_warning { text-align:center;padding:1em 0;margin:1em 2em;border:#f00 solid 5px;background:#fee;color:#000; }
 #header { float:left; margin:0 0 20px; width:304px; }
 #header a { float:left; width:304px; text-decoration:none; font-size: 1.4em;}
 

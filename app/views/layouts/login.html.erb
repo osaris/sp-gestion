@@ -10,6 +10,7 @@
   <%= javascript_include_tag(:defaults) %>
 </head>
 <body class="login">
+  <!--[if lte IE 6]><%= render(:partial => "/layouts/ie6_warning") %><![endif]-->
   <p id="header">
     <%= link_to(h(@station.name), root_back_path)%>
   </p><!-- #header -->
