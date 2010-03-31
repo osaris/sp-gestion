@@ -23,7 +23,8 @@ a:hover { text-decoration:none; }
 img { vertical-align:text-bottom; }
 
 /* HEADER */
-.browser_capabilities_warning { text-align:center;padding:1em 0;margin:1em 2em;border:#f00 solid 5px;background:#fee;color:#000; width: 100% !important;}
+.browser_capabilities_warning { text-align:center; background:#db2e2e; width: 100% !important; border:1px solid #333; color: #fff; padding:15px; font-size:14px; margin-bottom:10px; }
+.browser_capabilities_warning a {	color:#fff;	text-decoration:underline; }
 #header { float:left; margin:0 0 20px; width:304px; }
 #header a { float:left; width:304px; text-decoration:none; font-size: 1.4em;}
 
@@ -148,7 +149,7 @@ img { vertical-align:text-bottom; }
 #nav .subnav .active a, #content .message, #content .tabs .head .active a, #content .box, #content button, #content ul.pagination, #footer { -moz-border-radius:6px; -webkit-border-radius:6px; }
 
 /* LOGIN BOX */
-body.login, body.login #content { width:304px; }
+.login, .login #content { width:304px; margin-left: auto; margin-right: auto;}
 #loginbox .submit { float:right; }
 #loginbox .submit button { margin:0; }
 

@@ -9,8 +9,9 @@
   <!--[if IE 7]><%= stylesheet_link_tag("back/ie7.css")%><![endif]-->
   <%= javascript_include_tag(:defaults) %>
 </head>
-<body class="login">
+<body>
   <!--[if lte IE 6]><%= render(:partial => "/layouts/ie6_warning") %><![endif]-->
+  <div class="login">
   <p id="header">
     <%= link_to(h(@station.name), root_back_path)%>
   </p><!-- #header -->
@@ -24,5 +25,6 @@
       </div>
     </div>
   </div><!-- #content -->
+  </div>
 </body>
 </html>
