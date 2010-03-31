@@ -1,5 +1,5 @@
 fireman = convocation_fireman.fireman
-grade = convocation_fireman.grade.nil? ? "" : Grade::GRADE.index(convocation_fireman.grade)
+grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.index(convocation_fireman.grade)
 
 _pdf.text(h(@station.name))
 _pdf.move_down(40)

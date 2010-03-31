@@ -29,6 +29,12 @@
     </span>
   </p>
   <p>
+    <%= f.label(:hide_grade, "Masquer les grades à l'impression", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.check_box(:hide_grade, :class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
     <%= f.label(:rem, "Remarque", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.text_area(:rem, :class => "span-2 first", :rows => 5) %>
