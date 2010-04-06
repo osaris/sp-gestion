@@ -28,7 +28,7 @@ module FiremenHelper
     else
       ratio = 0
     end
-    result = "#{presence[:total]} convocation(s) / #{presence[:present]} présence(s) / #{presence[:missing]} absence(s) (#{ratio} % présence)"
+    result = "#{presence[:total]} convocation(s) / #{presence[:presents]} présence(s) / #{presence[:missings]} absence(s) (#{ratio} % présence)"
   end
 
 end

@@ -68,8 +68,8 @@ class Fireman < ActiveRecord::Base
     result = ActiveRecord::Base.connection.select_one("
                SELECT 
                COUNT(*) AS total,
-               COALESCE(SUM(IF(presence = 0,1,0)),0) AS missing, 
-               COALESCE(SUM(IF(presence=1,1,0)),0) as present
+               COALESCE(SUM(IF(presence = 0,1,0)),0) AS missings, 
+               COALESCE(SUM(IF(presence = 1,1,0)),0) as presents
                FROM convocation_firemen 
                WHERE fireman_id = #{self.id}")
     result.symbolize_keys!
