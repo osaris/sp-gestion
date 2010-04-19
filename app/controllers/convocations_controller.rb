@@ -4,7 +4,6 @@ class ConvocationsController < BackController
   
   before_filter :load_convocation, :except => [:index, :new, :create]
   before_filter :load_firemen, :only => [:new, :create, :edit, :update]
-  before_filter :set_convocations_firemen, :only => [:create, :update]
   
   def index
     @convocations = @station.convocations.paginate(:page => params[:page], :order => 'date DESC')    
@@ -51,6 +50,9 @@ class ConvocationsController < BackController
       flash[:error] = "Vous ne pouvez pas éditer une convocation passée."
       redirect_to(@convocation)
     else    
+      # overwrite params because browser doesn't send array if no checkbox are selected
+      # and rails omit them in this case !
+      params[:convocation][:fireman_ids] ||= []
       if @convocation.update_attributes(params[:convocation])
         flash[:success] = "La convocation a été mise à jour."
         redirect_to(@convocation)
@@ -78,10 +80,6 @@ class ConvocationsController < BackController
   
   def load_firemen
     @firemen = @station.firemen.find(:all, :order => 'firemen.grade DESC, firemen.lastname ASC')
-  end
-  
-  def set_convocations_firemen
-    params[:convocation][:fireman_ids] ||= []
   end
   
   def set_attendees

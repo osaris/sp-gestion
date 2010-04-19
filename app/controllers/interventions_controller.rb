@@ -5,7 +5,6 @@ class InterventionsController < BackController
   before_filter :load_intervention, :except => [:index, :new, :create, :stats]
   before_filter :load_vehicles, :except => [:index, :show, :destroy, :stats]
   before_filter :load_firemen, :except => [:index, :show, :destroy, :stats]
-  before_filter :set_fireman_interventions, :only => [:create, :update]
   
   def index
     @interventions = @station.interventions.paginate(:page => params[:page], :include => [:vehicles, {:fireman_interventions => [:fireman]}], 
@@ -45,6 +44,10 @@ class InterventionsController < BackController
       flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont évolué."
       redirect_to(@intervention)
     else
+      # overwrite params because browser doesn't send array if no checkbox are selected
+      # and rails omit them in this case !
+      params[:intervention][:vehicle_ids] ||= []
+      params[:intervention][:fireman_ids] ||= []      
       if @intervention.update_attributes(params[:intervention])
         flash[:success] = "L'intervention a été mise à jour."
         redirect_to(@intervention)
@@ -90,10 +93,6 @@ class InterventionsController < BackController
   def load_firemen
     @firemen = @station.firemen.find(:all, :conditions => {:status => 3},
                                            :order => 'firemen.grade DESC, firemen.lastname ASC')
-  end  
-  
-  def set_fireman_interventions
-    params[:intervention][:fireman_ids] ||= []
   end
   
   def set_participants
