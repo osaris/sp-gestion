@@ -2,9 +2,9 @@
 class Intervention < ActiveRecord::Base
   
   belongs_to :station
-  has_many :intervention_vehicles
+  has_many :intervention_vehicles, :dependent => :destroy
   has_many :vehicles, :through => :intervention_vehicles
-  has_many :fireman_interventions, :order => 'fireman_interventions.grade DESC'
+  has_many :fireman_interventions, :dependent => :destroy, :order => 'fireman_interventions.grade DESC'
   has_many :firemen, :through => :fireman_interventions
   
   validates_presence_of :place, :message => "Le lieu est obligatoire"
