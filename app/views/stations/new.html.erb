@@ -1,7 +1,3 @@
-<%- content_for(:header) do -%>
-  <%=javascript_include_tag("jquery.pstrength.1.2") %>
-<%- end -%>
-
 <h2 class="title-01">Inscrivez-vous gratuitement pour découvrir SP-Gestion</h2>
 
 <div class="in">
@@ -62,26 +58,6 @@
             <td>
               <%= u.text_field(:email, :tabindex => 3) %>
               <%= error_message_on(:user, :email) %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= u.label(:password, "Mot de passe") %>
-            </td>
-            <td>
-              <%= u.password_field(:password, :tabindex => 4) %>
-              <%= javascript_for_password_strength %>
-              <%= error_message_on(:user, :password) %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= u.label(:password_confirmation, "Confirmation") %>
-            </td>
-            <td>
-              <%= u.password_field(:password_confirmation, :tabindex => 4) %>
-              <%= error_message_on(:user, :password_confirmation) %>
-              <p>Saisissez à nouveau votre mot de passe</p>
             </td>
           </tr>
           <tr>

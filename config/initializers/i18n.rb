@@ -9,8 +9,7 @@ module I18n
         raise exception        
       when "production"
         if MissingTranslationData === exception
-          HoptoadNotifier.notify(:error_message => exception.message,
-                                 :backtrace => exception.backtrace)
+          notify_errornot(exception)
           return exception.message 
         else
           raise exception

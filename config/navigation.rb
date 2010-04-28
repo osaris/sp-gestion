@@ -40,6 +40,8 @@ SimpleNavigation::Configuration.run do |navigation|
       personnel.item(:firemen, 'Hommes', firemen_path)
       personnel.item(:convocations, 'Convocations', convocations_path)
       
+      personnel.item(:uniforms, 'Tenues', uniforms_path, :class => 'right')
+      
       personnel.auto_highlight = false
       personnel.dom_class = 'subnav'
     end
@@ -56,16 +58,10 @@ SimpleNavigation::Configuration.run do |navigation|
       intervention.item(:interventions_list, 'Liste', interventions_path)
       intervention.item(:interventions_stats, 'Statistiques', stats_interventions_path)
 
+      intervention.item(:vehicles, 'Véhicules', vehicles_path, :class => 'right')
+
       intervention.auto_highlight = false
       intervention.dom_class = 'subnav'
-    end
-    
-    primary.item(:config, 'Configuration', vehicles_path, :class => 'right') do |configuration|
-      configuration.item(:vehicles, 'Véhicules', vehicles_path)
-      configuration.item(:uniforms, 'Tenues', uniforms_path)
-      
-      configuration.auto_highlight = false
-      configuration.dom_class = 'subnav'
     end
     
     primary.dom_id = 'mainnav'

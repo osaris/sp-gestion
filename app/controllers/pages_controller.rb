@@ -4,4 +4,7 @@ class PagesController < FrontController
     @newsletter = Newsletter.new
   end
   
+  def bye
+  end
+  
 end

@@ -18,9 +18,17 @@
   </noscript>
   <!--[if lte IE 6]><%= render(:partial => "/layouts/ie6_warning") %><![endif]-->
   <p id="header">
-    <%= link_to(h(@station.name), root_back_path)%>
+    <%= h(@station.name) %>
   </p><!-- #header -->
   <p id="user">
+    <%- if current_user.id == @station.owner_id -%>
+      <%= link_to("Compte", account_path) %>
+      &nbsp;|&nbsp;
+      <%= link_to("Utilisateurs", users_path) %>
+      &nbsp;|&nbsp;
+    <%- end -%>
+    <%= link_to("Mes informations", profile_path)%>
+    &nbsp;|&nbsp;
     <%= link_to("Déconnexion", logout_path) %>
   </p><!-- #user -->
   <div id="nav">

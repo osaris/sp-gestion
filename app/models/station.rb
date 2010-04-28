@@ -9,8 +9,9 @@ class Station < ActiveRecord::Base
   has_many :interventions, :dependent => :destroy
   has_many :uniforms, :dependent => :destroy
   has_many :vehicles, :dependent => :destroy
+  has_one  :owner, :class_name => "User"
   
-  RESERVED_URL =  %w(sp-gestion spgestion).freeze
+  RESERVED_URL =  %w(sp-gestion spgestion blog).freeze
   
   validates_presence_of   :url, :message => "L'adresse de votre site est obligatoire."
   validates_presence_of   :name, :message => "Le nom du centre est obligatoire."
@@ -22,6 +23,7 @@ class Station < ActiveRecord::Base
   validates_format_of     :url, :with => /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*$/ix, :message => "L'adresse ne doit contenir que des chiffres, des lettres et des tirets."
 
   after_create :create_defaults_uniforms
+  after_create :set_owner
   
   def self.check(query)
     station = nil
@@ -51,10 +53,21 @@ class Station < ActiveRecord::Base
     result
   end
   
+  def update_owner(new_owner_id)
+    self.users.confirmed.find(new_owner_id, :conditions => ["users.id != ?", self.owner_id])
+    return update_attribute(:owner_id, new_owner_id)
+   rescue ActiveRecord::RecordNotFound
+    return false
+  end
+  
   private
   
   def create_defaults_uniforms
     Uniform.create_defaults(self)
   end
-
+  
+  def set_owner
+    update_attribute(:owner_id, self.users.first.id) unless self.users.first.blank? # for test purpose only :-/
+  end
+  
 end

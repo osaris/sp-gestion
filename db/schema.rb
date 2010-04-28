@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100331192121) do
+ActiveRecord::Schema.define(:version => 20100403104357) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20100331192121) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "last_grade_update_at"
+    t.integer  "owner_id"
   end
 
   create_table "taggings", :force => true do |t|

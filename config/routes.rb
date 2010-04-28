@@ -39,7 +39,11 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
-
+  
+  map.account   '/account', :controller => 'accounts', :action => 'edit', :conditions => { :subdomain => /.+/  }
+  map.update_account '/account/update', :controller => 'accounts', :action => 'update', :conditions => { :subdomain => /.+/  }
+  map.destroy_account '/account/destroy', :controller => 'accounts', :action => 'destroy', :conditions => { :subdomain => /.+/  }
+  map.resources :confirmations, :only => [:edit, :update], :conditions => { :subdomain => /.+/ } 
   map.resources :convocations, :conditions => { :subdomain => /.+/  } do |convocation|
     convocation.resources :convocation_firemen, :only => [:show], :collection => {:show_all => :get, :edit_all => :get, :update_all => :put}, :conditions => { :subdomain => /.+/  }
   end
@@ -51,13 +55,17 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages, :member => { :mark_as_read => :post }, :only => [:index, :show], :conditions => { :subdomain => /.+/  }
   map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
   map.resources :password_resets, :only => [:new, :create, :edit, :update], :conditions => { :subdomain => /.+/  }
+  map.profile      '/profile', :controller => 'profiles', :action => 'edit', :conditions => { :subdomain => /.+/ }
+  map.update_profile '/profile/update', :controller => 'profiles', :action => 'update', :condition => { :subdomain => /.+/ }  
   map.resources :interventions, :collection => {:stats => :get }, :conditions => { :subdomain => /.+/  }
   map.resources :stations, :collection => { :check => :get }, :only => [:new, :create, :check], :conditions => { :subdomain => 'www' }
   map.resources :uniforms, :collection => { :reset => :post }, :conditions => { :subdomain => /.+/  }
+  map.resources :users, :except => [:edit, :update],:conditions => { :subdomain => /.+/  }
   map.resources :vehicles, :conditions => { :subdomain => /.+/  }
+  
 
-  map.activate     '/activate/:id', :controller => 'confirmations', :action => 'create', :conditions => { :subdomain => /.+/  }
   map.home         '/home', :controller => 'pages', :action => 'home', :conditions => { :subdomain => 'www' }
+  map.bye          '/bye', :controller => 'pages', :action => 'bye', :conditions => { :subdomain => 'www' }
   map.authenticate '/login/authenticate', :controller => 'user_sessions', :action => 'create', :conditions => { :subdomain => /.+/ }  
   map.login        '/login', :controller => 'user_sessions', :action => 'new', :conditions => { :subdomain => /.+/ }
   map.logout       '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :subdomain => /.+/ }  

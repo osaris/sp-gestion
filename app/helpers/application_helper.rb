@@ -9,6 +9,14 @@ module ApplicationHelper
     image_tag("back/grades/#{grade}.png", :alt => Grade::GRADE.index(grade))
   end
 
+  def context_login_navigation(controller_name)
+    if controller_name == "confirmations"
+      return "confirmation"
+    else
+      return "login"
+    end
+  end
+  
   def l!(object, options = {})
     begin
       I18n.localize(object, options)

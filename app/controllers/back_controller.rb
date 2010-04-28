@@ -14,4 +14,8 @@ class BackController < ApplicationController
     raise ActionController::RoutingError, "Bad station URL" if @station.nil?
   end
   
+  def check_ownership
+    redirect_to(root_back_url) if @station.owner_id != current_user.id
+  end
+  
 end

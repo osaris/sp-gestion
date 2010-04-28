@@ -1,0 +1,20 @@
+<h1>Utilisateurs</h1>
+<div class="span-6 first">
+  <p class="right">
+    <%= link_to(image_tag("back/icons/add.png") + "&nbsp;Inviter un nouvel utilisateur", new_user_path)%>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Adresse email</th>
+        <th></th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render(:partial => @users) %>
+    </tbody>
+  </table>
+  <%= will_paginate(@users, :previous_label => "", :next_label => "") %>
+  <p><%= render(:partial => 'users/owner_instructions') %><p>
+</div>

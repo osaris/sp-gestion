@@ -5,23 +5,49 @@ class User < ActiveRecord::Base
   has_many :messages, :dependent => :destroy
   has_many :beta_codes
   
-  attr_accessor :beta_code
+  attr_accessor :beta_code, :cooptation
   
   after_create :assign_beta_code
   
+  named_scope :confirmed, :conditions => ['confirmed_at IS NOT NULL']
+  
   acts_as_authentic do |config| 
     config.validations_scope = :station_id
-    # only to be able to set the message
-    config.validates_length_of_email_field_options(:within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.")
-    config.validates_length_of_password_field_options(:minimum => 6, :message => "Le mot de passe doit avoir au moins 6 caractères.")
+    
+    # email validation rules
+    config.validates_length_of_email_field_options({
+      :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères."
+    })
+    config.validates_uniqueness_of_email_field_options({
+      :if => Proc.new {|user| user.attribute_present?('email') && user.email_changed?},
+      :case_sensitive => false,
+      :scope => validations_scope,
+      :message => "Un utilisateur avec cette adresse email existe déjà pour ce compte."
+    })    
+    
+    # password validation rules
+    config.validates_length_of_password_field_options({
+      :on => :update,
+      :minimum => 6, :message => "Le mot de passe doit avoir au moins 6 caractères."
+    })
+    config.validates_confirmation_of_password_field_options({
+      :on => :update,
+      :message => "Le mot de passe ne correspond pas à la confirmation."
+    })
+    config.validates_length_of_password_confirmation_field_options({
+      :on => :update,
+      :minimum => 6, :message => "Le mot de passe doit avoir au moins 6 caractères."
+    })
+    
     # because we reset password on the same page as profile
     config.ignore_blank_passwords = true
-    config.validates_confirmation_of_password_field_options(:message => "Le mot de passe ne correspond pas à la confirmation.")
   end
   
   def validate_on_create
-    bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
-    self.errors.add(:beta_code, "Ce code n'est pas valide.") if bc.blank?
+    unless cooptation
+      bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
+      self.errors.add(:beta_code, "Ce code n'est pas valide.") if bc.blank?
+    end
   end
   
   def reset_password!(new_password, new_password_confirmation)
@@ -34,11 +60,14 @@ class User < ActiveRecord::Base
     !(self.new_record? || self.confirmed_at.nil?)
   end
 
-  def confirm!
-    update_attribute(:confirmed_at, Time.now.utc)
+  def confirm!(params)
+    self.confirmed_at = Time.now.utc
+    self.password = params[:user][:password]
+    self.password_confirmation = params[:user][:password_confirmation]
     self.beta_codes.each do |beta_code|
       beta_code.update_attribute(:used, true)
     end
+    save
   end
   
   def deliver_confirmation_instructions!
@@ -54,6 +83,15 @@ class User < ActiveRecord::Base
     UserMailer.deliver_password_reset_instructions(self)
   end
   
+  # for cooptation
+  def deliver_cooptation_instructions!
+    self.reset_perishable_token
+    self.confirmed_at = nil
+    self.confirmation_sent_at = Time.now.utc
+    self.save(false)
+    UserMailer.deliver_cooptation_instructions(self)
+  end
+  
   def boost_activation
     if self.confirmed_at.blank?
       UserMailer.deliver_boost_activation(self)
@@ -67,8 +105,10 @@ class User < ActiveRecord::Base
   private
   
   def assign_beta_code
-    bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
-    bc.update_attribute(:user_id, self.id)
+    unless cooptation
+      bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
+      bc.update_attribute(:user_id, self.id)
+    end
   end
 
 end

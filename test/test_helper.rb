@@ -69,6 +69,13 @@ end
 
 # data
 
+def make_station_with_user(attributes = {})
+  s = Station.make_unsaved(attributes)
+  s.users << User.new
+  s.save
+  s
+end
+
 def make_fireman_with_grades(attributes = {})
   f = Fireman.make_unsaved(attributes)
   f.grades = Grade::new_defaults

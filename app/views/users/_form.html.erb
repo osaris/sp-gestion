@@ -1,0 +1,13 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires. Un email sera envoyé à l'utilisateur avec un lien pour confirmer son compte et choisir un mot de passe.</p>
+<%- form_for(@user) do |f| -%>
+  <p>
+    <%= f.label(:email, "Adresse email", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:email, :class => "span-2 first") %>
+      <%= error_message_on(:user, :email, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p class="span-3 first prefix-1">
+    <%= button_tag(:submit, "Envoyer") %> ou <%= link_to("Annuler", users_path) %>
+  </p>
+<%- end -%>

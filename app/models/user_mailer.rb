@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     setup(user)
     subject("Activation de votre compte SP-Gestion.fr")
 
-    confirmation_url = activate_url(user.perishable_token)
+    confirmation_url = edit_confirmation_url(user.perishable_token)
 
     content_type("multipart/alternative")
     part "text/plain" do |plain_part|
@@ -17,6 +17,25 @@ class UserMailer < ApplicationMailer
       html_part.body = render_message("confirmation_instructions.html", :confirmation_url => confirmation_url)
       html_part.transfer_encoding = "base64"
     end
+  end
+  
+  def cooptation_instructions(user)
+    setup(user)
+    subject("Invitation à rejoindre SP-Gestion.fr")
+
+    confirmation_url = edit_confirmation_url(user.perishable_token)
+    station_url = user.station.url
+
+    content_type("multipart/alternative")
+    part "text/plain" do |plain_part|
+      plain_part.body = render_message("cooptation_instructions.plain", :station_url => station_url, :confirmation_url => confirmation_url)
+      plain_part.transfer_encoding = "base64"
+    end
+
+    part "text/html" do |html_part|
+      html_part.body = render_message("cooptation_instructions.html", :station_url => @station_url, :confirmation_url => confirmation_url)
+      html_part.transfer_encoding = "base64"
+    end    
   end
   
   def password_reset_instructions(user)

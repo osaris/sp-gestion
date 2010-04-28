@@ -25,11 +25,11 @@ img { vertical-align:text-bottom; }
 /* HEADER */
 .browser_capabilities_warning { text-align:center; background:#db2e2e; width: 100% !important; border:1px solid #333; color: #fff; padding:15px; font-size:14px; margin-bottom:10px; }
 .browser_capabilities_warning a {	color:#fff;	text-decoration:underline; }
-#header { float:left; margin:0 0 20px; width:304px; }
-#header a { float:left; width:304px; text-decoration:none; font-size: 1.4em;}
+#header { float:left; margin:0 0 20px; width:304px; font-size: 1.4em; color: red;}
 
 /* USER */
-#user { float:right; margin:0 0 20px; width:304px; text-align:right; }
+#user { float:right; margin:0 0 20px; width:304px; text-align:right; font-size: 10px;}
+#user a:hover { background-color: #BBB;}
 
 /* NAVIGATION */
 #nav { clear:both; float:left; margin:0 0 20px; font-size:11px; text-transform:uppercase; letter-spacing:0.02em; }
