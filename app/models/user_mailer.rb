@@ -60,7 +60,7 @@ class UserMailer < ApplicationMailer
     setup(user)
     subject("Activation de votre compte SP-Gestion.fr")
 
-    confirmation_url = activate_url(user.perishable_token)
+    confirmation_url = edit_confirmation_url(user.perishable_token)
 
     content_type("multipart/alternative")
     part "text/plain" do |plain_part|
