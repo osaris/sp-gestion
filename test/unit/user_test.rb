@@ -44,17 +44,31 @@ class UserTest < ActiveSupport::TestCase
       assert(!@user.confirmed?)
     end
     
-    context "after a call to confirm!" do
+    context "after a call to confirm! with good password" do
       setup do
-        @user.confirm!
+        @user.confirm!('123456', '123456')
       end
 
       should "be confirmed" do
-        assert(@user.confirmed?)
+        assert(@user.reload.confirmed?)
       end
       
       should "set BetaCode to used" do
         assert(@user.beta_codes.first.used)
+      end
+    end
+    
+    context "after a call to confirm! with bad password" do
+      setup do
+        @user.confirm!('123','')
+      end
+
+      should "not be confirmed" do
+        assert_equal(false, @user.reload.confirmed?)
+      end
+      
+      should "not set BetaCode to used" do
+        assert_equal(false, @user.reload.beta_codes.first.used)
       end
     end
 

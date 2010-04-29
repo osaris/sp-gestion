@@ -60,14 +60,17 @@ class User < ActiveRecord::Base
     !(self.new_record? || self.confirmed_at.nil?)
   end
 
-  def confirm!(params)
+  def confirm!(password, password_confirmation)
     self.confirmed_at = Time.now.utc
-    self.password = params[:user][:password]
-    self.password_confirmation = params[:user][:password_confirmation]
-    self.beta_codes.each do |beta_code|
-      beta_code.update_attribute(:used, true)
+    self.password = password
+    self.password_confirmation = password_confirmation
+    result = save
+    if result
+      self.beta_codes.each do |beta_code|
+        beta_code.update_attribute(:used, true)
+      end      
     end
-    save
+    result
   end
   
   def deliver_confirmation_instructions!

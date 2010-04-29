@@ -12,7 +12,7 @@ class ConfirmationsController < BackController
   end
 
   def update
-    if @user.confirm!(params)
+    if @user.confirm!(params[:password], password[:password_confirmation])
       flash[:success] = render_to_string(:partial => "welcome") if @user.id == @station.owner_id
       redirect_to(root_back_path)
     else
