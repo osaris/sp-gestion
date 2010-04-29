@@ -50,6 +50,8 @@ SimpleNavigation::Configuration.run do |navigation|
       materiel.item(:check_lists, 'Listes', check_lists_path)
       materiel.item(:expirings, 'Expiration', expirings_items_path)
 
+      materiel.item(:vehicles, 'Véhicules', vehicles_path, :class => 'right')
+
       materiel.auto_highlight = false
       materiel.dom_class = 'subnav'
     end
@@ -57,8 +59,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item(:intervention, 'Interventions', interventions_path) do |intervention|
       intervention.item(:interventions_list, 'Liste', interventions_path)
       intervention.item(:interventions_stats, 'Statistiques', stats_interventions_path)
-
-      intervention.item(:vehicles, 'Véhicules', vehicles_path, :class => 'right')
 
       intervention.auto_highlight = false
       intervention.dom_class = 'subnav'
