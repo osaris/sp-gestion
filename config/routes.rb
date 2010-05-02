@@ -56,7 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
   map.resources :password_resets, :only => [:new, :create, :edit, :update], :conditions => { :subdomain => /.+/  }
   map.profile      '/profile', :controller => 'profiles', :action => 'edit', :conditions => { :subdomain => /.+/ }
-  map.update_profile '/profile/update', :controller => 'profiles', :action => 'update', :condition => { :subdomain => /.+/ }  
+  map.update_profile '/profile/update', :controller => 'profiles', :action => 'update', :conditions => { :subdomain => /.+/ }  
   map.resources :interventions, :collection => {:stats => :get }, :conditions => { :subdomain => /.+/  }
   map.resources :stations, :collection => { :check => :get }, :only => [:new, :create, :check], :conditions => { :subdomain => 'www' }
   map.resources :uniforms, :collection => { :reset => :post }, :conditions => { :subdomain => /.+/  }
