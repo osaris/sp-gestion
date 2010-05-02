@@ -74,7 +74,7 @@ class UniformsControllerTest < ActionController::TestCase
       
       should_respond_with(:redirect)
       
-      should_change("number of uniform", :by => 3) { Uniform.count }
+      should_change("number of uniform", :by => 5) { Uniform.count }
       
       should_set_the_flash(:success)
     end
