@@ -106,6 +106,21 @@ class UserTest < ActiveSupport::TestCase
       end
     end
     
+    context "call deliver_cooptation_instructions!" do
+      setup do
+        @user.deliver_cooptation_instructions!
+      end
+      
+      should "unconfirm user" do
+        assert_equal(false, @user.confirmed?)
+      end
+      
+      should "send an email" do
+        assert_sent_email()
+      end
+    end
+    
+    
     context "call password_reset_instructions!" do
       setup do
         @user.deliver_password_reset_instructions!
