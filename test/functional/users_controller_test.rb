@@ -72,6 +72,17 @@ class UsersControllerTest < ActionController::TestCase
         @another_user = @station.users.make(:confirmed)
       end
 
+      context "requesting DELETE :destroy for a non existing user" do
+        setup do
+          delete :destroy, :id => rand(10)
+        end
+
+        should_respond_with(:redirect)
+        should_redirect_to(":index") { users_path }
+
+        should_set_the_flash(:error)
+      end
+
       context "requesting DELETE :destroy" do
         setup do
           delete :destroy, :id => @another_user.id
