@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessor :beta_code, :cooptation, :new_email_tmp
   
   after_create :assign_beta_code
+  before_create :reset_perishable_token
   
   named_scope :confirmed, :conditions => ['confirmed_at IS NOT NULL']
   
