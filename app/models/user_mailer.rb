@@ -57,7 +57,7 @@ class UserMailer < ApplicationMailer
   end
   
   def new_email_instructions(user)
-    setup(user.new_email)
+    setup(user, user.new_email)
     subject("Changement de votre adresse email SP-Gestion.fr")
     
     new_email_url = edit_email_confirmation_url(user.perishable_token)
