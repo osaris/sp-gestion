@@ -8,7 +8,7 @@
     <p>
       <%= f.label(:new_email, "Nouvelle adresse email", :class => "span-1 first")%>
       <span class="span-2">
-        <%= f.text_field(:new_email_tmp, :class => "span-2 first")%>
+        <%= f.text_field(:new_email_tmp, :class => "span-2 first", :autocomplete => :off)%>
         <%= error_message_on(:user, :new_email_tmp, :css_class => "span-2 first")%>
       </span>
       <span class="span-2 help">
@@ -18,14 +18,14 @@
     <p>
       <%= f.label(:password, "Nouveau mot de passe", :class => "span-1 first") %>
       <span class="span-3">
-        <%= f.password_field(:password, :class => "span-2 first") %>
+        <%= f.password_field(:password, :class => "span-2 first", :autocomplete => :off) %>
         <%= error_message_on(:user, :password, :css_class => "span-2 first") %>
       </span>    
     </p>
     <p>
       <%= f.label(:password_confirmation, "Confirmation du nouveau mot de passe", :class => "span-1 first") %>
       <span class="span-3">
-        <%= f.password_field(:password_confirmation, :class => "span-2 first") %>
+        <%= f.password_field(:password_confirmation, :class => "span-2 first", :autocomplete => :off) %>
         <%= error_message_on(:user, :password_confirmation, :css_class => "span-2 first") %>
       </span>
     </p>
