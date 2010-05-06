@@ -3,7 +3,7 @@ class Newsletter < ActiveRecord::Base
   
   attr_accessible :email
   
-  validates_format_of :email, :with => /^\S+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,4}|[0-9]{1,4})(\]?)$/ix
+  validates_format_of :email, :with => Authlogic::Regex.email
   validates_uniqueness_of :email
 
   before_create :generate_activation_key

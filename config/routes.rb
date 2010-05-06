@@ -50,6 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :check_lists, :member => { :copy => :post }, :conditions => { :subdomain => /.+/ } do |check_list|
     check_list.resources :items, :except => [:index, :show], :conditions => { :subdomain => /.+/ }
   end
+  map.resources :email_confirmations, :only => [:edit, :update], :conditions => { :subdomain => /.+/ }   
   map.resources :items, :collection => { :expirings => :get }, :only => [:expirings], :conditions => { :subdomain => /.+/ }
   map.resources :firemen, :conditions => { :subdomain => /.+/  }
   map.resources :messages, :member => { :mark_as_read => :post }, :only => [:index, :show], :conditions => { :subdomain => /.+/  }

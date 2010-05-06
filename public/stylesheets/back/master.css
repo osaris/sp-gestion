@@ -112,6 +112,7 @@ img { vertical-align:text-bottom; }
 #content form { margin-bottom:20px; }
 #content form p { float:left; }
 #content form small { clear:left; display:block; color:#284FA4; }
+#content span.help { font-size:11px;}
 
 /* FORMS ERROR */
 .fieldWithErrors { display:inline; }

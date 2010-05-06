@@ -5,9 +5,11 @@ class ProfilesController < BackController
   def edit
   end
   
-  def update
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Le mot de passe a bien été changé."
+  def update    
+    if @user.update_profile(params)
+      flash[:success] = "Le profil a été mis à jour. Si vous avez changé votre adresse email 
+                         vous devez d'abord cliquer sur le lien envoyé par email à votre nouvelle 
+                         adresse pour que celle-ci remplace votre adresse actuelle."
       redirect_to(profile_path)
     else
       render(:action => :edit)

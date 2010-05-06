@@ -1,0 +1,19 @@
+<%- form_for @user_session, :url => email_confirmation_path, :html => { :method => :put } do |f| -%>
+  <p>Veuillez confirmer la modification en entrant votre mot de passe :</p>
+  <%= flash_helper %>
+  <p>
+    <%= f.label(:email, "Ancienne adresse email") %><br />
+    <%= text_field_tag(:new_email, @user.email, :size => 36, :disabled => true) %>
+  </p>
+  <p>
+    <%= f.label(:new_email, "Nouvelle adresse email") %><br />
+    <%= text_field_tag(:new_email, @user.new_email, :size => 36, :disabled => true) %>
+  </p>
+  <p>
+    <%= f.label(:password, "Mot de passe") %>
+    <%= f.password_field(:password, :size => 36) %>
+  </p>
+  <p class="submit">
+    <%= button_tag(:submit, "Enregistrer") %>
+  </p>
+<%- end -%>

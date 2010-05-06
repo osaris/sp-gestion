@@ -56,6 +56,24 @@ class UserMailer < ApplicationMailer
     end
   end
   
+  def new_email_instructions(user)
+    setup(user)
+    subject("Changement de votre adresse email SP-Gestion.fr")
+    
+    new_email_url = edit_email_confirmation_url(user.perishable_token)
+    
+    content_type("multipart/alternative")
+    part "text/plain" do |plain_part|
+      plain_part.body = render_message("new_email_instructions.plain", :new_email_url => new_email_url)
+      plain_part.transfer_encoding = "base64"
+    end
+
+    part "text/html" do |html_part|
+      html_part.body = render_message("new_email_instructions.html", :new_email_url => new_email_url)
+      html_part.transfer_encoding = "base64"
+    end
+  end
+  
   def boost_activation(user)
     setup(user)
     subject("Activation de votre compte SP-Gestion.fr")
@@ -72,8 +90,8 @@ class UserMailer < ApplicationMailer
       html_part.body = render_message("boost_activation.html", :confirmation_url => confirmation_url)
       html_part.transfer_encoding = "base64"
     end
-  end  
-  
+  end
+    
   private
 
   def setup(user)
