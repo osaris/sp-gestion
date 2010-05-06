@@ -33,7 +33,7 @@ class UserMailer < ApplicationMailer
     end
 
     part "text/html" do |html_part|
-      html_part.body = render_message("cooptation_instructions.html", :station_url => @station_url, :confirmation_url => confirmation_url)
+      html_part.body = render_message("cooptation_instructions.html", :station_url => station_url, :confirmation_url => confirmation_url)
       html_part.transfer_encoding = "base64"
     end    
   end
