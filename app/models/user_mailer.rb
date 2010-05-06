@@ -57,7 +57,7 @@ class UserMailer < ApplicationMailer
   end
   
   def new_email_instructions(user)
-    setup(user)
+    setup(user.new_email)
     subject("Changement de votre adresse email SP-Gestion.fr")
     
     new_email_url = edit_email_confirmation_url(user.perishable_token)
@@ -94,10 +94,10 @@ class UserMailer < ApplicationMailer
     
   private
 
-  def setup(user)
+  def setup(user, email = '')
     default_url_options[:host] = "#{user.station.url}.#{BASE_URL}"
     from("SP-Gestion.fr <pas_de_reponse@sp-gestion.fr>")
-    recipients(user.email)
+    recipients(email.blank? ? user.email : email)
     sent_on(Time.now)
   end
 

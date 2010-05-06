@@ -4,7 +4,7 @@ class UserMailerTest < ActionMailer::TestCase
 
   context "with a user" do
     setup do
-      @user = User.make(:beta, :email => "test@test.com")
+      @user = User.make(:beta, :email => "test@test.com", :new_email => "test@new.com")
     end
     
     context "deliver confirmation instructions" do
@@ -27,7 +27,7 @@ class UserMailerTest < ActionMailer::TestCase
 
       should "send an email" do
         assert_sent_email do |email|
-          email.to.include?("test@test.com") &&
+          email.to.include?("test@new.com") &&
           email.body.match(@user.perishable_token)
         end      
       end
