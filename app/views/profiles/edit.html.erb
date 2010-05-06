@@ -16,11 +16,11 @@
       </span>
     </p>
     <p>
-      <%= f.label(:password, "Changement de mot de passe", :class => "span-1 first") %>
+      <%= f.label(:password, "Nouveau mot de passe", :class => "span-1 first") %>
       <span class="span-3">
         <%= f.password_field(:password, :class => "span-2 first") %>
         <%= error_message_on(:user, :password, :css_class => "span-2 first") %>
-      </span>
+      </span>    
     </p>
     <p>
       <%= f.label(:password_confirmation, "Confirmation du nouveau mot de passe", :class => "span-1 first") %>
