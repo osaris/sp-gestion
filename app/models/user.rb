@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   attr_accessor :beta_code, :cooptation, :new_email_tmp
   
   after_create :assign_beta_code
-  after_update :deliver_new_email_instructions
   
   named_scope :confirmed, :conditions => ['confirmed_at IS NOT NULL']
   
@@ -105,22 +104,29 @@ class User < ActiveRecord::Base
       return false
     end
   end
-  
+    
   def update_profile(params)
+    email_already_used = false
+    email_change = false
     if !params[:user][:new_email_tmp].blank? and params[:user][:new_email_tmp] != self.email
-      already_used = self.station.users.find_by_email(params[:user][:new_email_tmp])
-      if already_used
+      email_already_used = self.station.users.find_by_email(params[:user][:new_email_tmp])
+      if email_already_used
         self.errors.add(:new_email_tmp, "L'adresse email souhaitée est déjà utilisée.")
       else
         params[:user][:new_email] = params[:user][:new_email_tmp]
+        email_change = true
       end
-    else
-      already_used = false
     end
     
-    already_used ? false : self.update_attributes(params[:user])
+    if email_already_used
+      result = false
+    else
+      result = self.update_attributes(params[:user])
+      deliver_new_email_instructions! if result and email_change
+    end
+    result
   end
-  
+    
   def swap_emails
     self.email = self.new_email
     self.new_email = nil
@@ -140,11 +146,8 @@ class User < ActiveRecord::Base
     end
   end
   
-  def deliver_new_email_instructions
-    unless new_email.blank?
-      self.reset_perishable_token
-      UserMailer.deliver_new_email_instructions(self)
-    end
+  def deliver_new_email_instructions!
+    self.reset_perishable_token
+    UserMailer.deliver_new_email_instructions(self)
   end
-
 end
