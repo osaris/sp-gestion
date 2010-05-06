@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates_length_of :new_email_tmp, :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.", :allow_blank => true
   
   acts_as_authentic do |config|
+    config.disable_perishable_token_maintenance = true
     config.validations_scope = :station_id
     
     # email validation rules
@@ -74,7 +75,7 @@ class User < ActiveRecord::Base
   end
   
   def deliver_confirmation_instructions!
-    self.reset_perishable_token
+    self.reset_perishable_token!
     self.confirmed_at = nil
     self.confirmation_sent_at = Time.now.utc
     self.save(false)
@@ -82,13 +83,13 @@ class User < ActiveRecord::Base
   end
     
   def deliver_password_reset_instructions!  
-    reset_perishable_token!  
+    self.reset_perishable_token!
     UserMailer.deliver_password_reset_instructions(self)
   end
   
   # for cooptation
   def deliver_cooptation_instructions!
-    self.reset_perishable_token
+    self.reset_perishable_token!
     self.confirmed_at = nil
     self.confirmation_sent_at = Time.now.utc
     self.save(false)
@@ -147,7 +148,7 @@ class User < ActiveRecord::Base
   end
   
   def deliver_new_email_instructions!
-    self.reset_perishable_token
+    self.reset_perishable_token!
     UserMailer.deliver_new_email_instructions(self)
   end
 end

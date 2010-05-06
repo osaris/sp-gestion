@@ -12,6 +12,8 @@ module ApplicationHelper
   def context_login_navigation(controller_name)
     if controller_name == "confirmations"
       return "confirmation"
+    elsif controller_name == "email_confirmations"
+      return "email_confirmation"
     else
       return "login"
     end
