@@ -1,5 +1,13 @@
 <h1><%= h(@vehicle.name) %></h1>
+<ul>
+  <li>Date de passage aux mines : <%= l!(@vehicle.date_approval) %></li>
+  <li>Date de contrôle technique : <%= l!(@vehicle.date_check) %></li>
+  <li>Date de révision : <%= l!(@vehicle.date_review) %></li>
+</ul>
+<%- unless @vehicle.rem.blank? -%>
+  <p>Remarque : <%= h(@vehicle.rem) %></p>
+<%- end -%>
 <p>
-  <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + "&nbsp;Editer", edit_vehicle_path(@vehicle))%> - 
+  <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + "&nbsp;Editer", edit_vehicle_path(@vehicle))%> -
   <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + "&nbsp;Supprimer", vehicle_path(@vehicle), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
 </p>

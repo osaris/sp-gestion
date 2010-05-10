@@ -6,6 +6,9 @@ class Vehicle < ActiveRecord::Base
   has_many :interventions, :through => :intervention_vehicles
   
   validates_presence_of :name, :message => "Le nom est obligatoire."
+  validates_date :date_approval, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
+  validates_date :date_check, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
+  validates_date :date_review, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
   
   before_destroy :check_associations
   

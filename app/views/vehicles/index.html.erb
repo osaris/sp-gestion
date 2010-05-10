@@ -4,10 +4,13 @@
     <thead>
       <tr>
         <th>Nom</th>
+        <th>Date de passage aux mines</th>
+        <th>Date de contrôle technique</th>
+        <th>Date de révision</th>
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => @vehicles) || "<tr><td colspan='1'>Pas encore de véhicule !</td></tr>" %>
+      <%= render(:partial => @vehicles) || "<tr><td colspan='4'>Pas encore de véhicule !</td></tr>" %>
     </tbody>
   </table>
   <%= will_paginate(@vehicles, :previous_label => "", :next_label => "") %>

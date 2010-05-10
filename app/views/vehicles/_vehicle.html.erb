@@ -1,3 +1,6 @@
 <tr class="<%= cycle("odd","even") %>">
   <td><%= link_to(h(vehicle.name), vehicle) %></td>
+  <td><%= l!(vehicle.date_approval) %></td>
+  <td><%= l!(vehicle.date_check) %></td>
+  <td><%= l!(vehicle.date_review) %></td>
 </tr>
