@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100510174214) do
+ActiveRecord::Schema.define(:version => 20100510203231) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(:version => 20100510174214) do
     t.text     "rem"
     t.boolean  "hide_grade", :default => false
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "fireman_interventions", :force => true do |t|
     t.integer  "fireman_id"
