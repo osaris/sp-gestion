@@ -8,9 +8,9 @@
   <p>
     <%= f.label(:password_confirmation, "Confirmation du mot de passe") %>
     <%= f.password_field(:password_confirmation, :size => 36) %>
-    <%= error_message_on(:user, :password_confirmation) %>    
+    <%= error_message_on(:user, :password_confirmation) %>
   </p>
   <p class="submit">
-    <%= button_tag(:submit, "Valider") %>
+    <%= submit_tag("Valider") %>
   </p>
 <%- end -%>

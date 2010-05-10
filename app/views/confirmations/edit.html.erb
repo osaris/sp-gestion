@@ -14,7 +14,7 @@
     <%= error_message_on(:user, :password_confirmation) %>
   </p>
   <p class="submit">
-    <%= button_tag(:submit, "Activer mon compte !") %>
-  </p>  
+    <%= submit_tag("Activer mon compte !") %>
+  </p>
 <%- end -%>
 <%= javascript_tag("$(':password:visible:enabled:first').focus();") %>

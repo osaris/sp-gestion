@@ -34,8 +34,8 @@
     </span>
   </p>
   <p class="span-3 first prefix-1">
-    <%= button_tag(:submit, "Enregistrer") %>
-    ou <%= link_to("Annuler", (session[:back_path] || check_list_path(@check_list)))%>   
+    <%= submit_tag("Enregistrer") %>
+    ou <%= link_to("Annuler", (session[:back_path] || check_list_path(@check_list)))%>
   </p>
 <%- end -%>
 <%- content_for(:header) do -%>

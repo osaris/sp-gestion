@@ -1,11 +1,11 @@
 <%- form_tag(password_resets_path) do -%>
-  <%= flash_helper %>      
+  <%= flash_helper %>
   <p>
     <%= label_tag("Adresse email") %><br />
     <%= text_field_tag(:email, '',:size => 36) %>
   </p>
   <p class="submit">
-    <%= button_tag(:submit, "Envoyer") %>
+    <%= submit_tag("Envoyer") %>
   </p>
 <%- end -%>
 <!--[if lte IE 7]><div class="clear">&nbsp;</div><![endif]-->

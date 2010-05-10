@@ -9,12 +9,12 @@
         <%= f.label(:owner_id, "Nouveau propriétaire du compte", :class => "span-1 first") %>
         <span class="span-3">
           <%= f.collection_select(:owner_id, @users, :id, :email) %>
-        </span>        
+        </span>
       </p>
       <p class="span-3 first prefix-1">
-        <%= button_tag(:submit, "Enregistrer") %>
+        <%= submit_tag("Enregistrer") %>
       </p>
-      <%= javascript_tag("      
+      <%= javascript_tag("
         $('.edit_station').submit(function() {
             return confirm('Êtes-vous sûr ?');
         });
@@ -28,13 +28,13 @@
 <div class="span-6 first">
   <h2>Supprimer le compte</h2>
   <p>Toutes les données sont effacées instantanément et définitivement.</p>
-  <%= button_tag(:account_destroy, "Je veux supprimer le compte") %>
-  <%= javascript_tag("      
+  <%= submit_tag("Je veux supprimer le compte", :id => "account_destroy") %>
+  <%= javascript_tag("
     $('#account_destroy').click(function() {
         if(confirm('Êtes-vous sûr ?'))
         {
          window.location.replace('/account/destroy');
         }
     });
-  ")%>  
+  ")%>
 </div>

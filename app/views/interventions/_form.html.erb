@@ -33,8 +33,8 @@
     		<%- @vehicles.each do |vehicle| -%>
     			<%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, @intervention.vehicles.include?(vehicle)) %>
     			<label class="click_prev_checkbox"><%= h(vehicle.name) %></label>
-    		<%- end -%> 		
-      </span>    
+    		<%- end -%>
+      </span>
     </p>
     <p>
       <%= f.label(:rem, "Remarque", :class => "span-1 first") %>
@@ -55,7 +55,7 @@
     </div>
   </div>
   <div class="span-5 first">
-    <%= button_tag(:submit, "Enregistrer") %> ou <%= link_to("Annuler", interventions_path) %>
+    <%= submit_tag("Enregistrer") %> ou <%= link_to("Annuler", interventions_path) %>
   </div>
 <%- end -%>
 <%- content_for(:header) do -%>

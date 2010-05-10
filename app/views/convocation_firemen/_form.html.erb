@@ -14,7 +14,7 @@
           <th colspan="4"><%= Fireman::STATUS.index(group) %></th>
         </tr>
           <%- convocation_firemen.each do |convocation_fireman| -%>
-            <%- fields_for("convocation_firemen[]", convocation_fireman) do |f| -%>          
+            <%- fields_for("convocation_firemen[]", convocation_fireman) do |f| -%>
             <tr class="<%= cycle("odd","even") %>">
               <td class="clickable"><%= Grade::GRADE.index(convocation_fireman.grade) %></td>
               <td class="clickable"><%= h(convocation_fireman.fireman.lastname) %></td>
@@ -32,5 +32,5 @@
       });
     ")%>
   </table>
-  <%= button_tag(:submit, "Enregistrer") %> ou <%= link_to("Annuler", convocation_path(@convocation)) %>
+  <%= submit_tag("Enregistrer") %> ou <%= link_to("Annuler", convocation_path(@convocation)) %>
 <%- end -%>
