@@ -19,7 +19,7 @@ class ActiveSupport::TestCase
   # don't care one way or the other, switching from MyISAM to InnoDB tables
   # is recommended.
   #
-  # The only drawback to using transactional fixtures is when you actually 
+  # The only drawback to using transactional fixtures is when you actually
   # need to test transactions.  Since your test is bracketed by a transaction,
   # any transactions started in your code will be automatically rolled back.
   self.use_transactional_fixtures = true
@@ -38,10 +38,19 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  
-  # setup :activate_authlogic    
-  
+
+  # setup :activate_authlogic
+
   setup { Sham.reset }
+end
+
+# Disable transparent delayed_job methods in test mode
+module Delayed
+  module MessageSending
+    def send_later(method, *args)
+      send(method, *args)
+    end
+  end
 end
 
 def login(station = Station.make, user = User.make(:confirmed))
@@ -50,7 +59,7 @@ def login(station = Station.make, user = User.make(:confirmed))
   @user.station = @station
 
   @request.host = "#{@station.url}.sp-gestion.fr"
-  
+
   UserSession.create(@user)
 end
 

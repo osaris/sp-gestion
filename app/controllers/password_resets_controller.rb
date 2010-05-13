@@ -1,30 +1,30 @@
 class PasswordResetsController < BackController
-  
-  skip_before_filter :require_user  
+
+  skip_before_filter :require_user
   before_filter :require_no_user
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
-  
+
   layout('login')
-  
+
   navigation(:password_resets)
-  
+
   def new
-  end  
-  
-  def create  
+  end
+
+  def create
     @user = @station.users.find_by_email(params[:email])
     if @user and @user.confirmed?
-      @user.deliver_password_reset_instructions!
+      @user.send_later(:deliver_password_reset_instructions!)
       flash.now[:warning] = "Les instructions pour recevoir votre nouveau mot de passe vous ont été transmises par email."
-    else  
+    else
       flash.now[:error] = "Aucun utilisateur trouvé avec cette adresse email."
     end
     render(:action => :new)
   end
-  
+
   def edit
   end
-  
+
   def update
     if @user.reset_password!(params[:user][:password], params[:user][:password_confirmation])
       flash[:success] = "Mot de passe mis à jour avec succès."
@@ -34,17 +34,17 @@ class PasswordResetsController < BackController
       render(:action => :edit)
     end
   end
-  
+
   private
-  
+
   def load_user_using_perishable_token
-    @user = @station.users.find_using_perishable_token(params[:id])  
+    @user = @station.users.find_using_perishable_token(params[:id])
     unless @user
       flash[:error] = "Nous sommes désolés mais nous n'arrivons pas à trouver votre compte. " +
                        "Essayez de copier/coller l'adresse de changement de mot de passe depuis " +
                        "votre email ou recommencez la procédure de changement de mot de passe."
       redirect_to(login_url)
-    end    
+    end
   end
-  
+
 end
