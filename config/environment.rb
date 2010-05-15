@@ -49,13 +49,9 @@ Rails::Initializer.run do |config|
   config.gem "errornot_notifier",   :version => "1.0.2"
   config.gem "google_analytics",    :version => "1.1.5", :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
   config.gem "googlecharts",        :version => "1.5.1", :source => "http://gems.github.com"
+  config.gem "graticule",           :version => "0.2.12"
   config.gem "prawn",               :version => "0.7.2", :lib => "prawn"
   config.gem "simple-navigation",   :version => "2.2.3", :lib => 'simple_navigation', :source => "http://gemcutter.org/"
   config.gem "validates_timeliness",:version => "2.3.0"
   config.gem "will_paginate",       :version => "2.3.12", :source => "http://gemcutter.org/"
 end
-
-# Google Analytics configuration
-Rubaidh::GoogleAnalytics.tracker_id = "UA-1194205-7"
-Rubaidh::GoogleAnalytics.domain_name  = "sp-gestion.fr"
-Rubaidh::GoogleAnalytics.environments = ["production"]
