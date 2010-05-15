@@ -4,8 +4,9 @@ require 'faker'
 
 Sham.define do
   body        { Faker::Lorem.sentences(5).join(' ') }
+  city        { Faker::Lorem.words(1).join(' ') }
   code        { Faker::Lorem.words(1).join(' ') }
-  description { Faker::Lorem.sentences(2).join(' ') } 
+  description { Faker::Lorem.sentences(2).join(' ') }
   email       { Faker::Internet.email }
   firstname   { Faker::Name.first_name }
   lastname    { Faker::Name.last_name }
@@ -38,6 +39,7 @@ end
 
 Intervention.blueprint do
   place
+  city
   start_date(3.days.ago)
   end_date(2.days.ago)
 end
@@ -105,7 +107,7 @@ User.blueprint(:confirmed) do
   password(pass = 'test1234')
   password_confirmation(pass)
   confirmed_at(1.day.ago)
-  beta_code(BetaCode.make.code)  
+  beta_code(BetaCode.make.code)
 end
 
 Vehicle.blueprint do
