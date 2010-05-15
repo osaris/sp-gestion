@@ -1,6 +1,6 @@
 # All items belongs to the station
 class Station < ActiveRecord::Base
-  
+
   authenticates_many :user_sessions
   has_many :users, :dependent => :destroy
   has_many :convocations, :dependent => :destroy
@@ -10,9 +10,9 @@ class Station < ActiveRecord::Base
   has_many :uniforms, :dependent => :destroy
   has_many :vehicles, :dependent => :destroy
   has_one  :owner, :class_name => "User"
-  
+
   RESERVED_URL =  %w(sp-gestion spgestion blog).freeze
-  
+
   validates_presence_of   :url, :message => "L'adresse de votre site est obligatoire."
   validates_presence_of   :name, :message => "Le nom du centre est obligatoire."
   validates_uniqueness_of :url, :message => "Cette adresse est déjà utilisée, veuillez en choisir une autre."
@@ -24,7 +24,7 @@ class Station < ActiveRecord::Base
 
   after_create :create_defaults_uniforms
   after_create :set_owner
-  
+
   def self.check(query)
     station = nil
     unless query.blank?
@@ -33,14 +33,14 @@ class Station < ActiveRecord::Base
     end
     station
   end
-  
+
   def reset_last_grade_update_at
-    max_grade_date = Grade.maximum(:date, 
+    max_grade_date = Grade.maximum(:date,
                                    :joins => "INNER JOIN firemen ON (firemen.id = grades.fireman_id)",
                                    :conditions => ["firemen.station_id = ?", self.id])
     self.update_attribute(:last_grade_update_at, max_grade_date)
   end
-  
+
   def confirm_last_grade_update_at?(max_grade_date)
     result = true
     if self.last_grade_update_at.blank?
@@ -52,22 +52,22 @@ class Station < ActiveRecord::Base
     end
     result
   end
-  
+
   def update_owner(new_owner_id)
     self.users.confirmed.find(new_owner_id, :conditions => ["users.id != ?", self.owner_id])
     return update_attribute(:owner_id, new_owner_id)
    rescue ActiveRecord::RecordNotFound
     return false
   end
-  
+
   private
-  
+
   def create_defaults_uniforms
-    Uniform.create_defaults(self)
+    Uniform.send_later(:create_defaults, self)
   end
-  
+
   def set_owner
     update_attribute(:owner_id, self.users.first.id) unless self.users.first.blank? # for test purpose only :-/
   end
-  
+
 end
