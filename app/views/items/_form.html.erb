@@ -53,7 +53,7 @@
                                 constrainInput: true,
                                 maxDate: '+5y',
                                 yearRange: '#{Date.today.year-5}:#{Date.today.year+5}'});
-        $('input#item_place').autocomplete(#{@places.to_json}, {
+        $('input#item_place').autocomplete(#{@check_list.places.to_json}, {
                                             minChars: 0,
                                             selectFirst: false
                                           });

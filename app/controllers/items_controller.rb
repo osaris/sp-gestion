@@ -4,9 +4,8 @@ class ItemsController < BackController
 
   before_filter :load_check_list, :except => [:expirings]
   before_filter :load_item, :except => [:new, :create, :expirings]
-  before_filter :load_places, :only => [:new, :create, :edit, :update]
 
-  def expirings    
+  def expirings
     @items = Item.expirings(30, @station.id)
     respond_to do |format|
       format.html do
@@ -67,13 +66,4 @@ class ItemsController < BackController
     flash[:error] = "Le matériel n'existe pas."
     redirect_to(check_list_path(@check_list))
   end
-
-  def load_places
-    @places = ActiveRecord::Base.connection.select_values("SELECT DISTINCT place
-                                                           FROM items
-                                                           WHERE items.place IS NOT NULL
-                                                           AND items.check_list_id = #{@check_list.id}
-                                                           ORDER BY place")
-  end
-
 end

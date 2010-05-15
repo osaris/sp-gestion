@@ -16,4 +16,12 @@ class CheckList < ActiveRecord::Base
     copy
   end
 
+  def places
+    ActiveRecord::Base.connection.select_values("SELECT DISTINCT place
+                                                           FROM items
+                                                           WHERE items.place IS NOT NULL
+                                                           AND items.check_list_id = #{self.id}
+                                                           ORDER BY place")
+  end
+
 end
