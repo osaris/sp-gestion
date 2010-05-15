@@ -6,6 +6,7 @@ class InterventionsController < BackController
   before_filter :load_vehicles, :except => [:index, :show, :destroy, :stats]
   before_filter :load_firemen, :except => [:index, :show, :destroy, :stats]
   before_filter :load_cities, :except => [:index, :show, :destroy, :stats]
+  before_filter :load_map, :only => [:show]
 
   def index
     @interventions = @station.interventions.paginate(:page => params[:page], :include => [:vehicles, {:fireman_interventions => [:fireman]}],
@@ -107,4 +108,16 @@ class InterventionsController < BackController
     end
   end
 
+  def load_map
+    unless @intervention.geocode.blank?
+      @map = GoogleMap::Map.new
+      @map.center = GoogleMap::Point.new(@intervention.geocode.latitude,
+                                         @intervention.geocode.longitude)
+      @map.zoom = 14
+      @map.markers << GoogleMap::Marker.new(:map => @map,
+                                            :lat => @intervention.geocode.latitude,
+                                            :lng => @intervention.geocode.longitude,
+                                            :html => '')
+    end
+  end
 end

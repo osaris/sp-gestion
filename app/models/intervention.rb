@@ -16,6 +16,8 @@ class Intervention < ActiveRecord::Base
   validates_datetime :start_date, :invalid_datetime_message => "Format incorrect (JJ/MM/AAAA HH:MM)"
   validates_datetime :end_date, :invalid_datetime_message => "Format incorrect (JJ/MM/AAAA HH:MM)"
 
+  acts_as_geocodable :address => {:street => :place, :locality => :city}
+
   before_create :init_number
 
   KIND = {
@@ -79,5 +81,4 @@ class Intervention < ActiveRecord::Base
   def init_number
     self.number = self.station.interventions.size + 1
   end
-
 end

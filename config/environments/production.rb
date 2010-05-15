@@ -29,3 +29,5 @@ config.action_view.cache_template_loading            = true
 
 # URL
 BASE_URL = "sp-gestion.fr"
+
+GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxQ-8_tmlR13LzjpxYDSzcgvXT_MeBS2b6MrBLjuU7-Jl6cuaphIPx84Sg"

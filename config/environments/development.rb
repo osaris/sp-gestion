@@ -16,9 +16,11 @@ config.action_controller.perform_caching             = false
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
-# Toggle toolbar URL 
+# Toggle toolbar URL
 # http://www.sp-gestion.dyndns.org:3000/__rack_bug__/bookmarklet.html
 config.middleware.use "Rack::Bug"
 
 # URL
 BASE_URL = "sp-gestion.dyndns.org:3000"
+
+GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxSVsZLsg7YqKrfZbkz-gQZBjT3-sxRVaIhrfjGMzd5BGWjuk_TjVpvVcw"

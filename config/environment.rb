@@ -47,11 +47,12 @@ Rails::Initializer.run do |config|
   config.gem "authlogic",           :version => "2.1.3"
   config.gem "delayed_job",         :version => "2.0.3"
   config.gem "errornot_notifier",   :version => "1.0.2"
-  config.gem "google_analytics",    :version => "1.1.5", :lib => "rubaidh/google_analytics", :source => "http://gems.github.com"
-  config.gem "googlecharts",        :version => "1.5.1", :source => "http://gems.github.com"
-  config.gem "graticule",           :version => "0.2.12"
+  config.gem "google_analytics",    :version => "1.1.5", :lib => "rubaidh/google_analytics"
+  config.gem "googlecharts",        :version => "1.5.1"
+  config.gem "graticule",           :version => "1.0.0.pre2"
+  config.gem "acts_as_geocodable",  :version => "1.0.3"
   config.gem "prawn",               :version => "0.7.2", :lib => "prawn"
-  config.gem "simple-navigation",   :version => "2.2.3", :lib => 'simple_navigation', :source => "http://gemcutter.org/"
+  config.gem "simple-navigation",   :version => "2.2.3", :lib => 'simple_navigation'
   config.gem "validates_timeliness",:version => "2.3.0"
-  config.gem "will_paginate",       :version => "2.3.12", :source => "http://gemcutter.org/"
+  config.gem "will_paginate",       :version => "2.3.12"
 end
