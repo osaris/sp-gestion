@@ -6,11 +6,19 @@
       <span class="span-2">
         <%= f.select(:kind, options_for_kind )%>
       </span>
+    </p>
     <p>
       <%= f.label(:place, "Lieu (*)", :class => "span-1 first") %>
       <span class="span-2">
         <%= f.text_area(:place, :class => "span-2 first", :rows => 5) %>
         <%= error_message_on(:intervention, :place, :css_class => "span-2 first") %>
+      </span>
+    </p>
+    <p>
+      <%= f.label(:city, "Ville (*)", :class => "span-1 first") %>
+      <span class="span-2">
+        <%= f.text_field(:city, :class => "span-2 first") %>
+        <%= error_message_on(:intervention, :city, :css_class => "span-2 first") %>
       </span>
     </p>
     <p>
@@ -59,8 +67,8 @@
   </div>
 <%- end -%>
 <%- content_for(:header) do -%>
-  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-1.7.2.custom.css")%>
-  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js") %>
+  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-1.7.2.custom.css", "back/jquery.autocomplete.css")%>
+  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js","jquery.autocomplete.pack.js") %>
 <%- end -%>
 <%= javascript_tag("
     $(function() {
@@ -76,11 +84,16 @@
                               showTime: true,
                               time24h: true,
                               stepMinutes: 1});
+      $('.click_prev_checkbox').click(function(){
+        var checkbox = $(this).prev(':checkbox');
+        checkbox.attr('checked', !checkbox.attr('checked'));
+      });
+      $('input#intervention_city').autocomplete(#{@cities.to_json}, {
+                                          minChars: 0,
+                                          selectFirst: false
+                                        });
+      $('input#intervention_city').focus(function(){
+        $('input#intervention_city').click().click();
+      });
     });
-    ") %>
-<%= javascript_tag("
-  $('.click_prev_checkbox').click(function(){
-    var checkbox = $(this).prev(':checkbox');
-    checkbox.attr('checked', !checkbox.attr('checked'));
-  });
 ")%>
