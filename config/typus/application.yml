@@ -9,9 +9,9 @@ BetaCode:
     options:
       date_formats:
         last_boosted_at: short
-  order_by: 
+  order_by:
   relationships: user
-  filters:
+  filters: used
   search:
   application: SP-Gestion
   actions:
@@ -27,7 +27,7 @@ Newsletter:
         last_boosted_at: short
         invited_at: short
   order_by:
-  relationships: 
+  relationships:
   filters:
   search: email
   application: SP-Gestion
@@ -38,9 +38,9 @@ Station:
   fields:
     list: name, url
     form: name, url
-  order_by: 
+  order_by:
   relationships: users
-  filters: 
+  filters:
   search: name
   application: SP-Gestion
 
@@ -55,9 +55,9 @@ User:
         confirmed_at: short
         confirmation_sent_at: short
         last_boosted_at: short
-  order_by: 
+  order_by:
   relationships: beta_codes, station
-  filters: 
+  filters:
   search: email
   application: SP-Gestion
   actions:
