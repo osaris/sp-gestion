@@ -8,6 +8,6 @@
   <p>Remarque : <%= h(@vehicle.rem) %></p>
 <%- end -%>
 <p>
-  <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + "&nbsp;Editer", edit_vehicle_path(@vehicle))%> -
-  <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + "&nbsp;Supprimer", vehicle_path(@vehicle), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
+  <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + "&nbsp;Editer".html_safe, edit_vehicle_path(@vehicle))%> -
+  <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + "&nbsp;Supprimer".html_safe, vehicle_path(@vehicle), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
 </p>
