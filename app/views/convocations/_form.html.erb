@@ -24,7 +24,7 @@
   <p>
     <%= f.label(:uniform, "Tenue (*)", :class => "span-1 first") %>
     <span class="span-3">
-      <%= collection_select(:convocation, :uniform_id, Uniform.all, :id, :title) %>
+      <%= collection_select(:convocation, :uniform_id, @station.uniforms.all, :id, :title) %>
       <%= error_message_on(:convocation, :uniform, :css_class => "span-2 first") %>
     </span>
   </p>
