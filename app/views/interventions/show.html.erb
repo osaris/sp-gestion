@@ -1,8 +1,8 @@
 <h1>Intervention n°<%= @intervention.number %></h1>
 <div class="span-3 first">
   <p>
-    <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + "&nbsp;Editer".html_safe, edit_intervention_path(@intervention))%> -
-    <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + "&nbsp;Supprimer".html_safe, intervention_path(@intervention), :method => :delete, :confirm => "Êtes-vous sûr ?")%>
+    <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + "&nbsp;Editer", edit_intervention_path(@intervention))%> -
+    <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + "&nbsp;Supprimer", intervention_path(@intervention), :method => :delete, :confirm => "Êtes-vous sûr ?")%>
   </p>
   <p>Type : <%= display_kind(@intervention)%></p>
   <p>Lieu : <%= h(@intervention.place)%>&nbsp;/&nbsp;<%= h(@intervention.city)%></p>
