@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100515140813) do
+ActiveRecord::Schema.define(:version => 20100612140837) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20100515140813) do
     t.text     "rem"
     t.date     "checkup"
     t.string   "cached_tag_list"
+    t.string   "email"
   end
 
   create_table "geocodes", :force => true do |t|
