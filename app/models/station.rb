@@ -70,11 +70,11 @@ class Station < ActiveRecord::Base
     (self.nb_email_sent+number <= NB_EMAIL_PER_HOUR)
   end
 
-  private
-
   def reset_email_limitation
     update_attribute(:nb_email_sent, 0) if self.last_email_sent_at < 1.hour.ago
   end
+
+  private
 
   def create_defaults_uniforms
     Uniform.send_later(:create_defaults, self)
