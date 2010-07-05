@@ -35,6 +35,7 @@ Fireman.blueprint do
   firstname
   lastname
   validate_grade_update(1)
+  email
 end
 
 Intervention.blueprint do

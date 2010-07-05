@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100612140837) do
+ActiveRecord::Schema.define(:version => 20100613101554) do
 
   create_table "beta_codes", :force => true do |t|
     t.string   "code"
@@ -47,7 +47,8 @@ ActiveRecord::Schema.define(:version => 20100612140837) do
     t.datetime "updated_at"
     t.string   "place"
     t.text     "rem"
-    t.boolean  "hide_grade", :default => false
+    t.boolean  "hide_grade",      :default => false
+    t.datetime "last_emailed_at"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -186,6 +187,8 @@ ActiveRecord::Schema.define(:version => 20100612140837) do
     t.datetime "updated_at"
     t.date     "last_grade_update_at"
     t.integer  "owner_id"
+    t.datetime "last_email_sent_at"
+    t.integer  "nb_email_sent",        :default => 0
   end
 
   create_table "taggings", :force => true do |t|

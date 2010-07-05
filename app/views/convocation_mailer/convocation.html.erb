@@ -1,0 +1,15 @@
+<%= h(@convocation.station.name) %>
+
+CONVOCATION
+
+<%= @grade %> <%= h(@fireman.firstname) %> <%= h(@fireman.lastname)%>
+
+Motif : <%= h(@convocation.title) %>
+
+Lieu : <%= h(@convocation.place) %>
+
+Date et heure : <%= I18n.l(@convocation.date, :format => :default) %>
+
+<%- unless @convocation.rem.blank? -%>
+Remarque : <%= h(convocation.rem) %>
+<%- end -%>

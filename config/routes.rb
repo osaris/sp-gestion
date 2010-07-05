@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.update_account '/account/update', :controller => 'accounts', :action => 'update', :conditions => { :subdomain => /.+/  }
   map.destroy_account '/account/destroy', :controller => 'accounts', :action => 'destroy', :conditions => { :subdomain => /.+/  }
   map.resources :confirmations, :only => [:edit, :update], :conditions => { :subdomain => /.+/ }
-  map.resources :convocations, :conditions => { :subdomain => /.+/  } do |convocation|
+  map.resources :convocations, :member => { :email => :post}, :conditions => { :subdomain => /.+/  } do |convocation|
     convocation.resources :convocation_firemen, :only => [:show], :collection => {:show_all => :get, :edit_all => :get, :update_all => :put}, :conditions => { :subdomain => /.+/  }
   end
   map.resources :check_lists, :member => { :copy => :post }, :conditions => { :subdomain => /.+/ } do |check_list|

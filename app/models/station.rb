@@ -25,6 +25,11 @@ class Station < ActiveRecord::Base
   after_create :create_defaults_uniforms
   after_create :set_owner
 
+  def initialize(params = nil)
+    super
+    self.last_email_sent_at ||= Time.now - 2.hours
+  end
+
   def self.check(query)
     station = nil
     unless query.blank?
@@ -60,7 +65,16 @@ class Station < ActiveRecord::Base
     return false
   end
 
+  def can_send_email?(number)
+    reset_email_limitation
+    (self.nb_email_sent+number <= NB_EMAIL_PER_HOUR)
+  end
+
   private
+
+  def reset_email_limitation
+    update_attribute(:nb_email_sent, 0) if self.last_email_sent_at < 1.hour.ago
+  end
 
   def create_defaults_uniforms
     Uniform.send_later(:create_defaults, self)
