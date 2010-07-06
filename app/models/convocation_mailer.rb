@@ -1,10 +1,11 @@
 class ConvocationMailer < ApplicationMailer
 
-  def convocation(convocation, convocation_fireman)
+  def convocation(convocation, convocation_fireman, user_email)
     fireman = convocation_fireman.fireman
     grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.index(convocation_fireman.grade)
 
     setup(fireman.email)
+    from(user_email)
     subject("Convocation")
 
     content_type("multipart/alternative")

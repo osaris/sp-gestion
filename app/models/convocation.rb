@@ -45,7 +45,7 @@ class Convocation < ActiveRecord::Base
     nb_email = 0
     # send convocations
     self.convocation_firemen.with_email.each do |convocation_fireman|
-      ConvocationMailer.deliver_convocation(self, convocation_fireman)
+      ConvocationMailer.send_later(:deliver_convocation, self, convocation_fireman, user_email)
       nb_email += 1
     end
     # send confirmation to user who started the job
