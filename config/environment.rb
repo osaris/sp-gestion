@@ -56,3 +56,5 @@ Rails::Initializer.run do |config|
   config.gem "validates_timeliness",:version => "2.3.1"
   config.gem "will_paginate",       :version => "2.3.12"
 end
+
+require File.join(RAILS_ROOT,'lib/filenamize.rb')
