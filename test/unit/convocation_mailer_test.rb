@@ -21,14 +21,15 @@ class ConvocationMailerTest < ActionMailer::TestCase
       end
     end
 
-    context "deliver confirmation" do
+    context "deliver convocation" do
       setup do
         @convocation_fireman = @convocation.convocation_firemen.first
-        ConvocationMailer.deliver_convocation(@convocation, @convocation_fireman)
+        ConvocationMailer.deliver_convocation(@convocation, @convocation_fireman, "test@test.com")
       end
 
       should "send an email" do
         assert_sent_email do |email|
+          email.from.include?("test@test.com") &&
           email.to.include?(@convocation_fireman.fireman.email) &&
           email.body.match(@convocation.title)
         end
