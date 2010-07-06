@@ -93,9 +93,11 @@ def make_fireman_with_grades(attributes = {})
   f
 end
 
-def make_convocation_with_firemen(attributes = {})
+def make_convocation_with_firemen(attributes = {}, number_of_firemen = 1)
   c = Convocation.make_unsaved(attributes)
-  c.firemen << make_fireman_with_grades(:station => c.station)
+  number_of_firemen.times do
+    c.firemen << make_fireman_with_grades(:station => c.station)
+  end
   c.save
   c
 end
