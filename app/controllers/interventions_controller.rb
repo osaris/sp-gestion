@@ -117,7 +117,7 @@ class InterventionsController < BackController
       @map.markers << GoogleMap::Marker.new(:map => @map,
                                             :lat => @intervention.geocode.latitude,
                                             :lng => @intervention.geocode.longitude,
-                                            :html => '')
+                                            :open_infoWindow => false)
     end
   end
 end
