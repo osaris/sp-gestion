@@ -2,24 +2,6 @@
 <div class="in">
   <div class="box">
     <div class="topstory-txt left">
-      <div id="newsletter">
-        <p class="header">
-          Découvrez SP-Gestion en avant-première !
-        </p>
-        <p>Laissez nous votre adresse email et nous vous transmettrons d'ici quelques jours un accès spécial pour
-          découvrir SP-Gestion.</p>
-        <%- if @newsletter.new_record? -%>
-          <%= flash_helper() unless @newsletter.errors.empty? %>
-          <%= render(:partial => "newsletters/new") %>
-        <%- else -%>
-          <%= flash_helper() %>
-        <%- end -%>
-        <p class="help">
-          Vous recevrez un seul email de notre part, aucune pub ou pourriel/spam.
-        </p>
-      </div>
-    </div>
-    <div class="topstory-txt right">
       <h3>Simplicité, efficacité, rapidité</h3>
       <p class="nomb">
         Oubliez les listes papier, les tableaux et les lettres types, SP-Gestion va <b>simplifier toute
@@ -27,34 +9,39 @@
         informations</b> dont vous avez besoin quand vous en avez besoin et vous <b>prenez ainsi les bonnes décisions</b>.
       </p>
     </div>
+    <div class="topstory-txt right">
+      <div class="signup_box">
+        <%= link_to("Inscription gratuite &raquo;", signup_path, :class => :signup) %>
+      </div>
+    </div>
   </div>
   <h4 class="title-02"><span>Fonctionnalités</span></h4>
   <div class="cols5050 box">
     <div class="col">
       <div class="article box">
         <div class="article-img">
-          <%= image_tag("front/contact_list.png", :alt => "Gestion du personnel") %>                  
+          <%= image_tag("front/contact_list.png", :alt => "Gestion du personnel") %>
         </div>
         <div class="article-txt">
           <h4>Personnel</h4>
           <p>Actifs, vétérans, JSP, formations, disponibilités...</p>
-        </div> 
+        </div>
       </div>
       <div class="article box">
         <div class="article-img">
           <%= image_tag("front/history.png", :alt => "Gestion et saisie des gardes") %>
         </div>
         <div class="article-txt">
-          <h4>Gardes</h4>
+          <h4>Gardes</h4><div class="soon">Bientôt disponible</div>
           <p>Saisie des disponibilités et préparation des feuilles de gardes.</p>
         </div>
       </div>
       <div class="article box">
         <div class="article-img">
-          <%= image_tag("front/money.png", :alt => "Calcul des vacations en fonction des grades, des durées d'intervention, des périodes...") %>                  
+          <%= image_tag("front/money.png", :alt => "Calcul des vacations en fonction des grades, des durées d'intervention, des périodes...") %>
         </div>
         <div class="article-txt">
-          <h4>Vacations</h4>
+          <h4>Vacations</h4><div class="soon">Bientôt disponible</div>
           <p>Calcul du montant des vacations par SP d'un simple clic.</p>
         </div>
       </div>
@@ -67,8 +54,8 @@
         <div class="article-txt">
           <h4>Véhicules</h4>
           <p>Suivi du nombre d'interventions par véhicules, du matériel...</p>
-        </div> 
-      </div> 
+        </div>
+      </div>
       <div class="article box">
         <div class="article-img">
           <%= image_tag("front/exec.png", :alt => "Listing de matériel, rappel de péremption, check list") %>
@@ -76,8 +63,8 @@
         <div class="article-txt">
           <h4>Matériel</h4>
           <p>Liste de matériel, gestion des dates de péremptions...</p>
-        </div> 
-      </div> 
+        </div>
+      </div>
       <div class="article box">
         <div class="article-img">
           <%= image_tag("front/chart.png", :alt => "Statistiques des types d'intervention (feu, accidents, secours à victime)") %>
@@ -109,7 +96,7 @@
       </div>
       <div class="article box">
         <div class="article-img">
-          <%= image_tag("front/user.png", :alt => "Gestion des tenues pour le fourrier (liste du matériel prêté à chaque SP ou JSP)") %>                  
+          <%= image_tag("front/user.png", :alt => "Gestion des tenues pour le fourrier (liste du matériel prêté à chaque SP ou JSP)") %>
         </div>
         <div class="article-txt">
           <h4>Tenues</h4>

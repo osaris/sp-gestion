@@ -21,7 +21,7 @@
               <%= c.label(:name, 'Nom du centre') %>
             </td>
             <td>
-              <%= c.text_field(:name, :tabindex => 1) %>              
+              <%= c.text_field(:name, :tabindex => 1) %>
               <%= error_message_on(:station, :name) %>
               <%= observe_field(:station_name, :url => check_stations_url,
                                                :method => :get,
@@ -58,15 +58,6 @@
             <td>
               <%= u.text_field(:email, :tabindex => 3) %>
               <%= error_message_on(:user, :email) %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= u.label(:beta_code, "Code beta") %>
-            </td>
-            <td>
-              <%= u.text_field(:beta_code, :tabindex => 5) %>
-              <%= error_message_on(:user, :beta_code) %>
             </td>
           </tr>
         <%- end -%>

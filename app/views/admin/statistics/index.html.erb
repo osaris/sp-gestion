@@ -7,15 +7,3 @@
 <!-- Content -->
 
 <h2><%= params[:controller].split('/').last.titleize.capitalize %></h2>
-
-<%= image_tag(Gchart.pie_3d(:title => 'Newsletters', :size => '400x200',
-                            :data => [@nb_nl_inactive, @nb_nl_to_invite, @nb_nl_invited], 
-                            :labels => ["Inactives #{@nb_nl_inactive}", 
-                                        "A inviter #{@nb_nl_to_invite}", 
-                                        "Invitées #{@nb_nl_invited}"])) %>
-
-<%= image_tag(Gchart.pie_3d(:title => 'Beta', :size => '400x200',
-                            :data => [@nb_bc_unused, @nb_bc_inactive, @nb_bc_used], 
-                            :labels => ["Inutilisés #{@nb_bc_unused}", 
-                                        "Inactifs #{@nb_bc_inactive}", 
-                                        "Utilisés #{@nb_bc_used}"])) %>

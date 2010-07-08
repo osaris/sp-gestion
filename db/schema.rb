@@ -9,17 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100613101554) do
-
-  create_table "beta_codes", :force => true do |t|
-    t.string   "code"
-    t.boolean  "used",            :default => false
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "email"
-    t.datetime "last_boosted_at"
-  end
+ActiveRecord::Schema.define(:version => 20100708192231) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -168,16 +158,6 @@ ActiveRecord::Schema.define(:version => 20100613101554) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "read_at"
-  end
-
-  create_table "newsletters", :force => true do |t|
-    t.string   "email"
-    t.string   "activation_key",  :limit => 64
-    t.datetime "activated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "invited_at"
-    t.datetime "last_boosted_at"
   end
 
   create_table "stations", :force => true do |t|

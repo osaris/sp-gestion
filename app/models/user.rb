@@ -3,11 +3,9 @@ class User < ActiveRecord::Base
 
   belongs_to :station
   has_many :messages, :dependent => :destroy
-  has_many :beta_codes
 
-  attr_accessor :beta_code, :cooptation, :new_email_tmp
+  attr_accessor :cooptation, :new_email_tmp
 
-  after_create :assign_beta_code
   before_create :reset_perishable_token
 
   named_scope :confirmed, :conditions => ['confirmed_at IS NOT NULL']
@@ -45,13 +43,6 @@ class User < ActiveRecord::Base
     })
   end
 
-  def validate_on_create
-    unless cooptation
-      bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
-      self.errors.add(:beta_code, "Ce code n'est pas valide.") if bc.blank?
-    end
-  end
-
   def reset_password!(new_password, new_password_confirmation)
     self.password = new_password || ""
     self.password_confirmation = new_password_confirmation || ""
@@ -66,13 +57,7 @@ class User < ActiveRecord::Base
     self.confirmed_at = Time.now.utc
     self.password = password
     self.password_confirmation = password_confirmation
-    result = save
-    if result
-      self.beta_codes.each do |beta_code|
-        beta_code.update_attribute(:used, true)
-      end
-    end
-    result
+    save
   end
 
   def deliver_confirmation_instructions!
@@ -139,13 +124,6 @@ class User < ActiveRecord::Base
 
   def password_validation_needed?
     confirmed_at.blank? or (!password.blank? or !password_confirmation.blank?)
-  end
-
-  def assign_beta_code
-    unless cooptation
-      bc = BetaCode.find(:first, :conditions => {:code => self.beta_code, :used => false})
-      bc.update_attribute(:user_id, self.id)
-    end
   end
 
   def deliver_new_email_instructions!

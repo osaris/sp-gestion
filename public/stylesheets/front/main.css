@@ -10,7 +10,7 @@
         display; position; z-index; float; clear; width; height; overflow; margin; padding; border; background; align; font;
 
     Content:
-    
+
         1) HTML tags
         2) HTML styles
         3) Layout
@@ -40,9 +40,9 @@ h1, h2, h3, h4, h5, h6, p, address, blockquote, table, dl, fieldset {margin:15px
 
     #header {position:relative; height:100px; padding:0 0 0 35px; background:url("/images/front/header.gif") 0 0 no-repeat; overflow:hidden;}
     #header #logo {margin:0;}
-    
+
         #slogan {position:absolute; top:30px; right:0; width:275px; padding:10px 10px 10px 15px; background:url("/images/front/pattern.gif");}
-    
+
     #nav {position:relative; padding:0 20px; background:url("/images/front/nav.gif") 0 0 repeat-x;}
     #nav ul {margin:0; list-style:none;}
     #nav ul li {display:inline;}
@@ -54,14 +54,14 @@ h1, h2, h3, h4, h5, h6, p, address, blockquote, table, dl, fieldset {margin:15px
 
     #cols {margin-bottom:10px;}
     #cols-in {min-height:430px; padding:20px; background-color: #e7e7e7;}
-    
+
         #content {float:left; width:900px; border:1px gray solid; background-color: white;}
         #aside {float:right; width:280px;}
         #content .in, #aside .in {padding:15px;}
 
     #footer {padding:15px 15px 5px 15px;}
     #footer p {margin:0; font-size:10px;}
-    
+
         #ico-print {padding-left:12px; background:url("/images/front/ico-print.gif") 0 50% no-repeat;}
         #ico-sitemap {margin-left:10px; padding-left:10px; background:url("/images/front/ico-sitemap.gif") 0 50% no-repeat;}
 
@@ -83,18 +83,14 @@ h1, h2, h3, h4, h5, h6, p, address, blockquote, table, dl, fieldset {margin:15px
 .topstory-txt #topstory-info {margin:0; font-size:90%;}
 .topstory-txt .comment {padding-left:12px; background:url("/images/front/ico-comment.gif") 0 2px no-repeat;}
 
-#newsletter { margin-top:10px; border:2px solid #df0000; padding:5px; }
-#newsletter p.header { width:100%; text-align:center;font-size:110%;font-weight:bold;margin: 0px 0px 5px 0px; padding: 0; }
-#newsletter p.help { font-size: 80%; padding:0 ; margin: 5px 0px 0px 0px;}
-
 .cols5050 {clear:both; background:url("/images/front/dot-01.gif") 0 100% repeat-x;}
 .cols5050 .col {float:left; width:290px;}
 .cols5050 .col .article {clear:both; margin-bottom:15px;}
 .cols5050 .col .article-img {float:left; width:85px;}
 .cols5050 .col .article-img img {display:block; margin-left:30px;}
 .cols5050 .col .article-txt {float:right; width:175px; margin-right: 10px;}
-.cols5050 .col .article-txt h4 {margin:0; margin-bottom:7px; font-size:110%;color:#df0000;}
-.cols5050 .col .article-txt p {margin:0; font-size:90%;}
+.cols5050 .col .article-txt h4 {margin:0; margin-bottom:7px; font-size:110%;color:#df0000; float:left;}
+.cols5050 .col .article-txt p {margin:0; font-size:90%; clear: both;}
 
 #subnav {margin:0; list-style:none;}
 #subnav li {display:inline;}
@@ -111,6 +107,11 @@ dl#news a:hover {text-decoration:none;}
 #gallery .separator {width:910px; height:2px; margin:10px 0; background:url("/images/front/separator.gif") 0 0 repeat-x; font-size:0; line-height:0; overflow:hidden;}
 #gallery img {margin-right:18px;}
 #gallery a.last img {margin:0;}
+
+.soon { background-color: gray; color:white; padding:3px; font-size:8px; float:right;}
+.signup_box { width: 250px; margin: 40px auto 0 auto; text-align:center;}
+.signup { background-color: #DF0000; color: white; padding: 12px; font-size: 18px; text-align:center; text-decoration: none;}
+.signup:hover { color: white; background-color: red;}
 
 /* ----------------------------------------------------------------------------------------------------------
 5) Others

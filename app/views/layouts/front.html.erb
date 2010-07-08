@@ -31,8 +31,7 @@
       <div id="nav" class="box">
         <ul>
 			<li><%= link_to("Accueil", home_path())%></li>
-			<%# TODO end of beta %>
-			<%- if false -%><li class="active"><%= link_to("Créer un compte", signup_path()) %></li><%- end -%>
+      <li class="active"><%= link_to("Inscription gratuite", signup_path()) %></li>
 			<li><%= link_to("Blog", "http://blog.sp-gestion.fr") %></li>
         </ul>
       </div> <!-- /nav -->
@@ -47,7 +46,7 @@
               <div id="content">
 
                 <%= yield %>
-                  
+
               </div> <!-- /content -->
 
               <hr class="noscreen" />
@@ -66,6 +65,6 @@
       </div> <!-- /box -->
 
   </div> <!-- /main -->
-    
+
 </body>
 </html>
