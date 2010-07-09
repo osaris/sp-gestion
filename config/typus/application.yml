@@ -2,38 +2,6 @@
 #
 # Use the README file as a reference to customize settings.
 
-BetaCode:
-  fields:
-    list: code, email, used, user, last_boosted_at
-    form: code, email, used, user
-    options:
-      date_formats:
-        last_boosted_at: short
-  order_by:
-  relationships: user
-  filters: used
-  search:
-  application: SP-Gestion
-  actions:
-    edit: boost_activation
-
-Newsletter:
-  fields:
-    list: email, activated_at, last_boosted_at, invited_at
-    form: email
-    options:
-      date_formats:
-        activated_at: short
-        last_boosted_at: short
-        invited_at: short
-  order_by:
-  relationships:
-  filters:
-  search: email
-  application: SP-Gestion
-  actions:
-    edit: invite_to_beta, boost_activation
-
 Station:
   fields:
     list: name, url
@@ -56,7 +24,7 @@ User:
         confirmation_sent_at: short
         last_boosted_at: short
   order_by:
-  relationships: beta_codes, station
+  relationships: station
   filters:
   search: email
   application: SP-Gestion

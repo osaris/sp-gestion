@@ -4,9 +4,9 @@ class UserMailerTest < ActionMailer::TestCase
 
   context "with a user" do
     setup do
-      @user = User.make(:beta, :email => "test@test.com", :new_email => "test@new.com")
+      @user = User.make(:email => "test@test.com", :new_email => "test@new.com")
     end
-    
+
     context "deliver confirmation instructions" do
       setup do
         UserMailer.deliver_confirmation_instructions(@user)
@@ -16,10 +16,10 @@ class UserMailerTest < ActionMailer::TestCase
         assert_sent_email do |email|
           email.to.include?("test@test.com") &&
           email.body.match(@user.perishable_token)
-        end      
+        end
       end
     end
-    
+
     context "deliver new email instructions" do
       setup do
         UserMailer.deliver_new_email_instructions(@user)
@@ -29,10 +29,10 @@ class UserMailerTest < ActionMailer::TestCase
         assert_sent_email do |email|
           email.to.include?("test@new.com") &&
           email.body.match(@user.perishable_token)
-        end      
+        end
       end
     end
-    
+
     context "deliver cooptation instructions" do
       setup do
        UserMailer.deliver_cooptation_instructions(@user)
@@ -42,7 +42,7 @@ class UserMailerTest < ActionMailer::TestCase
         assert_sent_email do |email|
           email.to.include?("test@test.com") &&
           email.body.match(@user.perishable_token)
-        end      
+        end
       end
     end
 
@@ -55,10 +55,10 @@ class UserMailerTest < ActionMailer::TestCase
         assert_sent_email do |email|
           email.to.include?("test@test.com") &&
           email.body.match(@user.station.url)
-        end      
+        end
       end
     end
-        
+
     context "deliver boost activation" do
       setup do
         UserMailer.deliver_boost_activation(@user)
@@ -68,7 +68,7 @@ class UserMailerTest < ActionMailer::TestCase
         assert_sent_email do |email|
           email.to.include?("test@test.com") &&
           email.body.match(@user.perishable_token)
-        end      
+        end
       end
     end
   end

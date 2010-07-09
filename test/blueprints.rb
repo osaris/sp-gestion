@@ -16,10 +16,6 @@ Sham.define do
   url         { Faker::Internet.domain_word }
 end
 
-BetaCode.blueprint do
-  email
-end
-
 CheckList.blueprint do
   title
 end
@@ -55,27 +51,6 @@ Message.blueprint do
   body
 end
 
-Newsletter.blueprint do
-  email
-end
-
-Newsletter.blueprint(:invited) do
-  email
-  activated_at(Time.now)
-  invited_at(Time.now)
-end
-
-Newsletter.blueprint(:inactive) do
-  email
-  activated_at(nil)
-end
-
-Newsletter.blueprint(:active) do
-  email
-  activated_at(Time.now)
-  invited_at(nil)
-end
-
 Station.blueprint do
   name
   url
@@ -94,21 +69,12 @@ User.blueprint do
   password_confirmation(pass)
 end
 
-User.blueprint(:beta) do
-  email
-  station
-  password(pass = Authlogic::Random.hex_token)
-  password_confirmation(pass)
-  beta_code(BetaCode.make.code)
-end
-
 User.blueprint(:confirmed) do
   email
   station
   password(pass = 'test1234')
   password_confirmation(pass)
   confirmed_at(1.day.ago)
-  beta_code(BetaCode.make.code)
 end
 
 Vehicle.blueprint do

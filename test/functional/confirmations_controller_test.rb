@@ -26,7 +26,7 @@ class ConfirmationsControllerTest < ActionController::TestCase
 
     context "with an inactive user on this subdomain" do
       setup do
-        @user = @station.users.make(:beta)
+        @user = @station.users.make
       end
 
       context "requesting GET :edit with good confirmation code" do

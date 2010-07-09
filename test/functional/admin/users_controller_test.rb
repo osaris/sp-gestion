@@ -10,30 +10,30 @@ class Admin::UsersControllerTest < ActionController::TestCase
       @request.session[:typus_user_id] = typus_users(:admin).id
       @request.env["HTTP_REFERER"] = "/admin"
     end
-        
+
     context "requesting GET :boost_activation which send boost" do
       setup do
         User.any_instance.stubs(:boost_activation).returns(true)
-        get :boost_activation, :id => User.make(:beta).id
+        get :boost_activation, :id => User.make.id
       end
-            
+
       should_respond_with(:redirect)
-      should_redirect_to("newsletters list") { "/admin/users" }
-      
+      should_redirect_to("users list") { "/admin/users" }
+
       should_set_the_flash(:success)
     end
-    
+
     context "requesting GET :boost_activation which fail" do
       setup do
         User.any_instance.stubs(:boost_activation).returns(false)
-        get :boost_activation, :id => User.make(:beta).id
+        get :boost_activation, :id => User.make.id
       end
-      
+
       should_respond_with(:redirect)
       should_redirect_to("back") { "/admin" }
-      
+
       should_set_the_flash(:error)
-    end    
+    end
   end
 
 end

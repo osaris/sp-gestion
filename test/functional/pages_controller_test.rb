@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PagesControllerTest < ActionController::TestCase
-  
+
   context "requesting GET :home" do
     setup do
       get :home
@@ -10,8 +10,6 @@ class PagesControllerTest < ActionController::TestCase
     should_respond_with(:success)
     should_render_template("home")
     should_render_with_layout("front")
-    
-    should_assign_to(:newsletter) { @newsletter }
   end
-  
+
 end
