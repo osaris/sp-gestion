@@ -29,7 +29,8 @@ class ConvocationMailerTest < ActionMailer::TestCase
 
       should "send an email" do
         assert_sent_email do |email|
-          email.from.include?("test@test.com") &&
+          email.from.include?("pas_de_reponse@sp-gestion.fr") &&
+          email.reply_to.include?("test@test.com") &&
           email.to.include?(@convocation_fireman.fireman.email) &&
           email.body.match(@convocation.title)
         end

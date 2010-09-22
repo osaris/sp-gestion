@@ -5,8 +5,9 @@ class ConvocationMailer < ApplicationMailer
     grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.index(convocation_fireman.grade)
 
     setup(fireman.email)
-    from(user_email)
     subject("Convocation")
+    from(convocation.station.name + " <pas_de_reponse@sp-gestion.fr>")
+    reply_to(user_email)
 
     content_type("multipart/alternative")
 
