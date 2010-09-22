@@ -2,7 +2,7 @@
   <h1>Détails du compte <%= @station.url %>.sp-gestion.fr</h1>
 
   <h2>Logo  (png, jpg, gif) de 100 x 50 pixels</h2>
-  <%- form_for(:account, :url => update_logo_account_path, :html => { :multipart => true}) do |f| %>
+  <%- form_for(:station, :url => update_logo_account_path, :html => { :method => :put, :multipart => true}) do |f| %>
   <p>
     <%= f.label(:logo, "Fichier", :class => "span-1 first")%>
     <span class="span-3">
@@ -26,7 +26,7 @@
   <h2>Changer le propriétaire du compte</h2>
   <p>Attention en transférant la propriété de ce compte à un autre utilisateur vous n'aurez plus la possibilité de gérer les utilisateurs et de re-changer le propriétaire.</p>
   <%- if @users.size > 0 -%>
-    <%- form_for(:account, :url => update_owner_account_path) do |f| %>
+    <%- form_for(:station, :url => update_owner_account_path, :html => { :method => :put }) do |f| %>
       <p>
         <%= f.label(:owner_id, "Nouveau propriétaire du compte", :class => "span-1 first") %>
         <span class="span-3">
