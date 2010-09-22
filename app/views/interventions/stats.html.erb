@@ -19,7 +19,7 @@
                                 :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
                                 :background => 'F5F5F5')) %>
 
-    <%= image_tag(Gchart.bar( :title => 'Interventions par mois', :size => '600x200',
+    <%= image_tag(Gchart.bar( :title => 'Interventions par mois', :size => '500x200',
                               :data => @by_month,
                               :axis_with_labels => 'x,y',
                               :axis_labels => [['Jan','Fév','Mar','Avr','Mai','Juin','Jui','Aou','Sep','Oct''Nov','Déc'],
