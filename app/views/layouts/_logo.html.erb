@@ -1,0 +1,5 @@
+<%- if @station.logo? -%>
+  <%= image_tag(@station.logo.url, :alt => h(@station.name)) %>
+<%- else -%>
+  <%= h(@station.name) %>
+<%- end -%>

@@ -14,12 +14,12 @@
   <!--[if lte IE 6]><%= render(:partial => "/layouts/ie6_warning") %><![endif]-->
   <div class="login">
   <p id="header">
-    <%= link_to(h(@station.name), root_back_path)%>
+    <%= render(:partial => "/layouts/logo") %>
   </p><!-- #header -->
   <div id="content">
     <div id="loginbox" class="tabs span-2 first">
       <div class="head">
-        <%= render_navigation(:context => context_login_navigation(controller.controller_name), 
+        <%= render_navigation(:context => context_login_navigation(controller.controller_name),
                               :level => 1) %>
       </div>
       <div id="login" class="body clearfix">

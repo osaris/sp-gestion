@@ -14,6 +14,7 @@ Sham.define do
   place       { Faker::Lorem.words(2).join(' ') }
   title       { Faker::Lorem.words(3).join(' ') }
   url         { Faker::Internet.domain_word }
+  logo        { File.open("#{Rails.root}/test/fixtures/uploads/logo/logo.png")}
 end
 
 CheckList.blueprint do
@@ -54,6 +55,12 @@ end
 Station.blueprint do
   name
   url
+end
+
+Station.blueprint(:logo) do
+  name
+  url
+  logo
 end
 
 Uniform.blueprint do

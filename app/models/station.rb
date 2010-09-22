@@ -11,6 +11,8 @@ class Station < ActiveRecord::Base
   has_many :vehicles, :dependent => :destroy
   has_one  :owner, :class_name => "User"
 
+  mount_uploader :logo, LogoUploader
+
   RESERVED_URL =  %w(sp-gestion spgestion blog).freeze
 
   validates_presence_of   :url, :message => "L'adresse de votre site est obligatoire."

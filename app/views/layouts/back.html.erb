@@ -18,11 +18,11 @@
   </noscript>
   <!--[if lte IE 6]><%= render(:partial => "/layouts/ie6_warning") %><![endif]-->
   <p id="header">
-    <%= h(@station.name) %>
+    <%= render(:partial => "/layouts/logo") %>
   </p><!-- #header -->
   <p id="user">
     <%- if current_user.id == @station.owner_id -%>
-      <%= link_to("Compte", account_path) %>
+      <%= link_to("Compte", edit_account_path) %>
       &nbsp;|&nbsp;
       <%= link_to("Utilisateurs", users_path) %>
       &nbsp;|&nbsp;

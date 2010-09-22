@@ -2,9 +2,11 @@ ActionController::Routing::Routes.draw do |map|
 
   Typus::Routes.draw(map)
 
-  map.account   '/account', :controller => 'accounts', :action => 'edit', :conditions => { :subdomain => /.+/  }
-  map.update_account '/account/update', :controller => 'accounts', :action => 'update', :conditions => { :subdomain => /.+/  }
-  map.destroy_account '/account/destroy', :controller => 'accounts', :action => 'destroy', :conditions => { :subdomain => /.+/  }
+  # map.account   '/account', :controller => 'accounts', :action => 'edit', :conditions => { :subdomain => /.+/  }, :method => :get
+  # map.update_account_logo '/account/update_logo', :controller => 'accounts', :action => 'update_logo', :conditions => { :subdomain => /.+/ }, :method => :put
+  # map.update_account_owner '/account/update_owner', :controller => 'accounts', :action => 'update_owner', :conditions => { :subdomain => /.+/  }, :method => :put
+  # map.destroy_account '/account/destroy', :controller => 'accounts', :action => 'destroy', :conditions => { :subdomain => /.+/  }
+  map.resource  :account, :only => [:edit, :destroy], :member => { :update_logo => :put, :update_owner => :put },  :conditions => { :subdomain => /.+/ }
   map.resources :confirmations, :only => [:edit, :update], :conditions => { :subdomain => /.+/ }
   map.resources :convocations, :member => { :email => :post}, :conditions => { :subdomain => /.+/  } do |convocation|
     convocation.resources :convocation_firemen, :only => [:show], :collection => {:show_all => :get, :edit_all => :get, :update_all => :put}, :conditions => { :subdomain => /.+/  }

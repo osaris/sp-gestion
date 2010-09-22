@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100708192231) do
+ActiveRecord::Schema.define(:version => 20100714191820) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20100708192231) do
     t.integer  "owner_id"
     t.datetime "last_email_sent_at"
     t.integer  "nb_email_sent",        :default => 0
+    t.string   "logo"
   end
 
   create_table "taggings", :force => true do |t|
