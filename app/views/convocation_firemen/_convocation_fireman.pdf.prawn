@@ -1,6 +1,9 @@
 fireman = convocation_fireman.fireman
 grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.index(convocation_fireman.grade)
 
+if @station.logo?
+  _pdf.image(@station.logo, :at => [425, 370], :width => 100, :height => 50)
+end
 _pdf.text(h(@station.name))
 _pdf.move_down(40)
 _pdf.text("CONVOCATION", :align => :center, :size => 14)
