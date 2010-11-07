@@ -45,17 +45,17 @@ Rails::Initializer.run do |config|
 
   config.gem "acts_as_geocodable",  :version => "1.0.3"
   config.gem "acts-as-taggable-on", :version => "2.0.6"
-  config.gem "authlogic",           :version => "2.1.3"
-  config.gem "carrierwave",         :version => "0.4.5"
+  config.gem "authlogic",           :version => "2.1.6"
+  config.gem "carrierwave",         :version => "0.4.10"
   config.gem "delayed_job",         :version => "2.0.3"
-  config.gem "errornot_notifier",   :version => "1.0.2"
+  config.gem "errornot_notifier",   :version => "1.1.1"
   config.gem "google_analytics",    :version => "1.1.5", :lib => "rubaidh/google_analytics"
   config.gem "googlecharts",        :version => "1.6.0"
   config.gem "graticule",           :version => "1.0.0.pre2"
   config.gem "prawn",               :version => "0.8.4", :lib => "prawn"
   config.gem "simple-navigation",   :version => "2.5.4", :lib => 'simple_navigation'
   config.gem "validates_timeliness",:version => "2.3.1"
-  config.gem "will_paginate",       :version => "2.3.12"
+  config.gem "will_paginate",       :version => "2.3.15"
 end
 
 require File.join(RAILS_ROOT,'lib/filenamize.rb')
