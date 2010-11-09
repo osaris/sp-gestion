@@ -6,6 +6,8 @@ CONVOCATION
 
 Motif : <%= h(@convocation.title) %>
 
+Tenue : <%= h(@uniform.title )%> - <%= h(@uniform.description) %>
+
 Lieu : <%= h(@convocation.place) %>
 
 Date et heure : <%= I18n.l(@convocation.date, :format => :default) %>

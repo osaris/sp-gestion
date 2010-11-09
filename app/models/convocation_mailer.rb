@@ -3,6 +3,7 @@ class ConvocationMailer < ApplicationMailer
   def convocation(convocation, convocation_fireman, user_email)
     fireman = convocation_fireman.fireman
     grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.index(convocation_fireman.grade)
+    uniform = convocation.uniform
 
     setup(fireman.email)
     subject("Convocation")
@@ -12,12 +13,12 @@ class ConvocationMailer < ApplicationMailer
     content_type("multipart/alternative")
 
     part "text/plain" do |plain_part|
-      plain_part.body = render_message("convocation.plain", :convocation => convocation, :fireman => fireman, :grade => grade)
+      plain_part.body = render_message("convocation.plain", :convocation => convocation, :fireman => fireman, :grade => grade, :uniform => uniform)
       plain_part.transfer_encoding = "base64"
     end
 
     part "text/html" do |html_part|
-      html_part.body = render_message("convocation.html", :convocation => convocation, :fireman => fireman, :grade => grade)
+      html_part.body = render_message("convocation.html", :convocation => convocation, :fireman => fireman, :grade => grade, :uniform => uniform)
       html_part.transfer_encoding = "base64"
     end
   end
