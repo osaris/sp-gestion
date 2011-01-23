@@ -43,7 +43,6 @@ Rails::Initializer.run do |config|
   config.action_controller.session = {:key => '_spgestion_session',
                                       :secret => "41da19045c1289f045a2797ace137c01908f49d5522ade1da1549022bd40202d663891fbca9dfc4d0f7a092e36ff5b325d38fe6cb22055d843802f37228c1868"}
 
-  config.gem "acts_as_geocodable",  :version => "1.0.3"
   config.gem "acts-as-taggable-on", :version => "2.0.6"
   config.gem "authlogic",           :version => "2.1.6"
   config.gem "carrierwave",         :version => "0.4.10"
@@ -56,6 +55,7 @@ Rails::Initializer.run do |config|
   config.gem "simple-navigation",   :version => "2.5.4", :lib => 'simple_navigation'
   config.gem "validates_timeliness",:version => "2.3.1"
   config.gem "will_paginate",       :version => "2.3.15"
+  config.gem "acts_as_geocodable",  :version => "1.0.3"
 end
 
 require File.join(RAILS_ROOT,'lib/filenamize.rb')
