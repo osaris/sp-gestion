@@ -5,7 +5,8 @@ class ConvocationMailerTest < ActionMailer::TestCase
   context "with a convocation" do
     setup do
       @convocation = make_convocation_with_firemen(:date => 3.days.from_now,
-                                                   :station => Station.make)
+                                                   :station => Station.make,
+                                                   :rem => 'Test')
     end
 
     context "deliver sending_confirmation" do
@@ -36,7 +37,5 @@ class ConvocationMailerTest < ActionMailer::TestCase
         end
       end
     end
-
   end
-
 end
