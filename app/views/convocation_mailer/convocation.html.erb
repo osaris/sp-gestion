@@ -6,5 +6,5 @@
 <p>Lieu : <%= h(@convocation.place) %></p>
 <p>Date et heure : <%= I18n.l(@convocation.date, :format => :default) %></p>
 <%- unless @convocation.rem.blank? -%>
-  <p>Remarque : <%= h(convocation.rem) %></p>
+  <p>Remarque : <%= h(@convocation.rem) %></p>
 <%- end -%>
