@@ -1,19 +1,19 @@
-<h1><%= Grade::GRADE.index(@fireman.grade) %>&nbsp;<%= h(@fireman.firstname) %>&nbsp;<%= h(@fireman.lastname) %></h1>
+<h1><%= Grade::GRADE.index(@fireman.grade) %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></h1>
 <%- unless @fireman.cached_tag_list.blank? -%>
-  <p>Etiquette(s) : <%= h(@fireman.cached_tag_list) %></p>
+  <p>Etiquette(s) : <%= @fireman.cached_tag_list %></p>
 <%- end -%>
 <%- unless @fireman.rem.blank? -%>
-  <p>Remarque : <%= h(@fireman.rem) %></p>
+  <p>Remarque : <%= @fireman.rem %></p>
 <%- end -%>
 <p>Statistiques :
   <ul>
-    <li>Interventions : <%= @fireman.stats_interventions[:total] %></li>
+    <li>Interventions : <%= @fireman.stats_interventions %></li>
     <li>Convocations : <%= display_stats_convocation %></li>
   </ul>
 </p>
 <p>
-  <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + "&nbsp;Editer", edit_fireman_path(@fireman))%> -
-  <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + "&nbsp;Supprimer", fireman_path(@fireman), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
+  <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + raw("&nbsp;Editer"), edit_fireman_path(@fireman))%> -
+  <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + raw("&nbsp;Supprimer"), fireman_path(@fireman), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
 </p>
 <h2>5 dernières interventions</h2>
 <table>
@@ -27,7 +27,7 @@
   </thead>
   <tbody>
     <%= render(:partial => "fireman_intervention", :collection => @fireman.fireman_interventions.newer) ||
-               "<tr><td colspan='4'>Pas encore d'intervention !</td></tr>" %>
+               raw("<tr><td colspan='4'>Pas encore d'intervention !</td></tr>") %>
   </tbody>
 </table>
 <h2>5 Dernières convocations</h2>
@@ -44,6 +44,6 @@
   </thead>
   <tbody>
     <%= render(:partial => "convocation_fireman", :collection => @fireman.convocation_firemen.newer) ||
-               "<tr><td colspan='6'>Pas encore de convocation !</td></tr>" %>
+               raw("<tr><td colspan='6'>Pas encore de convocation !</td></tr>") %>
   </tbody>
 </table>

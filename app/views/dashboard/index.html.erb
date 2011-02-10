@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render(:partial => 'dashboard/message', :collection => @messages) || "<tr><td colspan='3'>Aucun nouveau message</td></tr>" %>
+          <%= render(:partial => 'dashboard/message', :collection => @messages) || raw("<tr><td colspan='3'>Aucun nouveau message</td></tr>") %>
         </tbody>
       </table>
     </div>
@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render(:partial => 'dashboard/convocation', :collection => @convocations) || "<tr><td colspan='3'>Aucune convocation</td></tr>" %>
+          <%= render(:partial => 'dashboard/convocation', :collection => @convocations) || raw("<tr><td colspan='3'>Aucune convocation</td></tr>") %>
         </tbody>
       </table>
     </div>
@@ -54,7 +54,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render(:partial => 'dashboard/intervention', :collection => @interventions) || "<tr><td colspan='2'>Aucune intervention</td></tr>" %>
+          <%= render(:partial => 'dashboard/intervention', :collection => @interventions) || raw("<tr><td colspan='2'>Aucune intervention</td></tr>") %>
         </tbody>
       </table>
     </div>
@@ -75,7 +75,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render(:partial => 'dashboard/expiring_item', :collection => @items) || "<tr><td colspan='3'>Aucun matériel</td></tr>" %>
+          <%= render(:partial => 'dashboard/expiring_item', :collection => @items) || raw("<tr><td colspan='3'>Aucun matériel</td></tr>") %>
           <%- unless @items.blank? -%>
             <tr>
               <td colspan="3" class="right"><%= link_to("Voir toute la liste", expirings_items_path) %></td>

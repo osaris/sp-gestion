@@ -1,6 +1,6 @@
 <div class="span-6 first">
   <h1>Edition de mon profil</h1>
-  <%- form_for @user, :url => update_profile_path do |f| -%>
+  <%= form_for @user, :url => update_profile_path do |f| %>
     <p>
       <%= f.label(:email, "Adresse email", :class => "span-1 first")%>
       <span class="span-2"><%= @user.email %></span>

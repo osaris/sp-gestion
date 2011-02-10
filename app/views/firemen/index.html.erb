@@ -1,5 +1,5 @@
 <div class="span-6 first">
-  <p class="right"><%= link_to(image_tag("back/icons/add.png") + "&nbsp;Créer une nouvelle personne", new_fireman_path)%></p>
+  <p class="right"><%= link_to(image_tag("back/icons/add.png") + raw("&nbsp;Créer une nouvelle personne"), new_fireman_path)%></p>
   <table>
     <thead>
       <tr>
@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => @firemen) || "<tr><td colspan='5'>Pas encore de personne !</td></tr>" %>
+      <%= render(:partial => @firemen) || raw("<tr><td colspan='5'>Pas encore de personne !</td></tr>") %>
     </tbody>
   </table>
   <%= will_paginate(@firemen, :previous_label => "", :next_label => "") %>

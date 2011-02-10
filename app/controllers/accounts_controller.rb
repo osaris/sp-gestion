@@ -3,7 +3,7 @@ class AccountsController < BackController
   before_filter :check_ownership
 
   def edit
-    @users = @station.users.confirmed.find(:all, :conditions => ["users.id != ?", @station.owner_id])
+    @users = @station.users.confirmed.where(["users.id != ?", @station.owner_id])
   end
 
   def update_owner
@@ -25,8 +25,8 @@ class AccountsController < BackController
   end
 
   def destroy
-    @station.send_later(:destroy)
-    # because we can't rewrite subdomain easily
+    @station.delay.destroy
+    # FIXME because we can't rewrite subdomain easily
     redirect_to("http://www.#{BASE_URL}/bye")
   end
 

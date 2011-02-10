@@ -1,5 +1,5 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%- form_for(@vehicle) do |f| -%>
+<%= form_for(@vehicle) do |f| %>
   <p>
     <%= f.label(:name, "Nom (*)", :class => "span-1 first") %>
     <span class="span-3">
@@ -39,11 +39,10 @@
   </p>
 <%- end -%>
 <%- content_for(:header) do -%>
-  <%= stylesheet_link_tag("back/jquery-ui-1.7.2.custom.css")%>
-  <%= javascript_include_tag("jquery-ui-i18n.min.js") %>
+  <%= stylesheet_link_tag("back/jquery-ui-1.8.7.blitzer.css")%>
+  <%= javascript_include_tag("jquery-ui-1.8.7.min.js", "jquery-ui-i18n-1.8.7.min.js") %>
 <%- end -%>
-<%= javascript_tag("
-  $(function() {
+<%- content_for(:javascript) do -%>
     $.datepicker.setDefaults($.datepicker.regional['fr']);
     $('.date').datepicker({ showMonthAfterYear: false,
                             showButtonPanel: true,
@@ -52,4 +51,4 @@
                             dateFormat: 'dd/mm/yy',
                             constrainInput: true,
                             yearRange: '#{Date.today.year-70}:#{Date.today.year+5}' });
-  });")%>
+<%- end -%>

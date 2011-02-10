@@ -1,6 +1,6 @@
 <div class="span-6 first">
   <p>Liste du matériel expirant dans les 30 prochains jours.</p>
-  <p class="right"><%= link_to(image_tag("back/icons/print.png", :alt => "Imprimer") + "&nbsp;Imprimer", expirings_items_path(:format => :pdf))%></p>
+  <p class="right"><%= link_to(image_tag("back/icons/print.png", :alt => "Imprimer") + raw("&nbsp;Imprimer"), expirings_items_path(:format => :pdf))%></p>
   <table>
     <thead>
       <tr>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => 'expiring_item', :collection => @items) || "<tr><td colspan='5'>Aucun matériel expiré !</td></tr>" %>
+      <%= render(:partial => 'expiring_item', :collection => @items) || raw("<tr><td colspan='5'>Aucun matériel expiré !</td></tr>") %>
     </tbody>
   </table>
 </div>

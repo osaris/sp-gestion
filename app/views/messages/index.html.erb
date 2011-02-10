@@ -7,7 +7,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => @messages) || "<tr><td colspan='2'>Pas encore de message !</td></tr>" %>
+      <%= render(:partial => @messages) || raw("<tr><td colspan='2'>Pas encore de message !</td></tr>") %>
     </tbody>
   </table>
   <%= will_paginate(@messages, :previous_label => "", :next_label => "") %>

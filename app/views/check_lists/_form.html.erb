@@ -1,5 +1,5 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%- form_for(@check_list) do |f| -%>
+<%= form_for(@check_list) do |f| %>
   <p>
     <%= f.label(:title, "Titre (*)", :class => "span-1 first") %>
     <span class="span-3">

@@ -7,9 +7,9 @@ class StationsControllerTest < ActionController::TestCase
       get :new
     end
 
-    should_respond_with(:success)
-    should_render_template("new")
-    should_render_with_layout("front")
+    should respond_with(:success)
+    should render_template("new")
+    should render_with_layout("front")
   end
 
   context "requesting POST :create with bad data" do
@@ -18,57 +18,58 @@ class StationsControllerTest < ActionController::TestCase
                     :user => {:email => 'raphael', :password => '213', :password_confirmation => '123'}
     end
 
-    should_respond_with(:success)
-    should_render_template("new")
-    should_render_with_layout("front")
+    should respond_with(:success)
+    should render_template("new")
+    should render_with_layout("front")
   end
 
   context "requesting POST :create with good data" do
     setup do
-      post :create, :station => Station.plan, :user => User.plan
+      post :create, :station => plan(Station.make), :user => plan(User.make)
     end
 
-    should_respond_with(:success)
+    should respond_with(:success)
     # FIXME assert_template is broken when using render_to_string
     # http://dev.rubyonrails.org/ticket/8990
     # should_render_template("create")
-    should_render_with_layout("front")
+    should render_with_layout("front")
 
     should "add a message to the default user" do
       assert_equal(1, assigns(:user).messages.length)
     end
   end
 
-  context "requesting GET :check with existing station" do
+  context "requesting POST :check with existing station" do
     setup do
-      Station.stubs(:find).returns(Station.plan)
-      get :check, :name => 'test'
+      stub(Station).check.with_any_args { Station.make }
+      post :check, :station => { :name => 'test' }
     end
 
-    should_respond_with(:success)
-    should_render_template("check")
-    should_render_without_layout
+    should respond_with(:success)
+    should render_template("check")
+    should_not render_with_layout
 
-    should_assign_to(:station)
+    should assign_to(:station)
     should "show name_warning" do
-      assert_select_rjs(:show, '#name_warning')
+      # FIXME assert_select_rjs is broken with Jquery and Rails3 (without jrails)
+      assert_match("$(\"#name_warning\").show();", @response.body)
     end
   end
 
-   context "requesting GET :check with non existing station" do
+   context "requesting POST :check with non existing station" do
     setup do
-      get :check, :name => 'test'
+      stub(Station).check.with_any_args { nil }
+      post :check, :station => { :name => 'test' }
     end
 
-    should_respond_with(:success)
-    should_render_template("check")
-    should_render_without_layout
+    should respond_with(:success)
+    should render_template("check")
+    should_not render_with_layout
 
-    should "have station set to nil" do
-      assert(assigns(:station).nil?)
-    end
+    should_not assign_to(:station)
     should "hide name_warning" do
-      assert_select_rjs(:hide, '#name_warning')
+      # FIXME assert_select_rjs is broken with Jquery and Rails3 (without jrails)
+      assert_match("$(\"#name_warning\").hide();", @response.body)
     end
   end
 

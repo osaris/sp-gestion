@@ -17,11 +17,10 @@ class CheckList < ActiveRecord::Base
   end
 
   def places
-    ActiveRecord::Base.connection.select_values("SELECT DISTINCT place
-                                                 FROM items
-                                                 WHERE items.place IS NOT NULL
-                                                 AND items.check_list_id = #{self.id}
-                                                 ORDER BY place")
+    result = Item.select("DISTINCT(place) AS place") \
+                 .where(["items.place IS NOT NULL AND items.check_list_id = ?", self.id]) \
+                 .order('place')
+    result.collect { |item| item.place }
   end
 
 end

@@ -88,10 +88,10 @@ img { vertical-align:text-bottom; }
 #content .odd { background:#ffffff; }
 
 /* MESSAGES */
-#content p.message { margin:0; padding:10px; margin-bottom:20px; border:0; color:#fff; background: #172E60; }
-#content p.error { background: #FF3333 url("/images/back/gradient-gray.png") repeat-x 0 0; }
-#content p.warning { background: #FF8533 url("/images/back/gradient-gray.png") repeat-x 0 0; }
-#content p.success { background: #4D9900 url("/images/back/gradient-gray.png") repeat-x 0 0; }
+#content .message { margin:0; padding:10px; margin-bottom:20px; border:0; color:#fff; background: #172E60; }
+#content .error { background: #FF3333 url("/images/back/gradient-gray.png") repeat-x 0 0; }
+#content .warning { background: #FF8533 url("/images/back/gradient-gray.png") repeat-x 0 0; }
+#content .success { background: #4D9900 url("/images/back/gradient-gray.png") repeat-x 0 0; }
 
 /* TAB BOXES */
 #content .tabs { margin:0 0 20px; }
@@ -115,10 +115,10 @@ img { vertical-align:text-bottom; }
 #content span.help { font-size:11px;}
 
 /* FORMS ERROR */
-.fieldWithErrors { display:inline; }
-.fieldWithErrors select { background: #FEE; border-color: #C00; }
-.fieldWithErrors input { background: #FEE; border-color: #C00; }
-.fieldWithErrors textarea { background: #FEE; border-color: #C00; }
+.field_with_errors { display:inline; }
+.field_with_errors select { background: #FEE; border-color: #C00; }
+.field_with_errors input { background: #FEE; border-color: #C00; }
+.field_with_errors textarea { background: #FEE; border-color: #C00; }
 .formError { display:block; color:red; }
 
 /* Take off 10px from the width to account for native border and padding: */
@@ -180,3 +180,10 @@ h1, h2 { page-break-inside:avoid; page-break-after:avoid; }
 th, td { border-bottom:1px solid #ccc; }
 
 }
+
+/* STYLE FOR TIMEPICKER */
+ .ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+* .ui-timepicker-div dl{ text-align: left; }
+* .ui-timepicker-div dl dt{ height: 25px; }
+* .ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+* .ui-timepicker-div td { font-size: 90%; }

@@ -1,5 +1,5 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%- form_for(@intervention) do |f| -%>
+<%= form_for(@intervention) do |f| %>
   <div class="span-3 first">
     <p>
       <%= f.label(:kind, "Type (*)", :class => "span-1 first")%>
@@ -40,7 +40,7 @@
       <span class="span-2">
     		<%- @vehicles.each do |vehicle| -%>
     			<%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, @intervention.vehicles.include?(vehicle)) %>
-    			<label class="click_prev_checkbox"><%= h(vehicle.name) %></label>
+    			<label class="click_prev_checkbox"><%= vehicle.name %></label>
     		<%- end -%>
       </span>
     </p>
@@ -67,33 +67,30 @@
   </div>
 <%- end -%>
 <%- content_for(:header) do -%>
-  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-1.7.2.custom.css", "back/jquery.autocomplete.css")%>
-  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js","jquery.autocomplete.pack.js") %>
+  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-1.8.7.blitzer.css", "back/jquery.autocomplete.css")%>
+  <%= javascript_include_tag("jquery-ui-1.8.7.min.js", "jquery-ui-i18n-1.8.7.min.js", "jquery-ui-timepicker-addon.js","jquery.autocomplete.pack.js") %>
 <%- end -%>
-<%= javascript_tag("
-    $(function() {
-      $.datepicker.setDefaults($.datepicker.regional['fr']);
-      $('.date').datepicker({ showMonthAfterYear: false,
+<%- content_for(:javascript) do -%>
+  $.datepicker.setDefaults($.datepicker.regional['fr']);
+  $.timepicker.setDefaults($.timepicker.regional['fr']);
+  $('.date').datetimepicker({ showMonthAfterYear: false,
                               changeYear: true,
                               changeMonth: true,
                               dateFormat: 'dd/mm/yy',
-                              minDate: '#{min_date_intervention(@station)}',
-                              maxDate: '+0d',
+                              minDate: '<%= min_date_intervention(@station) %>',
+                              maxDate: new Date(),
                               constrainInput: true,
                               duration: '',
-                              showTime: true,
-                              time24h: true,
-                              stepMinutes: 1});
-      $('.click_prev_checkbox').click(function(){
-        var checkbox = $(this).prev(':checkbox');
-        checkbox.attr('checked', !checkbox.attr('checked'));
-      });
-      $('input#intervention_city').autocomplete(#{@cities.to_json}, {
-                                          minChars: 0,
-                                          selectFirst: false
-                                        });
-      $('input#intervention_city').focus(function(){
-        $('input#intervention_city').click().click();
-      });
-    });
-")%>
+                              stepMinute: 1});
+  $('.click_prev_checkbox').click(function(){
+    var checkbox = $(this).prev(':checkbox');
+    checkbox.attr('checked', !checkbox.attr('checked'));
+  });
+  $('input#intervention_city').autocomplete(<%= raw(@cities.to_json) %>, {
+                                      minChars: 0,
+                                      selectFirst: false
+                                    });
+  $('input#intervention_city').focus(function(){
+    $('input#intervention_city').click().click();
+  });
+<%- end -%>

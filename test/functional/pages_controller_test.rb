@@ -7,9 +7,9 @@ class PagesControllerTest < ActionController::TestCase
       get :home
     end
 
-    should_respond_with(:success)
-    should_render_template("home")
-    should_render_with_layout("front")
+    should respond_with(:success)
+    should render_template("home")
+    should render_with_layout("front")
   end
 
 end

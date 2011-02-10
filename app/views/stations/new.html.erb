@@ -2,9 +2,9 @@
 
 <div class="in">
   <div class="box">
-    <%- form_for(@station) do |f| -%>
+    <%= form_for(@station) do |f| =%>
       <table>
-        <%- fields_for :station do |c| -%>
+        <%= fields_for :station do |s| =%>
           <tr>
             <td colspan="2">
               <h4>Créer votre site SP-Gestion</h4>
@@ -18,15 +18,19 @@
           </tr>
           <tr>
             <td>
-              <%= c.label(:name, 'Nom du centre') %>
+              <%= s.label(:name, 'Nom du centre') %>
             </td>
             <td>
-              <%= c.text_field(:name, :tabindex => 1) %>
+              <%= s.text_field(:name, :tabindex => 1) %>
               <%= error_message_on(:station, :name) %>
-              <%= observe_field(:station_name, :url => check_stations_url,
-                                               :method => :get,
-                                               :with => 'name',
-                                               :before => "sanitize_for_subdomain($('#station_name'), $('#station_url'))") %>
+              <%- content_for(:javascript) do -%>
+                $("#station_name").change(function() {
+                  sanitize_for_subdomain($('#station_name'), $('#station_url'));
+                  $.post('<%= check_stations_url %>', $(this).serialize(), function(data) {
+                    $("#results").html(data);
+                  });
+                });
+              <%- end -%>
             </td>
           </tr>
           <tr>
@@ -36,15 +40,15 @@
           </tr>
           <tr>
             <td>
-              <%= c.label(:url, 'Site') %>
+              <%= s.label(:url, 'Site') %>
             </td>
             <td>
-              <%= c.text_field(:url, :tabindex => 2) %>.sp-gestion.fr
+              <%= s.text_field(:url, :tabindex => 2) %>.sp-gestion.fr
               <%= error_message_on(:station, :url) %>
             </td>
           </tr>
         <%- end -%>
-        <%- fields_for :user do |u| -%>
+        <%= fields_for :user do |u| =%>
           <tr>
             <td colspan="2">
               <h4>Créer votre compte utilisateur</h4>
@@ -70,4 +74,6 @@
     <%- end -%>
   </div>
 </div>
-<%= javascript_tag("$(':text:visible:enabled:first').focus();") %>
+<%- content_for(:javascript) do -%>
+  $(':text:visible:enabled:first').focus();
+<%- end -%>

@@ -1,10 +1,10 @@
-begin  
-  require 'metric_fu'  
-  
-  MetricFu::Configuration.run do |config|  
+begin
+  require 'metric_fu'
+
+  MetricFu::Configuration.run do |config|
     config.metrics  = [:churn, :saikuro, :stats, :flog, :flay, :reek, :roodi, :rcov]
     config.graphs   = [:flog, :flay, :reek, :roodi, :rcov]
-    
+
     config.flay     = { :dirs_to_flay => ['app', 'lib'],
                         :minimum_score => 100  }
     config.flog     = { :dirs_to_flog => ['app', 'lib']  }
@@ -12,7 +12,7 @@ begin
     # http://wiki.github.com/kevinrutherford/reek/working-with-rails
     config.reek     = { :dirs_to_reek => ['app/models', 'lib']  }
     config.roodi    = { :dirs_to_roodi => ['app', 'lib'] }
-    config.saikuro  = { :output_directory => 'scratch_directory/saikuro', 
+    config.saikuro  = { :output_directory => 'scratch_directory/saikuro',
                         :input_directory => ['app', 'lib'],
                         :cyclo => "",
                         :filter_cyclo => "0",
@@ -21,16 +21,17 @@ begin
                         :formater => "text"} #this needs to be set to "text"
     config.churn    = { :start_date => "1 year ago", :minimum_churn_count => 10}
     config.rcov     = { :environment => 'test',
-                        :test_files => ['test/unit/**/*_test.rb', #'test/unit/helpers/*_test.rb', 
+                        :test_files => ['test/unit/**/*_test.rb', #'test/unit/helpers/*_test.rb',
                                         'test/functional/**/*_test.rb'], #, 'test/functional/admin/*_test.rb'],
                         :rcov_opts => ["-Itest",
-                                       "--sort coverage", 
-                                       "--no-html", 
+                                       "--sort coverage",
+                                       "--no-html",
                                        "--text-coverage",
                                        "--no-color",
                                        "--profile",
                                        "--rails",
                                        "--exclude \"rubygems/*, gems/*, rcov*\""]}
-end
-rescue LoadError  
+  end
+rescue LoadError
+  p "Error loading metric_fu"
 end

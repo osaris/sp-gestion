@@ -1,18 +1,5 @@
 module FiremenHelper
-  
-  def js_for_status
-    javascript_tag("
-      $(function() {
-        $('#fireman_status').change(function() {
-          if ($(this).val() == 1)
-            $('#grades').fadeOut();
-          else
-            $('#grades').fadeIn();
-        });
-      });
-    ")
-  end
-  
+
   def style_for_grades(fireman)
     fireman.status == 1 ? "display:none;" : ""
   end
@@ -20,7 +7,7 @@ module FiremenHelper
   def class_for_grade(grade)
     grade.date.blank? ? "" : "set"
   end
-    
+
   def display_stats_convocation
     presence = @fireman.stats_convocations
     if presence[:total].to_i > 0
@@ -28,7 +15,7 @@ module FiremenHelper
     else
       ratio = 0
     end
-    result = "#{presence[:total]} convocation(s) / #{presence[:presents]} présence(s) / #{presence[:missings]} absence(s) (#{ratio} % présence)"
+    result = "#{presence[:total].to_i} convocation(s) / #{presence[:presents].to_i} présence(s) / #{presence[:missings].to_i} absence(s) (#{ratio} % présence)"
   end
 
 end

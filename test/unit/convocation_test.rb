@@ -2,15 +2,15 @@ require 'test_helper'
 
 class ConvocationTest < ActiveSupport::TestCase
 
-  should_validate_presence_of(:title, :message => /titre/)
-  should_validate_presence_of(:date, :message => /date/)
-  should_validate_presence_of(:uniform, :message => /tenue/)
-  should_validate_presence_of(:firemen, :message => /personnes/)
+  should validate_presence_of(:title).with_message(/titre/)
+  should validate_presence_of(:date).with_message(/date/)
+  should validate_presence_of(:uniform).with_message(/tenue/)
+  should validate_presence_of(:firemen).with_message(/personnes/)
 
   context "with an instance" do
     setup do
       @convocation = make_convocation_with_firemen(:date => 3.days.from_now,
-                                                   :station => Station.make)
+                                                   :station => Station.make!)
     end
 
     should "be valid" do
@@ -36,36 +36,36 @@ class ConvocationTest < ActiveSupport::TestCase
     end
   end
 
-  context "with an instance with 3 firemen (3 emails) and a call to send_emails" do
+  context "with an instance with 1 fireman and a call to send_emails" do
     setup do
       @convocation = make_convocation_with_firemen({:date => 3.days.from_now,
-                                                   :station => Station.make}, 3)
+                                                   :station => Station.make!}, 1)
       @convocation.send_emails("test@test.com")
     end
 
-    before_should "expect convocations are delivered" do
-      ConvocationMailer.expects(:deliver_convocation).times(3)
+    before_should "expect convocation is delivered" do
+      mock.proxy(ConvocationMailer).convocation(is_a(Convocation), is_a(ConvocationFireman), is_a(String))
     end
 
     before_should "expect one sending confirmation is delivered" do
-      ConvocationMailer.expects(:deliver_sending_confirmation).once
+      mock.proxy(ConvocationMailer).sending_confirmation(is_a(Convocation), is_a(String))
     end
 
     should "set nb_email_sent" do
-      assert_equal(3, @convocation.station.reload.nb_email_sent)
+      assert_equal(1, @convocation.station.reload.nb_email_sent)
     end
   end
 
   context "with an instance and 3 firemen (2 emails) and a call to send_emails" do
     setup do
       @convocation = make_convocation_with_firemen({:date => 3.days.from_now,
-                                                   :station => Station.make}, 3)
+                                                   :station => Station.make!}, 3)
       @convocation.firemen.first.update_attribute(:email, '')
       @convocation.send_emails("test@test.com")
     end
 
     before_should "expect convocations are delivered" do
-      ConvocationMailer.expects(:deliver_convocation).times(2)
+      mock.proxy(ConvocationMailer).convocation(is_a(Convocation), is_a(ConvocationFireman), is_a(String)).twice
     end
 
     should "set nb_email_sent" do

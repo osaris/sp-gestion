@@ -1,4 +1,4 @@
-<%- form_tag(password_resets_path) do -%>
+<%= form_tag(password_resets_path) do -%>
   <%= flash_helper %>
   <p>
     <%= label_tag("Adresse email") %><br />
@@ -9,4 +9,6 @@
   </p>
 <%- end -%>
 <!--[if lte IE 7]><div class="clear">&nbsp;</div><![endif]-->
-<%= javascript_tag("$(':text:visible:enabled:first').focus();") %>
+<%- content_for(:javascript) do -%>
+  $(':text:visible:enabled:first').focus();
+<%- end -%>

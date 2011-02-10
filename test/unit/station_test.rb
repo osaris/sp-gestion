@@ -4,7 +4,7 @@ class StationTest < ActiveSupport::TestCase
 
   context "with an instance and last_grade_update_at blank" do
     setup do
-      @station = Station.make(:last_grade_update_at => nil)
+      @station = Station.make!(:last_grade_update_at => nil)
     end
 
     should "not confirm last_grade_update_at" do
@@ -14,7 +14,7 @@ class StationTest < ActiveSupport::TestCase
 
   context "with an instance and last_grade_update_at but no intervention" do
     setup do
-      @station = Station.make(:last_grade_update_at => Date.today)
+      @station = Station.make!(:last_grade_update_at => Date.today)
     end
 
     should "not confirm last_grade_update_at" do
@@ -24,9 +24,8 @@ class StationTest < ActiveSupport::TestCase
 
   context "with an instance and last_grade_update_at and interventions but date before last_grade_update_at" do
     setup do
-      @station = Station.make(:last_grade_update_at => Date.today)
-      # because there is no stub_chain for any_instance in mocha
-      Station.any_instance.stubs(:interventions).returns(mock(:empty? => false))
+      @station = Station.make!(:last_grade_update_at => Date.today)
+      stub.instance_of(Station).interventions.stub!.empty? { false }
     end
 
     should "not confirm last_grade_update_at" do
@@ -47,7 +46,7 @@ class StationTest < ActiveSupport::TestCase
 
   context "with an instance which has never sent email" do
     setup do
-      @station = Station.make()
+      @station = Station.make!
     end
 
     should "let send less than NB_EMAIL_PER_HOUR" do
@@ -65,7 +64,7 @@ class StationTest < ActiveSupport::TestCase
 
   context "with an instance which has sent emails 3 hours ago and call to reset_email_limitation" do
     setup do
-      @station = Station.make(:last_email_sent_at => 3.hours.ago, :nb_email_sent => 10)
+      @station = Station.make!(:last_email_sent_at => 3.hours.ago, :nb_email_sent => 10)
       @station.reset_email_limitation
     end
 
@@ -76,7 +75,7 @@ class StationTest < ActiveSupport::TestCase
 
   context "with an instance which has sent emails 15 minutes ago and call to reset_email_limitation" do
     setup do
-      @station = Station.make(:last_email_sent_at => 15.minutes.ago, :nb_email_sent => 10)
+      @station = Station.make!(:last_email_sent_at => 15.minutes.ago, :nb_email_sent => 10)
       @station.reset_email_limitation
     end
 

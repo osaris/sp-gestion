@@ -13,12 +13,15 @@ class DashboardControllerTest < ActionController::TestCase
       setup do
         get :index
       end
-      
-      should_respond_with(:success)
-      should_render_template("index")
-      should_render_with_layout("back")
-      
-      should_assign_to(:messages)
+
+      should respond_with(:success)
+      should render_template("index")
+      should render_with_layout("back")
+
+      should assign_to(:messages)
+      should assign_to(:interventions)
+      should assign_to(:convocations)
+      should assign_to(:items)
     end
   end
 

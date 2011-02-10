@@ -1,7 +1,7 @@
 <div class="span-6 first">
   <p class="right">
-    <%= link_to(image_tag("back/icons/add.png") + "&nbsp;Créer une nouvelle tenue", new_uniform_path)%> -
-    <%= link_to(image_tag("back/icons/down.png", :alt => "Créer les tenues par défaut") + "&nbsp;Créer les tenues par défaut", reset_uniforms_path, :method => :post, :confirm => "Etes-vous sûr de vouloir ajouter les tenues standard à celles déjà existantes ?")%>
+    <%= link_to(image_tag("back/icons/add.png") + raw("&nbsp;Créer une nouvelle tenue"), new_uniform_path)%> -
+    <%= link_to(image_tag("back/icons/down.png", :alt => "Créer les tenues par défaut") + raw("&nbsp;Créer les tenues par défaut"), reset_uniforms_path, :method => :post, :confirm => "Etes-vous sûr de vouloir ajouter les tenues standard à celles déjà existantes ?")%>
   </p>
   <table>
     <thead>
@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render(:partial => @uniforms) || "<tr><td colspan='2'>Pas encore de tenue !</td></tr>" %>
+      <%= render(:partial => @uniforms) || raw("<tr><td colspan='2'>Pas encore de tenue !</td></tr>") %>
     </tbody>
   </table>
   <%= will_paginate(@uniforms, :previous_label => "", :next_label => "") %>

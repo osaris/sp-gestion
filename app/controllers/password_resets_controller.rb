@@ -14,7 +14,7 @@ class PasswordResetsController < BackController
   def create
     @user = @station.users.find_by_email(params[:email])
     if @user and @user.confirmed?
-      @user.send_later(:deliver_password_reset_instructions!)
+      @user.deliver_password_reset_instructions!
       flash.now[:warning] = "Les instructions pour recevoir votre nouveau mot de passe vous ont été transmises par email."
     else
       flash.now[:error] = "Aucun utilisateur trouvé avec cette adresse email."

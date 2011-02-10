@@ -1,10 +1,10 @@
-<p><%= h(@convocation.station.name) %></p>
+<p><%= @convocation.station.name %></p>
 <p>CONVOCATION</p>
-<p><%= @grade %>&nbsp;<%= h(@fireman.firstname) %>&nbsp;<%= h(@fireman.lastname)%></p>
-<p>Motif : <%= h(@convocation.title) %></p>
-<p>Tenue : <%= h(@uniform.title) %> - <%= h(@uniform.description)%></p>
-<p>Lieu : <%= h(@convocation.place) %></p>
+<p><%= @grade %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></p>
+<p>Motif : <%= @convocation.title %></p>
+<p>Tenue : <%= @uniform.title %> - <%= @uniform.description %></p>
+<p>Lieu : <%= @convocation.place %></p>
 <p>Date et heure : <%= I18n.l(@convocation.date, :format => :default) %></p>
 <%- unless @convocation.rem.blank? -%>
-  <p>Remarque : <%= h(@convocation.rem) %></p>
+  <p>Remarque : <%= @convocation.rem %></p>
 <%- end -%>

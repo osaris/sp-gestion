@@ -16,6 +16,7 @@ class Fireman < ActiveRecord::Base
   validates_date :birthday, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
   validates_format_of :email, :with => Authlogic::Regex.email, :message => "L'adresse email est mal formée.", :allow_blank => true
   validates_length_of :email, :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.", :allow_blank => true
+  validates_with FiremanValidator
 
   attr_accessor :validate_grade_update
 
@@ -47,56 +48,38 @@ class Fireman < ActiveRecord::Base
     20
   end
 
-  def validate
-    if self.status != STATUS['JSP']
-      if self.grades.reject{ |grade| grade.date.blank? }.empty?
-        self.errors.add(:grades, "Une personne ayant le statut actif ou vétéran doit avoir un grade.")
-      elsif self.station.confirm_last_grade_update_at?(max_grade_date) and (self.validate_grade_update.to_i != 1)
-        self.errors.add(:validate_grade_update)
-      end
-    end
-  end
-
   def max_grade_date
-    self.grades.collect { |grade| grade.date }.compact.max
+    result = self.grades.collect { |grade| grade.date }.compact.max
+    result.to_date unless result == nil
   end
 
   def stats_interventions
-    result = ActiveRecord::Base.connection.select_one("SELECT COUNT(*) AS total FROM fireman_interventions WHERE fireman_id = #{self.id}")
-    result.symbolize_keys!
+    FiremanIntervention.where(:fireman_id => self.id).count
   end
 
   def stats_convocations
-    result = ActiveRecord::Base.connection.select_one("
-               SELECT
-               COUNT(*) AS total,
-               COALESCE(SUM(IF(presence = 0,1,0)),0) AS missings,
-               COALESCE(SUM(IF(presence = 1,1,0)),0) as presents
-               FROM convocation_firemen
-               WHERE fireman_id = #{self.id}")
-    result.symbolize_keys!
+    ConvocationFireman.select("COUNT(*) AS total, COALESCE(SUM(IF(presence = 0,1,0)),0) AS missings, COALESCE(SUM(IF(presence = 1,1,0)),0) as presents") \
+                      .where(:fireman_id => self.id) \
+                      .first
   end
 
   def self.distinct_tags(station)
-    result = ActiveRecord::Base.connection.select_all("
-              SELECT tags.name
-              FROM tags
-              INNER JOIN taggings ON (taggings.tag_id = tags.id)
-              INNER JOIN firemen ON (firemen.id = taggings.taggable_id)
-              WHERE firemen.station_id = #{station.id}
-              ORDER BY tags.name")
-    result.each { |line| line.symbolize_keys! }
-    result.map! { |line| [line[:name], line[:name], line[:name]] }
+    result = Fireman.select("DISTINCT(tags.name) AS name") \
+                    .joins("INNER JOIN taggings ON firemen.id = taggings.taggable_id AND taggings.taggable_type = 'Fireman'") \
+                    .joins("INNER JOIN tags ON taggings.tag_id = tags.id") \
+                    .where(:station_id => station.id) \
+                    .order('tags.name')
+    result.map! { |tag| [tag.name, tag.name, tag.name] }
   end
 
   private
 
   def check_associations
     unless self.convocations.empty?
-      self.errors.add_to_base("Impossible de supprimer cette personne car elle possède des convocations.") and return false
+      self.errors[:base] << "Impossible de supprimer cette personne car elle possède des convocations." and return false
     end
     unless self.interventions.empty?
-      self.errors.add_to_base("Impossible de supprimer cette personne car elle a effectué des interventions.") and return false
+      self.errors[:base] << "Impossible de supprimer cette personne car elle a effectué des interventions." and return false
     end
   end
 

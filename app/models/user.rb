@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   before_create :reset_perishable_token
 
-  named_scope :confirmed, :conditions => ['confirmed_at IS NOT NULL']
+  scope :confirmed, :conditions => ['confirmed_at IS NOT NULL']
 
   validates_format_of :new_email_tmp, :with => Authlogic::Regex.email, :message => "L'adresse email est mal formée.", :allow_blank => true
   validates_length_of :new_email_tmp, :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.", :allow_blank => true
@@ -64,13 +64,13 @@ class User < ActiveRecord::Base
     self.reset_perishable_token!
     self.confirmed_at = nil
     self.confirmation_sent_at = Time.now.utc
-    self.save(false)
-    UserMailer.send_later(:deliver_confirmation_instructions, self)
+    self.save(:validate => false)
+    UserMailer.delay.confirmation_instructions(self)
   end
 
   def deliver_password_reset_instructions!
     self.reset_perishable_token!
-    UserMailer.send_later(:deliver_password_reset_instructions, self)
+    UserMailer.delay.password_reset_instructions(self)
   end
 
   # for cooptation
@@ -78,13 +78,13 @@ class User < ActiveRecord::Base
     self.reset_perishable_token!
     self.confirmed_at = nil
     self.confirmation_sent_at = Time.now.utc
-    self.save(false)
-    UserMailer.send_later(:deliver_cooptation_instructions, self)
+    self.save(:validate => false)
+    UserMailer.delay.cooptation_instructions(self)
   end
 
   def boost_activation
     if self.confirmed_at.blank?
-      UserMailer.deliver_boost_activation(self)
+      UserMailer.delay.boost_activation(self)
       update_attribute(:last_boosted_at, Time.now)
       return true
     else
@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
     if !params[:user][:new_email_tmp].blank? and params[:user][:new_email_tmp] != self.email
       email_already_used = self.station.users.find_by_email(params[:user][:new_email_tmp])
       if email_already_used
-        self.errors.add(:new_email_tmp, "L'adresse email souhaitée est déjà utilisée.")
+        self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
       else
         params[:user][:new_email] = params[:user][:new_email_tmp]
         email_change = true
@@ -128,6 +128,6 @@ class User < ActiveRecord::Base
 
   def deliver_new_email_instructions!
     self.reset_perishable_token!
-    UserMailer.send_later(:deliver_new_email_instructions, self)
+    UserMailer.delay.new_email_instructions(self)
   end
 end

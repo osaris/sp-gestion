@@ -13,7 +13,7 @@ dd { font-size: 18px; margin: 0 0 15px 0; }
 
 /* @group Links */
 
-a, 
+a,
 a:visited,
 a:link { color: #000; font-weight: normal; text-decoration: none; }
 a:hover { color: #333; text-decoration: underline; }
@@ -153,7 +153,7 @@ fieldset small { font-size: 0.9em; font-weight: normal; }
 
 fieldset.inputs { }
 
-  fieldset.inputs input[type='text'], 
+  fieldset.inputs input[type='text'],
   fieldset.inputs input[type='password'] {
     border: 1px solid #999;
     font-size: 20px;
@@ -161,7 +161,7 @@ fieldset.inputs { }
     width: 691px;
   }
 
-  fieldset.inputs input[type='text']:focus, 
+  fieldset.inputs input[type='text']:focus,
   fieldset.inputs input[type='password']:focus, {
     background: #FFFCE1;
   }
@@ -203,7 +203,7 @@ fieldset.buttons { }
 
 /* @group Rails Errors */
 
-.fieldWithErrors input { background: #FBE3E4; border: 1px solid #8A1F11!important; }
+.field_with_errors input { background: #FBE3E4; border: 1px solid #8A1F11!important; }
 
 .errorExplanation {
   background: #FBE3E4;
@@ -301,10 +301,10 @@ input#search { border: 1px solid #999; font-size: 1.2em; padding: 3px; }
 /* @group Success, notice and error boxes */
 
 .error,
-.notice, 
+.notice,
 .success { border: 1px solid #CCC; font-weight: bold; margin: 0 0 1em 0; }
 .error p,
-.notice p, 
+.notice p,
 .success p { font-weight: bold; margin: 0!important; padding: 1em; }
 .error { background: #FBE3E4; border-color: #FBC2C4; color: #8A1F11; }
 .error a { color: #8A1F11; }

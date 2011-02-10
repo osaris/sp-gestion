@@ -4,6 +4,6 @@
     <%- if fireman.status != Fireman::STATUS['JSP'] -%>
       <%= Grade::GRADE.index(fireman.grade) %>-
     <%- end -%>
-    <%= h(fireman.firstname) %>&nbsp;<%= h(fireman.lastname) %>
+    <%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
   </label>
 </li>

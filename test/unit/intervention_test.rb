@@ -2,12 +2,12 @@ require 'test_helper'
 
 class InterventionTest < ActiveSupport::TestCase
 
-  should_validate_presence_of(:place, :message => /lieu/)
-  should_validate_presence_of(:firemen, :message => /personnel/)
+  should validate_presence_of(:place).with_message(/lieu/)
+  should validate_presence_of(:firemen).with_message(/personnel/)
 
   context "with an instance and station last_grade_update_at nil" do
     setup do
-      @i = make_intervention_with_firemen(:station => Station.make)
+      @i = make_intervention_with_firemen(:station => Station.make!)
     end
 
     should "initialize kind to sap" do
@@ -60,7 +60,7 @@ class InterventionTest < ActiveSupport::TestCase
 
   context "with an instance and station last_grade_update_at set" do
     setup do
-      @s = Station.make(:last_grade_update_at => 2.days.ago)
+      @s = Station.make!(:last_grade_update_at => 2.days.ago)
       @i = make_intervention_with_firemen(:start_date => 4.days.ago, :end_date => 3.days.ago, :station => @s)
     end
 
@@ -75,7 +75,7 @@ class InterventionTest < ActiveSupport::TestCase
 
   context "with many interventions" do
     setup do
-      @station = Station.make
+      @station = Station.make!
       # 3 interventions of kind 1,2 and 2 interventions of kind 3,4
       10.times do |i|
         make_intervention_with_firemen(:station => @station,

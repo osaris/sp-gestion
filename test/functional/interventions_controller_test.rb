@@ -15,38 +15,38 @@ class InterventionsControllerTest < ActionController::TestCase
         get :index
       end
 
-      should_respond_with(:success)
-      should_render_template("index")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("index")
+      should render_with_layout("back")
 
-      should_assign_to(:interventions)
+      should assign_to(:interventions)
     end
 
     context "requesting GET :stats with interventions" do
       setup do
-        Station.any_instance.stubs(:interventions).returns(mock(:empty? => false))
-        Intervention.stubs(:min_max_year).returns([Date.today.year, Date.today.year])
+        stub.instance_of(Station).interventions.stub!.empty? { false }
+        stub(Intervention).min_max_year { [Date.today.year, Date.today.year] }
         get :stats
       end
 
-      should_respond_with(:success)
-      should_render_template("stats")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("stats")
+      should render_with_layout("back")
 
-      should_assign_to(:by_type)
-      should_assign_to(:by_month)
+      should assign_to(:by_type)
+      should assign_to(:by_month)
     end
 
     context "requesting GET :stats without intervention" do
       setup do
-        Station.any_instance.stubs(:interventions).returns(mock(:empty? => true))
+        instance_of(Station).interventions.stub!.empty? { true }
         get :stats
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to(":index") { interventions_path }
+      should respond_with(:redirect)
+      should redirect_to(":index") { interventions_path }
 
-      should_set_the_flash(:warning)
+      should set_the_flash.level(:warning)
     end
 
     context "requesting GET :show for a non existing intervention" do
@@ -54,10 +54,10 @@ class InterventionsControllerTest < ActionController::TestCase
         get :show, :id => 2458437589
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to(":index") { interventions_path }
+      should respond_with(:redirect)
+      should redirect_to(":index") { interventions_path }
 
-      should_set_the_flash(:error)
+      should set_the_flash.level(:error)
     end
 
     context "requesting GET :new" do
@@ -65,9 +65,9 @@ class InterventionsControllerTest < ActionController::TestCase
         get :new
       end
 
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
     end
 
     context "requesting POST :create with bad data" do
@@ -75,11 +75,9 @@ class InterventionsControllerTest < ActionController::TestCase
         post :create, :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_ids => []}
       end
 
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
-
-      should_not_change("number of interventions") { Intervention.count }
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
     end
 
     context "requesting POST :create with good data" do
@@ -90,18 +88,17 @@ class InterventionsControllerTest < ActionController::TestCase
                                         :fireman_ids => [@fireman.id.to_s]}
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
+      should respond_with(:redirect)
+      should redirect_to("intervention") { intervention_path(assigns(:intervention)) }
 
-      should_assign_to(:intervention)
-      should_change("number of interventions", :by => 1) { Intervention.count }
-      should_set_the_flash(:success)
+      should assign_to(:intervention)
+      should set_the_flash.level(:success)
     end
 
     context "with an existing intervention not editable" do
       setup do
         @intervention = make_intervention_with_firemen(:station => @station)
-        Intervention.any_instance.stubs(:editable?).returns(false)
+        instance_of(Intervention).editable? { false }
       end
 
       context "requesting GET :edit" do
@@ -109,10 +106,10 @@ class InterventionsControllerTest < ActionController::TestCase
           get :edit, :id => @intervention.id
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
+        should respond_with(:redirect)
+        should redirect_to("intervention") { intervention_path(assigns(:intervention)) }
 
-        should_set_the_flash(:error)
+        should set_the_flash.level(:error)
       end
 
       context "requesting PUT :update with good data" do
@@ -123,17 +120,17 @@ class InterventionsControllerTest < ActionController::TestCase
                                                                   :fireman_ids => [@fireman.id.to_s]}
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
+        should respond_with(:redirect)
+        should redirect_to("intervention") { intervention_path(assigns(:intervention)) }
 
-        should_set_the_flash(:error)
+        should set_the_flash.level(:error)
       end
     end
 
     context "with an existing intervention editable" do
       setup do
         @intervention = make_intervention_with_firemen(:station => @station)
-        Intervention.any_instance.stubs(:editable?).returns(true)
+        instance_of(Intervention).editable? { true }
       end
 
       context "requesting GET :show" do
@@ -141,9 +138,9 @@ class InterventionsControllerTest < ActionController::TestCase
           get :show, :id => @intervention.id
         end
 
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("show")
+        should render_with_layout("back")
       end
 
       context "requesting GET :edit" do
@@ -151,9 +148,9 @@ class InterventionsControllerTest < ActionController::TestCase
           get :edit, :id => @intervention.id
         end
 
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
       end
 
       context "requesting PUT :update with bad data" do
@@ -161,9 +158,9 @@ class InterventionsControllerTest < ActionController::TestCase
           put :update, :id => @intervention.id, :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_ids => []}
         end
 
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
       end
 
       context "requesting PUT :update with good data" do
@@ -174,10 +171,10 @@ class InterventionsControllerTest < ActionController::TestCase
                                                                   :fireman_ids => [@fireman.id.to_s]}
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("intervention") { intervention_path(assigns(:intervention)) }
+        should respond_with(:redirect)
+        should redirect_to("intervention") { intervention_path(assigns(:intervention)) }
 
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
 
       context "requesting DELETE :destroy" do
@@ -185,10 +182,9 @@ class InterventionsControllerTest < ActionController::TestCase
           delete :destroy, :id => @intervention.id
         end
 
-        should_redirect_to("interventions list") { interventions_path }
+        should redirect_to("interventions list") { interventions_path }
 
-        should_change("number of interventions", :by => -1) { Intervention.count }
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
     end
   end

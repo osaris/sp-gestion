@@ -1,10 +1,10 @@
-.fieldWithErrors {
+.field_with_errors {
   display:inline;
 }
 
-.fieldWithErrors input {
+.field_with_errors input {
   background: #FEE;
-	border-color: #C00;	
+	border-color: #C00;
 }
 
 .formError {

@@ -2,6 +2,6 @@
   <div class="light box">
     <h1><%= @message.title %></h1>
     <p>Date : <%= l(@message.created_at, :format => :default) %></p>
-    <p><%= @message.body %></p>
+    <p><%= raw(@message.body) %></p>
   </div>
 </div>

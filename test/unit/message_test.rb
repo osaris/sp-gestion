@@ -4,7 +4,7 @@ class MessageTest < ActiveSupport::TestCase
 
   context "with an instance" do
     setup do
-      @message = Message.new(:title => "test", :body => "test content", :user => User.make)
+      @message = Message.new(:title => "test", :body => "test content", :user => User.make!)
     end
 
     should "not be read" do

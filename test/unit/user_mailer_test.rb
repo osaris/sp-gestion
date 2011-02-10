@@ -4,71 +4,61 @@ class UserMailerTest < ActionMailer::TestCase
 
   context "with a user" do
     setup do
-      @user = User.make(:email => "test@test.com", :new_email => "test@new.com")
+      @user = User.make!(:email => "test@test.com", :new_email => "test@new.com")
     end
 
     context "deliver confirmation instructions" do
       setup do
-        UserMailer.deliver_confirmation_instructions(@user)
+        UserMailer.confirmation_instructions(@user).deliver
       end
 
-      should "send an email" do
-        assert_sent_email do |email|
-          email.to.include?("test@test.com") &&
-          email.body.match(@user.perishable_token)
-        end
+      should "" do
+        have_sent_email.to('test@test.com').
+                        with_body(@user.perishable_token)
       end
     end
 
     context "deliver new email instructions" do
       setup do
-        UserMailer.deliver_new_email_instructions(@user)
+        UserMailer.new_email_instructions(@user).deliver
       end
 
-      should "send an email" do
-        assert_sent_email do |email|
-          email.to.include?("test@new.com") &&
-          email.body.match(@user.perishable_token)
-        end
+      should "" do
+        have_sent_email.to('test@new.com').
+                        with_body(@user.perishable_token)
       end
     end
 
     context "deliver cooptation instructions" do
       setup do
-       UserMailer.deliver_cooptation_instructions(@user)
+       UserMailer.cooptation_instructions(@user).deliver
       end
 
-      should "send an email" do
-        assert_sent_email do |email|
-          email.to.include?("test@test.com") &&
-          email.body.match(@user.perishable_token)
-        end
+      should "" do
+        have_sent_email.to('test@test.com').
+                        with_body(@user.perishable_token)
       end
     end
 
     context "deliver password reset instructions" do
       setup do
-        UserMailer.deliver_password_reset_instructions(@user)
+        UserMailer.password_reset_instructions(@user).deliver
       end
 
-      should "send an email" do
-        assert_sent_email do |email|
-          email.to.include?("test@test.com") &&
-          email.body.match(@user.station.url)
-        end
+      should "" do
+        have_sent_email.to('test@test.com').
+                        with_body(@user.station.url)
       end
     end
 
     context "deliver boost activation" do
       setup do
-        UserMailer.deliver_boost_activation(@user)
+        UserMailer.boost_activation(@user).deliver
       end
 
-      should "send an email" do
-        assert_sent_email do |email|
-          email.to.include?("test@test.com") &&
-          email.body.match(@user.perishable_token)
-        end
+      should "" do
+        have_sent_email.to('test@test.com').
+                        with_body(@user.perishable_token)
       end
     end
   end

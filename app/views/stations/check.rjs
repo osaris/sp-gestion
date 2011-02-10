@@ -1,5 +1,5 @@
 if @station.nil?
-  page[:name_warning].hide
+  page['#name_warning'].hide
 else
-  page[:name_warning].show
+  page['#name_warning'].show
 end

@@ -7,147 +7,138 @@ class UniformsControllerTest < ActionController::TestCase
     setup do
       login
     end
-    
+
     context "requesting GET :index" do
       setup do
         get :index
       end
 
-      should_respond_with(:success)
-      should_render_template("index")
-      should_render_with_layout("back")
-      
-      should_assign_to(:uniforms)
-    end    
-    
+      should respond_with(:success)
+      should render_template("index")
+      should render_with_layout("back")
+
+      should assign_to(:uniforms)
+    end
+
     context "requesting GET :show for a non existing uniform" do
       setup do
         get :show, :id => rand(10)
       end
-      
-      should_respond_with(:redirect)
-      should_redirect_to(":index") { uniforms_path }
 
-      should_set_the_flash(:error)
-    end    
-        
+      should respond_with(:redirect)
+      should redirect_to(":index") { uniforms_path }
+
+      should set_the_flash.level(:error)
+    end
+
     context "requesting GET :new" do
       setup do
         get :new
       end
 
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
     end
-    
+
     context "requesting POST :create with bad data" do
       setup do
         post :create, :uniform => {:title => '', :code => '2b', :description => 'test'}
       end
-    
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
-      
-      should_not_change("number of uniforms") { Uniform.count }
-    end   
-    
+
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
+    end
+
     context "requesting POST :create with good data" do
       setup do
-        post :create, :uniform => Uniform.plan
+        post :create, :uniform => plan(Uniform.make)
       end
-    
-      should_respond_with(:redirect)
-      should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
-      
-      should_assign_to(:uniform)
-      should_change("number of uniform", :by => 1) { Uniform.count }
 
-      should_set_the_flash(:success)
+      should respond_with(:redirect)
+      should redirect_to("uniform") { uniform_path(assigns(:uniform)) }
+
+      should assign_to(:uniform)
+      should set_the_flash.level(:success)
     end
-    
+
     context "requesting POST :reset" do
       setup do
         post :reset
       end
-      
-      should_respond_with(:redirect)
-      
-      should_change("number of uniform", :by => 5) { Uniform.count }
-      
-      should_set_the_flash(:success)
+
+      should respond_with(:redirect)
+
+      should set_the_flash.level(:success)
     end
-    
+
     context "with an existing uniform" do
       setup do
-        @uniform = @station.uniforms.make
+        @uniform = @station.uniforms.make!
       end
-  
+
       context "requesting GET :show on existing uniform" do
         setup do
           get :show, :id => @uniform.id
         end
-  
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+
+        should respond_with(:success)
+        should render_template("show")
+        should render_with_layout("back")
       end
-      
+
       context "requesting GET :edit" do
         setup do
           get :edit, :id => @uniform.id
         end
-  
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
-      end  
-      
+
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
+      end
+
       context "requesting PUT :update with bad data" do
         setup do
           put :update, :id => @uniform.id, :uniform => {:title => '', :code => '2b', :description => 'test'}
         end
-  
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
-      end  
-      
+
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
+      end
+
       context "requesting PUT :update with good data" do
         setup do
-          put :update, :id => @uniform.id, :uniform => Uniform.plan
+          put :update, :id => @uniform.id, :uniform => plan(Uniform.make)
         end
-  
-        should_respond_with(:redirect)
-        should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
 
-        should_set_the_flash(:success)
-      end       
-      
+        should respond_with(:redirect)
+        should redirect_to("uniform") { uniform_path(assigns(:uniform)) }
+
+        should set_the_flash.level(:success)
+      end
+
       context "requesting DELETE :destroy without associations" do
         setup do
           delete :destroy, :id => @uniform.id
         end
-        
-        should_redirect_to("uniforms list") { uniforms_path }
-        
-        should_change("number of uniforms", :by => -1) { Uniform.count }
-        should_set_the_flash(:success)
+
+        should redirect_to("uniforms list") { uniforms_path }
+
+        should set_the_flash.level(:success)
       end
-      
+
       context "requesting DELETE :destroy with associations" do
         setup do
-          Uniform.any_instance.stubs(:destroy).returns(false)
-          # because there is no stub_chain for any_instance in mocha
-          Uniform.any_instance.stubs(:errors).returns(mock(:full_messages => ["erreur"]))
+          stub.instance_of(Uniform).destroy { false }
+          stub.instance_of(Uniform).errors.stub!.full_messages { ["erreur"] }
           delete :destroy, :id => @uniform.id
         end
-        
-        should_redirect_to("uniform") { uniform_path(assigns(:uniform)) }
-        
-        should_not_change("number of uniform") { Uniform.count }
-        should_set_the_flash(:error)
+
+        should redirect_to("uniform") { uniform_path(assigns(:uniform)) }
+
+        should set_the_flash.level(:error)
       end
     end
   end

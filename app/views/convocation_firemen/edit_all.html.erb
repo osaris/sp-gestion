@@ -1,7 +1,7 @@
 <div class="span-6 first">
-  <h1>Edition des présences - <%= h(@convocation.title) %> (<%= l(@convocation.date) %>)</h1>
+  <h1>Edition des présences - <%= @convocation.title %> (<%= l(@convocation.date) %>)</h1>
   <p class="right">
-    <%= link_to(image_tag("back/icons/print.png", :alt => "Imprimer la liste d'appel") + "&nbsp;Imprimer la liste d'appel", show_all_convocation_convocation_firemen_path, :format => :pdf) %>
+    <%= link_to(image_tag("back/icons/print.png", :alt => "Imprimer la liste d'appel") + raw("&nbsp;Imprimer la liste d'appel"), show_all_convocation_convocation_firemen_path(:format => :pdf)) %>
   </p>
   <%= render(:partial => 'form') %>
 </div>

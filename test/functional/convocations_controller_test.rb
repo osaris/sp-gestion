@@ -7,7 +7,7 @@ class ConvocationsControllerTest < ActionController::TestCase
   context "an user logged in" do
     setup do
       login
-      @uniform = Uniform.make
+      @uniform = Uniform.make!
       @fireman = make_fireman_with_grades(:station => @station)
     end
 
@@ -16,11 +16,11 @@ class ConvocationsControllerTest < ActionController::TestCase
         get :index
       end
 
-      should_respond_with(:success)
-      should_render_template("index")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("index")
+      should render_with_layout("back")
 
-      should_assign_to(:convocations)
+      should assign_to(:convocations)
     end
 
     context "requesting GET :show for a non existing convocation" do
@@ -28,10 +28,10 @@ class ConvocationsControllerTest < ActionController::TestCase
         get :show, :id => 2458437589
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to(":index") { convocations_path }
+      should respond_with(:redirect)
+      should redirect_to(":index") { convocations_path }
 
-      should_set_the_flash(:error)
+      should set_the_flash.level(:error)
     end
 
     context "requesting GET :new" do
@@ -39,9 +39,9 @@ class ConvocationsControllerTest < ActionController::TestCase
         get :new
       end
 
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
     end
 
     context "requesting POST :create with bad data" do
@@ -49,11 +49,9 @@ class ConvocationsControllerTest < ActionController::TestCase
         post :create, :convocation => {:title => '', :date => '', :place => '', :uniform_id => '', :fireman_ids => []}
       end
 
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
-
-      should_not_change("number of convocations") { Convocation.count }
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
     end
 
     context "requesting POST :create with good data" do
@@ -62,17 +60,16 @@ class ConvocationsControllerTest < ActionController::TestCase
                                        :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+      should respond_with(:redirect)
+      should redirect_to("convocation") { convocation_path(assigns(:convocation)) }
 
-      should_change("number of convocations", :by => 1) { Convocation.count }
-      should_set_the_flash(:success)
+      should set_the_flash.level(:success)
     end
 
     context "with an existing convocation not editable" do
       setup do
         @convocation = make_convocation_with_firemen(:station => @station)
-        Convocation.any_instance.stubs(:editable?).returns(false)
+        stub.instance_of(Convocation).editable? { false }
       end
 
       context "requesting GET :edit" do
@@ -80,10 +77,10 @@ class ConvocationsControllerTest < ActionController::TestCase
           get :edit, :id => @convocation.id
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+        should respond_with(:redirect)
+        should redirect_to("convocation") { convocation_path(assigns(:convocation)) }
 
-        should_set_the_flash(:error)
+        should set_the_flash.level(:error)
       end
 
       context "requesting PUT :update with good data" do
@@ -92,10 +89,10 @@ class ConvocationsControllerTest < ActionController::TestCase
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+        should respond_with(:redirect)
+        should redirect_to("convocation") { convocation_path(assigns(:convocation)) }
 
-        should_set_the_flash(:error)
+        should set_the_flash.level(:error)
       end
     end
 
@@ -109,11 +106,11 @@ class ConvocationsControllerTest < ActionController::TestCase
           get :show, :id => @convocation.id
         end
 
-        should_respond_with(:success)
-        should_render_template("show")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("show")
+        should render_with_layout("back")
 
-        should_assign_to(:convocation)
+        should assign_to(:convocation)
       end
 
       context "requesting GET :show on existing convocation with PDF format" do
@@ -122,8 +119,8 @@ class ConvocationsControllerTest < ActionController::TestCase
           get :show, :id => @convocation.id, :format => 'pdf'
         end
 
-        should_respond_with(:success)
-        should_render_template("show")
+        should respond_with(:success)
+        should render_template("show")
         should "send a file" do
           send_file_to_disk(@response.body, "convocation.pdf")
         end
@@ -134,9 +131,9 @@ class ConvocationsControllerTest < ActionController::TestCase
           get :edit, :id => @convocation.id
         end
 
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
       end
 
       context "requesting PUT :update with bad data" do
@@ -145,9 +142,9 @@ class ConvocationsControllerTest < ActionController::TestCase
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
 
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
       end
 
       context "requesting PUT :update with good data" do
@@ -156,10 +153,10 @@ class ConvocationsControllerTest < ActionController::TestCase
                                                                 :fireman_ids => [@fireman.id.to_s], :uniform_id => @uniform.id.to_s}
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+        should respond_with(:redirect)
+        should redirect_to("convocation") { convocation_path(assigns(:convocation)) }
 
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
 
       context "requesting DELETE :destroy" do
@@ -167,34 +164,33 @@ class ConvocationsControllerTest < ActionController::TestCase
           delete :destroy, :id => @convocation.id
         end
 
-        should_redirect_to("convocations list") { convocations_path }
+        should redirect_to("convocations list") { convocations_path }
 
-        should_change("number of convocations", :by => -1) { Convocation.count }
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
 
       context "requesting POST :email with email quota not exceeded" do
         setup do
-          Station.any_instance.stubs(:can_send_email?).returns(true)
+          stub.instance_of(Station).can_send_email? { true }
           post :email, :id => @convocation.id
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+        should respond_with(:redirect)
+        should redirect_to("convocation") { convocation_path(assigns(:convocation)) }
 
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
 
       context "requesting POST :email with email quota exceeded" do
         setup do
-          Station.any_instance.stubs(:can_send_email?).returns(false)
+          stub.instance_of(Station).can_send_email? { false }
           post :email, :id => @convocation.id
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+        should respond_with(:redirect)
+        should redirect_to("convocation") { convocation_path(assigns(:convocation)) }
 
-        should_set_the_flash(:error)
+        should set_the_flash.level(:error)
       end
     end
   end

@@ -8,7 +8,7 @@ class StationsController < FrontController
     @station = Station.new(params[:station])
     @user = @station.users.build(params[:user])
     if @station.save
-      @user.send_later(:deliver_confirmation_instructions!)
+      @user.deliver_confirmation_instructions!
       @user.messages.create(:title => "Bienvenue dans SP-Gestion",
                             :body => render_to_string(:partial => 'messages/instructions',
                                                       :layout => false))
@@ -19,6 +19,6 @@ class StationsController < FrontController
   end
 
   def check
-    @station = Station::check(params[:name])
+    @station = Station::check(params[:station][:name])
   end
 end

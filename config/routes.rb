@@ -1,43 +1,106 @@
-ActionController::Routing::Routes.draw do |map|
+SpGestion::Application.routes.draw do
 
-  Typus::Routes.draw(map)
+  constraints(:subdomain => 'www') do
+    match '/home' => 'pages#home', :as => :home
+    match '/bye' => 'pages#bye', :as => :bye
+    match '/signup' => 'stations#new', :as => :signup
+    match '/' => 'pages#home', :as => :root_front
 
-  # map.account   '/account', :controller => 'accounts', :action => 'edit', :conditions => { :subdomain => /.+/  }, :method => :get
-  # map.update_account_logo '/account/update_logo', :controller => 'accounts', :action => 'update_logo', :conditions => { :subdomain => /.+/ }, :method => :put
-  # map.update_account_owner '/account/update_owner', :controller => 'accounts', :action => 'update_owner', :conditions => { :subdomain => /.+/  }, :method => :put
-  # map.destroy_account '/account/destroy', :controller => 'accounts', :action => 'destroy', :conditions => { :subdomain => /.+/  }
-  map.resource  :account, :only => [:edit, :destroy], :member => { :update_logo => :put, :update_owner => :put },  :conditions => { :subdomain => /.+/ }
-  map.resources :confirmations, :only => [:edit, :update], :conditions => { :subdomain => /.+/ }
-  map.resources :convocations, :member => { :email => :post}, :conditions => { :subdomain => /.+/  } do |convocation|
-    convocation.resources :convocation_firemen, :only => [:show], :collection => {:show_all => :get, :edit_all => :get, :update_all => :put}, :conditions => { :subdomain => /.+/  }
+    # admin routes
+    match "/admin" => redirect("/admin/dashboard")
+    namespace :admin do
+      match "help" => "base#help"
+      resource :dashboard, :only => [:show], :controller => :dashboard
+      resource :session, :only => [:new, :create, :destroy], :controller => :session
+      resources :account, :only => [:new, :create, :show, :forgot_password] do
+        collection { get :forgot_password }
+      end
+    end
+    match ':controller(/:action(/:id(.:format)))', :controller => /admin\/[^\/]+/
   end
-  map.resources :check_lists, :member => { :copy => :post }, :conditions => { :subdomain => /.+/ } do |check_list|
-    check_list.resources :items, :except => [:index, :show], :conditions => { :subdomain => /.+/ }
+
+  constraints(:subdomain => /.+/) do
+    resource :account, :only => [:edit, :destroy] do
+      member do
+        put :update_logo
+        put :update_owner
+      end
+    end
+
+    resources :confirmations, :only => [:edit, :update]
+
+    resources :convocations do
+      member do
+        post :email
+      end
+      resources :convocation_firemen, :only => [:show] do
+        collection do
+          get :show_all
+          get :edit_all
+          put :update_all
+        end
+      end
+    end
+
+    resources :check_lists do
+      member do
+        post :copy
+      end
+      resources :items, :except => [:index, :show]
+    end
+
+    resources :email_confirmations, :only => [:edit, :update]
+
+    resources :items, :only => [:expirings] do
+      collection do
+        get :expirings
+      end
+    end
+
+    resources :firemen
+
+    resources :messages, :only => [:index, :show, :mark_as_read] do
+      member do
+        post :mark_as_read
+      end
+    end
+
+    resources :newsletters, :only => [:new, :create, :activate] do
+      member do
+        get :activate
+      end
+    end
+
+    resources :password_resets, :only => [:new, :create, :edit, :update]
+
+    match '/profile' => 'profiles#edit', :as => :profile
+    match '/profile/update' => 'profiles#update', :as => :update_profile
+
+    resources :interventions do
+      collection do
+        get :stats
+      end
+    end
+
+    resources :stations, :only => [:new, :create, :check] do
+      collection do
+        post :check
+      end
+    end
+
+    resources :uniforms do
+      collection do
+        post :reset
+      end
+    end
+
+    resources :users, :except => [:edit, :update]
+    resources :vehicles
+
+    match '/login/authenticate' => 'user_sessions#create', :as => :authenticate
+    match '/login' => 'user_sessions#new', :as => :login
+    match '/logout' => 'user_sessions#destroy', :as => :logout
+    match '/' => 'dashboard#index', :as => :root_back
+    match '*url' => 'dashboard#index', :as => :error_404
   end
-  map.resources :email_confirmations, :only => [:edit, :update], :conditions => { :subdomain => /.+/ }
-  map.resources :items, :collection => { :expirings => :get }, :only => [:expirings], :conditions => { :subdomain => /.+/ }
-  map.resources :firemen, :conditions => { :subdomain => /.+/  }
-  map.resources :messages, :member => { :mark_as_read => :post }, :only => [:index, :show], :conditions => { :subdomain => /.+/  }
-  map.resources :newsletters, :member => { :activate => :get}, :only => [:new, :create, :activate], :conditions => { :subdomain => 'www' }
-  map.resources :password_resets, :only => [:new, :create, :edit, :update], :conditions => { :subdomain => /.+/  }
-  map.profile      '/profile', :controller => 'profiles', :action => 'edit', :conditions => { :subdomain => /.+/ }
-  map.update_profile '/profile/update', :controller => 'profiles', :action => 'update', :conditions => { :subdomain => /.+/ }
-  map.resources :interventions, :collection => {:stats => :get }, :conditions => { :subdomain => /.+/  }
-  map.resources :stations, :collection => { :check => :get }, :only => [:new, :create, :check], :conditions => { :subdomain => 'www' }
-  map.resources :uniforms, :collection => { :reset => :post }, :conditions => { :subdomain => /.+/  }
-  map.resources :users, :except => [:edit, :update],:conditions => { :subdomain => /.+/  }
-  map.resources :vehicles, :conditions => { :subdomain => /.+/  }
-
-
-  map.home         '/home', :controller => 'pages', :action => 'home', :conditions => { :subdomain => 'www' }
-  map.bye          '/bye', :controller => 'pages', :action => 'bye', :conditions => { :subdomain => 'www' }
-  map.authenticate '/login/authenticate', :controller => 'user_sessions', :action => 'create', :conditions => { :subdomain => /.+/ }
-  map.login        '/login', :controller => 'user_sessions', :action => 'new', :conditions => { :subdomain => /.+/ }
-  map.logout       '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :subdomain => /.+/ }
-  map.signup       '/signup', :controller => 'stations', :action => 'new', :conditions => { :subdomain => 'www' }
-
-  map.root_front   '/', :controller => 'pages',  :action => 'home', :conditions => { :subdomain => 'www' }
-  map.root_back    '/', :controller => 'dashboard', :action => 'index', :conditions => { :subdomain => /.+/  }
-
-  map.error_404    '*url', :controller => 'dashboard', :action => 'index'
 end

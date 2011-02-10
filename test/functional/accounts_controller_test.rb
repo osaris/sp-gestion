@@ -14,14 +14,14 @@ class AccountsControllerTest < ActionController::TestCase
         get :edit
       end
 
-      should_redirect_to("back home") { root_back_url }
+      should redirect_to("back home") { root_back_url }
     end
   end
 
   context "a station with a logo" do
     setup do
-      @user = User.make(:confirmed)
-      login(Station.make(:logo, :owner_id => @user.id), @user)
+      @user = User.make!(:confirmed)
+      login(Station.make!(:logo, :owner_id => @user.id), @user)
     end
 
     context "requesting PUT :update_logo with remove logo" do
@@ -33,14 +33,14 @@ class AccountsControllerTest < ActionController::TestCase
         assert(!assigns(:station).reload.logo?)
       end
 
-      should_set_the_flash(:success)
+      should set_the_flash.level(:success)
     end
   end
 
   context "an user logged in and station owner" do
     setup do
-      @user = User.make(:confirmed)
-      login(Station.make(:owner_id => @user.id), @user)
+      @user = User.make!(:confirmed)
+      login(Station.make!(:owner_id => @user.id), @user)
     end
 
     should "not have a station logo" do
@@ -52,11 +52,11 @@ class AccountsControllerTest < ActionController::TestCase
         get :edit
       end
 
-      should_respond_with(:success)
-      should_render_template("edit")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("edit")
+      should render_with_layout("back")
 
-      should_assign_to(:users)
+      should assign_to(:users)
     end
 
     context "requesting PUT :update_logo with good logo" do
@@ -69,7 +69,7 @@ class AccountsControllerTest < ActionController::TestCase
         assert(assigns(:station).reload.logo?)
       end
 
-      should_set_the_flash(:success)
+      should set_the_flash.level(:success)
     end
 
     context "requesting PUT :update_logo with bad logo" do
@@ -82,29 +82,29 @@ class AccountsControllerTest < ActionController::TestCase
         assert(!assigns(:station).reload.logo?)
       end
 
-      should_set_the_flash(:error)
+      should set_the_flash.level(:error)
     end
 
     context "requesting PUT :update_owner with good data" do
       setup do
-        Station.any_instance.stubs(:update_owner).returns(true)
+        stub.instance_of(Station).update_owner.with_any_args { true }
         put :update_owner, :station => { :owner_id => '' }
       end
 
-      should_redirect_to("back home") { root_back_url }
+      should redirect_to("back home") { root_back_url }
 
-      should_set_the_flash(:success)
+      should set_the_flash.level(:success)
     end
 
     context "requesting PUT :update_owner with bad data" do
       setup do
-        Station.any_instance.stubs(:update_owner).returns(false)
+        stub.instance_of(Station).update_owner.with_any_args { false }
         put :update_owner, :station => { :owner_id => '' }
       end
 
-      should_redirect_to("back home") { root_back_url }
+      should redirect_to("back home") { root_back_url }
 
-      should_set_the_flash(:error)
+      should set_the_flash.level(:error)
     end
 
     context "requesting DELETE :destroy" do
@@ -112,8 +112,7 @@ class AccountsControllerTest < ActionController::TestCase
         delete :destroy
       end
 
-      should_redirect_to("bye page") { "http://www.test.local/bye" }
-      should_change("number of stations", :by => -1) { Station.count }
+      should redirect_to("bye page") { "http://www.test.local/bye" }
     end
   end
 end

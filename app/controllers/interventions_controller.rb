@@ -82,7 +82,9 @@ class InterventionsController < BackController
   private
 
   def load_intervention
-    @intervention = @station.interventions.find(params[:id], :include => [:vehicles, {:fireman_interventions => [:fireman]}])
+    # Rails can't load all stuff in 1 SQL query because we use has_many :through
+    @intervention = @station.interventions.includes(:vehicles, {:fireman_interventions => [:fireman]}) \
+                                          .find(params[:id])
    rescue ActiveRecord::RecordNotFound
     flash[:error] = "L'intervention n'existe pas."
     redirect_to(interventions_path)
@@ -93,8 +95,7 @@ class InterventionsController < BackController
   end
 
   def load_firemen
-    @firemen = @station.firemen.find(:all, :conditions => {:status => 3},
-                                           :order => 'firemen.grade DESC, firemen.lastname ASC')
+    @firemen = @station.firemen.where(:status => Fireman::STATUS['Actif']).order('firemen.grade DESC, firemen.lastname ASC')
   end
 
   def load_cities

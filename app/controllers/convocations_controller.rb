@@ -71,7 +71,7 @@ class ConvocationsController < BackController
 
   def email
     if @station.can_send_email?(@convocation.firemen.size)
-      @convocation.send_later(:send_emails, @current_user.email)
+      @convocation.delay.send_emails(@current_user.email)
       flash[:success] = "Les convocations sont en cours d'envoi. Un email vous sera adressé à la fin de l'envoi."
     else
       flash[:error] = render_to_string(:partial => "email_error")
@@ -82,14 +82,16 @@ class ConvocationsController < BackController
   private
 
   def load_convocation
-    @convocation = @station.convocations.find(params[:id], :include => {:convocation_firemen => :fireman}, :order => 'convocation_firemen.grade DESC, firemen.lastname ASC')
+    @convocation = @station.convocations.includes({:convocation_firemen => :fireman}) \
+                                        .order('convocation_firemen.grade DESC, firemen.lastname ASC') \
+                                        .find(params[:id])
    rescue ActiveRecord::RecordNotFound
     flash[:error] = "La convocation n'existe pas."
     redirect_to(convocations_path)
   end
 
   def load_firemen
-    @firemen = @station.firemen.find(:all, :order => 'firemen.grade DESC, firemen.lastname ASC')
+    @firemen = @station.firemen.order('firemen.grade DESC, firemen.lastname ASC')
   end
 
   def set_attendees

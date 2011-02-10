@@ -6,7 +6,7 @@ class UserTest < ActiveSupport::TestCase
 
   context "with an instance unsaved" do
     setup do
-      @user = User.make_unsaved
+      @user = User.make
     end
 
     should "not be valid?" do
@@ -16,7 +16,7 @@ class UserTest < ActiveSupport::TestCase
 
   context "with an instance saved and not activated" do
     setup do
-      @user = User.make
+      @user = User.make!
     end
 
     should "not be confirmed?" do
@@ -72,9 +72,7 @@ class UserTest < ActiveSupport::TestCase
         assert_equal(false, @user.confirmed?)
       end
 
-      should "send an email" do
-        assert_sent_email()
-      end
+      should have_sent_email()
     end
 
     context "call deliver_cooptation_instructions!" do
@@ -86,9 +84,7 @@ class UserTest < ActiveSupport::TestCase
         assert_equal(false, @user.confirmed?)
       end
 
-      should "send an email" do
-        assert_sent_email()
-      end
+      should have_sent_email()
     end
 
 
@@ -97,39 +93,43 @@ class UserTest < ActiveSupport::TestCase
         @user.deliver_password_reset_instructions!
       end
 
-      should "send an email" do
-        assert_sent_email()
-      end
+      should have_sent_email()
     end
   end
 
-  context "boost_activation on a confirmed instance" do
+  context "with a confirmed user call boost_activation!" do
     setup do
-      @u = User.make(:confirmed)
+      @u = User.make!(:confirmed)
       @result = @u.boost_activation
+    end
+
+    before_should "expect one mail is delivered" do
+      dont_allow(UserMailer).boost_activation.with_any_args
     end
 
     should "return false" do
       assert_equal(false, @result)
     end
+
     should "not set last_boosted_at" do
       assert_nil(@u.last_boosted_at)
     end
   end
 
-  context "boost_activation on a non confirmed instance" do
+  context "with a not confirmed user call boost_activation!" do
     setup do
-      @u = User.make
+      @u = User.make!
       @result = @u.boost_activation
     end
 
     before_should "expect one mail is delivered" do
-      UserMailer.expects(:deliver_boost_activation).once
+      mock.proxy(UserMailer).boost_activation.with_any_args
     end
 
     should "return true" do
       assert_equal(true, @result)
     end
+
     should "set last_boosted_at" do
       assert_not_nil(@u.last_boosted_at)
     end

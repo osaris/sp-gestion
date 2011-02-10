@@ -1,11 +1,13 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%- form_for(@fireman) do |f| -%>
+<%= form_for(@fireman) do |f| %>
   <div class="span-4 first">
   <%- if !@fireman.errors.blank? -%>
-    <%- if @fireman.errors.on(:validate_grade_update) -%>
-      <p class="message warning span-3">
-        Vous ne pourrez plus modifier tous rapports d'interventions ayant eu lieu avant le <%= l(@fireman.max_grade_date) %>.<br /> <%= f.check_box(:validate_grade_update) %><b><%= f.label(:validate_grade_update, "Je confirme la modification (*)") %></b>
-      </p>
+    <%- unless @fireman.errors[:validate_grade_update].blank? -%>
+      <div class="message warning span-3">
+        Vous ne pourrez plus modifier tous rapports d'interventions ayant eu lieu avant le <%= l(@fireman.max_grade_date) %>.
+        <br />
+        <%= f.check_box(:validate_grade_update) %><b><%= f.label(:validate_grade_update, "Je confirme la modification (*)") %></b>
+      </div>
     <%- else -%>
       <p class="message error">Veuillez corriger les erreurs avant de pouvoir continuer.</p>
     <%- end -%>
@@ -28,7 +30,14 @@
     <%= f.label(:status, "Statut (*)", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.select(:status, Fireman::STATUS.sort, :class => "span-2 first") %>
-      <%= js_for_status %>
+      <%- content_for(:javascript) do -%>
+        $('#fireman_status').change(function() {
+          if ($(this).val() == 1)
+            $('#grades').fadeOut();
+          else
+            $('#grades').fadeIn();
+        });
+      <%- end -%>
       <%= error_message_on(:fireman, :status, :css_class => "span-2 first") %>
     </span>
   </p>
@@ -70,7 +79,7 @@
   <div class="span-2" id="grades" style="<%= style_for_grades(@fireman) %>">
     <div>Grade (*)<br />Saisissez la date de nomination à côté de chaque grade obtenu.</div>
     <table>
-    <%- f.fields_for(:grades) do |g| -%>
+    <%= f.fields_for(:grades) do |g| %>
       <%= render :partial => 'grade', :locals => { :f => g } %>
     <%- end -%>
     </table>
@@ -81,30 +90,28 @@
   </div>
 <%- end -%>
 <%- content_for(:header) do -%>
-  <%= stylesheet_link_tag("back/jquery-ui-1.7.2.custom.css", "back/TextboxList.css", "back/TextboxList.Autocomplete.css")%>
-  <%= javascript_include_tag("jquery-ui-i18n.min.js", "timepicker.js", "GrowingInput.js", "TextboxList.js", "TextboxList.Autocomplete.js") %>
+  <%= stylesheet_link_tag("back/jquery-ui-1.8.7.blitzer.css", "back/TextboxList.css", "back/TextboxList.Autocomplete.css")%>
+  <%= javascript_include_tag("jquery-ui-1.8.7.min.js", "jquery-ui-i18n-1.8.7.min.js", "GrowingInput.js", "TextboxList.js", "TextboxList.Autocomplete.js") %>
 <%- end -%>
-<%= javascript_tag("
-      $(function() {
-        var t = new $.TextboxList('#fireman_tag_list', {
-                        unique: true,
-                        plugins: {
-                          autocomplete: {
-                            queryRemote: false,
-                            placeholder: 'Saisir une nouvelle étiquette ou quelques lettres pour en choisir une existante...'
-                          }
-                        }
-                      });
-        t.plugins['autocomplete'].setValues(#{@tags});
+<%- content_for(:javascript) do -%>
+  var t = new $.TextboxList('#fireman_tag_list', {
+                  unique: true,
+                  plugins: {
+                    autocomplete: {
+                      queryRemote: false,
+                      placeholder: 'Saisir une nouvelle étiquette ou quelques lettres pour en choisir une existante...'
+                    }
+                  }
+                });
+  t.plugins['autocomplete'].setValues(<%= raw(@tags) %>);
 
-        $.datepicker.setDefaults($.datepicker.regional['fr']);
-        $('.date').datepicker({ showMonthAfterYear: false,
-                                showButtonPanel: true,
-                                changeYear: true,
-                                changeMonth: true,
-                                dateFormat: 'dd/mm/yy',
-                                constrainInput: true,
-                                maxDate: '+0',
-                                yearRange: '#{Date.today.year-70}:#{Date.today.year}'});
-      });
-      ") %>
+  $.datepicker.setDefaults($.datepicker.regional['fr']);
+  $('.date').datepicker({ showMonthAfterYear: false,
+                          showButtonPanel: true,
+                          changeYear: true,
+                          changeMonth: true,
+                          dateFormat: 'dd/mm/yy',
+                          constrainInput: true,
+                          maxDate: '+0',
+                          yearRange: '#{Date.today.year-70}:#{Date.today.year}'});
+<%- end -%>

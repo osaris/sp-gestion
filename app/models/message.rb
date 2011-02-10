@@ -1,9 +1,9 @@
 # Message used for internal notification system
 class Message < ActiveRecord::Base
-  
+
   belongs_to :user
-  
-  named_scope :unread, :conditions => {:read_at => nil}
+
+  scope :unread, :conditions => {:read_at => nil}
 
   def read?
     !self.read_at.blank?
@@ -12,5 +12,5 @@ class Message < ActiveRecord::Base
   def read!
     update_attribute(:read_at, Time.now) unless self.read?
   end
-  
+
 end

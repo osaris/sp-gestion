@@ -1,5 +1,5 @@
 <tr class="<%= cycle("odd","even") %>">
   <td><%= Grade::GRADE.index(fireman_intervention.grade) %></td>
-  <td><%= h(fireman_intervention.fireman.lastname) %></td>
-  <td><%= h(fireman_intervention.fireman.firstname) %></td>
+  <td><%= fireman_intervention.fireman.lastname %></td>
+  <td><%= fireman_intervention.fireman.firstname %></td>
 </tr>

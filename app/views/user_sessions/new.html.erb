@@ -1,4 +1,4 @@
-<%- form_for(@user_session, :url => authenticate_path) do |f| -%>
+<%= form_for(@user_session, :as => :user_session, :url => authenticate_path) do |f| %>
   <%= flash_helper %>
   <p>
     <%= f.label(:email, "Adresse email") %><br />
@@ -17,4 +17,6 @@
   </p>
 <%- end -%>
 <!--[if lte IE 7]><div class="clear">&nbsp;</div><![endif]-->
-<%= javascript_tag("$(':text:visible:enabled:first').focus();") %>
+<%- content_for(:javascript) do -%>
+  $(':text:visible:enabled:first').focus();
+<%- end -%>

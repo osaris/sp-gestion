@@ -1,5 +1,5 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires. Un email sera envoyé à l'utilisateur avec un lien pour confirmer son compte et choisir un mot de passe.</p>
-<%- form_for(@user) do |f| -%>
+<%= form_for(@user) do |f| %>
   <p>
     <%= f.label(:email, "Adresse email", :class => "span-1 first") %>
     <span class="span-3">

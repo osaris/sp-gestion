@@ -1,11 +1,13 @@
 <%- content_for(:header) do -%>
-  <%=javascript_include_tag("jquery.pstrength.1.2") %>
+  <%=javascript_include_tag("jquery-1.4.4.js", "jquery.pstrength.1.2") %>
 <%- end -%>
-<%- form_for @user, :url => confirmation_path(@user.perishable_token), :html => { :method => :put } do |f| -%>
+<%= form_for @user, :url => confirmation_path(@user.perishable_token), :html => { :method => :put } do |f| %>
   <p>
     <%= f.label(:password, "Choisissez un mot de passe") %>
     <%= f.password_field(:password) %>
-    <%= javascript_for_password_strength %>
+    <%- content_for(:javascript) do -%>
+      $('#user_password').pstrength();
+    <%- end -%>
     <%= error_message_on(:user, :password) %>
   </p>
   <p>
@@ -17,4 +19,6 @@
     <%= submit_tag("Activer mon compte !") %>
   </p>
 <%- end -%>
-<%= javascript_tag("$(':password:visible:enabled:first').focus();") %>
+<%- content_for(:javascript) do -%>
+  $(':password:visible:enabled:first').focus();
+<%- end -%>

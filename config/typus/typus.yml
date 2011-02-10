@@ -5,9 +5,9 @@
 TypusUser:
   fields:
     list: email, role, status
-    form: first_name, last_name, role, email, password, password_confirmation, language
+    form: first_name, last_name, role, email, password, password_confirmation, locale
     options:
-      selectors: role, language
+      selectors: role, locale
       booleans:
         status: Active, Inactive
   filters: status, role

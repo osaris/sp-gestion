@@ -2,6 +2,6 @@
   <td><%= intervention.number %></td>
   <td><%= link_to(l(intervention.start_date), intervention_path(intervention)) %></td>
   <td><%= display_kind(intervention) %></td>
-  <td><%= h(intervention.place) %>&nbsp;/&nbsp;<%= h(intervention.city) %></td>
+  <td><%= intervention.place %>&nbsp;/&nbsp;<%= intervention.city %></td>
   <td><%= display_vehicles(intervention) %></td>
 </tr>

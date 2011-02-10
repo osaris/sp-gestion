@@ -3,7 +3,7 @@ namespace :spg do
   task :qa do
     exit_code = 0
     begin
-      RAILS_ENV = 'test'
+      Rails.env = 'test'
       Rake::Task["db:migrate"].invoke
       Rake::Task["test"].invoke
       Rake::Task["metrics:all"].invoke

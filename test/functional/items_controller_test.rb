@@ -7,7 +7,7 @@ class ItemsControllerTest < ActionController::TestCase
   context "an user logged in with an existing check_list" do
     setup do
       login
-      @check_list = @station.check_lists.make
+      @check_list = @station.check_lists.make!
     end
 
     context "requesting GET :expirings" do
@@ -15,12 +15,12 @@ class ItemsControllerTest < ActionController::TestCase
         get :expirings
       end
 
-      should_respond_with(:success)
-      should_render_template("expirings")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("expirings")
+      should render_with_layout("back")
 
-      should_assign_to(:items)
-      should_set_session(:back_path) { expirings_items_path }
+      should assign_to(:items)
+      should set_session(:back_path) { expirings_items_path }
     end
 
     context "requesting GET :expirings with PDF format" do
@@ -29,8 +29,8 @@ class ItemsControllerTest < ActionController::TestCase
         get :expirings, :format => 'pdf'
       end
 
-      should_respond_with(:success)
-      should_render_template("expirings")
+      should respond_with(:success)
+      should render_template("expirings")
       should "send a file" do
         send_file_to_disk(@response.body, "check_list_expiration.pdf")
       end
@@ -41,10 +41,10 @@ class ItemsControllerTest < ActionController::TestCase
         get :edit, :check_list_id => rand(10), :id => rand(10)
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to(":index") { check_lists_path }
+      should respond_with(:redirect)
+      should redirect_to(":index") { check_lists_path }
 
-      should_set_the_flash(:error)
+      should set_the_flash.level(:error)
     end
 
     context "requesting GET :edit for a non existing item on an existing check_list" do
@@ -52,10 +52,10 @@ class ItemsControllerTest < ActionController::TestCase
         get :edit, :check_list_id => @check_list.id, :id => rand(10)
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to(":index") { check_list_path(@check_list) }
-      
-      should_set_the_flash(:error)
+      should respond_with(:redirect)
+      should redirect_to(":index") { check_list_path(@check_list) }
+
+      should set_the_flash.level(:error)
     end
 
     context "requesting GET :new" do
@@ -63,9 +63,9 @@ class ItemsControllerTest < ActionController::TestCase
         get :new, :check_list_id => @check_list.id
       end
 
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
     end
 
     context "requesting POST :create with bad data" do
@@ -73,11 +73,9 @@ class ItemsControllerTest < ActionController::TestCase
         post :create, :check_list_id => @check_list.id, :item => {:title => ''}
       end
 
-      should_respond_with(:success)
-      should_render_template("new")
-      should_render_with_layout("back")
-
-      should_not_change("number of items") { Item.count }
+      should respond_with(:success)
+      should render_template("new")
+      should render_with_layout("back")
     end
 
     context "requesting POST :create with good data" do
@@ -85,17 +83,16 @@ class ItemsControllerTest < ActionController::TestCase
         post :create, :check_list_id => @check_list.id, :item => {:title => 'Test', :quantity => '1'}
       end
 
-      should_respond_with(:redirect)
-      should_redirect_to("check_list") { check_list_path(assigns(:check_list)) }
+      should respond_with(:redirect)
+      should redirect_to("check_list") { check_list_path(assigns(:check_list)) }
 
-      should_assign_to(:check_list)
-      should_change("number of items", :by => 1) { Item.count }
-      should_set_the_flash(:success)
+      should assign_to(:check_list)
+      should set_the_flash.level(:success)
     end
 
     context "with an existing item" do
       setup do
-        @item = @check_list.items.make
+        @item = @check_list.items.make!
       end
 
       context "requesting GET :edit" do
@@ -103,9 +100,9 @@ class ItemsControllerTest < ActionController::TestCase
           get :edit, :check_list_id => @check_list.id, :id => @item.id
         end
 
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
       end
 
       context "requesting PUT :update with bad data" do
@@ -113,9 +110,9 @@ class ItemsControllerTest < ActionController::TestCase
           put :update, :check_list_id => @check_list.id, :id => @item.id, :item => {:title => '', :quantity => '1'}
         end
 
-        should_respond_with(:success)
-        should_render_template("edit")
-        should_render_with_layout("back")
+        should respond_with(:success)
+        should render_template("edit")
+        should render_with_layout("back")
       end
 
       context "requesting PUT :update with good data" do
@@ -123,10 +120,10 @@ class ItemsControllerTest < ActionController::TestCase
           put :update, :check_list_id => @check_list.id, :id => @item.id, :item => {:title => 'Test', :quantity => '1'}
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("check_list") { check_list_path(assigns(:check_list)) }
+        should respond_with(:redirect)
+        should redirect_to("check_list") { check_list_path(assigns(:check_list)) }
 
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
 
       context "requesting PUT :update with good data and back_path set to expiring" do
@@ -135,10 +132,10 @@ class ItemsControllerTest < ActionController::TestCase
           put :update, :check_list_id => @check_list.id, :id => @item.id, :item => {:title => 'Test', :quantity => '1'}
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("expirings") { expirings_items_path }
+        should respond_with(:redirect)
+        should redirect_to("expirings") { expirings_items_path }
 
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
 
       context "requesting DELETE :destroy" do
@@ -146,10 +143,9 @@ class ItemsControllerTest < ActionController::TestCase
           delete :destroy, :check_list_id => @check_list.id, :id => @item.id
         end
 
-        should_redirect_to("check_list") { check_list_path(assigns(:check_list)) }
+        should redirect_to("check_list") { check_list_path(assigns(:check_list)) }
 
-        should_change("number of items", :by => -1) { Item.count }
-        should_set_the_flash(:success)
+        should set_the_flash.level(:success)
       end
 
       context "requesting DELETE :destroy and back_path set to expiring" do
@@ -158,10 +154,10 @@ class ItemsControllerTest < ActionController::TestCase
           delete :destroy, :check_list_id => @check_list.id, :id => @item.id
         end
 
-        should_respond_with(:redirect)
-        should_redirect_to("expirings") { expirings_items_path }
-        
-        should_set_the_flash(:success)
+        should respond_with(:redirect)
+        should redirect_to("expirings") { expirings_items_path }
+
+        should set_the_flash.level(:success)
       end
     end
   end

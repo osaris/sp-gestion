@@ -1,5 +1,7 @@
 <div class="span-5 first">
   <h1>Nouvelle tenue</h1>
   <%= render(:partial => 'form') %>
-  <%= javascript_tag("$(':text:visible:enabled:first').focus();") %>
+  <%- content_for(:javascript) do -%>
+    $(':text:visible:enabled:first').focus();
+  <%- end -%>
 </div>

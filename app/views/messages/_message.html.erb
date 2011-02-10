@@ -1,4 +1,4 @@
 <tr class="<%= cycle("odd", "even") %> <%= class_tr_message(message) %>">
   <td><%= l(message.created_at, :format => :default) %></td>
-  <td><%= link_to(h(message.title), message) %></td>
+  <td><%= link_to(message.title, message) %></td>
 </tr>

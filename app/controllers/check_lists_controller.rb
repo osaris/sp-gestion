@@ -64,7 +64,9 @@ class CheckListsController < BackController
   end
 
   def load_check_list
-    @check_list = @station.check_lists.find(params[:id], :include => [:items], :order => 'items.place, items.title')
+    @check_list = @station.check_lists.includes(:items) \
+                                      .order('items.place, items.title') \
+                                      .find(params[:id])
    rescue ActiveRecord::RecordNotFound
     flash[:error] = "La liste n'existe pas."
     redirect_to(check_lists_path)

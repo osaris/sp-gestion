@@ -1,10 +1,17 @@
 <tr class="<%= cycle("odd", "even") %>" id="message_<%= message.id %>">
   <td>
-    <%= link_to_remote(image_tag("back/icons/email.png", :alt => "Marquer comme lu"),
-                       :url => mark_as_read_message_path(message),
-                       :confirm => "Voulez-vous marquer ce message comme lu ?",
-                       :success => visual_effect(:fade, "message_#{message.id}")) %>
+    <%= link_to(image_tag("back/icons/email.png", :alt => "Marquer comme lu"),
+                mark_as_read_message_path(message),
+                :id => "mark_message_#{message.id}_as_read",
+                :confirm => "Voulez-vous marquer ce message comme lu ?",
+                :method => :post,
+                :remote => true) %>
+    <%- content_for(:javascript) do -%>
+      $('#mark_message_#{message.id}_as_read').bind('ajax:success', function(et, e){
+        $('#message_#{message.id}').fadeOut('slow');
+      });
+    <%- end -%>
   </td>
   <td><%= l(message.created_at, :format => :default) %></td>
-  <td><%= link_to(h(message.title), message) %></td>
+  <td><%= link_to(message.title, message) %></td>
 </tr>

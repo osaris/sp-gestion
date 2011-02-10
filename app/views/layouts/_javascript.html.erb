@@ -1,0 +1,5 @@
+<%= javascript_tag do -%>
+  jQuery(document).ready(function($) {
+    <%= yield(:javascript) %>
+  });
+<%- end -%>

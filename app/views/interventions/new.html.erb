@@ -1,5 +1,7 @@
 <div class="span-6 first">
   <h1>Nouvelle intervention</h1>
   <%= render(:partial => 'form') %>
-  <%= javascript_tag("$('#intervention_place').focus();") %>
+  <%- content_for(:javascript) do -%>
+    $('#intervention_place').focus();
+  <%- end -%>
 </div>
