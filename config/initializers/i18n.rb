@@ -1,3 +1,6 @@
+I18n.default_locale = :fr
+I18n.exception_handler = :missing_translations_handler
+
 module I18n
   class << self
     def missing_translations_handler(exception, locale, key, options)
