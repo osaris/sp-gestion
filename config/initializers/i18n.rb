@@ -1,7 +1,10 @@
 I18n.backend.class.send(:include, I18n::Backend::Fallbacks)
 
+# for local
 I18n.default_locale = :fr
+# for production
 I18n.locale = :fr
+# for faker
 I18n.fallbacks.defaults = [:en]
 I18n.exception_handler = :missing_translations_handler
 
