@@ -28,7 +28,8 @@ class Intervention < ActiveRecord::Base
     :sr => 4
   }.freeze
 
-  scope :newer, { :order => 'start_date DESC' }
+  scope :newer, order('start_date DESC')
+  scope :latest, newer.limit(1)
 
   def initialize(params = nil)
     super

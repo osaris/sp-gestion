@@ -16,7 +16,7 @@ class Convocation < ActiveRecord::Base
   validates_datetime :date, :invalid_datetime_message => "Format incorrect (JJ/MM/AAAA HH:MM)"
   validates_with ConvocationValidator
 
-  scope :newer, { :order => 'date DESC' }
+  scope :newer, order('date DESC')
 
   def presence
     ConvocationFireman.select("COUNT(*) AS total, SUM(IF(presence = 0,1,0)) AS missings, SUM(IF(presence=1,1,0)) as presents, status") \

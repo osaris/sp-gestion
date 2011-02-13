@@ -3,7 +3,7 @@ class Message < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :unread, :conditions => {:read_at => nil}
+  scope :unread, where(:read_at => nil)
 
   def read?
     !self.read_at.blank?

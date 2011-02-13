@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   before_create :reset_perishable_token
 
-  scope :confirmed, :conditions => ['confirmed_at IS NOT NULL']
+  scope :confirmed, where(['confirmed_at IS NOT NULL'])
 
   validates_format_of :new_email_tmp, :with => Authlogic::Regex.email, :message => "L'adresse email est mal formée.", :allow_blank => true
   validates_length_of :new_email_tmp, :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.", :allow_blank => true

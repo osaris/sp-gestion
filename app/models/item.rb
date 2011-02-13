@@ -8,9 +8,9 @@ class Item < ActiveRecord::Base
   validates_date :expiry, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
 
   scope :expirings, lambda { |nb_days, station_id|
-    {:include => :check_list,
-     :conditions => ['items.expiry < ? AND check_lists.station_id = ?', nb_days.days.from_now, station_id],
-     :order => 'items.expiry ASC'}
+      includes(:check_list) \
+      .where(['items.expiry < ? AND check_lists.station_id = ?', nb_days.days.from_now, station_id]) \
+      .order('items.expiry ASC')
   }
 
 end

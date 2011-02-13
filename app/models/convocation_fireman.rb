@@ -4,8 +4,8 @@ class ConvocationFireman < ActiveRecord::Base
   belongs_to :convocation
   belongs_to :fireman
 
-  scope :newer, { :include => [:convocation], :order => 'convocations.date DESC', :limit => 5}
-  scope :with_email, { :include => [:fireman], :conditions => ["COALESCE(firemen.email, '') <> ''"] }
+  scope :newer, includes(:convocation).order('convocations.date DESC').limit(5)
+  scope :with_email, includes(:fireman).where(["COALESCE(firemen.email, '') <> ''"])
 
   before_create :set_grade_and_status
 
