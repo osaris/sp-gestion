@@ -24,7 +24,7 @@ class InterventionsControllerTest < ActionController::TestCase
 
     context "requesting GET :stats with interventions" do
       setup do
-        stub.instance_of(Station).interventions.stub!.empty? { false }
+        instance_of(Station).interventions.stub!.latest.stub!.first { Intervention.make }
         stub(Intervention).min_max_year { [Date.today.year, Date.today.year] }
         get :stats
       end
@@ -39,7 +39,7 @@ class InterventionsControllerTest < ActionController::TestCase
 
     context "requesting GET :stats without intervention" do
       setup do
-        instance_of(Station).interventions.stub!.empty? { true }
+        instance_of(Station).interventions.stub!.latest.stub!.first { nil }
         get :stats
       end
 
