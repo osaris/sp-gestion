@@ -67,11 +67,12 @@ class InterventionsController < BackController
   end
 
   def stats
-    if @station.interventions.empty?
+    last_intervention = @station.interventions.latest.first
+    if last_intervention.blank?
       flash[:warning] = "Il faut au moins une intervention pour avoir des statistiques."
       redirect_to(interventions_path)
     else
-      @current_year = (params[:year].blank? ? Date.today.year : params[:year])
+      @current_year = (params[:year].blank? ? last_intervention.start_date.year : params[:year])
       @by_type = Intervention::stats_by_type(@station, @current_year)
       @by_month = Intervention::stats_by_month(@station, @current_year)
       @min_year, @max_year = Intervention::min_max_year(@station)
