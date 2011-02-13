@@ -30,6 +30,7 @@ SpGestion::Application.configure do
   BASE_URL = "sp-gestion.dyndns.org:3000"
   GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxSVsZLsg7YqKrfZbkz-gQZBjT3-sxRVaIhrfjGMzd5BGWjuk_TjVpvVcw"
 
+  # Configure emails
   config.action_mailer.default_url_options = { :host => "www." + BASE_URL }
 end
 

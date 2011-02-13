@@ -36,6 +36,7 @@ SpGestion::Application.configure do
   BASE_URL = "test.local"
   GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxSN6O-sxzKqXTS22pL8Iuz-w39NGhS_t71U82I7hvQ2lF2DlGftGyHd9A"
 
+  # Configure emails
   config.action_mailer.default_url_options = { :host => BASE_URL }
 end
 

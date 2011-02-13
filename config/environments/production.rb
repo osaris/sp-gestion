@@ -50,5 +50,16 @@ SpGestion::Application.configure do
   BASE_URL = "sp-gestion.fr"
   GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxQ-8_tmlR13LzjpxYDSzcgvXT_MeBS2b6MrBLjuU7-Jl6cuaphIPx84Sg"
 
+  # Configure emails
   config.action_mailer.default_url_options = { :host => "www." + BASE_URL }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'in.mailjet.com',
+    :domain => 'sp-gestion.fr',
+    :port => 587,
+    :enable_starttls_auto => true,
+    :authentication => :plain,
+    :user_name => 'd7746ffae9f7945e32665d1c2b579d3d',
+    :password => 'ba809a7c5b054c25b2bd4d51e696a20d',
+  }
 end
