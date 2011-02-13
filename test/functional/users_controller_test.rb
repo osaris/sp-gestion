@@ -71,7 +71,7 @@ class UsersControllerTest < ActionController::TestCase
 
       context "requesting DELETE :destroy for a non existing user" do
         setup do
-          delete :destroy, :id => rand(10)
+          delete :destroy, :id => -1
         end
 
         should respond_with(:redirect)

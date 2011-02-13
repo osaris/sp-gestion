@@ -23,7 +23,7 @@ class VehiclesControllerTest < ActionController::TestCase
 
     context "requesting GET :show for a non existing vehicle" do
       setup do
-        get :show, :id => rand(10)
+        get :show, :id => -1
       end
 
       should respond_with(:redirect)

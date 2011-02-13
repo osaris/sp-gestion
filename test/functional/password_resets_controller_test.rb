@@ -53,7 +53,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
 
     context "requesting GET :edit with bad data" do
       setup do
-        get :edit, :id => rand(10)
+        get :edit, :id => -1
       end
 
       should respond_with(:redirect)

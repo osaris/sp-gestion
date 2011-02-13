@@ -38,7 +38,7 @@ class ItemsControllerTest < ActionController::TestCase
 
     context "requesting GET :edit for a non existing check_list" do
       setup do
-        get :edit, :check_list_id => rand(10), :id => rand(10)
+        get :edit, :check_list_id => -1, :id => -1
       end
 
       should respond_with(:redirect)
@@ -49,7 +49,7 @@ class ItemsControllerTest < ActionController::TestCase
 
     context "requesting GET :edit for a non existing item on an existing check_list" do
       setup do
-        get :edit, :check_list_id => @check_list.id, :id => rand(10)
+        get :edit, :check_list_id => @check_list.id, :id => -1
       end
 
       should respond_with(:redirect)

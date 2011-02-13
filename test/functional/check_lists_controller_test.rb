@@ -23,7 +23,7 @@ class CheckListsControllerTest < ActionController::TestCase
 
     context "requesting GET :show for a non existing check-list" do
       setup do
-        get :show, :id => rand(10)
+        get :show, :id => -1
       end
 
       should respond_with(:redirect)
