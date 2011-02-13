@@ -51,7 +51,7 @@
                           dateFormat: 'dd/mm/yy',
                           constrainInput: true,
                           maxDate: '+5y',
-                          yearRange: '#{Date.today.year-5}:#{Date.today.year+5}'});
+                          yearRange: '<%= Date.today.year-5 %>:<%= Date.today.year+5 %>'});
   $('input#item_place').autocomplete(<%= raw(@check_list.places.to_json) %>, {
                                       minChars: 0,
                                       selectFirst: false
