@@ -47,7 +47,7 @@ SpGestion::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  BASE_URL = "sp-gestion.dotcloud.com"
+  BASE_URL = "dev.sp-gestion.fr"
   GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxQ-8_tmlR13LzjpxYDSzcgvXT_MeBS2b6MrBLjuU7-Jl6cuaphIPx84Sg"
 
   # Configure emails

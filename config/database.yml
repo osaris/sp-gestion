@@ -26,6 +26,17 @@ test:
   username: root
   password:
 
+preprod:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: spgestion_preprod
+  pool: 5
+  username: root
+  password: >hj1pGs^GRUb5WO*85%q
+  host: mysql.spgestion.dotcloud.com
+  port: 1345
+
 production:
   adapter: mysql2
   encoding: utf8
