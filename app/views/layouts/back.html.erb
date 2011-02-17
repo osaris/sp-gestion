@@ -42,7 +42,7 @@
   </div><!-- #content -->
   <div id="footer" class="clearfix">
     <p class="left">
-      Copyright &copy; 2009-<%= Date.today.year %>  imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> !
+      Copyright &copy; 2009-<%= Date.today.year %>  imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> - <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr") %>
     </p>
   </div><!-- #footer -->
   <%= render(:partial => "/layouts/javascript") if content_for?(:javascript) %>

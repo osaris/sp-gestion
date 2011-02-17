@@ -140,8 +140,8 @@ img { vertical-align:text-bottom; }
 
 /* FOOTER */
 #footer { clear:both; float:left; margin:20px 0 40px; padding:10px 19px; width:920px; background:#f9fcff; border:1px solid #172E60; color:#284FA4; }
-#footer .left { float:left; width:45%; }
-#footer .right { float:right; width:45%; text-align:right; }
+#footer .left { float:left; width:50%; }
+#footer .right { float:right; width:50%; text-align:right; }
 #footer a { color:inherit; }
 
 /* ROUNDED CORNERS */

@@ -31,8 +31,9 @@
       <!-- Navigation -->
       <div id="nav" class="box">
         <ul>
-			<li><%= link_to("Accueil", home_path())%></li>
-			<li><%= link_to("Blog", "http://blog.sp-gestion.fr") %></li>
+    			<li><%= link_to("Accueil", home_path())%></li>
+    			<li><%= link_to("Blog", "http://blog.sp-gestion.fr") %></li>
+    			<li><%= link_to("Forum", "http://forum.sp-gestion.fr") %></li>
         </ul>
       </div> <!-- /nav -->
 
@@ -60,7 +61,7 @@
       <!-- Footer -->
       <div id="footer" class="box">
 
-          <p class="f-left">Copyright &copy; 2009-<%= Date.today.year %> imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous !")%></p>
+          <p class="f-left">Copyright &copy; 2009-<%= Date.today.year %> imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous")%> - <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr") %></p>
 
       </div> <!-- /box -->
 
