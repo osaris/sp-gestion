@@ -9,6 +9,7 @@ gem 'capistrano'
 
 gem 'acts_as_geocodable','2.0.2'
 gem 'acts-as-taggable-on','2.0.6'
+gem 'authlogic', :git => 'git://github.com/jjb/authlogic.git'
 gem 'carrierwave', '0.5.1'
 gem 'dalli'
 gem 'delayed_job', '2.1.3'
