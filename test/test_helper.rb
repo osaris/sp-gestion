@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require File.expand_path(File.dirname(__FILE__) + '/blueprints')
@@ -38,7 +39,7 @@ class ActiveSupport::TestCase
     test_file_path = "#{Rails.root}/tmp/tests/"
     FileUtils.mkdir_p(test_file_path)
     File.open(test_file_path+filename, "w") do |f|
-      f.write(content)
+      f.write(content.force_encoding('UTF-8'))
     end
   end
 

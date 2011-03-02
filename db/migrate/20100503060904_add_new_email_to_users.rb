@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddNewEmailToUsers < ActiveRecord::Migration
   def self.up
     add_column(:users, :new_email, :string)

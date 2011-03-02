@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDatesColumnsToVehicles < ActiveRecord::Migration
   def self.up
     add_column(:vehicles, :date_approval, :date)

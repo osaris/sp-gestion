@@ -1,7 +1,7 @@
 <tr class="<%= cycle("odd","even") %>">
-  <td><%= Grade::GRADE.index(fireman.grade) %></td>
+  <td><%= Grade::GRADE.key(fireman.grade) %></td>
   <td><%= link_to(fireman.lastname, fireman) %></td>
   <td><%= fireman.firstname %></td>
-  <td><%= Fireman::STATUS.index(fireman.status) %></td>
+  <td><%= Fireman::STATUS.key(fireman.status) %></td>
   <td><%= fireman.cached_tag_list %></td>
 </tr>

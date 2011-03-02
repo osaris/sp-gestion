@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReplaceRolesByTagsForFiremen < ActiveRecord::Migration
   def self.up
     add_column(:firemen, :cached_tag_list, :string)

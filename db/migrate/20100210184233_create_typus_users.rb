@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTypusUsers < ActiveRecord::Migration
 
   def self.up

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module FiremenHelper
 
   def style_for_grades(fireman)

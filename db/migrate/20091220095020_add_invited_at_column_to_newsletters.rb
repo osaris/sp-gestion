@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddInvitedAtColumnToNewsletters < ActiveRecord::Migration
   def self.up
     add_column(:newsletters, :invited_at, :datetime)

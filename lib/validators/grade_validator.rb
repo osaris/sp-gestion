@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class GradeValidator < ActiveModel::Validator
 
   def validate(record)

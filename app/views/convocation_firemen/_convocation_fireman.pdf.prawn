@@ -1,5 +1,5 @@
 fireman = convocation_fireman.fireman
-grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.index(convocation_fireman.grade)
+grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.key(convocation_fireman.grade)
 uniform = convocation.uniform
 
 if @station.logo?

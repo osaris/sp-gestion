@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AccountsController < BackController
 
   before_filter :check_ownership

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class StationsController < FrontController
 
   def new

@@ -11,12 +11,12 @@
     <tbody>
       <%- @convocation_firemen.group_by(&:status).each do |group, convocation_firemen| -%>
         <tr>
-          <th colspan="4"><%= Fireman::STATUS.index(group) %></th>
+          <th colspan="4"><%= Fireman::STATUS.key(group) %></th>
         </tr>
           <%- convocation_firemen.each do |convocation_fireman| -%>
             <%= fields_for("convocation_firemen[]", convocation_fireman) do |f| =%>
             <tr class="<%= cycle("odd","even") %>">
-              <td class="clickable"><%= Grade::GRADE.index(convocation_fireman.grade) %></td>
+              <td class="clickable"><%= Grade::GRADE.key(convocation_fireman.grade) %></td>
               <td class="clickable"><%= convocation_fireman.fireman.lastname %></td>
               <td class="clickable"><%= convocation_fireman.fireman.firstname %></td>
               <td><%= f.check_box(:presence) %></td>

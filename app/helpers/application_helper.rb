@@ -1,12 +1,15 @@
+# -*- encoding : utf-8 -*-
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
   def flash_helper
-    raw([:success, :warning, :error].map { |type| content_tag(:p, flash[type], :class => "message #{type}") if flash[type] })
+    msg = "".html_safe
+    [:success, :warning, :error].map { |type| msg << content_tag(:p, flash[type], :class => "message #{type}") if flash[type] }
+    msg 
   end
 
   def img_grade(grade)
-    image_tag("back/grades/#{grade}.png", :alt => Grade::GRADE.index(grade))
+    image_tag("back/grades/#{grade}.png", :alt => Grade::GRADE.key(grade))
   end
 
   def context_login_navigation(controller_name)

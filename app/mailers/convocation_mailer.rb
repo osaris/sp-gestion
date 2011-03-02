@@ -1,8 +1,9 @@
+# -*- encoding : utf-8 -*-
 class ConvocationMailer < ApplicationMailer
 
   def convocation(convocation, convocation_fireman, user_email)
     @fireman = convocation_fireman.fireman
-    @grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.index(convocation_fireman.grade)
+    @grade = (convocation_fireman.grade.nil?||convocation.hide_grade) ? "" : Grade::GRADE.key(convocation_fireman.grade)
     @uniform = convocation.uniform
     @convocation = convocation
 

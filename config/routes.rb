@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 SpGestion::Application.routes.draw do
 
   constraints(:subdomain => 'www') do

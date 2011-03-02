@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CheckListsController < BackController
 
   navigation(:check_lists)

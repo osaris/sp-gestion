@@ -46,7 +46,7 @@
       <table>
         <%- @firemen.group_by(&:status).sort.reverse.each do |status, firemen| -%>
           <tr>
-            <td><%= Fireman::STATUS.index(status) %></td>
+            <td><%= Fireman::STATUS.key(status) %></td>
             <td><%= link_to("Cocher/décocher", "#", :id => "change_status_#{status}", :class => "change_status")%></td>
             <td>
               <ul>

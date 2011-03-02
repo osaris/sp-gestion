@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
   navigation(:interventions_list)

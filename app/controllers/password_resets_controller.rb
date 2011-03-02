@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PasswordResetsController < BackController
 
   skip_before_filter :require_user

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Item in check list
 class Item < ActiveRecord::Base
 

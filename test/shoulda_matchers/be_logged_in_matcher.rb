@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Shoulda # :nodoc:
   module Matchers
     module Custom # :nodoc:

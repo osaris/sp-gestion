@@ -43,5 +43,6 @@ production:
   reconnect: false
   database: spgestion_production
   pool: 5
-  username: root
-  password:
+  username: raphael
+  password: 4R8a0LKU
+  host: 212.7.195.85

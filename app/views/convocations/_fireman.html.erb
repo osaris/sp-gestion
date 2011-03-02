@@ -2,7 +2,7 @@
   <%= check_box_tag("convocation[fireman_ids][]", fireman.id, @attendees.has_key?(fireman.id), :class => "status_#{status}") %>
   <label class="click_prev_checkbox">
     <%- if fireman.status != Fireman::STATUS['JSP'] -%>
-      <%= Grade::GRADE.index(fireman.grade) %>-
+      <%= Grade::GRADE.key(fireman.grade) %>-
     <%- end -%>
     <%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
   </label>

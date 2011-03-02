@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module InterventionsHelper
   
   def options_for_kind
@@ -5,7 +6,7 @@ module InterventionsHelper
   end
   
   def display_kind(intervention)
-    t("intervention.kind."+Intervention::KIND.index(intervention.kind).to_s)
+    t("intervention.kind."+Intervention::KIND.key(intervention.kind).to_s)
   end
   
   def display_vehicles(intervention)

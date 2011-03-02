@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # require 'google_map/bounding_box'
 # require 'google_map/clusterer'
 require 'google_map/geo_xml'

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module GoogleMap
   
   class SmallIcon < GoogleMap::Icon

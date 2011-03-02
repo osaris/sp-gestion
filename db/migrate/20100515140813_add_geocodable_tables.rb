@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddGeocodableTables < ActiveRecord::Migration
   def self.up
     create_table "geocodes" do |t|

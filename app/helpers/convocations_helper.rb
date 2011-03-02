@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ConvocationsHelper
 
   def display_stats_presence(status)

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # All items belongs to the station
 class Station < ActiveRecord::Base
 

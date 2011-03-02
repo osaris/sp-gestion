@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Relation table for fireman presence at convocation
 class ConvocationFireman < ActiveRecord::Base
 
