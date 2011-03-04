@@ -32,5 +32,4 @@ group :test do
   gem 'machinist', '2.0.0.beta2'
   gem 'rr', '1.0.2'
   gem 'shoulda', '2.11.3'
-  gem 'metric_fu', '2.0.1'
 end
