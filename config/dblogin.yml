@@ -1,4 +1,0 @@
-login: &login
-  username: root
-  password:
-  host: localhost
