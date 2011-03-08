@@ -9,6 +9,7 @@
   <!--[if IE 7]><%= stylesheet_link_tag("back/ie7.css")%><![endif]-->
   <%= javascript_include_tag("jquery-1.4.4.js", "rails.js") %>
   <%= csrf_meta_tag %>
+  <%= hoptoad_javascript_notifier %>
   <%= yield(:header) %>
 </head>
 <body>

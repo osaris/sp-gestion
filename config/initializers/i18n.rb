@@ -20,7 +20,7 @@ module I18n
         raise exception
       when "production"
         if MissingTranslationData === exception
-          notify_errornot(exception)
+          notify_hoptoad(exception)
           return exception.message
         else
           raise exception
