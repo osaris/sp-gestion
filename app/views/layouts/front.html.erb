@@ -42,6 +42,7 @@
       <p class="f-left">Copyright &copy; 2009-<%= Date.today.year %> imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous")%> - <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr") %></p>
     </div>
   </div>
-  <%= render(:partial => "/layouts/javascript")%>
+  <%= render(:partial => "/layouts/javascript") if content_for?(:javascript) %>
+  <!-- SVN REV : <%= render(:partial => "/layouts/svn_revision")%> -->
 </body>
 </html>
