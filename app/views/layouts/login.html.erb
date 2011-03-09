@@ -7,7 +7,7 @@
   <%= stylesheet_link_tag("back/master.css")%>
   <!--[if lte IE 6]><%= stylesheet_link_tag("back/ie6.css")%><![endif]-->
   <!--[if IE 7]><%= stylesheet_link_tag("back/ie7.css")%><![endif]-->
-  <%= javascript_include_tag("jquery-1.4.4.js", "rails.js") %>
+  <%= javascript_include_tag("jquery-#{SpGestion::JQUERY_VERSION}.min.js", "rails.js") %>
   <%= csrf_meta_tag %>
   <%= hoptoad_javascript_notifier %>
   <%= yield(:header) %>

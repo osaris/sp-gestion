@@ -75,8 +75,8 @@
   </div>
 <%- end -%>
 <%- content_for(:header) do -%>
-  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-1.8.7.blitzer.css")%>
-  <%= javascript_include_tag("jquery-ui-1.8.7.min.js", "jquery-ui-i18n-1.8.7.min.js", "jquery-ui-timepicker-addon.js") %>
+  <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-#{SpGestion::JQUERY_UI_VERSION}.blitzer.css")%>
+  <%= javascript_include_tag("jquery-ui-#{SpGestion::JQUERY_UI_VERSION}.min.js", "jquery-ui-i18n-#{SpGestion::JQUERY_UI_VERSION}.min.js", "jquery-ui-timepicker-addon.js") %>
 <%- end -%>
 <%- content_for(:javascript) do -%>
   $.datepicker.setDefaults($.datepicker.regional['fr']);
