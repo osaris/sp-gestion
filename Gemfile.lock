@@ -39,6 +39,10 @@ GEM
     acts_as_geocodable (2.0.2)
       graticule (>= 2.0.0)
     arel (2.0.9)
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
     builder (2.1.2)
     capistrano (2.5.19)
       highline
@@ -156,6 +160,7 @@ GEM
     validates_timeliness (3.0.5)
       timeliness (~> 0.3.2)
     will_paginate (3.0.pre2)
+    xml-simple (1.0.14)
 
 PLATFORMS
   ruby
@@ -164,6 +169,7 @@ DEPENDENCIES
   acts-as-taggable-on (= 2.0.6)
   acts_as_geocodable (= 2.0.2)
   authlogic!
+  aws-s3 (= 0.6.2)
   capistrano (= 2.5.19)
   carrierwave (= 0.5.2)
   dalli (= 1.0.2)

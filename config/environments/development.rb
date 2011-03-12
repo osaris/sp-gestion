@@ -18,10 +18,6 @@ SpGestion::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
-  # Toggle toolbar URL
-  # http://www.sp-gestion.dyndns.org:3000/__rack_bug__/bookmarklet.html
-  # config.middleware.use "Rack::Bug", :secret_key => "vUevpHm1oPhz3qFuUxek"
-
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
