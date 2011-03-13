@@ -169,16 +169,14 @@ namespace :s3_asset_host do
   
   desc "Loads the S3 id and secret from the .yaml file set in CONFIG_FILENAME"
   task :load_config do
-    # rails_env = ENV["RAILS_ENV"] || "production"
     s3sync_config = YAML::load(File.open(CONFIG_FILENAME))
     s3sync_config.each do |key, value|
       set(key.downcase.to_sym, value)
     end
-    set(:asset_host_name, s3sync_config[rails_env]['asset_host_name'])
   end
 
   desc "Synchronizes the public directory with your asset hosts."
-  task :synch_public, :roles => [:web, :app], :only => {:asset_host_syncher => true} do
+  task :synch_public, :roles => :web, :only => {:asset_host_syncher => true} do
     connect
     current_release_dir = fetch(:latest_release)
     asset_hosts.each do |host|
@@ -189,7 +187,7 @@ namespace :s3_asset_host do
       command += "--dryrun " if fetch(:dry_run, false)
       command += "#{File.join(current_release_dir, 'public')}/ #{host}:" 
       run(command)
-    end   
+    end
   end
   
   desc "Deletes and re-creates all of your asset host buckets and then uploads everything to them"

@@ -1,4 +1,4 @@
-ws_access_key_id: AKIAI3DSGZI62YJTITAQ
-aws_secret_access_key: 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
+AWS_ACCESS_KEY_ID: AKIAI3DSGZI62YJTITAQ
+AWS_SECRET_ACCESS_KEY: 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
 asset_host_name: s3.sp-gestion.fr
 dry_run: true
