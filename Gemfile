@@ -7,6 +7,7 @@ gem 'mysql2', '0.2.6'
 # Deploy with Capistrano
 gem 'capistrano', '2.5.19'
 
+gem 'aproxacs-s3sync', '1.3.6'
 gem 'acts_as_geocodable','2.0.2'
 gem 'acts-as-taggable-on','2.0.6'
 gem 'authlogic', :git => 'git://github.com/jjb/authlogic.git'
@@ -26,10 +27,6 @@ gem 'simple-navigation', '3.2.0'
 gem 'typus', '3.0.8'
 gem 'validates_timeliness', '3.0.5'
 gem 'will_paginate', '3.0.pre2'
-
-group :development do
-	gem 'aws-s3', '0.6.2'
-end
 
 group :test do
   gem 'faker', '0.9.5'
