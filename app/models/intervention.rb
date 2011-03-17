@@ -68,7 +68,10 @@ class Intervention < ActiveRecord::Base
   private
 
   def init_number
-    self.number = self.station.interventions.size + 1
+    result = Intervention.select("COALESCE(MAX(number),0) AS max_number") \
+                         .where(:station_id => self.station.id) \
+                         .first
+    self.number = result[:max_number].to_i + 1
   end
 
 end
