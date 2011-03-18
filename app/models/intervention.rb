@@ -68,7 +68,8 @@ class Intervention < ActiveRecord::Base
   private
 
   def init_number
-    result = Intervention.select("COALESCE(MAX(number),0) AS max_number") \
+    # casting because number is stored as a varchar (for custom format)
+    result = Intervention.select("COALESCE(MAX(CAST(number AS SIGNED),0) AS max_number") \
                          .where(:station_id => self.station.id) \
                          .first
     self.number = result[:max_number].to_i + 1
