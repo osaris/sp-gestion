@@ -70,6 +70,7 @@
   <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-#{SpGestion::JQUERY_UI_VERSION}.blitzer.css", "back/jquery.autocomplete.css")%>
   <%= javascript_include_tag("jquery-ui-#{SpGestion::JQUERY_UI_VERSION}.min.js", "jquery-ui-i18n-#{SpGestion::JQUERY_UI_VERSION}.min.js", "jquery-ui-timepicker-addon.js","jquery.autocomplete.pack.js") %>
 <%- end -%>
+<%# FIXME use maxDate: new Date() when minutes selection is fixed in datetimepicker %>
 <%- content_for(:javascript) do -%>
   $.datepicker.setDefaults($.datepicker.regional['fr']);
   $.timepicker.setDefaults($.timepicker.regional['fr']);
@@ -78,7 +79,7 @@
                               changeMonth: true,
                               dateFormat: 'dd/mm/yy',
                               minDate: '<%= min_date_intervention(@station) %>',
-                              maxDate: new Date(),
+                              maxDate: +0,
                               constrainInput: true,
                               duration: '',
                               stepMinute: 1});
