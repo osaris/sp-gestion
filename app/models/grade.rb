@@ -4,8 +4,8 @@ class Grade < ActiveRecord::Base
 
   belongs_to :fireman
 
-  validates_date :date, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
-  validates_with GradeValidator
+  # TODO use validates_date when https://github.com/adzap/validates_timeliness/issues/41 is fixed
+  validates :date, :timeliness => { :allow_blank => true, :on_or_before => :today, :type => :date}
 
   after_save :set_last_grade_update_at
 

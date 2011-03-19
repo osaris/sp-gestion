@@ -14,7 +14,7 @@ class Convocation < ActiveRecord::Base
   # FIXME record is saved even if this validation failed, it's a Rails bug
   # https://rails.lighthouseapp.com/projects/8994/tickets/922-has_many-through-transaction-rollback
   validates_presence_of :firemen, :message => "Les personnes convoquées sont obligatoires."
-  validates_datetime :date, :invalid_datetime_message => "Format incorrect (JJ/MM/AAAA HH:MM)"
+  validates_datetime :date
   validates_with ConvocationValidator
 
   scope :newer, order('date DESC')

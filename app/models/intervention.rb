@@ -14,9 +14,8 @@ class Intervention < ActiveRecord::Base
   # FIXME record is saved even if this validation failed, it's a Rails bug
   # https://rails.lighthouseapp.com/projects/8994/tickets/922-has_many-through-transaction-rollback
   validates_presence_of :firemen, :message => "Le personnel est obligatoire."
-  validates_datetime :start_date, :invalid_datetime_message => "Format incorrect (JJ/MM/AAAA HH:MM)"
-  validates_datetime :end_date, :invalid_datetime_message => "Format incorrect (JJ/MM/AAAA HH:MM)"
-  validates_with InterventionValidator
+  validates_datetime :start_date
+  validates_datetime :end_date, :on_or_before => :now, :after => :start_date
 
   acts_as_geocodable :address => {:street => :place, :locality => :city}
 

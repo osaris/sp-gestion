@@ -7,9 +7,10 @@ class Vehicle < ActiveRecord::Base
   has_many :interventions, :through => :intervention_vehicles
 
   validates_presence_of :name, :message => "Le nom est obligatoire."
-  validates_date :date_approval, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
-  validates_date :date_check, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
-  validates_date :date_review, :allow_blank => true, :invalid_date_message => "Format incorrect (JJ/MM/AAAA)"
+  # TODO use validates_date when https://github.com/adzap/validates_timeliness/issues/41 is fixed
+  validates :date_approval, :timeliness => { :allow_blank => true, :type => :date }
+  validates :date_check, :timeliness => { :allow_blank => true, :type => :date }
+  validates :date_review, :timeliness => { :allow_blank => true, :type => :date }
 
   before_destroy :check_associations
 
