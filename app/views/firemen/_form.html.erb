@@ -2,7 +2,7 @@
 <%= form_for(@fireman) do |f| %>
   <div class="span-4 first">
   <%- if !@fireman.errors.blank? -%>
-    <%- unless @fireman.errors[:validate_grade_update].blank? -%>
+    <%- if (@fireman.errors.count == 1) and @fireman.errors[:validate_grade_update].present? -%>
       <div class="message warning span-3">
         Vous ne pourrez plus modifier tous rapports d'interventions ayant eu lieu avant le <%= l(@fireman.max_grade_date) %>.
         <br />
