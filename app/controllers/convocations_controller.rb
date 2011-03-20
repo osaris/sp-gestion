@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ConvocationsController < BackController
 
-  navigation(:convocations)
-
   before_filter :load_convocation, :except => [:index, :new, :create]
   before_filter :load_firemen, :only => [:new, :create, :edit, :update]
 

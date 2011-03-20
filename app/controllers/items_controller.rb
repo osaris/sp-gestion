@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ItemsController < BackController
 
-  navigation(:check_lists)
-
   before_filter :load_check_list, :except => [:expirings]
   before_filter :load_item, :except => [:new, :create, :expirings]
 
@@ -10,7 +8,6 @@ class ItemsController < BackController
     @items = Item.expirings(30, @station.id)
     respond_to do |format|
       format.html do
-        current_navigation(:expirings)
         session[:back_path] = expirings_items_path
       end
       format.pdf do

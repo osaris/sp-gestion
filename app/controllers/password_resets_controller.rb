@@ -7,8 +7,6 @@ class PasswordResetsController < BackController
 
   layout('login')
 
-  navigation(:password_resets)
-
   def new
   end
 

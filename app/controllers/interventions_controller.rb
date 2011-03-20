@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
-  navigation(:interventions_list)
-
   before_filter :load_intervention, :except => [:index, :new, :create, :stats]
   before_filter :load_vehicles, :except => [:index, :show, :destroy, :stats]
   before_filter :load_firemen, :except => [:index, :show, :destroy, :stats]
@@ -77,7 +75,6 @@ class InterventionsController < BackController
       @by_type = Intervention::stats_by_type(@station, @current_year)
       @by_month = Intervention::stats_by_month(@station, @current_year)
       @min_year, @max_year = Intervention::min_max_year(@station)
-      current_navigation(:interventions_stats)
     end
   end
 

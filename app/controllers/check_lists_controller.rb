@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CheckListsController < BackController
 
-  navigation(:check_lists)
-
   before_filter :load_check_list, :except => [:index, :new, :create]
   before_filter :reset_back_path # for expirings items back link
 

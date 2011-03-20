@@ -1,25 +1,25 @@
 # -*- encoding : utf-8 -*-
 # Configures your navigation
-SimpleNavigation::Configuration.run do |navigation|  
-  # Specify a custom renderer if needed. 
+SimpleNavigation::Configuration.run do |navigation|
+  # Specify a custom renderer if needed.
   # The default renderer is SimpleNavigation::Renderer::List which renders HTML lists.
   # navigation.renderer = Your::Custom::Renderer
-  
+
   # Specify the class that will be applied to active navigation items. Defaults to 'selected'
   navigation.selected_class = 'active'
-  
+
   # Normally only the current sub menu is renderedwhen render_navigation is called
   # setting this to true render all submenus which is useful for javascript
   # driven hovering menus like the jquery superfish plugin
   # navigation.render_all_levels = true
-  
+
   # Item keys are normally added to list items as id.
   # This setting turns that off
   # navigation.autogenerate_item_ids = false
 
   # The auto highlight feature is turned on by default.
   # This turns it off globally (for the whole plugin)
-  # navigation.auto_highlight = false
+  navigation.auto_highlight = false
 
   # Define the primary navigation
   navigation.items do |primary|
@@ -30,43 +30,39 @@ SimpleNavigation::Configuration.run do |navigation|
     # options - can be used to specify attributes that will be included in the rendered navigation item (e.g. id, class etc.)
     #
     primary.item(:home, 'Accueil', root_back_path) do |home|
-      home.item(:dashboard, 'Le standard', root_back_path)
-      home.item(:messages, 'Messages', messages_path)
-      
-      home.auto_highlight = false
+      home.item(:dashboard, 'Le standard', root_back_path, :highlights_on => /^\/$/)
+      home.item(:messages, 'Messages', messages_path, :highlights_on => /^\/messages/)
+
       home.dom_class = 'subnav'
     end
-    
+
     primary.item(:personnel, 'Personnel', firemen_path) do |personnel|
-      personnel.item(:firemen, 'Hommes', firemen_path)
-      personnel.item(:convocations, 'Convocations', convocations_path)
-      
-      personnel.item(:uniforms, 'Tenues', uniforms_path, :class => 'right')
-      
-      personnel.auto_highlight = false
+      personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen/)
+      personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/)
+
+      personnel.item(:uniforms, 'Tenues', uniforms_path, :class => 'right', :highlights_on => /^uniforms/)
+
       personnel.dom_class = 'subnav'
     end
 
     primary.item(:materiel, 'Matériel', check_lists_path) do |materiel|
-      materiel.item(:check_lists, 'Listes', check_lists_path)
-      materiel.item(:expirings, 'Expiration', expirings_items_path)
+      materiel.item(:check_lists, 'Listes', check_lists_path, :highlights_on => /^\/check_lists/)
+      materiel.item(:expirings, 'Expiration', expirings_items_path, :highlights_on => /^\/items\/expirings/)
 
-      materiel.item(:vehicles, 'Véhicules', vehicles_path, :class => 'right')
+      materiel.item(:vehicles, 'Véhicules', vehicles_path, :class => 'right', :highlights_on => /^\/vehicles/)
 
-      materiel.auto_highlight = false
       materiel.dom_class = 'subnav'
     end
-    
-    primary.item(:intervention, 'Interventions', interventions_path) do |intervention|
-      intervention.item(:interventions_list, 'Liste', interventions_path)
-      intervention.item(:interventions_stats, 'Statistiques', stats_interventions_path)
 
-      intervention.auto_highlight = false
+    primary.item(:intervention, 'Interventions', interventions_path) do |intervention|
+      intervention.item(:interventions_list, 'Liste', interventions_path, :highlights_on => /^\/interventions\/?((\d).*|new)?$/)
+      intervention.item(:interventions_stats, 'Statistiques', stats_interventions_path, :highlights_on => /^\/interventions\/stats/)
+
       intervention.dom_class = 'subnav'
     end
-    
+
     primary.dom_id = 'mainnav'
-    
+
     # You can also specify a condition-proc that needs to be fullfilled to display an item.
     # Conditions are part of the options. They are evaluated in the context of the views,
     # thus you can use all the methods and vars you have available in the views.
@@ -77,10 +73,10 @@ SimpleNavigation::Configuration.run do |navigation|
     # works for all levels of the menu
     # primary.dom_id = 'menu-id'
     # primary.dom_class = 'menu-class'
-    
+
     # You can turn off auto highlighting for a specific level
     # primary.auto_highlight = false
-  
+
   end
-  
+
 end

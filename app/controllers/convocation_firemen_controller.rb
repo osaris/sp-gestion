@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ConvocationFiremenController < BackController
 
-  navigation(:convocations)
-
   before_filter :load_convocation
 
   def show

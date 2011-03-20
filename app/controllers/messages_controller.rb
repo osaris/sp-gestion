@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class MessagesController < BackController
 
-  navigation(:messages)
-
   before_filter :load_message, :except => :index
 
   def index
