@@ -4,6 +4,8 @@ gem 'rails', '3.0.5'
 
 gem 'mysql2', '0.2.6'
 
+gem 'rack', '1.2.2'
+
 # Deploy with Capistrano
 gem 'capistrano', '2.5.19'
 
