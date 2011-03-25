@@ -10,9 +10,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 module SpGestion
   # Global constants for configuration
   JQUERY_VERSION = '1.5.1'
-  JQUERY_UI_VERSION = '1.8.7'
-  
-  
+  JQUERY_UI_VERSION = '1.8.11'
+
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -49,6 +49,6 @@ module SpGestion
     # Specify generators
     config.generators do |g|
       g.fixture_replacement :machinist
-    end    
+    end
   end
 end
