@@ -78,11 +78,17 @@
   </div>
   <div class="span-2" id="grades" style="<%= style_for_grades(@fireman) %>">
     <div>Grade (*)<br />Saisissez la date de nomination à côté de chaque grade obtenu.</div>
-    <table>
     <%= f.fields_for(:grades) do |g| %>
-      <%= render :partial => 'grade', :locals => { :f => g } %>
+        <%= render :partial => 'grade', :locals => { :f => g } %>
     <%- end -%>
-    </table>
+    <div id="accordion">
+      <%- Grade::GRADE_CATEGORY.each do |gc| %>
+      <h3><a href="#"><%= gc[0] %></a></h3>
+      <div>
+        <%= yield("GC_#{gc[1]}".to_sym) %>
+      </div>
+      <%- end -%>
+    </div>
     <%= error_message_on(:fireman, :grades, :css_class => "span-2 first") %>
   </div>
   <div class="span-5 first">
@@ -114,4 +120,10 @@
                           constrainInput: true,
                           maxDate: '+0',
                           yearRange: '<%= Date.today.year-70 %>:<%= Date.today.year %>'});
+
+  $("#accordion").accordion({
+    autoHeight: false,
+    active: <%= active_accordion(@fireman) %>,
+  });
+
 <%- end -%>

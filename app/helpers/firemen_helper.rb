@@ -9,6 +9,26 @@ module FiremenHelper
     grade.date.blank? ? "" : "set"
   end
 
+  def active_accordion(fireman)
+    result = 4
+    if !fireman.current_grade.blank?
+      category = Grade::GRADE_CATEGORY_MATCH[@fireman.current_grade.kind]
+      case category
+        when Grade::GRADE_CATEGORY['Médecin']
+          result = 0
+        when Grade::GRADE_CATEGORY['Infirmier']
+          result = 1
+        when Grade::GRADE_CATEGORY['Officier']
+          result = 2
+        when Grade::GRADE_CATEGORY['Sous-officier']
+          result = 3
+        else
+          result = 4
+      end
+    end
+    result
+  end
+
   def display_stats_convocation
     presence = @fireman.stats_convocations
     if presence[:total].to_i > 0
