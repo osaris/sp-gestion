@@ -23,7 +23,7 @@ development:
 login: &login
   username: raphael
   password: 4R8a0LKU
-  host: 212.7.195.85
+  host: 212.7.209.34
 
 # replace the above login details with information from ./config/dblogin.yml
 <%= file = File.join(Rails.root.to_s, "config", "dblogin.yml")
@@ -45,4 +45,4 @@ production:
   pool: 5
   username: raphael
   password: 4R8a0LKU
-  host: 212.7.195.85
+  host: 212.7.209.34
