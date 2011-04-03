@@ -163,6 +163,27 @@ img { vertical-align:text-bottom; }
 #content .edit_fireman ul.textboxlist-bits, #content .new_fireman ul.textboxlist-bits {padding: 0; margin: 0;}
 img.grade { vertical-align:middle; }
 
+/* FIREMEN FACEBOOK */
+.facebook a {
+  text-decoration: none;
+  color: #172E60;
+}
+
+.facebook ul {
+  list-style:none;
+}
+.facebook li {
+  float:left;
+  display: block;
+  width: 150px;
+  text-align: center;
+  font-size: 10px;
+  border: 1px solid #F5F5F5;
+}
+.facebook li:hover {
+  border: 1px solid #172E60;
+}
+
 /* GRADE FORM */
 #grades .set { background-color: #a8aaaa;}
 

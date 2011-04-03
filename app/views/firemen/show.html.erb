@@ -1,4 +1,5 @@
-<h1><%= Grade::GRADE.key(@fireman.grade) %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></h1>
+<p style="float:right"><%= image_tag(@fireman.passeport_photo.url, :alt => grade_and_name(@fireman)) %></p>
+<h1><%= grade_and_name(@fireman) %></h1>
 <%- unless @fireman.cached_tag_list.blank? -%>
   <p>Etiquette(s) : <%= @fireman.cached_tag_list %></p>
 <%- end -%>

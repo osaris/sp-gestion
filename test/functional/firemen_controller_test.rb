@@ -22,6 +22,18 @@ class FiremenControllerTest < ActionController::TestCase
       should assign_to(:firemen)
     end
 
+    context "requesting GET :facebook" do
+      setup do
+        get :facebook
+      end
+
+      should respond_with(:success)
+      should render_template("facebook")
+      should render_with_layout("back")
+
+      should assign_to(:firemen)
+    end
+
     context "requesting GET :show for a non existing fireman" do
       setup do
         get :show, :id => 2458437589

@@ -1,6 +1,13 @@
 # -*- encoding : utf-8 -*-
 module FiremenHelper
 
+  def grade_and_name(fireman)
+    result = ""
+    result += Grade::GRADE.key(fireman.grade) + " " unless fireman.grade.blank?
+    result += fireman.firstname + " " + fireman.lastname
+    result
+  end
+
   def style_for_grades(fireman)
     fireman.status == 1 ? "display:none;" : ""
   end

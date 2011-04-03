@@ -1,5 +1,5 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%= form_for(@fireman) do |f| %>
+<%= form_for(@fireman, :html => {:multipart => true}) do |f| %>
   <div class="span-4 first">
   <%- if !@fireman.errors.blank? -%>
     <%- if (@fireman.errors.count == 1) and @fireman.errors[:validate_grade_update].present? -%>
@@ -67,6 +67,14 @@
     <span class="span-3">
       <%= f.text_field(:email, :class => "span-2 first") %>
       <%= error_message_on(:fireman, :email, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
+    <%= f.label(:passeport_photo, "Photo (PNG, JPG, GIF) de 155 x 200 pixels", :class => "span-1 first")%>
+    <span class="span-3">
+      <%= f.file_field :passeport_photo %>
+      <%= f.hidden_field :passeport_photo_cache %><br />
+      <%= f.check_box :remove_passeport_photo %> Supprimer la photo existante
     </span>
   </p>
   <p>

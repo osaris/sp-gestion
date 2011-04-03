@@ -3,7 +3,7 @@ class FiremenController < BackController
 
   helper(:interventions)
 
-  before_filter :load_fireman, :except => [:index, :new, :create, :tag]
+  before_filter :load_fireman, :except => [:index, :new, :create, :tag, :facebook]
   before_filter :load_tags, :only => [:new, :create, :edit, :update]
 
   def index
@@ -47,6 +47,10 @@ class FiremenController < BackController
       flash[:error] = @fireman.errors.full_messages.join("")
       redirect_to(@fireman)
     end
+  end
+
+  def facebook
+    @firemen = @station.firemen.order_by_grade_and_lastname
   end
 
   private

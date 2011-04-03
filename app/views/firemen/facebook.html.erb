@@ -1,0 +1,16 @@
+<%- @firemen.group_by(&:status).sort.reverse.each do |status, firemen| -%>
+  <h1 class=clear><%= Fireman::STATUS_PLURAL.key(status) %></h1>
+  <%- firemen.group_by(&:grade_category).each do |gc, firemen_category| -%>
+    <h2 class=clear><%= Grade::GRADE_CATEGORY_PLURAL.key(gc) %></h2>
+    <ul class=facebook>
+      <%- firemen_category.each do |fireman| -%>
+        <%= link_to(fireman_path(fireman)) do %>
+          <li>
+            <%= image_tag(fireman.passeport_photo.thumb.url, :alt => grade_and_name(fireman)) %><br />
+            <%= grade_and_name(fireman) %>
+          </li>
+        <%- end -%>
+      <%- end -%>
+    </ul>
+  <%- end -%>
+<%- end -%>

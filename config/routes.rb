@@ -58,7 +58,11 @@ SpGestion::Application.routes.draw do
       end
     end
 
-    resources :firemen
+    resources :firemen do
+      collection do
+        get :facebook
+      end
+    end
 
     resources :messages, :only => [:index, :show, :mark_as_read] do
       member do

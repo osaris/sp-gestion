@@ -94,7 +94,7 @@ class InterventionsController < BackController
   end
 
   def load_firemen
-    @firemen = @station.firemen.where(:status => Fireman::STATUS['Actif']).order('firemen.grade DESC, firemen.lastname ASC')
+    @firemen = @station.firemen.where(:status => Fireman::STATUS['Actif']).order_by_grade_and_lastname
   end
 
   def load_cities

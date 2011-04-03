@@ -17,6 +17,14 @@ class Grade < ActiveRecord::Base
     'Homme du rang' => 3
   }.freeze
 
+  GRADE_CATEGORY_PLURAL = {
+    'Médecins' => 5,
+    'Infirmiers' => 4,
+    'Officiers' => 1,
+    'Sous-officiers' => 2,
+    'Hommes du rang' => 3
+  }
+
   GRADE = {
     'Médecin colonel' => 22, 'Médecin lieutenant-colonel' => 21, 'Médecin commandant' => 20, 'Médecin capitaine' => 19,
     "Infirmier d'encadrement" => 18, 'Infirmier chef' => 17, 'Infirmier principal' => 16, 'Infirmier' => 15,

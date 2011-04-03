@@ -11,6 +11,8 @@ class Fireman < ActiveRecord::Base
 
   accepts_nested_attributes_for :grades
 
+  mount_uploader :passeport_photo, PasseportPhotoUploader
+
   validates_presence_of :firstname, :message => "Le prénom est obligatoire."
   validates_presence_of :lastname, :message => "Le nom est obligatoire."
   validates_presence_of :status
@@ -32,6 +34,14 @@ class Fireman < ActiveRecord::Base
     'Vétéran' => 2,
     'Actif' => 3
   }.freeze
+
+  STATUS_PLURAL = {
+    'JSP' => 1,
+    'Vétérans' => 2,
+    'Actifs' => 3
+  }
+
+  scope :order_by_grade_and_lastname, order('firemen.grade DESC, firemen.lastname ASC')
 
   def initialize(params = nil)
     super
