@@ -11,6 +11,7 @@
   <%= csrf_meta_tag %>
   <%= hoptoad_javascript_notifier %>
   <%= yield(:header) %>
+  <%= render(:partial => '/layouts/google_analytics') if Rails.env == "production" %>
 </head>
 <body>
   <noscript>
@@ -42,9 +43,7 @@
     <%= yield %>
   </div><!-- #content -->
   <div id="footer" class="clearfix">
-    <p class="left">
-      Copyright &copy; 2009-<%= Date.today.year %>  imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> - <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr") %>
-    </p>
+    <p class="left"><%= render(:partial => "/layouts/footer") %></p>
   </div><!-- #footer -->
   <%= render(:partial => "/layouts/javascript") if content_for?(:javascript) %>
   <!-- SVN REV : <%= render(:partial => "/layouts/svn_revision")%> -->

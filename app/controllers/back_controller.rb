@@ -4,8 +4,6 @@ class BackController < ApplicationController
   before_filter :load_station
   before_filter :require_user
 
-  skip_after_filter :add_google_analytics_code
-
   layout('back')
 
   protected

@@ -13,6 +13,7 @@
   <%= javascript_include_tag("jquery-#{SpGestion::JQUERY_VERSION}.min.js", "rails.js", "front.js") %>
   <%= csrf_meta_tag %>
   <%= hoptoad_javascript_notifier %>
+  <%= render(:partial => '/layouts/google_analytics') if Rails.env == "production" %>
 </head>
 <body>
   <div id="main">
@@ -39,7 +40,7 @@
     </div>
     <hr class="noscreen" />
     <div id="footer" class="box">
-      <p class="f-left">Copyright &copy; 2009-<%= Date.today.year %> imagineapp - <%= mail_to("contact@sp-gestion.fr", "Contactez-nous")%> - <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr") %></p>
+      <p class="f-left"><%= render(:partial => "/layouts/footer") %></p>
     </div>
   </div>
   <%= render(:partial => "/layouts/javascript") if content_for?(:javascript) %>
