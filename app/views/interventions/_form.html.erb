@@ -2,6 +2,14 @@
 <%= form_for(@intervention) do |f| %>
   <div class="span-3 first">
     <p>
+      <%= f.label(:number, "Numéro (*)", :class => "span-1 first")%>
+      <span class="span-2">
+        <%= f.text_field(:number, :class => "span-2 first") %>
+        <%= error_message_on(:intervention, :number, :css_class => "span-2 first") %>
+        <span class="help">Incrémenté depuis le numéro précédent</span>
+      </span>
+    </p>
+    <p>
       <%= f.label(:kind, "Type (*)", :class => "span-1 first")%>
       <span class="span-2">
         <%= f.select(:kind, options_for_kind )%>

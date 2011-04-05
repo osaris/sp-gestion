@@ -14,12 +14,12 @@ class Intervention < ActiveRecord::Base
   # FIXME record is saved even if this validation failed, it's a Rails bug
   # https://rails.lighthouseapp.com/projects/8994/tickets/922-has_many-through-transaction-rollback
   validates_presence_of :firemen, :message => "Le personnel est obligatoire."
-  validates_datetime :start_date
-  validates_datetime :end_date, :on_or_before => :now, :after => :start_date
+  validates_datetime :start_date, :invalid_datetime_message => "La date de début n'est pas valide."
+  validates_datetime :end_date, :on_or_before => :now, :after => :start_date, :invalid_datetime_message => "La date de fin n'est pas valide."
+  validates_numericality_of :number, :message => "Le numéro est obligatoire."
+  validates_uniqueness_of :number, :scope => :station_id, :message => "Le numéro doit être unique."
 
   acts_as_geocodable :address => {:street => :place, :locality => :city}
-
-  before_create :init_number
 
   KIND = {
     :sap => 1,
@@ -34,6 +34,7 @@ class Intervention < ActiveRecord::Base
   def initialize(params = nil)
     super
     self.kind ||= KIND[:sap]
+    self.number ||= init_number
   end
 
   def self.stats_by_type(station, year)
@@ -71,7 +72,7 @@ class Intervention < ActiveRecord::Base
     result = Intervention.select("COALESCE(MAX(CAST(number AS SIGNED)),0) AS max_number") \
                          .where(:station_id => self.station.id) \
                          .first
-    self.number = result[:max_number].to_i + 1
+    result[:max_number].to_i + 1
   end
 
 end
