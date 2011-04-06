@@ -25,7 +25,9 @@ class InterventionsControllerTest < ActionController::TestCase
 
     context "requesting GET :stats with interventions" do
       setup do
-        instance_of(Station).interventions.stub!.latest.stub!.first { Intervention.make }
+        # prepare intervention because stub will loop if you create it after
+        i = make_intervention_with_firemen(:station => @station)
+        instance_of(Station).interventions.stub!.latest.stub!.first { i }
         stub(Intervention).min_max_year { [Date.today.year, Date.today.year] }
         get :stats
       end
