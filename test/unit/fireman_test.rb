@@ -66,7 +66,8 @@ class FiremanTest < ActiveSupport::TestCase
 
   context "with an instance valid and an intervention" do
     setup do
-      @fireman = make_fireman_with_grades(:station => Station.make!, :interventions => [Intervention.make])
+      s = Station.make!
+      @fireman = make_fireman_with_grades(:station => s, :interventions => [s.interventions.make])
     end
 
     should "not be destroyable" do

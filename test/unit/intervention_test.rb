@@ -3,9 +3,6 @@ require 'test_helper'
 
 class InterventionTest < ActiveSupport::TestCase
 
-  should validate_presence_of(:place).with_message(/lieu/)
-  should validate_presence_of(:firemen).with_message(/personnel/)
-
   context "with an instance and station last_grade_update_at nil" do
     setup do
       @i = make_intervention_with_firemen(:station => Station.make!)
@@ -17,6 +14,26 @@ class InterventionTest < ActiveSupport::TestCase
 
     should "be valid" do
       assert(@i.valid?)
+    end
+
+    context "and place not set" do
+      setup do
+        @i.place = ''
+      end
+
+      should "not be valid" do
+        assert_equal(false, @i.valid?)
+      end
+    end
+
+    context "and no firemen" do
+      setup do
+        @i.firemen = []
+      end
+
+      should "not be valid" do
+        assert_equal(false, @i.valid?)
+      end
     end
 
     context "and start_date in future" do

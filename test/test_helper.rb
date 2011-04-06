@@ -77,7 +77,7 @@ class ActiveSupport::TestCase
   end
 
   def make_intervention_with_firemen(attributes = {})
-    i = Intervention.make(attributes)
+    i = attributes[:station].interventions.make(attributes)
     i.firemen << make_fireman_with_grades(:station => i.station)
     i.save
     i

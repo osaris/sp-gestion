@@ -16,7 +16,7 @@ class VehicleTest < ActiveSupport::TestCase
 
     context "used in an intervention" do
       setup do
-        make_intervention_with_firemen(:vehicles => [@vehicle], :station => Station.make)
+        make_intervention_with_firemen(:vehicles => [@vehicle], :station => Station.make!)
       end
 
       should "not be destroyable" do
