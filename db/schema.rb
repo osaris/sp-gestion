@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110402091245) do
+ActiveRecord::Schema.define(:version => 20110407203229) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "check_lists", ["station_id"], :name => "index_check_lists_on_station_id"
 
   create_table "convocation_firemen", :force => true do |t|
     t.integer  "convocation_id"
@@ -28,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "convocation_firemen", ["convocation_id"], :name => "index_convocation_firemen_on_convocation_id"
+  add_index "convocation_firemen", ["fireman_id"], :name => "index_convocation_firemen_on_fireman_id"
 
   create_table "convocations", :force => true do |t|
     t.string   "title"
@@ -41,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.boolean  "hide_grade",      :default => false
     t.datetime "last_emailed_at"
   end
+
+  add_index "convocations", ["station_id"], :name => "index_convocations_on_station_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -65,6 +72,9 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.datetime "updated_at"
   end
 
+  add_index "fireman_interventions", ["fireman_id"], :name => "index_fireman_interventions_on_fireman_id"
+  add_index "fireman_interventions", ["intervention_id"], :name => "index_fireman_interventions_on_intervention_id"
+
   create_table "firemen", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -81,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.string   "email"
     t.string   "passeport_photo"
   end
+
+  add_index "firemen", ["station_id"], :name => "index_firemen_on_station_id"
 
   create_table "geocodes", :force => true do |t|
     t.decimal "latitude",    :precision => 15, :scale => 12
@@ -119,12 +131,16 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.date    "date"
   end
 
+  add_index "grades", ["fireman_id"], :name => "index_grades_on_fireman_id"
+
   create_table "intervention_vehicles", :force => true do |t|
     t.integer  "intervention_id"
     t.integer  "vehicle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "intervention_vehicles", ["intervention_id"], :name => "index_intervention_vehicles_on_intervention_id"
 
   create_table "interventions", :force => true do |t|
     t.integer  "station_id"
@@ -141,6 +157,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.float    "longitude"
   end
 
+  add_index "interventions", ["station_id"], :name => "index_interventions_on_station_id"
+
   create_table "items", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -153,6 +171,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.string   "place"
   end
 
+  add_index "items", ["check_list_id"], :name => "index_items_on_check_list_id"
+
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
@@ -161,6 +181,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.datetime "updated_at"
     t.datetime "read_at"
   end
+
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
   create_table "stations", :force => true do |t|
     t.string   "name"
@@ -173,6 +195,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.integer  "nb_email_sent",        :default => 0
     t.string   "logo"
   end
+
+  add_index "stations", ["url"], :name => "index_stations_on_url"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -214,6 +238,8 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.string   "code"
   end
 
+  add_index "uniforms", ["station_id"], :name => "index_uniforms_on_station_id"
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "crypted_password"
@@ -246,5 +272,7 @@ ActiveRecord::Schema.define(:version => 20110402091245) do
     t.date     "date_check"
     t.date     "date_review"
   end
+
+  add_index "vehicles", ["station_id"], :name => "index_vehicles_on_station_id"
 
 end
