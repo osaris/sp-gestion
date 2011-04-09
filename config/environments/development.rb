@@ -24,7 +24,7 @@ SpGestion::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-  BASE_URL = "sp-gestion.dyndns.org:3000"
+  BASE_URL = "sp-gestion.dev:3000"
   GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxSVsZLsg7YqKrfZbkz-gQZBjT3-sxRVaIhrfjGMzd5BGWjuk_TjVpvVcw"
 
   # Configure emails
