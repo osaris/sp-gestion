@@ -25,7 +25,7 @@ SpGestion::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   BASE_URL = "sp-gestion.dev:3000"
-  GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxSVsZLsg7YqKrfZbkz-gQZBjT3-sxRVaIhrfjGMzd5BGWjuk_TjVpvVcw"
+  GOOGLE_APPLICATION_ID = "ABQIAAAAeXshH7iw2A0V-ooPrmyhuxQ8f6pDMxsw1Ot5OtwUDVc_Cd-UARTyN9UUi5QzEepMfvAvBhVj3db3mQ"
 
   # Configure emails
   config.action_mailer.default_url_options = { :host => "www." + BASE_URL }
