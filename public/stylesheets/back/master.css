@@ -135,8 +135,7 @@ img { vertical-align:text-bottom; }
 
 /* PAGINATION */
 #content ul.pagination { float:left; padding:0 14px; background:#f9fcff; border:1px solid #172E60; list-style:none; }
-#content ul.pagination li { float:left; }
-#content ul.pagination a, #content ul.pagination strong, #content ul.pagination span { float:left; padding:4px 5px; }
+#content ul.pagination li { float:left; padding: 4px 5px;}
 
 /* FOOTER */
 #footer { clear:both; float:left; margin:20px 0 40px; padding:10px 19px; width:920px; background:#f9fcff; border:1px solid #172E60; color:#284FA4; }
@@ -176,6 +175,7 @@ img.grade { vertical-align:middle; }
   float:left;
   display: block;
   width: 150px;
+  height: 110px;
   text-align: center;
   font-size: 10px;
   border: 1px solid #F5F5F5;
@@ -186,6 +186,11 @@ img.grade { vertical-align:middle; }
 
 /* GRADE FORM */
 #grades .set { background-color: #a8aaaa;}
+
+/* INTERVENTIONS */
+a.ui-button { color: #172E60;}
+a.ui-state-active { color: red;}
+a.active { color:red; }
 
 /* TABLE */
 table .actions { width:100px; }

@@ -44,15 +44,6 @@
       </span>
     </p>
     <p>
-      <%= f.label(:vehicles, "Véhicules", :class => "span-1 first") %>
-      <span class="span-2">
-    		<%- @vehicles.each do |vehicle| -%>
-    			<%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, @intervention.vehicles.include?(vehicle)) %>
-    			<label class="click_prev_checkbox"><%= vehicle.name %></label>
-    		<%- end -%>
-      </span>
-    </p>
-    <p>
       <%= f.label(:rem, "Remarque", :class => "span-1 first") %>
       <span class="span-2">
         <%= f.text_area(:rem, :class => "span-2 first", :rows => 5) %>
@@ -68,6 +59,17 @@
         <%= render :partial => "fireman", :collection => @firemen %>
       </ul>
       <%= error_message_on(:intervention, :firemen) %>
+    </div>
+    <div class="span-1 first"><%= f.label(:vehicles, "Véhicules", :class => "span-1 first") %></div>
+    <div class="span-2">
+      <ul>
+      <%- @vehicles.each do |vehicle| -%>
+        <li>
+          <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, @intervention.vehicles.include?(vehicle)) %>
+          <label class="click_prev_checkbox"><%= vehicle.name %></label>
+        </li>
+      <%- end -%>
+      </ul>
     </div>
   </div>
   <div class="span-5 first">
