@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
-  before_filter :load_intervention, :except => [:index, :new, :create, :stats]
-  before_filter :load_vehicles, :except => [:index, :show, :destroy, :stats]
-  before_filter :load_firemen, :except => [:index, :show, :destroy, :stats]
-  before_filter :load_cities, :except => [:index, :show, :destroy, :stats]
+  before_filter :load_intervention, :except => [:index, :new, :create, :stats, :stats_change_year]
+  before_filter :load_vehicles, :except => [:index, :show, :destroy, :stats, :stats_change_year]
+  before_filter :load_firemen, :except => [:index, :show, :destroy, :stats, :stats_change_year]
+  before_filter :load_cities, :except => [:index, :show, :destroy, :stats, :stats_change_year]
   before_filter :load_map, :only => [:show]
 
   def index
@@ -65,16 +65,29 @@ class InterventionsController < BackController
     redirect_to(interventions_path)
   end
 
+  def stats_change_year
+    @current_year = params[:new_year]
+    redirect_to(interventions_stats_path(@current_year, params[:type]))
+  end
+
   def stats
     last_intervention = @station.interventions.latest.first
     if last_intervention.blank?
       flash[:warning] = "Il faut au moins une intervention pour avoir des statistiques."
       redirect_to(interventions_path)
     else
-      @current_year = (params[:year].blank? ? last_intervention.start_date.year : params[:year])
-      @by_type = Intervention::stats_by_type(@station, @current_year)
-      @by_month = Intervention::stats_by_month(@station, @current_year)
+      @current_year = (params[:year] || last_intervention.start_date.year)
       @min_year, @max_year = Intervention::min_max_year(@station)
+
+      if params[:type] == "by_type"
+        @by_type = Intervention::stats_by_type(@station, @current_year)
+        @sum = @by_type.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
+        @not_enough_data = (@by_type.max == 0)
+      elsif params[:type] == "by_month"
+        @by_month = Intervention::stats_by_month(@station, @current_year)
+        @sum = @by_month.sum
+        @not_enough_data = (@by_month.max == 0)
+      end
     end
   end
 

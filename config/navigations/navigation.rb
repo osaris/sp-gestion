@@ -56,7 +56,8 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item(:intervention, 'Interventions', interventions_path) do |intervention|
       intervention.item(:interventions_list, 'Liste', interventions_path, :highlights_on => /^\/interventions\/?((\d).*|new)?$/)
-      intervention.item(:interventions_stats, 'Statistiques', stats_interventions_path, :highlights_on => /^\/interventions\/stats/)
+      intervention.item(:interventions_stats, 'Statistiques', interventions_stats_path((@current_year || Date.today.year), "by_type"), :highlights_on => /^\/interventions\/stats/)
+
 
       intervention.dom_class = 'subnav'
     end

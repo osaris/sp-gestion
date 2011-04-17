@@ -81,11 +81,9 @@ SpGestion::Application.routes.draw do
     match '/profile' => 'profiles#edit', :as => :profile
     match '/profile/update' => 'profiles#update', :as => :update_profile
 
-    resources :interventions do
-      collection do
-        get :stats
-      end
-    end
+    resources :interventions
+    match '/interventions/stats/change_year/:type' => 'interventions#stats_change_year', :as => :interventions_stats_change_year
+    match '/interventions/stats/:year/:type' => 'interventions#stats', :as => :interventions_stats
 
     resources :stations, :only => [:new, :create, :check] do
       collection do

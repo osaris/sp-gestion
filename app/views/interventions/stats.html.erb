@@ -1,35 +1,35 @@
 <h1>
   Statistiques de l'année
-  <%= form_tag(stats_interventions_path, :method => :get,
-                                         :id => :form_stats_interventions,
-                                         :style => "display:inline;") do -%>
-    <%= select_tag(:year, options_for_select((@min_year..@max_year), @current_year)) %>
+  <%= form_tag(interventions_stats_change_year_path(params[:type]),
+               :id => :form_stats_interventions,
+               :style => "display:inline;") do -%>
+    <%= select_tag(:new_year, options_for_select((@min_year..@max_year), @current_year)) %>
     <%- content_for(:javascript) do -%>
-      $("#year").change(function() {
+      $("#new_year").change(function() {
         $('#form_stats_interventions').submit();
       });
     <%- end -%>
   <%- end -%>
 </h1>
 
-<%- if @by_month.max == 0 -%>
+<%- if @not_enough_data -%>
   <p class="message warning">
     Pas assez de données pour cette période.
   </p>
 <%- else -%>
-  <p class="center">
-    <%= image_tag(Gchart.pie_3d(:title => 'Interventions par type', :size => '600x200',
-                                :data => Intervention::KIND.to_a.map { |kind, i| @by_type[i].to_i },
-                                :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
-                                :background => 'F5F5F5')) %>
+  <%= render(:partial => params[:type]) %>
 
-    <%= image_tag(Gchart.bar( :title => 'Interventions par mois', :size => '500x200',
-                              :data => @by_month,
-                              :axis_with_labels => 'x,y',
-                              :axis_labels => [['Jan','Fév','Mar','Avr','Mai','Juin','Jui','Aou','Sep','Oct','Nov','Déc'],
-                                               ['0', @by_month.max]],
-                              :bar_width_and_spacing => [25,15],
-                              :background => 'F5F5F5'),
-                  :style => "padding-top: 50px;") %>
-  </p>
+  <div class="buttons">
+    <%= render_navigation(:context => :interventions_stats,
+                          :renderer => :links,
+                          :level => 1) %>
+  </div>
+
+  <%- content_for(:header) do -%>
+    <%= stylesheet_link_tag("back/master.css", "back/jquery-ui-#{SpGestion::JQUERY_UI_VERSION}.blitzer.css")%>
+    <%= javascript_include_tag("jquery-ui-#{SpGestion::JQUERY_UI_VERSION}.min.js") %>
+  <%- end -%>
+  <%- content_for(:javascript) do -%>
+    $( "a", ".buttons" ).button();
+  <%- end -%>
 <%- end -%>

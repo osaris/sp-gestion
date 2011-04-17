@@ -1,0 +1,4 @@
+<%= image_tag(Gchart.pie_3d(:title => "Interventions par type (Total : #{@sum})", :size => '600x200',
+                            :data => Intervention::KIND.to_a.map { |kind, i| @by_type[i].to_i },
+                            :labels => Intervention::KIND.to_a.map { |kind, i| t("intervention.kind.#{kind}") + " (#{@by_type[i].to_i})" },
+                            :background => 'F5F5F5')) %>
