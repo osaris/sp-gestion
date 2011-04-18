@@ -29,21 +29,22 @@ class InterventionsControllerTest < ActionController::TestCase
         i = make_intervention_with_firemen(:station => @station)
         instance_of(Station).interventions.stub!.latest.stub!.first { i }
         stub(Intervention).min_max_year { [Date.today.year, Date.today.year] }
-        get :stats
+        get :stats, :year => Date.today.year.to_s, :type => "by_month"
       end
 
       should respond_with(:success)
       should render_template("stats")
       should render_with_layout("back")
 
-      should assign_to(:by_type)
-      should assign_to(:by_month)
+      should assign_to(:data)
+      should assign_to(:sum)
+      should assign_to(:not_enough_data)
     end
 
     context "requesting GET :stats without intervention" do
       setup do
         instance_of(Station).interventions.stub!.latest.stub!.first { nil }
-        get :stats
+        get :stats, :year => Date.today.year.to_s, :type => "by_month"
       end
 
       should respond_with(:redirect)

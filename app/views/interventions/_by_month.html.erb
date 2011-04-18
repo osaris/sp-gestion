@@ -1,7 +1,7 @@
 <%= image_tag(Gchart.bar( :title => "Interventions par mois (Total : #{@sum})", :size => '500x200',
-                          :data => @by_month,
+                          :data => @data,
                           :axis_with_labels => 'x,y',
                           :axis_labels => [['Jan','Fév','Mar','Avr','Mai','Juin','Jui','Aou','Sep','Oct','Nov','Déc'],
-                                           ['0', @by_month.max]],
+                                           ['0', @data.max]],
                           :bar_width_and_spacing => [25,15],
                           :background => 'F5F5F5')) %>

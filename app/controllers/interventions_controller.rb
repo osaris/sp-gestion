@@ -80,14 +80,13 @@ class InterventionsController < BackController
       @min_year, @max_year = Intervention::min_max_year(@station)
 
       if params[:type] == "by_type"
-        @by_type = Intervention::stats_by_type(@station, @current_year)
-        @sum = @by_type.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
-        @not_enough_data = (@by_type.max == 0)
+        @data = Intervention::stats_by_type(@station, @current_year)
+        @sum = @data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
       elsif params[:type] == "by_month"
-        @by_month = Intervention::stats_by_month(@station, @current_year)
-        @sum = @by_month.sum
-        @not_enough_data = (@by_month.max == 0)
+        @data = Intervention::stats_by_month(@station, @current_year)
+        @sum = @data.sum
       end
+      @not_enough_data = (@data.max == 0)
     end
   end
 
