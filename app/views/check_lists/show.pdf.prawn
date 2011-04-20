@@ -2,17 +2,19 @@ pdf.move_down(20)
 pdf.text(h(@check_list.title), :align => :center, :size => 14)
 pdf.move_down(20)
 
+header = [["<b>Titre</b>", "<b>Emplacement</b>", "<b>Quantité</b>", "<b>Expire le</b>", "<b>Contrôle</b>"]]
+
 items = @check_list.items.map do |item|
   [h(item.title), h(item.place), item.quantity.to_s, l!(item.expiry), ""]
 end
 items << ["","", "", "", ""] if items.length == 0
 
-pdf.table items, :border_style => :grid,
-                      :row_colors => ["FFFFFF","DDDDDD"],
-                      :headers => [Prawn::Table::Cell.new(:text => "Titre", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text =>"Emplacement", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text =>"Quantité", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text =>"Expire le", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text => "Contrôle", :font_style => :bold)],
-                      :column_widths => { 0 => 160, 1 => 160, 2 => 60, 3 => 80, 4 => 60 },
-                      :align => { 0 => :left, 1 => :left, 2 => :center, 3 => :center, 4 => :center }
+pdf.table header+items, :header => true,
+                        :row_colors => ["DDDDDD", "FFFFFF"],
+                        :column_widths => [160, 160, 60, 80, 60],
+                        :cell_style => { :inline_format => true } do
+  # align 3 last columns center
+  columns(2..4).align = :center
+  # but force right align of quantity
+  rows(1..items.count).column(2).style(:padding_right => 10, :align => :right)
+end
