@@ -9,10 +9,10 @@ items = @check_list.items.map do |item|
 end
 items << ["","", "", "", ""] if items.length == 0
 
-pdf.table header+items, :header => true,
+pdf.table(header+items, :header => true,
                         :row_colors => ["DDDDDD", "FFFFFF"],
                         :column_widths => [160, 160, 60, 80, 60],
-                        :cell_style => { :inline_format => true } do
+                        :cell_style => { :inline_format => true }) do
   # align 3 last columns center
   columns(2..4).align = :center
   # but force right align of quantity
