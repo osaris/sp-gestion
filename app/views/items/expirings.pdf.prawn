@@ -2,18 +2,19 @@ pdf.move_down(20)
 pdf.text("Liste du matériel expirant dans les 30 prochains jour", :align => :center, :size => 14)
 pdf.move_down(20)
 
+header = [["<b>Titre</b>", "<b>Liste</b>", "<b>Emplacement</b>", "<b>Expire le</b>", "<b>Quantité</b>", "<b>Contrôle</b>"]]
+
 items = @items.map do |item|
   [h(item.title), h(item.check_list.title), h(item.place), l(item.expiry, :format => :default), item.quantity.to_s, ""]
 end
 items << ["","","","","",""] if items.length == 0
 
-pdf.table items, :border_style => :grid,
-                      :row_colors => ["FFFFFF","DDDDDD"],
-                      :headers => [Prawn::Table::Cell.new(:text => "Titre", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text => "Liste", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text => "Emplacement", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text =>"Expire le", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text =>"Quantité", :font_style => :bold),
-                                   Prawn::Table::Cell.new(:text => "Contrôle", :font_style => :bold)],
-                      :column_widths => { 0 => 110, 1 => 110, 2 => 110 , 3 => 80, 4 => 60, 5 => 60 },
-                      :align => { 0 => :left, 1 => :left, 2 => :left, 3 => :center, 4 => :center, 5 => :center }
+pdf.table header+items, :header => true,
+                        :row_colors => ["DDDDDD", "FFFFFF"],
+                        :column_widths => [100, 110, 110, 80, 60, 60],
+                        :cell_style => { :inline_format => true } do
+  # align 3 last columns center
+  columns(3..5).align = :center
+  # but force right align of quantity
+  rows(1..items.count).column(4).style(:padding_right => 10, :align => :right)
+end
