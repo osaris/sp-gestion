@@ -15,10 +15,10 @@ module Graticule
           :latitude    => result.latitude,
           :longitude   => result.longitude,
           :street      => "", # ugly hack
-          :locality    => result.locality,
-          :region      => result.region,
-          :postal_code => result.postal_code,
-          :country     => result.country,
+          :locality    => "",
+          :region      => "",
+          :postal_code => "",
+          :country     => "",
           :precision   => result.precision
         )
       end
