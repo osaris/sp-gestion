@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110407203229) do
+ActiveRecord::Schema.define(:version => 20110426203026) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -261,6 +261,8 @@ ActiveRecord::Schema.define(:version => 20110407203229) do
     t.datetime "last_boosted_at"
     t.string   "new_email"
   end
+
+  add_index "users", ["station_id"], :name => "index_users_on_station_id"
 
   create_table "vehicles", :force => true do |t|
     t.string   "name"
