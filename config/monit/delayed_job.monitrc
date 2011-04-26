@@ -1,0 +1,4 @@
+check process delayed_job
+  with pidfile /home/raphael/public_html/sp-gestion.fr/shared/pids/delayed_job.pid
+  start program = "/bin/bash -l -i -c 'RAILS_ENV=production /home/raphael/public_html/sp-gestion.fr/current/script/delayed_job start'" as uid raphael and gid raphael
+  stop program = "/bin/bash -l -i -c 'RAILS_ENV=production /home/raphael/public_html/sp-gestion.fr/current/script/delayed_job stop'" as uid raphael and gid raphael
