@@ -29,6 +29,10 @@ gem 'typus', '3.0.10'
 gem 'validates_timeliness', '3.0.5'
 gem 'will_paginate', '3.0.pre2'
 
+group :development do
+  gem 'rack-debug', '2.0.0'
+end
+
 group :test do
   gem 'faker', '0.9.5'
   gem 'machinist', '2.0.0.beta2'

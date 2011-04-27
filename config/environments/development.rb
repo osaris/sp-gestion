@@ -29,5 +29,8 @@ SpGestion::Application.configure do
 
   # Configure emails
   config.action_mailer.default_url_options = { :host => "www." + BASE_URL }
+
+  # Enable debugger
+  config.middleware.use Rack::Debug
 end
 
