@@ -12,7 +12,14 @@
     <p>
       <%= f.label(:kind, "Type (*)", :class => "span-1 first")%>
       <span class="span-2">
-        <%= f.select(:kind, options_for_kind )%>
+        <%= f.select(:kind, options_for_kind)%>
+      </span>
+    </p>
+    <p>
+      <%= f.label(:subtype, "Sous-type", :class => "span-1 first")%>
+      <span class="span-2">
+        <%= f.text_field(:subtype, :class => "span-2 first") %>
+        <span class="help">Apporte des précisions sur le type</span>
       </span>
     </p>
     <p>
@@ -84,23 +91,34 @@
 <%- content_for(:javascript) do -%>
   $.datepicker.setDefaults($.datepicker.regional['fr']);
   $.timepicker.setDefaults($.timepicker.regional['fr']);
-  $('.date').datetimepicker({ showMonthAfterYear: false,
-                              changeYear: true,
-                              changeMonth: true,
-                              dateFormat: 'dd/mm/yy',
-                              minDate: '<%= min_date_intervention(@station) %>',
-                              maxDate: +0,
-                              constrainInput: true,
-                              duration: '',
-                              stepMinute: 1});
+  $('.date').datetimepicker({ 
+    showMonthAfterYear: false,
+    changeYear: true,
+    changeMonth: true,
+    dateFormat: 'dd/mm/yy',
+    minDate: '<%= min_date_intervention(@station) %>',
+    maxDate: +0,
+    constrainInput: true,
+    duration: '',
+    stepMinute: 1
+  });
   $('.click_prev_checkbox').click(function(){
     var checkbox = $(this).prev(':checkbox');
     checkbox.attr('checked', !checkbox.attr('checked'));
   });
+
+	$('input#intervention_subtype').autocomplete(<%= raw(@subtypes.to_json) %>, {
+    minChars: 0,
+    selectFirst: false
+	});
+  $('input#intervention_subtype').focus(function(){
+  	$('input#intervention_subtype').click().click();  
+  });
+  
   $('input#intervention_city').autocomplete(<%= raw(@cities.to_json) %>, {
-                                      minChars: 0,
-                                      selectFirst: false
-                                    });
+  	minChars: 0,
+    selectFirst: false
+  });
   $('input#intervention_city').focus(function(){
     $('input#intervention_city').click().click();
   });

@@ -38,7 +38,6 @@ class InterventionsControllerTest < ActionController::TestCase
 
       should assign_to(:data)
       should assign_to(:sum)
-      should assign_to(:not_enough_data)
     end
 
     context "requesting GET :stats without intervention" do

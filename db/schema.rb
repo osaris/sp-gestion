@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426203026) do
+ActiveRecord::Schema.define(:version => 20110430085804) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20110426203026) do
     t.string   "city"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "subtype"
   end
 
   add_index "interventions", ["station_id"], :name => "index_interventions_on_station_id"

@@ -91,23 +91,39 @@ class InterventionTest < ActiveSupport::TestCase
     end
   end
 
+  # work on last year because we can't create interventions for all month
+  # of current year
   context "with many interventions" do
     setup do
       @station = Station.make!
-      # 3 interventions of kind 1,2 and 2 interventions of kind 3,4
-      10.times do |i|
+      # 3 interventions of each kind
+      # 1 by month
+      12.times do |i|
+        start_date = Date.new(Date.today.year-1, (i%12)+1, 15) 
         make_intervention_with_firemen(:station => @station,
-                                       :kind => (i%4)+1)
+                                       :kind => (i%4)+1,
+                                       :start_date => start_date,
+                                       :end_date =>start_date + 1)
       end
     end
 
     context "stats_by_type" do
       setup do
-        @stats_by_type = Intervention.stats_by_type(@station, Date.today.year)
+        @stats_by_type = Intervention.stats_by_type(@station, Date.today.year-1)
       end
 
-      should "return number of intervention grouped by type" do
-        assert_equal({1 => 3, 2 => 3, 3 => 2, 4 => 2}, @stats_by_type)
+      should "return number of interventions grouped by type" do
+        assert_equal({1 => 3, 2 => 3, 3 => 3, 4 => 3}, @stats_by_type)
+      end
+    end
+
+    context "stats_by_month" do
+      setup do
+        @stats_by_month = Intervention.stats_by_month(@station, Date.today.year-1)
+      end
+
+      should "return number of interventions for each month" do
+        assert_equal([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], @stats_by_month)
       end
     end
   end

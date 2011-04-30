@@ -1,15 +1,17 @@
 # -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
-  before_filter :load_intervention, :except => [:index, :new, :create, :stats, :stats_change_year]
-  before_filter :load_vehicles, :except => [:index, :show, :destroy, :stats, :stats_change_year]
-  before_filter :load_firemen, :except => [:index, :show, :destroy, :stats, :stats_change_year]
-  before_filter :load_cities, :except => [:index, :show, :destroy, :stats, :stats_change_year]
+  before_filter :load_intervention, :only => [:show, :edit, :update, :destroy]
+  before_filter :load_vehicles, :load_firemen, :load_cities, :load_subtypes, 
+  							:only => [:new, :create, :edit, :update]
   before_filter :load_map, :only => [:show]
 
   def index
-    @interventions = @station.interventions.paginate(:page => params[:page], :include => [:vehicles, {:fireman_interventions => [:fireman]}],
-                                                     :order => 'interventions.start_date DESC')
+    @interventions = @station.interventions.paginate(
+    	:page => params[:page], 
+      :include => [:vehicles, {:fireman_interventions => [:fireman]}],
+      :order => 'interventions.start_date DESC'
+    )
   end
 
   def show
@@ -82,11 +84,13 @@ class InterventionsController < BackController
       if params[:type] == "by_type"
         @data = Intervention::stats_by_type(@station, @current_year)
         @sum = @data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
+      elsif params[:type] == "by_subtype"
+        @data = Intervention::stats_by_subtype(@station, @current_year)
+        @sum = @data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
       elsif params[:type] == "by_month"
         @data = Intervention::stats_by_month(@station, @current_year)
         @sum = @data.sum
       end
-      @not_enough_data = (@data.max == 0)
     end
   end
 
@@ -111,6 +115,10 @@ class InterventionsController < BackController
 
   def load_cities
     @cities = Intervention::cities(@station)
+  end
+
+  def load_subtypes
+    @subtypes = Intervention::subtypes(@station)
   end
 
   def set_participants

@@ -41,6 +41,10 @@ class Intervention < ActiveRecord::Base
     Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group(:kind).count
   end
 
+  def self.stats_by_subtype(station, year)
+    Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group(:subtype).count
+  end
+
   def self.stats_by_month(station, year)
     result = Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group('MONTH(start_date)').count
     result = Hash[1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0].merge(result)
@@ -65,6 +69,14 @@ class Intervention < ActiveRecord::Base
     result.collect { |intervention| intervention.city }
   end
 
+  def self.subtypes(station)
+  	result = Intervention.select("DISTINCT(subtype) AS subtype") \
+    										 .where(["interventions.subtype IS NOT NULL AND interventions.station_id = ?", station.id]) \
+                         .order('subtype')
+
+    result.collect { |intervention| intervention.subtype }
+  end
+  
   private
 
   def init_number
