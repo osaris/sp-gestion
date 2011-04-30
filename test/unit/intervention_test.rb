@@ -99,12 +99,12 @@ class InterventionTest < ActiveSupport::TestCase
       # 3 interventions of each kind
       # 1 by month
       # 4 differents subtype
-      year = Date.today.year - 1
+      @year = Date.today.year - 1
       12.times do |i|
-        start_date = Date.new(year, (i%12)+1, 15) 
+        start_date = Date.new(@year, (i%12)+1, 15) 
         make_intervention_with_firemen(:station => @station,
                                        :kind => (i%4)+1,
-                                       :subtype => "st#{i%3}",
+                                       :subtype => "st#{i%4}",
                                        :start_date => start_date,
                                        :end_date =>start_date + 1)
       end
@@ -112,7 +112,7 @@ class InterventionTest < ActiveSupport::TestCase
 
     context "stats_by_type" do
       setup do
-        @stats_by_type = Intervention.stats_by_type(@station, year)
+        @stats_by_type = Intervention.stats_by_type(@station, @year)
       end
 
       should "return number of interventions grouped by type" do
@@ -122,7 +122,7 @@ class InterventionTest < ActiveSupport::TestCase
 
     context "stats_by_subtype" do
       setup do
-        @stats_by_subtype = Intervention.stats_by_subtype(@station, year)
+        @stats_by_subtype = Intervention.stats_by_subtype(@station, @year)
       end
 
       should "return number of interventions grouped by subtype" do
@@ -132,7 +132,7 @@ class InterventionTest < ActiveSupport::TestCase
 
     context "stats_by_month" do
       setup do
-        @stats_by_month = Intervention.stats_by_month(@station, year)
+        @stats_by_month = Intervention.stats_by_month(@station, @year)
       end
 
       should "return number of interventions for each month" do
