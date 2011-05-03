@@ -26,7 +26,11 @@ fr:
         email: email
         password: password
         remember_me: remember me
-
+  errors:
+    messages:
+      carrierwave_processing_error: "Impossible de traiter l'image."
+      carrierwave_integrity_error: "Le fichier n'est pas une image."
+        
   activerecord:
     errors:
       messages:

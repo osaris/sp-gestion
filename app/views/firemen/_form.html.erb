@@ -63,7 +63,7 @@
     </span>
   </p>
   <p>
-    <%= f.label(:tag_list, "Adresse email", :class => "span-1 first") %>
+    <%= f.label(:email, "Adresse email", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.text_field(:email, :class => "span-2 first") %>
       <%= error_message_on(:fireman, :email, :css_class => "span-2 first") %>
@@ -75,6 +75,7 @@
       <%= f.file_field :passeport_photo %>
       <%= f.hidden_field :passeport_photo_cache %><br />
       <%= f.check_box :remove_passeport_photo %> Supprimer la photo existante
+      <%= error_message_on(:fireman, :passeport_photo, :css_class => "span-2 first")%>
     </span>
   </p>
   <p>
