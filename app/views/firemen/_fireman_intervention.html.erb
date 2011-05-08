@@ -1,6 +1,6 @@
 <tr class="<%= cycle("odd","even") %>">
   <td><%= fireman_intervention.intervention.number %></td>
   <td><%= link_to(l(fireman_intervention.intervention.start_date), intervention_path(fireman_intervention.intervention)) %></td>
-  <td><%= display_kind(fireman_intervention.intervention) %></td>
-  <td><%= fireman_intervention.intervention.place %></td>
+  <td><%= display_kind_and_subtype(fireman_intervention.intervention) %></td>
+  <td><%= fireman_intervention.intervention.place %>&nbsp;/&nbsp;<%= fireman_intervention.intervention.city %></td>
 </tr>

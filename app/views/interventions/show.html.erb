@@ -4,7 +4,7 @@
     <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + raw("&nbsp;Editer"), edit_intervention_path(@intervention))%> -
     <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + raw("&nbsp;Supprimer"), intervention_path(@intervention), :method => :delete, :confirm => "Êtes-vous sûr ?")%>
   </p>
-  <p>Type : <%= display_kind(@intervention)%> / <%= @intervention.subtype %></p>
+  <p>Type : <%= display_kind_and_subtype(@intervention)%></p>
   <p>Lieu : <%= @intervention.place %>&nbsp;/&nbsp;<%= @intervention.city %></p>
   <p>
     Début : <%= l(@intervention.start_date) %><br/>

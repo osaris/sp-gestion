@@ -1,4 +1,4 @@
 <tr class="<%= cycle("odd","even") %>">
   <td><%= link_to(l(intervention.start_date), intervention_path(intervention)) %></td>  
-  <td><%= display_kind(intervention) %></td>
+  <td><%= display_kind_and_subtype(intervention) %></td>
 </tr>

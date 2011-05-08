@@ -5,8 +5,9 @@ module InterventionsHelper
     Intervention::KIND.map { |kind, i| [t("intervention.kind.#{kind}"),i] }.sort {|x,y| x[1] <=> y[1] }
   end
   
-  def display_kind(intervention)
-    t("intervention.kind."+Intervention::KIND.key(intervention.kind).to_s)
+  def display_kind_and_subtype(intervention)
+    [t("intervention.kind."+Intervention::KIND.key(intervention.kind).to_s),
+     intervention.subtype].delete_if { |x| x.to_s.empty? }.join(" / ")
   end
   
   def display_vehicles(intervention)
