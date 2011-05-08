@@ -51,6 +51,14 @@ class Intervention < ActiveRecord::Base
     result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |month, number| number }
   end
 
+  def self.stats_by_vehicle(station, year)
+		Intervention.select("vehicles.name, COUNT(interventions.id) AS count") \
+                .joins(:vehicles) \
+    						.where(["interventions.station_id = ? AND YEAR(interventions.start_date) = ?", station.id, year]) \
+                .group("vehicles.name")
+                .collect { |i| [i[:name], i[:count].to_i] }
+  end
+
   def self.min_max_year(station)
     result = Intervention.select("MIN(YEAR(start_date)) AS min_year, MAX(YEAR(end_date)) AS max_year") \
                          .where(:station_id => station.id) \
