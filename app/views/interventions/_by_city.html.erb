@@ -1,0 +1,8 @@
+<%= image_tag(Gchart.pie_3d(:title => "Interventions par ville (Total : #{@sum})", :size => '600x200',
+                            :data => @data.to_a.map { |label, value|
+                            	value  
+                            },
+                            :labels => @data.to_a.map { |label, value| 
+                            	"#{label} (#{value.to_i})" 
+                            },
+                            :background => 'F5F5F5')) %>

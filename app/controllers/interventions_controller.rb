@@ -81,7 +81,7 @@ class InterventionsController < BackController
       @current_year = (params[:year] || last_intervention.start_date.year)
       @min_year, @max_year = Intervention::min_max_year(@station)
 
-      if ["by_type", "by_subtype", "by_vehicle"].include?(params[:type])
+      if ["by_type", "by_subtype", "by_city", "by_vehicle"].include?(params[:type])
         @data = Intervention.send("stats_#{params[:type]}", @station, @current_year)
         @sum = @data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
       elsif params[:type] == "by_month"

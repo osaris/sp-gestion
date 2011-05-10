@@ -51,6 +51,10 @@ class Intervention < ActiveRecord::Base
     result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |month, number| number }
   end
 
+	def self.stats_by_city(station, year)
+    Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group(:city).count
+  end
+  
   def self.stats_by_vehicle(station, year)
 		Intervention.select("vehicles.name, COUNT(interventions.id) AS count") \
                 .joins(:vehicles) \
