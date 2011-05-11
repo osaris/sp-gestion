@@ -96,17 +96,17 @@ class InterventionTest < ActiveSupport::TestCase
   context "with many interventions" do
     setup do
       @station = Station.make!
-      # 3 interventions of each kind
-      # 1 by month
-      # 4 differents subtype
       @year = Date.today.year - 1
+      vehicles = [Vehicle.new(:name => 'FPT'), Vehicle.new(:name => 'VSAV')]
       12.times do |i|
-        start_date = Date.new(@year, (i%12)+1, 15) 
+        start_date = Time.new(@year, (i%12)+1, 15, (i%4), 30, 00) # one per month at 4 different hours
         make_intervention_with_firemen(:station => @station,
-                                       :kind => (i%4)+1,
-                                       :subtype => "st#{i%4}",
-                                       :start_date => start_date,
-                                       :end_date =>start_date + 1)
+                                       :kind => (i%4)+1,					# 3 of each kind
+                                       :subtype => "st#{i%4}",		# 4 subtypes
+                                       :city => "city#{i%4}",			# 4 cities
+                                       :start_date => start_date,	
+                                       :end_date =>start_date + 1,
+                                       :vehicles => [vehicles[i%2]])
       end
     end
 
@@ -136,7 +136,37 @@ class InterventionTest < ActiveSupport::TestCase
       end
 
       should "return number of interventions for each month" do
-        assert_equal([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], @stats_by_month)
+        assert_equal(Array.new(12,1), @stats_by_month)
+      end
+    end
+
+    context "stats_by_hour" do
+      setup do
+        @stats_by_hour = Intervention.stats_by_hour(@station, @year)
+      end
+
+      should "return number of interventions per hour" do
+        assert_equal(Array.new(4, 3) + Array.new(20, 0), @stats_by_hour)
+      end
+    end
+
+    context "stats_by_city" do
+      setup do
+        @stats_by_city = Intervention.stats_by_city(@station, @year)
+      end
+
+      should "return number of interventions per city" do
+        assert_equal({"city0" => 3, "city1" => 3, "city2" => 3, "city3" => 3}, @stats_by_city)
+      end
+    end
+
+    context "stats_by_vehicle" do
+      setup do
+        @stats_by_vehicle = Intervention.stats_by_vehicle(@station, @year)
+      end
+
+      should "return number of interventions per vehicle" do
+        assert_equal([["FPT", 6], ["VSAV", 6]], @stats_by_vehicle)
       end
     end
   end
