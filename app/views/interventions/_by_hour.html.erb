@@ -1,0 +1,7 @@
+<%= image_tag(Gchart.bar( :title => "Interventions par heure (Total : #{@sum})", :size => '500x200',
+                          :data => @data,
+                          :axis_with_labels => 'x,y',
+                          :axis_labels => [(0..23).to_a,
+                                           [0, @data.max]],
+                          :bar_width_and_spacing => [15,5],
+                          :background => 'F5F5F5')) %>

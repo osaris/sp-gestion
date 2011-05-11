@@ -47,8 +47,17 @@ class Intervention < ActiveRecord::Base
 
   def self.stats_by_month(station, year)
     result = Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group('MONTH(start_date)').count
-    result = Hash[1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0].merge(result)
+    result = Hash[*(1..12).to_a.zip(Array.new(12, 0)).flatten].merge(result)
     result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |month, number| number }
+  end
+
+  def self.stats_by_hour(station, year)
+    result = Intervention.select("HOUR(CONVERT_TZ(start_date, 'UTC', 'Europe/Paris')) AS hour, COUNT(interventions.id) AS count") \
+    										 .where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]) \
+                         .group('hour')
+                         .collect { |i| [i[:hour], i[:count].to_i] }
+    result = Hash[*(0..23).to_a.zip(Array.new(24, 0)).flatten].merge(Hash[result])
+    result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |hour, number| number } 
   end
 
 	def self.stats_by_city(station, year)

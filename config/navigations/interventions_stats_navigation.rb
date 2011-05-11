@@ -16,7 +16,10 @@ SimpleNavigation::Configuration.run do |navigation|
     						 'Par mois', 
                  interventions_stats_path((@current_year || Date.today.year), "by_month"),
                  :highlights_on => /^\/interventions\/stats\/(\d+)\/by_month/)
-    # primary.item(:by_hour, 'Par heure', '#')
+    primary.item(:by_hour, 
+    						 'Par heure', 
+                 interventions_stats_path((@current_year || Date.today.year), "by_hour"),
+               	 :highlights_on => /^\/interventions\/stats\/(\d+)\/by_hour/)
     primary.item(:by_city,
     						 'Par ville',
                  interventions_stats_path((@current_year || Date.today.year), "by_city"),
