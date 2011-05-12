@@ -30,6 +30,9 @@ class Intervention < ActiveRecord::Base
 
   scope :newer, order('start_date DESC')
   scope :latest, newer.limit(1)
+  scope :for_year_and_station, lambda {
+    |station, year| where("interventions.station_id = ? AND YEAR(interventions.start_date) = ?", station.id, year) 
+  }
 
   def initialize(params = nil)
     super
@@ -38,38 +41,43 @@ class Intervention < ActiveRecord::Base
   end
 
   def self.stats_by_type(station, year)
-    Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group(:kind).count
+    Intervention.for_year_and_station(station, year).group(:kind).count
   end
 
   def self.stats_by_subtype(station, year)
-    Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group(:subtype).count
+    Intervention.for_year_and_station(station, year).group(:subtype).count
   end
 
   def self.stats_by_month(station, year)
-    result = Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group('MONTH(start_date)').count
+    result = Intervention.for_year_and_station(station, year).group('MONTH(start_date)').count
     result = Hash[*(1..12).to_a.zip(Array.new(12, 0)).flatten].merge(result)
     result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |month, number| number }
   end
 
   def self.stats_by_hour(station, year)
     result = Intervention.select("HOUR(CONVERT_TZ(start_date, 'UTC', 'Europe/Paris')) AS hour, COUNT(interventions.id) AS count") \
-    										 .where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]) \
+                         .for_year_and_station(station, year) \
                          .group('hour')
                          .collect { |i| [i[:hour], i[:count].to_i] }
     result = Hash[*(0..23).to_a.zip(Array.new(24, 0)).flatten].merge(Hash[result])
     result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |hour, number| number } 
   end
 
-	def self.stats_by_city(station, year)
-    Intervention.where(["station_id = ? AND YEAR(start_date) = ?", station.id, year]).group(:city).count
+  def self.stats_by_city(station, year)
+    Intervention.for_year_and_station(station, year).group(:city).count
   end
   
   def self.stats_by_vehicle(station, year)
-		Intervention.select("vehicles.name, COUNT(interventions.id) AS count") \
+    Intervention.select("vehicles.name, COUNT(interventions.id) AS count") \
                 .joins(:vehicles) \
-    						.where(["interventions.station_id = ? AND YEAR(interventions.start_date) = ?", station.id, year]) \
+                .for_year_and_station(station, year) \
                 .group("vehicles.name")
                 .collect { |i| [i[:name], i[:count].to_i] }
+  end
+
+  def self.stats_map(station, year)
+    Intervention.for_year_and_station(station, year) \
+                .includes(:geocoding)
   end
 
   def self.min_max_year(station)
@@ -91,8 +99,8 @@ class Intervention < ActiveRecord::Base
   end
 
   def self.subtypes(station)
-  	result = Intervention.select("DISTINCT(subtype) AS subtype") \
-    										 .where(["interventions.subtype IS NOT NULL AND interventions.station_id = ?", station.id]) \
+    result = Intervention.select("DISTINCT(subtype) AS subtype") \
+                         .where(["interventions.subtype IS NOT NULL AND interventions.station_id = ?", station.id]) \
                          .order('subtype')
 
     result.collect { |intervention| intervention.subtype }

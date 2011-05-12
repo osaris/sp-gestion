@@ -3,12 +3,12 @@ class InterventionsController < BackController
 
   before_filter :load_intervention, :only => [:show, :edit, :update, :destroy]
   before_filter :load_vehicles, :load_firemen, :load_cities, :load_subtypes, 
-  							:only => [:new, :create, :edit, :update]
+                :only => [:new, :create, :edit, :update]
   before_filter :load_map, :only => [:show]
 
   def index
     @interventions = @station.interventions.paginate(
-    	:page => params[:page], 
+      :page => params[:page], 
       :include => [:vehicles, {:fireman_interventions => [:fireman]}],
       :order => 'interventions.start_date DESC'
     )
@@ -80,12 +80,27 @@ class InterventionsController < BackController
     else
       @current_year = (params[:year] || last_intervention.start_date.year)
       @min_year, @max_year = Intervention::min_max_year(@station)
-			@data = Intervention.send("stats_#{params[:type]}", @station, @current_year)
+      @data = Intervention.send("stats_#{params[:type]}", @station, @current_year)
      
       if ["by_type", "by_subtype", "by_city", "by_vehicle"].include?(params[:type])
         @sum = @data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
       elsif ["by_month", "by_hour"].include?(params[:type])
         @sum = @data.sum
+      elsif params[:type] == "map"
+        @sum = @data.length
+
+        @map = GoogleMap::Map.new
+        @data.each do |intervention|
+          unless intervention.geocode.nil?
+            html = render_to_string(:partial => "intervention_map",
+                                    :locals => { :intervention => intervention})
+            @map.markers << GoogleMap::Marker.new(:map => @map,
+                                                  :lat => intervention.geocode.latitude,
+                                                  :lng => intervention.geocode.longitude,
+                                                  :open_infoWindow => false,
+                                                  :html => html)
+          end
+        end
       end
     end
   end

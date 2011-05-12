@@ -191,6 +191,7 @@ img.grade { vertical-align:middle; }
 a.ui-button { color: #172E60;}
 a.ui-state-active { color: red;}
 a.active { color:red; }
+.buttons { margin-top: 20px;}
 
 /* TABLE */
 table .actions { width:100px; }
