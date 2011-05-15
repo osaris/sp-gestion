@@ -45,7 +45,10 @@ class Intervention < ActiveRecord::Base
   end
 
   def self.stats_by_subtype(station, year)
-    Intervention.for_year_and_station(station, year).group(:subtype).count
+    Intervention.select("COUNT(*) AS count, COALESCE(subtype, '') AS stnotnull") \
+                .for_year_and_station(station, year) \
+                .group("stnotnull") \
+                .collect { |i| [i[:stnotnull], i[:count].to_i] }
   end
 
   def self.stats_by_month(station, year)
@@ -57,14 +60,17 @@ class Intervention < ActiveRecord::Base
   def self.stats_by_hour(station, year)
     result = Intervention.select("HOUR(CONVERT_TZ(start_date, 'UTC', 'Europe/Paris')) AS hour, COUNT(interventions.id) AS count") \
                          .for_year_and_station(station, year) \
-                         .group('hour')
+                         .group('hour') \
                          .collect { |i| [i[:hour], i[:count].to_i] }
     result = Hash[*(0..23).to_a.zip(Array.new(24, 0)).flatten].merge(Hash[result])
     result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |hour, number| number } 
   end
 
   def self.stats_by_city(station, year)
-    Intervention.for_year_and_station(station, year).group(:city).count
+    Intervention.select("COUNT(*) AS count, COALESCE(city, '') AS citynotnull") \
+                .for_year_and_station(station, year) \
+                .group("citynotnull") \
+                .collect { |i| [i[:citynotnull], i[:count].to_i] }
   end
   
   def self.stats_by_vehicle(station, year)
