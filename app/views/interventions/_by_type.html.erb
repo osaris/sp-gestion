@@ -1,6 +1,27 @@
-<%= image_tag(Gchart.pie_3d(:title => "Interventions par type (Total : #{@sum})", :size => '600x200',
-                            :data => Intervention::KIND.to_a.map { |kind, i| @data[i].to_i },
-                            :labels => Intervention::KIND.to_a.map { |kind, i| 
-                              t("intervention.kind.#{kind}") + " (#{@data[i].to_i})" 
-                            },
-                            :background => 'F5F5F5')) %>
+<div class="span-4 first">
+  <%= image_tag(Gchart.pie_3d(:title => "Interventions par type (Total : #{@sum})", :size => '600x200',
+                              :data => Intervention::KIND.to_a.map { |kind, i| @data[i].to_i },
+                              :labels => Intervention::KIND.to_a.map { |kind, i|
+                                t("intervention.kind.#{kind}") + " (#{@data[i].to_i})"
+                              },
+                              :background => 'F5F5F5')) %>
+</div>
+<div class="span-2 clearfix">
+  <table>
+    <thead>
+        <tr>
+          <th>Type</th>
+          <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+      <%- @data.each.map do |kind, number| -%>
+        <tr>
+          <td><%= t("intervention.kind.#{Intervention::KIND.key(kind)}") %></td>
+          <td><%= number %></td>
+        </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+</div>
+<div class="clear"></div>

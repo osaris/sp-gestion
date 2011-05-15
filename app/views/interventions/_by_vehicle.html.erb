@@ -1,6 +1,28 @@
-<%= image_tag(Gchart.pie_3d(:title => "Interventions par véhicule (Total : #{@sum})", :size => '600x200',
-                            :data => @data.map { |x| x[1] },
-                            :labels => @data.map { |x| 
-                              "#{x[0]} (#{x[1]})"  
-                            },
-                            :background => 'F5F5F5')) %>
+<div class="span-4 first">
+  <%= image_tag(Gchart.pie_3d(:title => "Interventions par véhicule (Total : #{@sum})", :size => '600x200',
+                              :data => @data.map { |x| x[1] },
+                              :labels => @data.map { |x|
+                                "#{x[0]} (#{x[1]})"
+                              },
+                              :background => 'F5F5F5')) %>
+</div>
+
+<div class="span-2 clearfix">
+  <table>
+    <thead>
+      <tr>
+        <th>Véhicule</th>
+        <th>Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%- @data.each.map do |vehicle, number| -%>
+      <tr>
+        <td><%= vehicle %></td>
+        <td><%= number %></td>
+      </tr>
+    <%- end -%>
+    </tbody>
+  </table>
+</div>
+<div class="clear"></div>
