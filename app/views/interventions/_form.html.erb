@@ -16,9 +16,9 @@
       </span>
     </p>
     <p>
-      <%= f.label(:subtype, "Sous-type", :class => "span-1 first")%>
+      <%= f.label(:subkind, "Sous-type", :class => "span-1 first")%>
       <span class="span-2">
-        <%= f.text_field(:subtype, :class => "span-2 first") %>
+        <%= f.text_field(:subkind, :class => "span-2 first") %>
         <span class="help">Apporte des précisions sur le type</span>
       </span>
     </p>
@@ -91,7 +91,7 @@
 <%- content_for(:javascript) do -%>
   $.datepicker.setDefaults($.datepicker.regional['fr']);
   $.timepicker.setDefaults($.timepicker.regional['fr']);
-  $('.date').datetimepicker({ 
+  $('.date').datetimepicker({
     showMonthAfterYear: false,
     changeYear: true,
     changeMonth: true,
@@ -107,14 +107,14 @@
     checkbox.attr('checked', !checkbox.attr('checked'));
   });
 
-	$('input#intervention_subtype').autocomplete(<%= raw(@subtypes.to_json) %>, {
+	$('input#intervention_subkind').autocomplete(<%= raw(@subkinds.to_json) %>, {
     minChars: 0,
     selectFirst: false
 	});
-  $('input#intervention_subtype').focus(function(){
-  	$('input#intervention_subtype').click().click();  
+  $('input#intervention_subkind').focus(function(){
+  	$('input#intervention_subkind').click().click();
   });
-  
+
   $('input#intervention_city').autocomplete(<%= raw(@cities.to_json) %>, {
   	minChars: 0,
     selectFirst: false

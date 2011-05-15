@@ -102,9 +102,9 @@ class InterventionTest < ActiveSupport::TestCase
         start_date = Time.new(@year, (i%12)+1, 15, (i%4), 30, 00) # one per month at 4 different hours
         make_intervention_with_firemen(:station => @station,
                                        :kind => (i%4)+1,					# 3 of each kind
-                                       :subtype => "st#{i%4}",		# 4 subtypes
+                                       :subkind => "st#{i%4}",		# 4 subkinds
                                        :city => "city#{i%4}",			# 4 cities
-                                       :start_date => start_date,	
+                                       :start_date => start_date,
                                        :end_date =>start_date + 1,
                                        :vehicles => [vehicles[i%2]])
       end
@@ -120,13 +120,13 @@ class InterventionTest < ActiveSupport::TestCase
       end
     end
 
-    context "stats_by_subtype" do
+    context "stats_by_subkind" do
       setup do
-        @stats_by_subtype = Intervention.stats_by_subtype(@station, @year)
+        @stats_by_subkind = Intervention.stats_by_subkind(@station, @year)
       end
 
-      should "return number of interventions grouped by subtype" do
-        assert_equal([["st0", 3], ["st1", 3], ["st2", 3], ["st3", 3]], @stats_by_subtype)
+      should "return number of interventions grouped by subkind" do
+        assert_equal([["st0", 3], ["st1", 3], ["st2", 3], ["st3", 3]], @stats_by_subkind)
       end
     end
 

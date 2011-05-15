@@ -31,7 +31,7 @@ class Intervention < ActiveRecord::Base
   scope :newer, order('start_date DESC')
   scope :latest, newer.limit(1)
   scope :for_year_and_station, lambda {
-    |station, year| where("interventions.station_id = ? AND YEAR(interventions.start_date) = ?", station.id, year) 
+    |station, year| where("interventions.station_id = ? AND YEAR(interventions.start_date) = ?", station.id, year)
   }
 
   def initialize(params = nil)
@@ -44,11 +44,11 @@ class Intervention < ActiveRecord::Base
     Intervention.for_year_and_station(station, year).group(:kind).count
   end
 
-  def self.stats_by_subtype(station, year)
-    Intervention.select("COUNT(*) AS count, COALESCE(subtype, '') AS stnotnull") \
+  def self.stats_by_subkind(station, year)
+    Intervention.select("COUNT(*) AS count, COALESCE(subkind, '') AS sknotnull") \
                 .for_year_and_station(station, year) \
-                .group("stnotnull") \
-                .collect { |i| [i[:stnotnull], i[:count].to_i] }
+                .group("sknotnull") \
+                .collect { |i| [i[:sknotnull], i[:count].to_i] }
   end
 
   def self.stats_by_month(station, year)
@@ -63,7 +63,7 @@ class Intervention < ActiveRecord::Base
                          .group('hour') \
                          .collect { |i| [i[:hour], i[:count].to_i] }
     result = Hash[*(0..23).to_a.zip(Array.new(24, 0)).flatten].merge(Hash[result])
-    result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |hour, number| number } 
+    result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |hour, number| number }
   end
 
   def self.stats_by_city(station, year)
@@ -72,7 +72,7 @@ class Intervention < ActiveRecord::Base
                 .group("citynotnull") \
                 .collect { |i| [i[:citynotnull], i[:count].to_i] }
   end
-  
+
   def self.stats_by_vehicle(station, year)
     Intervention.select("vehicles.name, COUNT(interventions.id) AS count") \
                 .joins(:vehicles) \
@@ -104,14 +104,14 @@ class Intervention < ActiveRecord::Base
     result.collect { |intervention| intervention.city }
   end
 
-  def self.subtypes(station)
-    result = Intervention.select("DISTINCT(subtype) AS subtype") \
-                         .where(["interventions.subtype IS NOT NULL AND interventions.station_id = ?", station.id]) \
-                         .order('subtype')
+  def self.subkinds(station)
+    result = Intervention.select("DISTINCT(subkind) AS subkind") \
+                         .where(["COALESCE(interventions.subkind, '') <> '' AND interventions.station_id = ?", station.id]) \
+                         .order('subkind')
 
-    result.collect { |intervention| intervention.subtype }
+    result.collect { |intervention| intervention.subkind }
   end
-  
+
   private
 
   def init_number

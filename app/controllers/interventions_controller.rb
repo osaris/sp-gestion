@@ -2,13 +2,13 @@
 class InterventionsController < BackController
 
   before_filter :load_intervention, :only => [:show, :edit, :update, :destroy]
-  before_filter :load_vehicles, :load_firemen, :load_cities, :load_subtypes, 
+  before_filter :load_vehicles, :load_firemen, :load_cities, :load_subkinds,
                 :only => [:new, :create, :edit, :update]
   before_filter :load_map, :only => [:show]
 
   def index
     @interventions = @station.interventions.paginate(
-      :page => params[:page], 
+      :page => params[:page],
       :include => [:vehicles, {:fireman_interventions => [:fireman]}],
       :order => 'interventions.start_date DESC'
     )
@@ -81,8 +81,8 @@ class InterventionsController < BackController
       @current_year = (params[:year] || last_intervention.start_date.year)
       @min_year, @max_year = Intervention::min_max_year(@station)
       @data = Intervention.send("stats_#{params[:type]}", @station, @current_year)
-     
-      if ["by_type", "by_subtype", "by_city", "by_vehicle"].include?(params[:type])
+
+      if ["by_type", "by_subkind", "by_city", "by_vehicle"].include?(params[:type])
         @sum = @data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
       elsif ["by_month", "by_hour"].include?(params[:type])
         @sum = @data.sum
@@ -128,8 +128,8 @@ class InterventionsController < BackController
     @cities = Intervention::cities(@station)
   end
 
-  def load_subtypes
-    @subtypes = Intervention::subtypes(@station)
+  def load_subkinds
+    @subkinds = Intervention::subkinds(@station)
   end
 
   def set_participants
