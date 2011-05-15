@@ -126,7 +126,7 @@ class InterventionTest < ActiveSupport::TestCase
       end
 
       should "return number of interventions grouped by subtype" do
-        assert_equal({"st0" => 3, "st1" => 3, "st2" => 3, "st3" => 3}, @stats_by_subtype)
+        assert_equal([["st0", 3], ["st1", 3], ["st2", 3], ["st3", 3]], @stats_by_subtype)
       end
     end
 
@@ -156,7 +156,7 @@ class InterventionTest < ActiveSupport::TestCase
       end
 
       should "return number of interventions per city" do
-        assert_equal({"city0" => 3, "city1" => 3, "city2" => 3, "city3" => 3}, @stats_by_city)
+        assert_equal([["city0", 3], ["city1", 3], ["city2", 3], ["city3", 3]], @stats_by_city)
       end
     end
 
