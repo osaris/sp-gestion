@@ -12,7 +12,7 @@ Encoding.default_internal = Encoding::UTF_8
 
 module SpGestion
   # Global constants for configuration
-  JQUERY_VERSION = '1.5.1'
+  JQUERY_VERSION = '1.6.1'
   JQUERY_UI_VERSION = '1.8.11'
 
 
