@@ -1,11 +1,11 @@
 pdf.move_down(20)
-pdf.text(h(@check_list.title), :align => :center, :size => 14)
+pdf.text(@check_list.title, :align => :center, :size => 14)
 pdf.move_down(20)
 
 header = [["<b>Titre</b>", "<b>Emplacement</b>", "<b>Quantité</b>", "<b>Expire le</b>", "<b>Contrôle</b>"]]
 
 items = @check_list.items.map do |item|
-  [h(item.title), h(item.place), item.quantity.to_s, l!(item.expiry), ""]
+  [item.title, item.place, item.quantity.to_s, l!(item.expiry), ""]
 end
 items << ["","", "", "", ""] if items.length == 0
 

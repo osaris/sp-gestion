@@ -5,7 +5,7 @@ pdf.move_down(20)
 header = [["<b>Titre</b>", "<b>Liste</b>", "<b>Emplacement</b>", "<b>Expire le</b>", "<b>Quantité</b>", "<b>Contrôle</b>"]]
 
 items = @items.map do |item|
-  [h(item.title), h(item.check_list.title), h(item.place), l(item.expiry, :format => :default), item.quantity.to_s, ""]
+  [item.title, item.check_list.title, item.place, l(item.expiry, :format => :default), item.quantity.to_s, ""]
 end
 items << ["","","","","",""] if items.length == 0
 
