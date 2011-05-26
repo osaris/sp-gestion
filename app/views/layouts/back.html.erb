@@ -9,7 +9,6 @@
   <!--[if IE 7]><%= stylesheet_link_tag("back/ie7.css")%><![endif]-->
   <%= javascript_include_tag("jquery-#{SpGestion::JQUERY_VERSION}.min.js", "rails.js") %>
   <%= csrf_meta_tag %>
-  <%= hoptoad_javascript_notifier %>
   <%= yield(:header) %>
   <%= render(:partial => '/layouts/google_analytics') if Rails.env == "production" %>
 </head>
