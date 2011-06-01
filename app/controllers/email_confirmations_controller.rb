@@ -19,7 +19,7 @@ class EmailConfirmationsController < BackController
         flash[:success] = "Le changement d'adresse email est effectué."
         redirect_to(profile_path)
       else
-        flash.now[:error] = "La nouvelle adresse email est déjà utilisée. Impossible de procéder au changement."
+        flash[:error] = "La nouvelle adresse email est déjà utilisée. Impossible de procéder au changement."
         redirect_to(login_path)
       end
     else
