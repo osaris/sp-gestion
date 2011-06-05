@@ -8,3 +8,6 @@
 <%- unless @convocation.rem.blank? -%>
   <p>Remarque : <%= @convocation.rem %></p>
 <%- end -%>
+<br /><hr /><br />
+<p>Vous pouvez confirmer votre présence en utilisant le lien suivant :</p>
+<p><%= link_to("Je confirme ma présence à cette convocation", @accept_url) %></p>

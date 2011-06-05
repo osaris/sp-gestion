@@ -95,6 +95,18 @@ class ConvocationsControllerTest < ActionController::TestCase
 
         should set_the_flash.level(:error)
       end
+
+      context "requesting POST :email with  with email quota not exceeded" do
+        setup do
+          stub.instance_of(Station).can_send_email? { true }
+          post :email, :id => @convocation.id
+        end
+
+        should respond_with(:redirect)
+        should redirect_to("convocation") { convocation_path(assigns(:convocation)) }
+
+        should set_the_flash.level(:error)
+      end
     end
 
     context "with an existing convocation" do

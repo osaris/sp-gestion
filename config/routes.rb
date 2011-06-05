@@ -35,6 +35,9 @@ SpGestion::Application.routes.draw do
         post :email
       end
       resources :convocation_firemen, :only => [:show] do
+        member do
+          get :accept
+        end
         collection do
           get :show_all
           get :edit_all

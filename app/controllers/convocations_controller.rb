@@ -69,11 +69,15 @@ class ConvocationsController < BackController
   end
 
   def email
-    if @station.can_send_email?(@convocation.firemen.size)
-      @convocation.delay.send_emails(@current_user.email)
-      flash[:success] = "Les convocations sont en cours d'envoi. Un email vous sera adressé à la fin de l'envoi."
+    if @convocation.editable?
+      if @station.can_send_email?(@convocation.firemen.size)
+        @convocation.delay.send_emails(@current_user.email)
+        flash[:success] = "Les convocations sont en cours d'envoi. Un email vous sera adressé à la fin de l'envoi."
+      else
+        flash[:error] = render_to_string(:partial => "email_error")
+      end
     else
-      flash[:error] = render_to_string(:partial => "email_error")
+      flash[:error] = "Vous ne pouvez pas envoyer par email une convocation passée."
     end
     redirect_to(@convocation)
   end

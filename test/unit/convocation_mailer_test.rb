@@ -28,10 +28,12 @@ class ConvocationMailerTest < ActionMailer::TestCase
       end
 
       should "" do
-        have_sent_email.from('pas_de_reponse@sp-gestion.fr').
-                        # reply_to('test@test.com').
-                        to(@convocation_fireman.fireman.email).
-                        with_body(@convocation.title)
+        have_sent_email.from('pas_de_reponse@sp-gestion.fr') \
+                       # .reply_to('test@test.com') \
+                       .to(@convocation_fireman.fireman.email) \
+                       .with_body(@convocation.title) \
+                       .with_body(Digest::SHA1.hexdigest(@convocation.id.to_s)) \
+                       .with_body(Digest::SHA1.hexdigest(@convocation_fireman.id.to_s))
       end
     end
 

@@ -5,6 +5,56 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
 
   setup(:activate_authlogic)
 
+  context "an user not logged in" do
+    setup do
+      @station = Station.make!(:url => 'cis-test')
+      @request.host = 'cis-test.sp-gestion.fr'
+    end
+
+    context "requesting GET :accept on non existing convocation" do
+      setup do
+        get :accept, :convocation_id => -1, :id => -1
+      end
+
+      should respond_with(:success)
+      should render_template("accept")
+      should render_with_layout("login")
+
+      should set_the_flash.level(:error).now
+    end
+
+    context "with an existing convocation" do
+      setup do
+        @convocation = make_convocation_with_firemen(:station => @station)
+      end
+
+      context "requesting GET :accept on a non editable convocation" do
+        setup do
+          stub.instance_of(Convocation).editable? { false }
+          get :accept, :convocation_id => @convocation.id, :id => @convocation.convocation_firemen.first.id
+        end
+
+        should respond_with(:success)
+        should render_template("accept")
+        should render_with_layout("login")
+
+        should set_the_flash.level(:error).now
+      end
+
+      context "requesting GET :accept" do
+        setup do
+          get :accept, :convocation_id => @convocation.id, :id => @convocation.convocation_firemen.first.id
+        end
+
+        should respond_with(:success)
+        should render_template("accept")
+        should render_with_layout("login")
+
+        should set_the_flash.level(:success).now
+      end
+    end
+  end
+
   context "an user logged in" do
     setup do
       login
