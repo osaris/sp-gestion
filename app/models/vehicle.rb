@@ -7,7 +7,7 @@ class Vehicle < ActiveRecord::Base
   has_many :interventions, :through => :intervention_vehicles
 
   validates_presence_of :name, :message => "Le nom est obligatoire."
-  # TODO use validates_date when https://github.com/adzap/validates_timeliness/issues/41 is fixed
+  # TODO use validates_date when https://github.com/adzap/validates_timeliness/issues/49 is fixed
   validates :date_approval, :timeliness => { :allow_blank => true, :type => :date }
   validates :date_check, :timeliness => { :allow_blank => true, :type => :date }
   validates :date_review, :timeliness => { :allow_blank => true, :type => :date }

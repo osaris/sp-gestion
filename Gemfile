@@ -27,7 +27,7 @@ gem 'prawn', '0.11.1'
 gem 'prawnto', '0.0.4'
 gem 'simple-navigation', '3.2.0'
 gem 'typus', '3.0.10'
-gem 'validates_timeliness', '3.0.5'
+gem 'validates_timeliness', '3.0.6'
 gem 'will_paginate', '3.0.pre2'
 
 group :development do

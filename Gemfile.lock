@@ -167,8 +167,8 @@ GEM
       render_inheritable
       will_paginate (~> 3.0.pre2)
     tzinfo (0.3.26)
-    validates_timeliness (3.0.5)
-      timeliness (~> 0.3.2)
+    validates_timeliness (3.0.6)
+      timeliness (~> 0.3.3)
     will_paginate (3.0.pre2)
 
 PLATFORMS
@@ -202,5 +202,5 @@ DEPENDENCIES
   shoulda (= 2.11.3)
   simple-navigation (= 3.2.0)
   typus (= 3.0.10)
-  validates_timeliness (= 3.0.5)
+  validates_timeliness (= 3.0.6)
   will_paginate (= 3.0.pre2)
