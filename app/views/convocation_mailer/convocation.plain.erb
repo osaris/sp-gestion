@@ -15,9 +15,10 @@ Date et heure : <%= I18n.l(@convocation.date, :format => :default) %>
 <%- unless @convocation.rem.blank? -%>
 Remarque : <%= @convocation.rem %>
 <%- end -%>
-
+<%- if @convocation.confirmable? -%>
 --
 
 Vous pouvez confirmer votre présence en utilisant le lien suivant :
 
 <%= @accept_url %>
+<%- end -%>

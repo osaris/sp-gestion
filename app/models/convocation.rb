@@ -21,6 +21,12 @@ class Convocation < ActiveRecord::Base
   scope :find_by_sha1, lambda { |sha1|
     where(['SHA1(id) = ?', sha1])
   }
+  scope :confirmable, where(:confirmable => true)
+
+  def initialize(params = nil)
+    super
+    self.confirmable ||= false
+  end
 
   def presence
     ConvocationFireman.select("COUNT(*) AS total, SUM(IF(presence = 0,1,0)) AS missings, SUM(IF(presence=1,1,0)) as presents, status") \

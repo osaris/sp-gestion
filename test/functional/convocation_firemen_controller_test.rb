@@ -23,15 +23,17 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
       should set_the_flash.level(:error).now
     end
 
-    context "with an existing convocation" do
+    context "with an existing convocation confirmable" do
       setup do
-        @convocation = make_convocation_with_firemen(:station => @station)
+        @convocation = make_convocation_with_firemen(:station => @station,
+                                                     :confirmable => true)
       end
 
       context "requesting GET :accept on a non editable convocation" do
         setup do
           stub.instance_of(Convocation).editable? { false }
-          get :accept, :convocation_id => @convocation.id, :id => @convocation.convocation_firemen.first.id
+          get :accept, :convocation_id => Digest::SHA1.hexdigest(@convocation.id.to_s),
+                       :id => Digest::SHA1.hexdigest(@convocation.convocation_firemen.first.id.to_s)
         end
 
         should respond_with(:success)
@@ -43,7 +45,8 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
 
       context "requesting GET :accept" do
         setup do
-          get :accept, :convocation_id => @convocation.id, :id => @convocation.convocation_firemen.first.id
+          get :accept, :convocation_id => Digest::SHA1.hexdigest(@convocation.id.to_s),
+                       :id =>Digest::SHA1.hexdigest(@convocation.convocation_firemen.first.id.to_s)
         end
 
         should respond_with(:success)
@@ -51,6 +54,40 @@ class ConvocationFiremenControllerTest < ActionController::TestCase
         should render_with_layout("login")
 
         should set_the_flash.level(:success).now
+      end
+    end
+
+    context "with an existing convocation not confirmable" do
+      setup do
+        @convocation = make_convocation_with_firemen(:station => @station,
+                                                     :confirmable => false)
+      end
+
+      context "requesting GET :accept on a non editable convocation" do
+        setup do
+          stub.instance_of(Convocation).editable? { false }
+          get :accept, :convocation_id => Digest::SHA1.hexdigest(@convocation.id.to_s),
+                       :id => Digest::SHA1.hexdigest(@convocation.convocation_firemen.first.id.to_s)
+        end
+
+        should respond_with(:success)
+        should render_template("accept")
+        should render_with_layout("login")
+
+        should set_the_flash.level(:error).now
+      end
+
+      context "requesting GET :accept" do
+        setup do
+          get :accept, :convocation_id => Digest::SHA1.hexdigest(@convocation.id.to_s),
+                       :id =>Digest::SHA1.hexdigest(@convocation.convocation_firemen.first.id.to_s)
+        end
+
+        should respond_with(:success)
+        should render_template("accept")
+        should render_with_layout("login")
+
+        should set_the_flash.level(:error).now
       end
     end
   end

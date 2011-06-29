@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110515154927) do
+ActiveRecord::Schema.define(:version => 20110627192250) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110515154927) do
     t.text     "rem"
     t.boolean  "hide_grade",      :default => false
     t.datetime "last_emailed_at"
+    t.boolean  "confirmable"
   end
 
   add_index "convocations", ["station_id"], :name => "index_convocations_on_station_id"

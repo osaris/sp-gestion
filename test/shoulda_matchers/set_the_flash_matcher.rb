@@ -72,7 +72,7 @@ module Shoulda # :nodoc:
         end
 
         def level_match?
-          return true unless Symbol == @level
+          return true unless Symbol === @level
           !flash[@level].blank?
         end
 
