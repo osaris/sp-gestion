@@ -2,7 +2,14 @@
 # All items belongs to the station
 class Station < ActiveRecord::Base
 
-  authenticates_many :user_sessions, :find_options => { :limit => 1 }
+  # TODO fix when https://github.com/binarylogic/authlogic/issues/135 is closed
+  class FindOptions
+    def inspect
+      '{ :conditions => ["`users`.station_id = ?", id] }'
+    end
+  end
+  authenticates_many :user_sessions, :find_options => FindOptions.new
+  
   has_many :users, :dependent => :destroy
   has_many :convocations, :dependent => :destroy
   has_many :check_lists, :dependent => :destroy
