@@ -43,15 +43,8 @@ class ActiveSupport::TestCase
     end
   end
 
-  # data
-
-  def make_station_with_user(attributes = {})
-    s = Station.make(attributes)
-    s.users << User.new
-    s.save
-    s
-  end
-
+  # data generation methods
+  
   def make_fireman_with_grades(attributes = {})
     f = Fireman.make(attributes)
     f.grades = Grade::new_defaults
