@@ -6,8 +6,7 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :title, :message => "Le titre est obligatoire."
   validates_numericality_of :quantity, :message => "La quantité doit être un nombre."
-  # TODO use validates_date when https://github.com/adzap/validates_timeliness/issues/49 is fixed
-  validates :expiry, :timeliness => { :allow_blank => true, :type => :date }
+  validates_date :expiry, :allow_blank => true
 
   scope :expirings, lambda { |nb_days, station_id|
       includes(:check_list) \

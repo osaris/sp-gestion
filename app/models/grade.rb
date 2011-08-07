@@ -4,8 +4,7 @@ class Grade < ActiveRecord::Base
 
   belongs_to :fireman
 
-  # TODO use validates_date when https://github.com/adzap/validates_timeliness/issues/49 is fixed
-  validates :date, :timeliness => { :allow_blank => true, :on_or_before => :today, :type => :date}
+  validates_date :date, :allow_blank => true, :on_or_before => :today
 
   after_save :set_last_grade_update_at
 

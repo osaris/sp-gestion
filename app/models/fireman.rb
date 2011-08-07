@@ -16,8 +16,7 @@ class Fireman < ActiveRecord::Base
   validates_presence_of :firstname, :message => "Le prénom est obligatoire."
   validates_presence_of :lastname, :message => "Le nom est obligatoire."
   validates_presence_of :status
-  # TODO use validates_date when https://github.com/adzap/validates_timeliness/issues/49 is fixed
-  validates :birthday, :timeliness => {  :allow_blank => true, :on_or_before => :today, :type => :date }
+  validates_date :birthday, :allow_blank => true, :on_or_before => :today
   validates_format_of :email, :with => Authlogic::Regex.email, :message => "L'adresse email est mal formée.", :allow_blank => true
   validates_length_of :email, :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.", :allow_blank => true
   validates_with FiremanValidator
