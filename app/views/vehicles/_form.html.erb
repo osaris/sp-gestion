@@ -1,5 +1,5 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%= form_for(@vehicle) do |f| %>
+<%= form_for(@vehicle, :html => {:multipart => true}) do |f| %>
   <p>
     <%= f.label(:name, "Nom (*)", :class => "span-1 first") %>
     <span class="span-3">
@@ -26,6 +26,15 @@
     <span class="span-3">
       <%= f.text_field(:date_review, :value => l!(f.object.date_review), :class => "span-1 first", :class => "date") %>
       <%= error_message_on(:vehicle, :date_review, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
+    <%= f.label(:vehicle_photo, "Photo (PNG, JPG, GIF) de 480x360 pixels", :class => "span-1 first")%>
+    <span class="span-3">
+      <%= f.file_field :vehicle_photo %>
+      <%= f.hidden_field :vehicle_photo_cache %><br />
+      <%= f.check_box :remove_vehicle_photo %> Supprimer la photo existante
+      <%= error_message_on(:vehicle, :vehicle_photo, :css_class => "span-2 first")%>
     </span>
   </p>
   <p>

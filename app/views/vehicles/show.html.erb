@@ -1,3 +1,4 @@
+<p style="float:right"><%= image_tag(@vehicle.vehicle_photo.url, :alt => @vehicle.name) %></p>
 <h1><%= @vehicle.name %></h1>
 <ul>
   <li>Date de passage aux mines : <%= l!(@vehicle.date_approval) %></li>

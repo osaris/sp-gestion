@@ -6,6 +6,8 @@ class Vehicle < ActiveRecord::Base
   has_many :intervention_vehicles
   has_many :interventions, :through => :intervention_vehicles
 
+  mount_uploader :vehicle_photo, VehiclePhotoUploader
+
   validates_presence_of :name, :message => "Le nom est obligatoire."
   validates_date :date_approval, :allow_blank => true
   validates_date :date_check, :allow_blank => true

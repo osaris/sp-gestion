@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110627192250) do
+ActiveRecord::Schema.define(:version => 20110816201840) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(:version => 20110627192250) do
     t.date     "date_approval"
     t.date     "date_check"
     t.date     "date_review"
+    t.string   "vehicle_photo"
   end
 
   add_index "vehicles", ["station_id"], :name => "index_vehicles_on_station_id"
