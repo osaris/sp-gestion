@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
-class VehiclePhotoUploader < BaseUploader
+class ItemPhotoUploader < BaseUploader
 
   process :resize_and_pad => [480, 360]
   
   # Override the filename of the uploaded files
   def filename
-    "vehicle.png" if original_filename
+    "item.png" if original_filename
   end
 
   def default_url

@@ -16,6 +16,9 @@ class ItemsController < BackController
       end
     end
   end
+  
+  def show
+  end  
 
   def new
     @item = @check_list.items.new
@@ -25,7 +28,7 @@ class ItemsController < BackController
     @item = @check_list.items.new(params[:item])
     if(@item.save)
       flash[:success] = "Le matériel a été créé."
-      redirect_to(@check_list)
+      redirect_to([@check_list, @item])
     else
       render(:action => :new)
     end
@@ -37,7 +40,7 @@ class ItemsController < BackController
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = "Le matériel a été mis à jour."
-      redirect_to(session[:back_path] || @check_list)
+      redirect_to(session[:back_path] || [@check_list, @item])
     else
       render(:action => :edit)
     end

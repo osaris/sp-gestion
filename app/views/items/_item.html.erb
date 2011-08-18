@@ -1,7 +1,6 @@
 <tr>
-  <td><%= link_to(item.title, edit_check_list_item_path(@check_list, item)) %></td>
+  <td><%= link_to(item.title, check_list_item_path(@check_list, item)) %></td>
   <td><%= item.place %></td>
   <td><%= item.quantity %></td>
   <td><%= l!(item.expiry) %></td>
-  <td class="center"><%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer"), check_list_item_path(@check_list, item), :method => :delete, :confirm => "Êtes-vous sûr ?") %></td>
 </tr>

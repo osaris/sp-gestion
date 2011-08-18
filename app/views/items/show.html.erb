@@ -1,0 +1,12 @@
+<p style="float:right"><%= image_tag(@item.item_photo.url, :alt => @item.title) %></p>
+<h1><%= link_to(@check_list.title, check_list_path(@check_list)) %> > <%= @item.title %></h1>
+<p>Quantité : <%= @item.quantity %></p>
+<p>Emplacement : <%= @item.place %></p>
+<p>Date d'expiration : <%= l!(@item.expiry) %></p>
+<%- unless @item.rem.blank? -%>
+  <p>Remarque : <%= @item.rem %></p>
+<%- end -%>
+<p>
+  <%= link_to(image_tag("back/icons/edit.png", :alt => "Editer") + raw("&nbsp;Editer"), edit_check_list_item_path(@check_list, @item))%> -
+  <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + raw("&nbsp;Supprimer"), check_list_item_path(@check_list, @item), :method => :delete, :confirm => "Êtes-vous sûr ?") %>
+</p>

@@ -36,6 +36,28 @@ class ItemsControllerTest < ActionController::TestCase
         send_file_to_disk(@response.body, "check_list_expiration.pdf")
       end
     end
+    
+    context "requesting GET :show for a non existing check_list" do
+      setup do
+        get :show, :check_list_id => -1, :id => -1
+      end
+
+      should respond_with(:redirect)
+      should redirect_to(":index") { check_lists_path }
+
+      should set_the_flash.level(:error)      
+    end
+    
+    context "requesting GET :show for a non existing item on an existing check_list" do
+      setup do
+        get :show, :check_list_id => @check_list.id, :id => -1
+      end
+
+      should respond_with(:redirect)
+      should redirect_to(":index") { check_list_path(@check_list) }
+
+      should set_the_flash.level(:error)    
+    end
 
     context "requesting GET :edit for a non existing check_list" do
       setup do
@@ -85,7 +107,7 @@ class ItemsControllerTest < ActionController::TestCase
       end
 
       should respond_with(:redirect)
-      should redirect_to("check_list") { check_list_path(assigns(:check_list)) }
+      should redirect_to("item") { check_list_item_path(assigns(:check_list), assigns(:item)) }
 
       should assign_to(:check_list)
       should set_the_flash.level(:success)
@@ -94,6 +116,16 @@ class ItemsControllerTest < ActionController::TestCase
     context "with an existing item" do
       setup do
         @item = @check_list.items.make!
+      end
+      
+      context "requesting GET :show" do
+        setup do
+          get :show, :check_list_id => @check_list.id, :id => @item.id
+        end
+
+        should respond_with(:success)
+        should render_template("show")
+        should render_with_layout("back")        
       end
 
       context "requesting GET :edit" do
@@ -122,7 +154,7 @@ class ItemsControllerTest < ActionController::TestCase
         end
 
         should respond_with(:redirect)
-        should redirect_to("check_list") { check_list_path(assigns(:check_list)) }
+        should redirect_to("item") { check_list_item_path(assigns(:check_list), assigns(:item)) }
 
         should set_the_flash.level(:success)
       end

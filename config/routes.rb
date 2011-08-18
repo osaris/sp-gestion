@@ -50,7 +50,7 @@ SpGestion::Application.routes.draw do
       member do
         post :copy
       end
-      resources :items, :except => [:index, :show]
+      resources :items, :except => [:index]
     end
 
     resources :email_confirmations, :only => [:edit, :update]

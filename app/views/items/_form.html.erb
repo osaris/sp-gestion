@@ -1,5 +1,5 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
-<%= form_for([@check_list, @item]) do |f| %>
+<%= form_for([@check_list, @item], :html => {:multipart => true}) do |f| %>
   <p>
     <%= f.label(:title, "Titre (*)", :class => "span-1 first") %>
     <span class="span-3">
@@ -25,6 +25,15 @@
     <span class="span-3">
       <%= f.text_field(:expiry, :value => l!(f.object.expiry), :class => "span-1 first", :class => "date") %>
       <%= error_message_on(:item, :expiry, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
+    <%= f.label(:item_photo, "Photo (PNG, JPG, GIF) de 480x360 pixels", :class => "span-1 first")%>
+    <span class="span-3">
+      <%= f.file_field :item_photo %>
+      <%= f.hidden_field :item_photo_cache %><br />
+      <%= f.check_box :remove_item_photo %> Supprimer la photo existante
+      <%= error_message_on(:item, :item_photo, :css_class => "span-2 first")%>
     </span>
   </p>
   <p>
