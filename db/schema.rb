@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818153553) do
+ActiveRecord::Schema.define(:version => 20110823210735) do
 
   create_table "check_lists", :force => true do |t|
     t.string   "title"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20110818153553) do
     t.string   "cached_tag_list"
     t.string   "email"
     t.string   "passeport_photo"
+    t.string   "regimental_number"
   end
 
   add_index "firemen", ["station_id"], :name => "index_firemen_on_station_id"

@@ -42,6 +42,13 @@
     </span>
   </p>
   <p>
+    <%= f.label(:regimental_number, "N° de matricule", :class => "span-1 first") %>
+    <span class="span-3">
+      <%= f.text_field(:regimental_number, :class => "span-2 first") %>
+      <%= error_message_on(:fireman, :regimental_number, :css_class => "span-2 first") %>
+    </span>
+  </p>
+  <p>
     <%= f.label(:tag_list, "Etiquette(s)", :class => "span-1 first") %>
     <span class="span-3">
       <%= f.text_field(:tag_list, :class => "span-2 first") %>
