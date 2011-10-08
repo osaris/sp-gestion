@@ -37,13 +37,13 @@ img { vertical-align:text-bottom; }
 #nav .active a:hover { color:inherit; cursor:default; }
 #mainnav { float:left; padding:9px 20px 0; width:918px; background:#BBBBBB; border:1px solid #172E60; }
 #mainnav a { float:left; padding:4px 20px; color:#172E60; }
-#mainnav a:hover { color:#223540; }
+#mainnav a:hover { color:#223540; text-decoration: underline; }
 #mainnav li.active { float:left; position:relative; top:1px; margin:0 20px; background:#f9fcff url("/images/back/gradient-white.png") repeat-x 0 0; border:1px solid #172E60; border-bottom:0; }
 #mainnav a.active  { padding:4px 20px;}
 #mainnav li.right { float:right; }
 #nav .subnav { clear:both; float:left; padding:10px 0 9px 20px; width:938px; background:#f9fcff; border:1px solid #172E60; border-top:0; }
 #nav .subnav a { float:left; margin:0 20px 0 0; color:#172E60; }
-#nav .subnav a:hover { color:#466c83; }
+#nav .subnav a:hover { color:#466c83; text-decoration: underline; }
 #nav .subnav a.active  { padding:0 10px; background: red url("/images/back/gradient-gray.png") repeat-x 0 0; color:#FFFFFF;}
 #nav .subnav .right a { float:right; }
 
