@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# The core of the job
 class Intervention < ActiveRecord::Base
 
   belongs_to :station

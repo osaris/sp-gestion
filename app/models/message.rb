@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# Message used for internal notification system
 class Message < ActiveRecord::Base
 
   belongs_to :user

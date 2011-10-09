@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# Grade of fireman
 class Grade < ActiveRecord::Base
 
   belongs_to :fireman

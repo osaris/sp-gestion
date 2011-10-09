@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# User used for auth
 class User < ActiveRecord::Base
 
   belongs_to :station

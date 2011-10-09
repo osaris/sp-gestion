@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# Check list of items
 class CheckList < ActiveRecord::Base
 
   belongs_to :station

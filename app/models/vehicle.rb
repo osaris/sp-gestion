@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# Used in interventions
 class Vehicle < ActiveRecord::Base
 
   belongs_to :station

@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-# All items belongs to the station
 class Station < ActiveRecord::Base
 
   # TODO fix when https://github.com/binarylogic/authlogic/issues/135 is closed
@@ -9,7 +8,7 @@ class Station < ActiveRecord::Base
     end
   end
   authenticates_many :user_sessions, :find_options => FindOptions.new
-  
+
   has_many :users, :dependent => :destroy
   has_many :convocations, :dependent => :destroy
   has_many :check_lists, :dependent => :destroy
