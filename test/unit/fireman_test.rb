@@ -52,6 +52,41 @@ class FiremanTest < ActiveSupport::TestCase
       end
     end
   end
+  
+  # test change from active to resigned
+  context "with an instance not resigned" do
+  	setup do
+  		@fireman = make_fireman_with_grades(:station => Station.make!, :incorporation_date => Date.yesterday)
+  	end
+
+  	context "set the resignation_date" do
+  		setup do
+				@fireman.update_attributes(:resignation_date => Date.today)
+      end
+
+	  	should "set warnings" do
+	  		assert_equal("Attention, cette personne est désormais dans la liste des hommes radiés.", @fireman.warnings)
+	  	end
+  	end
+  end
+  
+  context "with an instance resigned" do
+  	setup do
+  		@fireman = make_fireman_with_grades(:station => Station.make!,
+                                          :incorporation_date => Date.yesterday,
+                                          :resignation_date => Date.today)
+  	end
+  	
+  	context "unset the resignation_date" do
+  		setup do
+				@fireman.update_attributes(:resignation_date => nil)
+			end
+			
+	  	should "set warnings" do
+	  		assert_equal("Attention, cette personne est désormais dans la liste des hommes.", @fireman.warnings)
+	  	end
+  	end
+  end  
 
   # test destroy with relations
   context "with an instance valid and a convocation" do

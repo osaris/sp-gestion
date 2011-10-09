@@ -21,6 +21,18 @@ class FiremenControllerTest < ActionController::TestCase
 
       should assign_to(:firemen)
     end
+    
+    context "requesting GET :resigned" do
+      setup do
+        get :index
+      end
+
+      should respond_with(:success)
+      should render_template("index")
+      should render_with_layout("back")
+
+      should assign_to(:firemen)
+    end    
 
     context "requesting GET :facebook" do
       setup do
@@ -76,7 +88,7 @@ class FiremenControllerTest < ActionController::TestCase
       should assign_to(:fireman)
       should set_the_flash.level(:success)
     end
-
+    
     context "with an existing fireman" do
       setup do
         @fireman = make_fireman_with_grades(:station => @station)
@@ -121,6 +133,15 @@ class FiremenControllerTest < ActionController::TestCase
         should redirect_to("fireman") { fireman_path(assigns(:fireman)) }
 
         should set_the_flash.level(:success)
+      end
+
+      context "requesting PUT :update with warnings" do
+        setup do
+          stub.instance_of(Fireman).warnings { 'Warnings' }
+          put :update, :id => @fireman.id
+        end
+
+        should set_the_flash.level(:warning)
       end
 
       context "requesting DELETE :destroy without associations" do

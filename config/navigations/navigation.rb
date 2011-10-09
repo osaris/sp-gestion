@@ -37,9 +37,10 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item(:personnel, 'Personnel', firemen_path) do |personnel|
-      personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen/)
+      personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen\/?((\d).*|new|facebook)?$/)
       personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/)
 
+			personnel.item(:firemen_resigned, 'Hommes radiés', resigned_firemen_path, :class => 'right', :highlights_on => /^\/firemen\/resigned/)
       personnel.item(:uniforms, 'Tenues', uniforms_path, :class => 'right', :highlights_on => /^uniforms/)
 
       personnel.dom_class = 'subnav'

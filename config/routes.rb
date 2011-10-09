@@ -64,6 +64,7 @@ SpGestion::Application.routes.draw do
     resources :firemen do
       collection do
         get :facebook
+        get :resigned
       end
     end
 

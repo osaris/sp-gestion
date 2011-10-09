@@ -3,11 +3,13 @@ class FiremenController < BackController
 
   helper(:interventions)
 
-  before_filter :load_fireman, :except => [:index, :new, :create, :tag, :facebook]
+  before_filter :load_fireman, :only => [:show, :edit, :update, :destroy]
   before_filter :load_tags, :only => [:new, :create, :edit, :update]
 
   def index
-    @firemen = @station.firemen.paginate(:page => params[:page], :order => 'firemen.grade DESC, firemen.lastname ASC')
+    @firemen = @station.firemen \
+                       .not_resigned \
+                       .paginate(:page => params[:page], :order => 'firemen.grade DESC, firemen.lastname ASC')
   end
 
   def show
@@ -33,6 +35,7 @@ class FiremenController < BackController
   def update
     if @fireman.update_attributes(params[:fireman])
       flash[:success] = "La personne a été mise à jour."
+      flash[:warning] = @fireman.warnings
       redirect_to(@fireman)
     else
       render(:action => :edit)
@@ -50,7 +53,15 @@ class FiremenController < BackController
   end
 
   def facebook
-    @firemen = @station.firemen.order_by_grade_and_lastname
+    @firemen = @station.firemen.not_resigned.order_by_grade_and_lastname
+  end
+
+  def resigned
+  	@firemen = @station.firemen \
+  	                   .resigned \
+  	                   .order_by_grade_and_lastname \
+  	                   .paginate(:page => params[:page], :order => 'firemen.grade DESC, firemen.lastname ASC')
+  	render(:action => :index)
   end
 
   private

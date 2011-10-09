@@ -94,7 +94,7 @@ class ConvocationsController < BackController
   end
 
   def load_firemen
-    @firemen = @station.firemen.order_by_grade_and_lastname
+    @firemen = @station.firemen.not_resigned.order_by_grade_and_lastname
   end
 
   def set_attendees

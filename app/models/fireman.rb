@@ -17,13 +17,17 @@ class Fireman < ActiveRecord::Base
   validates_presence_of :lastname, :message => "Le nom est obligatoire."
   validates_presence_of :status
   validates_date :birthday, :allow_blank => true, :on_or_before => :today
+  validates_date :incorporation_date, :allow_blank => true, :on_or_before => :today
+  validates_date :resignation_date, :allow_blank => true, :after => :incorporation_date
   validates_format_of :email, :with => Authlogic::Regex.email, :message => "L'adresse email est mal formée.", :allow_blank => true
   validates_length_of :email, :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.", :allow_blank => true
   validates_with FiremanValidator
 
   attr_accessor :validate_grade_update
+  attr_reader :warnings
 
   before_save :denormalize_grade
+  before_save :warn_if_resignation_date_changed
   before_destroy :check_associations
 
   acts_as_taggable_on :tags
@@ -41,11 +45,14 @@ class Fireman < ActiveRecord::Base
   }
 
   scope :order_by_grade_and_lastname, order('firemen.grade DESC, firemen.lastname ASC')
+  scope :not_resigned, where("COALESCE(firemen.resignation_date, '') = ''")
+  scope :resigned, where("COALESCE(firemen.resignation_date, '') <> ''")
 
   def initialize(params = nil)
     super
     self.status ||= 3
     self.grades = Grade.new_defaults() if self.grades.length != Grade::GRADE.length
+    @warnings = ""
   end
 
   def current_grade
@@ -69,13 +76,16 @@ class Fireman < ActiveRecord::Base
   end
 
   def stats_convocations
-    ConvocationFireman.select("COUNT(*) AS total, COALESCE(SUM(IF(presence = 0,1,0)),0) AS missings, COALESCE(SUM(IF(presence = 1,1,0)),0) as presents") \
+    ConvocationFireman.select("COUNT(*) AS total,
+    													 COALESCE(SUM(IF(presence = 0,1,0)),0) AS missings,
+    													 COALESCE(SUM(IF(presence = 1,1,0)),0) as presents") \
                       .where(:fireman_id => self.id) \
                       .first
   end
 
   def self.distinct_tags(station)
-    result = Fireman.select("DISTINCT(tags.name) AS name") \
+    result = Fireman.not_resigned
+                    .select("DISTINCT(tags.name) AS name") \
                     .joins("INNER JOIN taggings ON firemen.id = taggings.taggable_id AND taggings.taggable_type = 'Fireman'") \
                     .joins("INNER JOIN tags ON taggings.tag_id = tags.id") \
                     .where(:station_id => station.id) \
@@ -103,5 +113,12 @@ class Fireman < ActiveRecord::Base
       self.grade_category = Grade::GRADE_CATEGORY_MATCH[self.grade]
     end
   end
+
+	def warn_if_resignation_date_changed
+	  if self.resignation_date_changed?
+		  @warnings = "Attention, cette personne est désormais dans la liste des hommes"
+		  @warnings += self.resignation_date.blank? ? "." : " radiés."
+		end
+	end
 
 end
