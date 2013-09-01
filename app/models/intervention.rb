@@ -71,7 +71,7 @@ class Intervention < ActiveRecord::Base
   end
 
   def self.stats_by_hour(station, year)
-    result = Intervention.select("HOUR(CONVERT_TZ(start_date, 'UTC', 'Europe/Paris')) AS hour, COUNT(interventions.id) AS count") \
+    result = Intervention.select("HOUR(CONVERT_TZ(start_date, '+00:00', '#{Time.zone.formatted_offset}')) AS hour, COUNT(interventions.id) AS count") \
                          .for_year_and_station(station, year) \
                          .group('hour') \
                          .collect { |i| [i[:hour], i[:count].to_i] }
