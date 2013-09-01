@@ -157,12 +157,13 @@ describe Intervention do
   describe "stats" do
 
     before(:all) do
-
       @year = Date.today.year - 1
       @station = Station.make!
 
       12.times do |i|
-        start_date = Time.new(@year, (i%12)+1, 15, (i%4), 30, 00) # one per month at 4 different hours
+        # One per month at 4 differents hours, force timezone to avoid problem
+        # with winter/summer hour
+        start_date = Time.new(@year, (i%12)+1, 15, (i%4), 30, 00, '+01:00')
         make_intervention_with_firemen(:station => @station,
                                        :kind => (i%4)+1,          # 3 of each kind
                                        :subkind => "st#{i%4}",    # 4 subkinds
