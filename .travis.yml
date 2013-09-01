@@ -3,6 +3,7 @@ rvm:
 
 before_script:
   - cp config/sp-gestion.sample.yml config/sp-gestion.yml
+  - mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
   - bundle exec rake db:drop db:create db:migrate
 
 bundler_args:
