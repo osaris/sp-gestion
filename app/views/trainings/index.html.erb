@@ -1,0 +1,19 @@
+<div class="btn-toolbar pull-right">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-plus', 'Créer une nouvelle formation'),
+                new_training_path,
+                :class => 'btn btn-small') %>
+  </div>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Nom court</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => @trainings) || raw("<tr><td colspan='2'>Pas encore de formation !</td></tr>") %>
+  </tbody>
+</table>
+<%= page_navigation_links(@trainings) %>

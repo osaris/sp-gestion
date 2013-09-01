@@ -1,0 +1,1 @@
+partial!("convocation_firemen/convocation")

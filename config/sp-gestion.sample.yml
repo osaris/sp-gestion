@@ -1,0 +1,40 @@
+defaults: &defaults
+  # Fog is used to sync assets to s3 and to send user uploads to s3
+  fog:
+    aws_access_key_id:
+    aws_secret_access_key:
+    region: eu-west-1
+    directory: s3.sp-gestion.fr
+  google_api_key:
+
+development:
+  <<: *defaults
+  base_url: sp-gestion.dev:3000
+  google_application_id:
+  delivery_method: smtp
+  # Keep these settings if you plan to use the mailcatcher gem
+  smtp_settings:
+      address: localhost
+      port: 1025
+      domain: sp-gestion.dev:3000
+
+test:
+  <<: *defaults
+  base_url: test.local
+  google_application_id:
+
+production:
+  <<: *defaults
+  base_url: sp-gestion.fr
+  delivery_method: smtp
+  # Extended SMTP settings, you can remove useless lines
+  smtp_settings:
+      address:
+      domain:
+      port:
+      enable_starttls_auto:
+      authentication:
+      user_name:
+      password:
+  airbrake_api_key:
+  google_application_id:

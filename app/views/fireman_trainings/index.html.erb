@@ -1,0 +1,20 @@
+<div class="block-title"><h4>Formations du <%= link_to(grade_and_name(@fireman), @fireman) %></h4></div>
+<div class="btn-toolbar pull-right">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-plus', 'Ajouter une nouvelle formation'),
+                new_fireman_fireman_training_path(@fireman.id),
+                :class => 'btn btn-small') %>
+  </div>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Date</th>
+      <th>Remarque</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => @fireman.fireman_trainings, :locals => {:fireman => @fireman}) || raw("<tr><td colspan='3'>Pas encore de formation !</td></tr>") %>
+  </tbody>
+</table>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>SP-Gestion - <%= @station.name %></title>
+  <%= favicon_link_tag('favicon.ico') %>
+  <%= javascript_include_tag("back") %>
+  <%= stylesheet_link_tag("back-all", :media => "all") %>
+  <%= csrf_meta_tag %>
+  <link rel="author" href="humans.txt" />
+  <%= render('/layouts/google_analytics') if Rails.env == "production" %>
+</head>
+<body>
+  <noscript>
+    <div class="alert">
+      Pour profiter pleinement de SP-Gestion, vous devez activer les scripts Javascript ! <%= mail_to("contact@sp-gestion.fr", "Contactez-nous pour obtenir de l'aide concernant ce message") %>.
+    </div>
+  </noscript>
+  <!--[if lte IE 6]><%= render("/layouts/ie6_warning") %><![endif]-->
+  <%- if @station.demo? -%>
+    <div class="alert alert-info center">
+      <%= link_to("Ceci est un compte de démonstration, vous pouvez profiter de votre propre compte SP-Gestion en vous inscrivant gratuitement !",
+                  signup_url(:subdomain => 'www')) %>
+    </div>
+  <%- end -%>
+  <!-- Main page container -->
+  <div class="container-fluid">
+
+    <!-- Left side -->
+    <section class="navigation-block">
+
+      <!-- Main page header -->
+      <header>
+        <!-- Main page logo -->
+        <%= render("/layouts/logo", :station => @station) %>
+      </header>
+      <!-- /Main page header -->
+
+      <!-- User profile -->
+      <section class="user-profile">
+        <strong><%= link_to(@current_user.email, profile_path) %></strong>
+        <%- if current_user.id == @station.owner_id -%>
+          <p><%= link_to("Compte", edit_account_path) %>
+          &nbsp;|&nbsp;
+          <%= link_to("Utilisateurs", users_path) %></p>
+        <%- end -%>
+        <ul>
+          <li><%= link_to("Déconnexion", logout_path, :class => "label") %></li>
+        </ul>
+      </section>
+      <!-- /User profile -->
+
+      <!-- Main navigation -->
+      <nav class="main-navigation" role="navigation">
+        <%= render_navigation %>
+      </nav>
+      <p class="center">
+        Copyright &copy; 2009-<%= Date.today.year %> imagineapp<br />
+        <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
+        <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr", :target => :blank) %>
+      </p>
+      <!-- /Main navigation -->
+    </section>
+    <!-- /Left side -->
+
+    <!-- Right side -->
+    <section class="content-block" role="main">
+      <!-- Breadcrumbs -->
+      <%= render_navigation(:renderer => :bootstrap_breadcrumbs, :root_path => root_back_path) %>
+      <!-- /Breadcrumbs -->
+      <%= flash_helper %>
+      <%= yield %>
+    </section>
+    <!-- /Right side -->
+
+  </div>
+  <!-- /Main page container -->
+  <%= render("/layouts/javascript") %>
+  <!-- VCS REV : <%= render("/layouts/vcs_revision")%> -->
+</body>
+</html>

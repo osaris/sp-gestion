@@ -1,0 +1,5 @@
+<%- if station.logo? -%>
+  <%= link_to(image_tag(station.logo.url, :alt => station.name), root_back_path) %>
+<%- else -%>
+  <h3><%= link_to(station.name, root_back_path) %></h3>
+<%- end -%>

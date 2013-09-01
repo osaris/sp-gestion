@@ -1,0 +1,53 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(vehicle, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:name, "Nom (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:name) %>
+        <%= error_message_on(:vehicle, :name) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:date_approval, "Date de passage aux mines", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:date_approval, :value => l!(f.object.date_approval), :class => "date") %>
+        <%= error_message_on(:vehicle, :date_approval) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:date_check, "Date de contrôle technique", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:date_check, :value => l!(f.object.date_check), :class => "date") %>
+        <%= error_message_on(:vehicle, :date_check) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:date_review, "Date de révision", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:date_review, :value => l!(f.object.date_review), :class => "date") %>
+        <%= error_message_on(:vehicle, :date_review) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:vehicle_photo, "Photo (png ou jpg) de 480x360 pixels", :class => 'control-label')%>
+      <div class="controls">
+        <%= f.file_field :vehicle_photo %>
+        <%= f.hidden_field :vehicle_photo_cache %><br />
+        <%= f.check_box :remove_vehicle_photo %> Supprimer la photo existante
+        <%= error_message_on(:vehicle, :vehicle_photo)%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:rem, "Remarque", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_area(:rem, :rows => 5) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", vehicles_path)%>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>

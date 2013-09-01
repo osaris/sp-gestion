@@ -1,0 +1,6 @@
+<%= javascript_tag do -%>
+  $(document).ready( function() {
+    Rails.init('<%="#{controller.controller_name}"%>');
+    Rails.init('<%="#{controller.controller_name}\\\\#{controller.action_name}"%>');
+  });
+<%- end -%>

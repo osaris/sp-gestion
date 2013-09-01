@@ -1,0 +1,4 @@
+# if you use Ackmate, move these lines to your ~/.ackrc file
+--type-add=ruby=.prawn
+--type-set=sass=.sass
+--type-set=erb=.erb

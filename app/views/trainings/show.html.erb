@@ -1,0 +1,16 @@
+<div class="block-title"><h4><%= @training.name %> (<%= @training.short_name %>)</h4></div>
+<div class="clearfix"></div>
+<%- if @training.description? -%>
+  <p><%= @training.description %></p>
+<%- end -%>
+<div class="btn-toolbar pull-left">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+                edit_training_path(@training),
+                :class => 'btn btn-small') %>
+    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                training_path(@training),
+                :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                :class => 'btn btn-small') %>
+  </div>
+</div>

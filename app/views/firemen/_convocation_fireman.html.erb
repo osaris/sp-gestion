@@ -1,0 +1,9 @@
+<tr>
+  <td><%= l(convocation_fireman.convocation_date) %></td>
+  <td><%= link_to(convocation_fireman.convocation_title, convocation_fireman.convocation) %></td>
+  <td><%= convocation_fireman.convocation_place %></td>
+  <td><%= convocation_fireman.convocation.uniform.title %></td>
+  <td><%= check_box_tag(:convocation_fireman, :presence, convocation_fireman.presence, :disabled => true) %></td>
+  <td class="center"><%= link_to(image_tag("back/icons/print.png", :alt => "Imprimer la convocation"),
+                                 convocation_convocation_fireman_path(convocation_fireman.convocation,convocation_fireman, :format => :pdf)) %></td>
+</tr>

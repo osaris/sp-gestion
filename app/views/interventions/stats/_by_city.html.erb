@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="span6">
+    <%= image_tag(Gchart.pie_3d(:title => "Interventions par ville (Total : #{sum})", :size => '570x190',
+                                :data => data.to_a.map { |label, value|
+                                  value
+                                },
+                                :labels => data.to_a.map { |label, value|
+                                  "#{label} (#{value.to_i})"
+                                })) %>
+  </div>
+  <div class="span3">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Ville</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%- data.each.map do |city, number| -%>
+        <tr>
+          <td><%= city %></td>
+          <td><%= number %></td>
+        </tr>
+      <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</div>

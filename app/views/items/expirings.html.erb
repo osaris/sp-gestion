@@ -1,0 +1,22 @@
+<div class="btn-toolbar pull-right">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-print', 'Imprimer'),
+                expirings_items_path(:format => :pdf),
+                :class => 'btn btn-small') %>
+  </div>
+</div>
+<div class="block-title"><h4>Liste du matériel expirant dans les 30 prochains jours.</h4></div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Liste</th>
+      <th>Emplacement</th>
+      <th>Quantité</th>
+      <th>Expire le</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => 'expiring_item', :collection => @items) || raw("<tr><td colspan='5'>Aucun matériel expiré !</td></tr>") %>
+  </tbody>
+</table>

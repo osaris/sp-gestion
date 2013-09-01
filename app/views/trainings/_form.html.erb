@@ -1,0 +1,30 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(training, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:name, "Nom (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:name) %>
+        <%= error_message_on(:training, :name) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:short_name, "Nom court (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:short_name) %>
+        <%= error_message_on(:training, :short_name) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:description, "Description", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_area(:description, :rows => 5) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", trainings_path) %>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>

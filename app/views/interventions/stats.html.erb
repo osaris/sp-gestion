@@ -1,0 +1,21 @@
+<div class="block-title stats"><h4>
+  Statistiques de l'année
+  <%= form_tag(interventions_stats_change_year_path(params[:type]),
+               :id => :form_stats_interventions,
+               :style => "display:inline;") do -%>
+    <%= select_tag(:new_year, options_for_select(@years_stats, params[:year])) %>
+  <%- end -%>
+</h4></div>
+
+<%- if @sum == 0 -%>
+  <p class="alert alert-warning">
+    Pas assez de données pour cette période.
+  </p>
+<%- else -%>
+  <%= render_navigation(:context => :interventions_stats,
+                        :level => 1) %>
+
+  <%= render("interventions/stats/#{params[:type]}", :data => @data,
+                                                     :sum => @sum,
+                                                     :map => @map) %>
+<%- end -%>

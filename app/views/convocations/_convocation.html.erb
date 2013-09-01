@@ -1,0 +1,7 @@
+<tr>
+  <td><%= l(convocation.date) %></td>
+  <td><%= link_to(convocation.title, convocation) %></td>
+  <td><%= convocation.place %></td>
+  <td><%= convocation.uniform_title %></td>
+  <td><%= display_last_emailed_at(convocation.last_emailed_at) %></td>
+</tr>

@@ -1,0 +1,30 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for([fireman, fireman_training], :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:training_id, "Formation (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.select(:training_id, trainings) %>
+        <%= error_message_on(:fireman_training, :training_id) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:achieved_at, "Date (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:achieved_at, :value => l!(f.object.achieved_at), :class => "date") %>
+        <%= error_message_on(:fireman_training, :achieved_at) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:rem, "Remarque", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_area(:rem, :rows => 5) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", fireman_fireman_trainings_path(fireman))%>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>

@@ -1,0 +1,34 @@
+<!-- page title -->
+<h2 class="ribbon full">Inscrivez-vous gratuitement pour découvrir SP-Gestion</h2>
+<div class="triangle-ribbon"></div>
+<br class="cl" />
+<%= form_for(@station) do |f| =%>
+  <%= fields_for :station do |s| =%>
+    <h4>Créer votre site SP-Gestion</h4>
+    <div id="name_warning" style="display:none;" class="notification warning">
+      Un centre avec un nom similaire existe déjà. La personne qui a créé le compte peut vous y donner accès.
+      Avez-vous vérifiez avec votre entourage si un compte SP-Gestion a déjà été créé pour ce centre ?
+    </div>
+    <p>
+      <%= s.label(:name, 'Nom du centre') %>
+      <%= s.text_field(:name, :tabindex => 1) %>
+      <%= error_message_on(:station, :name) %>
+    </p>
+    <p>Si vous souhaitez que votre compte SP-Gestion soit à l'adresse http://mon-cpi.sp-gestion.fr vous entrez mon-cpi dans le champ suivant. Uniquement des chiffres et des lettres.</p>
+    <p>
+      <%= s.label(:url, 'Site') %>
+      <%= s.text_field(:url, :tabindex => 2) %>.sp-gestion.fr
+      <%= error_message_on(:station, :url) %>
+    </p>
+  <%- end -%>
+  <%= fields_for :user do |u| =%>
+    <h4>Créer votre compte utilisateur</h4>
+    <p>Vous pourrez vous identifier sur le site SP-Gestion de votre corps grâce à cette adresse email.</p>
+    <p>
+      <%= u.label(:email, 'Adresse email') %>
+      <%= u.text_field(:email, :tabindex => 3) %>
+      <%= error_message_on(:user, :email) %>
+    </p>
+  <%- end -%>
+  <div class=center><%= f.submit("Créer mon compte !", :class => "button red") %></div>
+<%- end -%>

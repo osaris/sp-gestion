@@ -1,0 +1,86 @@
+<div id="feature">
+  <div id="slides">
+    <div class="slides_container">
+      <div>
+        <%= image_tag("front/slides/screen1.png") %>
+        <div class="caption">
+          <p>Rapport d'intervention</p>
+        </div>
+      </div>
+      <div>
+        <%= image_tag("front/slides/screen2.png") %>
+        <div class="caption">
+          <p>Statistiques d'interventions</p>
+        </div>
+      </div>
+      <div>
+        <%= image_tag("front/slides/screen3.png") %>
+        <div class="caption">
+          <p>Vue d'ensemble (dashboard)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="feature-text">
+    <h2 id="tagline">Gestion de centres d'interventions et de secours</h2>
+    <h3 id="tagline-mini">
+      Oubliez les listes papier, les tableaux et les lettres types, SP-Gestion va <b>simplifier toute
+      la gestion de votre centre de secours</b>. Avec SP-Gestion vous <b>gagnez du temps</b>, vous <b>accédez aux
+      informations</b> dont vous avez besoin quand vous en avez besoin et vous <b>prenez ainsi les bonnes décisions</b>.
+    </h3>
+    <%= link_to("Démonstration", "http://cpi-demo.sp-gestion.fr", :class => "button") %>
+    <%= link_to("Inscription gratuite &rarr;".html_safe, signup_path(), :class => "button red") %>
+  </div>
+  <br class="cl" />
+</div>
+
+<div id="page-content" class="container_12">
+  <h2 class="ribbon">Fonctionnalités</h2>
+  <div class="triangle-ribbon"></div>
+  <br class="cl" />
+  <div class="grid_4 feature">
+    <h3>Personnel</h3>
+    <%= image_tag("front/contact_list.png",
+                  :alt => "Gestion du personnel",
+                  :size => "48x48") %>
+    <p>Liste des formations, date de visite médicale, date de permis PL etc...</p>
+  </div>
+  <div class="grid_4 feature">
+    <h3>Véhicules</h3>
+    <%= image_tag("front/delivery.png",
+                  :alt => "Statistiques sur les véhicules (VPI, VTU, VTULE, FPTL)",
+                  :size => "48x48") %>
+    <p>Date de contrôle technique, statistique d'utilisation etc...</p>
+  </div>
+  <div class="grid_4 feature">
+    <h3>Matériel</h3>
+    <%= image_tag("front/exec.png",
+                  :alt => "Listing de matériel, rappel de péremption, check list",
+                  :size => "48x48") %>
+    <p>Liste de matériel, gestion des dates de péremptions etc...</p>
+  </div>
+  <div class="grid_4 feature">
+    <h3>Convocations</h3>
+    <%= image_tag("front/mail.png",
+                  :alt => "Préparation des convocations, envoi par email, confirmation par email, statistiques de présence",
+                  :size => "48x48") %>
+    <p>Préparation des convocations, envoi par email, confirmation par email, statistiques de présence etc...</p>
+  </div>
+  <div class="grid_4 feature">
+    <h3>Rapports d'interventions</h3>
+    <%= image_tag("front/documents.png",
+                  :alt => "Rapports d'interventions pour obtenir des statistiques (heure de sortie, véhicules, moyens utilisés, personnel)",
+                  :size => "48x48") %>
+    <p>Saisie des informations de l'intervention, du personnel présent, des véhicules etc...</p>
+  </div>
+  <div class="grid_4 feature">
+    <h3>Statistiques</h3>
+    <%= image_tag("front/chart.png",
+                  :alt => "Statistiques des types d'intervention (feu, accidents, secours à victime)",
+                  :size => "48x48") %>
+    <p>Nombre d'interventions, répartition par mois, heure de la journée, commune...</p>
+  </div>
+  <br class="cl" />
+  <br />
+</div>
+<br class="cl" />

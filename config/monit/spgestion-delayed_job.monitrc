@@ -1,0 +1,4 @@
+check process spgestion-delayed_job
+  with pidfile /home/raphael/sites/sp-gestion.fr/shared/pids/delayed_job.pid
+  start program = "/etc/init.d/spgestion-delayed_job start" as uid root
+  stop program = "/etc/init.d/spgestion-delayed_job stop" as uid root

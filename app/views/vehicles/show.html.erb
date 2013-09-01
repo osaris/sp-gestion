@@ -1,0 +1,21 @@
+<div class="block-title"><h4><%= @vehicle.name %></h4></div>
+<p class="pull-right"><%= image_tag(@vehicle.vehicle_photo.url, :alt => @vehicle.name) %></p>
+<ul>
+  <li>Date de passage aux mines : <%= l!(@vehicle.date_approval) %></li>
+  <li>Date de contrôle technique : <%= l!(@vehicle.date_check) %></li>
+  <li>Date de révision : <%= l!(@vehicle.date_review) %></li>
+</ul>
+<%- if @vehicle.rem? -%>
+  <p>Remarque : <%= @vehicle.rem %></p>
+<%- end -%>
+<div class="btn-toolbar pull-left">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+                edit_vehicle_path(@vehicle),
+                :class => 'btn btn-small') %>
+    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                vehicle_path(@vehicle),
+                :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                :class => 'btn btn-small') %>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(uniform, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:title, "Titre (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:title) %>
+        <%= error_message_on(:uniform, :title) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:code, "Code", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:code) %>
+        <%= error_message_on(:uniform, :code) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:description, "Description (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_area(:description, :rows => 5) %>
+        <%= error_message_on(:uniform, :description) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", uniforms_path) %>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>

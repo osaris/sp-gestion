@@ -1,0 +1,6 @@
+<p>
+  <b>Intervention n°<%= intervention.number %></b><br/>
+  Du <%= l(intervention.start_date) %> au <%= l(intervention.end_date) %><br />
+  <%= display_kind_and_subkind(intervention) %><br />
+  <%= intervention.place %>&nbsp;/&nbsp;<%= intervention.city %>
+</p>

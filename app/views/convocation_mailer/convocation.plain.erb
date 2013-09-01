@@ -1,0 +1,24 @@
+<%= @convocation.station_name %>
+
+CONVOCATION
+
+<%= @grade %> <%= @fireman.firstname %> <%= @fireman.lastname %>
+
+Motif : <%= @convocation.title %>
+
+Tenue : <%= @uniform.title %> - <%= @uniform.description %>
+
+Lieu : <%= @convocation.place %>
+
+Date et heure : <%= I18n.l(@convocation.date, :format => :default) %>
+
+<%- if @convocation.rem? -%>
+Remarque : <%= @convocation.rem %>
+<%- end -%>
+<%- if @convocation.confirmable? -%>
+--
+
+Vous pouvez confirmer votre présence en utilisant le lien suivant :
+
+<%= @accept_url %>
+<%- end -%>

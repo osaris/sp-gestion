@@ -1,0 +1,13 @@
+<div class="block-title"><h4><%= @uniform.title %></h4></div>
+<p><%= @uniform.description %></p>
+<div class="btn-toolbar pull-left">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+                edit_uniform_path(@uniform),
+                :class => 'btn btn-small') %>
+    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                uniform_path(@uniform),
+                :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                :class => 'btn btn-small') %>
+  </div>
+</div>

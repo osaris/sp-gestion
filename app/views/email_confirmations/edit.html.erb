@@ -1,0 +1,26 @@
+<%= form_for @user_session, :url => email_confirmation_path, :html => { :method => :put } do |f| %>
+  <p>Veuillez confirmer la modification en entrant votre mot de passe :</p>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:email, "Ancienne adresse email") %><br />
+      <div class="controls">
+        <%= text_field_tag(:new_email, @user.email, :size => 36, :disabled => true) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:new_email, "Nouvelle adresse email") %><br />
+      <div class="controls">
+        <%= text_field_tag(:new_email, @user.new_email, :size => 36, :disabled => true) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:password, "Mot de passe") %>
+      <div class="controls">
+        <%= f.password_field(:password, :size => 36) %>
+      </div>
+    </div>
+  </fieldset>
+  <div class="pull-right">
+    <%= button_tag("Enregistrer", :class => "btn btn-primary btn-large") %>
+  </div>
+<%- end -%>

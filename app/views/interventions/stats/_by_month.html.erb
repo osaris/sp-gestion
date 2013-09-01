@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="span6">
+    <%= image_tag(Gchart.bar( :title => "Interventions par mois (Total : #{sum})", :size => '500x200',
+                              :data => data,
+                              :axis_with_labels => 'x,y',
+                              :axis_labels => [t("date.abbr_month_names").compact,
+                                               ['0', data.max]],
+                              :bar_width_and_spacing => [25,15])) %>
+  </div>
+  <div class="span3">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Mois</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%- data.each_with_index do |number, i| -%>
+        <tr>
+          <td><%= t("date.month_names")[i+1].capitalize %></td>
+          <td><%= number %></td>
+        </tr>
+      <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</div>

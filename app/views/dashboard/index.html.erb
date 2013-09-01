@@ -1,0 +1,93 @@
+<div class="row-fluid">
+  <div class="span6">
+    <article class="data-block">
+      <div class="block-title"><h4>Messages</h4></div>
+      <div class="data-container">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Date</th>
+              <th>Titre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render(:partial => 'dashboard/message', :collection => @messages) || raw("<tr><td colspan='3'>Aucun nouveau message</td></tr>") %>
+          </tbody>
+        </table>
+        <%- unless @messages.blank? -%>
+          <footer class="note">
+            <p><%= link_to("Voir toute la liste", messages_path) %></p>
+          </footer>
+        <%- end -%>
+      </div>
+    </article>
+    <article class="data-block">
+      <div class="block-title"><h4>Dernières convocations</h4></div>
+      <div class="data-container">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Titre</th>
+              <th>Lieu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render(:partial => 'dashboard/convocation', :collection => @convocations) || raw("<tr><td colspan='3'>Aucune convocation</td></tr>") %>
+          </tbody>
+        </table>
+        <%- unless @convocations.blank? -%>
+          <footer class="note">
+            <p><%= link_to("Voir toute la liste", convocations_path) %></p>
+          </footer>
+        <%- end -%>
+      </div>
+    </article>
+  </div>
+  <div class="span6">
+    <article class="data-block">
+      <div class="block-title"><h4>Dernières interventions</h4></div>
+      <div class="data-container">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render(:partial => 'dashboard/intervention', :collection => @interventions) || raw("<tr><td colspan='2'>Aucune intervention</td></tr>") %>
+          </tbody>
+        </table>
+        <%- unless @interventions.blank? -%>
+          <footer class="note">
+            <p><%= link_to("Voir toute la liste", interventions_path) %></p>
+          </footer>
+        <%- end -%>
+      </div>
+    </article>
+    <article class="data-block">
+      <div class="block-title"><h4>Matériel expirant dans les 30 prochains jours</h4></div>
+      <div class="data-container">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Quantité</th>
+              <th>Expire le</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render(:partial => 'dashboard/expiring_item', :collection => @items) || raw("<tr><td colspan='3'>Aucun matériel</td></tr>") %>
+          </tbody>
+        </table>
+        <%- unless @items.blank? -%>
+          <footer class="note">
+            <p><%= link_to("Voir toute la liste", expirings_items_path) %></p>
+          </footer>
+        <%- end -%>
+      </div>
+    </article>
+  </div>
+</div>

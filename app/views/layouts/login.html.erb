@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>SP-Gestion - <%= @station.name %></title>
+  <%= favicon_link_tag('favicon.ico') %>
+  <%= javascript_include_tag("back") %>
+  <%= stylesheet_link_tag("back-all") %>
+  <%= csrf_meta_tag %>
+  <link rel="author" href="humans.txt" />
+  <%= render('/layouts/google_analytics') if Rails.env == "production" %>
+</head>
+<body class="single-page">
+  <!--[if lte IE 6]><%= render("/layouts/ie6_warning") %><![endif]-->
+  <div class="container">
+    <div class="content">
+      <div class="row-fluid">
+        <div id="login-container">
+          <div id="login-header">
+            <%= render("/layouts/logo", :station => @station) %>
+          </div> <!-- /login-header -->
+          <div id="login-content" class="clearfix">
+            <%- if @station.demo %>
+              <p class="alert alert-warning">
+                Ce compte est un compte de démonstration.<br />
+                Le mot de passe est : <b><%= @station.url %></b>
+              </p>
+            <%- end %>
+            <%= flash_helper %>
+            <%= yield %>
+          </div> <!-- /login-content -->
+          <div id="login-extra">
+            <p>Mot de passe perdu ? <%= link_to("Cliquez-ici pour le récupérer.", new_password_reset_path) %></p>
+          </div> <!-- /login-extra -->
+        </div>
+      </div>
+    </div>
+  </div> <!-- /container -->
+  <%= render("/layouts/javascript") %>
+  <!-- VCS REV : <%= render("/layouts/vcs_revision")%> -->
+</body>
+</html>

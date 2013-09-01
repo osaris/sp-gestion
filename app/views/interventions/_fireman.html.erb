@@ -1,0 +1,9 @@
+<label class="checkbox">
+  <% fireman = builder.object.fireman %>
+  <%= builder.hidden_field(:fireman_id) %>
+
+  <%= Grade::GRADE.key(fireman.grade) %>&nbsp;-&nbsp;<%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
+
+  <%= builder.check_box(:enable) %>
+</label>
+<%= builder.select(:intervention_role_id, intervention_roles_collection(station)) %>

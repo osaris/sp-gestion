@@ -1,0 +1,96 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(intervention, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="row">
+      <div class="span5">
+        <div class="control-group">
+          <%= f.label(:number, "Numéro (*)", :class => 'control-label')%>
+          <div class="controls">
+            <%= f.text_field(:number) %>
+            <%= error_message_on(:intervention, :number) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:kind, "Type (*)", :class => 'control-label')%>
+          <div class="controls">
+            <%= f.select(:kind, options_for_kind)%>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:subkind, "Sous-type", :class => 'control-label')%>
+          <div class="controls">
+            <%= f.text_field(:subkind) %>
+            <span class="help-block">Apporte des précisions sur le type</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:place, "Lieu (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_area(:place, :rows => 5) %>
+            <%= error_message_on(:intervention, :place) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:city, "Ville (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:city) %>
+            <%= error_message_on(:intervention, :city) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:start_date, "Date début (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:start_date, :value => l!(f.object.start_date), :class => "date") %>
+            <%= error_message_on(:intervention, :start_date) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:end_date, "Date fin (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:end_date, :value => l!(f.object.end_date), :class => "date") %>
+            <%= error_message_on(:intervention, :end_date) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:rem, "Remarque", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_area(:rem, :rows => 5) %>
+          </div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="popover popover-right">
+          <p class="popover-title">Personnel (*)</p>
+          <div class="popover-content">
+            <%= f.fields_for(:fireman_interventions, intervention.initialized_fireman_interventions) do |builder| %>
+              <%= render('fireman', :builder => builder, :station => station) %>
+            <% end %>
+          </div>
+        </div>
+        <%= error_message_on(:intervention, :firemen) %>
+
+        <div class="popover popover-right">
+          <p class="popover-title">Véhicules</p>
+          <div class="popover-content">
+            <%- vehicles.each do |vehicle| -%>
+              <label class="checkbox">
+                <%= vehicle.name %>
+                <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, intervention.vehicles.include?(vehicle)) %>
+              </label>
+            <%- end -%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", interventions_path)%>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>
+<%= javascript_tag do -%>
+  var minDate = '<%= min_date_intervention(station) %>';
+  var subkinds = <%= raw(subkinds.to_json) %>;
+  var cities = <%= raw(cities.to_json) %>;
+<%- end -%>

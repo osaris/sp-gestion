@@ -1,0 +1,49 @@
+<div class="block-title"><h4>Intervention n°<%= @intervention.number %></h4></div>
+<div class="clearfix">
+  <div class="pull-left">
+    <p>Type : <%= display_kind_and_subkind(@intervention)%></p>
+    <p>Lieu : <%= @intervention.place %>&nbsp;/&nbsp;<%= @intervention.city %></p>
+    <p>
+      Début : <%= l(@intervention.start_date) %><br/>
+      Fin : <%= l(@intervention.end_date) %>
+    </p>
+    <p>Véhicules : <%= display_vehicles(@intervention) %></p>
+    <%- if @intervention.rem? -%>
+      <p>Remarque : <%= @intervention.rem %></p>
+    <%- end -%>
+    <div class="btn-toolbar pull-left">
+      <div class="btn-group">
+        <%= link_to(icon_label_text('icon-edit', 'Editer'),
+                    edit_intervention_path(@intervention),
+                    :class => 'btn btn-small') %>
+        <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                    intervention_path(@intervention),
+                    :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                    :class => 'btn btn-small') %>
+      </div>
+    </div>
+  </div>
+  <div class="pull-right">
+    <%- if @intervention.geocode.blank? %>
+      Impossible de localiser l'adresse, essayez de la modifier pour avoir une vue du lieu de l'intervention.
+    <%- else -%>
+      <div style="width: 450px; height: 250px;">
+        <%= map_for(@intervention) %>
+      </div>
+    <%- end -%>
+  </div>
+</div>
+<div class="block-title"><h5>Personnel</h5></div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Grade</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Rôle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(@intervention.fireman_interventions) %>
+  </tbody>
+</table>

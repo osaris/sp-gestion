@@ -1,0 +1,6 @@
+log
+tmp
+coverage
+public/uploads
+config/newrelic.yml
+config/sp-gestion.yml

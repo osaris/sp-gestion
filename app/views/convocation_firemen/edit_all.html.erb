@@ -1,0 +1,9 @@
+<div class="block-title"><h4>Edition des présences - <%= @convocation.title %> (<%= l(@convocation.date) %>)</h4></div>
+<div class="clearfix"></div>
+<p class="pull-right">
+  <%= link_to(icon_label_text('icon-print', "Imprimer la liste d'appel"),
+              show_all_convocation_convocation_firemen_path(:format => :pdf),
+              :class => 'btn btn-small') %>
+</p>
+<%= render('form', :convocation => @convocation,
+                   :convocation_firemen => @convocation_firemen) %>

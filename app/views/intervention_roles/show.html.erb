@@ -1,0 +1,13 @@
+<div class="block-title"><h4><%= @intervention_role.name %> (<%= @intervention_role.short_name %>)</h4></div>
+<div class="clearfix"></div>
+<div class="btn-toolbar pull-left">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+                edit_intervention_role_path(@intervention_role),
+                :class => 'btn btn-small') %>
+    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                intervention_role_path(@intervention_role),
+                :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                :class => 'btn btn-small') %>
+  </div>
+</div>

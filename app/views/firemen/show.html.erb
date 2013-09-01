@@ -1,0 +1,66 @@
+<div class="pull-left">
+  <div class="block-title"><h4><%= grade_and_name(@fireman) %></h4></div>
+  <%- if @fireman.regimental_number? -%>
+    <p>N° de matricule : <%= @fireman.regimental_number %></p>
+  <%- end -%>
+  <%- if @fireman.cached_tag_list? -%>
+    <p>Etiquette(s) : <%= display_tags(@fireman.cached_tag_list) %></p>
+  <%- end -%>
+  <%- if @fireman.rem? -%>
+    <p>Remarque : <%= @fireman.rem %></p>
+  <%- end -%>
+  <div class="btn-toolbar pull-left">
+    <div class="btn-group">
+      <%= link_to(icon_label_text('icon-edit', 'Editer'),
+                  edit_fireman_path(@fireman),
+                  :class => 'btn btn-small') %>
+      <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                  fireman_path(@fireman),
+                  :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                  :class => 'btn btn-small') %>
+      <%= link_to(icon_label_text('icon-flag', 'Formations'),
+                  fireman_fireman_trainings_path(@fireman),
+                  :class => 'btn btn-small') %>
+      <%= link_to(icon_label_text('icon-signal', 'Statistiques'),
+                  firemen_stats_path(@fireman, Date.today.year, "interventions"),
+                  :class => 'btn btn-small') %>
+    </div>
+  </div>
+</div>
+<div class="pull-right">
+  <%= image_tag(@fireman.passeport_photo.url, :alt => grade_and_name(@fireman)) %>
+</div>
+<div class="clearfix"></div>
+<div class="block-title"><h5>5 dernières interventions</h5></div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Numéro</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Lieu/Ville</th>
+      <th>Rôle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => "fireman_intervention", :collection => @fireman.fireman_interventions.newer) ||
+               raw("<tr><td colspan='5'>Pas encore d'intervention !</td></tr>") %>
+  </tbody>
+</table>
+<div class="block-title"><h5>5 dernières convocations</h5></div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Titre</th>
+      <th>Lieu</th>
+      <th>Tenue</th>
+      <th>Présent ?</th>
+      <th class="actions">Imprimer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => "convocation_fireman", :collection => @fireman.convocation_firemen.newer) ||
+               raw("<tr><td colspan='6'>Pas encore de convocation !</td></tr>") %>
+  </tbody>
+</table>

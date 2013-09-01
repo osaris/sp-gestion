@@ -1,0 +1,8 @@
+<%- content_for("GC_#{Grade::GRADE_CATEGORY_MATCH[f.object.kind]}".to_sym) do -%>
+  <p>
+  <%= img_grade(f.object.kind) %>
+  <%= f.text_field(:date, :value => l!(f.object.date), :size => 20, :class => "date") %>
+  <%= f.hidden_field(:kind, :value => f.object.kind) %>
+  <%= error_message_on(f.object, :date) %>
+  </p>
+<%- end -%>

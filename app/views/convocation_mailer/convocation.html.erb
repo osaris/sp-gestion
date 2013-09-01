@@ -1,0 +1,15 @@
+<p><%= @convocation.station_name %></p>
+<p>CONVOCATION</p>
+<p><%= @grade %>&nbsp;<%= @fireman.firstname %>&nbsp;<%= @fireman.lastname %></p>
+<p>Motif : <%= @convocation.title %></p>
+<p>Tenue : <%= @uniform.title %> - <%= @uniform.description %></p>
+<p>Lieu : <%= @convocation.place %></p>
+<p>Date et heure : <%= I18n.l(@convocation.date, :format => :default) %></p>
+<%- if @convocation.rem? -%>
+  <p>Remarque : <%= @convocation.rem %></p>
+<%- end -%>
+<%- if @convocation.confirmable? -%>
+  <br /><hr /><br />
+  <p>Vous pouvez confirmer votre présence en utilisant le lien suivant :</p>
+  <p><%= link_to("Je confirme ma présence à cette convocation", @accept_url) %></p>
+<%- end -%>

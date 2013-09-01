@@ -1,0 +1,141 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(fireman, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <%- if !fireman.errors.blank? -%>
+      <%- if (fireman.errors.count == 1) and fireman.errors[:validate_grade_update].present? -%>
+        <div class="alert alert-warring fireman-grade-update">
+          Vous ne pourrez plus modifier tous rapports d'interventions ayant eu lieu avant le <%= l(fireman.max_grade_date) %>.
+          <div class="control-group">
+            <%= f.label(:validate_grade_update, "J'accepte (*)", :class => 'control-label') %>
+            <div class="controls">
+              <%= f.check_box(:validate_grade_update) %>
+            </div>
+          </div>
+        </div>
+      <%- else -%>
+        <p class="alert alert-error">Veuillez corriger les erreurs avant de pouvoir continuer.</p>
+      <%- end -%>
+    <%- end -%>
+    <div class="row">
+      <div class="span5">
+        <div class="control-group">
+          <%= f.label(:firstname, "Prénom (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:firstname) %>
+            <%= error_message_on(:fireman, :firstname) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:lastname, "Nom (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:lastname) %>
+            <%= error_message_on(:fireman, :lastname) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:status, "Statut (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.select(:status, Fireman::STATUS.sort) %>
+            <%= error_message_on(:fireman, :status) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:regimental_number, "N° de matricule", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:regimental_number) %>
+            <%= error_message_on(:fireman, :regimental_number) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:tag_list, "Etiquette(s)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:tag_list) %>
+            <%= error_message_on(:fireman, :tag_list) %>
+            <span class="help-block">Appuyer sur "Enter" pour sauver une étiquette.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:birthday, "Date de naissance", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:birthday, :value => l!(f.object.birthday), :class => "date") %>
+            <%= error_message_on(:fireman, :birthday) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:incorporation_date, "Date d'incorporation", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:incorporation_date, :value => l!(f.object.incorporation_date), :class => "date") %>
+            <%= error_message_on(:fireman, :incorporation_date) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:resignation_date, "Date de radiation", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:resignation_date, :value => l!(f.object.resignation_date), :class => "date") %>
+            <%= error_message_on(:fireman, :resignation_date) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:checkup, "Date visite médicale", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:checkup, :value => l!(f.object.checkup), :class => "date-no-limit") %>
+            <%= error_message_on(:fireman, :checkup) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:checkup, "Date visite médicale (permis PL)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:checkup_truck, :value => l!(f.object.checkup_truck), :class => "date-no-limit") %>
+            <%= error_message_on(:fireman, :checkup_truck) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:email, "Adresse email", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:email) %>
+            <%= error_message_on(:fireman, :email) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:passeport_photo, "Photo (png ou jpg) de 155 x 200 pixels", :class => 'control-label')%>
+          <div class="controls">
+            <%= f.file_field :passeport_photo %>
+            <%= f.hidden_field :passeport_photo_cache %><br />
+            <%= f.check_box :remove_passeport_photo %> Supprimer la photo existante
+            <%= error_message_on(:fireman, :passeport_photo)%>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:rem, "Remarque", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_area(:rem, :rows => 5) %>
+          </div>
+        </div>
+      </div>
+      <div class="span3" id="grades" style="<%= style_for_grades(fireman) %>">
+        <div>Grade (*)<br />Saisissez la date de nomination à côté de chaque grade obtenu.</div>
+        <%= f.fields_for(:grades) do |g| %>
+            <%= render :partial => 'grade', :locals => { :f => g } %>
+        <%- end -%>
+        <div id="accordion">
+          <%- Grade::GRADE_CATEGORY.each do |gc| %>
+          <h3><a href="#"><%= gc[0] %></a></h3>
+          <div>
+            <%= yield("GC_#{gc[1]}".to_sym) %>
+          </div>
+          <%- end -%>
+        </div>
+        <%= error_message_on(:fireman, :grades) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", firemen_path)%>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>
+<%= javascript_tag do -%>
+  var tags = <%= raw(tags) %>;
+  var active_accordion = <%= active_accordion(fireman) %>;
+<%- end -%>

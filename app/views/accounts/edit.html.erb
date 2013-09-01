@@ -1,0 +1,92 @@
+<div class="block-title"><h4>Détails du compte <%= @station.url %>.sp-gestion.fr</h4></div>
+
+<div class="clearfix"></div>
+
+<div class="block-title"><h5>Numérotation des interventions</h5></div>
+<%= form_for(:station, :url => update_settings_account_path, :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:interventions_number_per_year, "Par année", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.check_box :interventions_number_per_year %>
+        <span class="help-block">
+          Les numéros d'interventions sont réinitialisés à chaque nouvelle année.
+        </span>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:interventions_number_size, "Longueur", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field :interventions_number_size %>
+        <span class="help-block">
+          Les numéros d'interventions sont préfixés avec des 0 pour atteindre la longueur indiquée (0001 au lieu de 1 pour la longeur 4 par exemple).
+        </span>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>
+
+<div class="clearfix"></div>
+
+<div class="block-title"><h5>Logo  (png ou jpg) de 100 x 50 pixels</h5></div>
+<%= form_for(:station, :url => update_settings_account_path, :html => { :method => :put,  :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:logo, "Fichier", :class => 'control-label')%>
+      <div class="controls">
+        <%= f.file_field :logo %>
+        <%= f.hidden_field :logo_cache %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:remove_logo, "Supprimer l'existant", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.check_box :remove_logo %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>
+
+<div class="clearfix"></div>
+
+<div class="block-title"><h5>Changer le propriétaire du compte</h5></div>
+<%- if @users.size > 0 -%>
+  <p class="alert alert-warning">Attention en transférant la propriété de ce compte à un autre utilisateur vous n'aurez plus la possibilité de gérer les utilisateurs et de re-changer le propriétaire.</p>
+  <%= form_for(:station, :url => update_owner_account_path, :html => { :method => :put, :id => :account_update_owner, :class => 'form-horizontal' }) do |f| %>
+    <fieldset>
+      <div class="control-group">
+        <%= f.label(:owner_id, "Nouveau propriétaire du compte", :class => 'control-label') %>
+        <div class="controls">
+          <%= f.collection_select(:owner_id, @users, :id, :email) %>
+        </div>
+      </div>
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %>
+      </div>
+    </fieldset>
+  <%- end -%>
+<%- else -%>
+  <p class="alert alert-warning">Aucun autre utilisateur ne peut devenir propriétaire de ce compte. Vous devez <%= link_to("inviter", users_path) %> un nouvel utilisateur avant de pouvoir lui transférer ce compte.</p>
+<%- end -%>
+
+<div class="clearfix"></div>
+
+<div class="block-title"><h5>Supprimer le compte</h5></div>
+<p>Toutes les données sont effacées instantanément et définitivement.</p>
+<div class="form-horizontal">
+  <div class="control-group">
+    <div class="controls">
+      <%= button_to('Je veux supprimer le compte', :account, :method => :delete, :data => { :confirm => 'Êtes-vous sûr ?' }, :class => 'btn btn-danger btn-large')%>
+    </div>
+  </div>
+</div>

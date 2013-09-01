@@ -1,0 +1,7 @@
+<tr>
+  <td><%= Grade::GRADE.key(fireman.grade) %></td>
+  <td><%= link_to(fireman.lastname, fireman) %></td>
+  <td><%= fireman.firstname %></td>
+  <td><%= Fireman::STATUS.key(fireman.status) %></td>
+  <td><%= display_tags(fireman.cached_tag_list) %></td>
+</tr>

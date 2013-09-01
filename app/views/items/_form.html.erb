@@ -1,0 +1,55 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for([check_list, item], :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:title, "Titre (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:title) %>
+        <%= error_message_on(:item, :title) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:quantity, "Quantité (*)", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:quantity) %>
+        <%= error_message_on(:item, :quantity) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:place, "Emplacement", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:place) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:birthday, "Date d'expiration", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field(:expiry, :value => l!(f.object.expiry), :class => "date") %>
+        <%= error_message_on(:item, :expiry) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:item_photo, "Photo (png ou jpg) de 480x360 pixels", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.file_field :item_photo %>
+        <%= f.hidden_field :item_photo_cache %><br />
+        <%= f.check_box :remove_item_photo %> Supprimer la photo existante
+        <%= error_message_on(:item, :item_photo)%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:rem, "Remarque", :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_area(:rem, :rows => 5) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", (session[:back_path] || check_list_path(check_list)))%>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>
+<%= javascript_tag do %>
+  var places = <%= raw(check_list.places.to_json) %>;
+<%- end -%>

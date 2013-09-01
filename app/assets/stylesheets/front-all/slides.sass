@@ -1,0 +1,50 @@
+#slides
+  float: left
+  width: 500px
+
+.slides_container
+  width: 500px
+  height: 300px
+  div
+    width: 500px
+    height: 300px
+    display: block
+
+#slides
+  .pagination
+    float: right
+    margin-top: 5px
+    li
+      float: left
+      margin: 0 1px
+      list-style: none
+      a
+        display: block
+        width: 12px
+        height: 0
+        padding: 12px 0px 0px 0px
+        background: none
+        background-image: image-url('front/slides/pagination.png')
+        background-position: 0 0
+        float: left
+        overflow: hidden
+        border: 0
+        margin: 0
+      &.current a
+        background-position: 0 -12px
+
+  .caption
+    z-index: 500
+    position: absolute
+    bottom: -25px
+    left: 0
+    height: 20px
+    padding-left: 10px
+    background: #000
+    background: rgba(0,0,0,.5)
+    width: 500px
+    font-size: 1em
+    line-height: 1
+    color: #fff
+    border-top: 1px solid #000
+    text-shadow: none

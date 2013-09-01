@@ -1,0 +1,17 @@
+<tr>
+  <td><%= user.email %></td>
+  <td>
+    <%- if user.id == station.owner_id -%>
+      Propriétaire du compte
+    <%- elsif !user.confirmed_at? -%>
+      Invité
+    <%- end -%>
+  </td>
+  <td>
+    <%- unless user.id == station.owner_id -%>
+      <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + raw("&nbsp;Supprimer"), user,
+                  :method => :delete,
+                  :data => { :confirm => "Êtes-vous sûr ?\r\n\r\nLes informations créées par cet utilisateur NE SONT PAS supprimées !\r\n\r\nVous pouvez réinviter cet utilisateur à tout moment." })%>
+    <%- end -%>
+  </td>
+</tr>

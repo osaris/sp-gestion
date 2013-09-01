@@ -1,0 +1,5 @@
+<div class="block-title"><h4>Edition de <%= @convocation.title %> (<%= l(@convocation.date) %>)</h4></div>
+<%= render('form', :convocation => @convocation,
+                   :attendees => @attendees,
+                   :station => @station,
+                   :firemen => @firemen) %>

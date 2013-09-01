@@ -1,0 +1,7 @@
+<tr>
+  <td><%= fireman_intervention.intervention_number %></td>
+  <td><%= link_to(l(fireman_intervention.intervention_start_date), intervention_path(fireman_intervention.intervention)) %></td>
+  <td><%= display_kind_and_subkind(fireman_intervention.intervention) %></td>
+  <td><%= fireman_intervention.intervention_place %>&nbsp;/&nbsp;<%= fireman_intervention.intervention_city %></td>
+  <td><%= display_intervention_role(fireman_intervention) %></td>
+</tr>

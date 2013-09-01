@@ -1,0 +1,81 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(convocation, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="row">
+      <div class="span5">
+        <div class="control-group">
+          <%= f.label(:title, "Titre (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:title) %>
+            <%= error_message_on(:convocation, :title) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:date, "Date (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:date, :value => l!(f.object.date), :class => "date") %>
+            <%= error_message_on(:convocation, :date) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:place, "Lieu (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:place) %>
+            <%= error_message_on(:convocation, :place) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:uniform, "Tenue (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= collection_select(:convocation, :uniform_id, station.uniforms.all, :id, :title) %>
+            <%= error_message_on(:convocation, :uniform) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:hide_grade, "Masquer les grades à l'impression", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.check_box(:hide_grade) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:confirmable, "Lien de confirmation", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.check_box(:confirmable) %>
+            <span class="help-block">Le destinataire peut cliquer sur ce lien pour confirmer sa présence.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label(:rem, "Remarque", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_area(:rem, :rows => 5) %>
+          </div>
+        </div>
+      </div>
+      <div class="span3">
+        <%= f.label(:firemen, "Personnel (*)") %>
+        <div>
+          <%- firemen.group_by(&:status).sort.reverse.each do |status, firemen_status| -%>
+            <div class="popover popover-right">
+              <p class="popover-title">
+                <%= Fireman::STATUS_PLURAL.key(status) %>
+                <span class="pull-right"><small>
+                  <%= link_to("Cocher/décocher", "#", :id => "change_status_#{status}", :class => "change_status")%>
+                </small></span>
+              </p>
+              <div class="popover-content">
+              <%= render :partial => "fireman", :collection => firemen_status, :locals => {:status => status,
+                                                                                           :attendees => attendees} %>
+              </div>
+            </div>
+          <%- end -%>
+        </div>
+        <%= error_message_on(:convocation, :firemen) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", convocations_path)%>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>

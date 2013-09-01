@@ -1,0 +1,23 @@
+<%= form_for(@user_session, :as => :user_session, :url => authenticate_path) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label(:email, "Adresse email") %>
+      <div class="controls">
+        <%= f.text_field(:email, :size => 36) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:password, "Mot de passe") %>
+      <div class="controls">
+        <%= f.password_field(:password, :size => 36) %>
+      </div>
+    </div>
+  </fieldset>
+  <div id="remember-me" class="pull-left">
+    <%= f.check_box(:remember_me) %>
+    <%= f.label(:email, "Rester connecté") %>
+  </div>
+  <div class="pull-right">
+    <%= button_tag("Connexion", :class => "btn btn-primary btn-large") %>
+  </div>
+<%- end -%>

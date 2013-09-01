@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="description" content="Logiciel de gestion de centre d'intervention et de secours : convocations, gardes, matériel, vacations, rapports d'intervention, statistiques" />
+  <meta name="keywords" content="CIS, CPI, vacations, gestion, centre, secours, pompiers, SP, véhicules, gardes, matériel, sapeur, interventions, rapport, logiciel, convocations, péremptions" />
+  <title>SP-Gestion - Gestion de centres d'intervention et de secours</title>
+  <%= favicon_link_tag('favicon.ico') %>
+  <%= javascript_include_tag("front") %>
+  <%= stylesheet_link_tag("front-all", :media => "all") %>
+  <%= csrf_meta_tag %>
+  <link rel="author" href="humans.txt" />
+  <%= render('/layouts/google_analytics') if Rails.env == "production" %>
+</head>
+<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<body>
+  <!--<![endif]-->
+  <div id="wrapper">
+    <!-- start header -->
+    <header>
+      <!-- logo -->
+      <h1 id="logo"><%= link_to("", home_path())%></h1>
+      <!-- nav -->
+      <nav>
+        <%= render_navigation(:context => :front,
+                              :renderer => :list,
+                              :level => 1) %>
+      </nav>
+      <br class="cl" />
+    </header>
+       <!-- end header -->
+
+    <!-- page container -->
+    <div id="page">
+      <%= yield %>
+    </div>
+
+    <!-- footer Start -->
+    <footer>
+      <ul class="footer-nav">
+        <li><%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> |</li>
+        <li><%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr", :target => :blank) %> |</li>
+        <li><%= link_to("Etat du service", "http://ping.sp-gestion.fr", :target => :blank) %></li>
+      </ul>
+      <p>Copyright © 2009-<%= Date.today.year %> imagineapp</p>
+      <br class="cl" />
+    </footer>
+    <!-- footer end -->
+  </div>
+
+  <%= render("/layouts/javascript") %>
+  <!-- VCS REV : <%= render("/layouts/vcs_revision")%> -->
+</body>
+</html>

@@ -1,0 +1,19 @@
+<div class="block-title"><h4><%= link_to(@check_list.title, check_list_path(@check_list)) %> > <%= @item.title %></h4></div>
+<p class="pull-right"><%= image_tag(@item.item_photo.url, :alt => @item.title) %></p>
+<p>Quantité : <%= @item.quantity %></p>
+<p>Emplacement : <%= @item.place %></p>
+<p>Date d'expiration : <%= l!(@item.expiry) %></p>
+<%- if @item.rem? -%>
+  <p>Remarque : <%= @item.rem %></p>
+<%- end -%>
+<div class="btn-toolbar pull-left">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+                edit_check_list_item_path(@check_list, @item),
+                :class => 'btn btn-small') %>
+    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                check_list_item_path(@check_list, @item),
+                :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                :class => 'btn btn-small') %>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+Cufon.replace('h1#logo,h3,h4,h5,.process,#tagline')
+
+# Home
+#######################################################
+
+slideshow = () ->
+  $('#slides').slides(
+    preload: true
+    play: 6000
+    hoverPause: true
+    preloadImage: "<%= asset_path('front/slides/loading.gif') %>"
+    animationStart: (current) ->
+        $(".caption").animate
+          bottom: -25
+        , 100
+    animationComplete: (current) ->
+      $(".caption").animate
+        bottom: 0
+      , 200
+    slidesLoaded: ->
+      $(".caption").animate
+        bottom: 0
+      , 200 )
+
+Rails.register_init ['pages\\home'], () -> slideshow()
+
+# Signup
+#######################################################
+
+sanitize_for_subdomain = (src, dest) ->
+  dest.val( src.val()
+               .toLowerCase()
+               .replace(/[àâä]/gi,"a")
+               .replace(/[éèêë]/gi,"e")
+               .replace(/[ùûü]/gi,"u")
+               .replace(/[ôö]/gi,"o")
+               .replace(/[îï]/gi,"i")
+               .replace(/^www\./i, "")
+               .replace(/[^-a-z0-9]/g, "-") )
+
+station_name_change = () ->
+  $("#station_name").change ->
+    sanitize_for_subdomain($('#station_name'), $('#station_url'))
+    $.post('/stations/check', $(this).serialize(), (data) ->
+      $("#results").html(data)
+    )
+
+Rails.register_init ['stations\\new'
+                     'stations\\create'], () -> station_name_change()
+Rails.register_init ['stations\\new'], () -> focus_first_visible_field()

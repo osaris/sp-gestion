@@ -1,0 +1,4 @@
+<tr class="<%= class_tr_message(message) %>">
+  <td><%= l(message.created_at, :format => :default) %></td>
+  <td><%= link_to(message.title, message) %></td>
+</tr>
