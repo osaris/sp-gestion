@@ -1,0 +1,22 @@
+rvm:
+  - "1.9.3"
+
+before_script:
+  - cp config/sp-gestion.sample.yml config/sp-gestion.yml
+  - bundle exec rake db:drop db:create db:migrate
+
+bundler_args:
+  --without development staging production
+
+script:
+  - bundle exec rake spec
+
+notifications:
+  on_success:
+    - always
+  on_failure:
+    - always
+
+env:
+  global:
+    - RAILS_ENV=test
