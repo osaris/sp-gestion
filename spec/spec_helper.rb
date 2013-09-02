@@ -1,5 +1,9 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
+require 'coveralls'
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
 SimpleCov.start('rails') do
   add_filter("/lib/navigation_renderers/")
   merge_timeout(15*60)

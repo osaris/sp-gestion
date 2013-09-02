@@ -6,6 +6,8 @@ Code status
 
 Tests : [![Build Status](https://travis-ci.org/osaris/sp-gestion.png)](https://travis-ci.org/osaris/sp-gestion)
 
+Coverage : [![Coverage Status](https://coveralls.io/repos/osaris/sp-gestion/badge.png)](https://coveralls.io/r/osaris/sp-gestion)
+
 Quality : [![Code Climate](https://codeclimate.com/github/osaris/sp-gestion.png)](https://codeclimate.com/github/osaris/sp-gestion)
 
 Dependencies : [![Dependency Status](https://gemnasium.com/osaris/sp-gestion.png)](https://gemnasium.com/osaris/sp-gestion)
