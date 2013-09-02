@@ -16,7 +16,7 @@ Prerequisites
 =============
 
 * Ruby 1.9.3
-* Mysql (with Timezone informations loaded !)
+* Mysql
 * memcached
 * ImageMagick
 * HTTP server with ruby support (Pow, Apache/Nginx+Passenger, Webrick, Thin...)
