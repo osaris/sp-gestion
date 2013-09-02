@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 
@@ -55,8 +55,7 @@ end
 
 group :test do
   gem 'coveralls', :require => false
-  # TODO upgrade when faker > 1.1.2 is released (1.1.2 is buggy with fr locale)
-  gem 'faker', '1.0.1'
+  gem 'faker'
   gem 'machinist'
   gem 'rspec-rails'
   gem 'simplecov'
