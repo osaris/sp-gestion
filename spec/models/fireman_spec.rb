@@ -161,17 +161,15 @@ describe Fireman do
 
       context "last_grade_update_at will not be updated" do
 
-        before { Station.any_instance
-                        .stub(:confirm_last_grade_update_at?)
-                        .and_return(false) }
+        before(:each) do
+          allow_any_instance_of(Station).to receive(:confirm_last_grade_update_at?).and_return(false)
+        end
 
         it { should be_true }
       end
 
-      before do
-        Station.any_instance
-               .stub(:confirm_last_grade_update_at?)
-               .and_return(true)
+      before(:each) do
+        allow_any_instance_of(Station).to receive(:confirm_last_grade_update_at?).and_return(true)
       end
 
       context "last_grade_update_at will be updated but validate_grade_update is not set" do

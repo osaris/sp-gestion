@@ -131,7 +131,7 @@ describe VehiclesController do
     describe "DELETE :destroy with associations" do
 
       before(:each) do
-        Vehicle.any_instance.stub(:interventions => { :empty? => false })
+        allow_any_instance_of(Vehicle).to receive(:interventions).and_return(double(:empty? => false))
 
         delete :destroy, :id => vehicle.id
       end

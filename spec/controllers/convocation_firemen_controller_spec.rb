@@ -33,8 +33,8 @@ describe ConvocationFiremenController do
     describe "GET :accept on a confirmable and non editable convocation" do
 
       before(:each) do
-        ConvocationValidator.any_instance.stub(:validate).and_return(true)
-        Convocation.any_instance.stub(:editable?).and_return(false)
+        allow_any_instance_of(ConvocationValidator).to receive(:validate).and_return(true)
+        allow_any_instance_of(Convocation).to receive(:editable?).and_return(false)
 
         get :accept, :convocation_id => Digest::SHA1.hexdigest(conv_conf.id.to_s),
                      :id => Digest::SHA1.hexdigest(conv_conf.convocation_firemen.first.id.to_s)
@@ -62,8 +62,8 @@ describe ConvocationFiremenController do
     describe "GET :accept on a non confirmable and non editable convocation" do
 
       before(:each) do
-        ConvocationValidator.any_instance.stub(:validate).and_return(true)
-        Convocation.any_instance.stub(:editable?).and_return(false)
+        allow_any_instance_of(ConvocationValidator).to receive(:validate).and_return(true)
+        allow_any_instance_of(Convocation).to receive(:editable?).and_return(false)
 
         get :accept, :convocation_id => Digest::SHA1.hexdigest(conv_not_conf.id.to_s),
                      :id => Digest::SHA1.hexdigest(conv_not_conf.convocation_firemen.first.id.to_s)

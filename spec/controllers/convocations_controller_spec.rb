@@ -82,8 +82,8 @@ describe ConvocationsController do
       before(:each) do
         # stub the validator because convocation can't be saved if editable?
         # returns false
-        ConvocationValidator.any_instance.stub(:validate).and_return(true)
-        Convocation.any_instance.stub(:editable?).and_return(false)
+        allow_any_instance_of(ConvocationValidator).to receive(:validate).and_return(true)
+        allow_any_instance_of(Convocation).to receive(:editable?).and_return(false)
       end
 
       describe "GET :edit" do
@@ -114,7 +114,7 @@ describe ConvocationsController do
       describe "POST :email with  with email quota not exceeded" do
 
         before(:each) do
-          Station.any_instance.stub(:can_send_email?).and_return(true)
+          allow_any_instance_of(Station).to receive(:can_send_email?).and_return(true)
 
           post :email, :id => convocation.id
         end
@@ -206,7 +206,7 @@ describe ConvocationsController do
       describe "POST :email with email quota not exceeded" do
 
         before(:each) do
-          Station.any_instance.stub(:can_send_email?).and_return(true)
+          allow_any_instance_of(Station).to receive(:can_send_email?).and_return(true)
 
           post :email, :id => convocation.id
         end
@@ -221,8 +221,8 @@ describe ConvocationsController do
 
         before(:each) do
           # because rspec fails on render_to_string in controller
-          controller.stub(:render_to_string).with(any_args).and_return('erreur')
-          Station.any_instance.stub(:can_send_email?).and_return(false)
+          allow(controller).to receive(:render_to_string).with(any_args).and_return('erreur')
+          allow_any_instance_of(Station).to receive(:can_send_email?).and_return(false)
 
           post :email, :id => convocation.id
         end

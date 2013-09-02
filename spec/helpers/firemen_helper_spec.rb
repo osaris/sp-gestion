@@ -58,7 +58,7 @@ describe FiremenHelper do
     context "with grade of Medecin category" do
 
       before(:each) do
-        Fireman.any_instance.stub(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Médecin capitaine']))
+        allow_any_instance_of(Fireman).to receive(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Médecin capitaine']))
       end
 
       it { should == 0 }
@@ -67,7 +67,7 @@ describe FiremenHelper do
     context "with grade of Infirmier category" do
 
       before(:each) do
-        Fireman.any_instance.stub(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Infirmier chef']))
+        allow_any_instance_of(Fireman).to receive(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Infirmier chef']))
       end
 
       it { should == 1 }
@@ -76,7 +76,7 @@ describe FiremenHelper do
     context "with grade of Officier category" do
 
       before(:each) do
-        Fireman.any_instance.stub(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Capitaine']))
+        allow_any_instance_of(Fireman).to receive(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Capitaine']))
       end
 
       it { should == 2 }
@@ -85,7 +85,7 @@ describe FiremenHelper do
     context "with grade of Sous-officier category" do
 
       before(:each) do
-        Fireman.any_instance.stub(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Sergent']))
+        allow_any_instance_of(Fireman).to receive(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Sergent']))
       end
 
       it { should == 3 }
@@ -94,7 +94,7 @@ describe FiremenHelper do
     context "with grade of Homme du rang category" do
 
       before(:each) do
-        Fireman.any_instance.stub(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Caporal']))
+        allow_any_instance_of(Fireman).to receive(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['Caporal']))
       end
 
       it { should == 4 }

@@ -44,7 +44,7 @@ describe StationsController do
   describe "POST :check with existing station" do
 
     before(:each) do
-      Station.any_instance.stub(:check).and_return(Station.make)
+      allow_any_instance_of(Station).to receive(:check).and_return(Station.make)
 
       xhr :post, :check, :station => { :name => 'test' }
     end
@@ -62,7 +62,7 @@ describe StationsController do
    describe "POST :check with non existing station" do
 
     before(:each) do
-      Station.any_instance.stub(:check).and_return(nil)
+      allow_any_instance_of(Station).to receive(:check).and_return(nil)
 
       xhr :post, :check, :station => { :name => 'test' }
     end

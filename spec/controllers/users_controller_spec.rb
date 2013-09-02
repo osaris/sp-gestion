@@ -82,7 +82,7 @@ describe UsersController do
 
       before(:each) do
         # because rspec fails on render_to_string in controller
-        controller.stub(:render_to_string).with(any_args).and_return('erreur')
+        allow(controller).to receive(:render_to_string).with(any_args).and_return('erreur')
 
         delete :destroy, :id => user.id
       end

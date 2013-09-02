@@ -30,8 +30,8 @@ describe InterventionsController do
 
       before(:each) do
         i = make_intervention_with_firemen(:station => @station)
-        Station.any_instance.stub_chain(:interventions, :latest, :first).and_return(i)
-        Intervention.any_instance.stub(:years_stats).and_return([Date.today.year+1, Date.today.year])
+        allow_any_instance_of(Station).to receive(:interventions).and_return(double(:latest => {:first => i}))
+        allow_any_instance_of(Intervention).to receive(:years_stats).and_return([Date.today.year+1, Date.today.year])
       end
 
       describe "GET :stats with bad year" do
@@ -80,7 +80,7 @@ describe InterventionsController do
     describe "GET :stats without intervention" do
 
       before(:each) do
-        Station.any_instance.stub_chain(:interventions, :latest, :first).and_return(nil)
+        allow_any_instance_of(Station).to receive(:interventions).and_return(double(:latest => double(:first => nil)))
 
         get :stats, :year => Date.today.year.to_s, :type => "by_month"
       end
@@ -151,7 +151,7 @@ describe InterventionsController do
       let(:intervention) { make_intervention_with_firemen(:station => @station) }
 
       before(:each) do
-        Intervention.any_instance.stub(:editable?).and_return(false)
+        allow_any_instance_of(Intervention).to receive(:editable?).and_return(false)
       end
 
       describe "GET :edit" do
@@ -192,7 +192,7 @@ describe InterventionsController do
       let(:intervention) { make_intervention_with_firemen(:station => @station) }
 
       before(:each) do
-        Intervention.any_instance.stub(:editable?).and_return(true)
+        allow_any_instance_of(Intervention).to receive(:editable?).and_return(true)
       end
 
       describe "GET :show" do

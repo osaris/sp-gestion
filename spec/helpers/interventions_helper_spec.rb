@@ -4,7 +4,7 @@ require 'spec_helper'
 describe InterventionsHelper do
 
   before(:each) do
-    Intervention.any_instance.stub(:init_number).and_return(1)
+    allow_any_instance_of(Intervention).to receive(:init_number).and_return(1)
   end
 
   describe "#display_kind_and_subkind" do
@@ -14,7 +14,7 @@ describe InterventionsHelper do
     context "with no subkind" do
 
       before(:each) do
-        Intervention.any_instance.stub(:kind).and_return(Intervention::KIND[:div])
+        allow_any_instance_of(Intervention).to receive(:kind).and_return(Intervention::KIND[:div])
       end
 
       it { should == "Divers"}
@@ -23,8 +23,8 @@ describe InterventionsHelper do
     context "with subkind" do
 
       before(:each) do
-        Intervention.any_instance.stub(:kind).and_return(Intervention::KIND[:div])
-        Intervention.any_instance.stub(:subkind).and_return('Inondation')
+        allow_any_instance_of(Intervention).to receive(:kind).and_return(Intervention::KIND[:div])
+        allow_any_instance_of(Intervention).to receive(:subkind).and_return('Inondation')
       end
 
       it { should == "Divers / Inondation"}
@@ -36,8 +36,8 @@ describe InterventionsHelper do
     subject { display_vehicles(Intervention.new) }
 
     before(:each) do
-      Intervention.any_instance.stub(:vehicles).and_return([Vehicle.make(:name => 'FPT'),
-                                                            Vehicle.make(:name => 'VSAV')])
+      allow_any_instance_of(Intervention).to receive(:vehicles).and_return([Vehicle.make(:name => 'FPT'),
+                                                                            Vehicle.make(:name => 'VSAV')])
     end
 
     it { should == "FPT / VSAV"}
@@ -48,8 +48,7 @@ describe InterventionsHelper do
     subject { map_for(Intervention.new) }
 
     before(:each) do
-      Intervention.any_instance.stub_chain(:geocode, :latitude).and_return(47.057493)
-      Intervention.any_instance.stub_chain(:geocode, :longitude).and_return(6.748619)
+      allow_any_instance_of(Intervention).to receive(:geocode).and_return(double(:latitude => 47.057493, :longitude => 6.748619))
     end
 
     it { should match(/google_map/) }
@@ -61,10 +60,9 @@ describe InterventionsHelper do
     subject { map_for_stats([Intervention.new, Intervention.new]) }
 
     before(:each) do
-      Intervention.any_instance.stub_chain(:geocode, :latitude).and_return(47.057493)
-      Intervention.any_instance.stub_chain(:geocode, :longitude).and_return(6.748619)
-      Intervention.any_instance.stub(:start_date).and_return(3.days.ago)
-      Intervention.any_instance.stub(:end_date).and_return(2.days.ago)
+      allow_any_instance_of(Intervention).to receive(:geocode).and_return(double(:latitude => 47.057493, :longitude => 6.748619))
+      allow_any_instance_of(Intervention).to receive(:start_date).and_return(3.days.ago)
+      allow_any_instance_of(Intervention).to receive(:end_date).and_return(2.days.ago)
     end
 
     it { should match(/google_map/) }

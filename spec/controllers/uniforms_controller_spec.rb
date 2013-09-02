@@ -143,7 +143,7 @@ describe UniformsController do
     describe "DELETE :destroy with associations" do
 
       before(:each) do
-        Uniform.any_instance.stub(:convocations => { :empty? => false })
+        allow_any_instance_of(Uniform).to receive(:convocations).and_return(double(:empty? => false))
 
         delete :destroy, :id => uniform.id
       end

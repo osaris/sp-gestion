@@ -132,7 +132,7 @@ describe InterventionRolesController do
     describe "DELETE :destroy with associations" do
 
       before(:each) do
-        InterventionRole.any_instance.stub(:fireman_intervention => { :empty? => false })
+        allow_any_instance_of(InterventionRole).to receive(:fireman_intervention).and_return(double(:empty? => false))
 
         delete :destroy, :id => intervention_role.id
       end

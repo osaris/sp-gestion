@@ -105,7 +105,7 @@ describe AccountsController do
 
     before do
       login(Station.make!(:owner_id => user.id), user)
-      Station.any_instance.stub(:update_owner).and_return(true)
+      allow_any_instance_of(Station).to receive(:update_owner).and_return(true)
 
       put :update_owner, :station => { :owner_id => '' }
     end
@@ -119,7 +119,7 @@ describe AccountsController do
 
     before do
       login(Station.make!(:owner_id => user.id), user)
-      Station.any_instance.stub(:update_owner).and_return(false)
+      allow_any_instance_of(Station).to receive(:update_owner).and_return(false)
 
       put :update_owner, :station => { :owner_id => '' }
     end

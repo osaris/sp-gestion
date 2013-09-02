@@ -112,7 +112,7 @@ describe FiremenController do
     describe "GET :stats with no data" do
 
       before(:each) do
-        Fireman.any_instance.stub(:years_stats).and_return([])
+        allow_any_instance_of(Fireman).to receive(:years_stats).and_return([])
 
         get :stats, :id => fireman.id, :year => (Date.today.year).to_s, :type => 'convocations'
       end
@@ -126,7 +126,7 @@ describe FiremenController do
     describe "GET :stats with bad year" do
 
       before(:each) do
-        Fireman.any_instance.stub(:years_stats).and_return([Date.today.year+1, Date.today.year])
+        allow_any_instance_of(Fireman).to receive(:years_stats).and_return([Date.today.year+1, Date.today.year])
 
         get :stats, :id => fireman.id, :year => (Date.today.year-1).to_s, :type => 'convocations'
       end
@@ -137,7 +137,7 @@ describe FiremenController do
     describe "GET :stats with bad type" do
 
       before(:each) do
-        Fireman.any_instance.stub(:years_stats).and_return([Date.today.year+1, Date.today.year])
+        allow_any_instance_of(Fireman).to receive(:years_stats).and_return([Date.today.year+1, Date.today.year])
 
         get :stats, :id => fireman.id, :year => Date.today.year.to_s, :type => 'badtype'
       end
@@ -148,7 +148,7 @@ describe FiremenController do
     describe "GET :stats" do
 
       before(:each) do
-        Fireman.any_instance.stub(:years_stats).and_return([Date.today.year+1, Date.today.year])
+        allow_any_instance_of(Fireman).to receive(:years_stats).and_return([Date.today.year+1, Date.today.year])
 
         get :stats, :id => fireman.id, :year => Date.today.year.to_s, :type => 'convocations'
       end
@@ -219,7 +219,7 @@ describe FiremenController do
     describe "PUT :update with warnings" do
 
       before(:each) do
-        Fireman.any_instance.stub(:warnings).and_return('Warning')
+        allow_any_instance_of(Fireman).to receive(:warnings).and_return('Warning')
 
         put :update, :id => fireman.id
       end
@@ -241,7 +241,7 @@ describe FiremenController do
     describe "DELETE :destroy with associations" do
 
       before(:each) do
-        Fireman.any_instance.stub(:interventions => { :empty? => false })
+        allow_any_instance_of(Fireman).to receive(:interventions).and_return(double(:empty? => false))
 
         delete :destroy, :id => fireman.id
       end

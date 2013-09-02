@@ -133,7 +133,7 @@ describe TrainingsController do
     describe "DELETE :destroy with associations" do
 
       before(:each) do
-        Training.any_instance.stub(:firemen => { :empty? => false })
+        allow_any_instance_of(Training).to receive(:firemen).and_return(double(:empty? => false))
 
         delete :destroy, :id => training.id
       end
