@@ -27,7 +27,7 @@ Setup
 * checkout source :
 
 ```
-git clone ssh://git@gitlab.imagineapp.com:9228/sp-gestion.git
+git clone https://github.com/osaris/sp-gestion.git
 ```
 
 * go into master :
@@ -70,13 +70,13 @@ Tests
 
 ```
 rake db:test:prepare
-``
+```
 
 * run `rspec`
 
 Production
 ==========
 
-* if you want to use newrelic you must have an account () and generate the
-`config/newrelic.yml` file by running `newrelic install` in the root folder of
-the application
+* if you want to use newrelic you must have an account (http://newrelic.com/)
+and generate the `config/newrelic.yml` file by running `newrelic install` in the
+root folder of the application.
