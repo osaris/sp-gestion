@@ -89,6 +89,8 @@ describe User do
 
   describe "#deliver_new_email_instructions!" do
 
+    let(:user) { User.make!(:new_email => 'foo@bar.com')}
+
     it "it resets perishable_token" do
       old_perishable_token = user.perishable_token
       user.send(:deliver_new_email_instructions!)
