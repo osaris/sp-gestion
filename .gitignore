@@ -4,3 +4,4 @@ coverage
 public/uploads
 config/newrelic.yml
 config/sp-gestion.yml
+config/deploy.rb
