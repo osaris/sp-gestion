@@ -80,3 +80,8 @@ Production
 * if you want to use newrelic you must have an account (http://newrelic.com/)
 and generate the `config/newrelic.yml` file by running `newrelic install` in the
 root folder of the application.
+
+Licensing
+=========
+
+SP-Gestion is released under the [MIT License](http://www.opensource.org/licenses/MIT).
