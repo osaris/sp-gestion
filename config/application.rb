@@ -10,7 +10,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-SPG_CONFIG = YAML.load_file('config/sp-gestion.yml')[Rails.env]
+SPG_CONFIG = YAML.load_file(File.expand_path('../sp-gestion.yml', __FILE__))[Rails.env]
 
 module SpGestion
   class Application < Rails::Application
