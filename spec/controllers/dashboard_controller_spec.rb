@@ -21,10 +21,10 @@ describe DashboardController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:messages) }
-      it { should assign_to(:interventions) }
-      it { should assign_to(:convocations) }
-      it { should assign_to(:items) }
+      it { expect(assigns(:messages)).to_not be_nil}
+      it { expect(assigns(:interventions)).to_not be_nil}
+      it { expect(assigns(:convocations)).to_not be_nil}
+      it { expect(assigns(:items)).to_not be_nil}
     end
   end
 end

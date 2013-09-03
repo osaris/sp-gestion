@@ -44,7 +44,7 @@ describe StationsController do
   describe "POST :check with existing station" do
 
     before(:each) do
-      allow_any_instance_of(Station).to receive(:check).and_return(Station.make)
+      allow(Station).to receive(:check).and_return(Station.make)
 
       xhr :post, :check, :station => { :name => 'test' }
     end
@@ -53,7 +53,7 @@ describe StationsController do
     it { should render_template("check") }
     it { should_not render_with_layout }
 
-    it { should assign_to(:station) }
+    it { expect(assigns(:station)).to_not be_nil}
     it "shows name_warning" do
       assert_match(@response.body, "show")
     end

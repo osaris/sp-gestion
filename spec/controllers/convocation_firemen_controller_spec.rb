@@ -119,8 +119,8 @@ describe ConvocationFiremenController do
       it { should render_template("edit") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:convocation) }
-      it { should assign_to(:convocation_firemen) }
+      it { expect(assigns(:convocation)).to_not be_nil }
+      it { expect(assigns(:convocation_firemen)).to_not be_nil }
     end
 
     describe "GET :show with PDF format" do
@@ -164,7 +164,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:redirect) }
       it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-      it { should assign_to(:convocation) }
+      it { expect(assigns(:convocation)).to_not be_nil}
       it "set the presence of firemen" do
         assert(convocation.convocation_firemen.first.presence)
       end

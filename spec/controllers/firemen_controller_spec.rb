@@ -23,7 +23,7 @@ describe FiremenController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:firemen) }
+      it { expect(assigns(:firemen)).to_not be_nil}
     end
 
     describe "GET :resigned" do
@@ -36,7 +36,7 @@ describe FiremenController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:firemen) }
+      it { expect(assigns(:firemen)).to_not be_nil}
     end
 
     describe "GET :facebook" do
@@ -49,7 +49,7 @@ describe FiremenController do
       it { should render_template("facebook") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:firemen) }
+      it { expect(assigns(:firemen)).to_not be_nil}
     end
 
     describe "GET :show for a non existing fireman" do
@@ -95,7 +95,7 @@ describe FiremenController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_path(assigns(:fireman))) }
 
-      it { should assign_to(:fireman) }
+      it { expect(assigns(:fireman)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 
@@ -157,7 +157,7 @@ describe FiremenController do
       it { should render_template("stats") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:data) }
+      it { expect(assigns(:data)).to_not be_nil}
     end
 
     describe "GET :show on existing fireman" do

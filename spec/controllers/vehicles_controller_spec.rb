@@ -22,7 +22,7 @@ describe VehiclesController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:vehicles) }
+      it { expect(assigns(:vehicles)).to_not be_nil}
     end
 
     describe "GET :show for a non existing vehicle" do
@@ -68,7 +68,7 @@ describe VehiclesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(vehicle_path(assigns(:vehicle))) }
 
-      it { should assign_to(:vehicle) }
+      it { expect(assigns(:vehicle)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 

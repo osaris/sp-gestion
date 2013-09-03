@@ -9,32 +9,32 @@ describe UserMailer do
 
     subject { UserMailer.confirmation_instructions(user).deliver }
 
-    it { should have_sent_email.to('test@test.com') \
-                               .with_subject(/Activation/) \
-                              .with_body { /#{user.perishable_token}/ } }
+    it { should deliver_to('test@test.com') }
+    it { should have_subject(/Activation/) }
+    it { should have_body_text(/#{user.perishable_token}/) }
   end
 
   describe "#new_email_instructions" do
     subject { UserMailer.new_email_instructions(user).deliver }
 
-    it { should have_sent_email.to('test@new.com') \
-                               .with_subject(/Changement/) \
-                               .with_body { /#{user.perishable_token}/ } }
+    it { should deliver_to('test@new.com') }
+    it { should have_subject(/Changement/) }
+    it { should have_body_text(/#{user.perishable_token}/) }
   end
 
   context "#cooptation_instructions" do
     subject { UserMailer.cooptation_instructions(user).deliver }
 
-    it { should have_sent_email.to('test@test.com') \
-                               .with_subject(/Invitation/) \
-                               .with_body { /#{user.perishable_token}/ } }
+    it { should deliver_to('test@test.com') }
+    it { should have_subject(/Invitation/) }
+    it { should have_body_text(/#{user.perishable_token}/) }
   end
 
   context "#password_reset_instructions" do
     subject { UserMailer.password_reset_instructions(user).deliver }
 
-    it { should have_sent_email.to('test@test.com') \
-                               .with_subject(/Modification/) \
-                               .with_body { /#{user.station.url}/ } }
+    it { should deliver_to('test@test.com') }
+    it { should have_subject(/Modification/) }
+    it { should have_body_text(/#{user.station.url}/) }
   end
 end

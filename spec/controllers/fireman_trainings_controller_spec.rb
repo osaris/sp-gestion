@@ -42,7 +42,7 @@ describe FiremanTrainingsController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:fireman) }
+      it { expect(assigns(:fireman)).to_not be_nil}
     end
 
     describe "GET :new" do
@@ -77,8 +77,8 @@ describe FiremanTrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_fireman_training_path(assigns(:fireman), assigns(:fireman_training))) }
 
-      it { should assign_to(:fireman_training) }
-      it { should assign_to(:fireman) }
+      it { expect(assigns(:fireman_training)).to_not be_nil}
+      it { expect(assigns(:fireman)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 

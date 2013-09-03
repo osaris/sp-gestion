@@ -23,7 +23,7 @@ describe MessagesController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:messages) }
+      it { expect(assigns(:messages)).to_not be_nil}
     end
 
     describe "GET :show for a non existing message" do

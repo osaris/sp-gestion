@@ -49,7 +49,7 @@ describe AccountsController do
       it { should render_template("edit") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:users) }
+      it { expect(assigns(:users)).to_not be_nil }
     end
   end
 

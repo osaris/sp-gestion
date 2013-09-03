@@ -23,7 +23,7 @@ describe TrainingsController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:trainings) }
+      it { expect(assigns(:trainings)).to_not be_nil}
     end
 
     describe "GET :show for a non existing training" do
@@ -69,7 +69,7 @@ describe TrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(training_path(assigns(:training))) }
 
-      it { should assign_to(:training) }
+      it { expect(assigns(:training)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 

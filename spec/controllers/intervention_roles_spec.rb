@@ -23,7 +23,7 @@ describe InterventionRolesController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:intervention_roles) }
+      it { expect(assigns(:intervention_roles)).to_not be_nil}
     end
 
     describe "GET :show for a non existing intervention_role" do
@@ -69,7 +69,7 @@ describe InterventionRolesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(intervention_role_path(assigns(:intervention_role))) }
 
-      it { should assign_to(:intervention_role) }
+      it { expect(assigns(:intervention_role)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 

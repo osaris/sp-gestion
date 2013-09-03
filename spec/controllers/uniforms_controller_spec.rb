@@ -23,7 +23,7 @@ describe UniformsController do
       it { should render_template("index")  }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:uniforms) }
+      it { expect(assigns(:uniforms)).to_not be_nil}
     end
 
     describe "GET :show for a non existing uniform" do
@@ -69,7 +69,7 @@ describe UniformsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(uniform_path(assigns(:uniform))) }
 
-      it { should assign_to(:uniform) }
+      it { expect(assigns(:uniform)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 

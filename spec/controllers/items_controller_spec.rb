@@ -25,7 +25,7 @@ describe ItemsController do
       it { should render_template("expirings") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:items) }
+      it { expect(assigns(:items)).to_not be_nil}
       it { should set_session(:back_path) { expirings_items_path } }
     end
 
@@ -125,7 +125,7 @@ describe ItemsController do
       it { should redirect_to(check_list_item_path(assigns(:check_list),
                                               assigns(:item))) }
 
-      it { should assign_to(:check_list) }
+      it { expect(assigns(:check_list)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 

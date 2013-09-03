@@ -23,7 +23,7 @@ describe InterventionsController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:interventions) }
+      it { expect(assigns(:interventions)).to_not be_nil}
     end
 
     describe "GET :stats with interventions" do
@@ -62,8 +62,8 @@ describe InterventionsController do
         it { should render_template("stats") }
         it { should render_with_layout("back") }
 
-        it { should assign_to(:data) }
-        it { should assign_to(:sum) }
+        it { expect(assigns(:data)).to_not be_nil}
+        it { expect(assigns(:sum)).to_not be_nil}
       end
     end
 
@@ -142,7 +142,7 @@ describe InterventionsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(intervention_path(assigns(:intervention))) }
 
-      it { should assign_to(:intervention) }
+      it { expect(assigns(:intervention)).to_not be_nil}
       it { should set_the_flash.level(:success) }
     end
 

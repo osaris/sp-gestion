@@ -27,7 +27,7 @@ describe ConvocationsController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:convocations) }
+      it { expect(assigns(:convocations)).to_not be_nil}
     end
 
     describe "GET :show for a non existing convocation" do
@@ -138,7 +138,7 @@ describe ConvocationsController do
         it { should render_template("show") }
         it { should render_with_layout("back") }
 
-        it { should assign_to(:convocation) }
+        it { expect(assigns(:convocation)).to_not be_nil}
       end
 
       describe "GET :show on existing convocation with PDF format" do

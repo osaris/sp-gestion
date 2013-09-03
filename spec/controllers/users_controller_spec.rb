@@ -41,7 +41,7 @@ describe UsersController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:users) }
+      it { expect(assigns(:users)).to_not be_nil}
     end
 
     describe "GET :new" do

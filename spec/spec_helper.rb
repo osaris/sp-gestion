@@ -16,12 +16,15 @@ require 'rspec/autorun'
 require File.expand_path(File.dirname(__FILE__) + '/blueprints')
 require 'authlogic/test_case'
 require File.expand_path(File.dirname(__FILE__) + '/matchers/custom_matchers')
+require 'email_spec'
 
 Delayed::Worker.delay_jobs = false
 
 RSpec.configure do |config|
 
-  include Authlogic::TestCase
+  config.include(Authlogic::TestCase)
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 
   # ## Mock Framework
   #

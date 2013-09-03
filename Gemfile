@@ -55,6 +55,7 @@ end
 
 group :test do
   gem 'coveralls', :require => false
+  gem 'email_spec'
   gem 'faker'
   gem 'machinist'
   gem 'rspec-rails'

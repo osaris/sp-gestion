@@ -22,7 +22,7 @@ describe CheckListsController do
       it { should render_template("index") }
       it { should render_with_layout("back") }
 
-      it { should assign_to(:check_lists) }
+      it { expect(assigns(:check_lists)).to_not be_nil }
     end
 
     describe "GET :show for a non existing check-list" do
@@ -68,7 +68,7 @@ describe CheckListsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(check_list_path(assigns(:check_list))) }
 
-      it { should assign_to(:check_list) }
+      it { expect(assigns(:check_list)).to_not be_nil }
       it { should set_the_flash.level(:success) }
     end
 
