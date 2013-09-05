@@ -7,8 +7,8 @@ SpGestion::Application.configure do
   # since you don't have to restart the webserver when you make code changes.
   config.cache_classes = false
 
-  # Log error messages when you accidentally call methods on nil.
-  config.whiny_nils = true
+  # Do not eager load code on boot.
+  config.eager_load = false
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -20,14 +20,13 @@ SpGestion::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
-  # Do not compress assets
-  config.assets.compress = false
+  # Raise an error on page load if there are pending migrations
+  config.active_record.migration_error = :page_load
 
-  # Expands the lines which load the assets
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in view rendering with a large
+  # number of complex assets.
   config.assets.debug = true
-
-  # Only use best-standards-support built into browsers
-  config.action_dispatch.best_standards_support = :builtin
 
   config.base_url = SPG_CONFIG['base_url']
   config.google_application_id = SPG_CONFIG['google_application_id']
@@ -36,8 +35,5 @@ SpGestion::Application.configure do
   config.action_mailer.default_url_options = { :host => "www." + config.base_url }
   config.action_mailer.delivery_method = SPG_CONFIG['delivery_method']
   config.action_mailer.smtp_settings = SPG_CONFIG['smtp_settings']
-
-  # Specify treshold for slow queries logging
-  config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
 

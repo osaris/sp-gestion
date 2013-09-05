@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '4.0.0'
 
 gem 'mysql2'
 
@@ -22,7 +22,7 @@ gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => 
 gem 'daemons'
 gem 'dalli'
 gem 'delayed_job'
-gem 'delayed_job_active_record', :git => 'https://github.com/collectiveidea/delayed_job_active_record.git', :ref => '44eb9e6c'
+gem 'delayed_job_active_record'
 gem 'fog'
 gem 'googlecharts'
 gem 'graticule'
@@ -34,7 +34,7 @@ gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'prawn'
 gem 'prawnto_2', :require => 'prawnto'
-gem 'sass-rails-bootstrap', '2.1.1'
+gem 'sass-rails-bootstrap'
 gem 'simple-navigation'
 gem 'validates_timeliness'
 gem 'will_paginate'
