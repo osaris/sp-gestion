@@ -6,9 +6,8 @@ class BaseUploader < CarrierWave::Uploader::Base
   # include CarrierWave::ImageScience
   include CarrierWave::MiniMagick
 
-  # For Rails 3.1 asset_path in default_url
-  include Sprockets::Helpers::RailsHelper
-  include Sprockets::Helpers::IsolatedHelper
+  # Include the sprockets-rails helper for Rails 4+ asset pipeline compatibility:
+  include Sprockets::Rails::Helper
 
   # Override the directory where uploaded files will be stored
   # This is a sensible default for uploaders that are meant to be mounted:
