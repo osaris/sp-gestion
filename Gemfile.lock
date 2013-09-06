@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: https://github.com/osaris/acts_as_geocodable
-  revision: 55a24521f3e7c6c9e16cd2add0d187bb2fa433bd
-  branch: ar-whiteattributes-rails323
+  revision: 429f81e0875e7fbe64eeeb20be4e64fdbb9a075a
+  branch: rails4
   specs:
     acts_as_geocodable (2.0.3)
       graticule (>= 2.0.0)

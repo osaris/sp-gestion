@@ -15,7 +15,7 @@ gem 'asset_sync'
 
 gem 'airbrake'
 gem 'aproxacs-s3sync'
-gem 'acts_as_geocodable', :git => 'https://github.com/osaris/acts_as_geocodable', :branch => 'ar-whiteattributes-rails323'
+gem 'acts_as_geocodable', :git => 'https://github.com/osaris/acts_as_geocodable', :branch => 'rails4'
 gem 'acts-as-taggable-on'
 gem 'authlogic'
 gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '719a13ce97'
