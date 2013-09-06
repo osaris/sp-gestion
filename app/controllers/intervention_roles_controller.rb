@@ -4,7 +4,9 @@ class InterventionRolesController < BackController
   before_filter :load_intervention_role, :except => [:index, :new, :create]
 
   def index
-    @intervention_roles = @station.intervention_roles.paginate(:page => params[:page], :order => 'name, short_name')
+    @intervention_roles = @station.intervention_roles
+                                  .page(params[:page])
+                                  .order('name, short_name')
   end
 
   def show

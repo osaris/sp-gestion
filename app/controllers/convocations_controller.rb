@@ -7,7 +7,9 @@ class ConvocationsController < BackController
   skip_before_filter :require_html_request, :only => [:show]
 
   def index
-    @convocations = @station.convocations.paginate(:page => params[:page], :order => 'date DESC')
+    @convocations = @station.convocations
+                            .page(params[:page])
+                            .order('date DESC')
   end
 
   def show

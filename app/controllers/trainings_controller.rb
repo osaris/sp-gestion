@@ -4,7 +4,9 @@ class TrainingsController < BackController
   before_filter :load_training, :except => [:index, :new, :create]
 
   def index
-    @trainings = @station.trainings.paginate(:page => params[:page], :order => 'name, short_name')
+    @trainings = @station.trainings
+                         .page(params[:page])
+                         .order('name, short_name')
   end
 
   def show

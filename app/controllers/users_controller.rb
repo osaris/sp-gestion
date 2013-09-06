@@ -6,10 +6,9 @@ class UsersController < BackController
   before_filter :check_ownership
 
   def index
-    @users = @station.users.paginate(
-      :page => params[:page],
-      :order => 'email'
-    )
+    @users = @station.users
+                     .page(params[:page])
+                     .order('email')
   end
 
   def new

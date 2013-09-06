@@ -6,7 +6,9 @@ class CheckListsController < BackController
   skip_before_filter :require_html_request, :only => [:show]
 
   def index
-    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title')
+    @check_lists = @station.check_lists
+                           .page(params[:page])
+                           .order('title')
   end
 
   def show

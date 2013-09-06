@@ -4,7 +4,9 @@ class VehiclesController < BackController
   before_filter :load_vehicle, :except => [:index, :new, :create]
 
   def index
-    @vehicles = @station.vehicles.paginate(:page => params[:page], :order => 'name')
+    @vehicles = @station.vehicles
+                        .page(params[:page])
+                        .order('name')
   end
 
   def show

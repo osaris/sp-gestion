@@ -4,7 +4,9 @@ class UniformsController < BackController
   before_filter :load_uniform, :except => [:index, :new, :create, :reset]
 
   def index
-    @uniforms = @station.uniforms.paginate(:page => params[:page], :order => 'code, title')
+    @uniforms = @station.uniforms
+                        .page(params[:page])
+                        .order('code, title')
   end
 
   def show

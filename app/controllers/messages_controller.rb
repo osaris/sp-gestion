@@ -5,7 +5,9 @@ class MessagesController < BackController
   skip_before_filter :require_html_request, :only => [:mark_as_read]
 
   def index
-    @messages = current_user.messages.paginate(:page => params[:page], :order => 'created_at')
+    @messages = current_user.messages
+                            .page(params[:page])
+                            .order('created_at')
   end
 
   def show

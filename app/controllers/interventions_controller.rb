@@ -9,11 +9,10 @@ class InterventionsController < BackController
 
 
   def index
-    @interventions = @station.interventions.paginate(
-      :page => params[:page],
-      :include => [:vehicles, {:fireman_interventions => [:fireman]}],
-      :order => 'interventions.start_date DESC'
-    )
+    @interventions = @station.interventions
+                             .page(params[:page])
+                             .includes(:vehicles, {:fireman_interventions => [:fireman]})
+                             .order('interventions.start_date DESC')
   end
 
   def show
