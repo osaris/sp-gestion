@@ -221,7 +221,7 @@ describe FiremenController do
       before(:each) do
         allow_any_instance_of(Fireman).to receive(:warnings).and_return('Warning')
 
-        put :update, :id => fireman.id
+        put :update, :id => fireman.id, :fireman => {:firstname => 'My firstname', :lastname => 'My lastname' }
       end
 
       it { should set_the_flash.level(:warning) }
