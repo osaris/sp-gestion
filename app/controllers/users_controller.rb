@@ -51,6 +51,6 @@ class UsersController < BackController
   end
 
   def user_params
-    parameters.require(:user).permit(:email)
+    params.require(:user).permit(:email)
   end
 end

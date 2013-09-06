@@ -62,6 +62,6 @@ class UniformsController < BackController
   end
 
   def uniform_params
-    parameters.require(:uniform).permit(:title, :description, :code)
+    params.require(:uniform).permit(:title, :description, :code)
   end
 end

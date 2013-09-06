@@ -56,7 +56,7 @@ class VehiclesController < BackController
   end
 
   def vehicle_params
-    parameters.require(:vehicle).permit(:name, :rem, :date_approval,
+    params.require(:vehicle).permit(:name, :rem, :date_approval,
                                         :date_check, :date_review,
                                         :vehicle_photo, :remove_vehicle_photo)
   end

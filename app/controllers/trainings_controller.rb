@@ -55,7 +55,7 @@ class TrainingsController < BackController
     redirect_to(trainings_path)
   end
 
-  def trainings_params
-    parameters.require(:training).permit(:name, :short_name, :description)
+  def training_params
+    params.require(:training).permit(:name, :short_name, :description)
   end
 end
