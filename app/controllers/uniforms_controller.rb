@@ -15,7 +15,7 @@ class UniformsController < BackController
   end
 
   def create
-    @uniform = @station.uniforms.new(params[:uniform])
+    @uniform = @station.uniforms.new(uniform_params)
     if(@uniform.save)
       flash[:success] = "La tenue a été créée."
       redirect_to(@uniform)
@@ -28,7 +28,7 @@ class UniformsController < BackController
   end
 
   def update
-    if @uniform.update_attributes(params[:uniform])
+    if @uniform.update_attributes(uniform_params)
       flash[:success] = "La tenue a été mise à jour."
       redirect_to(@uniform)
     else
@@ -61,4 +61,7 @@ class UniformsController < BackController
     redirect_to(uniforms_path)
   end
 
+  def uniform_params
+    parameters.require(:uniform).permit(:title, :description, :code)
+  end
 end

@@ -7,9 +7,10 @@ class FiremenController < BackController
   before_filter :load_tags, :only => [:new, :create, :edit, :update]
 
   def index
-    @firemen = @station.firemen \
+    @firemen = @station.firemen
+                       .page(params[:page]) \
                        .not_resigned \
-                       .paginate(:page => params[:page], :order => 'firemen.grade DESC, firemen.lastname ASC')
+                       .order('firemen.grade DESC, firemen.lastname ASC')
   end
 
   def show
@@ -20,7 +21,7 @@ class FiremenController < BackController
   end
 
   def create
-    @fireman = @station.firemen.new(params[:fireman])
+    @fireman = @station.firemen.new(fireman_params)
     if(@fireman.save)
       flash[:success] = "La personne a été créée."
       redirect_to(@fireman)
@@ -33,7 +34,7 @@ class FiremenController < BackController
   end
 
   def update
-    if @fireman.update_attributes(params[:fireman])
+    if @fireman.update_attributes(fireman_params)
       flash[:success] = "La personne a été mise à jour."
       flash[:warning] = @fireman.warnings
       redirect_to(@fireman)
@@ -58,9 +59,10 @@ class FiremenController < BackController
 
   def resigned
     @firemen = @station.firemen \
+                       .page(params[:page]) \
                        .resigned \
                        .order_by_grade_and_lastname \
-                       .paginate(:page => params[:page], :order => 'firemen.grade DESC, firemen.lastname ASC')
+                       .order('firemen.grade DESC, firemen.lastname ASC')
     render(:action => :index)
   end
 
@@ -101,4 +103,12 @@ class FiremenController < BackController
     @tags = Fireman.distinct_tags(@station).to_json
   end
 
+  def fireman_params
+    params.require(:fireman).permit(:firstname, :lastname, :status, :birthday,
+                                    :rem, :checkup, :email, :passeport_photo,
+                                    :remove_passeport_photo, :regimental_number,
+                                    :incorporation_date, :resignation_date,
+                                    :checkup_truck, :tag_list, :grades_attributes,
+                                    :validate_grade_update)
+  end
 end

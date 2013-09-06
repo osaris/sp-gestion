@@ -26,7 +26,7 @@ class ItemsController < BackController
   end
 
   def create
-    @item = @check_list.items.new(params[:item])
+    @item = @check_list.items.new(item_params)
     if(@item.save)
       flash[:success] = "Le matériel a été créé."
       redirect_to([@check_list, @item])
@@ -39,7 +39,7 @@ class ItemsController < BackController
   end
 
   def update
-    if @item.update_attributes(params[:item])
+    if @item.update_attributes(item_params)
       flash[:success] = "Le matériel a été mis à jour."
       redirect_to(session[:back_path] || [@check_list, @item])
     else
@@ -67,5 +67,10 @@ class ItemsController < BackController
    rescue ActiveRecord::RecordNotFound
     flash[:error] = "Le matériel n'existe pas."
     redirect_to(check_list_path(@check_list))
+  end
+
+  def item_params
+    params.require(:item).permit(:title, :description, :quantity, :expiry, :rem,
+                                 :place, :item_photo, :remove_item_photo)
   end
 end

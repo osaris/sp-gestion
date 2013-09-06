@@ -7,8 +7,8 @@ class ConvocationFireman < ActiveRecord::Base
   delegate :title, :place, :date, :to => :convocation, :prefix => true
   delegate :firstname, :lastname, :to => :fireman, :prefix => true
 
-  scope :newer, includes(:convocation).order('convocations.date DESC').limit(5)
-  scope :with_email, includes(:fireman).where(["COALESCE(firemen.email, '') <> ''"])
+  scope :newer, -> { order('convocations.date DESC').includes(:convocation).limit(5) }
+  scope :with_email, -> { where(["COALESCE(firemen.email, '') <> ''"]).includes(:fireman) }
 
   before_create :set_grade_and_status
 

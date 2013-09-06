@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Grade < ActiveRecord::Base
 
-  attr_accessible :date, :kind
-
   belongs_to :fireman
 
   validates_date :date, :allow_blank => true, :on_or_before => :today

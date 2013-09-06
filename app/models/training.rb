@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Training < ActiveRecord::Base
 
-  attr_accessible :name, :short_name, :description
-
   belongs_to :station
   has_many :fireman_trainings
   has_many :firemen, :through => :fireman_trainings
@@ -12,7 +10,7 @@ class Training < ActiveRecord::Base
 
   before_destroy :check_associations
 
-  scope :order_by_short_name, order('short_name')
+  scope :order_by_short_name, -> { order('short_name') }
 
   private
 

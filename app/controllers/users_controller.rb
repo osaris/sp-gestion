@@ -17,7 +17,7 @@ class UsersController < BackController
   end
 
   def create
-    @user = @station.users.new(params[:user])
+    @user = @station.users.new(user_params)
     @user.cooptation = true
     if(@user.save)
       @user.deliver_cooptation_instructions!
@@ -50,4 +50,7 @@ class UsersController < BackController
     redirect_to(users_path)
   end
 
+  def user_params
+    parameters.require(:user).permit(:email)
+  end
 end

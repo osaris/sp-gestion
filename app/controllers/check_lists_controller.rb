@@ -24,7 +24,7 @@ class CheckListsController < BackController
   end
 
   def create
-    @check_list = @station.check_lists.new(params[:check_list])
+    @check_list = @station.check_lists.new(check_list_params)
     if(@check_list.save)
       flash[:success] = "La liste a été créée."
       redirect_to(@check_list)
@@ -37,7 +37,7 @@ class CheckListsController < BackController
   end
 
   def update
-    if @check_list.update_attributes(params[:check_list])
+    if @check_list.update_attributes(check_list_params)
       flash[:success] = "La liste a été mise à jour."
       redirect_to(@check_list)
     else
@@ -72,4 +72,7 @@ class CheckListsController < BackController
     redirect_to(check_lists_path)
   end
 
+  def check_list_params
+    params.require(:check_list).permit(:title)
+  end
 end

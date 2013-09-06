@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
 
-  attr_accessible :title, :description, :quantity, :expiry, :rem, :place, :item_photo, :remove_item_photo
-
   belongs_to :check_list
 
   mount_uploader :item_photo, ItemPhotoUploader

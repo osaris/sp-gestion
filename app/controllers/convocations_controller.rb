@@ -27,7 +27,7 @@ class ConvocationsController < BackController
   end
 
   def create
-    @convocation = @station.convocations.new(params[:convocation])
+    @convocation = @station.convocations.new(convocation_params)
     if(@convocation.save)
       flash[:success] = "La convocation a été créée."
       redirect_to(@convocation)
@@ -54,7 +54,7 @@ class ConvocationsController < BackController
       # overwrite params because browser doesn't send array if no checkbox are selected
       # and rails omit them in this case !
       params[:convocation][:fireman_ids] ||= []
-      if @convocation.update_attributes(params[:convocation])
+      if @convocation.update_attributes(convocation_params)
         flash[:success] = "La convocation a été mise à jour."
         redirect_to(@convocation)
       else
@@ -106,4 +106,9 @@ class ConvocationsController < BackController
     end
   end
 
+  def convocation_params
+    params.require(:convocation).permit(:title, :date, :uniform_id, :place,
+                                        :rem, :hide_grade, :confirmable,
+                                        :fireman_ids)
+  end
 end

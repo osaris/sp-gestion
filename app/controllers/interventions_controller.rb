@@ -23,7 +23,7 @@ class InterventionsController < BackController
   end
 
   def create
-    @intervention = @station.interventions.new(params[:intervention])
+    @intervention = @station.interventions.new(intervention_params)
     if(@intervention.save)
       flash[:success] = "L'intervention a été créée."
       redirect_to(@intervention)
@@ -48,7 +48,7 @@ class InterventionsController < BackController
       # and rails omit them in this case !
       params[:intervention][:vehicle_ids] ||= []
       params[:intervention][:fireman_ids] ||= []
-      if @intervention.update_attributes(params[:intervention])
+      if @intervention.update_attributes(intervention_params)
         flash[:success] = "L'intervention a été mise à jour."
         redirect_to(@intervention)
       else
@@ -120,5 +120,12 @@ class InterventionsController < BackController
         fi_attr[:_destroy] = (fi_attr[:enable] != '1')
       end
     end
+  end
+
+  def intervention_params
+    params.require(:intervention).permit(:kind, :number, :start_date, :end_date,
+                                         :place, :rem, :city, :subkind,
+                                         :fireman_interventions_attributes,
+                                         :vehicle_ids)
   end
 end

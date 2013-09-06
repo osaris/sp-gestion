@@ -15,7 +15,7 @@ class InterventionRolesController < BackController
   end
 
   def create
-    @intervention_role = @station.intervention_roles.new(params[:intervention_role])
+    @intervention_role = @station.intervention_roles.new(intervention_role_params)
     if(@intervention_role.save)
       flash[:success] = "Le rôle a été créé."
       redirect_to(@intervention_role)
@@ -28,7 +28,7 @@ class InterventionRolesController < BackController
   end
 
   def update
-    if @intervention_role.update_attributes(params[:intervention_role])
+    if @intervention_role.update_attributes(intervention_role_params)
       flash[:success] = "Le rôle a été mis à jour."
       redirect_to(@intervention_role)
     else
@@ -55,4 +55,7 @@ class InterventionRolesController < BackController
     redirect_to(intervention_roles_path)
   end
 
+  def intervention_role_params
+    params.require(:intervention_role).permit(:name, :short_name)
+  end
 end

@@ -15,7 +15,7 @@ class TrainingsController < BackController
   end
 
   def create
-    @training = @station.trainings.new(params[:training])
+    @training = @station.trainings.new(training_params)
     if(@training.save)
       flash[:success] = "La formation a été créée."
       redirect_to(@training)
@@ -28,7 +28,7 @@ class TrainingsController < BackController
   end
 
   def update
-    if @training.update_attributes(params[:training])
+    if @training.update_attributes(training_params)
       flash[:success] = "La formation a été mise à jour."
       redirect_to(@training)
     else
@@ -55,4 +55,7 @@ class TrainingsController < BackController
     redirect_to(trainings_path)
   end
 
+  def trainings_params
+    parameters.require(:training).permit(:name, :short_name, :description)
+  end
 end

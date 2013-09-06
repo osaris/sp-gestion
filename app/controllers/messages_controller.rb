@@ -24,5 +24,4 @@ class MessagesController < BackController
     flash[:error] = "Le message n'existe pas."
     redirect_to(messages_path)
   end
-
 end

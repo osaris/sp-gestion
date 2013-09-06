@@ -19,7 +19,7 @@ class AccountsController < BackController
   end
 
   def update_settings
-    if @station.update_attributes(params[:station])
+    if @station.update_attributes(station_params)
       flash[:success] = "Les paramètres ont bien été mis à jour !"
     else
       flash[:error] = "Erreur lors de la mise à jour !"
@@ -31,4 +31,13 @@ class AccountsController < BackController
     @station.delay.destroy
     redirect_to(bye_url(:subdomain => 'www'))
   end
+
+  private
+
+  def station_params
+    params.require(:station).permit(:name, :url, :logo, :remove_logo,
+                                    :interventions_number_size,
+                                    :interventions_number_per_year)
+  end
+
 end

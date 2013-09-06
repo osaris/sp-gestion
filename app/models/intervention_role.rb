@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class InterventionRole < ActiveRecord::Base
 
-  attr_accessible :name, :short_name
-
   belongs_to :station
   has_many :fireman_intervention
 

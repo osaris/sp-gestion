@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class FiremanIntervention < ActiveRecord::Base
 
-  attr_accessible :fireman_id, :intervention_role_id, :enable
   attr_accessor :enable
 
   belongs_to :fireman
@@ -12,7 +11,7 @@ class FiremanIntervention < ActiveRecord::Base
   delegate :firstname, :lastname, :to => :fireman, :prefix => true
   delegate :short_name, :to => :intervention_role, :prefix => true
 
-  scope :newer, includes(:intervention).order('interventions.start_date DESC').limit(5)
+  scope :newer, -> { order('interventions.start_date DESC').includes(:intervention).limit(5) }
 
   before_create :set_grade
 
