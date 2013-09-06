@@ -87,12 +87,12 @@ class User < ActiveRecord::Base
   def update_profile(params)
     email_already_used = false
     email_change = false
-    if !params[:user][:new_email_tmp].blank? and params[:user][:new_email_tmp] != self.email
-      email_already_used = self.station.users.find_by_email(params[:user][:new_email_tmp])
+    if !params[:new_email_tmp].blank? and params[:new_email_tmp] != self.email
+      email_already_used = self.station.users.find_by_email(params[:new_email_tmp])
       if email_already_used
         self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
       else
-        params[:user][:new_email] = params[:user][:new_email_tmp]
+        params[:new_email] = params[:new_email_tmp]
         email_change = true
       end
     end
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
     if email_already_used
       result = false
     else
-      result = self.update_attributes(params[:user])
+      result = self.update_attributes(params)
       deliver_new_email_instructions! if result and email_change
     end
     result

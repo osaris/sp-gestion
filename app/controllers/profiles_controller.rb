@@ -8,7 +8,7 @@ class ProfilesController < BackController
   end
 
   def update
-    if @user.update_profile(params)
+    if @user.update_profile(user_params)
       flash[:success] = "Le profil a été mis à jour. Si vous avez changé votre adresse email
                          vous devez d'abord cliquer sur le lien envoyé par email à votre nouvelle
                          adresse pour que celle-ci remplace votre adresse actuelle."
@@ -24,4 +24,7 @@ class ProfilesController < BackController
     @user = current_user
   end
 
+  def user_params
+    params.require(:user).permit(:password, :password_confirmation, :new_email_tmp)
+  end
 end
