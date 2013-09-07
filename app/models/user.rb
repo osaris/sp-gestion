@@ -88,12 +88,15 @@ class User < ActiveRecord::Base
     email_already_used = false
     email_change = false
     if !params[:new_email_tmp].blank? and params[:new_email_tmp] != self.email
-      email_already_used = self.station.users.find_by_email(params[:new_email_tmp])
-      if email_already_used
-        self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
-      else
+      nb_users_with_same_email = self.station
+                                     .users
+                                     .where(:email => params[:new_email_tmp])
+                                     .count
+      if nb_users_with_same_email == 0
         params[:new_email] = params[:new_email_tmp]
         email_change = true
+      else
+        self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
       end
     end
 
