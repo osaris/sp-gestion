@@ -12,6 +12,7 @@ class Item < ActiveRecord::Base
   scope :expirings, lambda { |nb_days, station_id|
       includes(:check_list) \
       .where(['items.expiry < ? AND check_lists.station_id = ?', nb_days.days.from_now, station_id]) \
+      .references(:check_list) \
       .order('items.expiry ASC')
   }
 
