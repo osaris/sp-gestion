@@ -111,6 +111,6 @@ class ConvocationsController < BackController
   def convocation_params
     params.require(:convocation).permit(:title, :date, :uniform_id, :place,
                                         :rem, :hide_grade, :confirmable,
-                                        :fireman_ids)
+                                        fireman_ids: [])
   end
 end
