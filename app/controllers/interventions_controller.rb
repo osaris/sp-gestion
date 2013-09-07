@@ -124,7 +124,9 @@ class InterventionsController < BackController
   def intervention_params
     params.require(:intervention).permit(:kind, :number, :start_date, :end_date,
                                          :place, :rem, :city, :subkind,
-                                         :fireman_interventions_attributes,
-                                         :vehicle_ids)
+                                         vehicle_ids: [],
+                                         fireman_interventions_attributes: [
+                                            :id, :enable, :intervention_role_id,
+                                            :fireman_id, :_destroy])
   end
 end
