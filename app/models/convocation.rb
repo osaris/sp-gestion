@@ -18,7 +18,7 @@ class Convocation < ActiveRecord::Base
   validates_with ConvocationValidator
 
   scope :newer, -> { order('date DESC') }
-  scope :find_by_sha1, lambda { |sha1|
+  scope :with_sha1, lambda { |sha1|
     where(['SHA1(id) = ?', sha1])
   }
   scope :confirmable, -> { where(confirmable: true) }

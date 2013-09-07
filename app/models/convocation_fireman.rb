@@ -13,7 +13,7 @@ class ConvocationFireman < ActiveRecord::Base
 
   before_create :set_grade_and_status
 
-  scope :find_by_sha1, lambda { |sha1|
+  scope :with_sha1, lambda { |sha1|
     where(['SHA1(id) = ?', sha1])
   }
 

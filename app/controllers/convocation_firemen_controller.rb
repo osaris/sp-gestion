@@ -16,8 +16,8 @@ class ConvocationFiremenController < BackController
   end
 
   def accept
-    convocation = @station.convocations.find_by_sha1(params[:convocation_id]).confirmable.first
-    convocation_fireman = convocation.convocation_firemen.find_by_sha1(params[:id]).first unless convocation.blank?
+    convocation = @station.convocations.with_sha1(params[:convocation_id]).confirmable.first
+    convocation_fireman = convocation.convocation_firemen.with_sha1(params[:id]).first unless convocation.blank?
     if !convocation_fireman.nil? and convocation.editable?
       convocation_fireman.update_attribute(:presence, true)
       flash.now[:success] = "Votre confirmation a bien été prise en compte !"
