@@ -19,6 +19,7 @@ gem 'acts_as_geocodable', :github => 'osaris/acts_as_geocodable', :branch => 'ra
 gem 'acts-as-taggable-on'
 gem 'authlogic', :github => 'osaris/authlogic', :branch => 'rails4'
 gem 'carrierwave', :github => 'jnicklas/carrierwave', :ref => '719a13ce97'
+gem 'coffee-rails'
 gem 'daemons'
 gem 'dalli'
 gem 'delayed_job'
@@ -30,24 +31,18 @@ gem 'highline'
 gem 'jquery-rails'
 gem 'jquery-migrate-rails'
 gem 'jquery-ui-rails'
+gem 'libv8', '3.11.8.4'
 gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'prawn'
 gem 'prawnto_2', :require => 'prawnto'
+gem 'sass-rails'
 gem 'sass-rails-bootstrap'
 gem 'simple-navigation'
+gem 'therubyracer', '0.11.0'
 gem 'validates_timeliness'
 gem 'will_paginate'
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'libv8', '3.11.8.4'
-  gem 'therubyracer', '0.11.0'
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'yui-compressor'
-end
+gem 'yui-compressor'
 
 group :development do
   gem 'mailcatcher'
