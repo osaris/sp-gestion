@@ -1,10 +1,12 @@
 # -*- encoding : utf-8 -*-
 class TrainingsController < BackController
 
-  before_filter :load_training, :except => [:index, :new, :create]
+  before_action :load_training, :except => [:index, :new, :create]
 
   def index
-    @trainings = @station.trainings.paginate(:page => params[:page], :order => 'name, short_name')
+    @trainings = @station.trainings
+                         .page(params[:page])
+                         .order('name, short_name')
   end
 
   def show
@@ -15,7 +17,7 @@ class TrainingsController < BackController
   end
 
   def create
-    @training = @station.trainings.new(params[:training])
+    @training = @station.trainings.new(training_params)
     if(@training.save)
       flash[:success] = "La formation a été créée."
       redirect_to(@training)
@@ -28,7 +30,7 @@ class TrainingsController < BackController
   end
 
   def update
-    if @training.update_attributes(params[:training])
+    if @training.update_attributes(training_params)
       flash[:success] = "La formation a été mise à jour."
       redirect_to(@training)
     else
@@ -55,4 +57,7 @@ class TrainingsController < BackController
     redirect_to(trainings_path)
   end
 
+  def training_params
+    params.require(:training).permit(:name, :short_name, :description)
+  end
 end

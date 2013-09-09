@@ -95,10 +95,10 @@ describe TrainingsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :id => training.id, :training => {:name => '', :short_name => 'test'}
+        patch :update, :id => training.id, :training => {:name => '', :short_name => 'test'}
       end
 
       it { should respond_with(:success) }
@@ -106,10 +106,10 @@ describe TrainingsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :id => training.id, :training => plan(Training.make)
+        patch :update, :id => training.id, :training => plan(Training.make)
       end
 
       it { should respond_with(:redirect) }

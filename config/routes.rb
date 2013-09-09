@@ -2,10 +2,10 @@
 SpGestion::Application.routes.draw do
 
   constraints(:subdomain => 'www') do
-    match '/home' => 'pages#home', :as => :home
-    match '/bye' => 'pages#bye', :as => :bye
-    match '/signup' => 'stations#new', :as => :signup
-    match '/' => 'pages#home', :as => :root_front
+    get '/home' => 'pages#home', :as => :home
+    get '/bye' => 'pages#bye', :as => :bye
+    get '/signup' => 'stations#new', :as => :signup
+    get '/' => 'pages#home', :as => :root_front
   end
 
   constraints(:subdomain => /.+/) do
@@ -51,12 +51,12 @@ SpGestion::Application.routes.draw do
       end
       resources :fireman_trainings
     end
-    match '/firemen/:id/stats/change_year/:type' => 'firemen#stats_change_year', :as => :firemen_stats_change_year
-    match '/firemen/:id/stats/:year/:type' => 'firemen#stats', :as => :firemen_stats
+    get '/firemen/:id/stats/change_year/:type' => 'firemen#stats_change_year', :as => :firemen_stats_change_year
+    get '/firemen/:id/stats/:year/:type' => 'firemen#stats', :as => :firemen_stats
 
     resources :interventions
-    match '/interventions/stats/change_year/:type' => 'interventions#stats_change_year', :as => :interventions_stats_change_year
-    match '/interventions/stats/:year/:type' => 'interventions#stats', :as => :interventions_stats
+    get '/interventions/stats/change_year/:type' => 'interventions#stats_change_year', :as => :interventions_stats_change_year
+    get '/interventions/stats/:year/:type' => 'interventions#stats', :as => :interventions_stats
 
     resources :intervention_roles
 
@@ -80,8 +80,8 @@ SpGestion::Application.routes.draw do
 
     resources :password_resets, :only => [:new, :create, :edit, :update]
 
-    match '/profile' => 'profiles#edit', :as => :profile
-    match '/profile/update' => 'profiles#update', :as => :update_profile
+    get '/profile' => 'profiles#edit', :as => :profile
+    patch '/profile/update' => 'profiles#update', :as => :update_profile
 
     resources :stations, :only => [:new, :create, :check] do
       collection do
@@ -100,10 +100,10 @@ SpGestion::Application.routes.draw do
     resources :users, :only => [:new, :create, :destroy, :index]
     resources :vehicles
 
-    match '/login/authenticate' => 'user_sessions#create', :as => :authenticate
-    match '/login' => 'user_sessions#new', :as => :login
-    match '/logout' => 'user_sessions#destroy', :as => :logout
-    match '/' => 'dashboard#index', :as => :root_back
-    match '*url' => 'dashboard#index', :as => :error_404
+    post '/login/authenticate' => 'user_sessions#create', :as => :authenticate
+    get '/login' => 'user_sessions#new', :as => :login
+    delete '/logout' => 'user_sessions#destroy', :as => :logout
+    get '/' => 'dashboard#index', :as => :root_back
+    get '*url' => 'dashboard#index', :as => :error_404
   end
 end

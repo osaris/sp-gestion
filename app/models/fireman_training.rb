@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class FiremanTraining < ActiveRecord::Base
 
-  attr_accessible :training_id, :achieved_at, :rem
-
   belongs_to :fireman
   belongs_to :training
   belongs_to :station

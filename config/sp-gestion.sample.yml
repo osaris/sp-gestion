@@ -6,6 +6,8 @@ defaults: &defaults
     region: eu-west-1
     directory: s3.sp-gestion.fr
   google_api_key:
+  secret_token: please_change_me_because_i_m_not_safe
+  secret_key_base: and_me_too
 
 development:
   <<: *defaults

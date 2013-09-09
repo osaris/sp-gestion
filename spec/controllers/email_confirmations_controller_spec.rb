@@ -24,10 +24,10 @@ describe EmailConfirmationsController do
       it { should render_with_layout("login") }
     end
 
-    describe "PUT :update with bad password" do
+    describe "PATCH :update with bad password" do
 
       before(:each) do
-        put :update, :id => user.perishable_token,
+        patch :update, :id => user.perishable_token,
                      :user_session => { :email => user.email,
                                         :new_email => user.new_email,
                                         :password => '' }
@@ -40,10 +40,10 @@ describe EmailConfirmationsController do
       it { should set_the_flash.level(:error).now }
     end
 
-    describe "PUT :update with good password" do
+    describe "PATCH :update with good password" do
 
       before(:each) do
-        put :update, :id => user.perishable_token,
+        patch :update, :id => user.perishable_token,
                      :user_session => { :email => user.email,
                                         :new_email => user.new_email,
                                         :password => 'test1234' }
@@ -55,13 +55,13 @@ describe EmailConfirmationsController do
       it { should set_the_flash.level(:success) }
     end
 
-    describe "PUT :update with good password but new_email already used" do
+    describe "PATCH :update with good password but new_email already used" do
 
       before(:each) do
         user.new_email = User.make!(:confirmed, :station => station).email
         user.save
 
-        put :update, :id => user.perishable_token,
+        patch :update, :id => user.perishable_token,
                      :user_session => { :email => user.email,
                                         :new_email => user.new_email,
                                         :password => 'test1234' }

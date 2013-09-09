@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::UnknownController, :with => :redirect_to_homepage
   rescue_from AbstractController::ActionNotFound , :with => :redirect_to_homepage
 
-  before_filter :require_html_request
+  before_action :require_html_request
 
   private
 

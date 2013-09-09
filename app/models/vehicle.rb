@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Vehicle < ActiveRecord::Base
 
-  attr_accessible :name, :rem, :date_approval, :date_check, :date_review, :vehicle_photo, :remove_vehicle_photo
-
   belongs_to :station
   has_many :intervention_vehicles
   has_many :interventions, :through => :intervention_vehicles

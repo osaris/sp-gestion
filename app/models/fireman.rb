@@ -1,14 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Fireman < ActiveRecord::Base
 
-  attr_accessible :firstname, :lastname, :status, :birthday, :rem, :checkup, :email, :passeport_photo, :remove_passeport_photo, \
-                  :regimental_number, :incorporation_date, :resignation_date, :checkup_truck, :tag_list, :grades_attributes, \
-                  :validate_grade_update
-
   belongs_to :station
-  has_many :grades, :order => 'kind DESC', :dependent => :destroy
+  has_many :grades, -> { order 'kind DESC' }, :dependent => :destroy
   has_many :convocation_firemen
-  has_many :convocations, :through => :convocation_firemen, :order => 'date DESC'
+  has_many :convocations, -> { order 'date DESC' }, :through => :convocation_firemen
   has_many :fireman_interventions
   has_many :interventions, :through => :fireman_interventions
   has_many :fireman_trainings
@@ -51,10 +47,10 @@ class Fireman < ActiveRecord::Base
     'Actifs' => 3
   }
 
-  scope :order_by_grade_and_lastname, order('firemen.grade DESC, firemen.lastname ASC')
-  scope :not_resigned, where("COALESCE(firemen.resignation_date, '') = ''")
-  scope :resigned, where("COALESCE(firemen.resignation_date, '') <> ''")
-  scope :active, where(:status => Fireman::STATUS['Actif'])
+  scope :order_by_grade_and_lastname, -> { order('firemen.grade DESC, firemen.lastname ASC') }
+  scope :not_resigned, -> { where("COALESCE(firemen.resignation_date, '') = ''") }
+  scope :resigned, -> { where("COALESCE(firemen.resignation_date, '') <> ''") }
+  scope :active, -> { where(:status => Fireman::STATUS['Actif']) }
 
   def initialize(params = nil, *args)
     super

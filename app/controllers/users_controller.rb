@@ -1,15 +1,14 @@
 # -*- encoding : utf-8 -*-
 class UsersController < BackController
 
-  before_filter :require_not_demo
-  before_filter :load_user, :only => [:destroy]
-  before_filter :check_ownership
+  before_action :require_not_demo
+  before_action :load_user, :only => [:destroy]
+  before_action :check_ownership
 
   def index
-    @users = @station.users.paginate(
-      :page => params[:page],
-      :order => 'email'
-    )
+    @users = @station.users
+                     .page(params[:page])
+                     .order('email')
   end
 
   def new
@@ -17,7 +16,7 @@ class UsersController < BackController
   end
 
   def create
-    @user = @station.users.new(params[:user])
+    @user = @station.users.new(user_params)
     @user.cooptation = true
     if(@user.save)
       @user.deliver_cooptation_instructions!
@@ -50,4 +49,7 @@ class UsersController < BackController
     redirect_to(users_path)
   end
 
+  def user_params
+    params.require(:user).permit(:email)
+  end
 end

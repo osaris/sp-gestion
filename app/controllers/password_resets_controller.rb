@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class PasswordResetsController < BackController
 
-  skip_before_filter :require_user
-  before_filter :require_not_demo
-  before_filter :require_no_user
-  before_filter :load_user_using_perishable_token, :only => [:edit, :update]
+  skip_before_action :require_user
+  before_action :require_not_demo
+  before_action :require_no_user
+  before_action :load_user_using_perishable_token, :only => [:edit, :update]
 
   layout('login')
 
@@ -12,7 +12,7 @@ class PasswordResetsController < BackController
   end
 
   def create
-    @user = @station.users.find_by_email(params[:email])
+    @user = @station.users.where(:email => params[:email]).first
     if @user and @user.confirmed?
       @user.deliver_password_reset_instructions!
       flash.now[:warning] = "Les instructions pour recevoir votre nouveau mot de passe vous ont été transmises par email."

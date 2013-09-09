@@ -116,7 +116,7 @@ describe ConvocationFiremenController do
       end
 
       it { should respond_with(:success) }
-      it { should render_template("edit") }
+      it { should render_template("edit_all") }
       it { should render_with_layout("back") }
 
       it { expect(assigns(:convocation)).to_not be_nil }
@@ -147,13 +147,13 @@ describe ConvocationFiremenController do
       end
 
       it { should respond_with(:success) }
-      it { should render_template("show") }
+      it { should render_template("show_all") }
       it "send a file" do
         send_file_to_disk(@response.body, "liste_appel.pdf")
       end
     end
 
-    describe "PUT :update_all" do
+    describe "PATCH :update_all" do
 
       before(:each) do
         convocation_firemen_id = convocation.convocation_firemen.first.id

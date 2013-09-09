@@ -1,5 +1,5 @@
 <h4>Mise à jour de votre mot de passe</h4>
-<%= form_for(@user, :url => password_reset_path, :method => :put) do |f| %>
+<%= form_for(@user, :url => password_reset_path, :method => :patch) do |f| %>
   <fieldset>
     <div class="control-group">
       <%= f.label(:password, "Mot de passe") %>

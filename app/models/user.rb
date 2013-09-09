@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
-  attr_accessible :email, :new_email, :new_email_tmp, :password, :password_confirmation
-
   belongs_to :station
   has_many :messages, :dependent => :destroy
 
@@ -12,7 +10,7 @@ class User < ActiveRecord::Base
 
   before_create :reset_perishable_token
 
-  scope :confirmed, where(['confirmed_at IS NOT NULL'])
+  scope :confirmed, -> { where(['confirmed_at IS NOT NULL']) }
 
   validates_format_of :new_email_tmp, :with => Authlogic::Regex.email, :message => "L'adresse email est mal formée.", :allow_blank => true
   validates_length_of :new_email_tmp, :within => 6..100, :message => "L'adresse email doit avoir au minimum 6 caractères.", :allow_blank => true
@@ -89,20 +87,23 @@ class User < ActiveRecord::Base
   def update_profile(params)
     email_already_used = false
     email_change = false
-    if !params[:user][:new_email_tmp].blank? and params[:user][:new_email_tmp] != self.email
-      email_already_used = self.station.users.find_by_email(params[:user][:new_email_tmp])
-      if email_already_used
-        self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
-      else
-        params[:user][:new_email] = params[:user][:new_email_tmp]
+    if !params[:new_email_tmp].blank? and params[:new_email_tmp] != self.email
+      nb_users_with_same_email = self.station
+                                     .users
+                                     .where(:email => params[:new_email_tmp])
+                                     .count
+      if nb_users_with_same_email == 0
+        params[:new_email] = params[:new_email_tmp]
         email_change = true
+      else
+        self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
       end
     end
 
     if email_already_used
       result = false
     else
-      result = self.update_attributes(params[:user])
+      result = self.update_attributes(params)
       deliver_new_email_instructions! if result and email_change
     end
     result

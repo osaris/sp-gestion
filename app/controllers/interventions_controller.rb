@@ -1,19 +1,18 @@
 # -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
-  before_filter :load_intervention, :only => [:show, :edit, :update, :destroy]
-  before_filter :load_vehicles, :load_cities, :load_subkinds, \
+  before_action :load_intervention, :only => [:show, :edit, :update, :destroy]
+  before_action :load_vehicles, :load_cities, :load_subkinds, \
                 :only => [:new, :create, :edit, :update]
-  before_filter :build_or_load_fireman_interventions, :only => [:new, :edit]
-  before_filter :process_fireman_interventions_attrs, :only => [:create, :update]
+  before_action :build_or_load_fireman_interventions, :only => [:new, :edit]
+  before_action :process_fireman_interventions_attrs, :only => [:create, :update]
 
 
   def index
-    @interventions = @station.interventions.paginate(
-      :page => params[:page],
-      :include => [:vehicles, {:fireman_interventions => [:fireman]}],
-      :order => 'interventions.start_date DESC'
-    )
+    @interventions = @station.interventions
+                             .page(params[:page])
+                             .includes(:vehicles, {:fireman_interventions => [:fireman]})
+                             .order('interventions.start_date DESC')
   end
 
   def show
@@ -23,7 +22,7 @@ class InterventionsController < BackController
   end
 
   def create
-    @intervention = @station.interventions.new(params[:intervention])
+    @intervention = @station.interventions.new(intervention_params)
     if(@intervention.save)
       flash[:success] = "L'intervention a été créée."
       redirect_to(@intervention)
@@ -48,7 +47,7 @@ class InterventionsController < BackController
       # and rails omit them in this case !
       params[:intervention][:vehicle_ids] ||= []
       params[:intervention][:fireman_ids] ||= []
-      if @intervention.update_attributes(params[:intervention])
+      if @intervention.update_attributes(intervention_params)
         flash[:success] = "L'intervention a été mise à jour."
         redirect_to(@intervention)
       else
@@ -120,5 +119,14 @@ class InterventionsController < BackController
         fi_attr[:_destroy] = (fi_attr[:enable] != '1')
       end
     end
+  end
+
+  def intervention_params
+    params.require(:intervention).permit(:kind, :number, :start_date, :end_date,
+                                         :place, :rem, :city, :subkind,
+                                         vehicle_ids: [],
+                                         fireman_interventions_attributes: [
+                                            :id, :enable, :intervention_role_id,
+                                            :fireman_id, :_destroy])
   end
 end

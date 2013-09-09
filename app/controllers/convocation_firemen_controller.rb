@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class ConvocationFiremenController < BackController
 
-  before_filter :load_convocation, :except => [:accept]
-  skip_before_filter :require_user, :only => [:accept]
-  skip_before_filter :require_html_request, :only => [:show, :show_all]
+  before_action :load_convocation, :except => [:accept]
+  skip_before_action :require_user, :only => [:accept]
+  skip_before_action :require_html_request, :only => [:show, :show_all]
 
   def show
     @convocation_fireman = @convocation.convocation_firemen.find(params[:id])
@@ -16,8 +16,8 @@ class ConvocationFiremenController < BackController
   end
 
   def accept
-    convocation = @station.convocations.find_by_sha1(params[:convocation_id]).confirmable.first
-    convocation_fireman = convocation.convocation_firemen.find_by_sha1(params[:id]).first unless convocation.blank?
+    convocation = @station.convocations.with_sha1(params[:convocation_id]).confirmable.first
+    convocation_fireman = convocation.convocation_firemen.with_sha1(params[:id]).first unless convocation.blank?
     if !convocation_fireman.nil? and convocation.editable?
       convocation_fireman.update_attribute(:presence, true)
       flash.now[:success] = "Votre confirmation a bien été prise en compte !"

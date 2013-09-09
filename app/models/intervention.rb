@@ -1,13 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Intervention < ActiveRecord::Base
 
-  attr_accessible :kind, :number, :start_date, :end_date, :place, :rem, :city, :subkind, \
-                  :fireman_interventions_attributes, :vehicle_ids
-
   belongs_to :station
   has_many :intervention_vehicles, :dependent => :destroy
   has_many :vehicles, :through => :intervention_vehicles
-  has_many :fireman_interventions, :dependent => :destroy, :order => 'fireman_interventions.grade DESC'
+  has_many :fireman_interventions, -> { order 'fireman_interventions.grade DESC' }, :dependent => :destroy
   has_many :firemen, :through => :fireman_interventions
 
   accepts_nested_attributes_for :fireman_interventions, :allow_destroy => true
@@ -29,8 +26,8 @@ class Intervention < ActiveRecord::Base
     :sr => 4
   }.freeze
 
-  scope :newer, order('start_date DESC')
-  scope :latest, newer.limit(1)
+  scope :newer, -> { order('start_date DESC') }
+  scope :latest, -> { newer.limit(1) }
   scope :for_year_and_station, lambda {
     |station, year| where("interventions.station_id = ? AND YEAR(interventions.start_date) = ?", station.id, year)
   }

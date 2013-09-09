@@ -3,7 +3,7 @@ rvm:
 
 before_script:
   - cp config/sp-gestion.sample.yml config/sp-gestion.yml
-  - bundle exec rake db:drop db:create db:migrate
+  - bundle exec rake db:create db:migrate
 
 bundler_args:
   --without development staging production assets

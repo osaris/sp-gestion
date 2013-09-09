@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class FiremanTrainingsController < BackController
 
-  before_filter :load_fireman, :except => [:index]
-  before_filter :load_fireman_training, :except => [:index, :new, :create]
-  before_filter :load_trainings, :except => [:index, :show, :destroy]
+  before_action :load_fireman, :except => [:index]
+  before_action :load_fireman_training, :except => [:index, :new, :create]
+  before_action :load_trainings, :except => [:index, :show, :destroy]
 
   def index
     @fireman = @station.firemen.includes(:fireman_trainings => [:training]) \
@@ -22,7 +22,7 @@ class FiremanTrainingsController < BackController
   end
 
   def create
-    @fireman_training = @fireman.fireman_trainings.new(params[:fireman_training])
+    @fireman_training = @fireman.fireman_trainings.new(fireman_training_params)
     if(@fireman_training.save)
       flash[:success] = "La formation a été ajoutée."
       redirect_to([@fireman, @fireman_training])
@@ -35,7 +35,7 @@ class FiremanTrainingsController < BackController
   end
 
   def update
-    if @fireman_training.update_attributes(params[:fireman_training])
+    if @fireman_training.update_attributes(fireman_training_params)
       flash[:success] = "La formation a été mise à jour."
       redirect_to([@fireman, @fireman_training])
     else
@@ -71,5 +71,9 @@ class FiremanTrainingsController < BackController
 
   def load_trainings
     @trainings = @station.trainings.collect { |training| [ training.short_name, training.id ] }
+  end
+
+  def fireman_training_params
+    params.require(:fireman_training).permit(:training_id, :achieved_at, :rem)
   end
 end

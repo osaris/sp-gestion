@@ -1,11 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Convocation < ActiveRecord::Base
 
-  attr_accessible :title, :date, :uniform_id, :place, :rem, :hide_grade, :confirmable, :fireman_ids
-
   belongs_to :station
   belongs_to :uniform
-  has_many :convocation_firemen, :dependent => :destroy, :order => 'convocation_firemen.grade DESC'
+  has_many :convocation_firemen, -> { order 'convocation_firemen.grade DESC' }, :dependent => :destroy
   has_many :firemen, :through => :convocation_firemen
 
   delegate :url, :name, :to => :station, :prefix => true
@@ -19,11 +17,11 @@ class Convocation < ActiveRecord::Base
   validates_datetime :date
   validates_with ConvocationValidator
 
-  scope :newer, order('date DESC')
-  scope :find_by_sha1, lambda { |sha1|
+  scope :newer, -> { order('date DESC') }
+  scope :with_sha1, lambda { |sha1|
     where(['SHA1(id) = ?', sha1])
   }
-  scope :confirmable, where(:confirmable => true)
+  scope :confirmable, -> { where(confirmable: true) }
 
   def initialize(params = nil, *args)
     super
@@ -52,9 +50,7 @@ class Convocation < ActiveRecord::Base
     # store last emailed time
     self.update_attribute(:last_emailed_at, Time.now)
     # update station attributes
-    self.station.update_attributes({:last_email_sent_at => Time.now,
-                                    :nb_email_sent => station.nb_email_sent + nb_email},
-                                    :as => :send_emails)
+    self.station.update_attributes(:last_email_sent_at => Time.now,
+                                   :nb_email_sent => station.nb_email_sent + nb_email)
   end
-
 end

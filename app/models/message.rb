@@ -1,11 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Message < ActiveRecord::Base
 
-  attr_accessible :title, :body
-
   belongs_to :user
 
-  scope :unread, where(:read_at => nil)
+  scope :unread, -> { where(:read_at => nil) }
 
   def read?
     !self.read_at.blank?

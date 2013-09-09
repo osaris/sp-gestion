@@ -1,12 +1,14 @@
 # -*- encoding : utf-8 -*-
 class CheckListsController < BackController
 
-  before_filter :load_check_list, :except => [:index, :new, :create]
-  before_filter :reset_back_path # for expirings items back link
-  skip_before_filter :require_html_request, :only => [:show]
+  before_action :load_check_list, :except => [:index, :new, :create]
+  before_action :reset_back_path # for expirings items back link
+  skip_before_action :require_html_request, :only => [:show]
 
   def index
-    @check_lists = @station.check_lists.paginate(:page => params[:page], :order => 'title')
+    @check_lists = @station.check_lists
+                           .page(params[:page])
+                           .order('title')
   end
 
   def show
@@ -24,7 +26,7 @@ class CheckListsController < BackController
   end
 
   def create
-    @check_list = @station.check_lists.new(params[:check_list])
+    @check_list = @station.check_lists.new(check_list_params)
     if(@check_list.save)
       flash[:success] = "La liste a été créée."
       redirect_to(@check_list)
@@ -37,7 +39,7 @@ class CheckListsController < BackController
   end
 
   def update
-    if @check_list.update_attributes(params[:check_list])
+    if @check_list.update_attributes(check_list_params)
       flash[:success] = "La liste a été mise à jour."
       redirect_to(@check_list)
     else
@@ -72,4 +74,7 @@ class CheckListsController < BackController
     redirect_to(check_lists_path)
   end
 
+  def check_list_params
+    params.require(:check_list).permit(:title)
+  end
 end

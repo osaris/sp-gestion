@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class AccountsController < BackController
 
-  before_filter :require_not_demo
-  before_filter :check_ownership
+  before_action :require_not_demo
+  before_action :check_ownership
 
   def edit
     @users = @station.users.confirmed.where(["users.id != ?",
@@ -19,7 +19,7 @@ class AccountsController < BackController
   end
 
   def update_settings
-    if @station.update_attributes(params[:station])
+    if @station.update_attributes(station_params)
       flash[:success] = "Les paramètres ont bien été mis à jour !"
     else
       flash[:error] = "Erreur lors de la mise à jour !"
@@ -31,4 +31,13 @@ class AccountsController < BackController
     @station.delay.destroy
     redirect_to(bye_url(:subdomain => 'www'))
   end
+
+  private
+
+  def station_params
+    params.require(:station).permit(:name, :url, :logo, :remove_logo,
+                                    :interventions_number_size,
+                                    :interventions_number_per_year)
+  end
+
 end

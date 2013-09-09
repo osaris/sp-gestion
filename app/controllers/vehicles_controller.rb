@@ -1,10 +1,12 @@
 # -*- encoding : utf-8 -*-
 class VehiclesController < BackController
 
-  before_filter :load_vehicle, :except => [:index, :new, :create]
+  before_action :load_vehicle, :except => [:index, :new, :create]
 
   def index
-    @vehicles = @station.vehicles.paginate(:page => params[:page], :order => 'name')
+    @vehicles = @station.vehicles
+                        .page(params[:page])
+                        .order('name')
   end
 
   def show
@@ -15,7 +17,7 @@ class VehiclesController < BackController
   end
 
   def create
-    @vehicle = @station.vehicles.new(params[:vehicle])
+    @vehicle = @station.vehicles.new(vehicle_params)
     if(@vehicle.save)
       flash[:success] = "Le véhicule a été créé."
       redirect_to(@vehicle)
@@ -28,7 +30,7 @@ class VehiclesController < BackController
   end
 
   def update
-    if @vehicle.update_attributes(params[:vehicle])
+    if @vehicle.update_attributes(vehicle_params)
       flash[:success] = "Le véhicule a été mis à jour."
       redirect_to(@vehicle)
     else
@@ -55,4 +57,9 @@ class VehiclesController < BackController
     redirect_to(vehicles_path)
   end
 
+  def vehicle_params
+    params.require(:vehicle).permit(:name, :rem, :date_approval,
+                                        :date_check, :date_review,
+                                        :vehicle_photo, :remove_vehicle_photo)
+  end
 end

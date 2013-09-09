@@ -53,14 +53,14 @@ describe AccountsController do
     end
   end
 
-  describe "PUT :update_settings with remove logo" do
+  describe "PATCH :update_settings with remove logo" do
 
     context "a station with a logo" do
 
       before do
         login(Station.make!(:logo, :owner_id => user.id), user)
 
-        put :update_settings, :station => { :remove_logo => '1' }
+        patch :update_settings, :station => { :remove_logo => '1' }
       end
 
       it "delete logo station" do
@@ -71,12 +71,12 @@ describe AccountsController do
     end
   end
 
-  describe "PUT :update_settings with new logo" do
+  describe "PATCH :update_settings with new logo" do
 
     before do
       login(Station.make!(:owner_id => user.id), user)
 
-      put :update_settings, :station => { :logo => logo }
+      patch :update_settings, :station => { :logo => logo }
     end
 
     it "add logo to station" do
@@ -86,12 +86,12 @@ describe AccountsController do
     it { should set_the_flash[:success] }
   end
 
-  describe "PUT :update_settings with bad logo" do
+  describe "PATCH :update_settings with bad logo" do
 
     before do
       login(Station.make!(:owner_id => user.id), user)
 
-      put :update_settings, :station => { :logo => logo_txt }
+      patch :update_settings, :station => { :logo => logo_txt }
     end
 
     it "doesn't add logo to station" do
@@ -101,13 +101,13 @@ describe AccountsController do
     it { should set_the_flash[:error] }
   end
 
-  describe "PUT :update_owner with good data" do
+  describe "PATCH :update_owner with good data" do
 
     before do
       login(Station.make!(:owner_id => user.id), user)
       allow_any_instance_of(Station).to receive(:update_owner).and_return(true)
 
-      put :update_owner, :station => { :owner_id => '' }
+      patch :update_owner, :station => { :owner_id => '' }
     end
 
     it { should redirect_to(root_back_url) }
@@ -115,13 +115,13 @@ describe AccountsController do
     it { should set_the_flash[:success] }
   end
 
-  describe "PUT :update_owner with bad data" do
+  describe "PATCH :update_owner with bad data" do
 
     before do
       login(Station.make!(:owner_id => user.id), user)
       allow_any_instance_of(Station).to receive(:update_owner).and_return(false)
 
-      put :update_owner, :station => { :owner_id => '' }
+      patch :update_owner, :station => { :owner_id => '' }
     end
 
     it { should redirect_to(root_back_url) }

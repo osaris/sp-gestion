@@ -3,9 +3,9 @@ class EmailConfirmationsController < BackController
 
   layout('login')
 
-  skip_before_filter :require_user
+  skip_before_action :require_user
 
-  before_filter :load_user_using_perishable_token
+  before_action :load_user_using_perishable_token
 
   def edit
     @user_session = @station.user_sessions.new

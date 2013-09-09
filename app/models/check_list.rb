@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CheckList < ActiveRecord::Base
 
-  attr_accessible :title
-
   belongs_to :station
   has_many :items, :dependent => :destroy
 

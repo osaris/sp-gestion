@@ -1,9 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Station < ActiveRecord::Base
 
-  attr_accessible :name, :url, :logo, :remove_logo, :interventions_number_size, :interventions_number_per_year
-  attr_accessible :last_email_sent_at, :nb_email_sent, :as => :send_emails
-
   # TODO fix when https://github.com/binarylogic/authlogic/issues/135 is closed
   class FindOptions
     def inspect
@@ -19,7 +16,7 @@ class Station < ActiveRecord::Base
   has_many :check_lists, :dependent => :destroy
   has_many :firemen, :dependent => :destroy
   has_many :intervention_roles, :dependent => :destroy
-  has_many :trainings, :dependent => :destroy, :order => 'short_name'
+  has_many :trainings, -> { order 'short_name' }, :dependent => :destroy
   has_many :uniforms, :dependent => :destroy
   has_many :vehicles, :dependent => :destroy
   has_one  :owner, :class_name => "User"
@@ -35,13 +32,13 @@ class Station < ActiveRecord::Base
   validates_length_of       :url, :minimum => 5, :message => "L'adresse de votre site doit avoir au minimum 5 caractères."
   validates_length_of       :name, :minimum => 5, :message => "Le nom du centre doit avoir au minimum 5 caractères."
   validates_exclusion_of    :url, :in => RESERVED_URL, :message => "Cette adresse est déjà utilisée, veuillez en choisir une autre."
-  validates_format_of       :url, :with => /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*$/ix, :message => "L'adresse ne doit contenir que des chiffres, des lettres et des tirets."
+  validates_format_of       :url, :with => /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*/ix, :message => "L'adresse ne doit contenir que des chiffres, des lettres et des tirets."
   validates_numericality_of :interventions_number_size, :greater_than_or_equal_to => 0, :less_than => 11, :message => "La longueur doit être entre 0 et 10."
 
   after_create :create_defaults_uniforms
   after_create :set_owner
 
-  scope :demo, where(:demo => true)
+  scope :demo, -> { where(:demo => true) }
 
   def initialize(params = nil, *args)
     super

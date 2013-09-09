@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Uniform < ActiveRecord::Base
 
-  attr_accessible :title, :description, :code
-
   belongs_to :station
   has_many :convocations
 
