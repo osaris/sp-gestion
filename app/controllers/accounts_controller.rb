@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class AccountsController < BackController
 
-  before_filter :require_not_demo
-  before_filter :check_ownership
+  before_action :require_not_demo
+  before_action :check_ownership
 
   def edit
     @users = @station.users.confirmed.where(["users.id != ?",

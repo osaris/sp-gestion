@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class TrainingsController < BackController
 
-  before_filter :load_training, :except => [:index, :new, :create]
+  before_action :load_training, :except => [:index, :new, :create]
 
   def index
     @trainings = @station.trainings

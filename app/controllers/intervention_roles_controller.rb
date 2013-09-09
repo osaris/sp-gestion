@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class InterventionRolesController < BackController
 
-  before_filter :load_intervention_role, :except => [:index, :new, :create]
+  before_action :load_intervention_role, :except => [:index, :new, :create]
 
   def index
     @intervention_roles = @station.intervention_roles

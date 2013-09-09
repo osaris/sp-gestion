@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class VehiclesController < BackController
 
-  before_filter :load_vehicle, :except => [:index, :new, :create]
+  before_action :load_vehicle, :except => [:index, :new, :create]
 
   def index
     @vehicles = @station.vehicles

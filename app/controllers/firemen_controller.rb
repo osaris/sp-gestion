@@ -3,8 +3,8 @@ class FiremenController < BackController
 
   helper(:interventions)
 
-  before_filter :load_fireman, :except => [:index, :new, :create, :facebook, :resigned, :trainings]
-  before_filter :load_tags, :only => [:new, :create, :edit, :update]
+  before_action :load_fireman, :except => [:index, :new, :create, :facebook, :resigned, :trainings]
+  before_action :load_tags, :only => [:new, :create, :edit, :update]
 
   def index
     @firemen = @station.firemen

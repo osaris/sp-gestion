@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class BackController < ApplicationController
 
-  before_filter :load_station
-  before_filter :require_user
+  before_action :load_station
+  before_action :require_user
 
   layout('back')
 

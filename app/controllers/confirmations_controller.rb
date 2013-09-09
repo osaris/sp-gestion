@@ -3,10 +3,10 @@ class ConfirmationsController < BackController
 
   layout('login')
 
-  skip_before_filter :require_user
-  before_filter :require_no_user
+  skip_before_action :require_user
+  before_action :require_no_user
 
-  before_filter :load_user
+  before_action :load_user
 
   def edit
   end

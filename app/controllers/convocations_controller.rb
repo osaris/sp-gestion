@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class ConvocationsController < BackController
 
-  before_filter :require_not_demo, :only => [:email]
-  before_filter :load_convocation, :except => [:index, :new, :create]
-  before_filter :load_firemen, :only => [:new, :create, :edit, :update]
-  skip_before_filter :require_html_request, :only => [:show]
+  before_action :require_not_demo, :only => [:email]
+  before_action :load_convocation, :except => [:index, :new, :create]
+  before_action :load_firemen, :only => [:new, :create, :edit, :update]
+  skip_before_action :require_html_request, :only => [:show]
 
   def index
     @convocations = @station.convocations

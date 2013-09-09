@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class FiremanTrainingsController < BackController
 
-  before_filter :load_fireman, :except => [:index]
-  before_filter :load_fireman_training, :except => [:index, :new, :create]
-  before_filter :load_trainings, :except => [:index, :show, :destroy]
+  before_action :load_fireman, :except => [:index]
+  before_action :load_fireman_training, :except => [:index, :new, :create]
+  before_action :load_trainings, :except => [:index, :show, :destroy]
 
   def index
     @fireman = @station.firemen.includes(:fireman_trainings => [:training]) \

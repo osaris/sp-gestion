@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
-  before_filter :load_intervention, :only => [:show, :edit, :update, :destroy]
-  before_filter :load_vehicles, :load_cities, :load_subkinds, \
+  before_action :load_intervention, :only => [:show, :edit, :update, :destroy]
+  before_action :load_vehicles, :load_cities, :load_subkinds, \
                 :only => [:new, :create, :edit, :update]
-  before_filter :build_or_load_fireman_interventions, :only => [:new, :edit]
-  before_filter :process_fireman_interventions_attrs, :only => [:create, :update]
+  before_action :build_or_load_fireman_interventions, :only => [:new, :edit]
+  before_action :process_fireman_interventions_attrs, :only => [:create, :update]
 
 
   def index

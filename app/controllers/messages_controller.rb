@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class MessagesController < BackController
 
-  before_filter :load_message, :except => :index
-  skip_before_filter :require_html_request, :only => [:mark_as_read]
+  before_action :load_message, :except => :index
+  skip_before_action :require_html_request, :only => [:mark_as_read]
 
   def index
     @messages = current_user.messages

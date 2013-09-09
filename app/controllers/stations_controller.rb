@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class StationsController < FrontController
 
-  skip_before_filter :require_html_request, :only => [:check]
+  skip_before_action :require_html_request, :only => [:check]
 
   def new
     @station = Station.new

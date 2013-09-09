@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class PasswordResetsController < BackController
 
-  skip_before_filter :require_user
-  before_filter :require_not_demo
-  before_filter :require_no_user
-  before_filter :load_user_using_perishable_token, :only => [:edit, :update]
+  skip_before_action :require_user
+  before_action :require_not_demo
+  before_action :require_no_user
+  before_action :load_user_using_perishable_token, :only => [:edit, :update]
 
   layout('login')
 

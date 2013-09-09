@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class UniformsController < BackController
 
-  before_filter :load_uniform, :except => [:index, :new, :create, :reset]
+  before_action :load_uniform, :except => [:index, :new, :create, :reset]
 
   def index
     @uniforms = @station.uniforms

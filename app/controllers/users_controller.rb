@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class UsersController < BackController
 
-  before_filter :require_not_demo
-  before_filter :load_user, :only => [:destroy]
-  before_filter :check_ownership
+  before_action :require_not_demo
+  before_action :load_user, :only => [:destroy]
+  before_action :check_ownership
 
   def index
     @users = @station.users

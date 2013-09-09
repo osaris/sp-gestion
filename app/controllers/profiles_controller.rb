@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ProfilesController < BackController
 
-  before_filter :require_not_demo
-  before_filter :load_user
+  before_action :require_not_demo
+  before_action :load_user
 
   def edit
   end

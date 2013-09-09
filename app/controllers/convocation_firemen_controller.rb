@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class ConvocationFiremenController < BackController
 
-  before_filter :load_convocation, :except => [:accept]
-  skip_before_filter :require_user, :only => [:accept]
-  skip_before_filter :require_html_request, :only => [:show, :show_all]
+  before_action :load_convocation, :except => [:accept]
+  skip_before_action :require_user, :only => [:accept]
+  skip_before_action :require_html_request, :only => [:show, :show_all]
 
   def show
     @convocation_fireman = @convocation.convocation_firemen.find(params[:id])

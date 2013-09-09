@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class ItemsController < BackController
 
-  before_filter :load_check_list, :except => [:expirings]
-  before_filter :load_item, :except => [:new, :create, :expirings]
-  skip_before_filter :require_html_request, :only => [:expirings]
+  before_action :load_check_list, :except => [:expirings]
+  before_action :load_item, :except => [:new, :create, :expirings]
+  skip_before_action :require_html_request, :only => [:expirings]
 
   def expirings
     @items = Item.expirings(30, @station.id)
