@@ -98,10 +98,10 @@ describe ConvocationsController do
         it { should set_the_flash.level(:error) }
       end
 
-      describe "PUT :update with good data" do
+      describe "PATCH :update with good data" do
 
         before(:each) do
-          put :update, :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
+          patch :update, :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                                                 :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s}
         end
 
@@ -167,10 +167,10 @@ describe ConvocationsController do
         it { should render_with_layout("back") }
       end
 
-      describe "PUT :update with bad data" do
+      describe "PATCH :update with bad data" do
 
         before(:each) do
-          put :update, :id => convocation.id, :convocation => {:title => "", :date => I18n.localize(2.weeks.from_now), :place => "",
+          patch :update, :id => convocation.id, :convocation => {:title => "", :date => I18n.localize(2.weeks.from_now), :place => "",
                                                                 :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s}
         end
 
@@ -179,10 +179,10 @@ describe ConvocationsController do
         it { should render_with_layout("back") }
       end
 
-      describe "PUT :update with good data" do
+      describe "PATCH :update with good data" do
 
         before(:each) do
-          put :update, :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
+          patch :update, :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
                                                                 :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s}
         end
 

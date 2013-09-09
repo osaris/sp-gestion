@@ -105,10 +105,10 @@ describe FiremanTrainingsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :fireman_id => fireman.id, :id => fireman_training.id,
+        patch :update, :fireman_id => fireman.id, :id => fireman_training.id,
                                                  :fireman_training => {
                                                     :training_id => training.id.to_s,
                                                     :achieved_at => ''
@@ -120,10 +120,10 @@ describe FiremanTrainingsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :fireman_id => fireman.id, :id => fireman_training.id,
+        patch :update, :fireman_id => fireman.id, :id => fireman_training.id,
                                                  :fireman_training => {
                                                     :training_id => training.id.to_s,
                                                     :achieved_at => I18n.localize(10.days.ago)

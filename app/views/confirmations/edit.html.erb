@@ -1,4 +1,4 @@
-<%= form_for @user, :url => confirmation_path(@user.perishable_token), :html => { :method => :put } do |f| %>
+<%= form_for @user, :url => confirmation_path(@user.perishable_token), :html => { :method => :patch } do |f| %>
   <fieldset>
     <div class="control-group">
       <%= f.label(:password, "Choisissez un mot de passe") %>

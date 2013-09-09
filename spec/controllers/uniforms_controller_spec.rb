@@ -106,10 +106,10 @@ describe UniformsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :id => uniform.id, :uniform => {:title => '', :code => '2b', :description => 'test'}
+        patch :update, :id => uniform.id, :uniform => {:title => '', :code => '2b', :description => 'test'}
       end
 
       it { should respond_with(:success) }
@@ -117,10 +117,10 @@ describe UniformsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :id => uniform.id, :uniform => plan(Uniform.make)
+        patch :update, :id => uniform.id, :uniform => plan(Uniform.make)
       end
 
       it { should respond_with(:redirect) }

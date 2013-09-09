@@ -108,10 +108,10 @@ describe CheckListsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :id => check_list.id, :check_list => {:title => ''}
+        patch :update, :id => check_list.id, :check_list => {:title => ''}
       end
 
       it { should respond_with(:success) }
@@ -119,10 +119,10 @@ describe CheckListsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :id => check_list.id, :check_list => plan(CheckList.make)
+        patch :update, :id => check_list.id, :check_list => plan(CheckList.make)
       end
 
       it { should respond_with(:redirect) }

@@ -40,10 +40,10 @@ describe ProfilesController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :user => { :password => '123456', :password_confirmation => '123456' }
+        patch :update, :user => { :password => '123456', :password_confirmation => '123456' }
       end
 
       it { should respond_with(:redirect) }
@@ -52,10 +52,10 @@ describe ProfilesController do
       it { should set_the_flash.level(:success) }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :user => { :password => '123456', :password_confirmation => '' }
+        patch :update, :user => { :password => '123456', :password_confirmation => '' }
       end
 
       it { should respond_with(:success) }

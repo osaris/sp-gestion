@@ -3,7 +3,7 @@
 <div class="clearfix"></div>
 
 <div class="block-title"><h5>Numérotation des interventions</h5></div>
-<%= form_for(:station, :url => update_settings_account_path, :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+<%= form_for(:station, :url => update_settings_account_path, :html => { :method => :patch, :class => 'form-horizontal' }) do |f| %>
   <fieldset>
     <div class="control-group">
       <%= f.label(:interventions_number_per_year, "Par année", :class => 'control-label') %>
@@ -34,7 +34,7 @@
 <div class="clearfix"></div>
 
 <div class="block-title"><h5>Logo  (png ou jpg) de 100 x 50 pixels</h5></div>
-<%= form_for(:station, :url => update_settings_account_path, :html => { :method => :put,  :class => 'form-horizontal' }) do |f| %>
+<%= form_for(:station, :url => update_settings_account_path, :html => { :method => :patch,  :class => 'form-horizontal' }) do |f| %>
   <fieldset>
     <div class="control-group">
       <%= f.label(:logo, "Fichier", :class => 'control-label')%>
@@ -62,7 +62,7 @@
 <div class="block-title"><h5>Changer le propriétaire du compte</h5></div>
 <%- if @users.size > 0 -%>
   <p class="alert alert-warning">Attention en transférant la propriété de ce compte à un autre utilisateur vous n'aurez plus la possibilité de gérer les utilisateurs et de re-changer le propriétaire.</p>
-  <%= form_for(:station, :url => update_owner_account_path, :html => { :method => :put, :id => :account_update_owner, :class => 'form-horizontal' }) do |f| %>
+  <%= form_for(:station, :url => update_owner_account_path, :html => { :method => :patch, :id => :account_update_owner, :class => 'form-horizontal' }) do |f| %>
     <fieldset>
       <div class="control-group">
         <%= f.label(:owner_id, "Nouveau propriétaire du compte", :class => 'control-label') %>

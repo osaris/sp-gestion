@@ -99,10 +99,10 @@ describe PasswordResetsController do
       it { should_not set_the_flash() }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :id => user.perishable_token,
+        patch :update, :id => user.perishable_token,
                      :user => {:password => 'test',
                                :password_confirmation => 'tes'}
       end
@@ -112,10 +112,10 @@ describe PasswordResetsController do
       it { should render_with_layout("login") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :id => user.perishable_token,
+        patch :update, :id => user.perishable_token,
                      :user => {:password => 'test2958',
                                :password_confirmation => 'test2958'}
       end

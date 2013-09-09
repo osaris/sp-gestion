@@ -153,7 +153,7 @@ describe ConvocationFiremenController do
       end
     end
 
-    describe "PUT :update_all" do
+    describe "PATCH :update_all" do
 
       before(:each) do
         convocation_firemen_id = convocation.convocation_firemen.first.id

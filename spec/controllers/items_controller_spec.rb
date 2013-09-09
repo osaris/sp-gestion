@@ -151,10 +151,10 @@ describe ItemsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :check_list_id => check_list.id,
+        patch :update, :check_list_id => check_list.id,
                      :id => item.id,
                      :item => {:title => '', :quantity => '1'}
       end
@@ -164,10 +164,10 @@ describe ItemsController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :check_list_id => check_list.id,
+        patch :update, :check_list_id => check_list.id,
                      :id => item.id,
                      :item => {:title => 'Test', :quantity => '1'}
       end
@@ -179,12 +179,12 @@ describe ItemsController do
       it { should set_the_flash.level(:success) }
     end
 
-    describe "PUT :update with good data and back_path set to expiring" do
+    describe "PATCH :update with good data and back_path set to expiring" do
 
       before(:each) do
         session[:back_path] = expirings_items_path
 
-        put :update, :check_list_id => check_list.id,
+        patch :update, :check_list_id => check_list.id,
                      :id => item.id,
                      :item => {:title => 'Test', :quantity => '1'}
       end

@@ -166,10 +166,10 @@ describe InterventionsController do
         it { should set_the_flash.level(:error) }
       end
 
-      describe "PUT :update with good data" do
+      describe "PATCH :update with good data" do
 
         before(:each) do
-          put :update, :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
+          patch :update, :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
                                                                   :start_date => I18n.localize(3.hours.ago),
                                                                   :end_date => I18n.localize(2.hours.ago),
                                                                   :fireman_interventions_attributes => {
@@ -217,10 +217,10 @@ describe InterventionsController do
         it { should render_with_layout("back") }
       end
 
-      describe "PUT :update with bad data" do
+      describe "PATCH :update with bad data" do
 
         before(:each) do
-          put :update, :id => intervention.id, :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_interventions_attributes => {}}
+          patch :update, :id => intervention.id, :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_interventions_attributes => {}}
         end
 
         it { should respond_with(:success) }
@@ -228,10 +228,10 @@ describe InterventionsController do
         it { should render_with_layout("back") }
       end
 
-      describe "PUT :update with good data" do
+      describe "PATCH :update with good data" do
 
         before(:each) do
-          put :update, :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
+          patch :update, :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
                                                                   :start_date => I18n.localize(3.hours.ago),
                                                                   :end_date => I18n.localize(2.hours.ago),
                                                                   :fireman_interventions_attributes => {

@@ -193,10 +193,10 @@ describe FiremenController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with bad data" do
+    describe "PATCH :update with bad data" do
 
       before(:each) do
-        put :update, :id => fireman.id, :fireman => {:firstname => '', :lastname => ''}
+        patch :update, :id => fireman.id, :fireman => {:firstname => '', :lastname => ''}
       end
 
       it { should respond_with(:success) }
@@ -204,10 +204,10 @@ describe FiremenController do
       it { should render_with_layout("back") }
     end
 
-    describe "PUT :update with good data" do
+    describe "PATCH :update with good data" do
 
       before(:each) do
-        put :update, :id => fireman.id, :fireman => {:firstname => 'My firstname', :lastname => 'My lastname' }
+        patch :update, :id => fireman.id, :fireman => {:firstname => 'My firstname', :lastname => 'My lastname' }
       end
 
       it { should respond_with(:redirect) }
@@ -216,12 +216,12 @@ describe FiremenController do
       it { should set_the_flash.level(:success) }
     end
 
-    describe "PUT :update with warnings" do
+    describe "PATCH :update with warnings" do
 
       before(:each) do
         allow_any_instance_of(Fireman).to receive(:warnings).and_return('Warning')
 
-        put :update, :id => fireman.id, :fireman => {:firstname => 'My firstname', :lastname => 'My lastname' }
+        patch :update, :id => fireman.id, :fireman => {:firstname => 'My firstname', :lastname => 'My lastname' }
       end
 
       it { should set_the_flash.level(:warning) }
