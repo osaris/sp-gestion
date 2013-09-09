@@ -64,6 +64,9 @@ GEM
       activemodel
       fog (>= 1.8.0)
     atomic (1.1.13)
+    bootstrap-sass-rails (2.3.2.1)
+      railties (>= 3.1.0)
+      sass-rails (>= 3.1.0)
     builder (3.1.4)
     capistrano (2.15.5)
       highline
@@ -236,9 +239,6 @@ GEM
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    sass-rails-bootstrap (2.2.2.3)
-      rails (>= 3.1)
-      sass-rails (>= 3.2.3)
     simple-navigation (3.11.0)
       activesupport (>= 2.3.2)
     simplecov (0.7.1)
@@ -296,6 +296,7 @@ DEPENDENCIES
   aproxacs-s3sync
   asset_sync
   authlogic!
+  bootstrap-sass-rails (= 2.3.2.1)
   capistrano
   carrierwave
   coffee-rails
@@ -327,7 +328,6 @@ DEPENDENCIES
   rake
   rspec-rails
   sass-rails
-  sass-rails-bootstrap
   shoulda-matchers!
   simple-navigation
   simplecov
