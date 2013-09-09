@@ -9,7 +9,7 @@ CarrierWave.configure do |config|
       :region                 => SPG_CONFIG['fog']['region']
     }
     config.fog_directory  = SPG_CONFIG['fog']['directory']
-    config.fog_host       = "http://#{SPG_CONFIG['fog']['directory']}"
+    config.asset_host     = "http://#{SPG_CONFIG['fog']['directory']}"
     config.fog_public     = true
     config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
   else
