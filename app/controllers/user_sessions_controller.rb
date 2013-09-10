@@ -26,5 +26,4 @@ class UserSessionsController < BackController
     flash[:success] = "Vous êtes désormais déconnecté."
     redirect_to(login_path)
   end
-
 end

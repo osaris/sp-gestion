@@ -102,7 +102,7 @@ SpGestion::Application.routes.draw do
 
     post '/login/authenticate' => 'user_sessions#create', :as => :authenticate
     get '/login' => 'user_sessions#new', :as => :login
-    delete '/logout' => 'user_sessions#destroy', :as => :logout
+    get '/logout' => 'user_sessions#destroy', :as => :logout
     get '/' => 'dashboard#index', :as => :root_back
     get '*url' => 'dashboard#index', :as => :error_404
   end
