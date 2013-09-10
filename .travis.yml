@@ -6,7 +6,7 @@ before_script:
   - bundle exec rake db:create db:migrate
 
 bundler_args:
-  --without development staging production assets
+  --without development staging production
 
 script:
   - bundle exec rake spec
