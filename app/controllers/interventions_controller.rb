@@ -4,7 +4,6 @@ class InterventionsController < BackController
   before_action :load_intervention, :only => [:show, :edit, :update, :destroy]
   before_action :load_vehicles, :load_cities, :load_subkinds, \
                 :only => [:new, :create, :edit, :update]
-  before_action :build_or_load_fireman_interventions, :only => [:new, :edit]
   before_action :process_fireman_interventions_attrs, :only => [:create, :update]
 
 
@@ -19,6 +18,7 @@ class InterventionsController < BackController
   end
 
   def new
+    @intervention = @station.interventions.new
   end
 
   def create
@@ -104,13 +104,6 @@ class InterventionsController < BackController
 
   def load_subkinds
     @subkinds = Intervention::subkinds(@station)
-  end
-
-  def build_or_load_fireman_interventions
-    @intervention ||= @station.interventions.new
-    @station.firemen.not_resigned.active.where('id not in (?)', @intervention.firemen).each do |f|
-      @intervention.fireman_interventions.new(:fireman => f)
-    end
   end
 
   def process_fireman_interventions_attrs
