@@ -63,6 +63,12 @@ rake db:setup
 * browse `www.sp-gestion.dev` for home
 * browse `demo.sp-gestion.dev` for a sample account (login : demo@sp-gestion.dev | pass : demospg)
 
+Emails
+======
+
+Development environment is configured to use [Mailcatcher](http://mailcatcher.me/).
+Simply run `gem install mailcatcher` then `mailcatcher` to get started.
+
 Tests
 =====
 

@@ -43,7 +43,6 @@ gem 'will_paginate'
 gem 'yui-compressor'
 
 group :development do
-  gem 'mailcatcher'
   gem 'rails-erd'
   gem 'rspec-rails'
 end
