@@ -24,12 +24,12 @@
     </div>
   </div>
   <div class="pull-right">
-    <%- if @intervention.geocode.blank? %>
-      Impossible de localiser l'adresse, essayez de la modifier pour avoir une vue du lieu de l'intervention.
-    <%- else -%>
+    <%- if @intervention.geocoded? %>
       <div style="width: 450px; height: 250px;">
         <%= map_for(@intervention) %>
       </div>
+    <%- else -%>
+      Impossible de localiser l'adresse, essayez de la modifier pour avoir une vue du lieu de l'intervention.
     <%- end -%>
   </div>
 </div>

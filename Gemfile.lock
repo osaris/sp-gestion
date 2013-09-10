@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/osaris/acts_as_geocodable.git
-  revision: abf15b54b95392e3cb3bc236dc8bbcd01bc77507
-  branch: rails4
-  specs:
-    acts_as_geocodable (2.0.3)
-      graticule (>= 2.0.0)
-
-GIT
   remote: git://github.com/osaris/authlogic.git
   revision: 9c63b6ecbe49065c0c7e46219e686d1fac47cfad
   branch: rails4
@@ -120,19 +112,11 @@ GEM
       nokogiri (~> 1.5)
       ruby-hmac
     formatador (0.2.4)
+    geocoder (1.1.8)
     googlecharts (1.6.8)
-    graticule (2.3.0)
-      activesupport
-      happymapper (>= 0.3.0)
-      htmlentities
-      i18n
-      json
-    happymapper (0.4.0)
-      libxml-ruby (~> 2.0)
     hashery (2.1.1)
     highline (1.6.19)
     hike (1.2.3)
-    htmlentities (4.3.1)
     i18n (0.6.5)
     jquery-migrate-rails (1.2.1)
     jquery-rails (3.0.4)
@@ -144,7 +128,6 @@ GEM
     json (1.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
-    libxml-ruby (2.7.0)
     machinist (2.0)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -258,7 +241,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  acts_as_geocodable!
   airbrake
   aproxacs-s3sync
   asset_sync
@@ -275,8 +257,8 @@ DEPENDENCIES
   email_spec
   faker
   fog
+  geocoder
   googlecharts
-  graticule
   highline
   jquery-migrate-rails
   jquery-rails

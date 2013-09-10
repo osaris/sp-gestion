@@ -32,7 +32,7 @@ module InterventionsHelper
     html = content_tag(:div, '', :id => 'google_map', :style => 'width: 450px; height: 250px;')
     html += javascript_include_tag("https://maps.google.com/maps/api/js?&sensor=false&key=#{Rails.configuration.google_api_key}")
     html += javascript_tag("
-      var latlng = new google.maps.LatLng(#{intervention.geocode.latitude}, #{intervention.geocode.longitude});
+      var latlng = new google.maps.LatLng(#{intervention.latitude}, #{intervention.longitude});
       var options = {
         center: latlng,
         zoom: 14,
@@ -40,7 +40,7 @@ module InterventionsHelper
       };
       var map = new google.maps.Map(document.getElementById('google_map'), options);
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(#{intervention.geocode.latitude}, #{intervention.geocode.longitude}),
+        position: new google.maps.LatLng(#{intervention.latitude}, #{intervention.longitude}),
         map: map
       });
     ")
@@ -64,7 +64,7 @@ module InterventionsHelper
     "
     data.each do |intervention|
       js += "
-        var latlng = new google.maps.LatLng(#{intervention.geocode.latitude}, #{intervention.geocode.longitude});
+        var latlng = new google.maps.LatLng(#{intervention.latitude}, #{intervention.longitude});
         var marker = new google.maps.Marker({
           position: latlng,
           map: map

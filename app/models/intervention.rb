@@ -17,7 +17,8 @@ class Intervention < ActiveRecord::Base
   validates_numericality_of :number, :message => "Le numéro est obligatoire."
   validates_with InterventionValidator
 
-  acts_as_geocodable :address => {:street => :place, :locality => :city}
+  geocoded_by :full_address
+  after_validation :geocode
 
   KIND = {
     :sap => 1,
@@ -92,9 +93,7 @@ class Intervention < ActiveRecord::Base
   end
 
   def self.stats_map(station, year)
-    Intervention.for_year_and_station(station, year) \
-                .joins(:geocoding => :geocode)
-                .includes(:geocoding => :geocode)
+    Intervention.for_year_and_station(station, year)
   end
 
   def self.years_stats(station)
@@ -162,4 +161,7 @@ class Intervention < ActiveRecord::Base
     ("%0"+self.station.interventions_number_size.to_s+"d") % (last_intervention_number + 1)
   end
 
+  def full_address
+    [place, city].compact.join(', ')
+  end
 end

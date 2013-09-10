@@ -29,7 +29,6 @@ SpGestion::Application.configure do
   config.assets.debug = true
 
   config.base_url = SPG_CONFIG['base_url']
-  config.google_application_id = SPG_CONFIG['google_application_id']
 
   # Configure emails
   config.action_mailer.default_url_options = { :host => "www." + config.base_url }

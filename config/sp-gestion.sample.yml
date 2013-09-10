@@ -12,7 +12,6 @@ defaults: &defaults
 development:
   <<: *defaults
   base_url: sp-gestion.dev:3000
-  google_application_id:
   delivery_method: smtp
   # Keep these settings if you plan to use the mailcatcher gem
   smtp_settings:
@@ -23,7 +22,6 @@ development:
 test:
   <<: *defaults
   base_url: test.local
-  google_application_id:
 
 production:
   <<: *defaults
@@ -39,4 +37,3 @@ production:
       user_name:
       password:
   airbrake_api_key:
-  google_application_id:

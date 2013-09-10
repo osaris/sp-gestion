@@ -48,7 +48,8 @@ describe InterventionsHelper do
     subject { map_for(Intervention.new) }
 
     before(:each) do
-      allow_any_instance_of(Intervention).to receive(:geocode).and_return(double(:latitude => 47.057493, :longitude => 6.748619))
+      allow_any_instance_of(Intervention).to receive(:latitude).and_return(47.057493)
+      allow_any_instance_of(Intervention).to receive(:longitude).and_return(6.748619)
     end
 
     it { should match(/google_map/) }
@@ -60,7 +61,8 @@ describe InterventionsHelper do
     subject { map_for_stats([Intervention.new, Intervention.new]) }
 
     before(:each) do
-      allow_any_instance_of(Intervention).to receive(:geocode).and_return(double(:latitude => 47.057493, :longitude => 6.748619))
+      allow_any_instance_of(Intervention).to receive(:latitude).and_return(47.057493)
+      allow_any_instance_of(Intervention).to receive(:longitude).and_return(6.748619)
       allow_any_instance_of(Intervention).to receive(:start_date).and_return(3.days.ago)
       allow_any_instance_of(Intervention).to receive(:end_date).and_return(2.days.ago)
     end
