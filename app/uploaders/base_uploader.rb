@@ -39,5 +39,4 @@ class BaseUploader < CarrierWave::Uploader::Base
   def filename
     "file.png" if original_filename
   end
-
 end

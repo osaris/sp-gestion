@@ -13,7 +13,6 @@ class PasseportPhotoUploader < BaseUploader
   end
 
   def default_url
-    asset_path("back/" + [version_name, "default_passeport_photo.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path("back/" + [version_name, "default_passeport_photo.png"].compact.join('_'))
   end
-
 end

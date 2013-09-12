@@ -9,7 +9,6 @@ class VehiclePhotoUploader < BaseUploader
   end
 
   def default_url
-    asset_path("back/" + [version_name, "default_photo_480_360.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path("back/" + [version_name, "default_photo_480_360.png"].compact.join('_'))
   end
-
 end

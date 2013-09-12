@@ -7,5 +7,4 @@ class LogoUploader < BaseUploader
   def filename
     "logo.png" if original_filename
   end
-
 end
