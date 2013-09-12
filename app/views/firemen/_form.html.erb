@@ -17,7 +17,7 @@
       <%- end -%>
     <%- end -%>
     <div class="row">
-      <div class="span5">
+      <div class="span6">
         <div class="control-group">
           <%= f.label(:firstname, "Prénom (*)", :class => 'control-label') %>
           <div class="controls">
@@ -112,7 +112,7 @@
           </div>
         </div>
       </div>
-      <div class="span3" id="grades" style="<%= style_for_grades(fireman) %>">
+      <div class="span4" id="grades" style="<%= style_for_grades(fireman) %>">
         <div>Grade (*)<br />Saisissez la date de nomination à côté de chaque grade obtenu.</div>
         <%= f.fields_for(:grades) do |g| %>
             <%= render :partial => 'grade', :locals => { :f => g } %>

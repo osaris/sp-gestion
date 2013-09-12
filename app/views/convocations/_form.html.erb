@@ -2,7 +2,7 @@
 <%= form_for(convocation, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
     <div class="row">
-      <div class="span5">
+      <div class="span6">
         <div class="control-group">
           <%= f.label(:title, "Titre (*)", :class => 'control-label') %>
           <div class="controls">
@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="span3">
+      <div class="span4">
         <%= f.label(:firemen, "Personnel (*)") %>
         <div>
           <%- firemen.group_by(&:status).sort.reverse.each do |status, firemen_status| -%>
