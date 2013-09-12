@@ -80,6 +80,12 @@ rake db:test:prepare
 
 * run `rspec`
 
+Deployment
+==========
+
+* [Capistrano](http://www.capistranorb.com/) is included in the `Gemfile` and a
+sample configuration file is delivered in `config/deploy.sample.rb`.
+
 Production
 ==========
 
