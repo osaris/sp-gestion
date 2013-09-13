@@ -60,6 +60,7 @@ GEM
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.1.4)
+    cancan (1.6.10)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -246,6 +247,7 @@ DEPENDENCIES
   asset_sync
   authlogic!
   bootstrap-sass-rails (= 2.3.2.1)
+  cancan
   capistrano
   carrierwave
   coffee-rails
