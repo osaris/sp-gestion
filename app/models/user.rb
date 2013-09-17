@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   belongs_to :station
   has_many :messages, :dependent => :destroy
+  belongs_to :group
 
   delegate :url, :to => :station, :prefix => true
 

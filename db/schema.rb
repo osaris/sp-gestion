@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910115430) do
+ActiveRecord::Schema.define(version: 20130916133151) do
 
   create_table "check_lists", force: true do |t|
     t.string   "title"
@@ -125,6 +125,13 @@ ActiveRecord::Schema.define(version: 20130910115430) do
   end
 
   add_index "grades", ["fireman_id"], name: "index_grades_on_fireman_id", using: :btree
+
+  create_table "groups", force: true do |t|
+    t.integer  "station_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "intervention_roles", force: true do |t|
     t.integer  "station_id"
@@ -267,6 +274,7 @@ ActiveRecord::Schema.define(version: 20130910115430) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "new_email"
+    t.integer  "group_id"
   end
 
   add_index "users", ["station_id"], name: "index_users_on_station_id", using: :btree

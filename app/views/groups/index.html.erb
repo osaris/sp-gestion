@@ -1,0 +1,18 @@
+<div class="btn-toolbar pull-right">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('icon-plus', 'Créer un nouveau groupe'),
+                new_group_path,
+                :class => 'btn btn-small') %>
+  </div>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => @groups) || raw("<tr><td colspan='1'>Pas encore de groupe !</td></tr>") %>
+  </tbody>
+</table>
+<%= page_navigation_links(@groups) %>

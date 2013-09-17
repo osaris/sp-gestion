@@ -1,0 +1,34 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(group, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+    <div class="row">
+      <div class="span6">
+        <div class="control-group">
+          <%= f.label(:title, "Nom (*)", :class => 'control-label') %>
+          <div class="controls">
+            <%= f.text_field(:name) %>
+            <%= error_message_on(:group, :name) %>
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <%= f.label(:users, "Utilisateurs") %>
+        <div>
+          <div class="popover popover-right">
+            <p class="popover-title"></p>
+            <div class="popover-content">
+              <%= render(:partial => 'user_form',
+                         :collection => @users, :as => :user,
+                         :locals => { :group => @group }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", groups_path) %>
+      </div>
+    </div>
+  </fieldset>
+<%- end -%>

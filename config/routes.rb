@@ -54,6 +54,8 @@ SpGestion::Application.routes.draw do
     get '/firemen/:id/stats/change_year/:type' => 'firemen#stats_change_year', :as => :firemen_stats_change_year
     get '/firemen/:id/stats/:year/:type' => 'firemen#stats', :as => :firemen_stats
 
+    resources :groups
+
     resources :interventions
     get '/interventions/stats/change_year/:type' => 'interventions#stats_change_year', :as => :interventions_stats_change_year
     get '/interventions/stats/:year/:type' => 'interventions#stats', :as => :interventions_stats

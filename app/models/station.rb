@@ -20,6 +20,7 @@ class Station < ActiveRecord::Base
   has_many :uniforms, :dependent => :destroy
   has_many :vehicles, :dependent => :destroy
   has_one  :owner, :class_name => "User"
+  has_many :groups, :dependent => :destroy
 
   mount_uploader :logo, LogoUploader
 

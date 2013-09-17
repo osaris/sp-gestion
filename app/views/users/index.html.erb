@@ -9,12 +9,13 @@
   <thead>
     <tr>
       <th>Adresse email</th>
-      <th></th>
+      <th>Groupe</th>
+      <th>Remarque</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <%= render(@users, :station => @station) %>
+    <%= render(@users) %>
   </tbody>
 </table>
 <%= page_navigation_links(@users) %>
