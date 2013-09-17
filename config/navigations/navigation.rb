@@ -34,6 +34,12 @@ SimpleNavigation::Configuration.run do |navigation|
       home.item(:messages, 'Messages', messages_path, :highlights_on => /^\/messages/)
     end
 
+    primary.item(:admin, 'Administration', edit_account_path, :if => Proc.new { current_user.admin? }) do |admin|
+      admin.item(:account, 'Compte', edit_account_path, :highlights_on => /^\/account/)
+      admin.item(:users, 'Utilisateurs', users_path, :highlights_on => /^\/users/)
+      admin.item(:groups, 'Groupes', groups_path, :highlights_on => /^\/groups/)
+    end
+
     primary.item(:personnel, 'Personnel', firemen_path) do |personnel|
       personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen\/?((\d).*|new|facebook|trainings|\?page=(\d).*)?$/)
       personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/)

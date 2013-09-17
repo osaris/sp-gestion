@@ -39,11 +39,6 @@
       <!-- User profile -->
       <section class="user-profile">
         <strong><%= link_to(@current_user.email, profile_path) %></strong>
-        <%- if current_user.id == @station.owner_id -%>
-          <p><%= link_to("Compte", edit_account_path) %>
-          &nbsp;|&nbsp;
-          <%= link_to("Utilisateurs", users_path) %></p>
-        <%- end -%>
         <ul>
           <li><%= link_to("Déconnexion", logout_path, :class => "label") %></li>
         </ul>
