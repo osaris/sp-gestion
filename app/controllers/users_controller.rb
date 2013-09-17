@@ -28,11 +28,11 @@ class UsersController < BackController
   end
 
   def destroy
-    if @user.id == @station.owner_id
+    if @user.admin?
       flash[:warning] = render_to_string(
         :partial => 'users/owner_instructions',
         :layout => false
-      )
+      ).html_safe
     else
       @user.destroy
       flash[:success] = "L'utilisateur a bien été supprimé."

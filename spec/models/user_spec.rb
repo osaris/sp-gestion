@@ -105,4 +105,23 @@ describe User do
       user.send(:deliver_new_email_instructions!)
     end
   end
+
+  describe "#admin?" do
+
+    subject { user.admin? }
+
+    context "with user not owner of the station" do
+
+      it { should be_false }
+    end
+
+    context "with user owner of the station" do
+
+      before(:each) do
+        Station.make!(:users => [user])
+      end
+
+      it { should be_true }
+    end
+  end
 end

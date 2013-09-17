@@ -115,6 +115,10 @@ class User < ActiveRecord::Base
     save
   end
 
+  def admin?
+    self.id == self.station.owner_id
+  end
+
   private
 
   def password_validation_needed?

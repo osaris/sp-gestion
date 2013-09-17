@@ -23,7 +23,7 @@ describe UsersController do
     end
   end
 
-  context "an user logged in and station owner" do
+  context "an user logged in and admin" do
 
     let(:user) { User.make!(:confirmed) }
 

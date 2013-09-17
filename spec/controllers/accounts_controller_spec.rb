@@ -37,7 +37,7 @@ describe AccountsController do
       it { should set_the_flash[:error] }
     end
 
-    context "an user logged in and station owner" do
+    context "an user logged in and admin" do
 
       before do
         login(Station.make!(:owner_id => user.id), user)
