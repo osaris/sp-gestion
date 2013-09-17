@@ -13,7 +13,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
-require File.expand_path(File.dirname(__FILE__) + '/blueprints')
+require File.expand_path(File.dirname(__FILE__) + '/support/blueprints')
 require 'authlogic/test_case'
 require File.expand_path(File.dirname(__FILE__) + '/matchers/custom_matchers')
 require 'email_spec'

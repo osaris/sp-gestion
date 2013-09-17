@@ -95,3 +95,7 @@ end
 Vehicle.blueprint do
   name                  { Faker::Company.name }
 end
+
+Group.blueprint do
+  name                  { Faker::Company.name }
+end
