@@ -59,27 +59,31 @@
         </div>
       </div>
       <div class="span4">
-        <div class="popover popover-right">
-          <p class="popover-title">Personnel (*)</p>
-          <div class="popover-content">
+        <div class="block-title"><%= f.label(:firemen, "Personnel (*)") %></div>
+        <table class="table table-stripped table-hover table-condensed">
+          <tbody>
             <%= f.fields_for(:fireman_interventions, intervention.initialized_fireman_interventions) do |builder| %>
               <%= render('fireman', :builder => builder, :station => station) %>
             <% end %>
-          </div>
-        </div>
+          </tbody>
+        </table>
         <%= error_message_on(:intervention, :firemen) %>
 
-        <div class="popover popover-right">
-          <p class="popover-title">Véhicules</p>
-          <div class="popover-content">
+        <div class="block-title"><%= f.label(:vehicles, "Véhicules") %></div>
+        <table class="table table-stripped table-hover table-condensed">
+          <tbody>
             <%- vehicles.each do |vehicle| -%>
-              <label class="checkbox">
-                <%= vehicle.name %>
-                <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, intervention.vehicles.include?(vehicle)) %>
-              </label>
+              <tr>
+                <td>
+                  <label class="checkbox">
+                    <%= vehicle.name %>
+                    <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, intervention.vehicles.include?(vehicle)) %>
+                  </label>
+                </td>
+              </tr>
             <%- end -%>
-          </div>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="control-group">

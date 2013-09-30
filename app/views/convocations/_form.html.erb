@@ -52,23 +52,23 @@
         </div>
       </div>
       <div class="span4">
-        <%= f.label(:firemen, "Personnel (*)") %>
-        <div>
+        <div class="block-title"><%= f.label(:firemen, "Personnel (*)") %></div>
+        <table class="table table-stripped table-hover table-condensed">
+          <tbody>
           <%- firemen.group_by(&:status).sort.reverse.each do |status, firemen_status| -%>
-            <div class="popover popover-right">
-              <p class="popover-title">
-                <%= Fireman::STATUS_PLURAL.key(status) %>
+            <tr>
+              <td>
+                <i><%= Fireman::STATUS_PLURAL.key(status) %></i>
                 <span class="pull-right"><small>
                   <%= link_to("Cocher/décocher", "#", :id => "change_status_#{status}", :class => "change_status")%>
                 </small></span>
-              </p>
-              <div class="popover-content">
-              <%= render :partial => "fireman", :collection => firemen_status, :locals => {:status => status,
-                                                                                           :attendees => attendees} %>
-              </div>
-            </div>
+              </td>
+            </tr>
+            <%= render :partial => "fireman", :collection => firemen_status, :locals => {:status => status,
+                                                                                         :attendees => attendees} %>
           <%- end -%>
-        </div>
+          </tbody>
+        </table>
         <%= error_message_on(:convocation, :firemen) %>
       </div>
     </div>
