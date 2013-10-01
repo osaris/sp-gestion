@@ -54,5 +54,5 @@ group :test do
   gem 'machinist'
   gem 'rspec-rails'
   gem 'simplecov'
-  gem 'shoulda-matchers', :github => 'thoughtbot/shoulda-matchers', :branch => 'dp-rails-four'
+  gem 'shoulda-matchers'
 end
