@@ -7,10 +7,16 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::RoutingError, :with => :redirect_to_homepage
   rescue_from ActionController::UnknownController, :with => :redirect_to_homepage
   rescue_from AbstractController::ActionNotFound , :with => :redirect_to_homepage
+  rescue_from CanCan::AccessDenied, :with => :redirect_to_dashboard
 
   before_action :require_html_request
 
   private
+
+  def redirect_to_dashboard
+    flash[:error] = "Vos droits ne vous permettent pas d'effectuer cette action."
+    redirect_to(root_back_url)
+  end
 
   def require_html_request
     if request.blank? || (request.format != 'html')

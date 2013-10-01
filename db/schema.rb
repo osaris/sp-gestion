@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130916133151) do
+ActiveRecord::Schema.define(version: 20130923163501) do
 
   create_table "check_lists", force: true do |t|
     t.string   "title"
@@ -196,6 +196,25 @@ ActiveRecord::Schema.define(version: 20130916133151) do
   end
 
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
+  create_table "permissions", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "resource_id"
+    t.boolean  "can_show"
+    t.boolean  "can_create"
+    t.boolean  "can_update"
+    t.boolean  "can_destroy"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resources", force: true do |t|
+    t.string   "title"
+    t.string   "name"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stations", force: true do |t|
     t.string   "name"

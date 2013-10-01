@@ -1,6 +1,8 @@
-<div class="control-group">
-  <label class="checkbox">
-    <%= user.email %>
-    <%= check_box_tag("group[user_ids][]", user.id, group.users.include?(user)) %>
-  </label>
-</div>
+<tr>
+  <td>
+    <label class="checkbox">
+      <%= user.email %>
+      <%= check_box_tag("group[user_ids][]", user.id, group.users.include?(user)) %>
+    </label>
+  </td>
+</tr>

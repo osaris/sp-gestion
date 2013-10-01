@@ -23,3 +23,23 @@
     <%= render(:partial => 'user', :collection => @group.users) || raw("<tr><td colspan='1'>Pas encore d'utilisateur !</td></tr>") %>
   </tbody>
 </table>
+<div class="block-title"><h5>Droits</h5></div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Resource</th>
+      <th>Lecture</th>
+      <th>Création</th>
+      <th>Edition</th>
+      <th>Suppression</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @group.initialized_permissions.group_by { |p| p.resource.category }.sort.each do |category, permissions| -%>
+      <tr class="info">
+        <td colspan="5"><%= category %></td>
+      </tr>
+      <%= render(:partial => 'permission', :collection => permissions) %>
+    <%- end -%>
+  </tbody>
+</table>
