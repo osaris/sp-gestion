@@ -108,7 +108,8 @@ class FiremenController < BackController
                                     :rem, :checkup, :email, :passeport_photo,
                                     :remove_passeport_photo, :regimental_number,
                                     :incorporation_date, :resignation_date,
-                                    :checkup_truck, :tag_list, :grades_attributes,
-                                    :validate_grade_update)
+                                    :checkup_truck, :tag_list,
+                                    :validate_grade_update,
+                                    grades_attributes: [:id, :date])
   end
 end
