@@ -37,4 +37,7 @@ module SpGestion
     # Additional variables
     config.google_api_key = SPG_CONFIG['google_api_key']
   end
+
+  # Raise an error when unpermitted_parameters are submitted
+  ActionController::Parameters.action_on_unpermitted_parameters = :raise
 end
