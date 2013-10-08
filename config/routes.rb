@@ -11,8 +11,8 @@ SpGestion::Application.routes.draw do
   constraints(:subdomain => /.+/) do
     resource :account, :only => [:edit, :destroy] do
       member do
-        put :update_owner
-        put :update_settings
+        patch :update_owner
+        patch :update_settings
       end
     end
 
@@ -29,7 +29,7 @@ SpGestion::Application.routes.draw do
         collection do
           get :show_all
           get :edit_all
-          put :update_all
+          patch :update_all
         end
       end
     end
