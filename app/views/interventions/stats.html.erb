@@ -1,6 +1,7 @@
 <div class="block-title stats"><h4>
   Statistiques de l'année
   <%= form_tag(interventions_stats_change_year_path(params[:type]),
+               :method => :get,
                :id => :form_stats_interventions,
                :style => "display:inline;") do -%>
     <%= select_tag(:new_year, options_for_select(@years_stats, params[:year])) %>
