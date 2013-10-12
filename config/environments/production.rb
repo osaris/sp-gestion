@@ -57,7 +57,7 @@ SpGestion::Application.configure do
 
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "http://" + SPG_CONFIG['fog']['directory']
+  config.action_controller.asset_host = "http://" + SPG_CONFIG[:fog][:directory]
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
@@ -82,10 +82,10 @@ SpGestion::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.base_url = SPG_CONFIG['base_url']
+  config.base_url = SPG_CONFIG[:base_url]
 
   # Configure emails
   config.action_mailer.default_url_options = { :host => "www." + config.base_url }
-  config.action_mailer.delivery_method = SPG_CONFIG['delivery_method']
-  config.action_mailer.smtp_settings = SPG_CONFIG['smtp_settings']
+  config.action_mailer.delivery_method = SPG_CONFIG[:delivery_method]
+  config.action_mailer.smtp_settings = SPG_CONFIG[:smtp_settings]
 end

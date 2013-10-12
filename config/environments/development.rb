@@ -28,11 +28,11 @@ SpGestion::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.base_url = SPG_CONFIG['base_url']
+  config.base_url = SPG_CONFIG[:base_url]
 
   # Configure emails
   config.action_mailer.default_url_options = { :host => "www." + config.base_url }
-  config.action_mailer.delivery_method = SPG_CONFIG['delivery_method']
-  config.action_mailer.smtp_settings = SPG_CONFIG['smtp_settings']
+  config.action_mailer.delivery_method = SPG_CONFIG[:delivery_method]
+  config.action_mailer.smtp_settings = SPG_CONFIG[:smtp_settings]
 end
 
