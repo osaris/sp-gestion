@@ -35,7 +35,7 @@ module SpGestion
     end
 
     # Additional variables
-    config.google_api_key = SPG_CONFIG['google_api_key']
+    config.google_api_key = SPG_CONFIG[:google_api_key]
   end
 
   # Raise an error when unpermitted_parameters are submitted

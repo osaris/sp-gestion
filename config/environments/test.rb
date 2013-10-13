@@ -35,7 +35,7 @@ SpGestion::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  config.base_url = SPG_CONFIG['base_url']
+  config.base_url = SPG_CONFIG[:base_url]
 
   # Configure emails
   config.action_mailer.default_url_options = { :host => config.base_url }

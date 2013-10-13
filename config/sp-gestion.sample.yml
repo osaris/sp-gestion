@@ -1,39 +1,39 @@
 defaults: &defaults
   # Fog is used to sync assets to s3 and to send user uploads to s3
-  fog:
-    aws_access_key_id:
-    aws_secret_access_key:
-    region: eu-west-1
-    directory: s3.sp-gestion.fr
-  google_api_key:
-  secret_token: please_change_me_because_i_m_not_safe
-  secret_key_base: and_me_too
+  :fog:
+    :aws_access_key_id:
+    :aws_secret_access_key:
+    :region: eu-west-1
+    :directory: s3.sp-gestion.fr
+  :google_api_key:
+  :secret_token: please_change_me_because_i_m_not_safe
+  :secret_key_base: and_me_too
 
 development:
   <<: *defaults
-  base_url: sp-gestion.dev:3000
-  delivery_method: smtp
+  :base_url: sp-gestion.dev:3000
+  :delivery_method: :smtp
   # Keep these settings if you plan to use the mailcatcher gem
-  smtp_settings:
-      address: localhost
-      port: 1025
-      domain: sp-gestion.dev:3000
+  :smtp_settings:
+      :address: localhost
+      :port: 1025
+      :domain: sp-gestion.dev:3000
 
 test:
   <<: *defaults
-  base_url: test.local
+  :base_url: test.local
 
 production:
   <<: *defaults
-  base_url: sp-gestion.fr
-  delivery_method: smtp
+  :base_url: sp-gestion.fr
+  :delivery_method: :smtp
   # Extended SMTP settings, you can remove useless lines
-  smtp_settings:
-      address:
-      domain:
-      port:
-      enable_starttls_auto:
-      authentication:
-      user_name:
-      password:
-  airbrake_api_key:
+  :smtp_settings:
+      :address:
+      :domain:
+      :port:
+      :enable_starttls_auto:
+      :authentication:
+      :user_name:
+      :password:
+  :airbrake_api_key:
