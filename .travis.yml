@@ -12,10 +12,7 @@ script:
   - bundle exec rake spec
 
 notifications:
-  on_success:
-    - always
-  on_failure:
-    - always
+  disabled: true
 
 env:
   global:
