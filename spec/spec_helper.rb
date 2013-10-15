@@ -18,8 +18,6 @@ require 'authlogic/test_case'
 require File.expand_path(File.dirname(__FILE__) + '/matchers/custom_matchers')
 require 'email_spec'
 
-Delayed::Worker.delay_jobs = false
-
 Geocoder::Lookup::Test.set_default_stub(
   [
     {
