@@ -110,6 +110,6 @@ class FiremenController < BackController
                                     :incorporation_date, :resignation_date,
                                     :checkup_truck, :tag_list,
                                     :validate_grade_update,
-                                    grades_attributes: [:id, :date])
+                                    grades_attributes: [:id, :kind, :date])
   end
 end
