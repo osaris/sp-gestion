@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FiremanIntervention < ActiveRecord::Base
 
   attr_accessor :enable

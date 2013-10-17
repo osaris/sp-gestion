@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 
 def create_fireman(station, attributes = {}, grade = nil, fireman_trainings = [])
   fireman = station.firemen.new(attributes)

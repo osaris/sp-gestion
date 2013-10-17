@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RenameMessagesRead < ActiveRecord::Migration
   def self.up
     add_column(:messages, :read_at, :timestamp, :default => nil)

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UsersController < BackController
 
   before_action :require_not_demo

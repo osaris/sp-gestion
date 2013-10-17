@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 if Rails.env.test?
   Geocoder.configure(:lookup => :test)
 else

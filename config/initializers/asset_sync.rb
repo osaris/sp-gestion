@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 AssetSync.configure do |config|
   config.fog_provider = 'AWS'
   config.aws_access_key_id = SPG_CONFIG[:fog][:aws_access_key_id]

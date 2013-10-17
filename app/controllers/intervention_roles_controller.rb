@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InterventionRolesController < BackController
 
   before_action :load_intervention_role, :except => [:index, :new, :create]

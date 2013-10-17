@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Station < ActiveRecord::Base
 
   # TODO fix when https://github.com/binarylogic/authlogic/issues/135 is closed

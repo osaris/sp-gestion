@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateCheckLists < ActiveRecord::Migration
   def self.up
     create_table :check_lists do |t|

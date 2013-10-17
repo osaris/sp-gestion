@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ItemPhotoUploader < BaseUploader
 
   process :resize_and_pad => [480, 360]

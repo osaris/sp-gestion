@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ConvocationFireman < ActiveRecord::Base
 
   belongs_to :convocation

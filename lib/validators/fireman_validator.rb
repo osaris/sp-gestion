@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FiremanValidator < ActiveModel::Validator
 
   def validate(record)

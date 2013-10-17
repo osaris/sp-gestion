@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FiremanTraining < ActiveRecord::Base
 
   belongs_to :fireman

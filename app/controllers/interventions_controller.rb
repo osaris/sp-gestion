@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
   before_action :load_intervention, :only => [:show, :edit, :update, :destroy]

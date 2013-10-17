@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateFiremanInterventions < ActiveRecord::Migration
   def self.up
     create_table :fireman_interventions do |t|

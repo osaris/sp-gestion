@@ -15,7 +15,7 @@ Dependencies : [![Dependency Status](https://gemnasium.com/osaris/sp-gestion.png
 Prerequisites
 =============
 
-* Ruby 2.0.0
+* Ruby 1.9.3 or 2.0.0
 * Mysql
 * memcached
 * ImageMagick

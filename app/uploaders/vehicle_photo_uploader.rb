@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class VehiclePhotoUploader < BaseUploader
 
   process :resize_and_pad => [480, 360]

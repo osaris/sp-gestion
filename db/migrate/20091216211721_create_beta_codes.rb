@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateBetaCodes < ActiveRecord::Migration
   def self.up
     create_table :beta_codes do |t|

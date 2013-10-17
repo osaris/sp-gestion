@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddPlaceToConvocations < ActiveRecord::Migration
   def self.up
     add_column(:convocations, :place, :string)

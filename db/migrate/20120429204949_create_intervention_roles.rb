@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateInterventionRoles < ActiveRecord::Migration
   def change
     create_table :intervention_roles do |t|

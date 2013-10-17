@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class StationsController < FrontController
 
   skip_before_action :require_html_request, :only => [:check]

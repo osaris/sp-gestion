@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddIdAndRenameHabtmInterventionsVehicles < ActiveRecord::Migration
   def self.up
     rename_table :interventions_vehicles, :intervention_vehicles

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ItemsController < BackController
 
   before_action :load_check_list, :except => [:expirings]

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddLastGradeUpdateAtToStations < ActiveRecord::Migration
   def self.up
     add_column(:stations, :last_grade_update_at, :date)

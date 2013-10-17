@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UniformsController < BackController
 
   before_action :load_uniform, :except => [:index, :new, :create, :reset]

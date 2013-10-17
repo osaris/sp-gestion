@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateConvocations < ActiveRecord::Migration
   def self.up
     create_table :convocations do |t|

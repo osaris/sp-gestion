@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # this should stay in /config/initializers/ folder because it extends already defined class
 class String
 
