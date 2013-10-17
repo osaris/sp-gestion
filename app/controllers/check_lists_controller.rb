@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CheckListsController < BackController
 
   before_action :load_check_list, :except => [:index, :new, :create]

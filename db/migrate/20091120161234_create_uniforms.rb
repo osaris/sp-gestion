@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateUniforms < ActiveRecord::Migration
   def self.up
     create_table :uniforms do |t|

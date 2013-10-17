@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class LogoUploader < BaseUploader
 
   process :resize_and_pad => [100, 50]

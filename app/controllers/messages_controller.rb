@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class MessagesController < BackController
 
   before_action :load_message, :except => :index

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class TrainingsController < BackController
 
   before_action :load_training, :except => [:index, :new, :create]

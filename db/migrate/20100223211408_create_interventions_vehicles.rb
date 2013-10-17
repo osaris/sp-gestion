@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateInterventionsVehicles < ActiveRecord::Migration
   def self.up
     create_table :interventions_vehicles, :id => false do |t|

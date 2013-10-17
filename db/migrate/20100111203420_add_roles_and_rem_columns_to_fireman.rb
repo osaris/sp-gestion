@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddRolesAndRemColumnsToFireman < ActiveRecord::Migration
   def self.up
     add_column(:firemen, :rem, :text)

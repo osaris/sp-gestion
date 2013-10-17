@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class InterventionRole < ActiveRecord::Base
 
   belongs_to :station

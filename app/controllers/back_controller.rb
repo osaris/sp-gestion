@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class BackController < ApplicationController
 
   before_action :load_station

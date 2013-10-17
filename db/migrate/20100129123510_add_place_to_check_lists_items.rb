@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddPlaceToCheckListsItems < ActiveRecord::Migration
   def self.up
     add_column(:items, :place, :string)

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddPasseportPhotoUrlToFiremen < ActiveRecord::Migration
   def self.up
     add_column(:firemen, :passeport_photo, :string)

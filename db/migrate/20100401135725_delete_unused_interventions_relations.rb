@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class DeleteUnusedInterventionsRelations < ActiveRecord::Migration
   def self.up
     execute("DELETE FROM fireman_interventions

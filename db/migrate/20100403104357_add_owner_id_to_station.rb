@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddOwnerIdToStation < ActiveRecord::Migration
   def self.up
     add_column(:stations, :owner_id, :integer)

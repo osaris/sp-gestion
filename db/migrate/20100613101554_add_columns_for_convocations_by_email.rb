@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddColumnsForConvocationsByEmail < ActiveRecord::Migration
   def self.up
     add_column(:convocations, :last_emailed_at, :datetime)

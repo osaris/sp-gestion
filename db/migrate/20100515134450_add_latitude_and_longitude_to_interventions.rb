@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddLatitudeAndLongitudeToInterventions < ActiveRecord::Migration
   def self.up
     add_column(:interventions, :latitude, :float)

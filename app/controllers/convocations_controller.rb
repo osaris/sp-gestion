@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class ConvocationsController < BackController
 
   before_action :require_not_demo, :only => [:email]

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class FiremanTrainingsController < BackController
 
   before_action :load_fireman, :except => [:index]

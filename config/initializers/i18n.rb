@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 I18n.backend.class.send(:include, I18n::Backend::Fallbacks)
 
 # for local

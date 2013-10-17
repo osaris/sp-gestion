@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateMessages < ActiveRecord::Migration
   def self.up
     create_table :messages do |t|

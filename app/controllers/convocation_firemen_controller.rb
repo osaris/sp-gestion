@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class ConvocationFiremenController < BackController
 
   before_action :load_convocation, :except => [:accept]

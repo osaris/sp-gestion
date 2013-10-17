@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class VehiclesController < BackController
 
   before_action :load_vehicle, :except => [:index, :new, :create]

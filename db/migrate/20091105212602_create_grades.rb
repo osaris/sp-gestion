@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateGrades < ActiveRecord::Migration
   def self.up
     create_table :grades do |t|

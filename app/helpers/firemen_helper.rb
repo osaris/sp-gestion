@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module FiremenHelper
 
   def grade_and_name(fireman)
