@@ -3,7 +3,7 @@
 class String
 
   def filenamize
-    Iconv.iconv("ASCII//IGNORE//TRANSLIT", "UTF-8", self).join.sanitize
+    self.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?").sanitize
   rescue
     self.sanitize
   end
