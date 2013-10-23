@@ -106,10 +106,11 @@ class FiremenController < BackController
   def fireman_params
     params.require(:fireman).permit(:firstname, :lastname, :status, :birthday,
                                     :rem, :checkup, :email, :passeport_photo,
+                                    :passeport_photo_cache,
                                     :remove_passeport_photo, :regimental_number,
                                     :incorporation_date, :resignation_date,
                                     :checkup_truck, :tag_list,
                                     :validate_grade_update,
-                                    grades_attributes: [:id, :date])
+                                    grades_attributes: [:id, :kind, :date])
   end
 end

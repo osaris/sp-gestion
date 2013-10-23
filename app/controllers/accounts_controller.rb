@@ -36,6 +36,7 @@ class AccountsController < BackController
 
   def station_params
     params.require(:station).permit(:name, :url, :logo, :remove_logo,
+                                    :logo_cache,
                                     :interventions_number_size,
                                     :interventions_number_per_year)
   end
