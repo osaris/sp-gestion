@@ -60,6 +60,7 @@ class VehiclesController < BackController
   def vehicle_params
     params.require(:vehicle).permit(:name, :rem, :date_approval,
                                         :date_check, :date_review,
-                                        :vehicle_photo, :remove_vehicle_photo)
+                                        :vehicle_photo, :remove_vehicle_photo,
+                                        :vehicle_photo_cache)
   end
 end

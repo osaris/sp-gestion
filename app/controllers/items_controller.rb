@@ -71,6 +71,7 @@ class ItemsController < BackController
 
   def item_params
     params.require(:item).permit(:title, :description, :quantity, :expiry, :rem,
-                                 :place, :item_photo, :remove_item_photo)
+                                 :place, :item_photo, :remove_item_photo,
+                                 :item_photo_cache)
   end
 end
