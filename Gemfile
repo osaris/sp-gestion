@@ -43,7 +43,6 @@ gem 'yui-compressor'
 
 group :development do
   gem 'rails-erd'
-  gem 'rspec-rails'
 end
 
 group :test do
