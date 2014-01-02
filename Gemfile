@@ -8,11 +8,6 @@ gem 'rack'
 
 gem 'rake'
 
-# Deploy with Capistrano
-gem 'capistrano'
-# Sync assets
-gem 'asset_sync'
-
 gem 'airbrake'
 gem 'aproxacs-s3sync'
 gem 'acts-as-taggable-on'
@@ -42,6 +37,10 @@ gem 'will_paginate'
 gem 'yui-compressor'
 
 group :development do
+  gem 'asset_sync'
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'rails-erd'
 end
 
