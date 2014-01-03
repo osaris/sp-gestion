@@ -18,3 +18,6 @@ AssetSync.configure do |config|
   # upload instead of searching the assets directory.
   config.manifest = true
 end
+
+# Fix bug with SSL certificate verification failing with dot in bucket name
+Fog.credentials = { path_style: true }

@@ -1,0 +1,9 @@
+# VCS Revision info
+desc "Write current revision to app/views/layouts/_vcs_revision.html.erb"
+task :publish_revision do
+  on roles(:web, :app) do
+    execute :sed, "-i 's/CURRENT/#{capture("cd #{repo_path} && git rev-parse --short HEAD")}/g' #{fetch(:release_path)}/app/views/layouts/_vcs_revision.html.erb"
+  end
+end
+
+after "deploy:publishing", "publish_revision"

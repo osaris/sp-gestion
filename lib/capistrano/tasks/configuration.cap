@@ -1,0 +1,9 @@
+# Upload local configuration to server
+desc "Upload configuration"
+task :upload_configuration do
+  on roles(:web, :app, :db) do
+    upload!(File.expand_path('../../../../config/sp-gestion.yml', __FILE__), "#{fetch(:release_path)}/config/sp-gestion.yml")
+  end
+end
+
+before "deploy:updated", "upload_configuration"

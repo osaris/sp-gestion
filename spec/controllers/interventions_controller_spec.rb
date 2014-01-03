@@ -31,7 +31,7 @@ describe InterventionsController do
       before(:each) do
         i = make_intervention_with_firemen(:station => @station)
         allow_any_instance_of(Station).to receive(:interventions).and_return(double(:latest => {:first => i}))
-        allow_any_instance_of(Intervention).to receive(:years_stats).and_return([Date.today.year+1, Date.today.year])
+        allow(Intervention).to receive(:years_stats).and_return([Date.today.year, Date.today.year+1])
       end
 
       describe "GET :stats with bad year" do

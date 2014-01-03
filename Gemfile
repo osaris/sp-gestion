@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.2'
 
 gem 'mysql2'
 
@@ -8,14 +8,10 @@ gem 'rack'
 
 gem 'rake'
 
-# Deploy with Capistrano
-gem 'capistrano'
-# Sync assets
-gem 'asset_sync'
-
+gem 'acts-as-taggable-on'
 gem 'airbrake'
 gem 'aproxacs-s3sync'
-gem 'acts-as-taggable-on'
+gem 'asset_sync'
 gem 'authlogic', :github => 'osaris/authlogic', :branch => 'rails4'
 gem 'bootstrap-sass-rails', '2.3.2.1'
 gem 'cancan'
@@ -43,8 +39,10 @@ gem 'will_paginate'
 gem 'yui-compressor'
 
 group :development do
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'rails-erd'
-  gem 'rspec-rails'
 end
 
 group :test do

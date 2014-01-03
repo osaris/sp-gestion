@@ -1,0 +1,11 @@
+# Restart delayed_job after deploy
+namespace :delayed_job do
+  desc "Restart the delayed_job process"
+  task :restart do
+    on roles(:web, :app), in: :sequence, wait: 5 do
+      execute "sudo monit restart spgestion-delayed_job"
+    end
+  end
+end
+
+after "deploy:publishing", "delayed_job:restart"

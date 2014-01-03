@@ -1,0 +1,9 @@
+# Change update date in humans.txt
+desc "Change update date in humans.txt"
+task :update_humanstxt do
+  on roles(:web, :app) do
+    execute "sed -i 's/LAST_UPDATE/#{Time.now.strftime("%Y-%m-%d")}/g' #{fetch(:release_path)}/public/humans.txt"
+  end
+end
+
+after "deploy:publishing", "update_humanstxt"
