@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 I18n.backend.class.send(:include, I18n::Backend::Fallbacks)
 
+I18n.enforce_available_locales = false
+
 # for local
 I18n.default_locale = :fr
 # for production
