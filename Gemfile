@@ -8,9 +8,10 @@ gem 'rack'
 
 gem 'rake'
 
+gem 'acts-as-taggable-on'
 gem 'airbrake'
 gem 'aproxacs-s3sync'
-gem 'acts-as-taggable-on'
+gem 'asset_sync'
 gem 'authlogic', :github => 'osaris/authlogic', :branch => 'rails4'
 gem 'bootstrap-sass-rails', '2.3.2.1'
 gem 'carrierwave'
@@ -37,7 +38,6 @@ gem 'will_paginate'
 gem 'yui-compressor'
 
 group :development do
-  gem 'asset_sync'
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
