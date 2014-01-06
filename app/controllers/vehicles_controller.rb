@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class VehiclesController < BackController
 
+  authorize_resource
+
   before_action :load_vehicle, :except => [:index, :new, :create]
 
   def index
