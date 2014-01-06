@@ -3,7 +3,7 @@ class Permissions < ActiveRecord::Migration
     create_table :permissions do |t|
       t.references(:group)
       t.references(:resource)
-      t.boolean(:can_show)
+      t.boolean(:can_read)
       t.boolean(:can_create)
       t.boolean(:can_update)
       t.boolean(:can_destroy)

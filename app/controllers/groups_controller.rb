@@ -62,7 +62,7 @@ class GroupsController < BackController
 
   def group_params
     params.require(:group).permit(:name, user_ids: [], permissions_attributes: [
-                                  :id, :resource_id, :can_show, :can_create,
+                                  :id, :resource_id, :can_read, :can_create,
                                   :can_update, :can_destroy])
   end
 end

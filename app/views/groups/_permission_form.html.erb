@@ -2,7 +2,7 @@
 <%= builder.hidden_field(:resource_id) %>
 <tr>
   <td><%= resource.title %></td>
-  <td><label><%= builder.check_box(:can_show) %> Lecture</label></td>
+  <td><label><%= builder.check_box(:can_read) %> Lecture</label></td>
   <td><label><%= builder.check_box(:can_create) %> Création</label></td>
   <td><label><%= builder.check_box(:can_update) %> Edition</label></td>
   <td><label><%= builder.check_box(:can_destroy) %> Suppression</label></td>
