@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 class CheckListsController < BackController
 
+  authorize_resource
+  skip_authorize_resource :only => :copy
+
   before_action :load_check_list, :except => [:index, :new, :create]
   before_action :reset_back_path # for expirings items back link
   skip_before_action :require_html_request, :only => [:show]
@@ -48,6 +51,7 @@ class CheckListsController < BackController
   end
 
   def copy
+    authorize! :create, CheckList
     @check_list = @check_list.copy
     flash[:success] = "La liste a été copiée."
     redirect_to(check_lists_path)
