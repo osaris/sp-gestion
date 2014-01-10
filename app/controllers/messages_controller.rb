@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class MessagesController < BackController
 
+  authorize_resource
+
   before_action :load_message, :except => :index
   skip_before_action :require_html_request, :only => [:mark_as_read]
 
@@ -15,6 +17,7 @@ class MessagesController < BackController
   end
 
   def mark_as_read
+    authorize!(:update, Message)
     @message.read!
   end
 

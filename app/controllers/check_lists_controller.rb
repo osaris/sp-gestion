@@ -51,7 +51,7 @@ class CheckListsController < BackController
   end
 
   def copy
-    authorize! :create, CheckList
+    authorize!(:create, CheckList)
     @check_list = @check_list.copy
     flash[:success] = "La liste a été copiée."
     redirect_to(check_lists_path)

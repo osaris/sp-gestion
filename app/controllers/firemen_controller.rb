@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 class FiremenController < BackController
 
+  authorize_resource
+  skip_authorize_resource :only => [:facebook, :resigned, :stats, :trainings]
+
   helper(:interventions)
 
   before_action :load_fireman, :except => [:index, :new, :create, :facebook, :resigned, :trainings]
@@ -54,10 +57,12 @@ class FiremenController < BackController
   end
 
   def facebook
+    authorize!(:show, Fireman)
     @firemen = @station.firemen.not_resigned.order_by_grade_and_lastname
   end
 
   def resigned
+    authorize!(:show, Fireman)
     @firemen = @station.firemen \
                        .page(params[:page]) \
                        .resigned \
@@ -71,6 +76,7 @@ class FiremenController < BackController
   end
 
   def stats
+    authorize!(:show, Fireman)
     @years_stats = @fireman.years_stats
     if @years_stats.empty?
       flash[:error] = "Les données actuelles ne permettent pas d'établir des statistiques."
@@ -85,6 +91,7 @@ class FiremenController < BackController
   end
 
   def trainings
+    authorize!(:show, Fireman)
     @firemen = @station.firemen.not_resigned.order_by_grade_and_lastname
     @trainings = @station.trainings.order_by_short_name
     @fireman_trainings = FiremanTraining.all_to_hash(@station.id)

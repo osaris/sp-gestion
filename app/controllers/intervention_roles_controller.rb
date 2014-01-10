@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class InterventionRolesController < BackController
 
+  authorize_resource
+
   before_action :load_intervention_role, :except => [:index, :new, :create]
 
   def index

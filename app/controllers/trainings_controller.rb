@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class TrainingsController < BackController
 
+  authorize_resource
+
   before_action :load_training, :except => [:index, :new, :create]
 
   def index

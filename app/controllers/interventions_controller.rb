@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 class InterventionsController < BackController
 
+  authorize_resource
+  skip_authorize_resource :only => :stats
+
   before_action :load_intervention, :only => [:show, :edit, :update, :destroy]
   before_action :load_vehicles, :load_cities, :load_subkinds, \
                 :only => [:new, :create, :edit, :update]
@@ -67,6 +70,7 @@ class InterventionsController < BackController
   end
 
   def stats
+    authorize!(:show, Intervention)
     last_intervention = @station.interventions.latest.first
     if last_intervention.blank?
       flash[:warning] = "Il faut au moins une intervention pour avoir des statistiques."

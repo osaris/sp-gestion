@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class FiremanTrainingsController < BackController
 
+  authorize_resource
+
   before_action :load_fireman, :except => [:index]
   before_action :load_fireman_training, :except => [:index, :new, :create]
   before_action :load_trainings, :except => [:index, :show, :destroy]

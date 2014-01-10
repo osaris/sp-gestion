@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 class ConvocationsController < BackController
 
+  authorize_resource
+  skip_authorize_resource :only => :email
+
   before_action :require_not_demo, :only => [:email]
   before_action :load_convocation, :except => [:index, :new, :create]
   before_action :load_firemen, :only => [:new, :create, :edit, :update]
@@ -73,6 +76,7 @@ class ConvocationsController < BackController
   end
 
   def email
+    authorize!(:create, Convocation)
     if @convocation.editable?
       if @station.can_send_email?(@convocation.firemen.size)
         @convocation.delay.send_emails(@current_user.email)

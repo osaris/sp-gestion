@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 class UniformsController < BackController
 
+  authorize_resource
+  skip_authorize_resource :only => :reset
+
   before_action :load_uniform, :except => [:index, :new, :create, :reset]
 
   def index
@@ -49,6 +52,7 @@ class UniformsController < BackController
   end
 
   def reset
+    authorize!(:destroy, Uniform)
     Uniform.create_defaults(@station)
     flash[:success] = "Les tenues par défaut ont été ajoutées."
     redirect_to(uniforms_path)
