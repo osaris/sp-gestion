@@ -32,9 +32,9 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo passenger-config restart-app #{release_path}"
+      execute "sudo passenger-config restart-app #{current_path}"
     end
   end
-end
 
-after 'deploy:publishing', 'deploy:restart'
+  after :publishing, 'deploy:restart'
+end
