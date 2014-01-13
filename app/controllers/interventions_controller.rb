@@ -13,7 +13,7 @@ class InterventionsController < BackController
   def index
     @interventions = @station.interventions
                              .page(params[:page])
-                             .includes(:vehicles, {:fireman_interventions => [:fireman]})
+                             .eager_load(:vehicles)
                              .order('interventions.start_date DESC')
   end
 

@@ -45,7 +45,7 @@ class Intervention < ActiveRecord::Base
         if fi = fireman_interventions.find { |fi| fi.fireman_id == fireman.id }
           o << fi.tap { |fi| fi.enable ||= true }
         else
-          o << FiremanIntervention.new(:fireman_id => fireman.id)
+          o << FiremanIntervention.new(:fireman => fireman)
         end
       end
     end
