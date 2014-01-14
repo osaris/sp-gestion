@@ -27,6 +27,14 @@ FiremanTraining.blueprint do
   achieved_at           { 2.days.ago }
 end
 
+Group.blueprint do
+  name                  { Faker::Lorem.words(1).join(' ') }
+end
+
+Group.blueprint(:destroy_checklist) do
+  permissions(1)        { Permission.make(:destroy_checklist) }
+end
+
 Intervention.blueprint do
   place                 { Faker::Lorem.words(2).join(' ') }
   city                  { Faker::Lorem.words(1).join(' ') }
@@ -53,6 +61,31 @@ Message.blueprint(:read) do
   title                 { Faker::Lorem.words(3).join(' ') }
   body                  { Faker::Lorem.sentences(5).join(' ') }
   read_at               { Time.now }
+end
+
+Permission.blueprint do
+  resource              { Resource.make }
+  can_read              { false }
+  can_create            { false }
+  can_update            { false }
+  can_destroy           { false }
+end
+
+Permission.blueprint(:destroy_checklist) do
+  resource              { Resource.make(:checklist) }
+  can_destroy           { true }
+end
+
+Resource.blueprint do
+  title                 { Faker::Lorem.words(1).join(' ') }
+  name                  { Faker::Lorem.words(1).join(' ') }
+  category              { Faker::Lorem.words(1).join(' ') }
+end
+
+Resource.blueprint(:checklist) do
+  title                 { 'Check-list' }
+  name                  { 'CheckList' }
+  category              { 'Matériel' }
 end
 
 Station.blueprint do
