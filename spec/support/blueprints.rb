@@ -129,6 +129,10 @@ Vehicle.blueprint do
   name                  { Faker::Company.name }
 end
 
+Vehicle.blueprint(:invalid) do
+  name                  { '' }
+end
+
 Group.blueprint do
   name                  { Faker::Company.name }
 end
