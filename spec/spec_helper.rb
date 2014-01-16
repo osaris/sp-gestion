@@ -119,8 +119,11 @@ RSpec.configure do |config|
 
   def make_intervention_with_firemen(attributes = {})
     i = attributes[:station].interventions.make(attributes)
-    fi = i.fireman_interventions.new
-    fi.fireman = make_fireman_with_grades(:station => i.station)
+    attributes[:firemen] ||= [make_fireman_with_grades(:station => i.station)]
+    attributes[:firemen].each do |fireman|
+      fi = i.fireman_interventions.new
+      fi.fireman = fireman
+    end
     i.save
     i
   end

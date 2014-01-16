@@ -11,6 +11,35 @@ describe Intervention do
 
   it { should validate_presence_of(:place).with_message(/lieu/) }
 
+  describe "#initialized_fireman_interventions" do
+
+    subject { intervention.initialized_fireman_interventions }
+
+    let(:fireman) { make_fireman_with_grades(:station => station) }
+
+    context "with a new intervention" do
+
+      let(:intervention) { station.interventions.make }
+
+      # force creation of a fireman in the station
+      before { fireman }
+
+      it { should have(1).items }
+    end
+
+    context "with an existing intervention" do
+
+      let(:intervention) { make_intervention_with_firemen(:station => station,
+                                                          :firemen => [fireman]) }
+
+      it { should have(1).items }
+
+      it "should be linked to the existing fireman intervention" do
+        intervention.fireman_interventions.first.fireman.should equal(fireman)
+      end
+    end
+  end
+
   describe ".kind" do
 
     subject { intervention.kind }
