@@ -4,6 +4,7 @@ class GroupsController < BackController
   before_action :require_not_demo
   before_action :load_group, :only => [:show, :edit, :update, :destroy]
   before_action :load_users, :except => [:index, :destroy]
+  before_action :load_resources, :except => [:index, :destroy]
   before_action :check_ownership
 
   def index
@@ -58,6 +59,10 @@ class GroupsController < BackController
 
   def load_users
     @users = @station.users.confirmed
+  end
+
+  def load_resources
+    @resources = Resource.all
   end
 
   def group_params

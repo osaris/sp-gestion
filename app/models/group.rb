@@ -10,9 +10,9 @@ class Group < ActiveRecord::Base
 
   validates_presence_of :name, :message => "Le nom est obligatoire."
 
-  def initialized_permissions
+  def initialized_permissions(resources)
     [].tap do |o|
-      Resource.all.each do |resource|
+      resources.each do |resource|
         if p = permissions.find { |p| p.resource_id == resource.id }
           o << p
         else

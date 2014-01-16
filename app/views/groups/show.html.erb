@@ -35,7 +35,7 @@
     </tr>
   </thead>
   <tbody>
-    <%- @group.initialized_permissions.group_by { |p| p.resource.category }.sort.each do |category, permissions| -%>
+    <%- @group.initialized_permissions(@resources).group_by { |p| p.resource.category }.sort.each do |category, permissions| -%>
       <tr class="info">
         <td colspan="5"><%= category %></td>
       </tr>
