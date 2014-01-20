@@ -1,12 +1,14 @@
 # Update CSS URL in static HTML files
-desc "Update CSS URL in static HTML files"
-task :update_css_url_html do
-  on roles(:web, :app) do
-    css = capture("cd #{fetch(:release_path)} && ruby -rjson -e \"p JSON.parse(open('assets_manifest_backup').read)['assets']['front-all.css']\"")
-    ['404', '500'].each do |file|
-      execute :sed, "-i 's/FRONT_ALL_CSS/#{css.chomp.delete('"')}/g' #{fetch(:release_path)}/public/#{file}.html"
+namespace :deploy do
+  desc "Update CSS URL in static HTML files"
+  task :update_css_url_html do
+    on roles(:web, :app) do
+      css = capture("cd #{fetch(:release_path)} && ruby -rjson -e \"p JSON.parse(open('assets_manifest_backup').read)['assets']['front-all.css']\"")
+      ['404', '500'].each do |file|
+        execute :sed, "-i 's/FRONT_ALL_CSS/#{css.chomp.delete('"')}/g' #{fetch(:release_path)}/public/#{file}.html"
+      end
     end
   end
-end
 
-after "deploy:compile_assets", "update_css_url_html"
+  after "deploy:compile_assets", :update_css_url_html
+end
