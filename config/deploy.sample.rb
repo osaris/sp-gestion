@@ -27,14 +27,3 @@ set :keep_releases, 5
 
 SSHKit.config.command_map[:rake]  = "bundle exec rake"
 SSHKit.config.command_map[:rails] = "bundle exec rails"
-
-namespace :deploy do
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo passenger-config restart-app #{current_path}"
-    end
-  end
-
-  after :publishing, 'deploy:restart'
-end
