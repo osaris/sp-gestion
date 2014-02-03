@@ -3,7 +3,7 @@ grade = (@convocation_fireman.grade.nil?||@convocation.hide_grade) ? "" : Grade:
 uniform = @convocation.uniform
 
 if @station.logo?
-  pdf.image(@station.logo, :at => [425, 370], :width => 100, :height => 50)
+  pdf.image(@station.logo.current_path, :at => [425, 370], :width => 100, :height => 50)
 end
 pdf.text(@station.name)
 pdf.move_down(40)
