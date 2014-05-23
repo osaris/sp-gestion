@@ -8,12 +8,12 @@
 <%- end -%>
 <div class="btn-toolbar pull-left">
   <div class="btn-group">
-    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+    <%= link_to(icon_label_text('glyphicon glyphicon-edit', 'Editer'),
                 edit_check_list_item_path(@check_list, @item),
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-remove', 'Supprimer'),
                 check_list_item_path(@check_list, @item),
                 :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
-                :class => 'btn btn-small') %>
+                :class => 'btn btn-default btn-sm') %>
   </div>
 </div>

@@ -8,7 +8,7 @@ class BootstrapBreadcrumbs < SimpleNavigation::Renderer::Base
 
   def prepend
     unless options[:root_path].nil?
-      content_tag(:li, link_to(content_tag(:i, '', :class => 'icon-home'), options[:root_path])) + join_with
+      content_tag(:li, link_to(content_tag(:i, '', :class => 'glyphicon glyphicon-home'), options[:root_path])) + join_with
     end
   end
 
