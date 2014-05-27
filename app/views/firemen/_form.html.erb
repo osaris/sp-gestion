@@ -19,122 +19,96 @@
     <div class="row">
       <div class="col-md-5">
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:firstname, "Prénom (*)", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:firstname, :class => 'form-control') %>
-              <%= error_message_on(:fireman, :firstname) %>
-            </div>
+          <%= f.label(:firstname, "Prénom (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:firstname, :class => 'form-control') %>
+            <%= error_message_on(:fireman, :firstname) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:lastname, "Nom (*)", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:lastname, :class => 'form-control') %>
-              <%= error_message_on(:fireman, :lastname) %>
-            </div>
+          <%= f.label(:lastname, "Nom (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:lastname, :class => 'form-control') %>
+            <%= error_message_on(:fireman, :lastname) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:status, "Statut (*)", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.select(:status, Fireman::STATUS.sort, {}, {:class => 'form-control'}) %>
-              <%= error_message_on(:fireman, :status) %>
-            </div>
+          <%= f.label(:status, "Statut (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.select(:status, Fireman::STATUS.sort, {}, {:class => 'form-control'}) %>
+            <%= error_message_on(:fireman, :status) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:regimental_number, "N° de matricule", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:regimental_number, :class => 'form-control') %>
-              <%= error_message_on(:fireman, :regimental_number) %>
-            </div>
+          <%= f.label(:regimental_number, "N° de matricule", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:regimental_number, :class => 'form-control') %>
+            <%= error_message_on(:fireman, :regimental_number) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:tag_list, "Etiquette(s)", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:tag_list, :class => 'form-control') %>
-              <%= error_message_on(:fireman, :tag_list) %>
-              <span class="help-block">Appuyer sur "Enter" pour sauver une étiquette.</span>
-            </div>
+          <%= f.label(:tag_list, "Etiquette(s)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:tag_list, :class => 'form-control') %>
+            <%= error_message_on(:fireman, :tag_list) %>
+            <span class="help-block">Appuyer sur "Enter" pour sauver une étiquette.</span>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:birthday, "Date de naissance", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:birthday, :value => l!(f.object.birthday), :class => "date form-control") %>
-              <%= error_message_on(:fireman, :birthday) %>
-            </div>
+          <%= f.label(:birthday, "Date de naissance", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:birthday, :value => l!(f.object.birthday), :class => "date form-control") %>
+            <%= error_message_on(:fireman, :birthday) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:incorporation_date, "Date d'incorporation", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:incorporation_date, :value => l!(f.object.incorporation_date), :class => "date form-control") %>
-              <%= error_message_on(:fireman, :incorporation_date) %>
-            </div>
+          <%= f.label(:incorporation_date, "Date d'incorporation", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:incorporation_date, :value => l!(f.object.incorporation_date), :class => "date form-control") %>
+            <%= error_message_on(:fireman, :incorporation_date) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:resignation_date, "Date de radiation", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:resignation_date, :value => l!(f.object.resignation_date), :class => "date form-control") %>
-              <%= error_message_on(:fireman, :resignation_date) %>
-            </div>
+          <%= f.label(:resignation_date, "Date de radiation", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:resignation_date, :value => l!(f.object.resignation_date), :class => "date form-control") %>
+            <%= error_message_on(:fireman, :resignation_date) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:checkup, "Date visite médicale", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:checkup, :value => l!(f.object.checkup), :class => "date-no-limit form-control") %>
-              <%= error_message_on(:fireman, :checkup) %>
-            </div>
+          <%= f.label(:checkup, "Date visite médicale", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:checkup, :value => l!(f.object.checkup), :class => "date-no-limit form-control") %>
+            <%= error_message_on(:fireman, :checkup) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:checkup, "Date visite médicale (permis PL)", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:checkup_truck, :value => l!(f.object.checkup_truck), :class => "date-no-limit form-control") %>
-              <%= error_message_on(:fireman, :checkup_truck) %>
-            </div>
+          <%= f.label(:checkup, "Date visite médicale (permis PL)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:checkup_truck, :value => l!(f.object.checkup_truck), :class => "date-no-limit form-control") %>
+            <%= error_message_on(:fireman, :checkup_truck) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:email, "Adresse email", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_field(:email, :class => 'form-control') %>
-              <%= error_message_on(:fireman, :email) %>
-            </div>
+          <%= f.label(:email, "Adresse email", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:email, :class => 'form-control') %>
+            <%= error_message_on(:fireman, :email) %>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:passeport_photo, "Photo (png ou jpg) de 155 x 200 pixels", :class => 'col-md-6 control-label')%>
-            <div class="col-md-6">
-              <%= f.file_field :passeport_photo, :class => 'form-control' %>
-              <%= f.hidden_field :passeport_photo_cache %><br />
-              <%= f.check_box :remove_passeport_photo %> Supprimer la photo existante
-              <%= error_message_on(:fireman, :passeport_photo)%>
-            </div>
+          <%= f.label(:passeport_photo, "Photo (png ou jpg) de 155 x 200 pixels", :class => 'col-md-5 control-label')%>
+          <div class="col-md-7">
+            <%= f.file_field :passeport_photo, :class => 'form-control' %>
+            <%= f.hidden_field :passeport_photo_cache %><br />
+            <%= f.check_box :remove_passeport_photo %> Supprimer la photo existante
+            <%= error_message_on(:fireman, :passeport_photo)%>
           </div>
         </div>
         <div class="form-group">
-          <div class="row">
-            <%= f.label(:rem, "Remarque", :class => 'col-md-6 control-label') %>
-            <div class="col-md-6">
-              <%= f.text_area(:rem, :rows => 5, :class => 'form-control') %>
-            </div>
+          <%= f.label(:rem, "Remarque", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_area(:rem, :rows => 5, :class => 'form-control') %>
           </div>
         </div>
       </div>
@@ -156,7 +130,7 @@
     </div>
     <div class="row">
       <div class="col-md-5">
-        <div class="col-md-6 col-md-offset-6">
+        <div class="col-md-7 col-md-offset-5">
           <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-lg') %> ou <%= link_to("Annuler", firemen_path)%>
         </div>
       </div>
