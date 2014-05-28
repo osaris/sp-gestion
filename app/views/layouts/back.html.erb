@@ -45,7 +45,9 @@
           <%= link_to("Utilisateurs", users_path) %></p>
         <%- end -%>
         <ul>
-          <li><%= link_to("Déconnexion", logout_path, :class => "label") %></li>
+          <li>
+            <%= link_to("Déconnexion", logout_path, :class => "label label-default") %>        
+          </li>
         </ul>
       </section>
       <!-- /User profile -->
