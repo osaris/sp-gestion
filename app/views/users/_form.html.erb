@@ -1,16 +1,18 @@
 <p class="alert alert-info">Les champs marqués d'une astérisque (*) sont obligatoires. Un email sera envoyé à l'utilisateur avec un lien pour confirmer son compte et choisir un mot de passe.</p>
 <%= form_for(user, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
-    <div class="control-group">
-      <%= f.label(:email, "Adresse email", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.text_field(:email) %>
-        <%= error_message_on(:user, :email) %>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label(:email, "Adresse email", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.text_field(:email, :class => 'form-control') %>
+          <%= error_message_on(:user, :email) %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", users_path) %>
+      <div class="form-group">
+        <div class="col-md-7 col-md-offset-5">
+          <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-lg') %> ou <%= link_to("Annuler", users_path) %>
+        </div>
       </div>
     </div>
   </fieldset>
