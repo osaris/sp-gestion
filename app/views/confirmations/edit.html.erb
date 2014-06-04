@@ -1,21 +1,17 @@
 <%= form_for @user, :url => confirmation_path(@user.perishable_token), :html => { :method => :patch } do |f| %>
   <fieldset>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label(:password, "Choisissez un mot de passe") %>
-      <div class="controls">
-        <%= f.password_field(:password) %>
-        <%= error_message_on(:user, :password) %>
-      </div>
+      <%= f.password_field(:password, :class => 'form-control') %>
+      <%= error_message_on(:user, :password) %>
     </div>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label(:password_confirmation, "Confirmation du mot de passe") %>
-      <div class="controls">
-        <%= f.password_field(:password_confirmation) %>
-        <%= error_message_on(:user, :password_confirmation) %>
-      </div>
+      <%= f.password_field(:password_confirmation, :class => 'form-control') %>
+      <%= error_message_on(:user, :password_confirmation) %>
     </div>
   </fieldset>
   <div class="pull-right">
-    <%= button_tag("Activer mon compte !", :class => "btn btn-primary btn-large") %>
+    <%= button_tag("Activer mon compte !", :class => "btn btn-primary btn-lg") %>
   </div>
 <%- end -%>
