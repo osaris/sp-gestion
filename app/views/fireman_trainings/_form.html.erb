@@ -1,29 +1,31 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
 <%= form_for([fireman, fireman_training], :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
-    <div class="control-group">
-      <%= f.label(:training_id, "Formation (*)", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.select(:training_id, trainings) %>
-        <%= error_message_on(:fireman_training, :training_id) %>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label(:training_id, "Formation (*)", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.select(:training_id, trainings, {}, :class => 'form-control') %>
+          <%= error_message_on(:fireman_training, :training_id) %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label(:achieved_at, "Date (*)", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.text_field(:achieved_at, :value => l!(f.object.achieved_at), :class => "date") %>
-        <%= error_message_on(:fireman_training, :achieved_at) %>
+      <div class="form-group">
+        <%= f.label(:achieved_at, "Date (*)", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.text_field(:achieved_at, :value => l!(f.object.achieved_at), :class => "form-control date") %>
+          <%= error_message_on(:fireman_training, :achieved_at) %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label(:rem, "Remarque", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.text_area(:rem, :rows => 5) %>
+      <div class="form-group">
+        <%= f.label(:rem, "Remarque", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.text_area(:rem, :rows => 5, :class => 'form-control') %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", fireman_fireman_trainings_path(fireman))%>
+      <div class="form-group">
+        <div class="col-md-7 col-md-offset-5">
+          <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-lg') %> ou <%= link_to("Annuler", fireman_fireman_trainings_path(fireman))%>
+        </div>
       </div>
     </div>
   </fieldset>
