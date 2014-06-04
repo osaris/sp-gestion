@@ -1,23 +1,25 @@
 <p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
 <%= form_for(intervention_role, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
-    <div class="control-group">
-      <%= f.label(:name, "Nom (*)", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.text_field(:name) %>
-        <%= error_message_on(:intervention_role, :name) %>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label(:name, "Nom (*)", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.text_field(:name, :class => 'form-control') %>
+          <%= error_message_on(:intervention_role, :name) %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label(:short_name, "Nom court (*)", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.text_field(:short_name) %>
-        <%= error_message_on(:intervention_role, :short_name) %>
+      <div class="form-group">
+        <%= f.label(:short_name, "Nom court (*)", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.text_field(:short_name, :class => 'form-control') %>
+          <%= error_message_on(:intervention_role, :short_name) %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", intervention_roles_path) %>
+      <div class="form-group">
+        <div class="col-md-7 col-md-offset-5">
+          <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-lg') %> ou <%= link_to("Annuler", trainings_path) %>
+        </div>
       </div>
     </div>
   <fieldset>
