@@ -2,63 +2,63 @@
 <%= form_for(intervention, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
     <div class="row">
-      <div class="span6">
-        <div class="control-group">
-          <%= f.label(:number, "Numéro (*)", :class => 'control-label')%>
-          <div class="controls">
-            <%= f.text_field(:number) %>
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label(:number, "Numéro (*)", :class => 'col-md-5 control-label')%>
+          <div class="col-md-7">
+            <%= f.text_field(:number, :class => 'form-control') %>
             <%= error_message_on(:intervention, :number) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:kind, "Type (*)", :class => 'control-label')%>
-          <div class="controls">
-            <%= f.select(:kind, options_for_kind)%>
+        <div class="form-group">
+          <%= f.label(:kind, "Type (*)", :class => 'col-md-5 control-label')%>
+          <div class="col-md-7">
+            <%= f.select(:kind, options_for_kind, {}, :class => 'form-control')%>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:subkind, "Sous-type", :class => 'control-label')%>
-          <div class="controls">
-            <%= f.text_field(:subkind) %>
+        <div class="form-group">
+          <%= f.label(:subkind, "Sous-type", :class => 'col-md-5 control-label')%>
+          <div class="col-md-7">
+            <%= f.text_field(:subkind, :class => 'form-control') %>
             <span class="help-block">Apporte des précisions sur le type</span>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:place, "Lieu (*)", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_area(:place, :rows => 5) %>
+        <div class="form-group">
+          <%= f.label(:place, "Lieu (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_area(:place, :rows => 5, :class => 'form-control') %>
             <%= error_message_on(:intervention, :place) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:city, "Ville (*)", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_field(:city) %>
+        <div class="form-group">
+          <%= f.label(:city, "Ville (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:city, :class => 'form-control') %>
             <%= error_message_on(:intervention, :city) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:start_date, "Date début (*)", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_field(:start_date, :value => l!(f.object.start_date), :class => "date") %>
+        <div class="form-group">
+          <%= f.label(:start_date, "Date début (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:start_date, :value => l!(f.object.start_date), :class => "form-control date") %>
             <%= error_message_on(:intervention, :start_date) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:end_date, "Date fin (*)", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_field(:end_date, :value => l!(f.object.end_date), :class => "date") %>
+        <div class="form-group">
+          <%= f.label(:end_date, "Date fin (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:end_date, :value => l!(f.object.end_date), :class => "form-control date") %>
             <%= error_message_on(:intervention, :end_date) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:rem, "Remarque", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_area(:rem, :rows => 5) %>
+        <div class="form-group">
+          <%= f.label(:rem, "Remarque", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_area(:rem, :rows => 5, :class => 'form-control') %>
           </div>
         </div>
       </div>
-      <div class="span4">
+      <div class="col-md-4 col-md-offset-1">
         <div class="popover popover-right">
           <p class="popover-title">Personnel (*)</p>
           <div class="popover-content">
@@ -73,18 +73,22 @@
           <p class="popover-title">Véhicules</p>
           <div class="popover-content">
             <%- vehicles.each do |vehicle| -%>
-              <label class="checkbox">
-                <%= vehicle.name %>
-                <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, intervention.vehicles.include?(vehicle)) %>
-              </label>
+              <div class="col-md-offset-1">
+                <label class="checkbox">
+                  <%= vehicle.name %>
+                  <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, intervention.vehicles.include?(vehicle)) %>
+                </label>
+              </div>
             <%- end -%>
           </div>
         </div>
       </div>
     </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", interventions_path)%>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="col-md-7 col-md-offset-5">
+          <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-lg') %> ou <%= link_to("Annuler", convocations_path)%>
+        </div>
       </div>
     </div>
   </fieldset>
