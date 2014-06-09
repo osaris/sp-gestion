@@ -56,11 +56,6 @@
       <nav class="main-navigation" role="navigation">
         <%= render_navigation %>
       </nav>
-      <p class="center">
-        Copyright &copy; 2009-<%= Date.today.year %> imagineapp<br />
-        <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
-        <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr", :target => :blank) %>
-      </p>
       <!-- /Main navigation -->
     </section>
     <!-- /Left side -->
@@ -75,6 +70,11 @@
     </section>
     <!-- /Right side -->
 
+  </div>
+  <div id="footer">
+      Copyright &copy; 2009-<%= Date.today.year %> imagineapp -
+      <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
+      <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr", :target => :blank) %>
   </div>
   <!-- /Main page container -->
   <%= render("/layouts/javascript") %>

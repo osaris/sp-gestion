@@ -2,13 +2,28 @@
 
 @import url("http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold")
 
+html
+  position: relative
+  min-height: 100%
+
 body
   font-size: 12px
   font-family: Tahoma, sans-serif, arial
   color: #444
   background: image-url('back/layout/bg_page.png') repeat-y
+  margin-bottom: 25px
   &.single-page
     background: none
+
+#footer
+  position: absolute
+  bottom: 0
+  width: 100%
+  min-height: 25px
+  background-color: #f5f5f5
+  text-align: right
+  padding: 5px 20px
+
 
 label, form, input, select, textarea, button
   font-size: 12px !important
