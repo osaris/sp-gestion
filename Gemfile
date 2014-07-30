@@ -36,8 +36,7 @@ gem 'simple-navigation'
 gem 'scrypt'
 # TODO unlock this https://github.com/sstephenson/sprockets/issues/540 is closed
 gem 'sprockets', '2.11.0'
-# TODO upgrade ASAP to avoid deprecation warning
-gem 'validates_timeliness'
+gem 'jc-validates_timeliness'
 gem 'will_paginate'
 gem 'yui-compressor'
 
