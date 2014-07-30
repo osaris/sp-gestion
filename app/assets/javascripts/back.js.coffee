@@ -13,6 +13,7 @@
 #= require back/jquery.dataTables.min.js
 #= require back/jquery.pstrength.1.2.js
 #= require back/jquery.tagsinput.min.js
+#= require bootstrap
 #= require bootstrap/alert
 #= require back/back
 

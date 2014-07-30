@@ -1,7 +1,7 @@
 class BootstrapBreadcrumbs < SimpleNavigation::Renderer::Base
 
   def render(item_container)
-    content_tag(:ul, prepend + li_tags(item_container).join(join_with).html_safe, { id: item_container.dom_id, class: "#{item_container.dom_class} breadcrumb" })
+    content_tag(:ul, prepend + li_tags(item_container).join(join_with).html_safe, { id: item_container.dom_id, class: "#{item_container.dom_class} breadcrumb hidden-xs" })
   end
 
   protected

@@ -71,10 +71,15 @@ img.img
 .navigation-block
   width: 270px
   height: auto
-  float: left
-  padding: 20px 0
+  padding: 20px 0 0 0
   position: absolute
   left: 0
+
+.navbar-toggle
+  background-color: #fff
+
+.icon-bar
+  background-color: #999
 
 .user-profile
   padding: 15px 20px
@@ -115,7 +120,7 @@ img.img
         margin-right: 10px
     &.current
       background: image-url('back/layout/bg_current_menu.png') no-repeat right 10px
-      margin-right: -1px
+      margin-right: -16px
       > a
         color: #666
   .badge
@@ -350,17 +355,13 @@ form label.error
         text-decoration: underline
 
 /*responsive
-@media (max-width: 1000px)
-  #chart-div
-    display: none
-
-@media (max-width: 550px)
+@media (max-width: 768px)
   .content-block
     margin-left: 0
     float: left
     padding: 10px 3px
-  #chart-div
-    display: none
+  .main-navigation > ul > li.current
+    margin-right: -15px
   .navigation-block
     width: 100%
     position: relative
