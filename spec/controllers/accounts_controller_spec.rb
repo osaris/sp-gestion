@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe AccountsController do
 
@@ -64,7 +64,7 @@ describe AccountsController do
       end
 
       it "delete logo station" do
-        assigns(:station).reload.logo?.should be_false
+        expect(assigns(:station).reload.logo?).to be_falsey
       end
 
       it { should set_the_flash[:success] }
@@ -80,7 +80,7 @@ describe AccountsController do
     end
 
     it "add logo to station" do
-      assigns(:station).reload.logo?.should be_true
+      expect(assigns(:station).reload.logo?).to be_truthy
     end
 
     it { should set_the_flash[:success] }
@@ -95,7 +95,7 @@ describe AccountsController do
     end
 
     it "doesn't add logo to station" do
-      assigns(:station).reload.logo?.should be_false
+      expect(assigns(:station).reload.logo?).to be_falsey
     end
 
     it { should set_the_flash[:error] }

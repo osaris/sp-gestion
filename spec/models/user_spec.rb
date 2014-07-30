@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
 
@@ -11,20 +11,20 @@ describe User do
 
     subject { user.reload.confirmed? }
 
-    it { should be_false }
+    it { should be_falsey }
 
     context "after a call to confirm with bad password" do
 
       before { user.confirm!('123', '') }
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "after a call to confirm with good password" do
 
       before { user.confirm!('123456', '123456') }
 
-      it { should be_true }
+      it { should be_truthy }
     end
   end
 
@@ -34,14 +34,14 @@ describe User do
 
       subject { user.reset_password!('test', 'test') }
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "with good password" do
 
       subject { user.reset_password!('test3467', 'test3467') }
 
-      it { should be_true }
+      it { should be_truthy }
     end
   end
 
@@ -50,12 +50,12 @@ describe User do
     it "unconfirm user" do
       user.deliver_confirmation_instructions!
 
-      user.confirmed?.should be_false
+      expect(user.confirmed?).to be_falsey
     end
 
     it "send an email" do
-      UserMailer.should_receive(:confirmation_instructions)
-                .and_return(double("mailer", :deliver => true))
+      expect(UserMailer).to receive(:confirmation_instructions)
+                            .and_return(double("mailer", :deliver => true))
 
       user.deliver_confirmation_instructions!
     end
@@ -66,12 +66,12 @@ describe User do
     it "unconfirm user" do
       user.deliver_cooptation_instructions!
 
-      user.confirmed?.should be_false
+      expect(user.confirmed?).to be_falsey
     end
 
     it "send an email" do
-      UserMailer.should_receive(:cooptation_instructions)
-                .and_return(double("mailer", :deliver => true))
+      expect(UserMailer).to receive(:cooptation_instructions)
+                            .and_return(double("mailer", :deliver => true))
 
       user.deliver_cooptation_instructions!
     end
@@ -80,8 +80,8 @@ describe User do
   describe "#password_reset_instructions!" do
 
     it "send an email" do
-      UserMailer.should_receive(:password_reset_instructions)
-                .and_return(double("mailer", :deliver => true))
+      expect(UserMailer).to receive(:password_reset_instructions)
+                            .and_return(double("mailer", :deliver => true))
 
       user.deliver_password_reset_instructions!
     end
@@ -95,12 +95,12 @@ describe User do
       old_perishable_token = user.perishable_token
       user.send(:deliver_new_email_instructions!)
 
-      user.perishable_token.should_not == old_perishable_token
+      expect(user.perishable_token).to_not eq old_perishable_token
     end
 
     it "send an email" do
-      UserMailer.should_receive(:new_email_instructions)
-                .and_return(double("mailer", :deliver => true))
+      expect(UserMailer).to receive(:new_email_instructions)
+                            .and_return(double("mailer", :deliver => true))
 
       user.send(:deliver_new_email_instructions!)
     end

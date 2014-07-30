@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Intervention do
 
@@ -28,7 +28,7 @@ describe Intervention do
         intervention.firemen = []
       end
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "start_date in future" do
@@ -38,7 +38,7 @@ describe Intervention do
                                        :end_date => 3.days.from_now)
       end
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "end_date in future" do
@@ -48,7 +48,7 @@ describe Intervention do
                                        :end_date => 3.days.from_now)
       end
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "end_date before start_date" do
@@ -58,7 +58,7 @@ describe Intervention do
                                        :end_date => 2.days.ago)
       end
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "grade updated since intervention" do
@@ -68,7 +68,7 @@ describe Intervention do
                                                           :end_date => 3.days.ago,
                                                           :station => station) }
 
-      it { should be_true }
+      it { should be_truthy }
     end
   end
 
@@ -83,7 +83,7 @@ describe Intervention do
 
       subject { intervention.editable? }
 
-      it { should be_false }
+      it { should be_falsey }
     end
   end
 
@@ -92,20 +92,20 @@ describe Intervention do
     let(:intervention) { station.interventions.make }
 
     it "is not nil" do
-      intervention.number.should_not be_nil
+      expect(intervention.number).to_not be_nil
     end
 
     context "default settings and no other intervention" do
 
       before do
-        Intervention.should_receive(:get_last_intervention_number)
-                    .with(instance_of(Station))
-                    .and_return(0)
-        Intervention.should_not_receive(:get_last_intervention_number_this_year)
+        expect(Intervention).to receive(:get_last_intervention_number)
+                                .with(instance_of(Station))
+                                .and_return(0)
+        expect(Intervention).to_not receive(:get_last_intervention_number_this_year)
       end
 
       it "is set to 1" do
-        intervention.number.should == "1"
+        expect(intervention.number).to eq "1"
       end
     end
 
@@ -113,28 +113,28 @@ describe Intervention do
 
       before do
         station.update_attribute(:interventions_number_size, 5)
-        Intervention.should_receive(:get_last_intervention_number)
-                    .with(instance_of(Station))
-                    .and_return(0)
-        Intervention.should_not_receive(:get_last_intervention_number_this_year)
+        expect(Intervention).to receive(:get_last_intervention_number)
+                                .with(instance_of(Station))
+                                .and_return(0)
+        expect(Intervention).to_not receive(:get_last_intervention_number_this_year)
       end
 
       it "is set to 00001" do
-        intervention.number.should == "00001"
+        expect(intervention.number).to eq "00001"
       end
     end
 
     context "default settings and last number set to 10" do
 
       before do
-        Intervention.should_receive(:get_last_intervention_number)
-                    .with(instance_of(Station))
-                    .and_return(10)
-        Intervention.should_not_receive(:get_last_intervention_number_this_year)
+        expect(Intervention).to receive(:get_last_intervention_number)
+                                .with(instance_of(Station))
+                                .and_return(10)
+        expect(Intervention).to_not receive(:get_last_intervention_number_this_year)
       end
 
       it "is set to 11" do
-        intervention.number.should == "11"
+        expect(intervention.number).to eq "11"
       end
     end
 
@@ -142,14 +142,14 @@ describe Intervention do
 
       before do
         station.update_attribute(:interventions_number_per_year, true)
-        Intervention.should_receive(:get_last_intervention_number_this_year)
-                    .with(instance_of(Station))
-                    .and_return(0)
-        Intervention.should_not_receive(:get_last_intervention_number)
+        expect(Intervention).to receive(:get_last_intervention_number_this_year)
+                                .with(instance_of(Station))
+                                .and_return(0)
+        expect(Intervention).to_not receive(:get_last_intervention_number)
       end
 
       it "is set to 1" do
-        intervention.number.should == "1"
+        expect(intervention.number).to eq "1"
       end
     end
   end

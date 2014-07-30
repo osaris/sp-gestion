@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Uniform do
 
@@ -14,14 +14,14 @@ describe Uniform do
 
     context "and not used in a convocation" do
 
-      it { should be_true }
+      it { should be_truthy }
     end
 
     context "and used in a convocation" do
 
       before { make_convocation_with_firemen(:uniform => uniform, :station => Station.make!) }
 
-      it { should be_false }
+      it { should be_falsey }
     end
   end
 end

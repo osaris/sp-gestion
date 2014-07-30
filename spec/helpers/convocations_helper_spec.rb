@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe ConvocationsHelper do
 
@@ -8,7 +8,7 @@ describe ConvocationsHelper do
     context "with last_emailed_at nil" do
 
       it "render -" do
-        display_last_emailed_at(nil).should == "-"
+        expect(display_last_emailed_at(nil)).to eq "-"
       end
     end
 
@@ -17,7 +17,7 @@ describe ConvocationsHelper do
       let(:date) { Date.new(2012, 04, 27) }
 
       it "render the date" do
-        display_last_emailed_at(date).should == I18n.l(date, :format => :default)
+        expect(display_last_emailed_at(date)).to eq I18n.l(date, :format => :default)
       end
     end
   end

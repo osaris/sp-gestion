@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Fireman do
 
@@ -17,11 +17,11 @@ describe Fireman do
   end
 
   it "initialize status to actif" do
-    fireman.status.should == Fireman::STATUS['Actif']
+    expect(fireman.status).to eq Fireman::STATUS['Actif']
   end
 
   it "initialize grades" do
-    fireman.grades.size.should == Grade::GRADE.size
+    expect(fireman.grades.size).to eq Grade::GRADE.size
   end
 
   describe ".current_grade" do
@@ -29,14 +29,14 @@ describe Fireman do
     context "with no grades" do
 
       it "return nil for current_grade" do
-        fireman.current_grade.should be_nil
+        expect(fireman.current_grade).to be_nil
       end
     end
 
     context "with grades" do
 
       it "return current_grade" do
-        fireman_with_grades.current_grade.kind.should == Grade::GRADE['2e classe']
+        expect(fireman_with_grades.current_grade.kind).to eq Grade::GRADE['2e classe']
       end
     end
   end
@@ -46,14 +46,14 @@ describe Fireman do
     context "with no grades" do
 
       it "return nil for max_grade_date" do
-        fireman.max_grade_date.should be_nil
+        expect(fireman.max_grade_date).to be_nil
       end
     end
 
     context "with grades" do
 
       it "return max_grade_date" do
-        fireman_with_grades.max_grade_date.should == (Date.today - 3.weeks)
+        expect(fireman_with_grades.max_grade_date).to eq (Date.today - 3.weeks)
       end
     end
   end
@@ -65,14 +65,14 @@ describe Fireman do
   describe ".grade" do
 
     it "return current grade" do
-      fireman_with_grades.grade.should == Grade::GRADE['2e classe']
+      expect(fireman_with_grades.grade).to eq Grade::GRADE['2e classe']
     end
   end
 
   describe ".grade_category" do
 
     it "return current grade category" do
-      fireman_with_grades.grade_category.should == Grade::GRADE_CATEGORY['Homme du rang']
+      expect(fireman_with_grades.grade_category).to eq Grade::GRADE_CATEGORY['Homme du rang']
     end
   end
 
@@ -85,7 +85,7 @@ describe Fireman do
       end
 
       it "set warnings" do
-        fireman_with_grades.warnings.should == "Attention, cette personne est désormais dans la liste des hommes radiés."
+        expect(fireman_with_grades.warnings).to eq "Attention, cette personne est désormais dans la liste des hommes radiés."
       end
     end
 
@@ -96,7 +96,7 @@ describe Fireman do
       end
 
       it "set warnings" do
-        fireman_resigned.warnings.should == "Attention, cette personne est désormais dans la liste des hommes."
+        expect(fireman_resigned.warnings).to eq "Attention, cette personne est désormais dans la liste des hommes."
       end
     end
   end
@@ -107,7 +107,7 @@ describe Fireman do
 
     context "and not used in an intervention" do
 
-      it { should be_true }
+      it { should be_truthy }
     end
 
     context "and used in an intervention" do
@@ -115,12 +115,12 @@ describe Fireman do
       before { make_intervention_with_firemen(:firemen => [fireman_with_grades],
                                               :station => station) }
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "and not used in a convocation" do
 
-      it { should be_true }
+      it { should be_truthy }
     end
 
     context "and used in a convocation" do
@@ -128,12 +128,12 @@ describe Fireman do
       before { make_convocation_with_firemen(:firemen => [fireman_with_grades],
                                              :station => station) }
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "and no trainings" do
 
-      it { should be_true }
+      it { should be_truthy }
     end
 
     context "and a training" do
@@ -142,7 +142,7 @@ describe Fireman do
                                   .create(:achieved_at => Date.today,
                                           :training_id => station.trainings.make!.id) }
 
-      it { should be_false }
+      it { should be_falsey }
     end
   end
 
@@ -151,7 +151,7 @@ describe Fireman do
     context "not JSP and no grade" do
 
       it "is false" do
-        fireman.valid?.should be_false
+        expect(fireman.valid?).to be_falsey
       end
     end
 
@@ -165,7 +165,7 @@ describe Fireman do
           allow_any_instance_of(Station).to receive(:confirm_last_grade_update_at?).and_return(false)
         end
 
-        it { should be_true }
+        it { should be_truthy }
       end
 
       before(:each) do
@@ -178,7 +178,7 @@ describe Fireman do
           fireman_with_grades.validate_grade_update = nil
         end
 
-        it { should be_false }
+        it { should be_falsey }
       end
 
       context "last_grade_update_at will be updated but validate_grade_update is set" do
@@ -187,7 +187,7 @@ describe Fireman do
           fireman_with_grades.validate_grade_update = 1
         end
 
-        it { should be_true }
+        it { should be_truthy }
       end
     end
   end

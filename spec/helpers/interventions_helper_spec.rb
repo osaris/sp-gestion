@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe InterventionsHelper do
 
@@ -69,7 +69,7 @@ describe InterventionsHelper do
 
     it { should match(/google_map/) }
     it "plots two points" do
-      subject.scan(/\(47.057493, 6.748619\)/i).size.should == 2
+      expect(subject.scan(/\(47.057493, 6.748619\)/i).size).to eq 2
     end
   end
 end

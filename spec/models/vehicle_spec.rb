@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Vehicle do
 
@@ -15,14 +15,14 @@ describe Vehicle do
 
     context "and not used in an intervention" do
 
-      it { should be_true }
+      it { should be_truthy }
     end
 
     context "and used in an intervention" do
 
       before { make_intervention_with_firemen(:vehicles => [vehicle], :station => Station.make!) }
 
-      it { should be_false }
+      it { should be_falsey }
     end
   end
 end
