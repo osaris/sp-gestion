@@ -1,10 +1,10 @@
 #= require jquery
 #= require jquery-migrate-min
 #= require jquery_ujs
-#= require jquery.ui.datepicker
-#= require jquery.ui.datepicker-fr
-#= require jquery.ui.slider
-#= require jquery.ui.accordion
+#= require jquery-ui/datepicker
+#= require jquery-ui/datepicker-fr
+#= require jquery-ui/slider
+#= require jquery-ui/accordion
 #= require common
 #= require back/FixedColumns.min.js
 #= require back/GrowingInput.js
