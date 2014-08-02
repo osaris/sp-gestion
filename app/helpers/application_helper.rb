@@ -52,7 +52,7 @@ module ApplicationHelper
     result = ''
     unless cached_tag_list.nil?
       cached_tag_list.split(',').each do |tag|
-        result += content_tag(:span, tag.strip, :class => 'label') + "&nbsp;".html_safe
+        result += content_tag(:span, tag.strip, :class => 'label label-info') + "&nbsp;".html_safe
       end
       result.html_safe
     end

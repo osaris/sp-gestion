@@ -1,22 +1,18 @@
 <h4>Mise à jour de votre mot de passe</h4>
 <%= form_for(@user, :url => password_reset_path, :method => :patch) do |f| %>
   <fieldset>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label(:password, "Mot de passe") %>
-      <div class="controls">
-        <%= f.password_field(:password, :size => 36) %>
-        <%= error_message_on(:user, :password) %>
-      </div>
+      <%= f.password_field(:password, :class => 'form-control') %>
+      <%= error_message_on(:user, :password) %>
     </div>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label(:password_confirmation, "Confirmation du mot de passe") %>
-      <div class="controls">
-        <%= f.password_field(:password_confirmation, :size => 36) %>
-        <%= error_message_on(:user, :password_confirmation) %>
-      </div>
+      <%= f.password_field(:password_confirmation, :class => 'form-control') %>
+      <%= error_message_on(:user, :password_confirmation) %>
     </div>
   </fieldset>
   <div class="pull-right">
-    <%= button_tag("Enregistrer", :class => "btn btn-primary btn-large") %>
+    <%= button_tag("Enregistrer", :class => "btn btn-primary btn-lg") %>
   </div>
 <%- end -%>

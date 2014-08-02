@@ -1,35 +1,39 @@
 <div class="block-title"><h4>Edition de mon profil</h4></div>
 <%= form_for(@user, :url => update_profile_path, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
-    <div class="control-group">
-      <%= f.label(:email, "Adresse email", :class => 'control-label')%>
-      <div class="controls"><%= f.text_field(:email, :disabled => true) %></div>
-    </div>
-    <div class="control-group">
-      <%= f.label(:new_email, "Nouvelle adresse email", :class => 'control-label')%>
-      <div class="controls">
-        <%= f.text_field(:new_email_tmp, :autocomplete => :off)%>
-        <%= error_message_on(:user, :new_email_tmp)%>
-        <span class="help-block">La nouvelle adresse email sera utilisée après l'avoir confirmée en cliquant sur le lien de confirmation reçu par email.</span>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label(:email, "Adresse email", :class => 'col-md-5 control-label')%>
+        <div class="col-md-7">
+          <%= f.text_field(:email, :disabled => true, :class => 'form-control') %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label(:password, "Nouveau mot de passe", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.password_field(:password, :autocomplete => :off) %>
-        <%= error_message_on(:user, :password) %>
+      <div class="form-group">
+        <%= f.label(:new_email, "Nouvelle adresse email", :class => 'col-md-5 control-label')%>
+        <div class="col-md-7">
+          <%= f.text_field(:new_email_tmp, :autocomplete => :off, :class => 'form-control')%>
+          <%= error_message_on(:user, :new_email_tmp)%>
+          <span class="help-block">La nouvelle adresse email sera utilisée après l'avoir confirmée en cliquant sur le lien de confirmation reçu par email.</span>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label(:password_confirmation, "Confirmation du nouveau mot de passe", :class => 'control-label') %>
-      <div class="controls">
-        <%= f.password_field(:password_confirmation, :autocomplete => :off) %>
-        <%= error_message_on(:user, :password_confirmation) %>
+      <div class="form-group">
+        <%= f.label(:password, "Nouveau mot de passe", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.password_field(:password, :autocomplete => :off, :class => 'form-control') %>
+          <%= error_message_on(:user, :password) %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %>
+      <div class="form-group">
+        <%= f.label(:password_confirmation, "Confirmation du nouveau mot de passe", :class => 'col-md-5 control-label') %>
+        <div class="col-md-7">
+          <%= f.password_field(:password_confirmation, :autocomplete => :off, :class => 'form-control') %>
+          <%= error_message_on(:user, :password_confirmation) %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-7 col-md-offset-5">
+          <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-lg') %>
+        </div>
       </div>
     </div>
   </fieldset>

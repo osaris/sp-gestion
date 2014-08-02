@@ -1,26 +1,20 @@
 <%= form_for @user_session, :url => email_confirmation_path, :html => { :method => :patch } do |f| %>
   <p>Veuillez confirmer la modification en entrant votre mot de passe :</p>
   <fieldset>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label(:email, "Ancienne adresse email") %><br />
-      <div class="controls">
-        <%= text_field_tag(:new_email, @user.email, :size => 36, :disabled => true) %>
-      </div>
+      <%= text_field_tag(:new_email, @user.email, :class => 'form-control', :disabled => true) %>
     </div>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label(:new_email, "Nouvelle adresse email") %><br />
-      <div class="controls">
-        <%= text_field_tag(:new_email, @user.new_email, :size => 36, :disabled => true) %>
-      </div>
+      <%= text_field_tag(:new_email, @user.new_email, :class => 'form-control', :disabled => true) %>
     </div>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label(:password, "Mot de passe") %>
-      <div class="controls">
-        <%= f.password_field(:password, :size => 36) %>
-      </div>
+      <%= f.password_field(:password, :class => 'form-control') %>
     </div>
   </fieldset>
   <div class="pull-right">
-    <%= button_tag("Enregistrer", :class => "btn btn-primary btn-large") %>
+    <%= button_tag("Enregistrer", :class => "btn btn-primary btn-lg") %>
   </div>
 <%- end -%>

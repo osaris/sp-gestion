@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Message do
 
@@ -13,14 +13,14 @@ describe Message do
 
     context "and message not read" do
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "and message read" do
 
       before { message.read! }
 
-      it { should be_true }
+      it { should be_truthy }
     end
   end
 

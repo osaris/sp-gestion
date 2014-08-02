@@ -1,12 +1,12 @@
 <div class="btn-toolbar pull-right">
   <div class="btn-group">
-    <%= link_to(icon_label_text('icon-plus', 'Créer une nouvelle tenue'),
+    <%= link_to(icon_label_text('glyphicon glyphicon-plus', 'Créer une nouvelle tenue'),
                 new_uniform_path,
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-list-alt', 'Créer les tenues par défaut'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-list-alt', 'Créer les tenues par défaut'),
                 reset_uniforms_path,
                 :method => :post, :data => { :confirm => "Etes-vous sûr de vouloir ajouter les tenues standard à celles déjà existantes ?" },
-                :class => 'btn btn-small') %>
+                :class => 'btn btn-default btn-sm') %>
   </div>
 </div>
 <table class="table table-bordered table-striped">

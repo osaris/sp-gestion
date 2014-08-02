@@ -30,30 +30,32 @@
     <section class="navigation-block">
 
       <!-- Main page header -->
-      <header>
+      <header class="hidden-xs">
         <!-- Main page logo -->
         <%= render("/layouts/logo", :station => @station) %>
+      </header>
+      <header class="visible-xs-block">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <h4><%= link_to(@station.name, root_back_path) %></h4>
       </header>
       <!-- /Main page header -->
 
       <!-- User profile -->
-      <section class="user-profile">
+      <section class="user-profile navbar-collapse collapse">
         <strong><%= link_to(@current_user.email, profile_path) %></strong>
-        <ul>
-          <li><%= link_to("Déconnexion", logout_path, :class => "label") %></li>
-        </ul>
+        <p><%= link_to("Déconnexion", logout_path, :class => "label") %></p>
       </section>
       <!-- /User profile -->
 
       <!-- Main navigation -->
-      <nav class="main-navigation" role="navigation">
+      <nav class="main-navigation navbar-collapse collapse" role="navigation">
         <%= render_navigation %>
       </nav>
-      <p class="center">
-        Copyright &copy; 2009-<%= Date.today.year %> imagineapp<br />
-        <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
-        <%= link_to("Forum des utilisateurs", "http://forum.sp-gestion.fr", :target => :blank) %>
-      </p>
       <!-- /Main navigation -->
     </section>
     <!-- /Left side -->
@@ -68,6 +70,11 @@
     </section>
     <!-- /Right side -->
 
+  </div>
+  <div id="footer">
+      <span class="hidden-xs">Copyright </span>&copy; 2009-<%= Date.today.year %> imagineapp -
+      <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
+      <%= link_to("Forum", "http://forum.sp-gestion.fr", :target => :blank) %>
   </div>
   <!-- /Main page container -->
   <%= render("/layouts/javascript") %>

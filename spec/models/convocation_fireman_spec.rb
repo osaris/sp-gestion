@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe ConvocationFireman do
 
@@ -12,10 +12,10 @@ describe ConvocationFireman do
   end
 
   it "set the convocation_firemen grade to firemen grade" do
-    convocation.convocation_firemen.first.grade.should == fireman.grade
+    expect(convocation.convocation_firemen.first.grade).to eq fireman.grade
   end
 
   it "set the convocation_firemen status to firemen status" do
-    convocation.convocation_firemen.first.status.should == fireman.status
+    expect(convocation.convocation_firemen.first.status).to eq fireman.status
   end
 end

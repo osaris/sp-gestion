@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe CheckList do
 
@@ -13,11 +13,11 @@ describe CheckList do
     let(:cl_copy) { cl.copy }
 
     it "returns a copy with different title" do
-      cl_copy.title.should match(cl.title)
+      expect(cl_copy.title).to match(cl.title)
     end
 
     it "returns a copy having same number of items" do
-      cl_copy.items.size.should == cl.items.size
+      expect(cl_copy.items.size).to eq cl.items.size
     end
   end
 
@@ -28,7 +28,7 @@ describe CheckList do
                                          Item.make!(:place => 'bar')]) }
 
     it "returns distinct list of places of items ordered by name" do
-      cl.places.should == ['bar', 'foo']
+      expect(cl.places).to eq ['bar', 'foo']
     end
   end
 end

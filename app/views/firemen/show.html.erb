@@ -11,19 +11,19 @@
   <%- end -%>
   <div class="btn-toolbar pull-left">
     <div class="btn-group">
-      <%= link_to(icon_label_text('icon-edit', 'Editer'),
+      <%= link_to(icon_label_text('glyphicon glyphicon-edit', 'Editer'),
                   edit_fireman_path(@fireman),
-                  :class => 'btn btn-small') %>
-      <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                  :class => 'btn btn-default btn-sm') %>
+      <%= link_to(icon_label_text('glyphicon glyphicon-remove', 'Supprimer'),
                   fireman_path(@fireman),
                   :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
-                  :class => 'btn btn-small') %>
-      <%= link_to(icon_label_text('icon-flag', 'Formations'),
+                  :class => 'btn btn-default btn-sm') %>
+      <%= link_to(icon_label_text('glyphicon glyphicon-flag', 'Formations'),
                   fireman_fireman_trainings_path(@fireman),
-                  :class => 'btn btn-small') %>
-      <%= link_to(icon_label_text('icon-signal', 'Statistiques'),
+                  :class => 'btn btn-default btn-sm') %>
+      <%= link_to(icon_label_text('glyphicon glyphicon-signal', 'Statistiques'),
                   firemen_stats_path(@fireman, Date.today.year, "interventions"),
-                  :class => 'btn btn-small') %>
+                  :class => 'btn btn-default btn-sm') %>
     </div>
   </div>
 </div>

@@ -1,15 +1,15 @@
 <%- if controller.action_name != 'resigned' -%>
   <div class="btn-toolbar pull-right">
     <div class="btn-group">
-      <%= link_to(icon_label_text('icon-plus', 'Créer une nouvelle personne'),
+      <%= link_to(icon_label_text('glyphicon glyphglyphicon glyphicon-plus', 'Créer une nouvelle personne'),
                   new_fireman_path,
-                  :class => 'btn btn-small') %>
-      <%= link_to(icon_label_text('icon-th', 'Synoptique des formations'),
+                  :class => 'btn btn-default btn-sm') %>
+      <%= link_to(icon_label_text('glyphicon glyphglyphicon glyphicon-th', 'Synoptique des formations'),
                   trainings_firemen_path,
-                  :class => 'btn btn-small') %>
-      <%= link_to(icon_label_text('icon-camera', 'Trombinoscope'),
+                  :class => 'btn btn-default btn-sm') %>
+      <%= link_to(icon_label_text('glyphicon glyphglyphicon glyphicon-camera', 'Trombinoscope'),
                   facebook_firemen_path,
-                  :class => 'btn btn-small') %>
+                  :class => 'btn btn-default btn-sm') %>
     </div>
   </div>
 <%- end -%>

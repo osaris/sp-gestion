@@ -8,4 +8,4 @@ Location: Switzerland
 Last update: LAST_UPDATE
 Language: French
 Software: Ruby On Rails
-IDE: Sublime Text 2
+IDE: Atom

@@ -1,13 +1,11 @@
-<tr>
-  <td>
-    <label class="checkbox">
-      <% fireman = builder.object.fireman %>
-      <%= builder.hidden_field(:fireman_id) %>
+<div class="col-md-offset-1">
+  <label class="checkbox">
+    <% fireman = builder.object.fireman %>
+    <%= builder.hidden_field(:fireman_id) %>
 
-      <%= Grade::GRADE.key(fireman.grade) %>&nbsp;-&nbsp;<%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
+    <%= Grade::GRADE.key(fireman.grade) %>&nbsp;-&nbsp;<%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
 
-      <%= builder.check_box(:enable) %>
-    </label>
-    <%= builder.select(:intervention_role_id, intervention_roles_collection(station)) %>
-  </td>
-</tr>
+    <%= builder.check_box(:enable) %>
+  </label>
+</div>
+<%= builder.select(:intervention_role_id, intervention_roles_collection(station)) %>

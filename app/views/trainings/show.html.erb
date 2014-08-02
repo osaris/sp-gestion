@@ -5,12 +5,12 @@
 <%- end -%>
 <div class="btn-toolbar pull-left">
   <div class="btn-group">
-    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+    <%= link_to(icon_label_text('glyphicon glyphicon-edit', 'Editer'),
                 edit_training_path(@training),
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-remove', 'Supprimer'),
                 training_path(@training),
                 :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
-                :class => 'btn btn-small') %>
+                :class => 'btn btn-default btn-sm') %>
   </div>
 </div>

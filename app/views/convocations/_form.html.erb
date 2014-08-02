@@ -2,79 +2,81 @@
 <%= form_for(convocation, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
     <div class="row">
-      <div class="span6">
-        <div class="control-group">
-          <%= f.label(:title, "Titre (*)", :class => 'control-label') %>
-          <div class="controls">
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label(:title, "Titre (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
             <%= f.text_field(:title) %>
-            <%= error_message_on(:convocation, :title) %>
+            <%= error_message_on(:convocation, :title, :class => 'form-control') %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:date, "Date (*)", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_field(:date, :value => l!(f.object.date), :class => "date") %>
+        <div class="form-group">
+          <%= f.label(:date, "Date (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:date, :value => l!(f.object.date), :class => "date form-control") %>
             <%= error_message_on(:convocation, :date) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:place, "Lieu (*)", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_field(:place) %>
+        <div class="form-group">
+          <%= f.label(:place, "Lieu (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_field(:place, :class => 'form-control') %>
             <%= error_message_on(:convocation, :place) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:uniform, "Tenue (*)", :class => 'control-label') %>
-          <div class="controls">
-            <%= collection_select(:convocation, :uniform_id, station.uniforms.all, :id, :title) %>
+        <div class="form-group">
+          <%= f.label(:uniform, "Tenue (*)", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= collection_select(:convocation, :uniform_id, station.uniforms.all, :id, :title, :class => 'form-control') %>
             <%= error_message_on(:convocation, :uniform) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:hide_grade, "Masquer les grades à l'impression", :class => 'control-label') %>
-          <div class="controls">
+        <div class="form-group">
+          <%= f.label(:hide_grade, "Masquer les grades à l'impression", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
             <%= f.check_box(:hide_grade) %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:confirmable, "Lien de confirmation", :class => 'control-label') %>
-          <div class="controls">
+        <div class="form-group">
+          <%= f.label(:confirmable, "Lien de confirmation", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
             <%= f.check_box(:confirmable) %>
             <span class="help-block">Le destinataire peut cliquer sur ce lien pour confirmer sa présence.</span>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label(:rem, "Remarque", :class => 'control-label') %>
-          <div class="controls">
-            <%= f.text_area(:rem, :rows => 5) %>
+        <div class="form-group">
+          <%= f.label(:rem, "Remarque", :class => 'col-md-5 control-label') %>
+          <div class="col-md-7">
+            <%= f.text_area(:rem, :rows => 5, :class => 'form-control') %>
           </div>
         </div>
       </div>
-      <div class="span6">
-        <div class="block-title"><%= f.label(:firemen, "Personnel (*)") %></div>
-        <table class="table table-stripped table-hover table-condensed">
-          <tbody>
+      <div class="col-md-4 col-md-offset-1">
+        <%= f.label(:firemen, "Personnel (*)") %>
+        <div>
           <%- firemen.group_by(&:status).sort.reverse.each do |status, firemen_status| -%>
-            <tr>
-              <td>
-                <i><%= Fireman::STATUS_PLURAL.key(status) %></i>
+            <div class="popover popover-right">
+              <p class="popover-title">
+                <%= Fireman::STATUS_PLURAL.key(status) %>
                 <span class="pull-right"><small>
-                  <%= link_to("Cocher/décocher", "#", :id => "change_status_#{status}", :class => "change_status")%>
+                  <%= link_to("Cocher/décocher tous", "#", :id => "change_status_#{status}", :class => "change_status")%>
                 </small></span>
-              </td>
-            </tr>
-            <%= render :partial => "fireman", :collection => firemen_status, :locals => {:status => status,
-                                                                                         :attendees => attendees} %>
+              </p>
+              <div class="popover-content">
+              <%= render :partial => "fireman", :collection => firemen_status, :locals => {:status => status,
+                                                                                           :attendees => attendees} %>
+              </div>
+            </div>
           <%- end -%>
-          </tbody>
-        </table>
+        </div>
         <%= error_message_on(:convocation, :firemen) %>
       </div>
     </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-large') %> ou <%= link_to("Annuler", convocations_path)%>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="col-md-7 col-md-offset-5">
+          <%= submit_tag("Enregistrer", :class => 'btn btn-primary btn-lg') %> ou <%= link_to("Annuler", convocations_path)%>
+        </div>
       </div>
     </div>
   </fieldset>

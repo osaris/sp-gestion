@@ -10,6 +10,9 @@ before_script:
 bundler_args:
   --without development staging production
 
+services:
+  - memcached
+
 script:
   - bundle exec rake spec
 

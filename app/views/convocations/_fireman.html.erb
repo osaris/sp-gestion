@@ -1,11 +1,9 @@
-<tr>
-  <td>
-    <label class="checkbox">
-      <%- if fireman.status != Fireman::STATUS['JSP'] -%>
-        <%= Grade::GRADE.key(fireman.grade) %> -
-      <%- end -%>
-      <%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
-      <%= check_box_tag("convocation[fireman_ids][]", fireman.id, attendees.has_key?(fireman.id), :class => "status_#{status}") %>
-    </label>
-  </td>
-</tr>
+<div class="col-md-offset-1">
+  <label class="checkbox">
+    <%- if fireman.status != Fireman::STATUS['JSP'] -%>
+      <%= Grade::GRADE.key(fireman.grade) %> -
+    <%- end -%>
+    <%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
+    <%= check_box_tag("convocation[fireman_ids][]", fireman.id, attendees.has_key?(fireman.id), :class => "status_#{status}") %>
+  </label>
+</div>

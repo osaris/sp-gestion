@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe MessagesHelper do
 
@@ -10,7 +10,7 @@ describe MessagesHelper do
       let(:message) { Message.make(:read) }
 
       it "render read" do
-        class_tr_message(message).should == "read"
+        expect(class_tr_message(message)).to eq "read"
       end
     end
 
@@ -19,7 +19,7 @@ describe MessagesHelper do
       let(:message) { Message.make }
 
       it "render unread" do
-        class_tr_message(message).should == "unread"
+        expect(class_tr_message(message)).to eq "unread"
       end
     end
   end

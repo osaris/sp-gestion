@@ -2,13 +2,28 @@
 
 @import url("http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold")
 
+html
+  position: relative
+  min-height: 100%
+
 body
   font-size: 12px
   font-family: Tahoma, sans-serif, arial
   color: #444
   background: image-url('back/layout/bg_page.png') repeat-y
+  margin-bottom: 25px
   &.single-page
     background: none
+
+#footer
+  position: absolute
+  bottom: 0
+  width: 100%
+  min-height: 25px
+  background-color: #f5f5f5
+  text-align: right
+  padding: 5px 20px
+
 
 label, form, input, select, textarea, button
   font-size: 12px !important
@@ -56,10 +71,15 @@ img.img
 .navigation-block
   width: 270px
   height: auto
-  float: left
-  padding: 20px 0
+  padding: 20px 0 0 0
   position: absolute
   left: 0
+
+.navbar-toggle
+  background-color: #fff
+
+.icon-bar
+  background-color: #999
 
 .user-profile
   padding: 15px 20px
@@ -100,7 +120,7 @@ img.img
         margin-right: 10px
     &.current
       background: image-url('back/layout/bg_current_menu.png') no-repeat right 10px
-      margin-right: -1px
+      margin-right: -16px
       > a
         color: #666
   .badge
@@ -287,9 +307,6 @@ form label.error
   border-radius: 5px
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1)
   background-color: whiteSmoke
-  input
-    width: 96%
-    padding: 2% 2%
 
 #login-container
   width: 435px
@@ -338,17 +355,13 @@ form label.error
         text-decoration: underline
 
 /*responsive
-@media (max-width: 1000px)
-  #chart-div
-    display: none
-
-@media (max-width: 550px)
+@media (max-width: 768px)
   .content-block
     margin-left: 0
     float: left
     padding: 10px 3px
-  #chart-div
-    display: none
+  .main-navigation > ul > li.current
+    margin-right: -15px
   .navigation-block
     width: 100%
     position: relative
@@ -397,14 +410,6 @@ form label.error
     max-width: none
 
 /* Firemen form
-.fireman-grade-update
-  .control-group
-    margin-bottom: 0
-    .control-label
-      width: 146px
-    .controls
-      margin-left: 166px
-
 #grades
   input
     width: 155px
@@ -434,3 +439,16 @@ form label.error
     width: auto
     height: auto
     margin-bottom: 0
+
+/* Toolbars
+
+.btn-toolbar
+  margin-top: 10px
+  margin-bottom: 10px
+
+/* Alerts
+
+.alert-error
+  background-color: #f2dede
+  border-color: #ebccd1
+  color: #a94442

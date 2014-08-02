@@ -145,7 +145,7 @@ class Fireman < ActiveRecord::Base
                     .joins("INNER JOIN tags ON taggings.tag_id = tags.id") \
                     .where(:station_id => station.id) \
                     .order('tags.name')
-    result.map! { |tag| tag.name }
+    result.to_a.map! { |tag| tag.name }
   end
 
   private

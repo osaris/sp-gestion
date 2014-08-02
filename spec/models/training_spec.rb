@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Training do
 
@@ -15,7 +15,7 @@ describe Training do
 
     context "and not used by a fireman" do
 
-      it { should be_true }
+      it { should be_truthy }
     end
 
     context "and used by a fireman" do
@@ -23,7 +23,7 @@ describe Training do
       before {  make_fireman_with_grades(:fireman_trainings => [FiremanTraining.make(:training => training)],
                                          :station => Station.make!) }
 
-      it { should be_false }
+      it { should be_falsey }
     end
   end
 end

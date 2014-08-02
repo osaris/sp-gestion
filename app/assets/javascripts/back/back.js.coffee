@@ -78,7 +78,7 @@ window.firemen = () ->
   $('#fireman_tag_list').tagsInput(
     autocomplete_url: tags
     defaultText: 'Ajouter un tag'
-    width: '206px'
+    width: '100%'
     height: '75px'
   )
 

@@ -1,13 +1,11 @@
 <%= form_tag(password_resets_path) do -%>
   <fieldset>
-    <div class="control-group">
+    <div class="form-group">
       <%= label_tag("Adresse email") %><br />
-      <div class="controls">
-        <%= text_field_tag(:email, '',:size => 36) %>
-      </div>
+      <%= text_field_tag(:email, '', :class => 'form-control') %>
     </div>
   </fieldset>
   <div class="pull-right">
-    <%= button_tag("Envoyer", :class => "btn btn-primary btn-large") %>
+    <%= button_tag("Envoyer", :class => "btn btn-primary btn-lg") %>
   </div>
 <%- end -%>

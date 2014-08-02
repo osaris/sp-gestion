@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.4'
 
 gem 'mysql2'
 
@@ -12,8 +12,8 @@ gem 'acts-as-taggable-on'
 gem 'airbrake'
 gem 'aproxacs-s3sync'
 gem 'asset_sync'
-gem 'authlogic', :github => 'osaris/authlogic', :branch => 'rails4'
-gem 'bootstrap-sass-rails', '2.3.2.1'
+gem 'authlogic'
+gem 'bootstrap-sass'
 gem 'cancan'
 gem 'carrierwave'
 gem 'coffee-rails'
@@ -34,7 +34,10 @@ gem 'prawn'
 gem 'prawnto_2', :require => 'prawnto'
 gem 'sass-rails'
 gem 'simple-navigation'
-gem 'validates_timeliness'
+gem 'scrypt'
+# TODO unlock this https://github.com/sstephenson/sprockets/issues/540 is closed
+gem 'sprockets', '2.11.0'
+gem 'jc-validates_timeliness'
 gem 'will_paginate'
 gem 'yui-compressor'
 

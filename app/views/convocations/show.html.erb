@@ -7,24 +7,24 @@
 <p>Date du dernier envoi par email : <%= display_last_emailed_at(@convocation.last_emailed_at) %></p>
 <div class="btn-toolbar pull-left">
   <div class="btn-group">
-    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+    <%= link_to(icon_label_text('glyphicon glyphicon-edit', 'Editer'),
                 edit_convocation_path(@convocation),
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-remove', 'Supprimer'),
                 convocation_path(@convocation),
                 :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-print', 'Imprimer les convocations'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-print', 'Imprimer les convocations'),
                 convocation_path(@convocation, :format => :pdf),
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-envelope', 'Envoyer par email'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-envelope', 'Envoyer par email'),
                 email_convocation_path(@convocation),
                 :method => :post,
                 :data => { :confirm => "Seuls les personnes ayant une adresse email recevront la convocation. Êtes-vous sûr ?" },
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-user', 'Présences'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-user', 'Présences'),
                 edit_all_convocation_convocation_firemen_path(@convocation),
-                :class => 'btn btn-small') %>
+                :class => 'btn btn-default btn-sm') %>
   </div>
 </div>
 <div class="clearfix"></div>
