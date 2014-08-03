@@ -8,7 +8,7 @@ describe ConvocationsHelper do
     let(:presences) { [:status => 1, :presents => 12, :total => 12] }
 
     it "display stats for group" do
-      display_stats_presence(presences, 1).should ==
+      expect(display_stats_presence(presences, 1)).to eq \
         "12 convoqué(s) / 12 présent(s) / 0 absent(s) (100 % présents)"
     end
   end
@@ -16,7 +16,7 @@ describe ConvocationsHelper do
   describe "#distance_to_next_email_send" do
 
     it "return remaining number of minutes before next hour" do
-      distance_to_next_email_send(11.minutes.ago).should == 48
+      expect(distance_to_next_email_send(11.minutes.ago)).to eq 48
     end
   end
 
@@ -34,7 +34,8 @@ describe ConvocationsHelper do
       let(:date) { Date.new(2012, 04, 27) }
 
       it "render the date" do
-        expect(display_last_emailed_at(date)).to eq I18n.l(date, :format => :default)
+        expect(display_last_emailed_at(date)).to eq I18n.l(date,
+                                                           :format => :default)
       end
     end
   end

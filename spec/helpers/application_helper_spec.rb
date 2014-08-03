@@ -103,6 +103,6 @@ describe ApplicationHelper do
 
     subject { display_tags('foo,bar') }
 
-    it { should == "<span class=\"label\">foo</span>&nbsp;<span class=\"label\">bar</span>&nbsp;" }
+    it { should == "<span class=\"label label-info\">foo</span>&nbsp;<span class=\"label label-info\">bar</span>&nbsp;" }
   end
 end

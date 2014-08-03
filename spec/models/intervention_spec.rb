@@ -24,7 +24,9 @@ describe Intervention do
       # force creation of a fireman in the station
       before { fireman }
 
-      it { should have(1).items }
+      it "should have one item" do
+        expect(subject.size).to eq 1
+      end
     end
 
     context "with an existing intervention" do
@@ -32,10 +34,12 @@ describe Intervention do
       let(:intervention) { make_intervention_with_firemen(:station => station,
                                                           :firemen => [fireman]) }
 
-      it { should have(1).items }
+      it "should have one item" do
+        expect(subject.size).to eq 1
+      end
 
       it "should be linked to the existing fireman intervention" do
-        intervention.fireman_interventions.first.fireman.should equal(fireman)
+        expect(intervention.fireman_interventions.first.fireman).to eq fireman
       end
     end
   end

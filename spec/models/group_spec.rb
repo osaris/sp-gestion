@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Group do
 
@@ -20,17 +20,21 @@ describe Group do
 
       let(:group) { Group.make }
 
-      it { should have(1).items }
+      it "should have one item" do
+        expect(subject.size).to eq 1
+      end
     end
 
     context "with an existing group" do
 
       let(:group) { Group.make(:permissions => [Permission.make(:resource => resources.first)]) }
 
-      it { should have(1).items }
+      it "should have one item" do
+        expect(subject.size).to eq 1
+      end
 
       it "should be linked to the existing resource" do
-        resources.first.should equal(group.permissions.first.resource)
+        expect(resources.first).to eq group.permissions.first.resource
       end
     end
   end

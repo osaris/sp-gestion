@@ -112,7 +112,7 @@ describe User do
 
     context "with user not owner of the station" do
 
-      it { should be_false }
+      it { should be_falsey }
     end
 
     context "with user owner of the station" do
@@ -121,7 +121,7 @@ describe User do
         Station.make!(:users => [user])
       end
 
-      it { should be_true }
+      it { should be_truthy }
     end
   end
 end
