@@ -1,11 +1,9 @@
-<div class="col-md-offset-1">
-  <label class="checkbox">
+<div class="col-md-offset-1 checkbox">
+  <label>
     <% fireman = builder.object.fireman %>
     <%= builder.hidden_field(:fireman_id) %>
-
-    <%= Grade::GRADE.key(fireman.grade) %>&nbsp;-&nbsp;<%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
-
     <%= builder.check_box(:enable) %>
+    <%= Grade::GRADE.key(fireman.grade) %>&nbsp;-&nbsp;<%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
   </label>
 </div>
 <%= builder.select(:intervention_role_id, intervention_roles_collection(station), {}, :class => 'form-control') %>
