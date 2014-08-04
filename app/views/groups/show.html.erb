@@ -2,13 +2,13 @@
 <div class="clearfix"></div>
 <div class="btn-toolbar pull-left">
   <div class="btn-group">
-    <%= link_to(icon_label_text('icon-edit', 'Editer'),
+    <%= link_to(icon_label_text('glyphicon glyphicon-edit', 'Editer'),
                 edit_group_path(@group),
-                :class => 'btn btn-small') %>
-    <%= link_to(icon_label_text('icon-remove', 'Supprimer'),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-remove', 'Supprimer'),
                 group_path(@group),
                 :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
-                :class => 'btn btn-small') %>
+                :class => 'btn btn-default btn-sm') %>
   </div>
 </div>
 <div class="clearfix"></div>
