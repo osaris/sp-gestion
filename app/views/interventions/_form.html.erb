@@ -73,10 +73,10 @@
           <p class="popover-title">Véhicules</p>
           <div class="popover-content">
             <%- vehicles.each do |vehicle| -%>
-              <div class="col-md-offset-1">
-                <label class="checkbox">
+              <div class="col-md-offset-1 checkbox">
+                <label>
+                  <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, intervention.vehicles.include?(vehicle)) %>                  
                   <%= vehicle.name %>
-                  <%= check_box_tag("intervention[vehicle_ids][]", vehicle.id, intervention.vehicles.include?(vehicle)) %>
                 </label>
               </div>
             <%- end -%>
