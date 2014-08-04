@@ -100,8 +100,8 @@ window.firemen = () ->
                         constrainInput:     true )
 
   $("#accordion").accordion(
-                            autoHeight: false
-                            active: active_accordion)
+                        heightStyle: "content"
+                        active: active_accordion )
 
 Rails.register_init ['firemen\\new'
                      'firemen\\create'
