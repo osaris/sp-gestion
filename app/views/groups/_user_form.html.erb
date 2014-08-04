@@ -1,8 +1,10 @@
 <tr>
   <td>
-    <label class="checkbox">
-      <%= user.email %>
-      <%= check_box_tag("group[user_ids][]", user.id, group.users.include?(user)) %>
-    </label>
+    <div class="checkbox">
+      <label>
+        <%= check_box_tag("group[user_ids][]", user.id, group.users.include?(user)) %>
+        <%= user.email %>
+      </label>
+    </div>
   </td>
 </tr>
