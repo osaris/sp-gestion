@@ -125,7 +125,7 @@
         <%- end -%>
         <div id="accordion">
           <%- Grade::GRADE_CATEGORY.each do |gc| %>
-          <h3><a href="#"><%= gc[0] %></a></h3>
+          <a href="#"><%= gc[0] %></a>
           <div>
             <%= yield("GC_#{gc[1]}".to_sym) %>
           </div>
