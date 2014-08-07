@@ -11,14 +11,14 @@ describe GroupsHelper do
 
       let(:authorized) { true }
 
-      it { should == "<i class=\"icon-ok\"></i>" }
+      it { should == "<i class=\"glyphicon glyphicon-ok\"></i>" }
     end
 
     context "not authorized" do
 
       let(:authorized) { false }
 
-      it { should == "<i class=\"icon-remove\"></i>" }
+      it { should be_nil }
     end
   end
 end
