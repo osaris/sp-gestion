@@ -98,4 +98,11 @@
       </article>
     <%- end -%>
   </div>
+  <%- if (flash.empty?) and
+         (cannot? :read, Message and cannot? :read, Convocation \
+            and cannot? :read, Intervention and cannot? :read, Item) -%>
+        <p class="alert alert-error">
+          Vos droits ne vous permettent pas d'effectuer cette action.
+        </p>
+  <%- end -%>
 </div>
