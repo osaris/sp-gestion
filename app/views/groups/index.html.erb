@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render(:partial => @groups) || raw("<tr><td colspan='1'>Pas encore de groupe !</td></tr>") %>
+    <%= render(:partial => @groups) || raw("<tr><td colspan='1'>Pas encore de groupe, tous les utilisateurs ont tous les droits !</td></tr>") %>
   </tbody>
 </table>
 <%= page_navigation_links(@groups) %>
