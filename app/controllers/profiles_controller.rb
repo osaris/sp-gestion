@@ -3,6 +3,7 @@ class ProfilesController < BackController
 
   before_action :require_not_demo
   before_action :load_user
+  before_action :load_resources
 
   def edit
   end
@@ -19,6 +20,10 @@ class ProfilesController < BackController
   end
 
   private
+
+  def load_resources
+    @resources = Resource.all
+  end
 
   def load_user
     @user = current_user

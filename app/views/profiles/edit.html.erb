@@ -1,4 +1,9 @@
 <div class="block-title"><h4>Edition de mon profil</h4></div>
+
+<div class="clearfix"></div>
+
+<div class="block-title"><h5>Général</h5></div>
+
 <%= form_for(@user, :url => update_profile_path, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
     <div class="col-md-5">
@@ -38,3 +43,8 @@
     </div>
   </fieldset>
 <%- end -%>
+
+<div class="clearfix"></div>
+
+<div class="block-title"><h5>Droits</h5></div>
+<%= render(:partial => 'groups/group_table', locals: {:group => @user.group, :resources => @resources}) %>

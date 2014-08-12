@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Resource</th>
+      <th>Lecture</th>
+      <th>Création</th>
+      <th>Edition</th>
+      <th>Suppression</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- group.initialized_permissions(resources).group_by { |p| p.resource.category }.sort.each do |category, permissions| -%>
+      <tr class="info">
+        <td colspan="5"><%= category %></td>
+      </tr>
+      <%= render(:partial => 'groups/permission', :collection => permissions) %>
+    <%- end -%>
+  </tbody>
+</table>
