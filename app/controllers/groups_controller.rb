@@ -58,7 +58,7 @@ class GroupsController < BackController
   end
 
   def load_users
-    @users = @station.users.confirmed
+    @users = @station.users.joins(:group).confirmed
   end
 
   def load_resources
