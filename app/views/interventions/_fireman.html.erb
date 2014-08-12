@@ -6,4 +6,4 @@
     <%= Grade::GRADE.key(fireman.grade) %>&nbsp;-&nbsp;<%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
   </label>
 </div>
-<%= builder.select(:intervention_role_id, intervention_roles_collection(station)) %>
+<%= builder.select(:intervention_role_id, intervention_roles_collection(station), {}, :class => 'form-control') %>
