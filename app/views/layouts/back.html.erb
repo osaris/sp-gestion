@@ -45,16 +45,9 @@
       </header>
       <!-- /Main page header -->
 
-      <!-- User profile -->
-      <section class="user-profile navbar-collapse collapse">
-        <strong><%= link_to(@current_user.email, profile_path) %></strong>
-        <p><%= link_to("Déconnexion", logout_path, :class => "label label-default") %></p>
-      </section>
-      <!-- /User profile -->
-
       <!-- Main navigation -->
       <nav class="main-navigation navbar-collapse collapse" role="navigation">
-        <%= render_navigation %>
+        <%= render_navigation(:expand_all => true) %>
       </nav>
       <!-- /Main navigation -->
     </section>
@@ -71,10 +64,12 @@
     <!-- /Right side -->
 
   </div>
-  <div id="footer">
-      <span class="hidden-xs">Copyright </span>&copy; 2009-<%= Date.today.year %> imagineapp -
-      <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
-      <%= link_to("Forum", "http://forum.sp-gestion.fr", :target => :blank) %>
+  <div class="navbar-fixed-bottom" id="footer">
+      <div class="pull-right">
+        <span class="hidden-xs">Copyright </span>&copy; 2009-<%= Date.today.year %> imagineapp -
+        <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
+        <%= link_to("Forum", "http://forum.sp-gestion.fr", :target => :blank) %>
+      </div>
   </div>
   <!-- /Main page container -->
   <%= render("/layouts/javascript") %>
