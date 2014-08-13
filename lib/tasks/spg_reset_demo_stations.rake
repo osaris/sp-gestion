@@ -39,7 +39,7 @@ namespace :spg  do
 
       # unread messages
       print "\rUnread messages..."
-      station.users.joins(:messages).update_all(:read_at => nil)
+      Message.joins(user: :station).where('stations.demo' => true).update_all(:read_at => nil)
       print "done !\r\n"
 
       # recreate basic items
