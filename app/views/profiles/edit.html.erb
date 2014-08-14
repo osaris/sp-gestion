@@ -44,7 +44,9 @@
   </fieldset>
 <%- end -%>
 
-<div class="clearfix"></div>
+<%- if @user.group.present? -%>
+  <div class="clearfix"></div>
 
-<div class="block-title"><h5>Droits</h5></div>
-<%= render(:partial => 'groups/group_table', locals: {:group => @user.group, :resources => @resources}) %>
+  <div class="block-title"><h5>Droits</h5></div>
+    <%= render(:partial => 'groups/group_table', locals: {:group => @user.group, :resources => @resources}) %>
+<%- end -%>
