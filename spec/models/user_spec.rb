@@ -106,9 +106,9 @@ describe User do
     end
   end
 
-  describe "#admin?" do
+  describe "#owner?" do
 
-    subject { user.admin? }
+    subject { user.owner? }
 
     context "with user not owner of the station" do
 

@@ -116,7 +116,7 @@ class User < ActiveRecord::Base
     save
   end
 
-  def admin?
+  def owner?
     self.id == self.station.owner_id
   end
 

@@ -5,7 +5,7 @@ describe GroupsController do
 
   setup(:activate_authlogic)
 
-  describe "an user logged in and admin" do
+  describe "an user logged in and owner" do
 
     let(:user) { User.make!(:confirmed) }
 

@@ -39,7 +39,7 @@ SimpleNavigation::Configuration.run do |navigation|
       home.item(:messages, 'Messages', messages_path, :highlights_on => /^\/messages/)
     end
 
-    primary.item(:admin, icon_label_text('glyphicon glyphicon-cog', 'Administration'), :if => Proc.new { current_user.admin? }) do |admin|
+    primary.item(:admin, icon_label_text('glyphicon glyphicon-cog', 'Administration'), :if => Proc.new { current_user.owner? }) do |admin|
       admin.item(:account, 'Compte', edit_account_path, :highlights_on => /^\/account/)
       admin.item(:users, 'Utilisateurs', users_path, :highlights_on => /^\/users/)
       admin.item(:groups, 'Groupes', groups_path, :highlights_on => /^\/groups/)

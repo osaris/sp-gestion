@@ -6,7 +6,7 @@ class Ability
   def initialize(user)
 
     # if user isn't in a group, he can manage everything (backward compatibility)
-    if user.group.nil? or user.admin?
+    if user.group.nil? or user.owner?
       can :manage, :all
     else
       user.group.permissions.eager_load(:resource).each do |permission|
