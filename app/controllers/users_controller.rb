@@ -28,7 +28,7 @@ class UsersController < BackController
   end
 
   def destroy
-    if @user.admin?
+    if @user.owner?
       flash[:warning] = render_to_string(
         :partial => 'users/owner_instructions',
         :layout => false
