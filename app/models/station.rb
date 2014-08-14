@@ -64,15 +64,9 @@ class Station < ActiveRecord::Base
   end
 
   def confirm_last_grade_update_at?(max_grade_date)
-    result = true
-    if self.last_grade_update_at.blank?
-      result = false
-    elsif self.interventions.empty?
-      result = false
-    elsif max_grade_date <= self.last_grade_update_at
-      result = false
-    end
-    result
+    (!last_grade_update_at.blank?) and
+    (!interventions.empty?) and
+    (max_grade_date > last_grade_update_at)
   end
 
   def update_owner(new_owner_id)
