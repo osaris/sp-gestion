@@ -8,6 +8,8 @@
     </div>
   </td>
   <td>
-    <%= user.group.name %>
+    <%- if user.group.present? -%>
+      <%= user.group.name %>
+    <%- end -%>
   </td>
 </tr>
