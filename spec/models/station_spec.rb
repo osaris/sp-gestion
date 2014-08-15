@@ -3,33 +3,33 @@ require 'rails_helper'
 
 describe Station do
 
-  describe "#last_grade_updated_at" do
+  describe "#intervention_editable_at" do
 
-    context "last_grade_update_at blank" do
+    context "intervention_editable_at blank" do
 
-      let(:station) { Station.make!(:last_grade_update_at => nil) }
+      let(:station) { Station.make!(:intervention_editable_at => nil) }
 
-      it "doesn't confirm last_grade_update_at" do
-        expect(station.confirm_last_grade_update_at?(Date.today)).to be_falsey
+      it "doesn't confirm intervention_editable_at" do
+        expect(station.confirm_intervention_editable_at?(Date.today)).to be_falsey
       end
     end
 
-    let(:station) { Station.make!(:last_grade_update_at => Date.today) }
+    let(:station) { Station.make!(:intervention_editable_at => Date.today) }
 
-    context "last_grade_update_at but no intervention" do
+    context "intervention_editable_at but no intervention" do
 
-      it "doesn't confirm last_grade_update_at" do
-        expect(station.confirm_last_grade_update_at?(Date.today)).to be_falsey
+      it "doesn't confirm intervention_editable_at" do
+        expect(station.confirm_intervention_editable_at?(Date.today)).to be_falsey
       end
     end
 
-    context "last_grade_update_at and interventions but date before last_grade_update_at" do
+    context "intervention_editable_at and interventions but date before intervention_editable_at" do
 
       before { allow(station.interventions).to receive(:empty?)
                                                .and_return(false) }
 
-      it "doesn't confirm last_grade_update_at" do
-        expect(station.confirm_last_grade_update_at?(3.days.ago)).to be_falsey
+      it "doesn't confirm intervention_editable_at" do
+        expect(station.confirm_intervention_editable_at?(3.days.ago)).to be_falsey
       end
     end
   end

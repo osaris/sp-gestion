@@ -15,8 +15,8 @@ module InterventionsHelper
   end
 
   def min_date_intervention(station)
-    if station.last_grade_update_at?
-      "-#{Date.today-station.last_grade_update_at}d"
+    if station.intervention_editable_at?
+      "-#{Date.today-station.intervention_editable_at}d"
     end
   end
 

@@ -104,7 +104,8 @@ class Intervention < ActiveRecord::Base
   end
 
   def editable?
-    (self.station.last_grade_update_at.blank?) or (self.start_date > self.station.last_grade_update_at)
+    (self.station.intervention_editable_at.blank?) or
+    (self.start_date > self.station.intervention_editable_at)
   end
 
   def self.cities(station)

@@ -5,7 +5,7 @@ class Grade < ActiveRecord::Base
 
   validates_date :date, :allow_blank => true, :on_or_before => :today
 
-  after_save :set_last_grade_update_at
+  after_save :set_intervention_editable_at
 
   GRADE_CATEGORY = {
     'Médecin' => 5,
@@ -45,8 +45,8 @@ class Grade < ActiveRecord::Base
 
   private
 
-  def set_last_grade_update_at
-    self.fireman.station.reset_last_grade_update_at if self.date_changed?
+  def set_intervention_editable_at
+    self.fireman.station.reset_intervention_editable_at if self.date_changed?
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805204607) do
+ActiveRecord::Schema.define(version: 20140814202030) do
 
   create_table "check_lists", force: true do |t|
     t.string   "title"
@@ -81,13 +81,24 @@ ActiveRecord::Schema.define(version: 20140805204607) do
   add_index "fireman_interventions", ["intervention_id"], name: "index_fireman_interventions_on_intervention_id", using: :btree
   add_index "fireman_interventions", ["intervention_role_id"], name: "index_fireman_interventions_on_intervention_role_id", using: :btree
 
+  create_table "fireman_periods", force: true do |t|
+    t.integer  "fireman_id"
+    t.datetime "periodDate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "station_id"
+  end
+
+  add_index "fireman_periods", ["fireman_id"], name: "index_fireman_periods_on_fireman_id", using: :btree
+  add_index "fireman_periods", ["station_id"], name: "index_fireman_periods_on_station_id", using: :btree
+
   create_table "fireman_trainings", force: true do |t|
     t.integer  "fireman_id"
     t.integer  "training_id"
     t.date     "achieved_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "rem"
+    t.text     "rem",         limit: 16777215
     t.integer  "station_id"
   end
 
@@ -164,8 +175,8 @@ ActiveRecord::Schema.define(version: 20140805204607) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "city"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "latitude",   limit: 24
+    t.float    "longitude",  limit: 24
     t.string   "subkind"
   end
 
@@ -200,7 +211,7 @@ ActiveRecord::Schema.define(version: 20140805204607) do
   create_table "permissions", force: true do |t|
     t.integer  "group_id"
     t.integer  "resource_id"
-    t.boolean  "can_show"
+    t.boolean  "can_read"
     t.boolean  "can_create"
     t.boolean  "can_update"
     t.boolean  "can_destroy"
@@ -221,7 +232,7 @@ ActiveRecord::Schema.define(version: 20140805204607) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "last_grade_update_at"
+    t.date     "intervention_editable_at"
     t.integer  "owner_id"
     t.datetime "last_email_sent_at"
     t.integer  "nb_email_sent",                 default: 0
@@ -259,7 +270,7 @@ ActiveRecord::Schema.define(version: 20140805204607) do
     t.integer  "station_id"
     t.string   "name"
     t.string   "short_name"
-    t.text     "description"
+    t.text     "description", limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -267,12 +278,12 @@ ActiveRecord::Schema.define(version: 20140805204607) do
   add_index "trainings", ["station_id"], name: "index_trainings_on_station_id", using: :btree
 
   create_table "uniforms", force: true do |t|
+    t.string   "code"
     t.string   "title"
     t.string   "description"
     t.integer  "station_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code"
   end
 
   add_index "uniforms", ["station_id"], name: "index_uniforms_on_station_id", using: :btree

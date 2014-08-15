@@ -159,20 +159,20 @@ describe Fireman do
 
       subject { fireman_with_grades.valid? }
 
-      context "last_grade_update_at will not be updated" do
+      context "intervention_editable_at will not be updated" do
 
         before(:each) do
-          allow_any_instance_of(Station).to receive(:confirm_last_grade_update_at?).and_return(false)
+          allow_any_instance_of(Station).to receive(:confirm_intervention_editable_at?).and_return(false)
         end
 
         it { should be_truthy }
       end
 
       before(:each) do
-        allow_any_instance_of(Station).to receive(:confirm_last_grade_update_at?).and_return(true)
+        allow_any_instance_of(Station).to receive(:confirm_intervention_editable_at?).and_return(true)
       end
 
-      context "last_grade_update_at will be updated but validate_grade_update is not set" do
+      context "intervention_editable_at will be updated but validate_grade_update is not set" do
 
         before do
           fireman_with_grades.validate_grade_update = nil
@@ -181,7 +181,7 @@ describe Fireman do
         it { should be_falsey }
       end
 
-      context "last_grade_update_at will be updated but validate_grade_update is set" do
+      context "intervention_editable_at will be updated but validate_grade_update is set" do
 
         before do
           fireman_with_grades.validate_grade_update = 1

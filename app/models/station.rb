@@ -58,15 +58,15 @@ class Station < ActiveRecord::Base
     station
   end
 
-  def reset_last_grade_update_at
+  def reset_intervention_editable_at
     max_grade_date = Grade.joins(:fireman).where(["firemen.station_id = ?", self.id]).maximum(:date)
-    self.update_attribute(:last_grade_update_at, max_grade_date)
+    self.update_attribute(:intervention_editable_at, max_grade_date)
   end
 
-  def confirm_last_grade_update_at?(max_grade_date)
-    (!last_grade_update_at.blank?) and
+  def confirm_intervention_editable_at?(new_date)
+    (!intervention_editable_at.blank?) and
     (!interventions.empty?) and
-    (max_grade_date > last_grade_update_at)
+    (new_date > intervention_editable_at)
   end
 
   def update_owner(new_owner_id)

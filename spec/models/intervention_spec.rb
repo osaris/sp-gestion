@@ -96,7 +96,7 @@ describe Intervention do
 
     context "grade updated since intervention" do
 
-      let(:station) { Station.make!(:last_grade_update_at => 2.days.ago) }
+      let(:station) { Station.make!(:intervention_editable_at => 2.days.ago) }
       let(:intervention) { make_intervention_with_firemen(:start_date => 4.days.ago,
                                                           :end_date => 3.days.ago,
                                                           :station => station) }
@@ -109,7 +109,7 @@ describe Intervention do
 
     context "grade updated since intervention" do
 
-      let(:station) { Station.make!(:last_grade_update_at => 2.days.ago) }
+      let(:station) { Station.make!(:intervention_editable_at => 2.days.ago) }
       let(:intervention) { make_intervention_with_firemen(:start_date => 4.days.ago,
                                                           :end_date => 3.days.ago,
                                                           :station => station) }
