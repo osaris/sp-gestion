@@ -60,7 +60,6 @@ class GroupsController < BackController
   def load_users
     @users = @station.users
                      .joins('LEFT OUTER JOIN groups ON (groups.id = users.group_id)')
-                     .confirmed
   end
 
   def load_resources
