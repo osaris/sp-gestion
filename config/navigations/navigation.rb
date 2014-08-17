@@ -46,10 +46,8 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item(:personnel, icon_label_text('glyphicon glyphicon-user', 'Personnel')) do |personnel|
-      personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen\/?((\d).*|new|facebook|trainings|\?page=(\d).*)?$/)
+      personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen/)
       personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/)
-
-      personnel.item(:firemen_resigned, 'Hommes radiés', resigned_firemen_path, :highlights_on => /^\/firemen\/resigned/)
       personnel.item(:trainings, 'Formations', trainings_path, :highlights_on => /^\/trainings/)
       personnel.item(:uniforms, 'Tenues', uniforms_path, :highlights_on => /^\/uniforms/)
     end
