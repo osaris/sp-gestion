@@ -36,14 +36,14 @@ class InterventionsController < BackController
 
   def edit
     if not @intervention.editable?
-      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont évolué."
+      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ou les véhicules ont évolué."
       redirect_to(@intervention)
     end
   end
 
   def update
     if not @intervention.editable?
-      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ont évolué."
+      flash[:error] = "Vous ne pouvez pas éditer cette intervention car les grades ou les véhicules ont évolué."
       redirect_to(@intervention)
     else
       # overwrite params because browser doesn't send array if no checkbox are selected
@@ -99,7 +99,7 @@ class InterventionsController < BackController
   end
 
   def load_vehicles
-    @vehicles = @station.vehicles
+    @vehicles = @station.vehicles.not_delisted
   end
 
   def load_cities

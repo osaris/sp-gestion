@@ -56,7 +56,9 @@
     <!-- Right side -->
     <section class="content-block" role="main">
       <!-- Breadcrumbs -->
-      <%= render_navigation(:renderer => :bootstrap_breadcrumbs, :root_path => root_back_path) %>
+      <%= render_navigation(:context => :breadcrumbs,
+                            :renderer => :bootstrap_breadcrumbs,
+                            :root_path => root_back_path) %>
       <!-- /Breadcrumbs -->
       <%= flash_helper %>
       <%= yield %>

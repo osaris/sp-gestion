@@ -4,6 +4,7 @@
   <li>Date de passage aux mines : <%= l!(@vehicle.date_approval) %></li>
   <li>Date de contrôle technique : <%= l!(@vehicle.date_check) %></li>
   <li>Date de révision : <%= l!(@vehicle.date_review) %></li>
+  <li>Date de radiation : <%= l!(@vehicle.date_delisting) %></li>
 </ul>
 <%- if @vehicle.rem? -%>
   <p>Remarque : <%= @vehicle.rem %></p>

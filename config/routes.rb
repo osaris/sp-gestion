@@ -100,7 +100,11 @@ SpGestion::Application.routes.draw do
     end
 
     resources :users, :only => [:new, :create, :destroy, :index]
-    resources :vehicles
+    resources :vehicles do
+      collection do
+        get :delisted
+      end
+    end
 
     post '/login/authenticate' => 'user_sessions#create', :as => :authenticate
     get '/login' => 'user_sessions#new', :as => :login

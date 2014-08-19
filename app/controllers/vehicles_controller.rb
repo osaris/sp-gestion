@@ -2,13 +2,24 @@
 class VehiclesController < BackController
 
   authorize_resource
+  skip_authorize_resource :only => [:delisted]
 
-  before_action :load_vehicle, :except => [:index, :new, :create]
+  before_action :load_vehicle, :except => [:index, :new, :create, :delisted]
 
   def index
     @vehicles = @station.vehicles
+                        .not_delisted
                         .page(params[:page])
                         .order('name')
+  end
+
+  def delisted
+    authorize!(:show, Vehicle)
+    @vehicles = @station.vehicles
+                        .delisted
+                        .page(params[:page])
+                        .order('date_delisting')
+    render(:action => :index)
   end
 
   def show
@@ -34,6 +45,7 @@ class VehiclesController < BackController
   def update
     if @vehicle.update_attributes(vehicle_params)
       flash[:success] = "Le véhicule a été mis à jour."
+      flash[:warning] = @vehicle.warnings      
       redirect_to(@vehicle)
     else
       render(:action => :edit)
@@ -60,9 +72,10 @@ class VehiclesController < BackController
   end
 
   def vehicle_params
-    params.require(:vehicle).permit(:name, :rem, :date_approval,
-                                        :date_check, :date_review,
-                                        :vehicle_photo, :remove_vehicle_photo,
-                                        :vehicle_photo_cache)
+    params.require(:vehicle).permit(:name, :rem, :date_approval, :date_check,
+                                    :date_review, :date_delisting,
+                                    :validate_date_delisting_update,
+                                    :vehicle_photo, :remove_vehicle_photo,
+                                    :vehicle_photo_cache)
   end
 end

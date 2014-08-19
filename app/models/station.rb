@@ -58,9 +58,10 @@ class Station < ActiveRecord::Base
     station
   end
 
-  def reset_intervention_editable_at
+  def update_intervention_editable_at
     max_grade_date = Grade.joins(:fireman).where(["firemen.station_id = ?", self.id]).maximum(:date)
-    self.update_attribute(:intervention_editable_at, max_grade_date)
+    max_vehicle_delisting_date = self.vehicles.maximum(:date_delisting)
+    self.update_attribute(:intervention_editable_at, [max_grade_date, max_vehicle_delisting_date].compact.max)
   end
 
   def confirm_intervention_editable_at?(new_date)

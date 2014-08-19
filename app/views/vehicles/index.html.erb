@@ -3,6 +3,9 @@
     <%= link_to(icon_label_text('glyphicon glyphicon-plus', 'Créer un nouveau véhicule'),
                 new_vehicle_path,
                 :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-list', 'Véhicules radiés'),
+                delisted_vehicles_path,
+                :class => 'btn btn-default btn-sm') %>
   </div>
 </div>
 <table class="table table-bordered table-striped">

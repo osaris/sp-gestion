@@ -25,6 +25,19 @@ describe VehiclesController do
       it { expect(assigns(:vehicles)).to_not be_nil}
     end
 
+    describe "GET :delisted" do
+
+      before(:each) do
+        get :delisted
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("index") }
+      it { should render_with_layout("back") }
+
+      it { expect(assigns(:vehicles)).to_not be_nil}
+    end
+
     describe "GET :show for a non existing vehicle" do
 
       before(:each) do

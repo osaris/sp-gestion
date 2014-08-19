@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814202030) do
+ActiveRecord::Schema.define(version: 20140815124655) do
 
   create_table "check_lists", force: true do |t|
     t.string   "title"
@@ -81,24 +81,13 @@ ActiveRecord::Schema.define(version: 20140814202030) do
   add_index "fireman_interventions", ["intervention_id"], name: "index_fireman_interventions_on_intervention_id", using: :btree
   add_index "fireman_interventions", ["intervention_role_id"], name: "index_fireman_interventions_on_intervention_role_id", using: :btree
 
-  create_table "fireman_periods", force: true do |t|
-    t.integer  "fireman_id"
-    t.datetime "periodDate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "station_id"
-  end
-
-  add_index "fireman_periods", ["fireman_id"], name: "index_fireman_periods_on_fireman_id", using: :btree
-  add_index "fireman_periods", ["station_id"], name: "index_fireman_periods_on_station_id", using: :btree
-
   create_table "fireman_trainings", force: true do |t|
     t.integer  "fireman_id"
     t.integer  "training_id"
     t.date     "achieved_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "rem",         limit: 16777215
+    t.text     "rem"
     t.integer  "station_id"
   end
 
@@ -270,7 +259,7 @@ ActiveRecord::Schema.define(version: 20140814202030) do
     t.integer  "station_id"
     t.string   "name"
     t.string   "short_name"
-    t.text     "description", limit: 16777215
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -278,12 +267,12 @@ ActiveRecord::Schema.define(version: 20140814202030) do
   add_index "trainings", ["station_id"], name: "index_trainings_on_station_id", using: :btree
 
   create_table "uniforms", force: true do |t|
-    t.string   "code"
     t.string   "title"
     t.string   "description"
     t.integer  "station_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
   end
 
   add_index "uniforms", ["station_id"], name: "index_uniforms_on_station_id", using: :btree
@@ -322,6 +311,7 @@ ActiveRecord::Schema.define(version: 20140814202030) do
     t.date     "date_check"
     t.date     "date_review"
     t.string   "vehicle_photo"
+    t.date     "date_delisting"
   end
 
   add_index "vehicles", ["station_id"], name: "index_vehicles_on_station_id", using: :btree
