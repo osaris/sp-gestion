@@ -34,9 +34,4 @@ class BaseUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg png)
   end
-
-  # Override the filename of the uploaded files
-  def filename
-    "file.png" if original_filename
-  end
 end
