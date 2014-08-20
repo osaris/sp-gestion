@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: c31f2e7e7afc223a2b85696f39156e383b758d51
+  ref: c31f2e7e7afc223a2b85696f39156e383b758d51
+  specs:
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,11 +68,6 @@ GEM
     capistrano-rails (1.1.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
     choice (0.1.6)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -81,7 +87,7 @@ GEM
     dalli (2.7.2)
     delayed_job (4.0.2)
       activesupport (>= 3.0, < 4.2)
-    delayed_job_active_record (4.0.1)
+    delayed_job_active_record (4.0.2)
       activerecord (>= 3.0, < 4.2)
       delayed_job (>= 3.0, < 4.1)
     diff-lcs (1.2.5)
@@ -250,7 +256,7 @@ GEM
     thread_safe (0.3.4)
     tilt (1.4.1)
     timeliness (0.3.7)
-    tins (1.3.1)
+    tins (1.3.2)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -277,7 +283,7 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   capistrano-rails
-  carrierwave
+  carrierwave!
   coffee-rails
   coveralls
   daemons

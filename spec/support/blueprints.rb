@@ -96,7 +96,7 @@ end
 Station.blueprint(:logo) do
   name                  { "Firemen station logo #{sn}" }
   url                   { "station-logo#{sn}" }
-  logo                  { File.open("#{Rails.root}/spec/fixtures/files/uploads/logo/logo.png") }
+  logo                  { File.open("#{Rails.root}/spec/fixtures/files/uploads/logo/logo_test.png") }
 end
 
 Training.blueprint do

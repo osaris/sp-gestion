@@ -7,9 +7,9 @@ describe AccountsController do
 
   let(:user) { User.make!(:confirmed) }
 
-  let(:logo) { fixture_file_upload('/files/uploads/logo/logo.png', 'image/png') }
+  let(:logo) { fixture_file_upload('/files/uploads/logo/logo_test.png', 'image/png') }
 
-  let(:logo_txt) { fixture_file_upload('/files/uploads/logo/logo.txt', 'text/plain') }
+  let(:logo_txt) { fixture_file_upload('/files/uploads/logo/logo_test.txt', 'text/plain') }
 
   describe "GET :edit" do
 
