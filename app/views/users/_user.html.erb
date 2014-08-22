@@ -6,10 +6,13 @@
     <%- end -%>
   </td>
   <td>
+    <%= l!(user.last_login_at) %>
+  </td>
+  <td>
     <%- if user.owner? -%>
       Propriétaire du compte
     <%- elsif !user.confirmed_at? -%>
-      Invité
+      Compte non confirmé
     <%- end -%>
   </td>
   <td>
