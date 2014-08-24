@@ -5,7 +5,7 @@ describe Message do
 
   it { should belong_to(:user) }
 
-  let(:message) { Message.new(:title => "test", :body => "test content", :user => User.make!) }
+  let(:message) { build(:message, :title => "test", :body => "test content", :user => build(:user)) }
 
   describe "#read?" do
 

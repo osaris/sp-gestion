@@ -7,7 +7,7 @@ describe InterventionRole do
 
   it { should validate_presence_of(:short_name).with_message(/nom court/) }
 
-  let(:intervention_role) { InterventionRole.make! }
+  let(:intervention_role) { create(:intervention_role) }
 
   describe "#destroy" do
 

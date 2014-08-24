@@ -3,9 +3,9 @@ require 'rails_helper'
 
 describe Intervention do
 
-  let(:intervention) { make_intervention_with_firemen(:station => Station.make!) }
+  let(:intervention) { create(:intervention, :station => create(:station)) }
 
-  let(:station) { Station.make! }
+  let(:station) { create(:station) }
 
   subject { intervention }
 
@@ -15,11 +15,11 @@ describe Intervention do
 
     subject { intervention.initialized_fireman_interventions }
 
-    let(:fireman) { make_fireman_with_grades(:station => station) }
+    let(:fireman) { create(:fireman) }
 
     context "with a new intervention" do
 
-      let(:intervention) { station.interventions.make }
+      let(:intervention) { create(:intervention, :station => station) }
 
       # force creation of a fireman in the station
       before { fireman }
@@ -96,7 +96,7 @@ describe Intervention do
 
     context "grade updated since intervention" do
 
-      let(:station) { Station.make!(:intervention_editable_at => 2.days.ago) }
+      let(:station) { create(:station, :intervention_editable_at => 2.days.ago) }
       let(:intervention) { make_intervention_with_firemen(:start_date => 4.days.ago,
                                                           :end_date => 3.days.ago,
                                                           :station => station) }
@@ -109,7 +109,7 @@ describe Intervention do
 
     context "grade updated since intervention" do
 
-      let(:station) { Station.make!(:intervention_editable_at => 2.days.ago) }
+      let(:station) { create(:station, :intervention_editable_at => 2.days.ago) }
       let(:intervention) { make_intervention_with_firemen(:start_date => 4.days.ago,
                                                           :end_date => 3.days.ago,
                                                           :station => station) }
@@ -122,7 +122,7 @@ describe Intervention do
 
   describe ".number" do
 
-    let(:intervention) { station.interventions.make }
+    let(:intervention) { create(:intervention, :station => station) }
 
     it "is not nil" do
       expect(intervention.number).to_not be_nil

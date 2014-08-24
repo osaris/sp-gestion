@@ -8,25 +8,25 @@ describe Ability do
 
   context "user with no group" do
 
-    let(:user) { User.make! }
+    let(:user) { create(:user) }
 
     it { should be_able_to(:manage, CheckList) }
   end
 
   context "user in a group" do
 
-    let(:user) { User.make!(:group => group) }
+    let(:user) { create(:user, :group => group) }
 
     context "and permission on checklist" do
 
-      let(:group) { Group.make!(:destroy_checklist) }
+      let(:group) { create(:group_destroy_checklist) }
 
       it { should be_able_to(:destroy, CheckList) }
     end
 
     context "and no permission" do
 
-      let(:group) { Group.make! }
+      let(:group) { create(:group_no_right) }
 
       it { should_not be_able_to(:manage, CheckList) }
     end

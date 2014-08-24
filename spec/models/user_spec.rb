@@ -5,7 +5,7 @@ describe User do
 
   setup(:activate_authlogic)
 
-  let(:user) { User.make! }
+  let(:user) { create(:user) }
 
   describe "#confirmed?" do
 
@@ -89,7 +89,7 @@ describe User do
 
   describe "#deliver_new_email_instructions!" do
 
-    let(:user) { User.make!(:new_email => 'foo@bar.com')}
+    let(:user) { create(:user, :new_email => 'foo@bar.com')}
 
     it "it resets perishable_token" do
       old_perishable_token = user.perishable_token
@@ -118,7 +118,7 @@ describe User do
     context "with user owner of the station" do
 
       before(:each) do
-        Station.make!(:users => [user])
+        create(:station, :users => [user])
       end
 
       it { should be_truthy }

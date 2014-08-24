@@ -6,8 +6,7 @@ describe Training do
   it { should validate_presence_of(:name).with_message(/nom/) }
   it { should validate_presence_of(:short_name).with_message(/nom court/) }
 
-  let(:training) { Training.make! }
-
+  let(:training) { create(:training) }
 
   describe "#destroy" do
 
@@ -20,8 +19,7 @@ describe Training do
 
     context "and used by a fireman" do
 
-      before {  make_fireman_with_grades(:fireman_trainings => [FiremanTraining.make(:training => training)],
-                                         :station => Station.make!) }
+      before { allow(training).to receive_message_chain(:firemen, :empty? => false) }
 
       it { should be_falsey }
     end

@@ -9,7 +9,7 @@ describe CheckList do
 
   describe "#copy" do
 
-    let(:cl) { make_check_list_with_items() }
+    let(:cl) { create(:check_list_with_items) }
     let(:cl_copy) { cl.copy }
 
     it "returns a copy with different title" do
@@ -23,9 +23,9 @@ describe CheckList do
 
   describe "#places" do
 
-    let(:cl) { CheckList.make!(:items => [Item.make!(:place => 'foo'),
-                                         Item.make!(:place => 'foo'),
-                                         Item.make!(:place => 'bar')]) }
+    let(:cl) { create(:check_list, :items => [create(:item, :place => 'foo'),
+                                              create(:item, :place => 'foo'),
+                                              create(:item, :place => 'bar')]) }
 
     it "returns distinct list of places of items ordered by name" do
       expect(cl.places).to eq ['bar', 'foo']

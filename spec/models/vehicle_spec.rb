@@ -7,9 +7,8 @@ describe Vehicle do
 
   it { should validate_presence_of(:name).with_message(/nom/) }
 
-  let(:station) { Station.make! }
-  let(:vehicle) { station.vehicles.make }
-  let(:vehicle_delisted) { station.vehicles.make!(:date_delisting => Date.today) }
+  let(:vehicle) { create(:vehicle) }
+  let(:vehicle_delisted) { create(:vehicle_delisted) }
 
   describe ".date_delisting" do
 
@@ -47,7 +46,7 @@ describe Vehicle do
 
     context "and used in an intervention" do
 
-      before { make_intervention_with_firemen(:vehicles => [vehicle], :station => Station.make!) }
+      before { allow(vehicle).to receive_message_chain(:interventions, :empty? => false) }
 
       it { should be_falsey }
     end
@@ -70,8 +69,8 @@ describe Vehicle do
 
       before(:each) do
         vehicle.date_delisting = Date.today
-        allow_any_instance_of(Station).to receive(:confirm_intervention_editable_at?)
-                                          .and_return(false)
+        allow(vehicle.station).to receive(:confirm_intervention_editable_at?)
+                                  .and_return(false)
       end
 
       it { should be_truthy }
@@ -81,8 +80,8 @@ describe Vehicle do
 
       before(:each) do
         vehicle.date_delisting = Date.today
-        allow_any_instance_of(Station).to receive(:confirm_intervention_editable_at?)
-                                          .and_return(true)
+        allow(vehicle.station).to receive(:confirm_intervention_editable_at?)
+                                  .and_return(true)
       end
 
       it { should be_falsey }
@@ -93,8 +92,8 @@ describe Vehicle do
       before(:each) do
         vehicle.date_delisting = Date.today
         vehicle.validate_date_delisting_update = 1
-        allow_any_instance_of(Station).to receive(:confirm_intervention_editable_at?)
-                                          .and_return(true)
+        allow(vehicle.station).to receive(:confirm_intervention_editable_at?)
+                                  .and_return(true)
       end
 
       it { should be_truthy }

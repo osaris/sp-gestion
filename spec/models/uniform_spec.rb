@@ -6,7 +6,7 @@ describe Uniform do
   it { should validate_presence_of(:title).with_message(/titre/) }
   it { should validate_presence_of(:description).with_message(/description/) }
 
-  let(:uniform) { Uniform.make! }
+  let(:uniform) { create(:uniform) }
 
   describe "#destroy" do
 
@@ -19,7 +19,7 @@ describe Uniform do
 
     context "and used in a convocation" do
 
-      before { make_convocation_with_firemen(:uniform => uniform, :station => Station.make!) }
+      before { allow(uniform).to receive_message_chain(:convocations, :empty? => false) }
 
       it { should be_falsey }
     end
