@@ -31,7 +31,8 @@ module SpGestion
 
     # Specify generators
     config.generators do |g|
-      g.fixture_replacement :machinist
+      g.test_framework :rspec
+      g.factory_girl false
     end
 
     # Additional variables

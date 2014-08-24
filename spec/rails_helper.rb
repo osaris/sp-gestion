@@ -8,7 +8,6 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require File.expand_path(File.dirname(__FILE__) + '/support/blueprints')
 require 'authlogic/test_case'
 require File.expand_path(File.dirname(__FILE__) + '/matchers/custom_matchers')
 require 'email_spec'
@@ -42,6 +41,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
+  config.include(FactoryGirl::Syntax::Methods)
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   config.include(Authlogic::TestCase)
@@ -69,12 +69,23 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  # FIXME this should be integrated in machinist gem but isn't ready in version 2.0.0.beta2
-  def plan(object)
-    assigned_attributes = {}
-    object.attributes.each do |key, value|
-      assigned_attributes[key.to_sym] = value
+  config.before(:suite) do
+    begin
+      DatabaseCleaner.start
+      FactoryGirl.lint
+    ensure
+      DatabaseCleaner.clean
     end
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 
   def send_file_to_disk(content, filename)
@@ -96,14 +107,6 @@ RSpec.configure do |config|
   end
 
   # data generation methods
-
-  def make_check_list_with_items(attributes = {})
-    cl = CheckList.make!(attributes)
-    5.times { cl.items << Item.make! }
-    cl.save
-    cl
-  end
-
   def make_fireman_with_grades(attributes = {})
     f = attributes[:station].firemen.make(attributes)
     f.grades = Grade::new_defaults

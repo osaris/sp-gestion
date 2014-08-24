@@ -52,9 +52,10 @@ end
 
 group :test do
   gem 'coveralls', :require => false
+  gem 'database_cleaner'
   gem 'email_spec'
   gem 'faker'
-  gem 'machinist'
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'shoulda-matchers'
