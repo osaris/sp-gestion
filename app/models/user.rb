@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   delegate :url, :to => :station, :prefix => true
 
-  attr_accessor :cooptation, :new_email_tmp
+  attr_accessor :new_email_tmp
 
   before_create :reset_perishable_token
 
@@ -76,7 +76,6 @@ class User < ActiveRecord::Base
     UserMailer.delay.password_reset_instructions(self)
   end
 
-  # for cooptation
   def deliver_cooptation_instructions!
     self.reset_perishable_token!
     self.confirmed_at = nil
