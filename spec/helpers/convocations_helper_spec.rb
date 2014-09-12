@@ -24,8 +24,8 @@ describe ConvocationsHelper do
 
     context "with last_emailed_at nil" do
 
-      it "render -" do
-        expect(display_last_emailed_at(nil)).to eq "-"
+      it "render 'jamais'" do
+        expect(display_last_emailed_at(nil)).to eq "jamais"
       end
     end
 

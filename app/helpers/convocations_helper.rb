@@ -12,7 +12,7 @@ module ConvocationsHelper
   end
 
   def display_last_emailed_at(last_emailed_at)
-    last_emailed_at.blank? ? "-" : l(last_emailed_at, :format => :default)
+    last_emailed_at.blank? ? "jamais" : l(last_emailed_at, :format => :default)
   end
 
 end
