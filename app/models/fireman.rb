@@ -163,13 +163,8 @@ class Fireman < ActiveRecord::Base
   end
 
   def denormalize_grade
-    if self.status == STATUS['JSP']
-      self.grade = nil
-      self.grade_category = nil
-    else
-      self.grade = current_grade.nil? ? nil : current_grade.kind
-      self.grade_category = Grade::GRADE_CATEGORY_MATCH[self.grade]
-    end
+    self.grade = current_grade.nil? ? nil : current_grade.kind
+    self.grade_category = Grade::GRADE_CATEGORY_MATCH[self.grade]
   end
 
   def warn_if_resignation_date_changed

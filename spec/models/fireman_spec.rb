@@ -36,7 +36,7 @@ describe Fireman do
     context "with grades" do
 
       it "return current_grade" do
-        expect(fireman_with_grades.current_grade.kind).to eq Grade::GRADE['2e classe']
+        expect(fireman_with_grades.current_grade.kind).to eq Grade::GRADE['JSP 1']
       end
     end
   end
@@ -65,14 +65,14 @@ describe Fireman do
   describe ".grade" do
 
     it "return current grade" do
-      expect(fireman_with_grades.grade).to eq Grade::GRADE['2e classe']
+      expect(fireman_with_grades.grade).to eq Grade::GRADE['JSP 1']
     end
   end
 
   describe ".grade_category" do
 
     it "return current grade category" do
-      expect(fireman_with_grades.grade_category).to eq Grade::GRADE_CATEGORY['Homme du rang']
+      expect(fireman_with_grades.grade_category).to eq Grade::GRADE_CATEGORY['JSP']
     end
   end
 
@@ -147,6 +147,18 @@ describe Fireman do
   end
 
   describe ".valid?" do
+
+    context "JSP and a grade > JSP" do
+
+      before do
+        fireman_with_grades.status = Fireman::STATUS['JSP']
+        fireman_with_grades.grades.first.date = Date.today - 3.weeks
+      end
+
+      it "is false" do
+        expect(fireman_with_grades.valid?).to be_falsey
+      end
+    end
 
     context "not JSP and no grade" do
 

@@ -13,7 +13,7 @@ describe FiremenHelper do
                                                :firstname => 'foo',
                                                :lastname  => 'bar') }
 
-      it { should == "2e classe foo bar" }
+      it { should == "JSP 1 foo bar" }
     end
 
     context "without grade" do
@@ -22,25 +22,6 @@ describe FiremenHelper do
                                   :lastname  => 'bar') }
 
       it { should == "foo bar" }
-    end
-  end
-
-  describe "#style_for_grades" do
-
-    subject { style_for_grades(fireman) }
-
-    context "with status JSP" do
-
-      let(:fireman) { Fireman.new(:status => 1) }
-
-      it { should == "display:none;" }
-    end
-
-    context "with other status" do
-
-      let(:fireman) { Fireman.new(:status => 0) }
-
-      it { should == "" }
     end
   end
 
@@ -98,6 +79,15 @@ describe FiremenHelper do
       end
 
       it { should == 4 }
+    end
+
+    context "with grade of JSP category" do
+
+      before(:each) do
+        allow_any_instance_of(Fireman).to receive(:current_grade).and_return(Grade.new(:kind => Grade::GRADE['JSP 3']))
+      end
+
+      it { should == 5 }
     end
   end
 end

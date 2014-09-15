@@ -1,7 +1,7 @@
 <div class="col-md-offset-1 checkbox">
   <label>
-    <%= check_box_tag("convocation[fireman_ids][]", fireman.id, attendees.has_key?(fireman.id), :class => "status_#{status}") %>    
-    <%- if fireman.status != Fireman::STATUS['JSP'] -%>
+    <%= check_box_tag("convocation[fireman_ids][]", fireman.id, attendees.has_key?(fireman.id), :class => "status_#{status}") %>
+    <%- unless fireman.grade.blank? -%>
       <%= Grade::GRADE.key(fireman.grade) %> -
     <%- end -%>
     <%= fireman.firstname %>&nbsp;<%= fireman.lastname %>
