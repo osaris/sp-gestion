@@ -22,7 +22,7 @@ module I18n
         raise exception
       when "production"
         if MissingTranslationData === exception
-          Airbrake.notify(exception)
+          Rollbar.report_exception(exception)
           return exception.message
         else
           raise exception

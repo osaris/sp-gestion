@@ -22,6 +22,15 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 5
 
+# let newrelic track deploys
+set :newrelic_license_key, ''
+set :newrelic_appname, ''
+
+# let rollbar track deploys
+set :rollbar_token, ''
+set :rollbar_env, Proc.new { fetch :stage }
+set :rollbar_role, Proc.new { :app }
+
 # set :newrelic_license_key, ''
 # set :newrelic_appname, ''
 
