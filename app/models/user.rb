@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   delegate :url, :to => :station, :prefix => true
 
-  attr_accessor :cooptation, :new_email_tmp
+  attr_accessor :new_email_tmp
 
   before_create :reset_perishable_token
 
@@ -33,16 +33,21 @@ class User < ActiveRecord::Base
 
     # password validation rules
     config.validates_length_of_password_field_options({
-      :on => :update, :if => :password_validation_needed?,
-      :minimum => 6, :message => "Le mot de passe doit avoir au moins 6 caractères."
+      :on => :update,
+      :if => :password_validation_needed?,
+      :minimum => 6,
+      :message => "Le mot de passe doit avoir au moins 6 caractères."
     })
     config.validates_confirmation_of_password_field_options({
-      :on => :update, :if => :password_validation_needed?,
+      :on => :update,
+      :if => :password_validation_needed?,
       :message => "Le mot de passe ne correspond pas à la confirmation."
     })
     config.validates_length_of_password_confirmation_field_options({
-      :on => :update, :if => :password_validation_needed?,
-      :minimum => 6, :message => "Le mot de passe doit avoir au moins 6 caractères."
+      :on => :update,
+      :if => :password_validation_needed?,
+      :minimum => 6,
+      :message => "Le mot de passe doit avoir au moins 6 caractères."
     })
   end
 
@@ -76,7 +81,6 @@ class User < ActiveRecord::Base
     UserMailer.delay.password_reset_instructions(self)
   end
 
-  # for cooptation
   def deliver_cooptation_instructions!
     self.reset_perishable_token!
     self.confirmed_at = nil
@@ -123,7 +127,7 @@ class User < ActiveRecord::Base
   private
 
   def password_validation_needed?
-    confirmed_at.blank? or (!password.nil? or !password_confirmation.nil?)
+    !group_id_changed? and (confirmed_at.blank? or (!password.nil? or !password_confirmation.nil?))
   end
 
   def deliver_new_email_instructions!

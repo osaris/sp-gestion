@@ -17,7 +17,6 @@ class UsersController < BackController
 
   def create
     @user = @station.users.new(user_params)
-    @user.cooptation = true
     if(@user.save)
       @user.deliver_cooptation_instructions!
       flash[:success] = "L'invitation a été envoyée avec succès."

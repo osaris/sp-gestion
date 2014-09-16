@@ -36,4 +36,4 @@ production:
       :authentication:
       :user_name:
       :password:
-  :airbrake_api_key:
+  :rollbar_access_token:

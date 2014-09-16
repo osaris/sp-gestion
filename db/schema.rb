@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815124655) do
+ActiveRecord::Schema.define(version: 20140912162233) do
 
   create_table "check_lists", force: true do |t|
     t.string   "title"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20140815124655) do
     t.date     "achieved_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "rem"
+    t.text     "rem",         limit: 16777215
     t.integer  "station_id"
   end
 
@@ -259,7 +259,7 @@ ActiveRecord::Schema.define(version: 20140815124655) do
     t.integer  "station_id"
     t.string   "name"
     t.string   "short_name"
-    t.text     "description"
+    t.text     "description", limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -267,12 +267,12 @@ ActiveRecord::Schema.define(version: 20140815124655) do
   add_index "trainings", ["station_id"], name: "index_trainings_on_station_id", using: :btree
 
   create_table "uniforms", force: true do |t|
+    t.string   "code"
     t.string   "title"
     t.string   "description"
     t.integer  "station_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code"
   end
 
   add_index "uniforms", ["station_id"], name: "index_uniforms_on_station_id", using: :btree

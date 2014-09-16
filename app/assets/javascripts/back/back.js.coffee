@@ -68,13 +68,16 @@ Rails.register_init ['convocation_firemen\\edit_all'], () -> convocation_firemen
 
 # Firemen
 #######################################################
-window.firemen = () ->
+window.jsp = () ->
   $('#fireman_status').change ->
     if parseInt($(this).val()) == 1
-      $('#grades').fadeOut()
+      $('#accordion').accordion({ active: 5 });
     else
-      $('#grades').fadeIn()
+      $('#accordion').accordion({ active: 4 });
 
+Rails.register_init ['firemen\\new'], () -> jsp()
+
+window.firemen = () ->
   $('#fireman_tag_list').tagsInput(
     autocomplete_url: tags
     defaultText: 'Ajouter un tag'
