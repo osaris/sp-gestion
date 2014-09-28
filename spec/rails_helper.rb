@@ -12,20 +12,6 @@ require 'authlogic/test_case'
 require File.expand_path(File.dirname(__FILE__) + '/matchers/custom_matchers')
 require 'email_spec'
 
-Geocoder::Lookup::Test.set_default_stub(
-  [
-    {
-      'latitude'     => 40.7143528,
-      'longitude'    => -74.0059731,
-      'address'      => 'New York, NY, USA',
-      'state'        => 'New York',
-      'state_code'   => 'NY',
-      'country'      => 'United States',
-      'country_code' => 'US'
-    }
-  ]
-)
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
