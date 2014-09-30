@@ -91,33 +91,4 @@ RSpec.configure do |config|
 
     UserSession.create(@user)
   end
-
-  # data generation methods
-  def make_fireman_with_grades(attributes = {})
-    f = attributes[:station].firemen.make(attributes)
-    f.grades = Grade::new_defaults
-    f.grades.last.date = 2.months.ago
-    f.save
-    f
-  end
-
-  def make_convocation_with_firemen(attributes = {}, number_of_firemen = 1)
-    c = Convocation.make(attributes)
-    number_of_firemen.times do
-      c.firemen << make_fireman_with_grades(:station => c.station)
-    end
-    c.save
-    c
-  end
-
-  def make_intervention_with_firemen(attributes = {})
-    i = attributes[:station].interventions.make(attributes)
-    attributes[:firemen] ||= [make_fireman_with_grades(:station => i.station)]
-    attributes[:firemen].each do |fireman|
-      fi = i.fireman_interventions.new
-      fi.fireman = fireman
-    end
-    i.save
-    i
-  end
 end
