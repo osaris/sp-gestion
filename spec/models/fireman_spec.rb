@@ -4,13 +4,12 @@ require 'rails_helper'
 describe Fireman do
 
   let(:fireman) { Fireman.new(:firstname => 'Test', :lastname => 'Test') }
-  let(:station) { Station.make! }
+  let(:station) { create(:station) }
   let(:fireman_with_grades) { station.firemen.new(:firstname => 'Test',
                                                   :lastname => 'Test',
                                                   :incorporation_date => Date.yesterday) }
-  let(:fireman_resigned) { make_fireman_with_grades(:station => Station.make!,
-                                                    :incorporation_date => Date.yesterday,
-                                                    :resignation_date => Date.today) }
+  let(:fireman_resigned) { create(:fireman, :incorporation_date => Date.yesterday,
+                                            :resignation_date => Date.today) }
 
   before do
     fireman_with_grades.grades.last.date = Date.today - 3.weeks
@@ -112,8 +111,8 @@ describe Fireman do
 
     context "and used in an intervention" do
 
-      before { make_intervention_with_firemen(:firemen => [fireman_with_grades],
-                                              :station => station) }
+      before { create(:intervention, :firemen => [fireman_with_grades],
+                                     :station => station) }
 
       it { should be_falsey }
     end
@@ -125,8 +124,8 @@ describe Fireman do
 
     context "and used in a convocation" do
 
-      before { make_convocation_with_firemen(:firemen => [fireman_with_grades],
-                                             :station => station) }
+      before { create(:convocation, :firemen => [fireman_with_grades],
+                                    :station => station) }
 
       it { should be_falsey }
     end
@@ -140,7 +139,7 @@ describe Fireman do
 
       before { fireman_with_grades.fireman_trainings
                                   .create(:achieved_at => Date.today,
-                                          :training_id => station.trainings.make!.id) }
+                                          :training_id => create(:training, :station => station).id) }
 
       it { should be_falsey }
     end
