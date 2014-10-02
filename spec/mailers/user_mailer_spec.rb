@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe UserMailer do
 
-  let(:user) { User.make!(:email => "test@test.com", :new_email => "test@new.com") }
+  let(:user) { create(:user, :email => "test@test.com", :new_email => "test@new.com") }
 
   describe "#confirmation_instructions" do
 

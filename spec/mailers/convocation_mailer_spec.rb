@@ -3,11 +3,11 @@ require 'rails_helper'
 
 describe ConvocationMailer do
 
-  let(:station) { Station.make! }
+  let(:station) { create(:station) }
 
-  let(:convocation) { make_convocation_with_firemen(:date => 3.days.from_now,
-                                                    :station => station,
-                                                    :rem => 'Test') }
+  let(:convocation) { create(:convocation,  :date => 3.days.from_now,
+                                            :station => station,
+                                            :rem => 'Test') }
 
   describe "#sending_confirmation" do
     subject { ConvocationMailer.sending_confirmation(convocation, "test@test.com").deliver }
@@ -32,10 +32,10 @@ describe ConvocationMailer do
       it { should have_body_text(/#{convocation.title}/) }
     end
 
-    let(:convocation) { make_convocation_with_firemen(:date => 3.days.from_now,
-                                                      :station => station,
-                                                      :rem => 'Test',
-                                                      :confirmable => true) }
+    let(:convocation) { create(:convocation, :date => 3.days.from_now,
+                                             :station => station,
+                                             :rem => 'Test',
+                                             :confirmable => true) }
 
     context "and confirmable convocation" do
 
