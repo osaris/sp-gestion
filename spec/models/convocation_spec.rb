@@ -11,11 +11,9 @@ describe Convocation do
 
   it { should validate_presence_of(:firemen).with_message(/personnes/) }
 
-  let(:convocation_in_future) { make_convocation_with_firemen(:date => 3.days.from_now,
-                                                              :station => Station.make!) }
+  let(:convocation_in_future) { build(:convocation, :date => 3.days.from_now) }
 
-  let(:convocation_in_past) { make_convocation_with_firemen(:date => 3.days.ago,
-                                                            :station => Station.make!) }
+  let(:convocation_in_past) { build(:convocation, :date => 3.days.ago) }
 
   describe "#valid?" do
 
@@ -55,8 +53,7 @@ describe Convocation do
 
     context "with 1 fireman" do
 
-      let(:convocation) { make_convocation_with_firemen({:date => 3.days.from_now,
-                                                     :station => Station.make!}, 1) }
+      let(:convocation) { create(:convocation, :date => 3.days.from_now) }
 
       it "deliver convocations" do
         expect(ConvocationMailer).to receive(:convocation)
@@ -87,8 +84,8 @@ describe Convocation do
 
     context "with 3 firemen (2 emails)" do
 
-      let(:convocation) { make_convocation_with_firemen({:date => 3.days.from_now,
-                                                         :station => Station.make!}, 3) }
+      let(:convocation) { create(:convocation, :date => 3.days.from_now,
+                                               :firemen_count => 3) }
 
       before { convocation.firemen.first.update_attribute(:email, '') }
 
