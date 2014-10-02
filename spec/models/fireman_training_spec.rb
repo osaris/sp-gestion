@@ -4,7 +4,7 @@ require 'rails_helper'
 describe FiremanTraining do
 
   # force the subject because validate_uniqueness use data in database
-  subject { FiremanTraining.make! }
+  subject { create(:fireman_training) }
 
   it { should validate_uniqueness_of(:training_id).with_message(/formation existe déjà/) }
 
