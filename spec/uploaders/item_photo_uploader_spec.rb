@@ -5,13 +5,13 @@ describe ItemPhotoUploader do
   include CarrierWave::Test::Matchers
 
   let(:uploader) do
-    uploader = ItemPhotoUploader.new(Item.make, :item_photo)
+    uploader = ItemPhotoUploader.new(create(:item), :item_photo)
     uploader.store!(File.open("#{Rails.root}/spec/fixtures/files/uploads/logo/logo_test.png"))
     uploader
   end
 
   let(:uploader_empty) do
-    ItemPhotoUploader.new(Item.make, :item_photo)
+    ItemPhotoUploader.new(create(:item), :item_photo)
   end
 
   context 'filename' do

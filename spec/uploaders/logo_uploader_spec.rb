@@ -5,7 +5,7 @@ describe LogoUploader do
   include CarrierWave::Test::Matchers
 
   let(:uploader) do
-    uploader = LogoUploader.new(Station.make, :logo)
+    uploader = LogoUploader.new(create(:station), :logo)
     uploader.store!(File.open("#{Rails.root}/spec/fixtures/files/uploads/logo/logo_test.png"))
     uploader
   end

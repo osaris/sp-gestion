@@ -5,13 +5,13 @@ describe PasseportPhotoUploader do
   include CarrierWave::Test::Matchers
 
   let(:uploader) do
-    uploader = PasseportPhotoUploader.new(Fireman.make, :passeport_photo)
+    uploader = PasseportPhotoUploader.new(create(:fireman), :passeport_photo)
     uploader.store!(File.open("#{Rails.root}/spec/fixtures/files/uploads/logo/logo_test.png"))
     uploader
   end
 
   let(:uploader_empty) do
-    PasseportPhotoUploader.new(Fireman.make, :passeport_photo)
+    PasseportPhotoUploader.new(create(:fireman), :passeport_photo)
   end
 
   context 'filename' do

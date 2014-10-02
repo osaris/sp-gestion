@@ -5,13 +5,13 @@ describe VehiclePhotoUploader do
   include CarrierWave::Test::Matchers
 
   let(:uploader) do
-    uploader = VehiclePhotoUploader.new(Vehicle.make, :vehicle_photo)
+    uploader = VehiclePhotoUploader.new(create(:vehicle), :vehicle_photo)
     uploader.store!(File.open("#{Rails.root}/spec/fixtures/files/uploads/logo/logo_test.png"))
     uploader
   end
 
   let(:uploader_empty) do
-    VehiclePhotoUploader.new(Vehicle.make, :vehicle_photo)
+    VehiclePhotoUploader.new(create(:vehicle), :vehicle_photo)
   end
 
   context 'filename' do
