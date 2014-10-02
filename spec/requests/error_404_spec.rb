@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe "404 Page Not Found" do
 
-  let(:station) { Station.make! }
+  let(:station) { create(:station) }
 
   context "on main domain" do
     before(:each) do
