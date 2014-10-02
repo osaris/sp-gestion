@@ -21,7 +21,7 @@ describe InterventionRole do
     context "and used in an intervention" do
 
       before do
-        i = make_intervention_with_firemen(:station => Station.make!)
+        i = create(:intervention)
         i.fireman_interventions.first.intervention_role = intervention_role
         i.save
       end
