@@ -3,13 +3,8 @@ require 'rails_helper'
 
 describe ConvocationFireman do
 
-  let(:fireman) { make_fireman_with_grades(:station => Station.make!) }
-  let(:convocation) { Convocation.make }
-
-  before do
-    convocation.firemen << fireman
-    convocation.save
-  end
+  let(:fireman) { create(:fireman) }
+  let(:convocation) { create(:convocation, :firemen => [fireman]) }
 
   it "set the convocation_firemen grade to firemen grade" do
     expect(convocation.convocation_firemen.first.grade).to eq fireman.grade
