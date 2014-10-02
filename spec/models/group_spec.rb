@@ -14,11 +14,11 @@ describe Group do
 
     subject { group.initialized_permissions(resources) }
 
-    let(:resources) { [Resource.make(:checklist)] }
+    let(:resources) { [create(:resource_checklist)] }
 
     context "with a new group" do
 
-      let(:group) { Group.make }
+      let(:group) { create(:group) }
 
       it "should have one item" do
         expect(subject.size).to eq 1
@@ -27,7 +27,8 @@ describe Group do
 
     context "with an existing group" do
 
-      let(:group) { Group.make(:permissions => [Permission.make(:resource => resources.first)]) }
+      let(:group) { create(:group, :permissions => [create(:permission,
+                                                    :resource => resources.first)]) }
 
       it "should have one item" do
         expect(subject.size).to eq 1
