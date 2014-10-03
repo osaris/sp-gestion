@@ -11,9 +11,9 @@ describe ItemsController do
       login
     end
 
-    let(:check_list) { @station.check_lists.make! }
+    let(:check_list) { create(:check_list, :station => @station) }
 
-    let(:item) { check_list.items.make! }
+    let(:item) { create(:item, :check_list => check_list) }
 
     describe "GET :expirings" do
 
