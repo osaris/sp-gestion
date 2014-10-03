@@ -8,7 +8,7 @@ describe ProfilesController do
   context "an user logged in station in demo mode" do
 
     before(:each) do
-      login(Station.make!(:demo => true))
+      login(create(:station, :demo => true))
     end
 
     describe "GET :edit" do
