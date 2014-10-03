@@ -3,11 +3,11 @@ require 'rails_helper'
 
 describe EmailConfirmationsController do
 
-  let(:station) { Station.make! }
+  let(:station) { create(:station) }
 
   context "a station subdomain with a user who asked for an email change" do
 
-    let(:user) { User.make!(:confirmed, :station => station, :new_email => 'new_email@test.com') }
+    let(:user) { create(:user_confirmed, :station => station, :new_email => 'new_email@test.com') }
 
     before(:each) do
       @request.host = "#{station.url}.test.local"
@@ -58,7 +58,7 @@ describe EmailConfirmationsController do
     describe "PATCH :update with good password but new_email already used" do
 
       before(:each) do
-        user.new_email = User.make!(:confirmed, :station => station).email
+        user.new_email = create(:user_confirmed, :station => station).email
         user.save
 
         patch :update, :id => user.perishable_token,
@@ -76,7 +76,7 @@ describe EmailConfirmationsController do
 
   context "a station subdomain with a user who never asked for an email change" do
 
-    let(:user) { User.make!(:confirmed, :station => station, :new_email => '') }
+    let(:user) { create(:user_confirmed, :station => station, :new_email => '') }
 
     before(:each) do
       @request.host = "#{station.url}.test.local"
