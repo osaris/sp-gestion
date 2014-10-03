@@ -11,7 +11,7 @@ describe TrainingsController do
       login
     end
 
-    let(:training) { @station.trainings.make! }
+    let(:training) { create(:training, :station => @station) }
 
     describe "GET :index" do
 
@@ -63,7 +63,7 @@ describe TrainingsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :training => plan(Training.make)
+        post :create, :training => attributes_for(:training)
       end
 
       it { should respond_with(:redirect) }
@@ -109,7 +109,7 @@ describe TrainingsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => training.id, :training => plan(Training.make)
+        patch :update, :id => training.id, :training => attributes_for(:training)
       end
 
       it { should respond_with(:redirect) }
