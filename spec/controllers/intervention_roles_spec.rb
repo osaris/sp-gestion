@@ -11,7 +11,7 @@ describe InterventionRolesController do
       login
     end
 
-    let(:intervention_role) { @station.intervention_roles.make! }
+    let(:intervention_role) { create(:intervention_role, :station => @station) }
 
     describe "GET :index" do
 
@@ -63,7 +63,7 @@ describe InterventionRolesController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :intervention_role => plan(InterventionRole.make)
+        post :create, :intervention_role => attributes_for(:intervention_role)
       end
 
       it { should respond_with(:redirect) }
@@ -109,7 +109,7 @@ describe InterventionRolesController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => intervention_role.id, :intervention_role => plan(InterventionRole.make)
+        patch :update, :id => intervention_role.id, :intervention_role => attributes_for(:intervention_role)
       end
 
       it { should respond_with(:redirect) }
