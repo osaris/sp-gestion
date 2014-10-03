@@ -5,7 +5,7 @@ describe PasswordResetsController do
 
   context "a station in demo mode" do
 
-    let(:station) { Station.make!(:demo => true) }
+    let(:station) { create(:station, :demo => true) }
 
     before(:each) do
       @request.host = "#{station.url}.test.local"
@@ -25,9 +25,9 @@ describe PasswordResetsController do
 
   context "a station subdomain with a user" do
 
-    let(:station) { Station.make! }
+    let(:station) { create(:station) }
 
-    let(:user) { User.make!(:confirmed, :station => station) }
+    let(:user) { create(:user_confirmed, :station => station) }
 
     before(:each) do
       @request.host = "#{station.url}.test.local"
