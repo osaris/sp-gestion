@@ -8,7 +8,7 @@ describe UserSessionsController do
   context "a station subdomain" do
 
     before(:each) do
-      @station = Station.make!(:url => 'cis-test')
+      @station = create(:station, :url => 'cis-test')
       @request.host = 'cis-test.sp-gestion.fr'
     end
 
@@ -26,7 +26,7 @@ describe UserSessionsController do
     context "with a user on another account" do
 
       before(:each) do
-        @user = User.make!(:confirmed, :station => Station.make!)
+        @user = create(:user_confirmed, :station => create(:station))
       end
 
       describe "POST :create with good data" do
@@ -47,7 +47,7 @@ describe UserSessionsController do
     context "with a user on this account" do
 
       before(:each) do
-        @user = User.make!(:confirmed, :station => @station)
+        @user = create(:user_confirmed, :station => @station)
       end
 
       describe "POST :create with bad data" do
