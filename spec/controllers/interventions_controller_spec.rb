@@ -11,7 +11,7 @@ describe InterventionsController do
       login
     end
 
-    let(:fireman) { make_fireman_with_grades(:station => @station) }
+    let(:fireman) { create(:fireman, :station => @station) }
 
     describe "GET :index" do
 
@@ -29,7 +29,7 @@ describe InterventionsController do
     describe "GET :stats with interventions" do
 
       before(:each) do
-        i = make_intervention_with_firemen(:station => @station)
+        i = create(:intervention, :station => @station)
         allow_any_instance_of(Station).to receive(:interventions).and_return(double(:latest => {:first => i}))
         allow(Intervention).to receive(:years_stats).and_return([Date.today.year, Date.today.year+1])
       end
@@ -148,7 +148,7 @@ describe InterventionsController do
 
     context "with an existing intervention not editable" do
 
-      let(:intervention) { make_intervention_with_firemen(:station => @station) }
+      let(:intervention) { create(:intervention, :station => @station) }
 
       before(:each) do
         allow_any_instance_of(Intervention).to receive(:editable?).and_return(false)
@@ -189,7 +189,7 @@ describe InterventionsController do
 
     context "with an existing intervention editable" do
 
-      let(:intervention) { make_intervention_with_firemen(:station => @station) }
+      let(:intervention) { create(:intervention, :station => @station) }
 
       before(:each) do
         allow_any_instance_of(Intervention).to receive(:editable?).and_return(true)
