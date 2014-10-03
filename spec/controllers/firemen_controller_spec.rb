@@ -11,7 +11,7 @@ describe FiremenController do
       login
     end
 
-    let(:fireman) { make_fireman_with_grades(:station => @station) }
+    let(:fireman) { create(:fireman, :station => @station) }
 
     describe "GET :index" do
 
@@ -89,7 +89,7 @@ describe FiremenController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :fireman => plan(Fireman.make(:status => Fireman::STATUS['JSP']))
+        post :create, :fireman => attributes_for(:fireman, :status => Fireman::STATUS['JSP'])
       end
 
       it { should respond_with(:redirect) }
