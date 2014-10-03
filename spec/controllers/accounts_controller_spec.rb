@@ -5,7 +5,7 @@ describe AccountsController do
 
   setup(:activate_authlogic)
 
-  let(:user) { User.make!(:confirmed) }
+  let(:user) { create(:user_confirmed) }
 
   let(:logo) { fixture_file_upload('/files/uploads/logo/logo_test.png', 'image/png') }
 
@@ -27,7 +27,7 @@ describe AccountsController do
     context "an user logged in and owner of station in demo mode" do
 
       before do
-        login(Station.make!(:demo => true))
+        login(create(:station, :demo => true))
 
         get :edit
       end
@@ -40,7 +40,7 @@ describe AccountsController do
     context "an user logged in and owner" do
 
       before do
-        login(Station.make!(:owner_id => user.id), user)
+        login(create(:station, :owner_id => user.id), user)
 
         get :edit
       end
@@ -58,7 +58,7 @@ describe AccountsController do
     context "a station with a logo" do
 
       before do
-        login(Station.make!(:logo, :owner_id => user.id), user)
+        login(create(:station_logo, :owner_id => user.id), user)
 
         patch :update_settings, :station => { :remove_logo => '1' }
       end
@@ -74,7 +74,7 @@ describe AccountsController do
   describe "PATCH :update_settings with new logo" do
 
     before do
-      login(Station.make!(:owner_id => user.id), user)
+      login(create(:station, :owner_id => user.id), user)
 
       patch :update_settings, :station => { :logo => logo }
     end
@@ -89,7 +89,7 @@ describe AccountsController do
   describe "PATCH :update_settings with bad logo" do
 
     before do
-      login(Station.make!(:owner_id => user.id), user)
+      login(create(:station, :owner_id => user.id), user)
 
       patch :update_settings, :station => { :logo => logo_txt }
     end
@@ -104,7 +104,7 @@ describe AccountsController do
   describe "PATCH :update_owner with good data" do
 
     before do
-      login(Station.make!(:owner_id => user.id), user)
+      login(create(:station, :owner_id => user.id), user)
       allow_any_instance_of(Station).to receive(:update_owner).and_return(true)
 
       patch :update_owner, :station => { :owner_id => '' }
@@ -118,7 +118,7 @@ describe AccountsController do
   describe "PATCH :update_owner with bad data" do
 
     before do
-      login(Station.make!(:owner_id => user.id), user)
+      login(create(:station, :owner_id => user.id), user)
       allow_any_instance_of(Station).to receive(:update_owner).and_return(false)
 
       patch :update_owner, :station => { :owner_id => '' }
@@ -132,7 +132,7 @@ describe AccountsController do
   describe "DELETE :destroy" do
 
     before do
-      login(Station.make!(:owner_id => user.id), user)
+      login(create(:station, :owner_id => user.id), user)
       @request.host = "#{@station.url}.test.local"
 
       delete :destroy
