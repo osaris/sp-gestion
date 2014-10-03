@@ -8,7 +8,7 @@ describe UsersController do
   context "an user logged in and owner of station in demo mode" do
 
     before(:each) do
-      login(Station.make!(:demo => true))
+      login(create(:station, :demo => true))
     end
 
     describe "GET :index" do
@@ -25,10 +25,10 @@ describe UsersController do
 
   context "an user logged in and owner" do
 
-    let(:user) { User.make!(:confirmed) }
+    let(:user) { create(:user_confirmed) }
 
     before(:each) do
-      login(Station.make!(:owner_id => user.id), user)
+      login(create(:station, :owner_id => user.id), user)
     end
 
     describe "GET :index" do
@@ -95,7 +95,7 @@ describe UsersController do
 
     context "with another user not owner" do
 
-      let(:another_user) { User.make!(:confirmed, :station => @station) }
+      let(:another_user) { create(:user_confirmed, :station => @station) }
 
       describe "DELETE :destroy for a non existing user" do
 
