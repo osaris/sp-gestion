@@ -5,7 +5,7 @@ describe ConfirmationsController do
 
   context "a station subdomain" do
 
-    let(:station) { Station.make!(:url => 'cis-test') }
+    let(:station) { create(:station, :url => 'cis-test') }
 
     before(:each) do
       @request.host = 'cis-test.sp-gestion.fr'
@@ -13,7 +13,7 @@ describe ConfirmationsController do
 
     context "with an active user on this subdomain" do
 
-      let(:user) { User.make!(:confirmed, :station => station) }
+      let(:user) { create(:user_confirmed, :station => station) }
 
       describe "GET :edit with good confirmation code" do
 
@@ -29,7 +29,7 @@ describe ConfirmationsController do
 
     context "with an inactive user on this subdomain" do
 
-      let(:user) { User.make!(:station => station) }
+      let(:user) { create(:user, :station => station) }
 
       describe "GET :edit with good confirmation code" do
 
