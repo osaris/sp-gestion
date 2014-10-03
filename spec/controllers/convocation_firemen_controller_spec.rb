@@ -8,15 +8,15 @@ describe ConvocationFiremenController do
   context "an user not logged in" do
 
     before(:each) do
-      @station = Station.make!(:url => 'cis-test')
+      @station = create(:station, :url => 'cis-test')
       @request.host = 'cis-test.sp-gestion.fr'
     end
 
-    let(:conv_conf) { make_convocation_with_firemen(:station => @station,
-                                                    :confirmable => true) }
+    let(:conv_conf) { create(:convocation, :station => @station,
+                                           :confirmable => true) }
 
-    let(:conv_not_conf) { make_convocation_with_firemen(:station => @station,
-                                                        :confirmable => false) }
+    let(:conv_not_conf) { create(:convocation, :station => @station,
+                                               :confirmable => false) }
 
     describe "GET :accept on non existing convocation" do
 
