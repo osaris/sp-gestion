@@ -7,13 +7,13 @@ describe GroupsController do
 
   describe "an user logged in and owner" do
 
-    let(:user) { User.make!(:confirmed) }
+    let(:user) { create(:user_confirmed) }
 
     before(:each) do
-      login(Station.make!(:owner_id => user.id), user)
+      login(create(:station, :owner_id => user.id), user)
     end
 
-    let(:group) { @station.groups.make! }
+    let(:group) { create(:group, :station => @station) }
 
     describe "GET :index" do
 
@@ -65,7 +65,7 @@ describe GroupsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :group => plan(Group.make)
+        post :create, :group => attributes_for(:group)
       end
 
       it { should respond_with(:redirect) }
@@ -111,7 +111,7 @@ describe GroupsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => group.id, :group => plan(Group.make)
+        patch :update, :id => group.id, :group => attributes_for(:group)
       end
 
       it { should respond_with(:redirect) }
