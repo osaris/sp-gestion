@@ -11,11 +11,11 @@ describe ConvocationsController do
       login
     end
 
-    let(:uniform) { Uniform.make! }
+    let(:uniform) { create(:uniform) }
 
-    let(:fireman) { make_fireman_with_grades(:station => @station) }
+    let(:fireman) { create(:fireman, :station => @station) }
 
-    let(:convocation) { make_convocation_with_firemen(:station => @station) }
+    let(:convocation) { create(:convocation, :station => @station) }
 
     describe "GET :index" do
 
