@@ -11,9 +11,9 @@ describe FiremanTrainingsController do
       login
     end
 
-    let(:fireman) { make_fireman_with_grades(:station => @station) }
+    let(:fireman) { create(:fireman, :station => @station) }
 
-    let(:training) { Training.make!(:station => @station) }
+    let(:training) { create(:training, :station => @station) }
 
     let(:fireman_training) {
       fireman.fireman_trainings.create(:training_id => training.id,
