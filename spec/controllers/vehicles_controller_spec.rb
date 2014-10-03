@@ -10,7 +10,7 @@ describe VehiclesController do
       login
     end
 
-    let(:vehicle) { @station.vehicles.make! }
+    let(:vehicle) { create(:vehicle, :station => @station) }
 
     describe "GET :index" do
 
@@ -75,7 +75,7 @@ describe VehiclesController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :vehicle => plan(Vehicle.make)
+        post :create, :vehicle => attributes_for(:vehicle)
       end
 
       it { should respond_with(:redirect) }
@@ -121,7 +121,7 @@ describe VehiclesController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => vehicle.id, :vehicle => plan(Vehicle.make)
+        patch :update, :id => vehicle.id, :vehicle => attributes_for(:vehicle)
       end
 
       it { should respond_with(:redirect) }
