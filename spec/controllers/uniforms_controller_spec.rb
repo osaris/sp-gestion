@@ -11,7 +11,7 @@ describe UniformsController do
       login
     end
 
-    let(:uniform) { @station.uniforms.make! }
+    let(:uniform) { create(:uniform, :station => @station) }
 
     describe "GET :index" do
 
@@ -63,7 +63,7 @@ describe UniformsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :uniform => plan(Uniform.make)
+        post :create, :uniform => attributes_for(:uniform)
       end
 
       it { should respond_with(:redirect) }
