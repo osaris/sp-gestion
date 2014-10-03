@@ -29,7 +29,7 @@ describe StationsController do
   describe "POST :create with good data" do
 
     before(:each) do
-      post :create, :station => plan(Station.make), :user => plan(User.make)
+      post :create, :station => attributes_for(:station), :user => attributes_for(:user)
     end
 
     it { should respond_with(:success) }
@@ -44,7 +44,7 @@ describe StationsController do
   describe "POST :check with existing station" do
 
     before(:each) do
-      allow(Station).to receive(:check).and_return(Station.make)
+      allow(Station).to receive(:check).and_return(create(:station))
 
       xhr :post, :check, :station => { :name => 'test' }
     end
