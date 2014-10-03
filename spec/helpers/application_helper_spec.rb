@@ -79,14 +79,14 @@ describe ApplicationHelper do
 
     context "with invalid object" do
 
-      let(:object) { Vehicle.make(:invalid) }
+      let(:object) { build(:vehicle, :name => '') }
 
       it { should match(/formError/) }
     end
 
     context "with valid object" do
 
-      let(:object) { Vehicle.make }
+      let(:object) { build(:vehicle) }
 
       it { should == "" }
     end

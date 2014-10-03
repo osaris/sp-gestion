@@ -9,9 +9,10 @@ describe FiremenHelper do
 
     context "with grade" do
 
-      let(:fireman) { make_fireman_with_grades(:station   => Station.make,
-                                               :firstname => 'foo',
-                                               :lastname  => 'bar') }
+      let(:fireman) { create(:fireman, :status    => Fireman::STATUS['JSP'],
+                                       :grade     => Grade::GRADE['JSP 1'],
+                                       :firstname => 'foo',
+                                       :lastname  => 'bar') }
 
       it { should == "JSP 1 foo bar" }
     end

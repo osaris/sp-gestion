@@ -36,8 +36,8 @@ describe InterventionsHelper do
     subject { display_vehicles(Intervention.new) }
 
     before(:each) do
-      allow_any_instance_of(Intervention).to receive(:vehicles).and_return([Vehicle.make(:name => 'FPT'),
-                                                                            Vehicle.make(:name => 'VSAV')])
+      allow_any_instance_of(Intervention).to receive(:vehicles).and_return([create(:vehicle, :name => 'FPT'),
+                                                                            create(:vehicle, :name => 'VSAV')])
     end
 
     it { should == "FPT / VSAV"}

@@ -7,7 +7,7 @@ describe MessagesHelper do
 
     context "with message read" do
 
-      let(:message) { Message.make(:read) }
+      let(:message) { create(:message_read) }
 
       it "render read" do
         expect(class_tr_message(message)).to eq "read"
@@ -16,7 +16,7 @@ describe MessagesHelper do
 
     context "with message unread" do
 
-      let(:message) { Message.make }
+      let(:message) { create(:message) }
 
       it "render unread" do
         expect(class_tr_message(message)).to eq "unread"
