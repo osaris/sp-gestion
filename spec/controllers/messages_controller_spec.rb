@@ -11,7 +11,7 @@ describe MessagesController do
       login
     end
 
-    let(:message) { @user.messages.make! }
+    let(:message) { create(:message, :user => @user) }
 
     describe "GET :index" do
 

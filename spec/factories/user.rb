@@ -6,5 +6,9 @@ FactoryGirl.define do
     station
     password(password)
     password_confirmation(password)
+
+    factory(:user_confirmed) do
+      confirmed_at(1.day.ago)
+    end
   end
 end

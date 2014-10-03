@@ -82,7 +82,7 @@ RSpec.configure do |config|
     end
   end
 
-  def login(station = Station.make!, user = User.make!(:confirmed))
+  def login(station = create(:station), user = create(:user_confirmed))
     @station = station
     @user = user
     @user.station = @station
