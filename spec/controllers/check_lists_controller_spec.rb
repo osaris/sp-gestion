@@ -10,7 +10,7 @@ describe CheckListsController do
       login
     end
 
-    let(:check_list) { @station.check_lists.make! }
+    let(:check_list) { create(:check_list, :station => @station) }
 
     describe "GET :index" do
 
@@ -62,7 +62,7 @@ describe CheckListsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :check_list => plan(CheckList.make)
+        post :create, :check_list => attributes_for(:check_list)
       end
 
       it { should respond_with(:redirect) }
@@ -122,7 +122,7 @@ describe CheckListsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => check_list.id, :check_list => plan(CheckList.make)
+        patch :update, :id => check_list.id, :check_list => attributes_for(:check_list)
       end
 
       it { should respond_with(:redirect) }
