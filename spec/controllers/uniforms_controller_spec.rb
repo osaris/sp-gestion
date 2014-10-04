@@ -120,7 +120,7 @@ describe UniformsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => uniform.id, :uniform => plan(Uniform.make)
+        patch :update, :id => uniform.id, :uniform => attributes_for(:uniform)
       end
 
       it { should respond_with(:redirect) }
