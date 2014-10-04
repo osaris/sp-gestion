@@ -95,7 +95,7 @@ describe ConvocationFiremenController do
       login
     end
 
-    let(:convocation) { make_convocation_with_firemen(:station => @station) }
+    let(:convocation) { create(:convocation, :station => @station) }
 
     describe "GET :edit on non existing convocation" do
 
