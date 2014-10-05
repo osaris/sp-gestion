@@ -37,6 +37,8 @@ module SpGestion
 
     # Additional variables
     config.google_api_key = SPG_CONFIG[:google_api_key]
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 
   # Raise an error when unpermitted_parameters are submitted
