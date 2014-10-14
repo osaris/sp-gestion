@@ -14,6 +14,7 @@ class Station < ActiveRecord::Base
   has_many :interventions, :dependent => :destroy
   has_many :users, :dependent => :destroy
   has_many :check_lists, :dependent => :destroy
+  has_many :fireman_availabilities, :dependent => :destroy
   has_many :firemen, :dependent => :destroy
   has_many :intervention_roles, :dependent => :destroy
   has_many :trainings, -> { order 'short_name' }, :dependent => :destroy

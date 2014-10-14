@@ -9,6 +9,7 @@ class Fireman < ActiveRecord::Base
   has_many :interventions, :through => :fireman_interventions
   has_many :fireman_trainings
   has_many :trainings, :through => :fireman_trainings
+  has_many :fireman_availabilities, :dependent => :destroy
 
   accepts_nested_attributes_for :grades
 
