@@ -1,0 +1,6 @@
+<div class="block-title"><h4>Disponibilités du <%= link_to(grade_and_name(@fireman), @fireman) %></h4></div>
+<div id="calendar"></div>
+
+<%= javascript_tag do %>
+  var fireman_id = <%= @fireman.id %>;
+<%- end -%>

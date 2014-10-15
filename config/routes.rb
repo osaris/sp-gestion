@@ -50,6 +50,7 @@ SpGestion::Application.routes.draw do
         get :trainings
       end
       resources :fireman_trainings
+      resources :fireman_availabilities, :only => [:index, :create, :destroy]
     end
     get '/firemen/:id/stats/change_year/:type' => 'firemen#stats_change_year', :as => :firemen_stats_change_year
     get '/firemen/:id/stats/:year/:type' => 'firemen#stats', :as => :firemen_stats
