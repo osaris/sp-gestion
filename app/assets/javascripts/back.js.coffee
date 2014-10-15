@@ -7,6 +7,9 @@
 #= require jquery-ui/accordion
 #= require common
 #= require back/FixedColumns.min.js
+#= require back/moment.min.js
+#= require back/fullcalendar.min.js
+#= require back/fullcalendar-fr.js
 #= require back/GrowingInput.js
 #= require back/jquery-ui-timepicker-addon.js
 #= require back/jquery.autocomplete.pack.js

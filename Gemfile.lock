@@ -158,7 +158,6 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
-    fullcalendar-rails (1.6.4.0)
     geocoder (1.2.5)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
@@ -171,8 +170,6 @@ GEM
     jc-validates_timeliness (3.1.1)
       timeliness (~> 0.3.7)
     jquery-migrate-rails (1.2.1)
-    jquery-qtip2-rails (0.5.0)
-      railties (>= 3.1.0)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -336,13 +333,11 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fog
-  fullcalendar-rails
   geocoder
   googlecharts
   highline
   jc-validates_timeliness
   jquery-migrate-rails
-  jquery-qtip2-rails
   jquery-rails
   jquery-ui-rails
   mini_magick
