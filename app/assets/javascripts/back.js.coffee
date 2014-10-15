@@ -8,6 +8,8 @@
 #= require common
 #= require back/FixedColumns.min.js
 #= require back/moment.min.js
+#= require back/moment-timezone-with-data.min.js
+#= require back/moment-timezone.min.js
 #= require back/fullcalendar.min.js
 #= require back/fullcalendar-fr.js
 #= require back/GrowingInput.js
