@@ -114,14 +114,15 @@ Rails.register_init ['firemen\\new'
 window.fireman_availabilities = () ->
   $('#calendar').fullCalendar({
     header: {
-     left: 'prev, next today'
-     center: 'title'
+      left: ''
+      right: 'prev, next today'
+      center: 'title'
     }
     defaultView: 'agendaWeek'
     allowCalEventOverlap: false
     allDaySlot: false
     slotDuration: '00:60:00'
-    timeFormat: 'H'
+    timeFormat: ''
     contentHeight: 475
     eventStartEditable: false
     eventDurationEditable: false
@@ -131,21 +132,7 @@ window.fireman_availabilities = () ->
     events: {
       url: '/firemen/' + fireman_id + '/fireman_availabilities',
     }
-    viewRender: (view, element) ->
-      $('.fc-past').css('backgroundColor','#D80000')
-      $('.fc-today').css('backgroundColor','#ED4035')
-      $('.fc-future').css('backgroundColor','#ED4035')
-    eventDataTransform : (calEvent) ->
-      calEvent.backgroundColor = '#07CA0C'
-      calEvent
     dayClick : (date, jsEvent, view) ->
-      new_event =
-        title: " "
-        start: new Date(date)
-        end: new Date(date)
-        allDay: false
-        backgroundColor: "#07CA0C"
-
       $.ajax({
         type: 'POST'
         url: '/firemen/' + fireman_id + '/fireman_availabilities'
@@ -153,10 +140,14 @@ window.fireman_availabilities = () ->
         data:
           fireman_availability:
             "fireman_id"   : fireman_id
-            "availability" : new_event.start
+            "availability" : new Date(date)
         success : (data) ->
-          new_event.end.setHours(new_event.start.getHours() + 1)
-          new_event.id = data["id"]
+          new_event =
+            title: " "
+            start: data["availability"]
+            end: moment(data["availability"]).add(1, 'h')
+            allDay: false
+            id: data["id"]
           $('#calendar').fullCalendar('renderEvent', new_event)
       })
 
@@ -165,7 +156,7 @@ window.fireman_availabilities = () ->
         type: 'DELETE'
         url: '/firemen/' + fireman_id + '/fireman_availabilities/' + calEvent.id
         success : (data) ->
-          $('#calendar').fullCalendar( 'removeEvents', calEvent._id)
+          $('#calendar').fullCalendar('removeEvents', calEvent._id)        
       })
   })
 
