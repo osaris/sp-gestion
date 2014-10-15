@@ -1,0 +1,12 @@
+[
+  <%- @availabilities.each do |availability| -%>
+    {
+        "id": <%= availability.id %>,
+        "title": "",
+        "start": "<%= availability.availability %>",
+        "end": "<%= (availability.availability + 1.hour) %>",
+        "allDay": false
+    }
+    <%- if availability != @availabilities.last %>,<%- end -%>
+  <%- end -%>
+]

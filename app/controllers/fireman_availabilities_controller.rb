@@ -9,20 +9,7 @@ class FiremanAvailabilitiesController < BackController
       format.json do
         start_date = DateTime.parse(params[:start])
         end_date = DateTime.parse(params[:end])
-
-        @planning = []
-        @fireman.fireman_availabilities.where(:availability => start_date..end_date).each do |fireman_period|
-          @planning.append({
-            "id"        => fireman_period.id,
-            "title"     => "",
-            "start"     => fireman_period.availability,
-            "end"       => (fireman_period.availability + 1.hour),
-            "allDay"    => false,
-            "className" => "normal_event"
-          })
-        end
-
-        render json: @planning.to_json
+        @availabilities = @fireman.fireman_availabilities.where(:availability => start_date..end_date)
       end
     end
   end
@@ -34,7 +21,6 @@ class FiremanAvailabilitiesController < BackController
       if @fireman_availability.save
         format.json { render json: @fireman_availability }
       else
-        format.html { render action: "new" }
         format.json { render json: @fireman_availability.errors, status: :unprocessable_entity }
       end
     end
@@ -43,8 +29,12 @@ class FiremanAvailabilitiesController < BackController
   def destroy
     respond_to do |format|
       format.json do
-        @station.fireman_availabilities.destroy(params[:id])
-        render json: { :status => :ok }
+        begin
+          @station.fireman_availabilities.destroy(params[:id])
+          render json: { :status => :ok }
+        rescue ActiveRecord::RecordNotDestroyed
+          render json: { :status => :error }
+        end
       end
     end
   end
