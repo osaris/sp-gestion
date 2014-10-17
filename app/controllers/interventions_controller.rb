@@ -70,7 +70,7 @@ class InterventionsController < BackController
   end
 
   def stats
-    authorize!(:show, Intervention)
+    authorize!(:read, Intervention)
     last_intervention = @station.interventions.latest.first
     if last_intervention.blank?
       flash[:warning] = "Il faut au moins une intervention pour avoir des statistiques."

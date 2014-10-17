@@ -45,25 +45,25 @@ SimpleNavigation::Configuration.run do |navigation|
       admin.item(:groups, 'Groupes', groups_path, :highlights_on => /^\/groups/)
     end
 
-    primary.item(:personnel, icon_label_text('glyphicon glyphicon-user', 'Personnel')) do |personnel|
-      personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen/)
-      personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/)
-      personnel.item(:trainings, 'Formations', trainings_path, :highlights_on => /^\/trainings/)
-      personnel.item(:uniforms, 'Tenues', uniforms_path, :highlights_on => /^\/uniforms/)
+    # Use ::Item because SimpleNavigation also has a Item class so it force rails
+    # to search inside our app first
+    primary.item(:personnel, icon_label_text('glyphicon glyphicon-user', 'Personnel'), if: proc { can?(:read, Fireman) || can?(:read, Convocation) || can?(:read, Training) || can?(:read, Uniform) }) do |personnel|
+      personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen/, if: proc { can?(:read, Fireman) })
+      personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/, if: proc { can?(:read, Convocation) })
+      personnel.item(:trainings, 'Formations', trainings_path, :highlights_on => /^\/trainings/, if: proc { can?(:read, Training) })
+      personnel.item(:uniforms, 'Tenues', uniforms_path, :highlights_on => /^\/uniforms/, if: proc { can?(:read, Uniform) })
     end
 
-    primary.item(:materiel, icon_label_text('glyphicon glyphicon-list', 'Matériel')) do |materiel|
-      materiel.item(:check_lists, 'Listes', check_lists_path, :highlights_on => /^\/check_lists/)
-      materiel.item(:expirings, 'Expiration', expirings_items_path, :highlights_on => /^\/items\/expirings/)
-
-      materiel.item(:vehicles, 'Véhicules', vehicles_path, :highlights_on => /^\/vehicles/)
+    primary.item(:materiel, icon_label_text('glyphicon glyphicon-list', 'Matériel'), if: proc { can?(:read, CheckList) || can?(:read, ::Item || can?(:read, Vehicle)) }) do |materiel|
+      materiel.item(:check_lists, 'Listes', check_lists_path, :highlights_on => /^\/check_lists/, if: proc { can?(:read, CheckList) })
+      materiel.item(:expirings, 'Expiration', expirings_items_path, :highlights_on => /^\/items\/expirings/, if: proc { can?(:read, ::Item) })
+      materiel.item(:vehicles, 'Véhicules', vehicles_path, :highlights_on => /^\/vehicles/, if: proc { can?(:read, Vehicle) })
     end
 
-    primary.item(:intervention, icon_label_text('glyphicon glyphicon-fire', 'Interventions')) do |intervention|
-      intervention.item(:interventions_list, 'Liste', interventions_path, :highlights_on => /^\/interventions\/?((\d).*|new|\?page=(\d).*)?$/)
-      intervention.item(:interventions_stats, 'Statistiques', interventions_stats_path((@current_year || Date.today.year), "by_type"), :highlights_on => /^\/interventions\/stats/)
-
-      intervention.item(:interventions_roles, 'Rôles', intervention_roles_path, :highlights_on => /^\/intervention_roles/)
+    primary.item(:intervention, icon_label_text('glyphicon glyphicon-fire', 'Interventions'), if: proc { can?(:read, Intervention) || can?(:read, InterventionRole) }) do |intervention|
+      intervention.item(:interventions_list, 'Liste', interventions_path, :highlights_on => /^\/interventions\/?((\d).*|new|\?page=(\d).*)?$/, if: proc { can?(:read, Intervention) })
+      intervention.item(:interventions_stats, 'Statistiques', interventions_stats_path((@current_year || Date.today.year), "by_type"), :highlights_on => /^\/interventions\/stats/, if: proc { can?(:read, Intervention) })
+      intervention.item(:interventions_roles, 'Rôles', intervention_roles_path, :highlights_on => /^\/intervention_roles/, if: proc { can?(:read, InterventionRole) })
     end
 
     # You can also specify a condition-proc that needs to be fullfilled to display an item.
