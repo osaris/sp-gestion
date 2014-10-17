@@ -14,7 +14,7 @@ class VehiclesController < BackController
   end
 
   def delisted
-    authorize!(:show, Vehicle)
+    authorize!(:read, Vehicle)
     @vehicles = @station.vehicles
                         .delisted
                         .page(params[:page])

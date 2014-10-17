@@ -9,7 +9,7 @@ class ItemsController < BackController
   skip_before_action :require_html_request, :only => [:expirings]
 
   def expirings
-    authorize!(:show, Item)
+    authorize!(:read, Item)
     @items = Item.expirings(30, @station.id)
     respond_to do |format|
       format.html do
