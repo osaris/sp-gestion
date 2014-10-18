@@ -23,6 +23,9 @@
     <%= link_to(icon_label_text('glyphicon glyphicon-flag', 'Formations'),
                 fireman_fireman_trainings_path(@fireman),
                 :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-calendar', 'Disponibilités'),
+                fireman_fireman_availabilities_path(@fireman),
+                :class => 'btn btn-default btn-sm') %>
     <%= link_to(icon_label_text('glyphicon glyphicon-signal', 'Statistiques'),
                 firemen_stats_path(@fireman, Date.today.year, "interventions"),
                 :class => 'btn btn-default btn-sm') %>
