@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class FiremanAvailabilitiesController < BackController
 
-  def index
-    @fireman = @station.firemen.find(params[:fireman_id])
+  before_action :load_fireman
 
+  def index
     respond_to do |format|
       format.html
       format.json do
@@ -40,6 +40,14 @@ class FiremanAvailabilitiesController < BackController
   end
 
   private
+
+  def load_fireman
+    @fireman = @station.firemen.find(params[:fireman_id])
+    if @fireman.status != Fireman::STATUS['Actif']
+      flash[:error] = "La disponibilité n'est disponible que pour les hommes actifs."
+      redirect_to(fireman_path(@fireman))
+    end
+  end
 
   def fireman_availability_params
     params[:fireman_availability][:availability] = DateTime.parse(params[:fireman_availability][:availability])
