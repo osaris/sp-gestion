@@ -12,10 +12,10 @@ SimpleNavigation::Configuration.run do |navigation|
                  'Par grade',
                  plannings_type_path("by_grade"),
                  :highlights_on => /^\/plannings\/type\/by_grade/)
-    primary.item(:by_formation,
+    primary.item(:by_training,
                  'Par formation',
-                 plannings_type_path("by_formation"),
-                 :highlights_on => /^\/plannings\/type\/by_formation/)
+                 plannings_type_path("by_training"),
+                 :highlights_on => /^\/plannings\/type\/by_training/)
 
     primary.dom_class = 'nav nav-tabs'
   end

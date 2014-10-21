@@ -272,20 +272,20 @@ window.planning = () ->
     $('#calendar').fullCalendar('removeEventSource', events)
     $('#calendar').fullCalendar('addEventSource', events)
 
-  # called when window is initialized to set the source of events for formations view
-  refresh_formations = (formation) ->
+  # called when window is initialized to set the source of events for trainings view
+  refresh_trainings = (training) ->
     events = {
-      url: '/plannings/type/by_formation',
+      url: '/plannings/type/by_training',
       type: 'GET',
       data:
-        formation: formation
+        training: training
     }
     $('#calendar').fullCalendar( 'removeEventSource', events )
     $('#calendar').fullCalendar('addEventSource', events)
 
-  $('#formation').change () ->
-    currentId = $('#formation').val()
-    refresh_formations(currentId)
+  $('#training').change () ->
+    currentId = $('#training').val()
+    refresh_trainings(currentId)
 
   $('#grade').change () ->
     currentId = $('#grade').val()
@@ -299,10 +299,10 @@ window.planning = () ->
     currentId = $('#grade').val()
     currentView = "by_grade"
     refresh_grades(currentId)
-  else if($('#by_formation').hasClass('active'))
-    currentId = $('#formation').val()
-    currentView = "by_formation"
-    refresh_formations(currentId)
+  else if($('#by_training').hasClass('active'))
+    currentId = $('#training').val()
+    currentView = "by_training"
+    refresh_trainings(currentId)
 
 Rails.register_init [ 'plannings\\type'], () -> planning()
 
