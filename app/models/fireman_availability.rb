@@ -13,11 +13,6 @@ class FiremanAvailability < ActiveRecord::Base
 
   before_destroy :check_valid_date
 
-  scope :limit_periods, lambda {|order| { :select => 'count(*) count, availability',
-                                          :group => "availability",
-                                          :order => order,
-                                          :limit => 5}}
-
   private
 
   def check_valid_date

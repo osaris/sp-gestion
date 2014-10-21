@@ -210,233 +210,99 @@ window.firemen_periods = () ->
 Rails.register_init ['firemen\\periods'], () -> firemen_periods()
 
 window.planning = () ->
-  $.datepicker.setDefaults($.datepicker.regional['fr'])
-  $('.date').datepicker(
-                        showMonthAfterYear: false
-                        showButtonPanel:    true
-                        changeYear:         true
-                        changeMonth:        true
-                        dateFormat:         'yy/mm/dd'
-                        constrainInput:     true
-                        onSelect: (dateText, inst)->
-                          d = new Date(dateText)
-                          $('#calendar').fullCalendar('gotoDate', d)
-  )
-
-  currentView = ""
   $('#calendar').fullCalendar({
     header: {
-      left: '',
-      center: 'title',
-      right: 'today prev, next '
+      left: ''
+      right: 'prev, next today'
+      center: 'title'
     },
-    defaultView: 'agendaWeek' ,
-    allDaySlot: false,
-    timeFormat: '',
-    slotMinutes: 60,
-    disableDragging: true,
-    aspectRatio: 1.35,
-    firstDay: 1,
-    editable: true,
-    eventDataTransform : (calEvent) ->
-      new_event = {}
-      new_event.start = calEvent.start
-      new_event.end = calEvent.end
-      new_event.allDay = false
-      new_event.id = calEvent.id
+    defaultView: 'agendaWeek'
+    allowCalEventOverlap: false
+    allDaySlot: false
+    slotDuration: '00:60:00'
+    timeFormat: ''
+    contentHeight: 475
+    eventStartEditable: false
+    eventDurationEditable: false
+    firstDay: 1
+    editable: true
+    timezone: "Europe/Paris"
+    loading: ( isLoading, view ) ->
+      if !isLoading
+        refresh_stats(currentView, currentId)
+        refresh_firemen(currentView, currentId)
+  })
 
-      #I think it's better to calculate the percentage here, in case we wanted to change the color
-      #or percentage, we do not need to change the controller (I pass as title: "1,5" (1 firemen over
-      # 5 in total)), for the percentage
-      aux = calEvent.title.split(",")
-      percentage = parseInt(aux[0]) / parseInt(aux[1])
-
-      pomp = " pompiers"
-      if(aux[0] == "1")
-        pomp = " pompier"
-      #new_event.title = aux[0] + pomp
-      new_event.title = aux[0]
-
-      if(percentage <= 0.25)
-        new_event.className = "event_red"
-      else if (percentage > 0.25 && percentage < 0.5)
-        new_event.className = "event_orange"
-      else if (percentage >= 0.5 && percentage < 0.75)
-        new_event.className = "event_dark_green"
-      else if (percentage >= 0.75)
-        new_event.className = "event_green"
-      else
-        new_event.className = "normal_event"
-      return new_event
-
-    viewDisplay : (view) ->
-      if($('#general').hasClass('active'))
-        refresh_stats("general", 0)
-        currentView = "general"
-        refresh_firemen("general")
-      else if($('#by_grade').hasClass('active'))
-        refresh_stats("by_grade",$('.grade').val())
-        currentView = "by_grade"
-        refresh_firemen("grade")
-      else if($('#by_formation').hasClass('active'))
-        refresh_stats("by_formation",$('.formation').val())
-        currentView = "by_formation"
-        refresh_firemen("formation")
-
-    eventClick : (calEvent, jsEvent, view) ->
-      currentDate = new Date(calEvent.start)
-
-      aux = $('.fc-event-time', this)  #The clicked div
-      aux.addClass("current")
-
-      #Just in the case that it takes time to the AJAX request
-      $('.current').qtip({
-        content: 'Loading firemen'
-        #content: {
-        #   text: '<img src="loading.gif" alt="" />',
-        #}
-        show : 'click'
-        style: {
-          classes: 'qtip-bootstrap'
-        }
-      })
-
-      id = 0
-      if(currentView == "by_grade")
-        id = $('.grade').val()
-      else if(currentView == "by_formation")
-        id = $('.formation').val()
-
-      $.ajax({
-        url: '/plannings/firemen_of_period',
-        data: {
-          date : currentDate,
-          type : currentView,
-          id : id
-        },
-        success: (data) ->
-          $('.current').qtip({
-            content: data,
-            position: {
-              my: 'top right',
-              at: 'bottom center'
-            },
-            show: { event: 'click', solo: true }
-            #show: 'click',
-            hide: { when: { event: 'unfocus' }, delay: 300, fixed: true },
-
-            style: {
-              classes: 'qtip-bootstrap'
-            }
-
-          })
-          $('.current').qtip('show')
-          aux.removeClass("current")
-          $('.current').qtip("destroy")
-      })
-    })
-  $('.fc-last').prevAll('td').css('backgroundColor','#ED4035')
-
-  if($('#general').hasClass('active'))
-    $('#calendar').fullCalendar('addEventSource', '/plannings/type/general')
-    refresh_general()
-  else if($('#by_grade').hasClass('active'))
-    refresh_grades()
-  else if($('#by_formation').hasClass('active'))
-    refresh_formations()
-
-
-  $('.formation').change( () ->
-    refresh_formations()
-   )
-
-  $('.grade').change( () ->
-    refresh_grades()
-  )
-
-  #Functions to refresh the calendar depending the grade/formation selected
+  # called after calendar events are loaded to refresh statistics
   refresh_stats = (type, id) ->
-    date = $('#calendar').fullCalendar('getDate')
-    date_timestamp = (date.getTime() / 1000)
     $.ajax({
-      url: '/plannings/stats',
-      data: {
-        start : date_timestamp
-        type : type
-        id : id
-      },
+      url: '/plannings/stats'
+      data:
+        start: $('#calendar').fullCalendar('getDate').format()
+        type:  type
+        id:    id
       success: (data) ->
-        $('#stats').html(data)
+        $('#planning_stats').html(data)
     })
 
+  # called after calendar events are loaded to refresh list of firemen
+  refresh_firemen = (type, id) ->
+    $.ajax({
+      url: '/plannings/firemen/' + type,
+      data:
+        id:   id
+        date: $('#calendar').fullCalendar('getDate').format()
+      success: (data) ->
+        $('#planning_firemen').html(data)
+    })
+
+  # called when window is initialized to set the source of events for general view
   refresh_general = () ->
-    refresh_stats("general",0)
-    date = $('#calendar').fullCalendar('getDate')
-    date_timestamp = (date.getTime() / 1000)
-    $.ajax({
-      url: '/plannings/firemen',
-      data: {
-        date : date_timestamp
-      }
-      success: (data) ->
-        $('#firemen').html(data)
-    })
+    $('#calendar').fullCalendar('removeEventSource', '/plannings/type/general')
+    $('#calendar').fullCalendar('addEventSource', '/plannings/type/general')
 
-  refresh_grades = () ->
+  # called when window is initialized to set the source of events for grades view
+  refresh_grades = (grade) ->
     events = {
-      url: '/plannings/type/by_grade',
-      type: 'GET',
-      data: {
-        grade : $('.grade').val()
-      },
-      success: (data) ->
-        #alert(data)
-        console.log(data)
+      url: '/plannings/type/by_grade'
+      type: 'GET'
+      data:
+        grade: grade
     }
-    $('#calendar').fullCalendar( 'removeEventSource', events )
+    $('#calendar').fullCalendar('removeEventSource', events)
     $('#calendar').fullCalendar('addEventSource', events)
 
-    date = $('#calendar').fullCalendar('getDate')
-    date_timestamp = (date.getTime() / 1000)
-
-
-    refresh_stats("by_grade",$('.grade').val())
-    refresh_firemen("grade")
-
-  refresh_formations = () ->
+  # called when window is initialized to set the source of events for formations view
+  refresh_formations = (formation) ->
     events = {
       url: '/plannings/type/by_formation',
       type: 'GET',
-      data: {
-        formation : $('.formation').val()
-      }
+      data:
+        formation: formation
     }
     $('#calendar').fullCalendar( 'removeEventSource', events )
     $('#calendar').fullCalendar('addEventSource', events)
 
+  $('#formation').change () ->
+    currentId = $('#formation').val()
+    refresh_formations(currentId)
 
-    refresh_stats("by_formation", $('.formation').val())
-    refresh_firemen("formation")
+  $('#grade').change () ->
+    currentId = $('#grade').val()
+    refresh_grades(currentId)
 
-  refresh_firemen = (type) ->
-    date = $('#calendar').fullCalendar('getDate')
-    date_timestamp = (date.getTime() / 1000)
-
-    if(type == "grade")
-      grade_val = $('.grade').val()
-    else if (type == "formation")
-      formation_val = $('.formation').val()
-
-    $.ajax({
-      url: '/plannings/firemen',
-      data: {
-        grade : grade_val
-        formation : formation_val
-        date : date_timestamp
-      },
-      success: (data) ->
-        $('#firemen').html(data)
-    })
+  if($('#general').hasClass('active'))
+    currentId = 0
+    currentView = "general"
+    refresh_general()
+  else if($('#by_grade').hasClass('active'))
+    currentId = $('#grade').val()
+    currentView = "by_grade"
+    refresh_grades(currentId)
+  else if($('#by_formation').hasClass('active'))
+    currentId = $('#formation').val()
+    currentView = "by_formation"
+    refresh_formations(currentId)
 
 Rails.register_init [ 'plannings\\type'], () -> planning()
 

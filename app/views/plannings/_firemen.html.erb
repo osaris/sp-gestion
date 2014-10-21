@@ -1,0 +1,8 @@
+<% @firemen.each do |fireman| %>
+  <%= link_to(fireman_fireman_availabilities_path(fireman)) do %>
+    <li>
+      <%= image_tag(fireman.passeport_photo.thumb.url, :alt => grade_and_name(fireman)) %><br />
+      <%= grade_and_name(fireman) %>
+    </li>
+  <%end%>
+<%end%>

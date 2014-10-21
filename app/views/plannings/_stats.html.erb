@@ -1,0 +1,30 @@
+<%= image_tag(Gchart.pie_3d(:title      => "Heures sans pompiers", :size => '350x150',
+                            :data       => [@periods_without_firemen, 7*24-@periods_without_firemen],
+                            :labels     => [(@periods_without_firemen.to_s + " heures")])) %>
+
+<%= image_tag(Gchart.pie_3d(:title      => "Occupation", :size => '250x150',
+                            :data       => [@occupation, 100-@occupation],
+                            :labels     => [(@occupation.to_s + "%")])) %>
+
+<%= image_tag(Gchart.pie_3d(:title      => "Nombre de pompiers par heure en moyenne" , :size => '350x150',
+                            :data       => [@firemen_period_average, @number_of_firemen - @firemen_period_average],
+                            :labels     => [(@firemen_period_average.to_s + " pompiers")],
+                            :max_value  => @number_of_firemen)) %>
+
+<h5>5 heures avec le moins de personnel</h5>
+<%- if @periods_less_firemen.blank? -%>
+  Pas assez de données disponibles.
+<%- else -%>
+  <%- @periods_less_firemen.each do |pf| -%>
+
+  <%- end -%>
+<%- end -%>
+
+<h5>5 heures avec le plus de personnel</h5>
+<%- if @periods_more_firemen.blank? -%>
+  Pas assez de données disponibles.
+<%- else -%>
+  <%- @periods_more_firemen.each do |pf| -%>
+
+  <%- end -%>
+<%- end -%>

@@ -1,0 +1,15 @@
+<div class="block-title"><h4>Disponibilités</h4></div>
+
+<%= render_navigation(:context => :plannings_type) %>
+
+<%= render("plannings/type/#{params[:type]}") %>
+
+<div id='calendar'></div>
+
+<div class="block-title"><h5>Pompiers dans le planning</h5></div>
+<ul class="facebook" id="planning_firemen"></ul>
+
+<div class="clearfix"></div>
+
+<div class="block-title"><h5>Statistiques</h5></div>
+<div class="stats" id="planning_stats"></div>
