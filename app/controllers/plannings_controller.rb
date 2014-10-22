@@ -60,12 +60,6 @@ class PlanningsController < BackController
     start_date = DateTime.parse(params[:start]).in_time_zone.beginning_of_week
     end_date = start_date.end_of_week
 
-    #Calculing stats
-    #date_numer : list of dates and his number of firemen
-    date_number = []
-    periods_with_more_firemen = []
-    periods_with_less_firemen = []
-
     #Takinig period with more and less firemen
     if params[:type] == "general"
       date_number = @station.fireman_availabilities.where(:availability => start_date..end_date).group(:availability).count

@@ -1,1 +1,11 @@
-<label>Choisissez une formation :</label> <%= select_tag(:training, options_for_select(@trainings)) %>
+<div class="row top10">
+  <div class="col-md-5">
+    <div class="form-group">
+      <%= label(:training, :id, 'Choisissez une formation', :class => 'col-md-5 control-label') %>
+      <div class="col-md-7">
+        <%= select_tag(:training, options_for_select(@trainings), :class => 'form-control') %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row top10"></div>
