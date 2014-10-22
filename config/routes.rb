@@ -48,7 +48,7 @@ SpGestion::Application.routes.draw do
         get :stats
       end
     end
-    get '/plannings/type/:type'     => 'plannings#type', :as => :plannings_type
+    get '/plannings/:type' => 'plannings#type', :as => :plannings_type
     get '/plannings/firemen/:type'  => 'plannings#firemen', :as => :plannings_firemen
 
     resources :firemen do

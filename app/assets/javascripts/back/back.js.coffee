@@ -258,13 +258,13 @@ window.planning = () ->
 
   # called when window is initialized to set the source of events for general view
   refresh_general = () ->
-    $('#calendar').fullCalendar('removeEventSource', '/plannings/type/general')
-    $('#calendar').fullCalendar('addEventSource', '/plannings/type/general')
+    $('#calendar').fullCalendar('removeEventSource', '/plannings/general')
+    $('#calendar').fullCalendar('addEventSource', '/plannings/general')
 
   # called when window is initialized to set the source of events for grades view
   refresh_grades = (grade) ->
     events = {
-      url: '/plannings/type/by_grade'
+      url: '/plannings/by_grade'
       type: 'GET'
       data:
         grade: grade
@@ -275,7 +275,7 @@ window.planning = () ->
   # called when window is initialized to set the source of events for trainings view
   refresh_trainings = (training) ->
     events = {
-      url: '/plannings/type/by_training',
+      url: '/plannings/by_training',
       type: 'GET',
       data:
         training: training
