@@ -60,42 +60,29 @@ class PlanningsController < BackController
     start_date = DateTime.parse(params[:start]).in_time_zone.beginning_of_week
     end_date = start_date.end_of_week
 
-    #Takinig period with more and less firemen
     if params[:type] == "general"
-      date_number = @station.fireman_availabilities.where(:availability => start_date..end_date).group(:availability).count
+      periods_availability = @station.fireman_availabilities.where(:availability => start_date..end_date).group(:availability).count
       @number_of_firemen = @station.firemen.count
-
-      # @periods_with_more_firemen = firemen_periods_stats('DESC', "general", 0, start_date, end_date)
-      # @periods_with_less_firemen = firemen_periods_stats('ASC', "general", 0, start_date, end_date)
     elsif params[:type] == "by_grade"
-      date_number = @station.fireman_availabilities.where(:availability => start_date..end_date, :fireman_id => @station.firemen.where(:grade_category => params[:id])).group(:availability).count
+      periods_availability = @station.fireman_availabilities.where(:availability => start_date..end_date, :fireman_id => @station.firemen.where(:grade_category => params[:id])).group(:availability).count
       @number_of_firemen = @station.firemen.where(:grade_category => params[:id]).count
-
-      # @periods_with_more_firemen = firemen_periods_stats('DESC', "by_grade", grade, start_date, end_date)
-      # @periods_with_less_firemen = firemen_periods_stats('ASC', "by_grade", grade, start_date, end_date)
     elsif params[:type] == "by_training"
-      date_number = @station.fireman_availabilities.where(:availability => start_date..end_date, :fireman_id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id)).group(:availability).count
+      periods_availability = @station.fireman_availabilities.where(:availability => start_date..end_date, :fireman_id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id)).group(:availability).count
       @number_of_firemen = @station.firemen.where(:id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id)).count
-
-      # @periods_with_more_firemen = firemen_periods_stats('DESC', "by_formation", formation, start_date, end_date)
-      # @periods_with_less_firemen = firemen_periods_stats('ASC', "by_formation", formation, start_date, end_date)
     end
 
-    number_of_periods = 0
-    date_number.each do |dn|
-      number_of_periods = number_of_periods + dn[1]
-    end
+    number_of_periods = periods_availability.inject(0) { |sum, x| sum + x[1] }
 
-    taken_periods = date_number.length
+    @periods_more_firemen = periods_availability.sort_by { |x| [-x[1], x[0]] }[0..4]
+    @periods_less_firemen = periods_availability.sort_by { |x| [x[1], x[0]] }[0..4]
 
-    @periods_without_firemen = 7 * 24 - taken_periods #total periods of a week - taken_periods
+    # total number of periods of a week - periods occupied
+    @periods_without_firemen = 7 * 24 - periods_availability.length
 
-    #occupation general of the planning: it would be 100% when all the firemen works all the periods
-    # Improve in production (if all the firemen works 8 hours all days, it would be aroun 33%)
-    #occupation = (number_of_periods / (7*24.0 * number_of_firemen)).round(4) Without decimals:
+    # occupation general of the planning
     @occupation = ((number_of_periods / (7*24.0 * @number_of_firemen)) * 100).to_i
 
-    #Average of the firemen in a period
+    # Average of the firemen in a period
     @firemen_period_average = number_of_periods / (24 * 7)
 
     respond_to do |format|

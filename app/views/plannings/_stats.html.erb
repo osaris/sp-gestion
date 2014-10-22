@@ -11,20 +11,54 @@
                             :labels     => [(@firemen_period_average.to_s + " pompiers")],
                             :max_value  => @number_of_firemen)) %>
 
-<h5>5 heures avec le moins de personnel</h5>
-<%- if @periods_less_firemen.blank? -%>
-  Pas assez de données disponibles.
-<%- else -%>
-  <%- @periods_less_firemen.each do |pf| -%>
-
-  <%- end -%>
-<%- end -%>
-
-<h5>5 heures avec le plus de personnel</h5>
-<%- if @periods_more_firemen.blank? -%>
-  Pas assez de données disponibles.
-<%- else -%>
-  <%- @periods_more_firemen.each do |pf| -%>
-
-  <%- end -%>
-<%- end -%>
+<div class="row">
+  <div class="col-md-6">
+    <h5>5 heures avec le moins de personnel</h5>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Heure</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @periods_less_firemen.each do |pf| -%>
+          <tr>
+            <td><%= l!(pf[0]) %></td>
+            <td><%= pf[1] %></td>
+          </tr>
+        <%- end -%>
+        <%- if @periods_less_firemen.blank? -%>
+          <tr>
+            <td colspan="2">Pas assez de données disponibles.</td>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <h5>5 heures avec le plus de personnel</h5>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Heure</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tbody>
+        <%- @periods_more_firemen.each do |pf| -%>
+          <tr>
+            <td><%= l!(pf[0]) %></td>
+            <td><%= pf[1] %></td>
+          </tr>
+        <%- end -%>
+        <%- if @periods_less_firemen.blank? -%>
+          <tr>
+            <td colspan="2">Pas assez de données disponibles.</td>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</div>
