@@ -238,9 +238,9 @@ window.planning = () ->
     $.ajax({
       url: '/plannings/stats'
       data:
-        start: $('#calendar').fullCalendar('getDate').format()
-        type:  type
         id:    id
+        type:  type        
+        start: $('#calendar').fullCalendar('getDate').format()
       success: (data) ->
         $('#planning_stats').html(data)
     })
@@ -251,7 +251,7 @@ window.planning = () ->
       url: '/plannings/firemen/' + type,
       data:
         id:   id
-        date: $('#calendar').fullCalendar('getDate').format()
+        start: $('#calendar').fullCalendar('getDate').format()
       success: (data) ->
         $('#planning_firemen').html(data)
     })
