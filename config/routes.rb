@@ -43,12 +43,11 @@ SpGestion::Application.routes.draw do
 
     resources :email_confirmations, :only => [:edit, :update]
 
-    resources :plannings, :only => [] do
+    resources :plannings, :only => [:show] do
       collection do
         get :stats
       end
     end
-    get '/plannings/:type' => 'plannings#type', :as => :plannings_type
     get '/plannings/firemen/:type'  => 'plannings#firemen', :as => :plannings_firemen
 
     resources :firemen do

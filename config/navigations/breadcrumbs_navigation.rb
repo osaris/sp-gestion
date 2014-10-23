@@ -31,7 +31,7 @@ SimpleNavigation::Configuration.run do |navigation|
       personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen/) do |firemen|
         firemen.item(:resigned, 'Radiés', resigned_firemen_path, :highlights_on => /^\/firemen\/resigned/)
       end
-      personnel.item(:planning, 'Disponibilités', plannings_type_path("general"), :highlights_on => /^\/plannings/)
+      personnel.item(:planning, 'Disponibilités', planning_path("general"), :highlights_on => /^\/plannings/)
       personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/)
       personnel.item(:trainings, 'Formations', trainings_path, :highlights_on => /^\/trainings/)
       personnel.item(:uniforms, 'Tenues', uniforms_path, :highlights_on => /^\/uniforms/)

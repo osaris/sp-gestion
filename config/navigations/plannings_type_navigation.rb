@@ -6,15 +6,15 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item(:general,
                  'Général',
-                 plannings_type_path("general"),
+                 planning_path("general"),
                  :highlights_on => /^\/plannings\/general/)
     primary.item(:by_grade,
                  'Par grade',
-                 plannings_type_path("by_grade"),
+                 planning_path("by_grade"),
                  :highlights_on => /^\/plannings\/by_grade/)
     primary.item(:by_training,
                  'Par formation',
-                 plannings_type_path("by_training"),
+                 planning_path("by_training"),
                  :highlights_on => /^\/plannings\/by_training/)
 
     primary.dom_class = 'nav nav-tabs'

@@ -49,7 +49,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # to search inside our app first
     primary.item(:personnel, icon_label_text('glyphicon glyphicon-user', 'Personnel'), if: proc { can?(:read, Fireman) || can?(:read, Convocation) || can?(:read, Training) || can?(:read, Uniform) }) do |personnel|
       personnel.item(:firemen, 'Hommes', firemen_path, :highlights_on => /^\/firemen/, if: proc { can?(:read, Fireman) })
-      personnel.item(:plannings_type, 'Disponiblités', plannings_type_path("general"), :highlights_on => /^\/plannings/)
+      personnel.item(:plannings_type, 'Disponiblités', planning_path("general"), :highlights_on => /^\/plannings/)
       personnel.item(:convocations, 'Convocations', convocations_path, :highlights_on => /^\/convocations/, if: proc { can?(:read, Convocation) })
       personnel.item(:trainings, 'Formations', trainings_path, :highlights_on => /^\/trainings/, if: proc { can?(:read, Training) })
       personnel.item(:uniforms, 'Tenues', uniforms_path, :highlights_on => /^\/uniforms/, if: proc { can?(:read, Uniform) })

@@ -304,7 +304,7 @@ window.planning = () ->
     currentView = "by_training"
     refresh_trainings(currentId)
 
-Rails.register_init [ 'plannings\\type'], () -> planning()
+Rails.register_init [ 'plannings\\show'], () -> planning()
 
 # Interventions
 #######################################################

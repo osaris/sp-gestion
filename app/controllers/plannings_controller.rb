@@ -1,9 +1,9 @@
 class PlanningsController < BackController
 
-  def type
+  def show
     respond_to do |format|
       format.html do
-        case params[:type]
+        case params[:id]
           when "by_grade"
             @grades = @station.firemen
                               .active
@@ -19,7 +19,7 @@ class PlanningsController < BackController
         start_date = DateTime.parse(params[:start]).in_time_zone.beginning_of_week
         end_date = start_date.end_of_week
 
-        case params[:type]
+        case params[:id]
         when "general"
           @availabilities = @station.fireman_availabilities.where(:availability => start_date..end_date).group(:availability).count
           @firemen_count = @station.firemen.count
