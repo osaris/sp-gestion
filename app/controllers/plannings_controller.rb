@@ -19,13 +19,14 @@ class PlanningsController < BackController
         start_date = DateTime.parse(params[:start]).in_time_zone.beginning_of_week
         end_date = start_date.end_of_week
 
-        if params[:type] == "general"
+        case params[:type]
+        when "general"
           @availabilities = @station.fireman_availabilities.where(:availability => start_date..end_date).group(:availability).count
           @firemen_count = @station.firemen.count
-        elsif params[:type] == "by_grade"
+        when "by_grade"
           @availabilities = @station.fireman_availabilities.where(:availability => start_date..end_date, :fireman_id => @station.firemen.where(:grade_category => params[:grade])).group(:availability).count
           @firemen_count = @station.firemen.where(:grade_category => params[:grade]).count
-        elsif params[:type] == "by_training"
+        when "by_training"
           @availabilities = @station.fireman_availabilities.where(:availability => start_date..end_date, :fireman_id => @station.fireman_trainings.where(:training_id => params[:training]).select(:fireman_id)).group(:availability).count
           @firemen_count = @station.firemen.where(:id => @station.fireman_trainings.where(:training_id => params[:training]).select(:fireman_id)).count
         end
