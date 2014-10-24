@@ -66,19 +66,12 @@ class PlanningsController < BackController
       @number_of_firemen = @station.firemen.where(:id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id)).count
     end
 
-    number_of_periods = periods_availability.inject(0) { |sum, x| sum + x[1] }
-
-    @periods_more_firemen = periods_availability.sort_by { |x| [-x[1], x[0]] }[0..4]
-    @periods_less_firemen = periods_availability.sort_by { |x| [x[1], x[0]] }[0..4]
-
-    # total number of periods of a week - periods occupied
-    @periods_without_firemen = 7 * 24 - periods_availability.length
-
-    # occupation general of the planning
-    @occupation = ((number_of_periods / (7*24.0 * @number_of_firemen)) * 100).to_i
-
-    # Average of the firemen in a period
-    @firemen_period_average = number_of_periods / (24 * 7)
+    ps = PlanningStatsService.new(periods_availability, @number_of_firemen)
+    @periods_more_firemen     = ps.periods_more_firemen
+    @periods_less_firemen     = ps.periods_less_firemen
+    @periods_without_firemen  = ps.periods_without_firemen
+    @occupation               = ps.occupation
+    @firemen_period_average   = ps.firemen_periods_average
 
     respond_to do |format|
       format.html { render :partial => 'stats' }
