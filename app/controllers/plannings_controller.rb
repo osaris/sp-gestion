@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PlanningsController < BackController
 
   before_filter :load_params, :unless => lambda{ |controller| controller.request.format.html? }
