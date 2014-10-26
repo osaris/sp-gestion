@@ -248,7 +248,7 @@ window.planning = () ->
   # called after calendar events are loaded to refresh list of firemen
   refresh_firemen = (type, id) ->
     $.ajax({
-      url: '/plannings/firemen/' + type,
+      url: '/plannings/firemen/' + type
       data:
         id:   id
         start: $('#calendar').fullCalendar('getDate').format()
@@ -275,8 +275,8 @@ window.planning = () ->
   # called when window is initialized to set the source of events for trainings view
   refresh_trainings = (training) ->
     events = {
-      url: '/plannings/by_training',
-      type: 'GET',
+      url: '/plannings/by_training'
+      type: 'GET'
       data:
         training: training
     }
