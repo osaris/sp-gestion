@@ -210,6 +210,7 @@ window.firemen_periods = () ->
 Rails.register_init ['firemen\\periods'], () -> firemen_periods()
 
 window.planning = () ->
+  currentId = 0
   $('#calendar').fullCalendar({
     header: {
       left: ''
