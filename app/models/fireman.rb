@@ -52,6 +52,11 @@ class Fireman < ActiveRecord::Base
   scope :not_resigned, -> { where("COALESCE(firemen.resignation_date, '') = ''") }
   scope :resigned, -> { where("COALESCE(firemen.resignation_date, '') <> ''") }
   scope :active, -> { where(:status => Fireman::STATUS['Actif']) }
+  scope :by_grade, -> (grade) { where(:grade_category => grade) }
+  scope :by_training, -> (training) {
+    joins(:fireman_trainings)
+    .where('training_id = ?', training)
+  }
 
   def initialize(params = nil, *args)
     super
