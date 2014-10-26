@@ -232,6 +232,23 @@ window.planning = () ->
       if !isLoading
         refresh_stats(currentView, currentId)
         refresh_firemen(currentView, currentId)
+    eventClick: ( event, jsEvent, view ) ->
+      eventDiv = $(this)
+      $.ajax({
+        url: '/plannings/firemen/' + currentView
+        data:
+          id:     currentId
+          period: event.start.format()
+        success: (data) ->
+          eventDiv.popover({
+                    html:     true
+                    title:    'Personnel pour le ' + moment(event.start).format('DD.MM.YY à HH:mm')
+                    content:  data
+                    placement:'auto right'
+                    container:'body'
+                  })
+                 .popover('show')
+      })
   })
 
   # called after calendar events are loaded to refresh statistics
@@ -291,6 +308,9 @@ window.planning = () ->
   $('#grade').change () ->
     currentId = $('#grade').val()
     refresh_grades(currentId)
+
+  $('body').click () ->
+    $('.popover').popover('destroy');
 
   if($('#general').hasClass('active'))
     currentId = 0

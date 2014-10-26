@@ -81,8 +81,14 @@ class PlanningsController < BackController
   private
 
   def load_params
-    start_date = DateTime.parse(params[:start]).in_time_zone.beginning_of_week
-    end_date = start_date.end_of_week
+    if !params[:period].blank?
+      start_date = DateTime.parse(params[:period])
+      end_date = start_date + 59.minutes
+    else
+      start_date = DateTime.parse(params[:start]).in_time_zone.beginning_of_week
+      end_date = start_date.end_of_week
+    end
+
     @date_range = [start_date..end_date]
   end
 end
