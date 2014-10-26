@@ -21,13 +21,26 @@ class PlanningsController < BackController
       format.json do
         case params[:id]
         when "general"
-          @availabilities = @station.fireman_availabilities.where(:availability => @date_range).group(:availability).count
+          @availabilities = @station.fireman_availabilities
+                                    .where(:availability => @date_range)
+                                    .group(:availability)
+                                    .count
           @firemen_count = @station.firemen.count
         when "by_grade"
-          @availabilities = @station.fireman_availabilities.where(:availability => @date_range, :fireman_id => @station.firemen.where(:grade_category => params[:grade])).group(:availability).count
+          @availabilities = @station.fireman_availabilities
+                                    .joins(:fireman)
+                                    .where(:availability => @date_range)
+                                    .where('firemen.grade_category = ?', params[:grade])
+                                    .group(:availability)
+                                    .count
           @firemen_count = @station.firemen.where(:grade_category => params[:grade]).count
         when "by_training"
-          @availabilities = @station.fireman_availabilities.where(:availability => @date_range, :fireman_id => @station.fireman_trainings.where(:training_id => params[:training]).select(:fireman_id)).group(:availability).count
+          @availabilities = @station.fireman_availabilities
+                                    .joins(:fireman => :fireman_trainings)
+                                    .where(:availability => @date_range)
+                                    .where('fireman_trainings.training_id = ?', params[:training])
+                                    .group(:availability)
+                                    .count
           @firemen_count = @station.firemen.where(:id => @station.fireman_trainings.where(:training_id => params[:training]).select(:fireman_id)).count
         end
       end
@@ -38,15 +51,25 @@ class PlanningsController < BackController
   def firemen
     case params[:type]
     when "general"
-      @firemen = @station.firemen.where(:id => @station.fireman_availabilities.where(
-                                        :availability => @date_range).select(:fireman_id))
+      @firemen = @station.fireman_availabilities
+                         .select('DISTINCT firemen.*')
+                         .joins(:fireman)
+                         .where(:availability => @date_range)
+                         .order('firemen.grade DESC, firemen.lastname ASC')
     when "by_grade"
-      @firemen = @station.firemen.where(:grade_category => params[:id],
-                                        :id => @station.fireman_availabilities.where(
-                                        :availability => @date_range).select(:fireman_id))
+      @firemen = @station.fireman_availabilities
+                         .select('DISTINCT firemen.*')
+                         .joins(:fireman)
+                         .where(:availability => @date_range)
+                         .where('firemen.grade_category = ?', params[:id])
+                         .order('firemen.grade DESC, firemen.lastname ASC')
     when "by_training"
-      @firemen = @station.firemen.where(:id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id))
-                                 .where(:id => @station.fireman_availabilities.where(:availability => @date_range).select(:fireman_id))
+      @firemen = @station.fireman_availabilities
+                         .select('DISTINCT firemen.*')
+                         .joins(:fireman => :fireman_trainings)
+                         .where(:availability => @date_range)
+                         .where('fireman_trainings.training_id = ?', params[:id])
+                         .order('firemen.grade DESC, firemen.lastname ASC')
     end
 
     respond_to do |format|
@@ -56,14 +79,29 @@ class PlanningsController < BackController
 
   def stats
     if params[:type] == "general"
-      periods_availability = @station.fireman_availabilities.where(:availability => @date_range).group(:availability).count
+      periods_availability = @station.fireman_availabilities
+                                     .where(:availability => @date_range)
+                                     .group(:availability)
+                                     .count
       @number_of_firemen = @station.firemen.count
     elsif params[:type] == "by_grade"
-      periods_availability = @station.fireman_availabilities.where(:availability => @date_range, :fireman_id => @station.firemen.where(:grade_category => params[:id])).group(:availability).count
+      periods_availability = @station.fireman_availabilities
+                                     .joins(:fireman)
+                                     .where(:availability => @date_range)
+                                     .where('firemen.grade_category = ?', params[:id])
+                                     .group(:availability)
+                                     .count
       @number_of_firemen = @station.firemen.where(:grade_category => params[:id]).count
     elsif params[:type] == "by_training"
-      periods_availability = @station.fireman_availabilities.where(:availability => @date_range, :fireman_id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id)).group(:availability).count
-      @number_of_firemen = @station.firemen.where(:id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id)).count
+      periods_availability = @station.fireman_availabilities
+                                     .joins(:fireman => :fireman_trainings)
+                                     .where(:availability => @date_range)
+                                     .where('fireman_trainings.training_id = ?', params[:id])
+                                     .group(:availability)
+                                     .count
+      @number_of_firemen = @station.firemen
+                                   .where(:id => @station.fireman_trainings.where(:training_id => params[:id]).select(:fireman_id))
+                                   .count
     end
 
     ps = PlanningStatsService.new(periods_availability, @number_of_firemen)
