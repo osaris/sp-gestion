@@ -234,11 +234,14 @@ window.planning = () ->
         refresh_firemen(currentView, currentId)
     eventClick: ( event, jsEvent, view ) ->
       eventDiv = $(this)
+      eventDivHtml = $(this).html()
       $.ajax({
         url: '/plannings/firemen/' + currentView
         data:
           id:     currentId
           period: event.start.format()
+        beforeSend: ->
+          eventDiv.html('Chargement...')
         success: (data) ->
           eventDiv.popover({
                     html:     true
@@ -248,7 +251,8 @@ window.planning = () ->
                     container:'body'
                   })
                  .popover('show')
-      })
+      }).always ->
+        eventDiv.html(eventDivHtml)
   })
 
   # called after calendar events are loaded to refresh statistics
@@ -257,7 +261,7 @@ window.planning = () ->
       url: '/plannings/stats'
       data:
         id:    id
-        type:  type        
+        type:  type
         start: $('#calendar').fullCalendar('getDate').format()
       success: (data) ->
         $('#planning_stats').html(data)
