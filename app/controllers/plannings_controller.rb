@@ -25,7 +25,7 @@ class PlanningsController < BackController
                                     .where(:availability => @date_range)
                                     .group(:availability)
                                     .count
-          @number_of_firemen = @station.firemen.count
+          @number_of_firemen = @station.firemen.active.not_resigned.count
         when "by_grade"
           @availabilities = @station.fireman_availabilities
                                     .joins(:fireman)
@@ -33,7 +33,7 @@ class PlanningsController < BackController
                                     .where('firemen.grade_category = ?', params[:grade])
                                     .group(:availability)
                                     .count
-          @number_of_firemen = @station.firemen.by_grade(params[:grade]).count
+          @number_of_firemen = @station.firemen.by_grade(params[:grade]).active.not_resigned.count
         when "by_training"
           @availabilities = @station.fireman_availabilities
                                     .joins(:fireman => :fireman_trainings)
@@ -41,7 +41,7 @@ class PlanningsController < BackController
                                     .where('fireman_trainings.training_id = ?', params[:training])
                                     .group(:availability)
                                     .count
-          @number_of_firemen = @station.firemen.by_training(params[:training]).count
+          @number_of_firemen = @station.firemen.by_training(params[:training]).active.not_resigned.count
         end
       end
     end
@@ -70,15 +70,15 @@ class PlanningsController < BackController
     if params[:type] == "general"
       periods_availability = @station.fireman_availabilities
                                      .count_by_availability(@date_range)
-      @number_of_firemen = @station.firemen.count
+      @number_of_firemen = @station.firemen.active.not_resigned.count
     elsif params[:type] == "by_grade"
       periods_availability = @station.fireman_availabilities
                                      .count_by_availability_for_grade(@date_range, params[:id])
-      @number_of_firemen = @station.firemen.by_grade(params[:id]).count
+      @number_of_firemen = @station.firemen.by_grade(params[:id]).active.not_resigned.count
     elsif params[:type] == "by_training"
       periods_availability = @station.fireman_availabilities
                                      .count_by_availability_for_training(@date_range, params[:id])
-      @number_of_firemen = @station.firemen.by_training(params[:id]).count
+      @number_of_firemen = @station.firemen.by_training(params[:id]).active.not_resigned.count
     end
 
     ps = PlanningStatsService.new(periods_availability, @number_of_firemen)
