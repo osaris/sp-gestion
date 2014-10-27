@@ -26,6 +26,13 @@ class FiremanAvailabilitiesController < BackController
     end
   end
 
+  def create_all
+    FiremanAvailability::create_all(@station,
+                                    @fireman.id,
+                                    params[:fireman_availability][:availability])
+    head :ok
+  end
+
   def destroy
     respond_to do |format|
       format.json do
@@ -37,6 +44,12 @@ class FiremanAvailabilitiesController < BackController
         end
       end
     end
+  end
+
+  def destroy_all
+    FiremanAvailability::destroy_all(@fireman.id,
+                                     params[:fireman_availability][:availability])
+    head :ok
   end
 
   private

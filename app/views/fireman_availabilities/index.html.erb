@@ -1,5 +1,12 @@
 <div class="block-title"><h4>Disponibilités du <%= link_to(grade_and_name(@fireman), @fireman) %></h4></div>
-<div id="calendar"></div>
+
+<div class="alert alert-info">Cliquer sur une heure pour indiquer
+  la disponibilité. La flèche verte à côté de la date permet de changer la
+  disponibilité d'une journée entière. Seules les heures à venir sont éditables.</div>
+
+<div id="fireman_availabilities">
+  <div id="calendar"></div>
+</div>
 
 <%= javascript_tag do %>
   var fireman_id = <%= @fireman.id %>;

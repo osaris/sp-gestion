@@ -50,6 +50,24 @@ class FiremanAvailability < ActiveRecord::Base
     .where('fireman_trainings.training_id = ?', training)
   }
 
+  def self.create_all(station, fireman_id, day)
+    date = DateTime.parse(day)
+    availabilities = []
+    (0..23).each do |i|
+      availabilities << {
+        :fireman_id   => fireman_id,
+        :availability => date.change({ hour: i, min: 0, sec: 0 })
+      }
+    end
+    station.fireman_availabilities.create(availabilities)
+  end
+
+  def self.destroy_all(fireman_id, day)
+    date = DateTime.parse(day)
+    delete_all(:fireman_id   => fireman_id,
+               :availability => [date.beginning_of_day..date.end_of_day])
+  end
+
   private
 
   def check_valid_date

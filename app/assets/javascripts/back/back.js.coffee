@@ -129,6 +129,9 @@ window.fireman_availabilities = () ->
     firstDay: 1
     editable: true
     timezone: "Europe/Paris"
+    columnFormat: {
+      agendaWeek: 'ddd DD/MM/YY'
+    }
     events: {
       url: '/firemen/' + fireman_id + '/fireman_availabilities',
     }
@@ -162,6 +165,34 @@ window.fireman_availabilities = () ->
           $('#calendar').fullCalendar('removeEvents', calEvent._id)
       })
   })
+
+  $('.fc-day-header').click () ->
+    currentDay = moment($(this).html(), 'ddd DD/MM/YY')
+    events = $('#calendar').fullCalendar('clientEvents', (event) ->
+      return (event.start.diff(currentDay.startOf('day'), 'hours') == 0)
+    )
+
+    if events.length == 1
+      texteMessage = 'supprimer'
+      requestType = 'DELETE'
+      requestAction = 'destroy_all'
+    else
+      texteMessage = 'créer'
+      requestType = 'POST'
+      requestAction = 'create_all'
+
+    if currentDay > new Date() and
+        confirm("Êtes-vous sûr de vouloir #{texteMessage} toutes les disponibilités du jour ?")
+      $.ajax({
+        type: requestType
+        url: '/firemen/' + fireman_id + '/fireman_availabilities/' + requestAction
+        data:
+          fireman_availability:
+            "fireman_id"   : fireman_id
+            "availability" : currentDay.format()
+        success : (data) ->
+          $('#calendar').fullCalendar('refetchEvents')
+      })
 
 Rails.register_init ['fireman_availabilities\\index'], () -> fireman_availabilities()
 
