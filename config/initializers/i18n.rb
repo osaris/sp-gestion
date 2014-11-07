@@ -22,7 +22,7 @@ module I18n
         raise exception
       when "production"
         if MissingTranslationData === exception
-          Rollbar.report_exception(exception)
+          Rollbar.warning(exception)
           return exception.message
         else
           raise exception
