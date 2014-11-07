@@ -61,7 +61,7 @@ SpGestion::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += ['back-all.css','front-all.css',
+  config.assets.precompile += ['back-all.css.sass','front-all.css.sass',
                                'back.js','front.js']
 
   # Ignore bad email addresses and do not raise email delivery errors.
