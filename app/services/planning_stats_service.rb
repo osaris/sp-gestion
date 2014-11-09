@@ -20,7 +20,11 @@ class PlanningStatsService
   end
 
   def occupation
-    ((@number_of_periods / (7*24.0 * @number_of_firemen)) * 100).to_i
+    if @number_of_firemen > 0
+      return ((@number_of_periods / (7*24.0 * @number_of_firemen)) * 100).to_i
+    else
+      return 0
+    end
   end
 
   def firemen_periods_average
