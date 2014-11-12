@@ -26,15 +26,16 @@ namespace :spg  do
       # and reset other items
       print "Reset '#{station.name}' data\r\n"
       print "\rEmpty tables..."
-      station.fireman_trainings.destroy_all
-      station.convocations.destroy_all
-      station.interventions.destroy_all
-      station.firemen.destroy_all
-      station.intervention_roles.destroy_all
-      station.check_lists.destroy_all
-      station.trainings.destroy_all
-      station.uniforms.destroy_all
-      station.vehicles.destroy_all
+      station.fireman_availabilities.delete_all
+      station.fireman_trainings.delete_all
+      station.convocations.delete_all
+      station.interventions.delete_all
+      station.firemen.delete_all
+      station.intervention_roles.delete_all
+      station.check_lists.delete_all
+      station.trainings.delete_all
+      station.uniforms.delete_all
+      station.vehicles.delete_all
       print "done !\r\n"
 
       # unread messages
@@ -469,6 +470,19 @@ namespace :spg  do
         :quantity => 1,
         :expiry   => 1.week.from_now
       )
+      print "done !\r\n"
+
+      # availabilites
+      print "\rCreate availabilities..."
+      station.firemen.active.each do |f|
+        # create availabilities for the next 7 days
+        (Date.today+1...Date.today+8).each do |day|
+          24.times do
+            f.fireman_availabilities.create(:station      => station,
+                                            :availability => day + rand(23).hours)
+          end
+        end
+      end
       print "done !\r\n"
 
       print "*"*terminal_width + "\r\n"
