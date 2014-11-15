@@ -1,0 +1,95 @@
+<h3>Soutenez SP-Gestion</h3>
+<p>SP-Gestion est une application open source et gratuite développée depuis 2008.
+  Concrètement cela signifie que n'importe quel personne qui possède des compétences
+  en informatique peut héberger sa propre version de SP-Gestion puisque le code
+  source est
+  <%= link_to("disponible ici", "http://github.com/osaris/sp-gestion", :target => :blank) %>.
+  Toutefois, lorsque vous utilisez SP-Gestion.fr vous n'avez pas à gérer l'installation
+  de l'application car nous nous occupons de tout. L'hébergement des comptes
+  implique plusieurs frais récurrents :</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Désignation</th>
+      <th>Prestataire</th>
+      <th>Coût mensuel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Serveur dédié</td>
+      <td><%= link_to("SoYouStart (OVH)", "http://www.soyoustart.com", :target => :blank) %></td>
+      <td>30 €</td>
+    </tr>
+    <tr>
+      <td>Stockage des fichiers statiques (photos...)</td>
+      <td><%= link_to("Amazon Web Services (S3)", "http://aws.amazon.com/fr/s3/", :target => :blank) %></td>
+      <td>~ 2 € (variable)</td>
+    </tr>
+    <tr>
+      <td>Noms de domaine (sp-gestion.fr et .com)</td>
+      <td><%= link_to("OVH", "http://www.ovh.com", :target => :blank) %></td>
+      <td>1.20 € (14 € /an)</td>
+    </tr>
+    <tr>
+      <td>Surveillance du serveur et de l'application</td>
+      <td><%= link_to("Newrelic", "http://newrelic.com", :target => :blank) %></td>
+      <td>gratuit</td>
+    </tr>
+    <tr>
+      <td>Envoi des emails</td>
+      <td><%= link_to("Mailjet", "http:://www.mailjet.com", :target => :blank) %></td>
+      <td>gratuit</td>
+    </tr>
+    <tr>
+      <td>Sauvegardes</td>
+      <td><%= link_to("Crashplan", "http://www.code42.com/crashplan", :target => :blank) %></td>
+      <td>2.2 € (33 $ / an)</td>
+    </tr>
+    <tr>
+      <td>Administration du serveur et maintient des services (3h/mois)</td>
+      <td>-</td>
+      <td>240 €</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2"><b>Total</b></td>
+      <td><b>275 € / mois</b></td>
+    </tr>
+  </tfoot>
+<table>
+<p>Les heures d'administration du serveur et de maintient des services n'incluent
+  pas le travail de développement de SP-Gestion qui peut aller jusqu'à plusieurs
+  dizaines d'heures par semaine. Le coût de ces heures est calculé en fonction du
+  coût si elles étaient sous-traitées à une société externe.</p>
+<p>Si vous aimez SP-Gestion et que vous souhaitez participer aux frais de fonctionnement
+  de l'application, vous pouvez utiliser le bouton ci-dessous pour faire un don
+  via Paypal.</p>
+
+<p align="center">
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+  <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+  </form>
+</p>
+
+<h4>Liste des dons (mise à jour le 15.11.2014)</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Date</th>
+      <th>Montant</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="3">Aucun don pour l'instant</td>
+    </tr>
+  </tbody>
+</table>

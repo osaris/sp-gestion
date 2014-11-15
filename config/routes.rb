@@ -41,6 +41,8 @@ SpGestion::Application.routes.draw do
       resources :items, :except => [:index]
     end
 
+    resources :donations, :only => [:index]
+
     resources :email_confirmations, :only => [:edit, :update]
 
     resources :plannings, :only => [:show] do
@@ -119,10 +121,10 @@ SpGestion::Application.routes.draw do
       end
     end
 
-    post '/login/authenticate' => 'user_sessions#create', :as => :authenticate
-    get '/login' => 'user_sessions#new', :as => :login
-    get '/logout' => 'user_sessions#destroy', :as => :logout
-    get '/' => 'dashboard#index', :as => :root_back
-    get '*url' => 'dashboard#index', :as => :error_404
+    post '/login/authenticate' => 'user_sessions#create',   :as => :authenticate
+    get '/login'               => 'user_sessions#new',      :as => :login
+    get '/logout'              => 'user_sessions#destroy',  :as => :logout
+    get '/'                    => 'dashboard#index',        :as => :root_back
+    get '*url'                 => 'dashboard#index',        :as => :error_404
   end
 end

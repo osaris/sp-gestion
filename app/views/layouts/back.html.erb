@@ -69,6 +69,9 @@
   <div class="navbar-fixed-bottom" id="footer">
       <div class="pull-right">
         <span class="hidden-xs">Copyright </span>&copy; 2009-<%= Date.today.year %> imagineapp -
+        <%= link_to(donations_path(), :target => :blank) do %>
+          <span class="donation">Soutenez SP-Gestion</span>
+        <%- end -%> -
         <%= mail_to("contact@sp-gestion.fr", "Contactez-nous") %> -
         <%= link_to("Forum", "http://forum.sp-gestion.fr", :target => :blank) %>
       </div>
