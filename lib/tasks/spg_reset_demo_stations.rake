@@ -479,7 +479,7 @@ namespace :spg  do
         (Date.today+1...Date.today+8).each do |day|
           24.times do
             f.fireman_availabilities.create(:station      => station,
-                                            :availability => day + rand(23).hours)
+                                            :availability => day + rand(24).hours)
           end
         end
       end
