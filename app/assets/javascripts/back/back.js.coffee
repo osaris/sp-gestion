@@ -228,16 +228,6 @@ Rails.register_init ['fireman_trainings\\new'
                      'fireman_trainings\\edit'
                      'fireman_trainings\\update'], () -> fireman_trainings()
 
-window.firemen_periods = () ->
-  oTable = $('#firemen_periods').dataTable(
-    'sScrollX':        '100%'
-    'sScrollY':        '500px'
-    'bFilter':         false
-    'bInfo':           false
-    'bPaginate':       false
-  )
-  new FixedColumns( oTable )
-
 Rails.register_init ['firemen\\periods'], () -> firemen_periods()
 
 window.planning = () ->
