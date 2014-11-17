@@ -21,6 +21,7 @@
 #= require back/jquery.tagsinput.min.js
 #= require bootstrap
 #= require bootstrap/alert
+#= require bootstrap/tooltip
 #= require back/back
 
 #= require_self

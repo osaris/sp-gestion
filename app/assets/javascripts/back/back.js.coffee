@@ -230,6 +230,11 @@ Rails.register_init ['fireman_trainings\\new'
 
 Rails.register_init ['firemen\\periods'], () -> firemen_periods()
 
+window.planning_stats = () ->
+  $('[data-toggle="tooltip"]').tooltip()
+
+Rails.register_init ['plannings\\stats'], () -> planning_stats()
+
 window.planning = () ->
   currentId = 0
   $('#calendar').fullCalendar({
