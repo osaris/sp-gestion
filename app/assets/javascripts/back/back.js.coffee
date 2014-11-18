@@ -237,12 +237,13 @@ Rails.register_init ['plannings\\stats'], () -> planning_stats()
 
 window.planning = () ->
   currentId = 0
+
   $('#calendar').fullCalendar({
     header: {
       left: ''
       right: 'prev, next today'
       center: 'title'
-    },
+    }
     defaultView: 'agendaWeek'
     allowCalEventOverlap: false
     allDaySlot: false
