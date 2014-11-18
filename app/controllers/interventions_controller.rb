@@ -82,7 +82,9 @@ class InterventionsController < BackController
       elsif !['by_type','by_subkind','by_city','by_vehicle','by_month','by_hour','map'].include?(params[:type])
         redirect_to(interventions_stats_path(params[:year], 'by_type'))
       else
-        @data, @sum = Intervention::stats(self, @station, params[:type], params[:year])
+        @data, @sum = Intervention::stats(@station, params[:type], params[:year])
+        ics = InterventionsChartsService.new(@data, @sum)
+        @chart = ics.send(params[:type]) if ics.respond_to?(params[:type])
       end
     end
   end

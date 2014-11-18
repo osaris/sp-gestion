@@ -22,6 +22,8 @@
 #= require bootstrap
 #= require bootstrap/alert
 #= require bootstrap/tooltip
+#= require highcharts/highcharts
+#= require highcharts/highcharts-more
 #= require back/back
 
 #= require_self

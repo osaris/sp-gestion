@@ -161,7 +161,7 @@ GEM
     geocoder (1.2.6)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
-    googlecharts (1.6.8)
+    hash-deep-merge (0.1.1)
     highline (1.6.21)
     hike (1.2.3)
     i18n (0.7.0.beta1)
@@ -178,6 +178,9 @@ GEM
     json (1.8.1)
     launchy (2.4.3)
       addressable (~> 2.3)
+    lazy_high_charts (1.5.4)
+      bundler (>= 1.0)
+      hash-deep-merge
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -332,12 +335,12 @@ DEPENDENCIES
   faker
   fog
   geocoder
-  googlecharts
   highline
   jc-validates_timeliness
   jquery-migrate-rails
   jquery-rails
   jquery-ui-rails
+  lazy_high_charts
   mini_magick
   mysql2
   newrelic_rpm

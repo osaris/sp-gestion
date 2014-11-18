@@ -123,7 +123,7 @@ class Intervention < ActiveRecord::Base
     result.collect { |intervention| intervention.subkind }
   end
 
-  def self.stats(context, station, type, year)
+  def self.stats(station, type, year)
     data = Intervention.send("stats_#{type}", station, year)
 
     if ["by_type", "by_subkind", "by_city", "by_vehicle"].include?(type)
