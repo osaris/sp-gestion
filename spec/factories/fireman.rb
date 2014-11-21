@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :fireman do
-    ignore do
+    transient do
       grade(Grade::GRADE['2e classe'])
     end
 

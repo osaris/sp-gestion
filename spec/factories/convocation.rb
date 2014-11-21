@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :convocation do
-    ignore do
+    transient do
       firemen_count 1
     end
 
