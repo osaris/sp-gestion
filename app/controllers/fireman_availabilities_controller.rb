@@ -41,6 +41,8 @@ class FiremanAvailabilitiesController < BackController
           render :nothing => true, :status => :ok
         rescue ActiveRecord::RecordNotDestroyed
           render :nothing => true, :status => :unprocessable_entity
+        rescue ActiveRecord::RecordNotFound
+          render :nothing => true, :status => :not_found
         end
       end
     end
