@@ -9,19 +9,19 @@ class Station < ActiveRecord::Base
   end
   authenticates_many :user_sessions, :find_options => FindOptions.new
 
-  has_many :fireman_trainings, :dependent => :destroy
+  has_many :fireman_trainings, :dependent => :delete_all
   has_many :convocations, :dependent => :destroy
   has_many :interventions, :dependent => :destroy
   has_many :users, :dependent => :destroy
   has_many :check_lists, :dependent => :destroy
-  has_many :fireman_availabilities, :dependent => :destroy
+  has_many :fireman_availabilities, :dependent => :delete_all
   has_many :firemen, :dependent => :destroy
-  has_many :intervention_roles, :dependent => :destroy
-  has_many :trainings, -> { order 'short_name' }, :dependent => :destroy
-  has_many :uniforms, :dependent => :destroy
-  has_many :vehicles, :dependent => :destroy
+  has_many :intervention_roles, :dependent => :delete_all
+  has_many :trainings, -> { order 'short_name' }, :dependent => :delete_all
+  has_many :uniforms, :dependent => :delete_all
+  has_many :vehicles, :dependent => :delete_all
   has_one  :owner, :class_name => "User"
-  has_many :groups, :dependent => :destroy
+  has_many :groups, :dependent => :delete_all
 
   mount_uploader :logo, LogoUploader
 

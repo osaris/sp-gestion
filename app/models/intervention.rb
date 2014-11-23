@@ -2,10 +2,10 @@
 class Intervention < ActiveRecord::Base
 
   belongs_to :station
-  has_many :intervention_vehicles, :dependent => :destroy
-  has_many :vehicles, :through => :intervention_vehicles
-  has_many :fireman_interventions, -> { order 'fireman_interventions.grade DESC' }, :dependent => :destroy
-  has_many :firemen, :through => :fireman_interventions
+  has_many :intervention_vehicles
+  has_many :vehicles, :through => :intervention_vehicles, :dependent => :delete_all
+  has_many :fireman_interventions, -> { order 'fireman_interventions.grade DESC' }
+  has_many :firemen, :through => :fireman_interventions, :dependent => :delete_all
 
   accepts_nested_attributes_for :fireman_interventions, :allow_destroy => true
 

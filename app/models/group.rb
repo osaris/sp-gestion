@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
 
   belongs_to :station
   has_many :users
-  has_many :permissions, :dependent => :destroy
+  has_many :permissions, :dependent => :delete_all
   has_many :resources, :through => :permissions
 
   accepts_nested_attributes_for :permissions, :allow_destroy => true

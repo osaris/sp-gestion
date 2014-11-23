@@ -2,14 +2,14 @@
 class Fireman < ActiveRecord::Base
 
   belongs_to :station
-  has_many :grades, -> { order 'kind DESC' }, :dependent => :destroy
+  has_many :grades, -> { order 'kind DESC' }, :dependent => :delete_all
   has_many :convocation_firemen
   has_many :convocations, -> { order 'date DESC' }, :through => :convocation_firemen
   has_many :fireman_interventions
   has_many :interventions, :through => :fireman_interventions
   has_many :fireman_trainings
   has_many :trainings, :through => :fireman_trainings
-  has_many :fireman_availabilities, :dependent => :destroy
+  has_many :fireman_availabilities, :dependent => :delete_all
 
   accepts_nested_attributes_for :grades
 

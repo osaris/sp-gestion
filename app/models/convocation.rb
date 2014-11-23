@@ -3,8 +3,8 @@ class Convocation < ActiveRecord::Base
 
   belongs_to :station
   belongs_to :uniform
-  has_many :convocation_firemen, -> { order 'convocation_firemen.grade DESC' }, :dependent => :destroy
-  has_many :firemen, :through => :convocation_firemen
+  has_many :convocation_firemen, -> { order 'convocation_firemen.grade DESC' }
+  has_many :firemen, :through => :convocation_firemen, :dependent => :delete_all
 
   delegate :url, :name, :to => :station, :prefix => true
   delegate :description, :title, :to => :uniform, :prefix => true
