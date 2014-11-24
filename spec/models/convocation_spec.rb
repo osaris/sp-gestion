@@ -58,7 +58,7 @@ describe Convocation do
       it "deliver convocations" do
         expect(ConvocationMailer).to receive(:convocation)
                                      .with(an_instance_of(Convocation), an_instance_of(ConvocationFireman), an_instance_of(String))
-                                     .and_return(double("mailer", :deliver => true))
+                                     .and_return(double("mailer", :deliver_now => true))
 
         convocation.send_emails("test@test.com")
       end
@@ -66,7 +66,7 @@ describe Convocation do
       it "deliver a sending confirmation" do
         expect(ConvocationMailer).to receive(:sending_confirmation)
                                      .with(an_instance_of(Convocation), an_instance_of(String))
-                                     .and_return(double("mailer", :deliver => true))
+                                     .and_return(double("mailer", :deliver_now => true))
 
         convocation.send_emails("test@test.com")
       end
@@ -93,7 +93,7 @@ describe Convocation do
         expect(ConvocationMailer).to receive(:convocation)
                                      .twice
                                      .with(an_instance_of(Convocation), an_instance_of(ConvocationFireman), an_instance_of(String))
-                                     .and_return(double("mailer", :deliver => true))
+                                     .and_return(double("mailer", :deliver_now => true))
 
         convocation.send_emails("test@test.com")
       end

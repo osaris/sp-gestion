@@ -7,7 +7,7 @@ describe UserMailer do
 
   describe "#confirmation_instructions" do
 
-    subject { UserMailer.confirmation_instructions(user).deliver }
+    subject { UserMailer.confirmation_instructions(user).deliver_now }
 
     it { should deliver_to('test@test.com') }
     it { should have_subject(/Activation/) }
@@ -15,7 +15,7 @@ describe UserMailer do
   end
 
   describe "#new_email_instructions" do
-    subject { UserMailer.new_email_instructions(user).deliver }
+    subject { UserMailer.new_email_instructions(user).deliver_now }
 
     it { should deliver_to('test@new.com') }
     it { should have_subject(/Changement/) }
@@ -23,7 +23,7 @@ describe UserMailer do
   end
 
   context "#cooptation_instructions" do
-    subject { UserMailer.cooptation_instructions(user).deliver }
+    subject { UserMailer.cooptation_instructions(user).deliver_now }
 
     it { should deliver_to('test@test.com') }
     it { should have_subject(/Invitation/) }
@@ -31,7 +31,7 @@ describe UserMailer do
   end
 
   context "#password_reset_instructions" do
-    subject { UserMailer.password_reset_instructions(user).deliver }
+    subject { UserMailer.password_reset_instructions(user).deliver_now }
 
     it { should deliver_to('test@test.com') }
     it { should have_subject(/Modification/) }

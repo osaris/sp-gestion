@@ -73,12 +73,12 @@ class User < ActiveRecord::Base
     self.confirmed_at = nil
     self.confirmation_sent_at = Time.now.utc
     self.save(:validate => false)
-    UserMailer.delay.confirmation_instructions(self)
+    UserMailer.confirmation_instructions(self).deliver_later
   end
 
   def deliver_password_reset_instructions!
     self.reset_perishable_token!
-    UserMailer.delay.password_reset_instructions(self)
+    UserMailer.password_reset_instructions(self).deliver_later
   end
 
   def deliver_cooptation_instructions!
@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
     self.confirmed_at = nil
     self.confirmation_sent_at = Time.now.utc
     self.save(:validate => false)
-    UserMailer.delay.cooptation_instructions(self)
+    UserMailer.cooptation_instructions(self).deliver_later
   end
 
   def update_profile(params)
@@ -132,6 +132,6 @@ class User < ActiveRecord::Base
 
   def deliver_new_email_instructions!
     self.reset_perishable_token!
-    UserMailer.delay.new_email_instructions(self)
+    UserMailer.new_email_instructions(self).deliver_later
   end
 end

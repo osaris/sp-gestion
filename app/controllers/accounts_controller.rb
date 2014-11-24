@@ -28,7 +28,7 @@ class AccountsController < BackController
   end
 
   def destroy
-    @station.delay.destroy
+    DestroyStationJob.perform_later(@station)
     redirect_to(bye_url(:subdomain => 'www'))
   end
 

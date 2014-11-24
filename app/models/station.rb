@@ -90,7 +90,7 @@ class Station < ActiveRecord::Base
   private
 
   def create_defaults_uniforms
-    Uniform.delay.create_defaults(self)
+    CreateDefaultsUniformJob.perform_later(self)
   end
 
   def set_owner

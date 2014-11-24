@@ -42,11 +42,11 @@ class Convocation < ActiveRecord::Base
     nb_email = 0
     # send convocations
     self.convocation_firemen.with_email.each do |convocation_fireman|
-      ConvocationMailer.convocation(self, convocation_fireman, user_email).deliver
+      ConvocationMailer.convocation(self, convocation_fireman, user_email).deliver_now
       nb_email += 1
     end
     # send confirmation to user who started the job
-    ConvocationMailer.sending_confirmation(self, user_email).deliver
+    ConvocationMailer.sending_confirmation(self, user_email).deliver_now
     # store last emailed time
     self.update_attribute(:last_emailed_at, Time.now)
     # update station attributes

@@ -10,7 +10,7 @@ describe ConvocationMailer do
                                             :rem => 'Test') }
 
   describe "#sending_confirmation" do
-    subject { ConvocationMailer.sending_confirmation(convocation, "test@test.com").deliver }
+    subject { ConvocationMailer.sending_confirmation(convocation, "test@test.com").deliver_now }
 
 
     it { should deliver_to('test@test.com') }
@@ -22,7 +22,7 @@ describe ConvocationMailer do
 
     let(:convocation_fireman) { convocation.convocation_firemen.first }
 
-    subject { ConvocationMailer.convocation(convocation, convocation_fireman, "test@test.com").deliver }
+    subject { ConvocationMailer.convocation(convocation, convocation_fireman, "test@test.com").deliver_now }
 
     context "and not confirmable convocation" do
 

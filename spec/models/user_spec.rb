@@ -55,7 +55,7 @@ describe User do
 
     it "send an email" do
       expect(UserMailer).to receive(:confirmation_instructions)
-                            .and_return(double("mailer", :deliver => true))
+                            .and_return(double("mailer", :deliver_later => true))
 
       user.deliver_confirmation_instructions!
     end
@@ -71,7 +71,7 @@ describe User do
 
     it "send an email" do
       expect(UserMailer).to receive(:cooptation_instructions)
-                            .and_return(double("mailer", :deliver => true))
+                            .and_return(double("mailer", :deliver_later => true))
 
       user.deliver_cooptation_instructions!
     end
@@ -81,7 +81,7 @@ describe User do
 
     it "send an email" do
       expect(UserMailer).to receive(:password_reset_instructions)
-                            .and_return(double("mailer", :deliver => true))
+                            .and_return(double("mailer", :deliver_later => true))
 
       user.deliver_password_reset_instructions!
     end
@@ -100,7 +100,7 @@ describe User do
 
     it "send an email" do
       expect(UserMailer).to receive(:new_email_instructions)
-                            .and_return(double("mailer", :deliver => true))
+                            .and_return(double("mailer", :deliver_later => true))
 
       user.send(:deliver_new_email_instructions!)
     end
