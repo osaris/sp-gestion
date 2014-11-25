@@ -80,7 +80,7 @@ Rails.register_init ['firemen\\new'], () -> jsp()
 window.firemen = () ->
   $('#fireman_tag_list').tagsInput(
     autocomplete_url: tags
-    defaultText: 'Ajouter un tag'
+    defaultText: ''
     width: '100%'
     height: '75px'
   )
@@ -384,7 +384,7 @@ window.interventions = () ->
   $('input#intervention_city').autocomplete(cities,
                                             minChars:     0
                                             selectFirst:  false )
-
+  
   $('input#intervention_city').focus ->
     $('input#intervention_city').click().click()
 
