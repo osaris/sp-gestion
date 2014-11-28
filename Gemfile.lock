@@ -235,7 +235,7 @@ GEM
     prawnto_2 (0.2.6)
       prawn (>= 0.6.0)
       rails (>= 3.1)
-    rack (1.6.0.beta)
+    rack (1.6.0.beta2)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.2.0.beta4)
