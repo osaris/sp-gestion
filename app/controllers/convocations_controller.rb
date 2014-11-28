@@ -79,7 +79,7 @@ class ConvocationsController < BackController
     authorize!(:create, Convocation)
     if @convocation.editable?
       if @station.can_send_email?(@convocation.firemen.size)
-        SendConvocationJob.perform_later(@convocation, @current_user)
+        SendConvocationsJob.perform_later(@convocation, @current_user)
         flash[:success] = "Les convocations sont en cours d'envoi. Un email vous sera adressé à la fin de l'envoi."
       else
         flash[:error] = render_to_string("email_error")
