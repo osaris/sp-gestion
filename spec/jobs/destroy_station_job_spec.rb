@@ -1,5 +1,18 @@
+# -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-RSpec.describe DestroyStationJob, :type => :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe DestroyStationJob do
+
+  let(:station) { build(:station) }
+
+  let(:job) { DestroyStationJob.new }
+
+  describe "#perform" do
+
+    it "call destroy on station" do
+      expect(station).to receive(:destroy)
+
+      job.perform(station)
+    end
+  end
 end
