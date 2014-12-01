@@ -62,6 +62,9 @@ class FiremanAvailabilitiesController < BackController
       flash[:error] = "La disponibilité n'est disponible que pour les hommes actifs."
       redirect_to(fireman_path(@fireman))
     end
+   rescue ActiveRecord::RecordNotFound
+    flash[:error] = "La personne n'existe pas."
+    redirect_to(firemen_path)
   end
 
   def fireman_availability_params
