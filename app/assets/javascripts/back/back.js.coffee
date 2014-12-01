@@ -166,7 +166,7 @@ window.fireman_availabilities = () ->
       })
   })
 
-  $('.fc-day-header').click () ->
+  $('#calendar').on 'click', '.fc-day-header', ->
     currentDay = moment($(this).html(), 'ddd DD/MM/YY')
     events = $('#calendar').fullCalendar('clientEvents', (event) ->
       return (event.start.diff(currentDay.startOf('day'), 'hours') == 0)
@@ -384,7 +384,7 @@ window.interventions = () ->
   $('input#intervention_city').autocomplete(cities,
                                             minChars:     0
                                             selectFirst:  false )
-  
+
   $('input#intervention_city').focus ->
     $('input#intervention_city').click().click()
 
