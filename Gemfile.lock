@@ -168,7 +168,7 @@ GEM
     fog-sakuracloud (0.1.1)
       fog-core
       fog-json
-    fog-softlayer (0.3.24)
+    fog-softlayer (0.3.25)
       fog-core
       fog-json
     fog-terremark (0.0.3)
@@ -177,7 +177,7 @@ GEM
     fog-vmfusion (0.0.1)
       fission
       fog-core
-    fog-voxel (0.0.1)
+    fog-voxel (0.0.2)
       fog-core
       fog-xml
     fog-xml (0.1.1)
@@ -200,7 +200,7 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0.beta, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.2)
+    jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     json (1.8.1)
     launchy (2.4.3)
@@ -221,7 +221,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
-    netrc (0.8.0)
+    netrc (0.9.0)
     newrelic_rpm (3.9.7.266)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
@@ -269,7 +269,7 @@ GEM
       activesupport (= 4.2.0.rc1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.4.0)
+    rake (10.4.1)
     rbvmomi (1.8.2)
       builder
       nokogiri (>= 1.4.1)
@@ -297,12 +297,12 @@ GEM
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
     ruby-graphviz (1.0.9)
-    sass (3.4.9)
-    sass-rails (5.0.0.beta1)
+    sass (3.2.19)
+    sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2)
-      sprockets (~> 2.12)
-      sprockets-rails (>= 2.0, < 4.0)
+      sass (~> 3.2.2)
+      sprockets (~> 2.8, < 3.0)
+      sprockets-rails (~> 2.0)
     scrypt (1.2.1)
       ffi-compiler (>= 0.0.2)
       rake
@@ -390,7 +390,7 @@ DEPENDENCIES
   rake
   rollbar
   rspec-rails
-  sass-rails (= 5.0.0.beta1)
+  sass-rails
   scrypt
   shoulda-matchers
   simple-navigation
