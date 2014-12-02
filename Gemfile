@@ -45,6 +45,7 @@ gem 'yui-compressor'
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
+  gem 'capistrano-passenger'
   gem 'capistrano-rails'
   gem 'rails-erd'
 end
