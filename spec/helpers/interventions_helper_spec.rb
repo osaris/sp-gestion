@@ -72,4 +72,30 @@ describe InterventionsHelper do
       expect(subject.scan(/\(47.057493, 6.748619\)/i).size).to eq 2
     end
   end
+
+  describe "#min_date_intervention" do
+
+    subject { min_date_intervention(build(:station, :intervention_editable_at => 3.days.ago)) }
+
+    it { should == "-3/1d" }
+  end
+
+  describe "display_intervention_role" do
+
+    subject { display_intervention_role(fireman_intervention) }
+
+    context "with intervention_role empty" do
+
+      let(:fireman_intervention) { build(:fireman_intervention, :intervention_role => nil) }
+
+      it { should be_empty }
+    end
+
+    context "with intervention_role set" do
+
+      let(:fireman_intervention) { build(:fireman_intervention) }
+
+      it { should_not be_empty }
+    end
+  end
 end
