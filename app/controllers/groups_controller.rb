@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class GroupsController < BackController
 
   before_action :require_not_demo

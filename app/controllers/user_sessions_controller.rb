@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class UserSessionsController < BackController
 
   before_action :require_no_user, :only => [:new, :create]

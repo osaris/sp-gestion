@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 require 'rails_helper'
 
 describe "404 Page Not Found" do

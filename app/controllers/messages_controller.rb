@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class MessagesController < BackController
 
   authorize_resource

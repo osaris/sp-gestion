@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CheckListsController < BackController
 
   authorize_resource

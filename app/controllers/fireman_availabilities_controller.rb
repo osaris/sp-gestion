@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class FiremanAvailabilitiesController < BackController
 
   before_action :load_fireman

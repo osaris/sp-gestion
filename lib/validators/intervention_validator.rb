@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class InterventionValidator < ActiveModel::Validator
 
   def validate(record)

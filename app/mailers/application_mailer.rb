@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # Basic mailer setup inherited by all specifics mailers
 class ApplicationMailer < ActionMailer::Base
 

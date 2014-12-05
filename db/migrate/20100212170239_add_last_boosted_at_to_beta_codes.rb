@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddLastBoostedAtToBetaCodes < ActiveRecord::Migration
   def self.up
     add_column(:beta_codes, :last_boosted_at, :datetime)

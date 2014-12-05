@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class ConvocationMailer < ApplicationMailer
 
   def convocation(convocation, convocation_fireman, user_email)

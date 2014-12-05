@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class FiremanTrainingsController < BackController
 
   authorize_resource

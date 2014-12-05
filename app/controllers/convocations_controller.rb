@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class ConvocationsController < BackController
 
   authorize_resource

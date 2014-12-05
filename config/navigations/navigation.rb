@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # Configures your navigation
 SimpleNavigation::Configuration.run do |navigation|
   # Specify a custom renderer if needed.

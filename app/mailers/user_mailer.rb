@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # User relative notifications
 class UserMailer < ApplicationMailer
 

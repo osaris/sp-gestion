@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddLastBoostedAtToNewsletters < ActiveRecord::Migration
   def self.up
     add_column(:newsletters, :last_boosted_at, :datetime)

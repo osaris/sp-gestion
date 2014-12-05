@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class VehiclesController < BackController
 
   authorize_resource

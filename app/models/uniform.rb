@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Uniform < ActiveRecord::Base
 
   belongs_to :station

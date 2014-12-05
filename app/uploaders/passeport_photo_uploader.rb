@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class PasseportPhotoUploader < BaseUploader
 
   process :resize_and_pad => [155, 200]

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class PlanningStatsService
 
   def initialize(periods_availability, number_of_firemen)

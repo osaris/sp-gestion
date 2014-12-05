@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateConvocationFiremen < ActiveRecord::Migration
   def self.up
     create_table :convocation_firemen do |t|

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # Based on https://gist.github.com/1205828, in turn based on https://gist.github.com/1182136
 class BootstrapLinkRenderer < ::WillPaginate::ActionView::LinkRenderer
   protected

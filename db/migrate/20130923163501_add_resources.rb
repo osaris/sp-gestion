@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddResources < ActiveRecord::Migration
   def change
     [

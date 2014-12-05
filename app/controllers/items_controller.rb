@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class ItemsController < BackController
 
   authorize_resource

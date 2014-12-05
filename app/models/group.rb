@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Group < ActiveRecord::Base
 
   belongs_to :station

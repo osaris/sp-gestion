@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddHideGradeToConvocations < ActiveRecord::Migration
   def self.up
     add_column(:convocations, :hide_grade, :boolean, :default => false)

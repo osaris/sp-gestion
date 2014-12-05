@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module InterventionsHelper
 
   def options_for_kind
