@@ -60,9 +60,8 @@ class PlanningsController < BackController
                          .firemen_for_range_and_training(@date_range, params[:id])
     end
 
-    respond_to do |format|
-      format.html { render :partial => 'firemen' }
-    end
+
+    render :partial => 'firemen'
   end
 
   def stats
@@ -87,9 +86,7 @@ class PlanningsController < BackController
     @occupation               = ps.occupation
     @firemen_period_average   = ps.firemen_periods_average
 
-    respond_to do |format|
-      format.html { render :partial => 'stats' }
-    end
+    render :partial => 'stats'
   end
 
   private
