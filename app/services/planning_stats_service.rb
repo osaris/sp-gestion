@@ -1,5 +1,7 @@
 class PlanningStatsService
 
+  attr_reader :periods_availability
+
   def initialize(periods_availability, number_of_firemen)
     @periods_availability = periods_availability
     @number_of_firemen = number_of_firemen
@@ -16,7 +18,7 @@ class PlanningStatsService
   end
 
   def periods_without_firemen
-    7 * 24 - @periods_availability.length
+    7 * 24.0 - @periods_availability.length
   end
 
   def occupation
@@ -28,6 +30,6 @@ class PlanningStatsService
   end
 
   def firemen_periods_average
-    @number_of_periods / (24 * 7)
+    @number_of_periods / (24.0 * 7)
   end
 end
