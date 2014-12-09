@@ -91,10 +91,71 @@ describe PlanningsController do
       it { expect(assigns(:firemen)).to_not be_nil }
     end
 
+    describe "GET :firemen for one period" do
+
+      before(:each) do
+        get :firemen, :type => 'general', :period => '2014-12-11T02:00:00+01:00'
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("_firemen") }
+      it { should_not render_with_layout }
+
+      it { expect(assigns(:firemen)).to_not be_nil }
+    end
+
+    describe "GET :firemen by_grade" do
+
+      before(:each) do
+        get :firemen, :type => 'by_grade'
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("_firemen") }
+      it { should_not render_with_layout }
+
+      it { expect(assigns(:firemen)).to_not be_nil }
+    end
+
+    describe "GET :firemen by_training" do
+
+      before(:each) do
+        get :firemen, :type => 'by_training'
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("_firemen") }
+      it { should_not render_with_layout }
+
+      it { expect(assigns(:firemen)).to_not be_nil }
+    end
+
     describe "GET :stats" do
 
       before(:each) do
         get :stats, :type => 'general'
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("_stats") }
+      it { should_not render_with_layout }
+    end
+
+    describe "GET :stats by_grade" do
+
+      before(:each) do
+        get :stats, :type => 'by_grade'
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("_stats") }
+      it { should_not render_with_layout }
+    end
+
+    describe "GET :stats by_training" do
+
+      before(:each) do
+        get :stats, :type => 'by_training'
       end
 
       it { should respond_with(:success) }
