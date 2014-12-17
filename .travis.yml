@@ -21,3 +21,5 @@ notifications:
 env:
   global:
     - RAILS_ENV=test
+
+cache: bundler
