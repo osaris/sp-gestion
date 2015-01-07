@@ -1,6 +1,8 @@
 SpGestion::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  config.active_job.queue_adapter = :delayed_job
+
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
@@ -34,4 +36,3 @@ SpGestion::Application.configure do
   config.action_mailer.delivery_method = SPG_CONFIG[:delivery_method]
   config.action_mailer.smtp_settings = SPG_CONFIG[:smtp_settings]
 end
-
