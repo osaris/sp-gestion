@@ -12,12 +12,7 @@ defaults: &defaults
 development:
   <<: *defaults
   :base_url: sp-gestion.dev:3000
-  :delivery_method: :smtp
-  # Keep these settings if you plan to use the mailcatcher gem
-  :smtp_settings:
-      :address: localhost
-      :port: 1025
-      :domain: sp-gestion.dev:3000
+  :delivery_method: :letter_opener_web
 
 test:
   <<: *defaults

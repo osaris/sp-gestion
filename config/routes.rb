@@ -5,6 +5,10 @@ SpGestion::Application.routes.draw do
     get '/bye' => 'pages#bye', :as => :bye
     get '/signup' => 'stations#new', :as => :signup
     get '/' => 'pages#home', :as => :root_front
+
+    if Rails.env.development?
+      mount LetterOpenerWeb::Engine, at: "/letter_opener"
+    end    
   end
 
   constraints(:subdomain => /.+/) do

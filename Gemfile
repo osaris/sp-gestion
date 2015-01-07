@@ -47,6 +47,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
   gem 'capistrano-rails'
+  gem 'letter_opener_web'
   gem 'rails-erd'
 end
 
