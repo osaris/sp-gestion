@@ -65,7 +65,8 @@ class InterventionsController < BackController
   end
 
   def stats_change_year
-    redirect_to(interventions_stats_path(params[:new_year], params[:type]))
+    redirect_to(interventions_stats_path(params[:new_year] || @current_year || Date.today.year,
+                                         params[:type]))
   end
 
   def stats
