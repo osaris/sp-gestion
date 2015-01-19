@@ -90,4 +90,25 @@ describe FiremenHelper do
       it { should == 5 }
     end
   end
+
+  describe "#ratio_interventions" do
+
+    subject { ratio_interventions(nb_interventions, total) }
+
+    context "with no interventions" do
+
+      let(:total) { 0 }
+      let(:nb_interventions) { 12 }
+
+      it { should == 0 }
+    end
+
+    context "with interventions" do
+
+      let(:total) { 12 }
+      let(:nb_interventions) { 6 }
+
+      it { should == 50 }
+    end
+  end
 end

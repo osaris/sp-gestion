@@ -1,1 +1,28 @@
-<%= data[:nb_interventions] %> interventions / <%= data[:total_interventions] %> interventions en <%= params[:year] %> (<%= data[:ratio] %> % des interventions)
+<br />
+<div class="well well-sm">
+  A participé à <%= data[:sum] %> interventions sur <%= nb_interventions %>
+  interventions en <%= params[:year] %> (<%= ratio_interventions(data[:sum], nb_interventions) %> % des interventions)
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= high_chart("chart", @chart) %>
+  </div>
+  <div class="col-md-3">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Rôle</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- data[:data].each.map do |role, number| -%>
+        <tr>
+          <td><%= role %></td>
+          <td><%= number %></td>
+        </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</div>

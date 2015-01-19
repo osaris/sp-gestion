@@ -35,4 +35,14 @@ module FiremenHelper
     end
     result
   end
+
+  def ratio_interventions(nb_interventions, total)
+    if total.to_i > 0
+      result = (nb_interventions.to_i*100) / total
+    else
+      result = 0
+    end
+    result
+  end
+
 end

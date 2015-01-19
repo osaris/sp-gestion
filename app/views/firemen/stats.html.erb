@@ -11,4 +11,4 @@
 <%= render_navigation(:context => :firemen_stats,
                       :level => 1) %>
 
-<%= render("firemen/stats/#{params[:type]}", :data => @data) %>
+<%= render("firemen/stats/#{params[:type]}", :data => @data, :nb_interventions => @nb_interventions) %>

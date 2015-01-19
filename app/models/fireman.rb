@@ -69,20 +69,19 @@ class Fireman < ActiveRecord::Base
       SELECT DISTINCT(year) AS year
       FROM
       (
-      SELECT DISTINCT(YEAR(interventions.start_date)) AS year
-      FROM firemen
-      INNER JOIN fireman_interventions ON fireman_interventions.fireman_id = firemen.id
-      INNER JOIN interventions ON interventions.id = fireman_interventions.intervention_id
-      WHERE firemen.id = %s
+        SELECT DISTINCT(YEAR(interventions.start_date)) AS year
+        FROM firemen
+        INNER JOIN fireman_interventions ON fireman_interventions.fireman_id = firemen.id
+        INNER JOIN interventions ON interventions.id = fireman_interventions.intervention_id
+        WHERE firemen.id = %s
 
-      UNION ALL
+        UNION ALL
 
-      SELECT DISTINCT(YEAR(convocations.date)) AS year
-      FROM firemen
-      INNER JOIN convocation_firemen ON (convocation_firemen.fireman_id = firemen.id)
-      INNER JOIN convocations ON (convocations.id = convocation_firemen.convocation_id)
-      WHERE firemen.id = %s
-
+        SELECT DISTINCT(YEAR(convocations.date)) AS year
+        FROM firemen
+        INNER JOIN convocation_firemen ON (convocation_firemen.fireman_id = firemen.id)
+        INNER JOIN convocations ON (convocations.id = convocation_firemen.convocation_id)
+        WHERE firemen.id = %s
       ) VIEW
       ORDER BY year DESC
     eos
@@ -102,28 +101,20 @@ class Fireman < ActiveRecord::Base
     result.to_date unless result == nil
   end
 
-  def stats_interventions(station, year)
-    nb_interventions = FiremanIntervention.joins(:intervention) \
-                                          .where("YEAR(interventions.start_date) = ?", year) \
-                                          .where(:fireman_id => self.id) \
-                                          .count
+  def stats_interventions(year)
+    data = FiremanIntervention.joins(:intervention) \
+                              .joins(:intervention_role) \
+                              .where("YEAR(interventions.start_date) = ?", year) \
+                              .where(:fireman_id => self.id) \
+                              .group('intervention_roles.name') \
+                              .count
 
-    total_interventions = Intervention.where(:station_id => station.id) \
-                                      .where("YEAR(interventions.start_date) = ?", year)
-                                      .count
-
-    if total_interventions.to_i > 0
-      ratio = (nb_interventions.to_i*100) / total_interventions
-    else
-      ratio = 0
-    end
-
-    result = {:nb_interventions => nb_interventions,
-              :total_interventions => total_interventions,
-              :ratio => ratio }
+    sum = data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
+    result = {:data => data,
+              :sum  => sum}
   end
 
-  def stats_convocations(station, year)
+  def stats_convocations(year)
     result = ConvocationFireman.select("COUNT(*) AS total,
                                         COALESCE(SUM(IF(presence = 0,1,0)),0) AS missings,
                                         COALESCE(SUM(IF(presence = 1,1,0)),0) as presents") \

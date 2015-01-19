@@ -85,7 +85,10 @@ class FiremenController < BackController
     elsif !['convocations','interventions'].include?(params[:type])
       redirect_to(firemen_stats_path(@fireman, params[:year], 'convocations'))
     else
-      @data = @fireman.send("stats_#{params[:type]}", @station, params[:year])
+      @data = @fireman.send("stats_#{params[:type]}", params[:year])
+      fcs = FiremenChartsService.new(@data)
+      @chart = fcs.send(params[:type]) if fcs.respond_to?(params[:type])
+      @nb_interventions = Intervention.for_year_and_station(@station, params[:year]).count
     end
   end
 
