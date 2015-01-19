@@ -3,7 +3,7 @@ class BootstrapLinkRenderer < ::WillPaginate::ActionView::LinkRenderer
   protected
 
   def html_container(html)
-    tag :div, tag(:ul, html), container_attributes
+    tag :div, tag(:ul, html, :class => 'pagination'), container_attributes
   end
 
   def page_number(page)
@@ -20,5 +20,5 @@ class BootstrapLinkRenderer < ::WillPaginate::ActionView::LinkRenderer
 end
 
 def page_navigation_links(pages)
-  will_paginate(pages, :class => 'pagination pagination-centered', :inner_window => 2, :outer_window => 0, :renderer => BootstrapLinkRenderer, :previous_label => '&larr;'.html_safe, :next_label => '&rarr;'.html_safe)
+  will_paginate(pages, :class => 'text-center', :inner_window => 2, :outer_window => 0, :renderer => BootstrapLinkRenderer, :previous_label => '&larr;'.html_safe, :next_label => '&rarr;'.html_safe)
 end
