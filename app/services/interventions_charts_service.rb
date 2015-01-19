@@ -15,7 +15,6 @@ class InterventionsChartsService
       f.series(:data => @data.to_a,
                :name => 'Interventions')
       f.chart({:type    => "pie",
-               :width   => 570,
                :height  => 350})
     end
   end
@@ -47,7 +46,6 @@ class InterventionsChartsService
                :name => 'Interventions')
       f.xAxis(:categories => (0..23).to_a)
       f.chart({:type    => "column",
-               :width   => 570,
                :height  => 350})
     end
   end
@@ -64,7 +62,6 @@ class InterventionsChartsService
                :name => 'Interventions')
       f.xAxis(:categories => I18n.t("date.abbr_month_names").compact)
       f.chart({:type    => "column",
-               :width   => 570,
                :height  => 350})
     end
   end
@@ -79,7 +76,6 @@ class InterventionsChartsService
       f.series(:data => @data.to_a,
                :name => 'Interventions')
       f.chart({:type    => "pie",
-               :width   => 570,
                :height  => 350})
     end
   end
@@ -96,7 +92,6 @@ class InterventionsChartsService
                 },
                :name => 'Interventions')
       f.chart({:type    => "pie",
-               :width   => 570,
                :height  => 350})
     end
   end

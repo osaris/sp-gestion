@@ -14,7 +14,6 @@ class FiremenChartsService
       f.series(:data => @data[:data].to_a,
                :name => 'Interventions')
       f.chart({:type    => "pie",
-               :width   => 570,
                :height  => 350})
     end
   end
