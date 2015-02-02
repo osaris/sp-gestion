@@ -33,7 +33,7 @@ describe AccountsController do
 
       it { should redirect_to(root_back_url) }
 
-      it { should set_the_flash[:error] }
+      it { should set_flash[:error] }
     end
 
     context "an user logged in and owner" do
@@ -66,7 +66,7 @@ describe AccountsController do
         expect(assigns(:station).reload.logo?).to be_falsey
       end
 
-      it { should set_the_flash[:success] }
+      it { should set_flash[:success] }
     end
   end
 
@@ -82,7 +82,7 @@ describe AccountsController do
       expect(assigns(:station).reload.logo?).to be_truthy
     end
 
-    it { should set_the_flash[:success] }
+    it { should set_flash[:success] }
   end
 
   describe "PATCH :update_settings with bad logo" do
@@ -97,7 +97,7 @@ describe AccountsController do
       expect(assigns(:station).reload.logo?).to be_falsey
     end
 
-    it { should set_the_flash[:error] }
+    it { should set_flash[:error] }
   end
 
   describe "PATCH :update_owner with good data" do
@@ -111,7 +111,7 @@ describe AccountsController do
 
     it { should redirect_to(root_back_url) }
 
-    it { should set_the_flash[:success] }
+    it { should set_flash[:success] }
   end
 
   describe "PATCH :update_owner with bad data" do
@@ -125,7 +125,7 @@ describe AccountsController do
 
     it { should redirect_to(root_back_url) }
 
-    it { should set_the_flash[:error] }
+    it { should set_flash[:error] }
   end
 
   describe "DELETE :destroy" do

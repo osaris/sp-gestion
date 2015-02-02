@@ -26,7 +26,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:error).now }
+      it { should set_flash[:error].now }
     end
 
     describe "GET :accept on a confirmable and non editable convocation" do
@@ -42,7 +42,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:error).now }
+      it { should set_flash[:error].now }
     end
 
     describe "GET :accept on a confirmable convocation" do
@@ -55,7 +55,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:success).now }
+      it { should set_flash[:success].now }
     end
 
     describe "GET :accept on a non confirmable and non editable convocation" do
@@ -71,7 +71,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:error).now }
+      it { should set_flash[:error].now }
     end
 
     describe "GET :accept on a non confirmable convocation" do
@@ -84,7 +84,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:error).now }
+      it { should set_flash[:error].now }
     end
   end
 
@@ -105,7 +105,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:redirect) }
       it { should redirect_to(convocations_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :edit_all" do
@@ -167,7 +167,7 @@ describe ConvocationFiremenController do
       it "set the presence of firemen" do
         assert(convocation.convocation_firemen.first.presence)
       end
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
   end
 end

@@ -87,7 +87,7 @@ describe InterventionsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(interventions_path) }
 
-      it { should set_the_flash.level(:warning) }
+      it { should set_flash[:warning] }
     end
 
     describe "GET :show for a non existing intervention" do
@@ -99,7 +99,7 @@ describe InterventionsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(interventions_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -142,7 +142,7 @@ describe InterventionsController do
       it { should redirect_to(intervention_path(assigns(:intervention))) }
 
       it { expect(assigns(:intervention)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     context "with an existing intervention not editable" do
@@ -162,7 +162,7 @@ describe InterventionsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(intervention_path(assigns(:intervention))) }
 
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
 
       describe "PATCH :update with good data" do
@@ -182,7 +182,7 @@ describe InterventionsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(intervention_path(assigns(:intervention))) }
 
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
     end
 
@@ -244,7 +244,7 @@ describe InterventionsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(intervention_path(assigns(:intervention))) }
 
-        it { should set_the_flash.level(:success) }
+        it { should set_flash[:success] }
       end
 
       describe "DELETE :destroy" do
@@ -255,7 +255,7 @@ describe InterventionsController do
 
         it { should redirect_to(interventions_path) }
 
-        it { should set_the_flash.level(:success) }
+        it { should set_flash[:success] }
       end
     end
   end

@@ -34,7 +34,7 @@ describe UniformsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(uniforms_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -69,7 +69,7 @@ describe UniformsController do
       it { should redirect_to(uniform_path(assigns(:uniform))) }
 
       it { expect(assigns(:uniform)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "POST :reset" do
@@ -80,7 +80,7 @@ describe UniformsController do
 
       it { should respond_with(:redirect) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :show on existing uniform" do
@@ -125,7 +125,7 @@ describe UniformsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(uniform_path(assigns(:uniform))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy without association" do
@@ -136,7 +136,7 @@ describe UniformsController do
 
       it { should redirect_to(uniforms_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy with associations" do
@@ -149,7 +149,7 @@ describe UniformsController do
 
       it { should redirect_to(uniform_path(assigns(:uniform))) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
   end
 end

@@ -36,7 +36,7 @@ describe EmailConfirmationsController do
       it { should render_template("edit") }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:error).now }
+      it { should set_flash[:error].now }
     end
 
     describe "PATCH :update with good password" do
@@ -51,7 +51,7 @@ describe EmailConfirmationsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(profile_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "PATCH :update with good password but new_email already used" do
@@ -69,7 +69,7 @@ describe EmailConfirmationsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(login_path) }
 
-      it { should set_the_flash.level(:error).now }
+      it { should set_flash[:error].now }
     end
   end
 

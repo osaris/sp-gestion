@@ -34,7 +34,7 @@ describe MessagesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(messages_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :show on existing message" do

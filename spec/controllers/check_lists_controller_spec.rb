@@ -33,7 +33,7 @@ describe CheckListsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(check_lists_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -68,7 +68,7 @@ describe CheckListsController do
       it { should redirect_to(check_list_path(assigns(:check_list))) }
 
       it { expect(assigns(:check_list)).to_not be_nil }
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :show on existing check_list" do
@@ -126,7 +126,7 @@ describe CheckListsController do
 
       it { should respond_with(:redirect) }
       it { should redirect_to(check_list_path(assigns(:check_list))) }
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy" do
@@ -137,7 +137,7 @@ describe CheckListsController do
 
       it { should redirect_to(check_lists_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "POST :copy" do
@@ -148,7 +148,7 @@ describe CheckListsController do
 
       it { should redirect_to(check_lists_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
   end
 end

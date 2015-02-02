@@ -28,7 +28,7 @@ describe FiremanTrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(firemen_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :index" do
@@ -78,7 +78,7 @@ describe FiremanTrainingsController do
 
       it { expect(assigns(:fireman_training)).to_not be_nil}
       it { expect(assigns(:fireman)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :show for a non existing training on an existing fireman" do
@@ -90,7 +90,7 @@ describe FiremanTrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_fireman_trainings_path(assigns(:fireman))) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :edit" do
@@ -132,7 +132,7 @@ describe FiremanTrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_fireman_training_path(assigns(:fireman), assigns(:fireman_training))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy" do
@@ -144,7 +144,7 @@ describe FiremanTrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_fireman_trainings_path(assigns(:fireman))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
   end
 end

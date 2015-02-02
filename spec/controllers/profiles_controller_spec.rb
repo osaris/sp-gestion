@@ -18,7 +18,7 @@ describe ProfilesController do
 
       it { should redirect_to(root_back_url) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
   end
 
@@ -48,7 +48,7 @@ describe ProfilesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(profile_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "PATCH :update with bad data" do

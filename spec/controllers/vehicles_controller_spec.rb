@@ -46,7 +46,7 @@ describe VehiclesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(vehicles_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -81,7 +81,7 @@ describe VehiclesController do
       it { should redirect_to(vehicle_path(assigns(:vehicle))) }
 
       it { expect(assigns(:vehicle)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :show on existing vehicle" do
@@ -126,7 +126,7 @@ describe VehiclesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(vehicle_path(assigns(:vehicle))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy without association" do
@@ -137,7 +137,7 @@ describe VehiclesController do
 
       it { should redirect_to(vehicles_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy with associations" do
@@ -150,7 +150,7 @@ describe VehiclesController do
 
       it { should redirect_to(vehicle_path(assigns(:vehicle))) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
   end
 end

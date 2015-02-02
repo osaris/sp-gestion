@@ -29,7 +29,7 @@ describe FiremanAvailabilitiesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(firemen_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :index on not active fireman" do
@@ -44,7 +44,7 @@ describe FiremanAvailabilitiesController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_path(assigns(:fireman))) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
 
     end
 

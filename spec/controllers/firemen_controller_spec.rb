@@ -60,7 +60,7 @@ describe FiremenController do
       it { should respond_with(:redirect) }
       it { should redirect_to(firemen_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -95,7 +95,7 @@ describe FiremenController do
       it { should redirect_to(fireman_path(assigns(:fireman))) }
 
       it { expect(assigns(:fireman)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :stats_change_year" do
@@ -119,7 +119,7 @@ describe FiremenController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_path(assigns(:fireman))) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :stats with bad year" do
@@ -212,7 +212,7 @@ describe FiremenController do
       it { should respond_with(:redirect) }
       it { should redirect_to(fireman_path(assigns(:fireman))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "PATCH :update with warnings" do
@@ -223,7 +223,7 @@ describe FiremenController do
         patch :update, :id => fireman.id, :fireman => {:firstname => 'My firstname', :lastname => 'My lastname' }
       end
 
-      it { should set_the_flash.level(:warning) }
+      it { should set_flash[:warning] }
     end
 
     describe "DELETE :destroy without associations" do
@@ -234,7 +234,7 @@ describe FiremenController do
 
       it { should redirect_to(firemen_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy with associations" do
@@ -246,7 +246,7 @@ describe FiremenController do
       end
 
       it { should redirect_to(fireman_path(assigns(:fireman))) }
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
   end
 end

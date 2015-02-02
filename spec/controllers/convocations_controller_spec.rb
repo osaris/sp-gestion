@@ -38,7 +38,7 @@ describe ConvocationsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(convocations_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -73,7 +73,7 @@ describe ConvocationsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     context "with an existing convocation not editable" do
@@ -94,7 +94,7 @@ describe ConvocationsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
 
       describe "PATCH :update with good data" do
@@ -107,7 +107,7 @@ describe ConvocationsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
 
       describe "POST :email with  with email quota not exceeded" do
@@ -121,7 +121,7 @@ describe ConvocationsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
     end
 
@@ -188,7 +188,7 @@ describe ConvocationsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-        it { should set_the_flash.level(:success) }
+        it { should set_flash[:success] }
       end
 
       describe "DELETE :destroy" do
@@ -199,7 +199,7 @@ describe ConvocationsController do
 
         it { should redirect_to(convocations_path) }
 
-        it { should set_the_flash.level(:success) }
+        it { should set_flash[:success] }
       end
 
       describe "POST :email with email quota not exceeded" do
@@ -213,7 +213,7 @@ describe ConvocationsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-        it { should set_the_flash.level(:success) }
+        it { should set_flash[:success] }
       end
 
       describe "POST :email with email quota exceeded" do
@@ -229,7 +229,7 @@ describe ConvocationsController do
         it { should respond_with(:redirect) }
         it { should redirect_to(convocation_path(assigns(:convocation))) }
 
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
     end
   end

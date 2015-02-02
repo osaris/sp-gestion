@@ -36,7 +36,7 @@ describe GroupsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(groups_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -71,7 +71,7 @@ describe GroupsController do
       it { should redirect_to(group_path(assigns(:group))) }
 
       it { expect(assigns(:group)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :show on existing group" do
@@ -116,7 +116,7 @@ describe GroupsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(group_path(assigns(:group))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy" do
@@ -127,7 +127,7 @@ describe GroupsController do
 
       it { should redirect_to(groups_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
   end
 end

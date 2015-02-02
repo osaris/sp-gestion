@@ -25,7 +25,7 @@ describe ItemsController do
       it { should render_with_layout("back") }
 
       it { expect(assigns(:items)).to_not be_nil}
-      it { should set_session(:back_path) { expirings_items_path } }
+      it { should set_session[:back_path] { expirings_items_path } }
     end
 
     describe "GET :expirings with PDF format" do
@@ -52,7 +52,7 @@ describe ItemsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(check_lists_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :show for a non existing item on an existing check_list" do
@@ -64,7 +64,7 @@ describe ItemsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(check_list_path(check_list)) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :edit for a non existing check_list" do
@@ -76,7 +76,7 @@ describe ItemsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(check_lists_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :edit for a non existing item on an existing check_list" do
@@ -88,7 +88,7 @@ describe ItemsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(check_list_path(check_list)) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -125,7 +125,7 @@ describe ItemsController do
                                               assigns(:item))) }
 
       it { expect(assigns(:check_list)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :show" do
@@ -175,7 +175,7 @@ describe ItemsController do
       it { should redirect_to(check_list_item_path(assigns(:check_list),
                                                    assigns(:item))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "PATCH :update with good data and back_path set to expiring" do
@@ -191,7 +191,7 @@ describe ItemsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(expirings_items_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy" do
@@ -202,7 +202,7 @@ describe ItemsController do
 
       it { should redirect_to(check_list_path(assigns(:check_list))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy and back_path set to expiring" do
@@ -216,7 +216,7 @@ describe ItemsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(expirings_items_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
   end
 end

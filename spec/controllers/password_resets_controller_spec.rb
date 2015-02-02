@@ -18,7 +18,7 @@ describe PasswordResetsController do
 
       it { should redirect_to(login_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
   end
 
@@ -55,7 +55,7 @@ describe PasswordResetsController do
       it { should render_template("new") }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:error).now }
+      it { should set_flash[:error].now }
     end
 
     describe "POST :create with good data" do
@@ -70,7 +70,7 @@ describe PasswordResetsController do
       it { should render_template("new") }
       it { should render_with_layout("login") }
 
-      it { should set_the_flash.level(:warning).now }
+      it { should set_flash[:warning].now }
     end
 
     describe "GET :edit with bad data" do
@@ -82,7 +82,7 @@ describe PasswordResetsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(login_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :edit with good data" do
@@ -95,7 +95,7 @@ describe PasswordResetsController do
       it { should render_template("edit") }
       it { should render_with_layout("login") }
 
-      it { should_not set_the_flash() }
+      it { should_not set_flash() }
     end
 
     describe "PATCH :update with bad data" do

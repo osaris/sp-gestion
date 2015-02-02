@@ -18,7 +18,7 @@ describe UsersController do
 
       it { should redirect_to(root_back_url) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
   end
 
@@ -74,7 +74,7 @@ describe UsersController do
       it { should respond_with(:redirect) }
       it { should redirect_to(users_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy of account owner (current user)" do
@@ -89,7 +89,7 @@ describe UsersController do
       it { should respond_with(:redirect) }
       it { should redirect_to(users_path) }
 
-      it { should set_the_flash.level(:warning) }
+      it { should set_flash[:warning] }
     end
 
     context "with another user not owner" do
@@ -105,7 +105,7 @@ describe UsersController do
         it { should respond_with(:redirect) }
         it { should redirect_to(users_path) }
 
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
 
       describe "DELETE :destroy" do
@@ -117,7 +117,7 @@ describe UsersController do
         it { should respond_with(:redirect) }
         it { should redirect_to(users_path) }
 
-        it { should set_the_flash.level(:success) }
+        it { should set_flash[:success] }
       end
     end
   end

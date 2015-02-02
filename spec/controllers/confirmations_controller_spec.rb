@@ -22,7 +22,7 @@ describe ConfirmationsController do
 
         it { should respond_with(:redirect) }
         it { should redirect_to(login_path) }
-        it { should set_the_flash.level(:error) }
+        it { should set_flash[:error] }
       end
     end
 

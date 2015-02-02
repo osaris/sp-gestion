@@ -34,7 +34,7 @@ describe TrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(trainings_path) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
 
     describe "GET :new" do
@@ -69,7 +69,7 @@ describe TrainingsController do
       it { should redirect_to(training_path(assigns(:training))) }
 
       it { expect(assigns(:training)).to_not be_nil}
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "GET :show on existing training" do
@@ -114,7 +114,7 @@ describe TrainingsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(training_path(assigns(:training))) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
 
@@ -126,7 +126,7 @@ describe TrainingsController do
 
       it { should redirect_to(trainings_path) }
 
-      it { should set_the_flash.level(:success) }
+      it { should set_flash[:success] }
     end
 
     describe "DELETE :destroy with associations" do
@@ -139,7 +139,7 @@ describe TrainingsController do
 
       it { should redirect_to(training_path(assigns(:training))) }
 
-      it { should set_the_flash.level(:error) }
+      it { should set_flash[:error] }
     end
   end
 end
