@@ -8,7 +8,7 @@ SpGestion::Application.routes.draw do
 
     if Rails.env.development?
       mount LetterOpenerWeb::Engine, at: "/letter_opener"
-    end    
+    end
   end
 
   constraints(:subdomain => /.+/) do
@@ -43,6 +43,8 @@ SpGestion::Application.routes.draw do
       end
       resources :items, :except => [:index]
     end
+
+    resources :daybooks
 
     resources :donations, :only => [:index]
 

@@ -21,6 +21,7 @@ class Station < ActiveRecord::Base
   has_many :vehicles, :dependent => :delete_all
   has_one  :owner, :class_name => "User"
   has_many :groups, :dependent => :delete_all
+  has_many :daybooks, :dependent => :delete_all
 
   mount_uploader :logo, LogoUploader
 

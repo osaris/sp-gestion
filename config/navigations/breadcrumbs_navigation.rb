@@ -17,6 +17,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item(:home, icon_label_text('glyphicon glyphicon-home', 'Accueil')) do |home|
       home.item(:dashboard, 'Le standard', root_back_path, :highlights_on => /^\/$/)
+      home.item(:daybooks, 'Main courante', daybooks_path, :highlights_on => /^\/daybooks/)
       home.item(:messages, 'Messages', messages_path, :highlights_on => /^\/messages/)
     end
 

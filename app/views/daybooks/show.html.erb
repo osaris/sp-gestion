@@ -1,0 +1,13 @@
+<div class="block-title"><h4>Main cournate n°<%= @daybook.id %></h4></div>
+<div class="btn-toolbar">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('glyphicon glyphicon-edit', 'Editer'),
+                edit_daybook_path(@daybook),
+                :class => 'btn btn-default btn-sm') %>
+    <%= link_to(icon_label_text('glyphicon glyphicon-remove', 'Supprimer'),
+                daybook_path(@daybook),
+                :method => :delete, :data => { :confirm => "Êtes-vous sûr ?" },
+                :class => 'btn btn-default btn-sm') %>
+  </div>
+</div>
+<%= @daybook.text %>

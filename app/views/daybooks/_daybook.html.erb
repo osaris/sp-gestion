@@ -1,0 +1,5 @@
+<tr>
+  <td><%= link_to(l!(daybook.created_at), daybook_path(daybook.id)) %></td>
+  <td><%= check_box_tag('frontpage', '', daybook.frontpage, disabled: true) %></td>
+  <td><%= daybook.text %></td>
+</tr>
