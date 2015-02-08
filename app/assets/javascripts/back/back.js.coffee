@@ -374,16 +374,18 @@ window.interventions = () ->
                             duration:           ''
                             stepMinute:         1 )
 
-  $('input#intervention_subkind').autocomplete(subkinds,
-                                               minChars:     0
-                                               selectFirst:  false )
+  $('input#intervention_subkind').autocomplete(
+    source: subkinds
+    minChars:     0
+    selectFirst:  false )
 
   $('input#intervention_subkind').focus ->
     $('input#intervention_subkind').click().click()
 
-  $('input#intervention_city').autocomplete(cities,
-                                            minChars:     0
-                                            selectFirst:  false )
+  $('input#intervention_city').autocomplete(
+    source: cities
+    minChars:     0
+    selectFirst:  false )
 
   $('input#intervention_city').focus ->
     $('input#intervention_city').click().click()
@@ -414,9 +416,10 @@ window.items = () ->
                         changeYear:         true
                         changeMonth:        true
                         dateFormat:         'dd/mm/yy' )
-  $('input#item_place').autocomplete(places,
-                                     minChars: 0
-                                     selectFirst: false )
+  $('input#item_place').autocomplete(
+    source: places
+    minChars: 0
+    selectFirst: false )
   $('input#item_place').focus ->
     $('input#item_place').click().click()
 

@@ -5,6 +5,7 @@
 #= require jquery-ui/datepicker-fr
 #= require jquery-ui/slider
 #= require jquery-ui/accordion
+#= require jquery-ui/autocomplete
 #= require common
 #= require back/FixedColumns.min.js
 #= require back/moment.min.js
@@ -15,7 +16,6 @@
 #= require back/GrowingInput.js
 #= require back/jquery-ui-timepicker-addon.js
 #= require back/jquery-ui-timepicker-fr.js
-#= require back/jquery.autocomplete.pack.js
 #= require back/jquery.dataTables.min.js
 #= require back/jquery.pstrength.1.2.js
 #= require back/jquery.tagsinput.min.js
