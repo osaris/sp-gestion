@@ -12,7 +12,6 @@ gem 'acts-as-taggable-on'
 gem 'aproxacs-s3sync'
 gem 'asset_sync'
 gem 'authlogic', :github => 'binarylogic/authlogic'
-gem 'bootstrap-sass'
 gem 'cancancan'
 # TODO unlock this when a new version of carrierwave is released
 gem 'carrierwave', :github => 'carrierwaveuploader/carrierwave', :ref => 'c31f2e7e7afc223a2b85696f39156e383b758d51'
@@ -24,9 +23,6 @@ gem 'delayed_job_active_record'
 gem 'fog'
 gem 'geocoder'
 gem 'highline'
-gem 'jquery-rails'
-gem 'jquery-migrate-rails'
-gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 gem 'mini_magick'
 gem 'newrelic_rpm'
@@ -41,6 +37,14 @@ gem 'sprockets'
 gem 'jc-validates_timeliness'
 gem 'will_paginate'
 gem 'yui-compressor'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-jquery'
+  gem 'rails-assets-jquery-ujs'
+  gem 'rails-assets-jquery-migrate'
+  gem 'rails-assets-jquery-ui'
+end
 
 group :development do
   gem 'capistrano'
