@@ -55,7 +55,7 @@
         <div class="form-group">
           <%= f.label(:tag_list, "Etiquette(s)", :class => 'col-md-5 control-label') %>
           <div class="col-md-7">
-            <%= f.text_field(:tag_list, :class => 'form-control') %>
+            <%= f.text_field(:tag_list, value: @fireman.tag_list.to_s, :class => 'form-control') %>
             <%= error_message_on(:fireman, :tag_list) %>
             <span class="help-block">Appuyer sur "Enter" pour sauver une étiquette.</span>
           </div>

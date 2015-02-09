@@ -78,11 +78,11 @@ window.jsp = () ->
 Rails.register_init ['firemen\\new'], () -> jsp()
 
 window.firemen = () ->
-  $('#fireman_tag_list').tagsInput(
-    autocomplete_url: tags
-    defaultText: ''
-    width: '100%'
-    height: '75px'
+  $('#fireman_tag_list').tagit(
+    availableTags: tags
+    removeConfirmation: true
+    allowSpaces: true
+    singleField: true
   )
 
   $.datepicker.setDefaults($.datepicker.regional['fr'])

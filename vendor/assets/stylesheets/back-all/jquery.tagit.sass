@@ -1,0 +1,57 @@
+ul.tagit
+  padding: 1px 5px
+  overflow: auto
+  margin-left: inherit
+  /* usually we don't want the regular ul margins.
+  margin-right: inherit
+  li
+    display: block
+    float: left
+    margin: 2px 5px 2px 0
+    &.tagit-choice
+      position: relative
+      line-height: inherit
+
+input.tagit-hidden-field
+  display: none
+
+ul.tagit
+  li
+    &.tagit-choice-read-only
+      padding: .2em .5em .2em .5em
+    &.tagit-choice-editable
+      padding: .2em 18px .2em .5em
+    &.tagit-new
+      padding: .25em 4px .25em 0
+    &.tagit-choice
+      a.tagit-label
+        cursor: pointer
+        text-decoration: none
+      .tagit-close
+        cursor: pointer
+        position: absolute
+        right: .1em
+        top: 50%
+        margin-top: -8px
+        line-height: 17px
+        .text-icon
+          display: none
+      input
+        display: block
+        float: left
+        margin: 2px 5px 2px 0
+  input[type="text"]
+    -moz-box-sizing: border-box
+    -webkit-box-sizing: border-box
+    box-sizing: border-box
+    -moz-box-shadow: none
+    -webkit-box-shadow: none
+    box-shadow: none
+    border: none
+    margin: 0
+    padding: 0
+    width: inherit
+    background-color: inherit
+    outline: none
+
+/* used for some custom themes that don't need image icons
