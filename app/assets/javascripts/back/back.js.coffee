@@ -129,9 +129,6 @@ window.fireman_availabilities = () ->
     firstDay: 1
     editable: true
     timezone: "Europe/Paris"
-    columnFormat: {
-      agendaWeek: 'ddd DD/MM/YY'
-    }
     events: {
       url: '/firemen/' + fireman_id + '/fireman_availabilities',
     }
