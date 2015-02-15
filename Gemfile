@@ -46,7 +46,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ui'
   gem 'rails-assets-datatables'
   gem 'rails-assets-highcharts'
-  gem 'rails-assets-fullcalendar', '2.2.4'
+  gem 'rails-assets-fullcalendar'
   gem 'rails-assets-datatables-fixedcolumns'
   gem 'rails-assets-moment'
   gem 'rails-assets-moment-timezone'
