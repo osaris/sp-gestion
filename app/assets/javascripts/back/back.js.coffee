@@ -134,6 +134,8 @@ window.fireman_availabilities = () ->
     dayClick : (date, jsEvent, view) ->
       date = moment.tz(date.format(), "Europe/Paris").format()
       return if(new Date(date) <= new Date())
+      eventDiv = $(this)
+      eventDivHtml = $(this).html()
       $.ajax({
         type: 'POST'
         url: '/firemen/' + fireman_id + '/fireman_availabilities'
@@ -142,6 +144,8 @@ window.fireman_availabilities = () ->
           fireman_availability:
             "fireman_id"   : fireman_id
             "availability" : date
+        beforeSend: ->
+          eventDiv.html('Chargement...')
         success : (data) ->
           new_event =
             title: ""
@@ -150,22 +154,34 @@ window.fireman_availabilities = () ->
             allDay: false
             id: data["id"]
           $('#calendar').fullCalendar('renderEvent', new_event)
-      })
+      }).always ->
+        eventDiv.html(eventDivHtml)
     eventRender: (event, element) ->
       element.find('.fc-time').remove()
       element
     eventClick : (calEvent, jsEvent, view) ->
       return if(new Date(calEvent.start) <= new Date())
+      eventDiv = $(this)
+      eventDivHtml = $(this).html()
       $.ajax({
         type: 'DELETE'
         url: '/firemen/' + fireman_id + '/fireman_availabilities/' + calEvent.id
+        beforeSend: ->
+          eventDiv.html('Chargement...')
         success : (data) ->
           $('#calendar').fullCalendar('removeEvents', calEvent._id)
-      })
+      }).always ->
+        eventDiv.html(eventDivHtml)
+    viewRender : ( view, element ) ->
+      # set data for each day to handle click
+      $('.fc-day-header').each (index) ->
+        current = moment(view.start)
+        current.add(index, 'd')
+        $( this ).data('date', current)
   })
 
   $('#calendar').on 'click', '.fc-day-header', ->
-    currentDay = moment($(this).html(), 'ddd DD/MM/YY')
+    currentDay = $(this).data('date')
     events = $('#calendar').fullCalendar('clientEvents', (event) ->
       return (event.start.diff(currentDay.startOf('day'), 'hours') == 0)
     )
@@ -187,7 +203,7 @@ window.fireman_availabilities = () ->
         data:
           fireman_availability:
             "fireman_id"   : fireman_id
-            "availability" : currentDay.format()
+            "availability" : moment.tz(currentDay.format(), "Europe/Paris").format()
         success : (data) ->
           $('#calendar').fullCalendar('refetchEvents')
       })
@@ -259,7 +275,7 @@ window.planning = () ->
         refresh_firemen(currentView, currentId)
     eventRender: (event, element) ->
       element.find('.fc-time').remove()
-      element        
+      element
     eventClick: ( event, jsEvent, view ) ->
       eventDiv = $(this)
       eventDivHtml = $(this).html()
