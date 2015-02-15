@@ -43,7 +43,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-migrate'
-  gem 'rails-assets-jquery-ui'
+  gem 'rails-assets-jqueryui'
   gem 'rails-assets-datatables'
   gem 'rails-assets-highcharts'
   gem 'rails-assets-fullcalendar'
