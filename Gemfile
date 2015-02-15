@@ -44,6 +44,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-migrate'
   gem 'rails-assets-jquery-ui'
+  gem 'rails-assets-datatables'
+  gem 'rails-assets-datatables-fixedcolumns'
 end
 
 group :development do
