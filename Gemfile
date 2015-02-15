@@ -45,6 +45,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-migrate'
   gem 'rails-assets-jquery-ui'
   gem 'rails-assets-datatables'
+  gem 'rails-assets-highcharts'
   gem 'rails-assets-datatables-fixedcolumns'
 end
 

@@ -20,8 +20,8 @@
 #= require back/jquery.pstrength.1.2.js
 #= require back/tag-it.min.js
 #= require bootstrap
-#= require back/highcharts/highcharts
-#= require back/highcharts/highcharts-more
+#= require highcharts/highcharts
+#= require highcharts/highcharts-more
 #= require back/back
 
 #= require_self
