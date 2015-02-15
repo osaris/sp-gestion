@@ -13,7 +13,6 @@
 #= require back/moment-timezone.min.js
 #= require back/fullcalendar.min.js
 #= require back/fullcalendar-fr.js
-#= require back/GrowingInput.js
 #= require datatables
 #= require datatables-fixedcolumns
 #= require back/jquery-ui-timepicker-addon.js
