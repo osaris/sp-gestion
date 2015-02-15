@@ -3,8 +3,8 @@
     {
         "id":         <%= index %>,
         "title":      "<%= availability[1] %>",
-        "start":      "<%= availability[0].in_time_zone %>",
-        "end":        "<%= availability[0].in_time_zone + 1.hour %>",
+        "start":      "<%= availability[0].iso8601 %>",
+        "end":        "<%= (availability[0] + 1.hour).iso8601 %>",
         "allDay":     false,
         <%- case availability[1]/@number_of_firemen.to_f -%>
         <%- when 0..0.25 -%>

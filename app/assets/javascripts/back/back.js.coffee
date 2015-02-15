@@ -122,7 +122,6 @@ window.fireman_availabilities = () ->
     allowCalEventOverlap: false
     allDaySlot: false
     slotDuration: '00:60:00'
-    timeFormat: ''
     contentHeight: 475
     eventStartEditable: false
     eventDurationEditable: false
@@ -133,7 +132,7 @@ window.fireman_availabilities = () ->
       url: '/firemen/' + fireman_id + '/fireman_availabilities',
     }
     dayClick : (date, jsEvent, view) ->
-      date = moment.tz(date, "Europe/Paris").format()
+      date = moment.tz(date.format(), "Europe/Paris").format()
       return if(new Date(date) <= new Date())
       $.ajax({
         type: 'POST'
@@ -145,14 +144,16 @@ window.fireman_availabilities = () ->
             "availability" : date
         success : (data) ->
           new_event =
-            title: " "
+            title: ""
             start: data["availability"]
             end: moment(data["availability"]).add(1, 'h')
             allDay: false
             id: data["id"]
           $('#calendar').fullCalendar('renderEvent', new_event)
       })
-
+    eventRender: (event, element) ->
+      element.find('.fc-time').remove()
+      element
     eventClick : (calEvent, jsEvent, view) ->
       return if(new Date(calEvent.start) <= new Date())
       $.ajax({
@@ -206,7 +207,7 @@ window.firemen_trainings = () ->
     'bFilter':         false
     'bInfo':           false
     'bPaginate':       false )
-  new FixedColumns( oTable )
+  new $.fn.dataTable.FixedColumns( oTable )
 
 Rails.register_init ['firemen\\trainings'], () -> firemen_trainings()
 
@@ -256,6 +257,9 @@ window.planning = () ->
       if !isLoading
         refresh_stats(currentView, currentId)
         refresh_firemen(currentView, currentId)
+    eventRender: (event, element) ->
+      element.find('.fc-time').remove()
+      element        
     eventClick: ( event, jsEvent, view ) ->
       eventDiv = $(this)
       eventDivHtml = $(this).html()

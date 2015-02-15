@@ -3,8 +3,8 @@
     {
         "id": <%= availability.id %>,
         "title": "",
-        "start": "<%= availability.availability %>",
-        "end": "<%= (availability.availability + 1.hour) %>",
+        "start": "<%= availability.availability.iso8601 %>",
+        "end": "<%= (availability.availability + 1.hour).iso8601 %>",
         "allDay": false
     }
     <%- if availability != @availabilities.last %>,<%- end -%>

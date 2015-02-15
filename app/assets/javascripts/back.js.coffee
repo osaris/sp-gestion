@@ -8,13 +8,12 @@
 #= require jquery-ui/ui/accordion
 #= require jquery-ui/ui/autocomplete
 #= require common
-#= require back/moment.min.js
-#= require back/moment-timezone-with-data.min.js
-#= require back/moment-timezone.min.js
-#= require back/fullcalendar.min.js
-#= require back/fullcalendar-fr.js
 #= require datatables
 #= require datatables-fixedcolumns
+#= require moment
+#= require moment-timezone/moment-timezone-with-data
+#= require fullcalendar
+#= require fullcalendar/lang/fr
 #= require back/jquery-ui-timepicker-addon.js
 #= require back/jquery-ui-timepicker-fr.js
 #= require back/jquery.pstrength.1.2.js
