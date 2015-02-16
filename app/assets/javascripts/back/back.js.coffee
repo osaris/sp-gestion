@@ -26,9 +26,14 @@ Rails.register_init ['accounts\\edit'], () -> account()
 # Confirmation
 #######################################################
 window.user_password_strength = () ->
-  $('#user_password').pstrength()
+  $('#user_password').pwstrength({
+    ui:
+      verdicts: ["Faible", "Normal", "Moyen", "Fort", "Très fort"]
+      showVerdictsInsideProgressBar: true
+  })
 
-Rails.register_init ['confirmations\\edit'], () -> user_password_strength()
+Rails.register_init ['confirmations\\edit',
+                     'confirmations\\update'], () -> user_password_strength()
 
 # Convocations
 #######################################################
@@ -444,7 +449,8 @@ Rails.register_init ['items\\new'], () -> items()
 
 # Password reset
 #######################################################
-Rails.register_init ['password_resets\\edit'], () -> user_password_strength()
+Rails.register_init ['password_resets\\edit',
+                     'password_resets\\update'], () -> user_password_strength()
 
 # Vehicles
 #######################################################

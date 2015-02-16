@@ -287,6 +287,9 @@ GEM
     rails-assets-moment (2.9.0)
     rails-assets-moment-timezone (0.3.0)
       rails-assets-moment (>= 2.6.0)
+    rails-assets-pwstrength-bootstrap (1.2.5)
+      rails-assets-bootstrap (>= 2.0.0)
+      rails-assets-jquery (>= 1.7.0)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.5)
@@ -428,6 +431,7 @@ DEPENDENCIES
   rails-assets-jqueryui!
   rails-assets-moment!
   rails-assets-moment-timezone!
+  rails-assets-pwstrength-bootstrap!
   rails-erd
   rake
   rollbar

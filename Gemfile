@@ -40,17 +40,20 @@ gem 'yui-compressor'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
+  gem 'rails-assets-bootstrap-multiselect'
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-migrate'
   gem 'rails-assets-jqueryui'
   gem 'rails-assets-jQuery-Timepicker-Addon'
+  gem 'rails-assets-pwstrength-bootstrap'
   gem 'rails-assets-datatables'
   gem 'rails-assets-highcharts'
   gem 'rails-assets-fullcalendar'
   gem 'rails-assets-datatables-fixedcolumns'
   gem 'rails-assets-moment'
   gem 'rails-assets-moment-timezone'
+  # TODO use tagit when https://github.com/aehlke/tag-it/issues/239 is solved
 end
 
 group :development do

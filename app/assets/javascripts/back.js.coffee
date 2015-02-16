@@ -16,7 +16,7 @@
 #= require fullcalendar/lang/fr
 #= require jQuery-Timepicker-Addon/src/jquery-ui-timepicker-addon
 #= require jQuery-Timepicker-Addon/src/i18n/jquery-ui-timepicker-fr
-#= require back/jquery.pstrength.1.2.js
+#= require pwstrength-bootstrap
 #= require back/tag-it.min.js
 #= require bootstrap
 #= require highcharts/highcharts
