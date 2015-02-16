@@ -268,6 +268,9 @@ GEM
       sprockets-rails
     rails-assets-bootstrap (3.3.2)
       rails-assets-jquery (>= 1.9.1)
+    rails-assets-bootstrap-multiselect (0.9.10)
+      rails-assets-bootstrap (>= 2.3.2)
+      rails-assets-jquery (>= 1.11.0)
     rails-assets-datatables (1.10.5)
       rails-assets-jquery (>= 1.7.0)
     rails-assets-datatables-fixedcolumns (3.0.3)
@@ -420,6 +423,7 @@ DEPENDENCIES
   rack
   rails (= 4.2.0)
   rails-assets-bootstrap!
+  rails-assets-bootstrap-multiselect!
   rails-assets-datatables!
   rails-assets-datatables-fixedcolumns!
   rails-assets-fullcalendar!
