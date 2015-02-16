@@ -14,8 +14,8 @@
 #= require moment-timezone/moment-timezone-with-data
 #= require fullcalendar
 #= require fullcalendar/lang/fr
-#= require back/jquery-ui-timepicker-addon.js
-#= require back/jquery-ui-timepicker-fr.js
+#= require jQuery-Timepicker-Addon/src/jquery-ui-timepicker-addon
+#= require jQuery-Timepicker-Addon/src/i18n/jquery-ui-timepicker-fr
 #= require back/jquery.pstrength.1.2.js
 #= require back/tag-it.min.js
 #= require bootstrap
