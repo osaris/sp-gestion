@@ -19,6 +19,14 @@ GIT
       json (>= 1.7)
       mime-types (>= 1.16)
 
+GIT
+  remote: git://github.com/dbalexandre/mailboxer.git
+  revision: caaf5417306cc9d93f5857b96a01cd6d374b62b8
+  specs:
+    mailboxer (0.12.5)
+      carrierwave (>= 0.5.8)
+      rails (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -268,6 +276,9 @@ GEM
       sprockets-rails
     rails-assets-bootstrap (3.3.2)
       rails-assets-jquery (>= 1.9.1)
+    rails-assets-bootstrap-multiselect (0.9.10)
+      rails-assets-bootstrap (>= 2.3.2)
+      rails-assets-jquery (>= 1.11.0)
     rails-assets-datatables (1.10.5)
       rails-assets-jquery (>= 1.7.0)
     rails-assets-datatables-fixedcolumns (3.0.3)
@@ -411,6 +422,7 @@ DEPENDENCIES
   jc-validates_timeliness
   lazy_high_charts
   letter_opener_web
+  mailboxer!
   mini_magick
   mysql2
   newrelic_rpm
@@ -420,6 +432,7 @@ DEPENDENCIES
   rack
   rails (= 4.2.0)
   rails-assets-bootstrap!
+  rails-assets-bootstrap-multiselect!
   rails-assets-datatables!
   rails-assets-datatables-fixedcolumns!
   rails-assets-fullcalendar!

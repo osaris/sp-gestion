@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
     })
   end
 
+  acts_as_messageable
+
   def reset_password!(new_password, new_password_confirmation)
     self.password = new_password || ""
     self.password_confirmation = new_password_confirmation || ""

@@ -24,6 +24,8 @@ gem 'fog'
 gem 'geocoder'
 gem 'highline'
 gem 'lazy_high_charts'
+# TODO use mailboxer/mailboxer when https://github.com/mailboxer/mailboxer/issues/316 is closed
+gem 'mailboxer', :github => 'dbalexandre/mailboxer'
 gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'prawn'
