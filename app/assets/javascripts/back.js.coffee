@@ -19,6 +19,7 @@
 #= require pwstrength-bootstrap
 #= require back/tag-it.min.js
 #= require bootstrap
+#= require bootstrap-multiselect
 #= require highcharts/highcharts
 #= require highcharts/highcharts-more
 #= require back/back
