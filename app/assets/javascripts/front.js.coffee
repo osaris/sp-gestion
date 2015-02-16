@@ -1,5 +1,5 @@
 #= require jquery
-#= require jquery_ujs
+#= require jquery-ujs
 #= require common
 #= require front/cufon-yui
 #= require front/Aller.font
