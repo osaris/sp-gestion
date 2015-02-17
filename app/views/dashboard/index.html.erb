@@ -20,30 +20,6 @@
     </div>
   <%- end -%>
   <div class="col-md-6">
-    <%- if can? :read, Message -%>
-      <article class="data-block">
-        <div class="block-title"><h4>Messages</h4></div>
-        <div class="data-container">
-          <table class="table table-stripped">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Date</th>
-                <th>Titre</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render(:partial => 'dashboard/message', :collection => @messages) || raw("<tr><td colspan='3'>Aucun nouveau message</td></tr>") %>
-            </tbody>
-          </table>
-          <%- unless @messages.blank? -%>
-            <footer class="note">
-              <p><%= link_to("Voir toute la liste", messages_path) %></p>
-            </footer>
-          <%- end -%>
-        </div>
-      </article>
-    <%- end -%>
     <%- if can? :read, Convocation -%>
       <article class="data-block">
         <div class="block-title"><h4>Dernières convocations</h4></div>
@@ -119,7 +95,7 @@
     <%- end -%>
   </div>
   <%- if (flash.empty?) and
-         (cannot? :read, Message and cannot? :read, Convocation \
+         (cannot? :read, Convocation \
             and cannot? :read, Intervention and cannot? :read, Item) -%>
         <p class="alert alert-error">
           Vos droits ne vous permettent pas d'effectuer cette action.
