@@ -1,0 +1,8 @@
+<h1><%= @conversation.subject %></h1>
+
+<%- @conversation.receipts_for(current_user).each do |receipt| -%>
+  <%- message = receipt.message -%>
+  <h2><%= message.subject %></h2>
+  <small><%= message.sender.email %> @ <%= message.created_at %></small>
+  <p><%= message.body %></p>
+<%- end -%>

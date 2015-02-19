@@ -35,8 +35,8 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item(:home, icon_label_text('glyphicon glyphicon-home', 'Accueil')) do |home|
       home.item(:dashboard, 'Le standard', root_back_path, :highlights_on => /^\/$/)
-      home.item(:daybooks, 'Main courante', daybooks_path, :highlights_on => /^\/daybooks/)      
-      home.item(:messages, 'Messages', messages_path, :highlights_on => /^\/messages/)
+      home.item(:daybooks, 'Main courante', daybooks_path, :highlights_on => /^\/daybooks/)
+      home.item(:messages, 'Conversations', conversations_path, :highlights_on => /^\/conversations/)
     end
 
     primary.item(:admin, icon_label_text('glyphicon glyphicon-cog', 'Administration'), :if => Proc.new { current_user.owner? }) do |admin|

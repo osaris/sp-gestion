@@ -1,0 +1,14 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Messages</th>
+      <th>Date</th>
+      <th>Expéditeur</th>
+      <th>Sujet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(:partial => 'conversation', :collection => @conversations) || raw("<tr><td colspan='4'>Pas encore de conversation !</td></tr>") %>
+  </tbody>
+</table>
+<%= page_navigation_links(@conversations) %>

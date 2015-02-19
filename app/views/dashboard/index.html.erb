@@ -20,6 +20,27 @@
     </div>
   <%- end -%>
   <div class="col-md-6">
+    <article class="data-block">
+      <div class="block-title"><h4>Conversations</h4></div>
+      <div class="data-container">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Sujet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render(:partial => 'dashboard/conversation', :collection => @conversations) || raw("<tr><td colspan='3'>Aucune conversation</td></tr>") %>
+          </tbody>
+        </table>
+        <%- unless @conversation.blank? -%>
+          <footer class="note">
+            <p><%= link_to("Voir toute la liste", conversations_path) %></p>
+          </footer>
+        <%- end -%>
+      </div>
+    </article>
     <%- if can? :read, Convocation -%>
       <article class="data-block">
         <div class="block-title"><h4>Dernières convocations</h4></div>
@@ -95,7 +116,7 @@
     <%- end -%>
   </div>
   <%- if (flash.empty?) and
-         (cannot? :read, Convocation \
+         (cannot? :read, Mailboxer::Message and cannot? :read, Convocation \
             and cannot? :read, Intervention and cannot? :read, Item) -%>
         <p class="alert alert-error">
           Vos droits ne vous permettent pas d'effectuer cette action.
