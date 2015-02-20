@@ -7,7 +7,7 @@ class ConversationsController < BackController
 
   def index
     @conversations = current_user.mailbox
-                                 .inbox
+                                 .conversations(:mailbox_type => params[:mailbox])
                                  .page(params[:page])
                                  .order('created_at')
   end
