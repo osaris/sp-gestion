@@ -1,4 +1,12 @@
-<div class="block-title"><h4>Conversations</h4></div>
+<div class="btn-toolbar pull-right">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('glyphicon glyphicon-plus', 'Nouveau message'),
+                new_conversation_path,
+                :class => 'btn btn-default btn-sm') %>
+  </div>
+</div>
+
+<br class="clearfix" />
 
 <%= render_navigation(:context => :conversations) %>
 

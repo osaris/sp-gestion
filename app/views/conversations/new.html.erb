@@ -1,0 +1,34 @@
+<p>Les champs marqués d'une astérisque (*) sont obligatoires.</p>
+<%= form_for(:conversation, :url => conversations_path, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+      <%= f.label(:recipients, "Destinataire(s) (*)", :class => 'col-md-5 control-label') %>
+      <div class="col-md-7">
+        <%= f.text_field(:recipients, :class => 'form-control') %>
+        <%= error_message_on(:conversation, :recipients) %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label(:subject, "Sujet (*)", :class => 'col-md-5 control-label') %>
+      <div class="col-md-7">
+        <%= f.text_field(:subject, :class => 'form-control') %>
+        <%= error_message_on(:conversation, :subject) %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label(:body, "Message (*)", :class => 'col-md-5 control-label') %>
+      <div class="col-md-7">
+        <%= text_area_tag('conversation[body]', '', :rows => 5, :class => 'form-control') %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-7 col-md-offset-5">
+        <%= submit_tag("Envoyer", :class => 'btn btn-primary btn-lg') %> ou <%= link_to("Annuler", vehicles_path)%>
+      </div>
+    </div>
+  </div>
+</div>
+</fieldset>
+<%- end -%>

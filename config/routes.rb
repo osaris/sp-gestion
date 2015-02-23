@@ -21,6 +21,8 @@ SpGestion::Application.routes.draw do
 
     resources :confirmations, :only => [:edit, :update]
 
+    resources :conversations, :except => [:edit, :update]
+
     resources :convocations do
       member do
         post :email
@@ -87,8 +89,6 @@ SpGestion::Application.routes.draw do
         get :expirings
       end
     end
-
-    resources :conversations, :only => [:index, :show]
 
     resources :newsletters, :only => [:new, :create, :activate] do
       member do

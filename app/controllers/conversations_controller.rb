@@ -2,8 +2,7 @@ class ConversationsController < BackController
 
   # authorize_resource Mailboxer::Message
 
-  before_action :load_message, :except => :index
-  skip_before_action :require_html_request, :only => [:mark_as_read]
+  before_action :load_message, :only => [:show]
 
   def index
     @conversations = current_user.mailbox
@@ -13,6 +12,17 @@ class ConversationsController < BackController
   end
 
   def show
+  end
+
+  def new
+    @conversation =  current_user.mailbox.conversations.new
+  end
+
+  def create
+    conversation = current_user.
+      send_message(recipients, *conversation_params(:body, :subject)).conversation
+
+    redirect_to conversation_path(conversation)        
   end
 
   private
