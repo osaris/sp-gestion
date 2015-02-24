@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
 
+  scope :recipients, -> (me) { where('id <> ?', [me.id]) }
+
   def mailboxer_email(object)
     self.email
   end

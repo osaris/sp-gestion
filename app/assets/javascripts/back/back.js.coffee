@@ -35,6 +35,27 @@ window.user_password_strength = () ->
 Rails.register_init ['confirmations\\edit',
                      'confirmations\\update'], () -> user_password_strength()
 
+# Conversation
+##########
+
+window.conversation = () ->
+  $('#conversation_recipients').multiselect(
+    buttonText: (options, select) ->
+      if options.length == 0
+        return 'Choisissez un destinataire'
+      else
+        labels = []        
+        options.each ->
+          if ($(this).attr('label') != undefined)
+            labels.push($(this).attr('label'))
+          else
+            labels.push($(this).html())
+        return labels.join(', ') + ''
+
+  )
+
+Rails.register_init ['conversations\\new'], () -> conversation()
+
 # Convocations
 #######################################################
 window.convocations = () ->

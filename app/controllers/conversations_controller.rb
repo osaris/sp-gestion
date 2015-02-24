@@ -3,6 +3,7 @@ class ConversationsController < BackController
   # authorize_resource Mailboxer::Message
 
   before_action :load_message, :only => [:show]
+  before_action :load_recipients, :only => [:new]
 
   def index
     @conversations = current_user.mailbox
@@ -22,10 +23,14 @@ class ConversationsController < BackController
     conversation = current_user.
       send_message(recipients, *conversation_params(:body, :subject)).conversation
 
-    redirect_to conversation_path(conversation)        
+    redirect_to conversation_path(conversation)
   end
 
   private
+
+  def load_recipients
+    @recipients = @station.users.recipients(current_user)
+  end
 
   def load_message
     @conversation = current_user.mailbox.conversations.find(params[:id])
