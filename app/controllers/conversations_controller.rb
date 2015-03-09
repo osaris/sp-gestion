@@ -20,8 +20,9 @@ class ConversationsController < BackController
   end
 
   def create
-    conversation = current_user.
-      send_message(recipients, *conversation_params(:body, :subject)).conversation
+    recipients = @station.users.find(params[:conversation][:recipients])
+    conversation = current_user.send_message(recipients, params[:conversation][:subject], params[:conversation][:body])
+                               .conversation
 
     redirect_to conversation_path(conversation)
   end
