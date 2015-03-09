@@ -6,7 +6,7 @@
     <div class="form-group">
       <%= f.label(:recipients, "Destinataire(s) (*)", :class => 'col-md-5 control-label') %>
       <div class="col-md-7">
-        <%= f.collection_select(:recipients, @recipients, :id, :email, {}, :multiple => true) %>
+        <%= f.collection_select(:recipients, @recipients, :id, :email, {:include_hidden => false}, :multiple => true) %>
         <%= error_message_on(:conversation, :recipients) %>
       </div>
     </div>
