@@ -44,7 +44,7 @@ window.conversation = () ->
       if options.length == 0
         return 'Choisissez un destinataire'
       else
-        labels = []        
+        labels = []
         options.each ->
           if ($(this).attr('label') != undefined)
             labels.push($(this).attr('label'))
@@ -54,7 +54,8 @@ window.conversation = () ->
 
   )
 
-Rails.register_init ['conversations\\new'], () -> conversation()
+Rails.register_init ['conversations\\new',
+                     'conversations\\create'], () -> conversation()
 
 # Convocations
 #######################################################
