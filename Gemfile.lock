@@ -279,7 +279,7 @@ GEM
     rails-assets-fullcalendar (2.3.1)
       rails-assets-jquery (>= 1.7.1)
       rails-assets-moment (>= 2.5.0)
-    rails-assets-highcharts (4.1.3)
+    rails-assets-highcharts (4.1.4)
     rails-assets-jQuery-Timepicker-Addon (1.5.0)
     rails-assets-jquery (2.1.3)
     rails-assets-jquery-migrate (1.2.1)
