@@ -3,12 +3,11 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>SP-Gestion - <%= @station.name %></title>
-  <%= favicon_link_tag('favicon.ico') %>
   <%= javascript_include_tag("back") %>
   <%= stylesheet_link_tag("back-all", :media => "all") %>
   <%= csrf_meta_tag %>
-  <link rel="author" href="humans.txt" />
-  <%= render('/layouts/google_analytics') if Rails.env == "production" %>
+  <%= render('/layouts/head') %>
+  <%= render('/layouts/google_analytics') if Rails.env.production? %>
 </head>
 <body>
   <noscript>
