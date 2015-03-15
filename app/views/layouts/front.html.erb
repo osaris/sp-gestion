@@ -5,12 +5,11 @@
   <meta name="description" content="Logiciel de gestion de centre d'intervention et de secours : convocations, gardes, matériel, vacations, rapports d'intervention, statistiques" />
   <meta name="keywords" content="CIS, CPI, vacations, gestion, centre, secours, pompiers, SP, véhicules, gardes, matériel, sapeur, interventions, rapport, logiciel, convocations, péremptions" />
   <title>SP-Gestion - Gestion de centres d'intervention et de secours</title>
-  <%= favicon_link_tag('favicon.ico') %>
   <%= javascript_include_tag("front") %>
   <%= stylesheet_link_tag("front-all", :media => "all") %>
   <%= csrf_meta_tag %>
-  <link rel="author" href="humans.txt" />
-  <%= render('/layouts/google_analytics') if Rails.env == "production" %>
+  <%= render('/layouts/head') %>
+  <%= render('/layouts/google_analytics') if Rails.env.production? %>
 </head>
 <!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
