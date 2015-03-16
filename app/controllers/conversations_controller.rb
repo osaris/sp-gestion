@@ -20,17 +20,12 @@ class ConversationsController < BackController
   end
 
   def create
-    @conversation = Conversation.new(params[:conversation])
-    if @conversation.valid?
-      redirect_to conversation_path(conversation)
+    @conversation = Conversation.new(@station, current_user, params[:conversation])
+    if @conversation.save
+      redirect_to conversation_path(@conversation)
     else
       render(:action => :new)
     end
-    # recipients = @station.users.find(params[:conversation][:recipients])
-    # conversation = current_user.send_message(recipients, params[:conversation][:subject], params[:conversation][:body])
-    #                            .conversation
-
-    # redirect_to conversation_path(conversation)
   end
 
   private
