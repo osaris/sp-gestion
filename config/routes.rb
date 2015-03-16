@@ -21,7 +21,11 @@ SpGestion::Application.routes.draw do
 
     resources :confirmations, :only => [:edit, :update]
 
-    resources :conversations, :except => [:edit, :update]
+    resources :conversations, :except => [:edit, :update] do
+      member do
+        post :reply
+      end   
+    end
 
     resources :convocations do
       member do

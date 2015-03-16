@@ -2,7 +2,7 @@ class ConversationsController < BackController
 
   # authorize_resource Mailboxer::Message
 
-  before_action :load_message, :only => [:show]
+  before_action :load_message, :only => [:show, :reply]
   before_action :load_recipients, :only => [:new, :create]
 
   def index
@@ -13,10 +13,11 @@ class ConversationsController < BackController
   end
 
   def show
+    @reply = Reply.new(@conversation, current_user)
   end
 
   def new
-    @conversation = Conversation.new
+    @conversation = Conversation.new(@station, current_user)
   end
 
   def create
@@ -25,6 +26,15 @@ class ConversationsController < BackController
       redirect_to conversation_path(@conversation)
     else
       render(:action => :new)
+    end
+  end
+
+  def reply
+    @reply = Reply.new(@conversation, current_user, params[:reply])
+    if @reply.save
+      redirect_to conversation_path(@conversation)
+    else
+      render(:action => :show)
     end
   end
 
