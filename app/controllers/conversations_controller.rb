@@ -6,6 +6,7 @@ class ConversationsController < BackController
   before_action :load_recipients, :only => [:new, :create]
 
   def index
+    @mailbox_type  = params[:mailbox]
     @conversations = current_user.mailbox
                                  .conversations(:mailbox_type => params[:mailbox])
                                  .page(params[:page])

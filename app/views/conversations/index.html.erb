@@ -13,14 +13,15 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Messages</th>
-      <th>Date</th>
-      <th>Expéditeur</th>
-      <th>Sujet</th>
+      <th width="25%"></th>
+      <th width="60%">Sujet</th>
+      <th width="15%" class="text-right">Date</th>
     </tr>
   </thead>
   <tbody>
-    <%= render(:partial => 'conversation', :collection => @conversations) || raw("<tr><td colspan='4'>Pas encore de conversation !</td></tr>") %>
+    <%= render(:partial => 'conversation', :collection => @conversations,
+                                           :locals => {:mailbox_type => @mailbox_type}) ||
+        raw("<tr><td colspan='3'>Pas encore de conversation !</td></tr>") %>
   </tbody>
 </table>
 <%= page_navigation_links(@conversations) %>
