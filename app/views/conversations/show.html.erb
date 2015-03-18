@@ -1,9 +1,15 @@
-<h1><%= @conversation.subject %></h1>
+<h3><%= @conversation.subject %></h3>
+<hr />
 
 <%- @conversation.receipts_for(current_user).each do |receipt| -%>
   <%- message = receipt.message -%>
-  <small><%= message.sender.email %> @ <%= message.created_at %></small>
-  <p><%= message.body %></p>
+  <div style="margin-left: 35px">
+    <p class="text-left" style="float:left;"><b><%= message.sender.email %></b></p>
+    <p class="text-right" style="float:right;"><%= l!(message.created_at) %></p>
+    <p class="clearfix" />
+    <p><%= message.body %></p>
+  </div>
+  <hr />
 <%- end -%>
 
 <%= render('reply', :conversation => @conversation) %>
