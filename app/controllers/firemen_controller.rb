@@ -24,7 +24,7 @@ class FiremenController < BackController
 
   def create
     @fireman = @station.firemen.new(fireman_params)
-    if(@fireman.save)
+    if @fireman.save
       flash[:success] = "La personne a été créée."
       redirect_to(@fireman)
     else

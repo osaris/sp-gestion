@@ -32,7 +32,7 @@ class ConvocationsController < BackController
 
   def create
     @convocation = @station.convocations.new(convocation_params)
-    if(@convocation.save)
+    if @convocation.save
       flash[:success] = "La convocation a été créée."
       redirect_to(@convocation)
     else

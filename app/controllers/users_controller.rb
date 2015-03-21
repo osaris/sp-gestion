@@ -16,7 +16,7 @@ class UsersController < BackController
 
   def create
     @user = @station.users.new(user_params)
-    if(@user.save)
+    if @user.save
       @user.deliver_cooptation_instructions!
       flash[:success] = "L'invitation a été envoyée avec succès."
       redirect_to(users_path)

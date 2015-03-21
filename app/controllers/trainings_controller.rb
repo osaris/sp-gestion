@@ -19,7 +19,7 @@ class TrainingsController < BackController
 
   def create
     @training = @station.trainings.new(training_params)
-    if(@training.save)
+    if @training.save
       flash[:success] = "La formation a été créée."
       redirect_to(@training)
     else

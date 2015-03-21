@@ -20,7 +20,7 @@ class UniformsController < BackController
 
   def create
     @uniform = @station.uniforms.new(uniform_params)
-    if(@uniform.save)
+    if @uniform.save
       flash[:success] = "La tenue a été créée."
       redirect_to(@uniform)
     else

@@ -29,7 +29,7 @@ class CheckListsController < BackController
 
   def create
     @check_list = @station.check_lists.new(check_list_params)
-    if(@check_list.save)
+    if @check_list.save
       flash[:success] = "La liste a été créée."
       redirect_to(@check_list)
     else

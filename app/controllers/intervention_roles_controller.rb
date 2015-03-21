@@ -19,7 +19,7 @@ class InterventionRolesController < BackController
 
   def create
     @intervention_role = @station.intervention_roles.new(intervention_role_params)
-    if(@intervention_role.save)
+    if @intervention_role.save
       flash[:success] = "Le rôle a été créé."
       redirect_to(@intervention_role)
     else
