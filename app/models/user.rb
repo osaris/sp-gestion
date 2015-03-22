@@ -89,26 +89,27 @@ class User < ActiveRecord::Base
   end
 
   def update_profile(params)
-    email_already_used = false
-    email_change = false
-    if !params[:new_email_tmp].blank? and params[:new_email_tmp] != self.email
-      nb_users_with_same_email = self.station
-                                     .users
-                                     .where(:email => params[:new_email_tmp])
-                                     .count
-      if nb_users_with_same_email == 0
-        params[:new_email] = params[:new_email_tmp]
-        email_change = true
-      else
-        self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
-      end
-    end
+    if !params[:new_email_tmp].nil?
 
-    if email_already_used
-      result = false
+      if params[:new_email_tmp].blank?
+        result = false
+        self.errors[:new_email_tmp] << "Il faut saisir une adresse email."
+      else
+        nb_users_with_same_email = self.station
+                                       .users
+                                       .where(:email => params[:new_email_tmp])
+                                       .count
+        if nb_users_with_same_email == 0
+          params[:new_email] = params[:new_email_tmp]
+          result = self.update_attributes(params)
+          deliver_new_email_instructions! if result
+        else
+          result = false
+          self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
+        end
+      end
     else
       result = self.update_attributes(params)
-      deliver_new_email_instructions! if result and email_change
     end
     result
   end
@@ -126,7 +127,8 @@ class User < ActiveRecord::Base
   private
 
   def password_validation_needed?
-    !group_id_changed? and (confirmed_at.blank? or (!password.nil? or !password_confirmation.nil?))
+    # account confirmation, password reset (from email), change password (profile)
+    !password.nil? or !password_confirmation.nil?
   end
 
   def deliver_new_email_instructions!
