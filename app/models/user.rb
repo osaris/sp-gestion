@@ -90,7 +90,6 @@ class User < ActiveRecord::Base
 
   def update_profile(params)
     if !params[:new_email_tmp].nil?
-
       if params[:new_email_tmp].blank?
         result = false
         self.errors[:new_email_tmp] << "Il faut saisir une adresse email."

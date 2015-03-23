@@ -39,7 +39,31 @@ describe ProfilesController do
       it { should render_with_layout("back") }
     end
 
-    describe "PATCH :update with good data" do
+    describe "PATCH :update email with good data" do
+
+      before(:each) do
+        patch :update, :user => { :new_email_tmp => 'test@test.com' }
+      end
+
+      it { should respond_with(:redirect) }
+      it { should redirect_to(profile_path) }
+      it { should render_with_layout("back") }
+
+      it { should set_flash[:success] }
+    end
+
+    describe "PATCH :update email with bad data" do
+
+      before(:each) do
+        patch :update, :user => { :new_email_tmp => '' }
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("edit") }
+      it { should render_with_layout("back") }
+    end
+
+    describe "PATCH :update password with good data" do
 
       before(:each) do
         patch :update, :user => { :password => '123456', :password_confirmation => '123456' }
@@ -47,11 +71,12 @@ describe ProfilesController do
 
       it { should respond_with(:redirect) }
       it { should redirect_to(profile_path) }
+      it { should render_with_layout("back") }
 
       it { should set_flash[:success] }
     end
 
-    describe "PATCH :update with bad data" do
+    describe "PATCH :update password with bad data" do
 
       before(:each) do
         patch :update, :user => { :password => '123456', :password_confirmation => '' }
