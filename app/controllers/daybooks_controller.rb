@@ -19,7 +19,7 @@ class DaybooksController < BackController
 
   def create
     @daybook = @station.daybooks.new(daybook_params)
-    if(@daybook.save)
+    if @daybook.save
       flash[:success] = "La main courante a été créée."
       redirect_to(@daybook)
     else

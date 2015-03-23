@@ -21,7 +21,7 @@ class GroupsController < BackController
 
   def create
     @group = @station.groups.new(group_params)
-    if(@group.save)
+    if @group.save
       flash[:success] = "Le groupe a été créé."
       redirect_to(@group)
     else

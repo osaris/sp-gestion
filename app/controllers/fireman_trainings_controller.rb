@@ -24,7 +24,7 @@ class FiremanTrainingsController < BackController
 
   def create
     @fireman_training = @fireman.fireman_trainings.new(fireman_training_params)
-    if(@fireman_training.save)
+    if @fireman_training.save
       flash[:success] = "La formation a été ajoutée."
       redirect_to([@fireman, @fireman_training])
     else

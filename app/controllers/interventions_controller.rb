@@ -25,7 +25,7 @@ class InterventionsController < BackController
 
   def create
     @intervention = @station.interventions.new(intervention_params)
-    if(@intervention.save)
+    if @intervention.save
       flash[:success] = "L'intervention a été créée."
       redirect_to(@intervention)
     else

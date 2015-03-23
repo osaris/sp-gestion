@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216193226) do
+ActiveRecord::Schema.define(version: 20150322204519) do
 
   create_table "check_lists", force: :cascade do |t|
     t.string   "title",      limit: 255

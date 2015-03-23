@@ -30,7 +30,7 @@ class VehiclesController < BackController
 
   def create
     @vehicle = @station.vehicles.new(vehicle_params)
-    if(@vehicle.save)
+    if @vehicle.save
       flash[:success] = "Le véhicule a été créé."
       redirect_to(@vehicle)
     else
@@ -44,7 +44,7 @@ class VehiclesController < BackController
   def update
     if @vehicle.update_attributes(vehicle_params)
       flash[:success] = "Le véhicule a été mis à jour."
-      flash[:warning] = @vehicle.warnings      
+      flash[:warning] = @vehicle.warnings
       redirect_to(@vehicle)
     else
       render(:action => :edit)

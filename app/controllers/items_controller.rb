@@ -30,7 +30,7 @@ class ItemsController < BackController
 
   def create
     @item = @check_list.items.new(item_params)
-    if(@item.save)
+    if @item.save
       flash[:success] = "Le matériel a été créé."
       redirect_to([@check_list, @item])
     else

@@ -123,4 +123,58 @@ describe User do
       it { should be_truthy }
     end
   end
+
+  describe "update_profile" do
+
+    subject { user.update_profile(params) }
+
+    context "with good password pair" do
+
+      let(:params) { {:password => 'test12345',
+                      :password_confirmation => 'test12345' } }
+
+      it { should be_truthy }
+    end
+
+    context "with bad password pair" do
+
+      let(:params) { {:password => 'test12345',
+                      :password_confirmation => 'test123' } }
+
+      it { should be_falsey }
+    end
+
+    context "with a new email blank" do
+
+      let(:params) { {:new_email_tmp => ''} }
+
+      it { should be_falsey }
+    end
+
+    context "with a new email wrong" do
+
+      let(:params) { {:new_email_tmp => 'test'} }
+
+      it { should be_falsey }
+    end
+
+    context "with a new email ok" do
+
+      let(:params) { {:new_email_tmp => 'test@test.com'} }
+
+      it { should be_truthy }
+    end
+
+    context "with a new email ok but already used" do
+
+      before(:each) do
+        expect(user.station).to receive_message_chain(:users, :where, :count)
+                                .and_return(1)
+      end
+
+      let(:params) { {:new_email_tmp => 'test@test.com'} }
+
+      it { should be_falsey }
+    end
+  end
 end
