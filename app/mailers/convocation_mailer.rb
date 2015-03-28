@@ -12,7 +12,7 @@ class ConvocationMailer < ApplicationMailer
                                                              Digest::SHA1.hexdigest(convocation_fireman.id.to_s))
 
     mail(:to => @fireman.email,
-         :from => @convocation.station_name + " <pas_de_reponse@sp-gestion.fr>",
+         :from => @convocation.station_name + " <contact@sp-gestion.fr>",
          :reply_to => user_email,
          :subject => "Convocation")
   end

@@ -25,7 +25,7 @@ describe ConvocationMailer do
 
     context "and not confirmable convocation" do
 
-      it { should deliver_from("#{station.name} <pas_de_reponse@sp-gestion.fr>") }
+      it { should deliver_from("#{station.name} <contact@sp-gestion.fr>") }
       it { should reply_to('test@test.com') }
       it { should deliver_to(convocation_fireman.fireman.email) }
       it { should have_body_text(/#{convocation.title}/) }
@@ -38,7 +38,7 @@ describe ConvocationMailer do
 
     context "and confirmable convocation" do
 
-      it { should deliver_from("#{station.name} <pas_de_reponse@sp-gestion.fr>") }
+      it { should deliver_from("#{station.name} <contact@sp-gestion.fr>") }
       it { should reply_to('test@test.com') }
       it { should deliver_to(convocation_fireman.fireman.email) }
       it { should have_body_text(/#{convocation.title}/) }
