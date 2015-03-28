@@ -4,7 +4,7 @@ Mailboxer.setup do |config|
   config.uses_emails = true
 
   #Configures the default from for emails sent for Messages and Notifications
-  config.default_from = 'SP-Gestion.fr <pas_de_reponse@sp-gestion.fr>'
+  config.default_from = 'SP-Gestion.fr <contact@sp-gestion.fr>'
 
   #Configures the methods needed by mailboxer
   config.email_method = :mailboxer_email
