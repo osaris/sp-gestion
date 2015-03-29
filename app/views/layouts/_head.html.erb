@@ -1,19 +1,21 @@
-<link rel="author" href="humans.txt" />
-<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png?v=69wQyG96Wq">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png?v=69wQyG96Wq">
-<link rel="icon" type="image/png" href="/favicon-32x32.png?v=69wQyG96Wq" sizes="32x32">
-<link rel="icon" type="image/png" href="/android-chrome-192x192.png?v=69wQyG96Wq" sizes="192x192">
-<link rel="icon" type="image/png" href="/favicon-96x96.png?v=69wQyG96Wq" sizes="96x96">
-<link rel="icon" type="image/png" href="/favicon-16x16.png?v=69wQyG96Wq" sizes="16x16">
-<link rel="manifest" href="/manifest.json?v=69wQyG96Wq">
-<link rel="shortcut icon" href="/favicon.ico?v=69wQyG96Wq">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-TileImage" content="/mstile-144x144.png?v=69wQyG96Wq">
-<meta name="theme-color" content="#dbdbdb">
+<%= tag(:link, { :href => 'humans.txt', :rel => 'author' }) %>
+
+<%= favicon_link_tag('favicons/apple-touch-icon-57x57.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '57x57') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-60x60.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '60x60') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-72x72.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '72x72') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-76x76.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '76x76') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-114x114.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '114x114') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-120x120.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-144x144.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-152x152.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152') %>
+<%= favicon_link_tag('favicons/apple-touch-icon-180x180.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180') %>
+
+<%= favicon_link_tag('favicons/favicon-32x32.png', rel: 'icon', type: 'image/png', sizes: '32x32') %>
+<%= favicon_link_tag('favicons/android-chrome-192x192.png', rel: 'icon', type: 'image/png', sizes: '192x192') %>
+<%= favicon_link_tag('favicons/favicon-96x96.png', rel: 'icon', type: 'image/png', sizes: '96x96') %>
+<%= favicon_link_tag('favicons/favicon-16x16.png', rel: 'icon', type: 'image/png', sizes: '16x16') %>
+<%= favicon_link_tag('favicons/favicon.ico') %>
+
+<%= tag(:meta, { :name => "msapplication-TileColor", :content => "#da532c" }) %>
+<%= tag(:meta, { :name => "msapplication-TileImage", :content => image_path('favicons/mstile-144x144.png') }) %>
+<%= tag(:meta, { :name => "theme-color", :content => "#dbdbdb"}) %>
