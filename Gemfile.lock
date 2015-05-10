@@ -112,6 +112,7 @@ GEM
     email_spec (1.6.0)
       launchy (~> 2.1)
       mail (~> 2.2)
+    error_page_assets (0.3)
     erubis (2.7.0)
     excon (0.45.3)
     execjs (2.5.2)
@@ -424,6 +425,7 @@ DEPENDENCIES
   delayed_job
   delayed_job_active_record
   email_spec
+  error_page_assets
   factory_girl_rails
   faker
   fog

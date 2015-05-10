@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>SP-Gestion.fr - Page non trouvée</title>
-  <link href="http://s3.sp-gestion.fr/assets/FRONT_ALL_CSS" media="screen" rel="stylesheet" type="text/css" />
+  <%= stylesheet_link_tag("front-all", :media => "all") %>
 </head>
 <body>
   <div id="wrapper">
@@ -26,7 +26,7 @@
         <li><a href="http://forum.sp-gestion.fr" target="blank">Forum des utilisateurs</a> |</li>
         <li><a href="http://ping.sp-gestion.fr" target="blank">Etat du service</a></li>
       </ul>
-      <p>Copyright © 2009-2015 imagineapp</p>
+      <p>Copyright © 2009-<%= Date.today.year %> imagineapp</p>
       <br class="cl" />
     </footer>
   </div>
