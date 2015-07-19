@@ -4,7 +4,7 @@ class FiremenChartsService
     @data = data
   end
 
-  def interventions
+  def interventions_by_role
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(:text => "Interventions par rôle (Total : #{@data[:sum]})",
               :style             => {

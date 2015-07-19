@@ -101,7 +101,7 @@ class Fireman < ActiveRecord::Base
     result.to_date unless result == nil
   end
 
-  def stats_interventions(year)
+  def stats_interventions_by_role(year)
     data = FiremanIntervention.joins(:intervention) \
                               .joins(:intervention_role) \
                               .where("YEAR(interventions.start_date) = ?", year) \
