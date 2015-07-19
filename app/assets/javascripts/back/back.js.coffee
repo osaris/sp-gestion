@@ -42,19 +42,16 @@ window.convocations = () ->
     parts = $(this).attr('id').split('_')
     $('.status_'+parts[2]).attr('checked',!$('.status_'+parts[2]).attr('checked'))
 
-  $.datepicker.setDefaults($.datepicker.regional['fr'])
-  $.timepicker.setDefaults($.timepicker.regional['fr'])
   $('.date').datetimepicker(
                               showMonthAfterYear: false
                               changeYear:         true
                               changeMonth:        true
-                              dateFormat:         'dd/mm/yy'
                               constrainInput:     true
                               minDate:            '+0'
                               maxDate:            '+1y'
                               duration:           ''
                               showTime:           true
-                              stepMinute:         5 )
+                              stepMinute:         5)
 
 Rails.register_init ['convocations\\new'
                      'convocations\\create'
@@ -90,13 +87,11 @@ window.firemen = () ->
     singleField: true
   )
 
-  $.datepicker.setDefaults($.datepicker.regional['fr'])
   $('.date').datepicker(
                         showMonthAfterYear: false
                         showButtonPanel:    true
                         changeYear:         true
                         changeMonth:        true
-                        dateFormat:         'dd/mm/yy'
                         constrainInput:     true
                         maxDate:            '+0' )
   $('.date-no-limit').datepicker(
@@ -104,7 +99,6 @@ window.firemen = () ->
                         showButtonPanel:    true
                         changeYear:         true
                         changeMonth:        true
-                        dateFormat:         'dd/mm/yy'
                         constrainInput:     true )
 
   $("#accordion").accordion(
@@ -233,13 +227,11 @@ window.firemen_trainings = () ->
 Rails.register_init ['firemen\\trainings'], () -> firemen_trainings()
 
 window.fireman_trainings = () ->
-  $.datepicker.setDefaults($.datepicker.regional['fr'])
   $('.date').datepicker(
                         showMonthAfterYear: false
                         showButtonPanel:    true
                         changeYear:         true
                         changeMonth:        true
-                        dateFormat:         'dd/mm/yy'
                         constrainInput:     true )
 
 Rails.register_init ['fireman_trainings\\new'
@@ -383,13 +375,10 @@ Rails.register_init [ 'plannings\\show'], () -> planning()
 # Interventions
 #######################################################
 window.interventions = () ->
-  $.datepicker.setDefaults($.datepicker.regional['fr'])
-  $.timepicker.setDefaults($.timepicker.regional['fr'])
   $('.date').datetimepicker(
                             showMonthAfterYear: false
                             changeYear:         true
                             changeMonth:        true
-                            dateFormat:         'dd/mm/yy'
                             minDate:            minDate
                             maxDate:            +0
                             constrainInput:     true
@@ -431,13 +420,11 @@ Rails.register_init ['interventions\\stats'], () -> interventions_stats()
 # Items
 #######################################################
 window.items = () ->
-  $.datepicker.setDefaults($.datepicker.regional['fr'])
   $('.date').datepicker(
                         showMonthAfterYear: false
                         showButtonPanel:    true
                         changeYear:         true
-                        changeMonth:        true
-                        dateFormat:         'dd/mm/yy' )
+                        changeMonth:        true )
   $('input#item_place').autocomplete(
     source: places
     minChars: 0
@@ -455,13 +442,11 @@ Rails.register_init ['password_resets\\edit',
 # Vehicles
 #######################################################
 window.vehicles = () ->
-  $.datepicker.setDefaults($.datepicker.regional['fr'])
   $('.date').datepicker(
                          showMonthAfterYear: false
                          showButtonPanel:    true
                          changeYear:         true
-                         changeMonth:        true
-                         dateFormat:         'dd/mm/yy' )
+                         changeMonth:        true )
 
 Rails.register_init ['vehicles\\new'
                      'vehicles\\create'
