@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.2'
 
 gem 'mysql2'
 
@@ -20,6 +20,7 @@ gem 'daemons'
 gem 'dalli'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
+gem 'error_page_assets'
 gem 'fog'
 gem 'geocoder'
 gem 'highline'

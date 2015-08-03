@@ -1,0 +1,28 @@
+<br />
+<div class="well well-sm">
+  A participé à <%= data[:sum] %> interventions sur <%= nb_interventions %>
+  interventions en <%= params[:year] %> (<%= ratio_interventions(data[:sum], nb_interventions) %> % des interventions)
+</div>
+<div class="row">
+  <div class="col-md-9">
+    <%= high_chart("chart", @chart) %>
+  </div>
+  <div class="col-md-3">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Heure</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- data[:data].each.map do |hour, number| -%>
+        <tr>
+          <td><%= hour %></td>
+          <td><%= number %></td>
+        </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</div>

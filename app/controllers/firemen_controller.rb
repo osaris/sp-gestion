@@ -1,5 +1,7 @@
 class FiremenController < BackController
 
+  include FiremenHelper
+
   authorize_resource
   skip_authorize_resource :only => [:facebook, :resigned, :stats, :trainings]
 
@@ -16,6 +18,18 @@ class FiremenController < BackController
   end
 
   def show
+    respond_to do |format|
+      format.pdf do
+        @trainings = @fireman.fireman_trainings
+                             .includes(:training)
+                             .order('trainings.short_name ASC')
+                             .map
+        prawnto :prawn => { :page_layout => :portrait, :page_size => "A4"},
+                :inline => false,
+                :filename => grade_and_name(@fireman).parameterize + ".pdf"
+      end
+      format.html
+    end
   end
 
   def new
@@ -82,7 +96,7 @@ class FiremenController < BackController
       redirect_to(@fireman)
     elsif !@years_stats.include?(params[:year].to_i)
       redirect_to(firemen_stats_path(@fireman, @years_stats.first, params[:type]))
-    elsif !['convocations','interventions'].include?(params[:type])
+    elsif !['convocations','interventions_by_role', 'interventions_by_hour'].include?(params[:type])
       redirect_to(firemen_stats_path(@fireman, params[:year], 'convocations'))
     else
       @data = @fireman.send("stats_#{params[:type]}", params[:year])

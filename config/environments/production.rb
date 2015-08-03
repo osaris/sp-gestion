@@ -65,7 +65,8 @@ SpGestion::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   config.assets.precompile += ['back-all.css','front-all.css',
-                               'back.js','front.js']
+                               'back.js','front.js',
+                               '404.html', '500.html']
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

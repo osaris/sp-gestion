@@ -170,6 +170,21 @@ describe FiremenController do
       it { should render_with_layout("back") }
     end
 
+    describe "GET :show with PDF format" do
+
+      before(:each) do
+        @request.env["SERVER_PROTOCOL"] = "http"
+
+        get :show, :id => fireman.id
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template("show") }
+      it "send a file" do
+        send_file_to_disk(@response.body, "personnel.pdf")
+      end
+    end
+
     describe "GET :trainings" do
 
       before(:each) do

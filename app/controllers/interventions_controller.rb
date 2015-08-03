@@ -1,7 +1,7 @@
 class InterventionsController < BackController
 
   authorize_resource
-  skip_authorize_resource :only => :stats
+  skip_authorize_resource :only => [:stats, :stats_change_year]
 
   before_action :load_intervention, :only => [:show, :edit, :update, :destroy]
   before_action :load_vehicles, :load_cities, :load_subkinds, \
@@ -65,6 +65,7 @@ class InterventionsController < BackController
   end
 
   def stats_change_year
+    authorize!(:read, Intervention)
     redirect_to(interventions_stats_path(params[:new_year] || @current_year || Date.today.year,
                                          params[:type]))
   end

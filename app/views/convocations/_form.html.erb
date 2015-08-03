@@ -27,7 +27,7 @@
         <div class="form-group">
           <%= f.label(:uniform, "Tenue (*)", :class => 'col-md-5 control-label') %>
           <div class="col-md-7">
-            <%= collection_select(:convocation, :uniform_id, station.uniforms.all, :id, :title, {}, :class => 'form-control') %>
+            <%= f.collection_select(:uniform_id, station.uniforms.all, :id, :title, {}, :class => 'form-control') %>
             <%= error_message_on(:convocation, :uniform) %>
           </div>
         </div>

@@ -101,7 +101,7 @@ class Fireman < ActiveRecord::Base
     result.to_date unless result == nil
   end
 
-  def stats_interventions(year)
+  def stats_interventions_by_role(year)
     data = FiremanIntervention.joins(:intervention) \
                               .joins(:intervention_role) \
                               .where("YEAR(interventions.start_date) = ?", year) \
@@ -109,6 +109,20 @@ class Fireman < ActiveRecord::Base
                               .group('intervention_roles.name') \
                               .count
 
+    sum = data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
+    result = {:data => data,
+              :sum  => sum}
+  end
+
+  def stats_interventions_by_hour(year)
+    data = FiremanIntervention.joins(:intervention) \
+                                .select("HOUR(CONVERT_TZ(start_date, '+00:00', '#{Time.zone.formatted_offset}')) AS hour, COUNT(interventions.id) AS count") \
+                                .where("YEAR(interventions.start_date) = ?", year) \
+                                .where(:fireman_id => self.id) \
+                                .group('hour') \
+                                .collect { |i| [i[:hour], i[:count].to_i] }
+    data = Hash[*(0..23).to_a.zip(Array.new(24, 0)).flatten].merge(Hash[data])
+    data.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |hour, number| number }
     sum = data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
     result = {:data => data,
               :sum  => sum}
