@@ -47,7 +47,6 @@ describe ProfilesController do
 
       it { should respond_with(:redirect) }
       it { should redirect_to(profile_path) }
-      it { should render_with_layout("back") }
 
       it { should set_flash[:success] }
     end
@@ -71,7 +70,6 @@ describe ProfilesController do
 
       it { should respond_with(:redirect) }
       it { should redirect_to(profile_path) }
-      it { should render_with_layout("back") }
 
       it { should set_flash[:success] }
     end
