@@ -1,20 +1,17 @@
 module FiremenHelper
 
-  def grade_and_name(fireman)
+  def grade_and_name(args)
     result = ""
-    if !(fireman.grade.blank?)
-      result += Grade::GRADE.key(fireman.grade) + " "
-    end
-    result += fireman.firstname + " " + fireman.lastname
-    result
-  end
 
-  def grade_and_name(firstname, lastname, grade)
-    result = ""
-    if !(grade.blank?)
-      result += Grade::GRADE.key(grade) + " "
+    if args.size == 1
+      fireman = args[:fireman]
+      result = grade_and_name_to_str(fireman.firstname, fireman.lastname, fireman.grade)
+    else
+      firstname = args[:firstname]
+      lastname = args[:lastname]
+      grade = args[:grade]
+      result = grade_and_name_to_str(firstname, lastname, grade)
     end
-    result += firstname + " " + lastname
     result
   end
 
@@ -51,6 +48,17 @@ module FiremenHelper
     else
       result = 0
     end
+    result
+  end
+
+  private
+
+  def grade_and_name_to_str(firstname, lastname, grade)
+    result = ""
+    if !(grade.blank?)
+      result += Grade::GRADE.key(grade) + " "
+    end
+    result += firstname + " " + lastname
     result
   end
 

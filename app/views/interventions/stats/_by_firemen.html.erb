@@ -13,7 +13,7 @@
       <tbody>
       <%- data.each.map do |firstname, lastname, grade, number| -%>
         <tr>
-          <td><%= grade_and_name(firstname, lastname, grade) %></td>
+          <td><%= grade_and_name(firstname: firstname, lastname: lastname, grade: grade) %></td>
           <td><%= number %></td>
         </tr>
       <%- end -%>

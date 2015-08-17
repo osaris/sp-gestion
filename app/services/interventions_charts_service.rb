@@ -29,7 +29,10 @@ class InterventionsChartsService
             })
       f.tooltip(:pointFormat => '{point.percentage:.1f} %')
       f.series(:data => @data.to_a
-                             .map { |fireman| [grade_and_name(fireman[0], fireman[1], fireman[2]), fireman.last] },
+                             .map { |fireman| [grade_and_name(firstname: fireman[0],
+                                                              lastname:fireman[1],
+                                                              grade: fireman[2]),
+                                                              fireman.last] },
                :name => 'Interventions')
       f.chart({:type    => "pie",
                :height  => 350})

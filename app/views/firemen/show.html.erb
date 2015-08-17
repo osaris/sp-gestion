@@ -1,5 +1,5 @@
 <div class="pull-left">
-  <div class="block-title"><h4><%= grade_and_name(@fireman) %></h4></div>
+  <div class="block-title"><h4><%= grade_and_name(fireman: @fireman) %></h4></div>
   <%- if @fireman.regimental_number? -%>
     <p>N° de matricule : <%= @fireman.regimental_number %></p>
   <%- end -%>
@@ -37,7 +37,7 @@
   </div>
 </div>
 <div class="pull-right">
-  <%= image_tag(@fireman.passeport_photo.url, :alt => grade_and_name(@fireman)) %>
+  <%= image_tag(@fireman.passeport_photo.url, :alt => grade_and_name(fireman: @fireman)) %>
 </div>
 <div class="clearfix"></div>
 <div class="block-title"><h5>5 dernières interventions</h5></div>

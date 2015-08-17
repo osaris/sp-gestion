@@ -1,4 +1,4 @@
-<div class="block-title"><h4>Nouvelle formation du <%= grade_and_name(@fireman) %></h4></div>
+<div class="block-title"><h4>Nouvelle formation du <%= grade_and_name(fireman: @fireman) %></h4></div>
 <%= render('form', :fireman => @fireman,
                    :fireman_training => @fireman_training,
                    :trainings => @trainings) %>

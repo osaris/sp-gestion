@@ -26,7 +26,7 @@ class FiremenController < BackController
                              .map
         prawnto :prawn => { :page_layout => :portrait, :page_size => "A4"},
                 :inline => false,
-                :filename => grade_and_name(@fireman).parameterize + ".pdf"
+                :filename => grade_and_name(fireman: @fireman).parameterize + ".pdf"
       end
       format.html
     end
