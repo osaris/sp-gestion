@@ -9,6 +9,15 @@ module FiremenHelper
     result
   end
 
+  def grade_and_name(firstname, lastname, grade)
+    result = ""
+    if !(grade.blank?)
+      result += Grade::GRADE.key(grade) + " "
+    end
+    result += firstname + " " + lastname
+    result
+  end
+
   def active_accordion(fireman)
     # if grade is set, we use it for default category
     if !fireman.current_grade.blank?

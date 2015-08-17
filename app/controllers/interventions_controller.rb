@@ -80,7 +80,8 @@ class InterventionsController < BackController
       @years_stats = Intervention::years_stats(@station)
       if !@years_stats.include?(params[:year].to_i)
         redirect_to(interventions_stats_path(@years_stats.first, params[:type]))
-      elsif !['by_type','by_subkind','by_city','by_vehicle','by_month','by_hour','map'].include?(params[:type])
+      elsif !['by_type','by_subkind','by_city','by_vehicle','by_month','by_hour',
+              'by_firemen', 'map'].include?(params[:type])
         redirect_to(interventions_stats_path(params[:year], 'by_type'))
       else
         @data, @sum = Intervention::stats(@station, params[:type], params[:year])
