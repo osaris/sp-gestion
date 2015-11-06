@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
 
-gem 'mysql2'
+# TODO unlock this when rails 4.2.5 is released
+gem 'mysql2', '~> 0.3.20'
 
 gem 'rack'
 
