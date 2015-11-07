@@ -55,7 +55,7 @@ describe PasswordResetsController do
       it { should render_template("new") }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:error].now }
+      it { should set_flash.now[:error] }
     end
 
     describe "POST :create with good data" do
@@ -70,7 +70,7 @@ describe PasswordResetsController do
       it { should render_template("new") }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:warning].now }
+      it { should set_flash.now[:warning] }
     end
 
     describe "GET :edit with bad data" do
