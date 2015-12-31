@@ -62,12 +62,6 @@ SpGestion::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.action_controller.asset_host = "http://" + SPG_CONFIG[:fog][:directory]
 
-  # Precompile additional assets.
-  # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += ['back-all.css','front-all.css',
-                               'back.js','front.js',
-                               '404.html', '500.html']
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
 

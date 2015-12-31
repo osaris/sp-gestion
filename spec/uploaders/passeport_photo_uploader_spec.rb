@@ -31,7 +31,7 @@ describe PasseportPhotoUploader do
 
   context 'default_url' do
     it "should be passeport_photo.png" do
-      expect(uploader_empty.url).to eq "/assets/back/default_passeport_photo.png"
+      expect(uploader_empty.url).to match /\/assets\/back\/default_passeport_photo-.*\.png/
     end
   end
 end

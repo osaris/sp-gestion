@@ -27,7 +27,7 @@ describe ItemPhotoUploader do
 
   context 'default_url' do
     it "should be default_photo_480_360.png" do
-      expect(uploader_empty.url).to eq "/assets/back/default_photo_480_360.png"
+      expect(uploader_empty.url).to match /\/assets\/back\/default_photo_480_360-.*\.png/
     end
   end
 end
