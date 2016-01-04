@@ -164,7 +164,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.7.6)
+    fog-aws (0.8.0)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -325,7 +325,7 @@ GEM
       rails-assets-jquery (> 1.8)
     rails-assets-jqueryui (1.11.4)
       rails-assets-jquery (>= 1.6)
-    rails-assets-moment (2.10.6)
+    rails-assets-moment (2.11.0)
     rails-assets-moment-timezone (0.5.0)
       rails-assets-moment (>= 2.6.0)
     rails-assets-pwstrength-bootstrap (1.2.9)
@@ -422,7 +422,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    will_paginate (3.0.7)
+    will_paginate (3.1.0)
     xml-simple (1.1.5)
     yui-compressor (0.12.0)
 
@@ -493,4 +493,4 @@ DEPENDENCIES
   yui-compressor
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
