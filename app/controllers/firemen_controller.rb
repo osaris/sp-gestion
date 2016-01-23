@@ -96,7 +96,7 @@ class FiremenController < BackController
       redirect_to(@fireman)
     elsif !@years_stats.include?(params[:year].to_i)
       redirect_to(firemen_stats_path(@fireman, @years_stats.first, params[:type]))
-    elsif !['convocations','interventions_by_role', 'interventions_by_hour'].include?(params[:type])
+    elsif !['convocations', 'interventions', 'interventions_by_role', 'interventions_by_hour'].include?(params[:type])
       redirect_to(firemen_stats_path(@fireman, params[:year], 'convocations'))
     else
       @data = @fireman.send("stats_#{params[:type]}", params[:year])

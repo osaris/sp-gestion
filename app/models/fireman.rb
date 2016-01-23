@@ -101,6 +101,16 @@ class Fireman < ActiveRecord::Base
     result.to_date unless result == nil
   end
 
+  def stats_interventions(year)
+    data = FiremanIntervention.joins(:intervention) \
+                              .where('YEAR(interventions.start_date) = ?', year) \
+                              .where(:fireman_id => self.id) \
+                              .pluck('COALESCE(SUM(TIMESTAMPDIFF(MINUTE, start_date, end_date)), 0) AS duration, COUNT(*) AS total')
+
+    result = {:duration => data[0][0],
+              :total    => data[0][1]}
+  end
+
   def stats_interventions_by_role(year)
     data = FiremanIntervention.joins(:intervention) \
                               .joins(:intervention_role) \
