@@ -76,6 +76,15 @@ class Intervention < ActiveRecord::Base
     result.sort { |result_a, result_b| result_a[0].to_i <=> result_b[0].to_i }.map{ |hour, number| number }
   end
 
+  def self.stats_by_firemen(station, year)
+    result = Intervention.select("firemen.firstname, firemen.lastname, firemen.grade, COUNT(interventions.id) AS count") \
+                         .joins(:firemen) \
+                         .for_year_and_station(station, year) \
+                         .group("firemen.firstname, firemen.lastname, firemen.grade")
+                         .order("count DESC")
+                         .collect { |i| [i[:firstname], i[:lastname], i[:grade], i[:count].to_i] }
+  end
+
   def self.stats_by_city(station, year)
     Intervention.select("COUNT(*) AS count, COALESCE(city, '') AS citynotnull") \
                 .for_year_and_station(station, year) \
@@ -124,14 +133,7 @@ class Intervention < ActiveRecord::Base
 
   def self.stats(station, type, year)
     data = Intervention.send("stats_#{type}", station, year)
-
-    if ["by_type", "by_subkind", "by_city", "by_vehicle"].include?(type)
-      sum = data.inject(0) { |sum, stat| sum ? sum+stat[1] : stat[1] }
-    elsif ["by_month", "by_hour"].include?(type)
-      sum = data.sum
-    elsif type == "map"
-      sum = data.length
-    end
+    sum = Intervention::for_year_and_station(station, year).count
     [data, sum]
   end
 

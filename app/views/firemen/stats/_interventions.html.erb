@@ -1,0 +1,8 @@
+<br />
+<div class="well well-sm">
+  A participé à <%= pluralize(data[:total], 'intervention', 'interventions') %>
+  sur <%= pluralize(nb_interventions, 'intervention', 'interventions') %> en
+  <%= params[:year] %> (en intervention
+  <%= pluralize(data[:duration], 'minute', 'minutes') %>
+   soit environ <%= pluralize(data[:duration]/60.round(0), 'heure', 'heures') %>).
+</div>

@@ -1,5 +1,7 @@
 class InterventionsChartsService
 
+  include FiremenHelper
+
   def initialize(data, sum)
     @data = data
     @sum = sum
@@ -13,6 +15,24 @@ class InterventionsChartsService
             })
       f.tooltip(:pointFormat => '{point.percentage:.1f} %')
       f.series(:data => @data.to_a,
+               :name => 'Interventions')
+      f.chart({:type    => "pie",
+               :height  => 350})
+    end
+  end
+
+  def by_firemen
+    LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(:text => "Interventions par personnel (Total : #{@sum})",
+              :style             => {
+                :fontSize => '12px'
+            })
+      f.tooltip(:pointFormat => '{point.percentage:.1f} %')
+      f.series(:data => @data.to_a
+                             .map { |fireman| [grade_and_name(firstname: fireman[0],
+                                                              lastname:fireman[1],
+                                                              grade: fireman[2]),
+                                                              fireman.last] },
                :name => 'Interventions')
       f.chart({:type    => "pie",
                :height  => 350})

@@ -1,5 +1,5 @@
 <%- @firemen.each do |fireman| -%>
   <li>
-    <%= link_to(grade_and_name(fireman), fireman_fireman_availabilities_path(fireman)) %>
+    <%= link_to(grade_and_name(fireman: fireman), fireman_fireman_availabilities_path(fireman)) %>
   </li>
 <%- end -%>

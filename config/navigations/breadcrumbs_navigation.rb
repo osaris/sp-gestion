@@ -12,7 +12,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item(:user_account, icon_label_text('glyphicon glyphicon-info-sign', current_user.email)) do |user_account|
       user_account.item(:logout, 'Déconnexion', logout_path)
-      user_account.item(:account, 'Mon compte', profile_path, :highlights_on => /^\/account/)
+      user_account.item(:account, 'Mon compte', profile_path, :highlights_on => /^\/profile/)
     end
 
     primary.item(:home, icon_label_text('glyphicon glyphicon-home', 'Accueil')) do |home|

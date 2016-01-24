@@ -9,8 +9,8 @@
       <%- firemen_category.each do |fireman| -%>
         <%= link_to(fireman_path(fireman)) do %>
           <li>
-            <%= image_tag(fireman.passeport_photo.thumb.url, :alt => grade_and_name(fireman)) %><br />
-            <%= grade_and_name(fireman) %>
+            <%= image_tag(fireman.passeport_photo.thumb.url, :alt => grade_and_name(fireman: fireman)) %><br />
+            <%= grade_and_name(fireman: fireman) %>
           </li>
         <%- end -%>
       <%- end -%>

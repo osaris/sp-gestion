@@ -26,7 +26,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:error].now }
+      it { should set_flash.now[:error] }
     end
 
     describe "GET :accept on a confirmable and non editable convocation" do
@@ -42,7 +42,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:error].now }
+      it { should set_flash.now[:error] }
     end
 
     describe "GET :accept on a confirmable convocation" do
@@ -55,7 +55,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:success].now }
+      it { should set_flash.now[:success] }
     end
 
     describe "GET :accept on a non confirmable and non editable convocation" do
@@ -71,7 +71,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:error].now }
+      it { should set_flash.now[:error] }
     end
 
     describe "GET :accept on a non confirmable convocation" do
@@ -84,7 +84,7 @@ describe ConvocationFiremenController do
       it { should respond_with(:success) }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:error].now }
+      it { should set_flash.now[:error] }
     end
   end
 

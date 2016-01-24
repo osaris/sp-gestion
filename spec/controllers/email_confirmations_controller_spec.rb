@@ -36,7 +36,7 @@ describe EmailConfirmationsController do
       it { should render_template("edit") }
       it { should render_with_layout("login") }
 
-      it { should set_flash[:error].now }
+      it { should set_flash.now[:error] }
     end
 
     describe "PATCH :update with good password" do
@@ -69,7 +69,7 @@ describe EmailConfirmationsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(login_path) }
 
-      it { should set_flash[:error].now }
+      it { should set_flash[:error] }
     end
   end
 

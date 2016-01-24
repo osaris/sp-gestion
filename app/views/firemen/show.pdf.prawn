@@ -4,7 +4,7 @@ end
 
 pdf.text(@station.name, :size => 12)
 pdf.move_down(20)
-pdf.text('<b>' + grade_and_name(@fireman) + '</b>', :size => 14, :inline_format => true)
+pdf.text('<b>' + grade_and_name(fireman: @fireman) + '</b>', :size => 14, :inline_format => true)
 if @fireman.regimental_number?
   pdf.move_down(20)
   pdf.text('<b>N° de matricule</b> : ' + @fireman.regimental_number, :inline_format => true)

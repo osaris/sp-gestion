@@ -39,7 +39,7 @@ describe UserSessionsController do
         it { should render_with_layout("login") }
 
         it { should_not be_logged_in }
-        it { should set_flash[:error].now }
+        it { should set_flash.now[:error] }
       end
     end
 
@@ -60,7 +60,7 @@ describe UserSessionsController do
         it { should render_with_layout("login") }
 
         it { should_not be_logged_in }
-        it { should set_flash[:error].now }
+        it { should set_flash.now[:error] }
       end
 
       describe "POST :create with good data" do

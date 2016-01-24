@@ -1,5 +1,5 @@
 <div class="block-title stats"><h4>
-  Statistiques pour le <%= link_to(grade_and_name(@fireman), @fireman) %> pour l'année
+  Statistiques pour le <%= link_to(grade_and_name(fireman: @fireman), @fireman) %> pour l'année
   <%= form_tag(firemen_stats_change_year_path(@fireman, params[:type]),
                :method => :get,
                :id => :form_stats_firemen,

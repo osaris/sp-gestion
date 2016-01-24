@@ -1,4 +1,4 @@
-<div class="block-title"><h4><%= link_to('Formation', fireman_fireman_trainings_path(@fireman)) %> <%= @fireman_training.training_short_name  %> du <%= grade_and_name(@fireman) %></h4></div>
+<div class="block-title"><h4><%= link_to('Formation', fireman_fireman_trainings_path(@fireman)) %> <%= @fireman_training.training_short_name  %> du <%= grade_and_name(fireman: @fireman) %></h4></div>
 <ul>
   <li>Date de réussite : <%= l!(@fireman_training.achieved_at) %></li>
 </ul>

@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-8">
+    <%= high_chart("chart", @chart) %>
+  </div>
+  <div class="col-md-4">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Personne</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%- data.each.map do |firstname, lastname, grade, number| -%>
+        <tr>
+          <td><%= grade_and_name(firstname: firstname, lastname: lastname, grade: grade) %></td>
+          <td><%= number %></td>
+        </tr>
+      <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</div>
