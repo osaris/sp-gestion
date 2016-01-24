@@ -2,6 +2,7 @@ class UsersController < BackController
 
   before_action :require_not_demo
   before_action :load_user, :except => [:new, :create, :index]
+  before_action :load_firemen, :except => [:index, :show, :destroy]
   before_action :check_ownership
 
   def index
@@ -51,6 +52,10 @@ class UsersController < BackController
    rescue ActiveRecord::RecordNotFound
     flash[:error] = "L'utilisateur n'existe pas."
     redirect_to(users_path)
+  end
+
+  def load_firemen
+    @firemen = @station.firemen
   end
 
   def user_params
