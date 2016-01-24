@@ -119,7 +119,7 @@ SpGestion::Application.routes.draw do
       end
     end
 
-    resources :users, :only => [:new, :create, :destroy, :index]
+    resources :users
     resources :vehicles do
       collection do
         get :delisted

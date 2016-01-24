@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322204519) do
+ActiveRecord::Schema.define(version: 20150404094151) do
 
   create_table "check_lists", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -366,6 +366,7 @@ ActiveRecord::Schema.define(version: 20150322204519) do
     t.datetime "updated_at"
     t.string   "new_email",            limit: 255
     t.integer  "group_id",             limit: 4
+    t.integer  "fireman_id",           limit: 4
   end
 
   add_index "users", ["station_id"], name: "index_users_on_station_id", using: :btree

@@ -2,6 +2,24 @@
 
 <div class="clearfix"></div>
 
+<div class="block-title"><h5>Personnel</h5></div>
+<fieldset>
+  <div class="col-md-5 form-horizontal">
+    <div class="form-group">
+      <label class="col-md-5 control-label">Personnel lié au compte</label>
+      <div class="col-md-7">
+        <p class="form-control-static">
+          <%- if @user.fireman_id.blank? -%>
+            Aucun
+          <%- else -%>
+            <%= link_to(grade_and_name(fireman: @user.fireman), fireman_path(@user.fireman)) %>
+          <%- end -%>
+        </p>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
 <div class="block-title"><h5>Adresse email</h5></div>
 <%= form_for(@user, :url => update_profile_path, :html => { :class => 'form-horizontal' }) do |f| %>
   <fieldset>
@@ -60,5 +78,5 @@
   <div class="clearfix"></div>
 
   <div class="block-title"><h5>Droits</h5></div>
-    <%= render(:partial => 'groups/group_table', locals: {:group => @user.group, :resources => @resources}) %>
+  <%= render(:partial => 'groups/group_table', locals: {:group => @user.group, :resources => @resources}) %>
 <%- end -%>

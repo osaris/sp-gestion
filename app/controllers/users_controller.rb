@@ -1,13 +1,16 @@
 class UsersController < BackController
 
   before_action :require_not_demo
-  before_action :load_user, :only => [:destroy]
+  before_action :load_user, :except => [:new, :create, :index]
   before_action :check_ownership
 
   def index
     @users = @station.users
                      .page(params[:page])
                      .order('email')
+  end
+
+  def show
   end
 
   def new
@@ -23,6 +26,9 @@ class UsersController < BackController
     else
       render(:action => :new)
     end
+  end
+
+  def edit
   end
 
   def destroy

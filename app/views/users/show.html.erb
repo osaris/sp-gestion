@@ -1,0 +1,31 @@
+<div class="block-title"><h4><%= @user.email %></h4></div>
+<ul>
+  <li>Personnel lié :
+    <%- if @user.fireman_id.blank? -%>
+      Aucun
+    <%- else -%>
+      <%= link_to(grade_and_name(fireman: @user.fireman), fireman_path(@user.fireman)) %>
+    <%- end -%>
+  </li>
+  <li>Groupe :
+    <%- if @user.group.blank? -%>
+      Aucun
+    <%- else -%>
+      <%= link_to(@user.group.name, group_path(@user.group)) %>
+    <%- end -%>
+  </li>
+  <li>Dernière connexion : <%= l!(@user.last_login_at) %></li>
+</ul>
+<div class="btn-toolbar pull-left">
+  <div class="btn-group">
+    <%= link_to(icon_label_text('glyphicon glyphicon-edit', 'Editer'),
+                edit_user_path(@user),
+                :class => 'btn btn-default btn-sm') %>
+    <%- unless @user.owner? -%>
+      <%= link_to(icon_label_text('glyphicon glyphicon-remove', 'Supprimer'),
+                  user_path(@user),
+                  :method => :delete, :data => { :confirm => "Êtes-vous sûr ?\r\n\r\nLes informations créées par cet utilisateur NE SONT PAS supprimées !\r\n\r\nVous pouvez réinviter cet utilisateur à tout moment." },
+                  :class => 'btn btn-default btn-sm') %>
+    <%- end -%>
+  </div>
+</div>

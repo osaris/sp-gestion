@@ -1,7 +1,16 @@
 <tr>
-  <td><%= user.email %></td>
+  <td><%= link_to(user.email, user_path(user)) %></td>
   <td>
-    <%- unless user.group.blank? -%>
+    <%- if user.fireman_id.blank? -%>
+      Aucun
+    <%- else -%>
+      <%= link_to(grade_and_name(fireman: user.fireman), fireman_path(user.fireman)) %>
+    <%- end -%>
+  </td>
+  <td>
+    <%- if user.group.blank? -%>
+      Aucun
+    <%- else -%>
       <%= link_to(user.group.name, group_path(user.group)) %>
     <%- end -%>
   </td>
@@ -13,13 +22,6 @@
       Propriétaire du compte
     <%- elsif !user.confirmed_at? -%>
       Compte non confirmé
-    <%- end -%>
-  </td>
-  <td>
-    <%- unless user.owner? -%>
-      <%= link_to(image_tag("back/icons/delete.png", :alt => "Supprimer") + raw("&nbsp;Supprimer"), user,
-                  :method => :delete,
-                  :data => { :confirm => "Êtes-vous sûr ?\r\n\r\nLes informations créées par cet utilisateur NE SONT PAS supprimées !\r\n\r\nVous pouvez réinviter cet utilisateur à tout moment." })%>
     <%- end -%>
   </td>
 </tr>
