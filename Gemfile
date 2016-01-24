@@ -35,9 +35,9 @@ gem 'sass-rails'
 gem 'simple-navigation'
 gem 'scrypt'
 gem 'sprockets'
+gem 'uglifier'
 gem 'jc-validates_timeliness'
 gem 'will_paginate'
-gem 'yui-compressor'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
