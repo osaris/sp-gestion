@@ -5,6 +5,31 @@ fr:
       inc: "Incendie"
       div: "Divers"
       sr: "Secours routier"
+  pluralize:
+    absence:
+      zero: absence
+      one: absence
+      other: absences
+    convocation:
+      zero: convocation
+      one: convocation
+      other: convocations
+    hour:
+      zero: heure
+      one: heure
+      other: heures
+    intervention:
+      zero: intervention
+      one: intervention
+      other: interventions
+    minute:
+      zero: minute
+      one: minute
+      other: minutes
+    presence:
+      zero: présence
+      one: présence
+      other: présences
   authlogic:
     error_messages:
       login_blank: can not be blank
