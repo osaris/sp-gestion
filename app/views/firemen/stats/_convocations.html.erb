@@ -1,5 +1,6 @@
-<br />
 <div class="well well-sm">
-  <%= data[:total] %> convocation(s) / <%= data[:presents] %> présence(s) /
-  <%= data[:missings] %> absence(s) (<%= data[:ratio] %> % présence)
+  <%= data[:total] %> <%= t('pluralize.convocation', :count => data[:total]) %> /
+  <%= data[:presents] %> <%= t('pluralize.presence', :count => data[:presents]) %> /
+  <%= data[:missings] %> <%= t('pluralize.absence', :count => data[:missings]) %> /
+  (<%= data[:ratio] %> % présence)
 </div>

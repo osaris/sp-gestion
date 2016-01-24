@@ -1,0 +1,5 @@
+<div class="well well-sm">
+  A participé à <%= data[:sum] %> <%= t('pluralize.intervention', :count => data[:sum]) %>
+  sur <%= nb_interventions %> <%= t('pluralize.intervention', :count => nb_interventions) %>
+  en <%= params[:year] %> (<%= ratio_interventions(data[:sum], nb_interventions) %> % des interventions)
+</div>

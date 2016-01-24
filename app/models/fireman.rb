@@ -108,7 +108,7 @@ class Fireman < ActiveRecord::Base
                               .pluck('COALESCE(SUM(TIMESTAMPDIFF(MINUTE, start_date, end_date)), 0) AS duration, COUNT(*) AS total')
 
     result = {:duration => data[0][0],
-              :total    => data[0][1]}
+              :sum    => data[0][1]}
   end
 
   def stats_interventions_by_role(year)
