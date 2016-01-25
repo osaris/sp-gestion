@@ -44,7 +44,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-multiselect'
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ujs'
-  gem 'rails-assets-jquery-migrate'
+  gem 'rails-assets-jquery-migrate-official'
   gem 'rails-assets-jqueryui'
   gem 'rails-assets-jQuery-Timepicker-Addon'
   gem 'rails-assets-pwstrength-bootstrap'

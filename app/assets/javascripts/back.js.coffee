@@ -1,5 +1,5 @@
 #= require jquery
-#= require jquery-migrate
+#= require jquery-migrate-official/src/migrate
 #= require jquery-ujs
 #= require jqueryui
 #= require jqueryui/ui/datepicker
