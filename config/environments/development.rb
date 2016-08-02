@@ -29,6 +29,9 @@ SpGestion::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
+
   config.base_url = SPG_CONFIG[:base_url]
 
   # Configure emails
