@@ -5,7 +5,6 @@ class ItemsController < BackController
 
   before_action :load_check_list, :except => [:expirings]
   before_action :load_item, :except => [:new, :create, :expirings]
-  skip_before_action :require_html_request, :only => [:expirings]
 
   def expirings
     authorize!(:read, Item)

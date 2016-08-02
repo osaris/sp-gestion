@@ -5,7 +5,6 @@ class CheckListsController < BackController
 
   before_action :load_check_list, :except => [:index, :new, :create]
   before_action :reset_back_path # for expirings items back link
-  skip_before_action :require_html_request, :only => [:show]
 
   def index
     @check_lists = @station.check_lists
