@@ -22,7 +22,7 @@ class ConvocationFiremenController < BackController
     else
       flash.now[:error] = "Convocation échue ou non trouvée !"
     end
-    render(:text => '', :layout => 'login')
+    render(:html => '', :layout => 'login')
   end
 
   def edit_all
