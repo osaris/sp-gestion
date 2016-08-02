@@ -69,6 +69,6 @@ class FiremanAvailability < ActiveRecord::Base
   private
 
   def check_valid_date
-    availability > Date.today
+    throw :abort unless availability > Date.today
   end
 end
