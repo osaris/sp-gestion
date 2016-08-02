@@ -20,7 +20,7 @@ describe ConvocationFiremenController do
     describe "GET :accept on non existing convocation" do
 
       before(:each) do
-        get :accept, :convocation_id => -1, :id => -1
+        get :accept, :params => { :convocation_id => -1, :id => -1 }
       end
 
       it { should respond_with(:success) }
@@ -35,8 +35,10 @@ describe ConvocationFiremenController do
         allow_any_instance_of(ConvocationValidator).to receive(:validate).and_return(true)
         allow_any_instance_of(Convocation).to receive(:editable?).and_return(false)
 
-        get :accept, :convocation_id => Digest::SHA1.hexdigest(conv_conf.id.to_s),
+        get :accept, :params => {
+                     :convocation_id => Digest::SHA1.hexdigest(conv_conf.id.to_s),
                      :id => Digest::SHA1.hexdigest(conv_conf.convocation_firemen.first.id.to_s)
+                    }
       end
 
       it { should respond_with(:success) }
@@ -48,8 +50,10 @@ describe ConvocationFiremenController do
     describe "GET :accept on a confirmable convocation" do
 
       before(:each) do
-        get :accept, :convocation_id => Digest::SHA1.hexdigest(conv_conf.id.to_s),
-                     :id =>Digest::SHA1.hexdigest(conv_conf.convocation_firemen.first.id.to_s)
+        get :accept, :params => {
+                      :convocation_id => Digest::SHA1.hexdigest(conv_conf.id.to_s),
+                      :id =>Digest::SHA1.hexdigest(conv_conf.convocation_firemen.first.id.to_s)
+                      }
       end
 
       it { should respond_with(:success) }
@@ -64,8 +68,10 @@ describe ConvocationFiremenController do
         allow_any_instance_of(ConvocationValidator).to receive(:validate).and_return(true)
         allow_any_instance_of(Convocation).to receive(:editable?).and_return(false)
 
-        get :accept, :convocation_id => Digest::SHA1.hexdigest(conv_not_conf.id.to_s),
-                     :id => Digest::SHA1.hexdigest(conv_not_conf.convocation_firemen.first.id.to_s)
+        get :accept, :params => {
+                      :convocation_id => Digest::SHA1.hexdigest(conv_not_conf.id.to_s),
+                      :id => Digest::SHA1.hexdigest(conv_not_conf.convocation_firemen.first.id.to_s)
+                      }
       end
 
       it { should respond_with(:success) }
@@ -77,8 +83,10 @@ describe ConvocationFiremenController do
     describe "GET :accept on a non confirmable convocation" do
 
       before(:each) do
-        get :accept, :convocation_id => Digest::SHA1.hexdigest(conv_not_conf.id.to_s),
-                     :id =>Digest::SHA1.hexdigest(conv_not_conf.convocation_firemen.first.id.to_s)
+        get :accept, :params => {
+                      :convocation_id => Digest::SHA1.hexdigest(conv_not_conf.id.to_s),
+                      :id =>Digest::SHA1.hexdigest(conv_not_conf.convocation_firemen.first.id.to_s)
+                      }
       end
 
       it { should respond_with(:success) }
@@ -99,7 +107,7 @@ describe ConvocationFiremenController do
     describe "GET :edit on non existing convocation" do
 
       before(:each) do
-        get :edit_all, :convocation_id => 10
+        get :edit_all, :params => { :convocation_id => 10 }
       end
 
       it { should respond_with(:redirect) }
@@ -111,7 +119,7 @@ describe ConvocationFiremenController do
     describe "GET :edit_all" do
 
       before(:each) do
-        get :edit_all, :convocation_id => convocation.id
+        get :edit_all, :params => { :convocation_id => convocation.id }
       end
 
       it { should respond_with(:success) }
@@ -127,7 +135,7 @@ describe ConvocationFiremenController do
       before(:each) do
         @request.env["SERVER_PROTOCOL"] = "http"
 
-        get :show, :convocation_id => convocation.id, :id => convocation.convocation_firemen.first.id, :format => 'pdf'
+        get :show, :params => { :convocation_id => convocation.id, :id => convocation.convocation_firemen.first.id, :format => 'pdf' }
       end
 
       it { should respond_with(:success) }
@@ -142,7 +150,7 @@ describe ConvocationFiremenController do
       before(:each) do
         @request.env["SERVER_PROTOCOL"] = "http"
 
-        get :show_all, :convocation_id => convocation.id, :format => 'pdf'
+        get :show_all, :params => { :convocation_id => convocation.id, :format => 'pdf' }
       end
 
       it { should respond_with(:success) }
@@ -157,7 +165,7 @@ describe ConvocationFiremenController do
       before(:each) do
         convocation_firemen_id = convocation.convocation_firemen.first.id
 
-        post :update_all, :convocation_id => convocation.id, :convocation_firemen => { convocation_firemen_id.to_s => {:presence => 1 }}
+        post :update_all, :params => { :convocation_id => convocation.id, :convocation_firemen => { convocation_firemen_id.to_s => {:presence => 1 }} }
       end
 
       it { should respond_with(:redirect) }

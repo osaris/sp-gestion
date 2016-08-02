@@ -27,7 +27,7 @@ describe DaybooksController do
     describe "GET :show for a non existing daybook" do
 
       before(:each) do
-        get :show, :id => -1
+        get :show, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -50,7 +50,7 @@ describe DaybooksController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :daybook => {:text => ''}
+        post :create, :params => { :daybook => {:text => ''} }
       end
 
       it { should respond_with(:success) }
@@ -61,7 +61,7 @@ describe DaybooksController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :daybook => attributes_for(:daybook)
+        post :create, :params => { :daybook => attributes_for(:daybook) }
       end
 
       it { should respond_with(:redirect) }
@@ -74,7 +74,7 @@ describe DaybooksController do
     describe "GET :show on existing daybook" do
 
       before(:each) do
-        get :show, :id => daybook.id
+        get :show, :params => { :id => daybook.id }
       end
 
       it { should respond_with(:success) }
@@ -85,7 +85,7 @@ describe DaybooksController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => daybook.id
+        get :edit, :params => { :id => daybook.id }
       end
 
       it { should respond_with(:success) }
@@ -96,7 +96,7 @@ describe DaybooksController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => daybook.id, :daybook => {:text => ''}
+        patch :update, :params => { :id => daybook.id, :daybook => {:text => ''} }
       end
 
       it { should respond_with(:success) }
@@ -107,7 +107,7 @@ describe DaybooksController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => daybook.id, :daybook => attributes_for(:daybook)
+        patch :update, :params => { :id => daybook.id, :daybook => attributes_for(:daybook) }
       end
 
       it { should respond_with(:redirect) }
@@ -119,7 +119,7 @@ describe DaybooksController do
     describe "DELETE :destroy" do
 
       before(:each) do
-        delete :destroy, :id => daybook.id
+        delete :destroy, :params => { :id => daybook.id }
       end
 
       it { should redirect_to(daybooks_path) }

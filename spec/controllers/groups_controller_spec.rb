@@ -30,7 +30,7 @@ describe GroupsController do
     describe "GET :show for a non existing group" do
 
       before(:each) do
-        get :show, :id => -1
+        get :show, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -53,7 +53,7 @@ describe GroupsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :group => {:name => ''}
+        post :create, :params => { :group => {:name => ''} }
       end
 
       it { should respond_with(:success) }
@@ -64,7 +64,7 @@ describe GroupsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :group => attributes_for(:group)
+        post :create, :params => { :group => attributes_for(:group) }
       end
 
       it { should respond_with(:redirect) }
@@ -77,7 +77,7 @@ describe GroupsController do
     describe "GET :show on existing group" do
 
       before(:each) do
-        get :show, :id => group.id
+        get :show, :params => { :id => group.id }
       end
 
       it { should respond_with(:success) }
@@ -88,7 +88,7 @@ describe GroupsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => group.id
+        get :edit, :params => { :id => group.id }
       end
 
       it { should respond_with(:success) }
@@ -99,7 +99,7 @@ describe GroupsController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => group.id, :group => {:name => ''}
+        patch :update, :params => { :id => group.id, :group => {:name => ''} }
       end
 
       it { should respond_with(:success) }
@@ -110,7 +110,7 @@ describe GroupsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => group.id, :group => attributes_for(:group)
+        patch :update, :params => { :id => group.id, :group => attributes_for(:group) }
       end
 
       it { should respond_with(:redirect) }
@@ -122,7 +122,7 @@ describe GroupsController do
     describe "DELETE :destroy" do
 
       before(:each) do
-        delete :destroy, :id => group.id
+        delete :destroy, :params => { :id => group.id }
       end
 
       it { should redirect_to(groups_path) }

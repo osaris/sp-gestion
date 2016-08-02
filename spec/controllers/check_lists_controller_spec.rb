@@ -27,7 +27,7 @@ describe CheckListsController do
     describe "GET :show for a non existing check-list" do
 
       before(:each) do
-        get :show, :id => -1
+        get :show, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -50,7 +50,7 @@ describe CheckListsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :check_list => {:title => ''}
+        post :create, :params => { :check_list => {:title => ''} }
       end
 
       it { should respond_with(:success) }
@@ -61,7 +61,7 @@ describe CheckListsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :check_list => attributes_for(:check_list)
+        post :create, :params => { :check_list => attributes_for(:check_list) }
       end
 
       it { should respond_with(:redirect) }
@@ -74,7 +74,7 @@ describe CheckListsController do
     describe "GET :show on existing check_list" do
 
       before(:each) do
-        get :show, :id => check_list.id
+        get :show, :params => { :id => check_list.id }
       end
 
       it { should respond_with(:success) }
@@ -86,7 +86,7 @@ describe CheckListsController do
 
       before(:each) do
         @request.env["SERVER_PROTOCOL"] = "http"
-        get :show, :id => check_list.id, :format => 'pdf'
+        get :show, :params => { :id => check_list.id, :format => 'pdf' }
       end
 
       it { should respond_with(:success) }
@@ -99,7 +99,7 @@ describe CheckListsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => check_list.id
+        get :edit, :params => { :id => check_list.id }
       end
 
       it { should respond_with(:success) }
@@ -110,7 +110,7 @@ describe CheckListsController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => check_list.id, :check_list => {:title => ''}
+        patch :update, :params => { :id => check_list.id, :check_list => {:title => ''} }
       end
 
       it { should respond_with(:success) }
@@ -121,7 +121,7 @@ describe CheckListsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => check_list.id, :check_list => attributes_for(:check_list)
+        patch :update, :params => { :id => check_list.id, :check_list => attributes_for(:check_list) }
       end
 
       it { should respond_with(:redirect) }
@@ -132,7 +132,7 @@ describe CheckListsController do
     describe "DELETE :destroy" do
 
       before(:each) do
-        delete :destroy, :id => check_list.id
+        delete :destroy, :params => { :id => check_list.id }
       end
 
       it { should redirect_to(check_lists_path) }
@@ -143,7 +143,7 @@ describe CheckListsController do
     describe "POST :copy" do
 
       before(:each) do
-        post :copy, :id => check_list.id
+        post :copy, :params => { :id => check_list.id }
       end
 
       it { should redirect_to(check_lists_path) }

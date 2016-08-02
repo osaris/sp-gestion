@@ -16,8 +16,8 @@ describe StationsController do
   describe "POST :create with bad data" do
 
     before(:each) do
-      post :create, :station => {:name => 'test', :url => 'él3 ek'},
-                    :user => {:email => 'raphael', :password => '213', :password_confirmation => '123'}
+      post :create, :params => { :station => {:name => 'test', :url => 'él3 ek'},
+                    :user => {:email => 'raphael', :password => '213', :password_confirmation => '123'} }
     end
 
     it { should respond_with(:success) }
@@ -28,7 +28,7 @@ describe StationsController do
   describe "POST :create with good data" do
 
     before(:each) do
-      post :create, :station => attributes_for(:station), :user => attributes_for(:user)
+      post :create, :params => { :station => attributes_for(:station), :user => attributes_for(:user) }
     end
 
     it { should respond_with(:success) }
@@ -45,7 +45,7 @@ describe StationsController do
     before(:each) do
       allow(Station).to receive(:check).and_return(create(:station))
 
-      xhr :post, :check, :station => { :name => 'test' }
+      post :check, :params => { :station => { :name => 'test' } }, :xhr => true
     end
 
     it { should respond_with(:success) }
@@ -63,7 +63,7 @@ describe StationsController do
     before(:each) do
       allow_any_instance_of(Station).to receive(:check).and_return(nil)
 
-      xhr :post, :check, :station => { :name => 'test' }
+      post :check, :params => { :station => { :name => 'test' } }, :xhr => true
     end
 
     it { should respond_with(:success) }

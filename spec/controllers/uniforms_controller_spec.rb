@@ -28,7 +28,7 @@ describe UniformsController do
     describe "GET :show for a non existing uniform" do
 
       before(:each) do
-        get :show, :id => -1
+        get :show, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -51,7 +51,7 @@ describe UniformsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :uniform => {:title => '', :code => '2b', :description => 'test'}
+        post :create, :params => { :uniform => {:title => '', :code => '2b', :description => 'test'} }
       end
 
       it { should respond_with(:success) }
@@ -62,7 +62,7 @@ describe UniformsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :uniform => attributes_for(:uniform)
+        post :create, :params => { :uniform => attributes_for(:uniform) }
       end
 
       it { should respond_with(:redirect) }
@@ -86,7 +86,7 @@ describe UniformsController do
     describe "GET :show on existing uniform" do
 
       before(:each) do
-        get :show, :id => uniform.id
+        get :show, :params => { :id => uniform.id }
       end
 
       it { should respond_with(:success) }
@@ -97,7 +97,7 @@ describe UniformsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => uniform.id
+        get :edit, :params => { :id => uniform.id }
       end
 
       it { should respond_with(:success) }
@@ -108,7 +108,7 @@ describe UniformsController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => uniform.id, :uniform => {:title => '', :code => '2b', :description => 'test'}
+        patch :update, :params => { :id => uniform.id, :uniform => {:title => '', :code => '2b', :description => 'test'} }
       end
 
       it { should respond_with(:success) }
@@ -119,7 +119,7 @@ describe UniformsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => uniform.id, :uniform => attributes_for(:uniform)
+        patch :update, :params => { :id => uniform.id, :uniform => attributes_for(:uniform) }
       end
 
       it { should respond_with(:redirect) }
@@ -131,7 +131,7 @@ describe UniformsController do
     describe "DELETE :destroy without association" do
 
       before(:each) do
-        delete :destroy, :id => uniform.id
+        delete :destroy, :params => { :id => uniform.id }
       end
 
       it { should redirect_to(uniforms_path) }
@@ -144,7 +144,7 @@ describe UniformsController do
       before(:each) do
         allow_any_instance_of(Uniform).to receive(:convocations).and_return(double(:empty? => false))
 
-        delete :destroy, :id => uniform.id
+        delete :destroy, :params => { :id => uniform.id }
       end
 
       it { should redirect_to(uniform_path(assigns(:uniform))) }

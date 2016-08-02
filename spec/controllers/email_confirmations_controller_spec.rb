@@ -15,7 +15,7 @@ describe EmailConfirmationsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => user.perishable_token
+        get :edit, :params => { :id => user.perishable_token }
       end
 
       it { should respond_with(:success) }
@@ -26,10 +26,12 @@ describe EmailConfirmationsController do
     describe "PATCH :update with bad password" do
 
       before(:each) do
-        patch :update, :id => user.perishable_token,
-                     :user_session => { :email => user.email,
+        patch :update, :params => {
+                        :id => user.perishable_token,
+                        :user_session => { :email => user.email,
                                         :new_email => user.new_email,
                                         :password => '' }
+        }
       end
 
       it { should respond_with(:success) }
@@ -42,10 +44,11 @@ describe EmailConfirmationsController do
     describe "PATCH :update with good password" do
 
       before(:each) do
-        patch :update, :id => user.perishable_token,
-                     :user_session => { :email => user.email,
+        patch :update, :params => { :id => user.perishable_token,
+                                    :user_session => { :email => user.email,
                                         :new_email => user.new_email,
                                         :password => 'test1234' }
+        }
       end
 
       it { should respond_with(:redirect) }
@@ -60,10 +63,11 @@ describe EmailConfirmationsController do
         user.new_email = create(:user_confirmed, :station => station).email
         user.save
 
-        patch :update, :id => user.perishable_token,
-                     :user_session => { :email => user.email,
+        patch :update, :params => {  :id => user.perishable_token,
+                                     :user_session => { :email => user.email,
                                         :new_email => user.new_email,
                                         :password => 'test1234' }
+        }
       end
 
       it { should respond_with(:redirect) }
@@ -84,7 +88,7 @@ describe EmailConfirmationsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => user.perishable_token
+        get :edit, :params => { :id => user.perishable_token }
       end
 
       it { should respond_with(:redirect) }

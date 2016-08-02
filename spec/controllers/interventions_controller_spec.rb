@@ -36,7 +36,7 @@ describe InterventionsController do
       describe "GET :stats with bad year" do
 
         before(:each) do
-          get :stats, :year => (Date.today.year-1).to_s, :type => 'by_month'
+          get :stats, :params => { :year => (Date.today.year-1).to_s, :type => 'by_month' }
         end
 
         it { should redirect_to(interventions_stats_path((Date.today.year), 'by_month')) }
@@ -45,7 +45,7 @@ describe InterventionsController do
       describe "GET :stats with bad type" do
 
         before(:each) do
-          get :stats, :year => Date.today.year.to_s, :type => 'by_badtype'
+          get :stats, :params => { :year => Date.today.year.to_s, :type => 'by_badtype' }
         end
 
         it { should redirect_to(interventions_stats_path(Date.today.year, 'by_type')) }
@@ -54,7 +54,7 @@ describe InterventionsController do
       describe "GET :stats" do
 
         before(:each) do
-          get :stats, :year => Date.today.year.to_s, :type => "by_month"
+          get :stats, :params => { :year => Date.today.year.to_s, :type => "by_month" }
         end
 
         it { should respond_with(:success) }
@@ -69,7 +69,7 @@ describe InterventionsController do
     describe "GET :stats_change_year" do
 
       before(:each) do
-        get :stats_change_year, :type => 'by_month', :new_year => (Date.today.year+1).to_s
+        get :stats_change_year, :params => { :type => 'by_month', :new_year => (Date.today.year+1).to_s }
       end
 
       it { should respond_with(:redirect) }
@@ -81,7 +81,7 @@ describe InterventionsController do
       before(:each) do
         allow_any_instance_of(Station).to receive(:interventions).and_return(double(:latest => double(:first => nil)))
 
-        get :stats, :year => Date.today.year.to_s, :type => "by_month"
+        get :stats, :params => { :year => Date.today.year.to_s, :type => "by_month" }
       end
 
       it { should respond_with(:redirect) }
@@ -93,7 +93,7 @@ describe InterventionsController do
     describe "GET :show for a non existing intervention" do
 
       before(:each) do
-        get :show, :id => 2458437589
+        get :show, :params => { :id => 2458437589 }
       end
 
       it { should respond_with(:redirect) }
@@ -116,7 +116,7 @@ describe InterventionsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_interventions_attributes => {}}
+        post :create, :params => { :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_interventions_attributes => {}} }
       end
 
       it { should respond_with(:success) }
@@ -127,7 +127,8 @@ describe InterventionsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
+        post :create, :params => {
+                        :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
                                         :start_date => I18n.localize(3.hours.ago),
                                         :end_date => I18n.localize(2.hours.ago),
                                         :fireman_interventions_attributes => {
@@ -135,7 +136,7 @@ describe InterventionsController do
                                             :enable => '1',
                                             :fireman_id => fireman.id.to_s,
                                             :intervention_role_id => '',
-                                          }}}
+                                          }}}}
       end
 
       it { should respond_with(:redirect) }
@@ -156,7 +157,7 @@ describe InterventionsController do
       describe "GET :edit" do
 
         before(:each) do
-          get :edit, :id => intervention.id
+          get :edit, :params => { :id => intervention.id }
         end
 
         it { should respond_with(:redirect) }
@@ -168,7 +169,7 @@ describe InterventionsController do
       describe "PATCH :update with good data" do
 
         before(:each) do
-          patch :update, :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
+          patch :update, :params => { :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
                                                                   :start_date => I18n.localize(3.hours.ago),
                                                                   :end_date => I18n.localize(2.hours.ago),
                                                                   :fireman_interventions_attributes => {
@@ -176,7 +177,7 @@ describe InterventionsController do
                                                                       :enable => '1',
                                                                       :fireman_id => fireman.id.to_s,
                                                                       :intervention_role_id => '',
-                                                                    }}}
+                                                                    }}}}
         end
 
         it { should respond_with(:redirect) }
@@ -197,7 +198,7 @@ describe InterventionsController do
       describe "GET :show" do
 
         before(:each) do
-          get :show, :id => intervention.id
+          get :show, :params => { :id => intervention.id }
         end
 
         it { should respond_with(:success) }
@@ -208,7 +209,7 @@ describe InterventionsController do
       describe "GET :edit" do
 
         before(:each) do
-          get :edit, :id => intervention.id
+          get :edit, :params => { :id => intervention.id }
         end
 
         it { should respond_with(:success) }
@@ -219,7 +220,7 @@ describe InterventionsController do
       describe "PATCH :update with bad data" do
 
         before(:each) do
-          patch :update, :id => intervention.id, :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_interventions_attributes => {}}
+          patch :update, :params => { :id => intervention.id, :intervention => {:place => '', :city => '', :kind => '', :start_date => '', :end_date => '', :fireman_interventions_attributes => {}}}
         end
 
         it { should respond_with(:success) }
@@ -230,7 +231,7 @@ describe InterventionsController do
       describe "PATCH :update with good data" do
 
         before(:each) do
-          patch :update, :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
+          patch :update, :params => { :id => intervention.id, :intervention => {:place => 'Test', :city => 'MyCity', :kind => '1',
                                                                   :start_date => I18n.localize(3.hours.ago),
                                                                   :end_date => I18n.localize(2.hours.ago),
                                                                   :fireman_interventions_attributes => {
@@ -238,7 +239,7 @@ describe InterventionsController do
                                                                       :enable => '1',
                                                                       :fireman_id => fireman.id.to_s,
                                                                       :intervention_role_id => '',
-                                                                    }}}
+                                                                    }}}}
         end
 
         it { should respond_with(:redirect) }
@@ -250,7 +251,7 @@ describe InterventionsController do
       describe "DELETE :destroy" do
 
         before(:each) do
-          delete :destroy, :id => intervention.id
+          delete :destroy, :params => { :id => intervention.id }
         end
 
         it { should redirect_to(interventions_path) }

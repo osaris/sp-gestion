@@ -23,7 +23,7 @@ describe FiremanAvailabilitiesController do
     describe "GET :index on non existing fireman" do
 
       before(:each) do
-        get :index, :fireman_id => -1, :format => :html
+        get :index, :params => { :fireman_id => -1, :format => :html }
       end
 
       it { should respond_with(:redirect) }
@@ -38,7 +38,7 @@ describe FiremanAvailabilitiesController do
         fireman
         allow_any_instance_of(Fireman).to receive(:status) { Fireman::STATUS['JSP'] }
 
-        get :index, :fireman_id => fireman.id, :format => :html
+        get :index, :params => { :fireman_id => fireman.id, :format => :html }
       end
 
       it { should respond_with(:redirect) }
@@ -51,8 +51,9 @@ describe FiremanAvailabilitiesController do
     describe "GET :index with JSON format" do
 
       before(:each) do
-        get :index, :fireman_id => fireman.id, :start => '2014-11-24',
+        get :index, :params => { :fireman_id => fireman.id, :start => '2014-11-24',
                     :end => '2014-11-30', :format => :json
+        }
       end
 
       it { should respond_with(:success) }
@@ -63,7 +64,7 @@ describe FiremanAvailabilitiesController do
     describe "GET :index with HTML format" do
 
       before(:each) do
-        get :index, :fireman_id => fireman.id
+        get :index, :params => { :fireman_id => fireman.id }
       end
 
       it { should respond_with(:success) }
@@ -74,10 +75,12 @@ describe FiremanAvailabilitiesController do
     describe "POST :create" do
 
       before(:each) do
-        post :create, :fireman_id => fireman.id,
-                      :fireman_availability => { :fireman_id => fireman.id,
+        post :create, :params => {
+                            :fireman_id => fireman.id,
+                            :fireman_availability => { :fireman_id => fireman.id,
                                                  :availability => (Time.now + 1.day).to_s },
-                      :format => :json
+                            :format => :json
+        }
       end
 
       it { should respond_with(:success) }
@@ -88,10 +91,12 @@ describe FiremanAvailabilitiesController do
     describe "POST :create with error" do
 
       before(:each) do
-        post :create, :fireman_id => fireman.id,
-                      :fireman_availability => { :fireman_id => fireman.id,
+        post :create, :params => {
+                            :fireman_id => fireman.id,
+                            :fireman_availability => { :fireman_id => fireman.id,
                                                  :availability => '2014-11-30T16:00:00+01:00' },
-                      :format => :json
+                            :format => :json
+        }
       end
 
       it { should respond_with(:unprocessable_entity) }
@@ -101,9 +106,10 @@ describe FiremanAvailabilitiesController do
     describe "POST :create_all" do
 
       before(:each) do
-        post :create_all, :fireman_id => fireman.id,
-                          :fireman_availability => { :fireman_id => fireman.id,
+        post :create_all, :params => { :fireman_id => fireman.id,
+                                       :fireman_availability => { :fireman_id => fireman.id,
                                                      :availability => '2014-12-18T00:00:00+01:00'}
+        }
       end
 
       it { should respond_with(:success) }
@@ -113,9 +119,9 @@ describe FiremanAvailabilitiesController do
     describe "DELETE :destroy" do
 
       before(:each) do
-        delete :destroy, :fireman_id => fireman.id,
+        delete :destroy, :params => { :fireman_id => fireman.id,
                          :id => fireman_availability.id,
-                         :format => :json
+                         :format => :json }
       end
 
       it { should respond_with(:success) }
@@ -125,9 +131,9 @@ describe FiremanAvailabilitiesController do
     describe "DELETE :destroy with error" do
 
       before(:each) do
-        delete :destroy, :fireman_id => fireman.id,
+        delete :destroy, :params => { :fireman_id => fireman.id,
                          :id => fireman_availability_passed.id,
-                         :format => :json
+                         :format => :json }
       end
 
       it { should respond_with(:unprocessable_entity) }
@@ -137,7 +143,7 @@ describe FiremanAvailabilitiesController do
     describe "DELETE :destroy not found" do
 
       before(:each) do
-        delete :destroy, :fireman_id => fireman.id, :id => -1, :format => :json
+        delete :destroy, :params => { :fireman_id => fireman.id, :id => -1, :format => :json }
       end
 
       it { should respond_with(:not_found) }
@@ -147,9 +153,9 @@ describe FiremanAvailabilitiesController do
     describe "DELETE :destroy_all" do
 
       before(:each) do
-        delete :destroy_all, :fireman_id => fireman.id,
+        delete :destroy_all, :params => { :fireman_id => fireman.id,
                              :fireman_availability => { :fireman_id => fireman.id,
-                                                        :availability => '2014-12-18T00:00:00+01:00'}
+                                                        :availability => '2014-12-18T00:00:00+01:00'} }
       end
 
       it { should respond_with(:success) }

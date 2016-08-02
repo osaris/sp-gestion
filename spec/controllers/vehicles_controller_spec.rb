@@ -40,7 +40,7 @@ describe VehiclesController do
     describe "GET :show for a non existing vehicle" do
 
       before(:each) do
-        get :show, :id => -1
+        get :show, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -63,7 +63,7 @@ describe VehiclesController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :vehicle => {:name => ''}
+        post :create, :params => { :vehicle => {:name => ''} }
       end
 
       it { should respond_with(:success) }
@@ -74,7 +74,7 @@ describe VehiclesController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :vehicle => attributes_for(:vehicle)
+        post :create, :params => { :vehicle => attributes_for(:vehicle) }
       end
 
       it { should respond_with(:redirect) }
@@ -87,7 +87,7 @@ describe VehiclesController do
     describe "GET :show on existing vehicle" do
 
       before(:each) do
-        get :show, :id => vehicle.id
+        get :show, :params => { :id => vehicle.id }
       end
 
       it { should respond_with(:success) }
@@ -98,7 +98,7 @@ describe VehiclesController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => vehicle.id
+        get :edit, :params => { :id => vehicle.id }
       end
 
       it { should respond_with(:success) }
@@ -109,7 +109,7 @@ describe VehiclesController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => vehicle.id, :vehicle => {:name => ''}
+        patch :update, :params => { :id => vehicle.id, :vehicle => {:name => ''} }
       end
 
       it { should respond_with(:success) }
@@ -120,7 +120,7 @@ describe VehiclesController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => vehicle.id, :vehicle => attributes_for(:vehicle)
+        patch :update, :params => { :id => vehicle.id, :vehicle => attributes_for(:vehicle) }
       end
 
       it { should respond_with(:redirect) }
@@ -132,7 +132,7 @@ describe VehiclesController do
     describe "DELETE :destroy without association" do
 
       before(:each) do
-        delete :destroy, :id => vehicle.id
+        delete :destroy, :params => { :id => vehicle.id }
       end
 
       it { should redirect_to(vehicles_path) }
@@ -145,7 +145,7 @@ describe VehiclesController do
       before(:each) do
         allow_any_instance_of(Vehicle).to receive(:interventions).and_return(double(:empty? => false))
 
-        delete :destroy, :id => vehicle.id
+        delete :destroy, :params => { :id => vehicle.id }
       end
 
       it { should redirect_to(vehicle_path(assigns(:vehicle))) }

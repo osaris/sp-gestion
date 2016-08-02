@@ -33,7 +33,7 @@ describe ItemsController do
       before(:each) do
         @request.env["SERVER_PROTOCOL"] = "http"
 
-        get :expirings, :format => 'pdf'
+        get :expirings, :params => { :format => 'pdf' }
       end
 
       it { should respond_with(:success) }
@@ -46,7 +46,7 @@ describe ItemsController do
     describe "GET :show for a non existing check_list" do
 
       before(:each) do
-        get :show, :check_list_id => -1, :id => -1
+        get :show, :params => { :check_list_id => -1, :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -58,7 +58,7 @@ describe ItemsController do
     describe "GET :show for a non existing item on an existing check_list" do
 
       before(:each) do
-        get :show, :check_list_id => check_list.id, :id => -1
+        get :show, :params => { :check_list_id => check_list.id, :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -70,7 +70,7 @@ describe ItemsController do
     describe "GET :edit for a non existing check_list" do
 
       before(:each) do
-        get :edit, :check_list_id => -1, :id => -1
+        get :edit, :params => { :check_list_id => -1, :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -82,7 +82,7 @@ describe ItemsController do
     describe "GET :edit for a non existing item on an existing check_list" do
 
       before(:each) do
-        get :edit, :check_list_id => check_list.id, :id => -1
+        get :edit, :params => { :check_list_id => check_list.id, :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -94,7 +94,7 @@ describe ItemsController do
     describe "GET :new" do
 
       before(:each) do
-        get :new, :check_list_id => check_list.id
+        get :new, :params => { :check_list_id => check_list.id }
       end
 
       it { should respond_with(:success) }
@@ -105,7 +105,7 @@ describe ItemsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :check_list_id => check_list.id, :item => {:title => ''}
+        post :create, :params => { :check_list_id => check_list.id, :item => {:title => ''} }
       end
 
       it { should respond_with(:success) }
@@ -116,8 +116,9 @@ describe ItemsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :check_list_id => check_list.id,
+        post :create, :params => {  :check_list_id => check_list.id,
                       :item => {:title => 'Test', :quantity => '1'}
+        }
       end
 
       it { should respond_with(:redirect) }
@@ -131,7 +132,7 @@ describe ItemsController do
     describe "GET :show" do
 
       before(:each) do
-        get :show, :check_list_id => check_list.id, :id => item.id
+        get :show, :params => { :check_list_id => check_list.id, :id => item.id }
       end
 
       it { should respond_with(:success) }
@@ -142,7 +143,7 @@ describe ItemsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :check_list_id => check_list.id, :id => item.id
+        get :edit, :params => { :check_list_id => check_list.id, :id => item.id }
       end
 
       it { should respond_with(:success) }
@@ -153,9 +154,9 @@ describe ItemsController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :check_list_id => check_list.id,
+        patch :update, :params => { :check_list_id => check_list.id,
                      :id => item.id,
-                     :item => {:title => '', :quantity => '1'}
+                     :item => {:title => '', :quantity => '1'}}
       end
 
       it { should respond_with(:success) }
@@ -166,9 +167,9 @@ describe ItemsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :check_list_id => check_list.id,
+        patch :update, :params => { :check_list_id => check_list.id,
                      :id => item.id,
-                     :item => {:title => 'Test', :quantity => '1'}
+                     :item => {:title => 'Test', :quantity => '1'}}
       end
 
       it { should respond_with(:redirect) }
@@ -183,9 +184,9 @@ describe ItemsController do
       before(:each) do
         session[:back_path] = expirings_items_path
 
-        patch :update, :check_list_id => check_list.id,
+        patch :update, :params => { :check_list_id => check_list.id,
                      :id => item.id,
-                     :item => {:title => 'Test', :quantity => '1'}
+                     :item => {:title => 'Test', :quantity => '1'}}
       end
 
       it { should respond_with(:redirect) }
@@ -197,7 +198,7 @@ describe ItemsController do
     describe "DELETE :destroy" do
 
       before(:each) do
-        delete :destroy, :check_list_id => check_list.id, :id => item.id
+        delete :destroy, :params => { :check_list_id => check_list.id, :id => item.id }
       end
 
       it { should redirect_to(check_list_path(assigns(:check_list))) }
@@ -210,7 +211,7 @@ describe ItemsController do
       before(:each) do
         session[:back_path] = expirings_items_path
 
-        delete :destroy, :check_list_id => check_list.id, :id => item.id
+        delete :destroy, :params => { :check_list_id => check_list.id, :id => item.id }
       end
 
       it { should respond_with(:redirect) }
