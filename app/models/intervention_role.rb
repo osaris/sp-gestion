@@ -12,7 +12,7 @@ class InterventionRole < ActiveRecord::Base
 
   def check_associations
     unless self.fireman_intervention.empty?
-      self.errors[:base] << "Impossible de supprimer ce rôle car il est attribué à des personnes en intervention." and return false
+      self.errors.add(:base, "Impossible de supprimer ce rôle car il est attribué à des personnes en intervention.") and throw :abort
     end
   end
 end

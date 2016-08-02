@@ -26,7 +26,7 @@ class Uniform < ActiveRecord::Base
 
   def check_associations
     unless self.convocations.empty?
-      self.errors[:base] << "Impossible de supprimer cette tenue car elle est utilisée par une ou plusieurs convocations." and return false
+      self.errors.add(:base, "Impossible de supprimer cette tenue car elle est utilisée par une ou plusieurs convocations.") and throw :abort
     end
   end
 

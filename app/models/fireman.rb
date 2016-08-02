@@ -172,13 +172,13 @@ class Fireman < ActiveRecord::Base
 
   def check_associations
     unless self.convocations.empty?
-      self.errors[:base] << "Impossible de supprimer cette personne car elle possède des convocations." and return false
+      self.errors.add(:base, "Impossible de supprimer cette personne car elle possède des convocations.") and throw :abort
     end
     unless self.interventions.empty?
-      self.errors[:base] << "Impossible de supprimer cette personne car elle a effectué des interventions." and return false
+      self.errors.add(:base, "Impossible de supprimer cette personne car elle a effectué des interventions."? and throw :abort
     end
     unless self.trainings.empty?
-      self.errors[:base] << "Impossible de supprimer cette personne car elle a effectué des formations." and return false
+      self.errors.add(:base, "Impossible de supprimer cette personne car elle a effectué des formations.") and throw :abort
     end
   end
 
