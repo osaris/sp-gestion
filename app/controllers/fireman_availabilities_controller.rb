@@ -37,11 +37,11 @@ class FiremanAvailabilitiesController < BackController
       format.json do
         begin
           @station.fireman_availabilities.destroy(params[:id])
-          render :nothing => true, :status => :ok
+          head :ok
         rescue ActiveRecord::RecordNotDestroyed
-          render :nothing => true, :status => :unprocessable_entity
+          head :unprocessable_entity
         rescue ActiveRecord::RecordNotFound
-          render :nothing => true, :status => :not_found
+          head :not_found
         end
       end
     end
