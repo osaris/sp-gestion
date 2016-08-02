@@ -175,7 +175,7 @@ class Fireman < ActiveRecord::Base
       self.errors.add(:base, "Impossible de supprimer cette personne car elle possède des convocations.") and throw :abort
     end
     unless self.interventions.empty?
-      self.errors.add(:base, "Impossible de supprimer cette personne car elle a effectué des interventions."? and throw :abort
+      self.errors.add(:base, "Impossible de supprimer cette personne car elle a effectué des interventions.") and throw :abort
     end
     unless self.trainings.empty?
       self.errors.add(:base, "Impossible de supprimer cette personne car elle a effectué des formations.") and throw :abort
