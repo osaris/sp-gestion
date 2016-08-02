@@ -1,6 +1,6 @@
 class PlanningsController < BackController
 
-  before_filter :load_params, :unless => lambda{ |controller| controller.request.format.html? }
+  before_action :load_params, :unless => lambda{ |controller| controller.request.format.html? }
 
   def show
     respond_to do |format|
