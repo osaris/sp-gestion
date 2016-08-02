@@ -58,6 +58,7 @@ source 'https://rails-assets.org' do
 end
 
 group :development do
+  gem 'puma'
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
