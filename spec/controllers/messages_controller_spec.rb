@@ -28,7 +28,7 @@ describe MessagesController do
     describe "GET :show for a non existing message" do
 
       before(:each) do
-        get :show, :id => 2458437589
+        get :show, :params => { :id => 2458437589 }
       end
 
       it { should respond_with(:redirect) }
@@ -40,7 +40,7 @@ describe MessagesController do
     describe "GET :show on existing message" do
 
       before(:each) do
-        get :show, :id => message.id
+        get :show, :params => { :id => message.id }
       end
 
       it { should respond_with(:success) }
@@ -51,7 +51,7 @@ describe MessagesController do
     describe "POST :mark_as_read on existing message" do
 
       before(:each) do
-        xhr :post, :mark_as_read, :id => message.id
+        post :mark_as_read, :params => { :id => message.id}, :xhr => true
       end
 
       it { should respond_with(:success) }

@@ -3,7 +3,6 @@ class MessagesController < BackController
   authorize_resource
 
   before_action :load_message, :except => :index
-  skip_before_action :require_html_request, :only => [:mark_as_read]
 
   def index
     @messages = current_user.messages

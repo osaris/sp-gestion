@@ -28,7 +28,7 @@ describe InterventionRolesController do
     describe "GET :show for a non existing intervention_role" do
 
       before(:each) do
-        get :show, :id => -1
+        get :show, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -51,7 +51,7 @@ describe InterventionRolesController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :intervention_role => {:name => '', :short_name => 'test'}
+        post :create, :params => { :intervention_role => {:name => '', :short_name => 'test'} }
       end
 
       it { should respond_with(:success) }
@@ -62,7 +62,7 @@ describe InterventionRolesController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :intervention_role => attributes_for(:intervention_role)
+        post :create, :params => { :intervention_role => attributes_for(:intervention_role) }
       end
 
       it { should respond_with(:redirect) }
@@ -75,7 +75,7 @@ describe InterventionRolesController do
     describe "GET :show on existing intervention_role" do
 
       before(:each) do
-        get :show, :id => intervention_role.id
+        get :show, :params => { :id => intervention_role.id }
       end
 
       it { should respond_with(:success) }
@@ -86,7 +86,7 @@ describe InterventionRolesController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => intervention_role.id
+        get :edit, :params => { :id => intervention_role.id }
       end
 
       it { should respond_with(:success) }
@@ -97,7 +97,7 @@ describe InterventionRolesController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => intervention_role.id, :intervention_role => {:name => '', :short_name => 'test'}
+        patch :update, :params => { :id => intervention_role.id, :intervention_role => {:name => '', :short_name => 'test'} }
       end
 
       it { should respond_with(:success) }
@@ -108,7 +108,7 @@ describe InterventionRolesController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => intervention_role.id, :intervention_role => attributes_for(:intervention_role)
+        patch :update, :params => { :id => intervention_role.id, :intervention_role => attributes_for(:intervention_role) }
       end
 
       it { should respond_with(:redirect) }
@@ -120,7 +120,7 @@ describe InterventionRolesController do
     describe "DELETE :destroy without association" do
 
       before(:each) do
-        delete :destroy, :id => intervention_role.id
+        delete :destroy, :params => { :id => intervention_role.id }
       end
 
       it { should redirect_to(intervention_roles_path) }
@@ -133,7 +133,7 @@ describe InterventionRolesController do
       before(:each) do
         allow_any_instance_of(InterventionRole).to receive(:fireman_intervention).and_return(double(:empty? => false))
 
-        delete :destroy, :id => intervention_role.id
+        delete :destroy, :params => { :id => intervention_role.id }
       end
 
       it { should redirect_to(intervention_role_path(assigns(:intervention_role))) }

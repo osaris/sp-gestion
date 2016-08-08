@@ -11,7 +11,7 @@ class UserSessionsController < BackController
   end
 
   def create
-    @user_session = @station.user_sessions.new(params[:user_session])
+    @user_session = @station.user_sessions.new(params[:user_session].try(:permit, :email, :password))
     if @user_session.save
       redirect_to(root_back_path)
     else

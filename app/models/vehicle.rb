@@ -31,10 +31,10 @@ class Vehicle < ActiveRecord::Base
 
   def check_associations
     unless self.interventions.empty?
-      self.errors[:base] << "Impossible de supprimer ce véhicule car il a \
+      self.errors.add(:base, "Impossible de supprimer ce véhicule car il a \
       effectué des interventions, vous pouvez lui indiquer une date de radiation \
       afin qu'il n'apparaisse plus dans la liste des véhicules pour la saisie des \
-      interventions." and return false
+      interventions.") and throw :abort
     end
   end
 

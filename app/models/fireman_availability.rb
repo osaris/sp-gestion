@@ -63,13 +63,12 @@ class FiremanAvailability < ActiveRecord::Base
 
   def self.destroy_all(fireman_id, day)
     date = DateTime.parse(day)
-    delete_all(:fireman_id   => fireman_id,
-               :availability => [date.beginning_of_day..date.end_of_day])
+    where(:fireman_id   => fireman_id, :availability => [date.beginning_of_day..date.end_of_day]).delete_all
   end
 
   private
 
   def check_valid_date
-    availability > Date.today
+    throw :abort unless availability > Date.today
   end
 end

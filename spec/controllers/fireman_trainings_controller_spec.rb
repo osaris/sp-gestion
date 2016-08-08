@@ -22,7 +22,7 @@ describe FiremanTrainingsController do
     describe "GET :index for a non existing fireman" do
 
       before(:each) do
-        get :show, :fireman_id => -1, :id => -1
+        get :show, :params => { :fireman_id => -1, :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -34,7 +34,7 @@ describe FiremanTrainingsController do
     describe "GET :index" do
 
       before(:each) do
-        get :index, :fireman_id => fireman.id
+        get :index, :params => { :fireman_id => fireman.id }
       end
 
       it { should respond_with(:success) }
@@ -47,7 +47,7 @@ describe FiremanTrainingsController do
     describe "GET :new" do
 
       before(:each) do
-        get :new, :fireman_id => fireman.id
+        get :new, :params => { :fireman_id => fireman.id }
       end
 
       it { should respond_with(:success) }
@@ -58,7 +58,7 @@ describe FiremanTrainingsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :fireman_id => fireman.id, :fireman_training => {:achieved_at => ''}
+        post :create, :params => { :fireman_id => fireman.id, :fireman_training => {:achieved_at => ''} }
       end
 
       it { should respond_with(:success) }
@@ -69,8 +69,8 @@ describe FiremanTrainingsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :fireman_id => fireman.id, :fireman_training => { :training_id => training.id.to_s,
-                                                                        :achieved_at => I18n.localize(2.days.ago) }
+        post :create, :params => { :fireman_id => fireman.id, :fireman_training => { :training_id => training.id.to_s,
+                                                                        :achieved_at => I18n.localize(2.days.ago) } }
       end
 
       it { should respond_with(:redirect) }
@@ -84,7 +84,7 @@ describe FiremanTrainingsController do
     describe "GET :show for a non existing training on an existing fireman" do
 
       before(:each) do
-        get :show, :fireman_id => fireman.id, :id => -1
+        get :show, :params => { :fireman_id => fireman.id, :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -96,7 +96,7 @@ describe FiremanTrainingsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :fireman_id => fireman.id, :id => fireman_training.id
+        get :edit, :params => { :fireman_id => fireman.id, :id => fireman_training.id }
       end
 
       it { should respond_with(:success) }
@@ -107,11 +107,12 @@ describe FiremanTrainingsController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :fireman_id => fireman.id, :id => fireman_training.id,
+        patch :update, :params => { :fireman_id => fireman.id, :id => fireman_training.id,
                                                  :fireman_training => {
                                                     :training_id => training.id.to_s,
                                                     :achieved_at => ''
                                                  }
+        }
       end
 
       it { should respond_with(:success) }
@@ -122,11 +123,12 @@ describe FiremanTrainingsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :fireman_id => fireman.id, :id => fireman_training.id,
+        patch :update, :params => { :fireman_id => fireman.id, :id => fireman_training.id,
                                                  :fireman_training => {
                                                     :training_id => training.id.to_s,
                                                     :achieved_at => I18n.localize(10.days.ago)
                                                  }
+        }
       end
 
       it { should respond_with(:redirect) }
@@ -138,7 +140,7 @@ describe FiremanTrainingsController do
     describe "DELETE :destroy" do
 
       before(:each) do
-        delete :destroy, :fireman_id => fireman.id, :id => fireman_training.id
+        delete :destroy, :params => { :fireman_id => fireman.id, :id => fireman_training.id }
       end
 
       it { should respond_with(:redirect) }

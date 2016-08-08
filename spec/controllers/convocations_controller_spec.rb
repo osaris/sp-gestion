@@ -32,7 +32,7 @@ describe ConvocationsController do
     describe "GET :show for a non existing convocation" do
 
       before(:each) do
-        get :show, :id => 2458437589
+        get :show, :params => { :id => 2458437589 }
       end
 
       it { should respond_with(:redirect) }
@@ -55,8 +55,8 @@ describe ConvocationsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :convocation => {:title => '', :date => '', :place => '',
-                                       :uniform_id => '', :fireman_ids => []}
+        post :create, :params => { :convocation => {:title => '', :date => '', :place => '',
+                                       :uniform_id => '', :fireman_ids => []}  }
       end
 
       it { should respond_with(:success) }
@@ -66,8 +66,8 @@ describe ConvocationsController do
 
     describe "POST :create with good data" do
       before(:each) do
-        post :create, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
-                                       :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s}
+        post :create, :params => { :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
+                                       :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s} }
       end
 
       it { should respond_with(:redirect) }
@@ -88,7 +88,7 @@ describe ConvocationsController do
       describe "GET :edit" do
 
         before(:each) do
-          get :edit, :id => convocation.id
+          get :edit, :params => { :id => convocation.id }
         end
 
         it { should respond_with(:redirect) }
@@ -100,8 +100,8 @@ describe ConvocationsController do
       describe "PATCH :update with good data" do
 
         before(:each) do
-          patch :update, :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
-                                                                :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s}
+          patch :update,:params => { :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
+                                                                :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s} }
         end
 
         it { should respond_with(:redirect) }
@@ -115,7 +115,7 @@ describe ConvocationsController do
         before(:each) do
           allow_any_instance_of(Station).to receive(:can_send_email?).and_return(true)
 
-          post :email, :id => convocation.id
+          post :email, :params => { :id => convocation.id }
         end
 
         it { should respond_with(:redirect) }
@@ -130,7 +130,7 @@ describe ConvocationsController do
       describe "GET :show on existing convocation" do
 
         before(:each) do
-          get :show, :id => convocation.id
+          get :show, :params => { :id => convocation.id }
         end
 
         it { should respond_with(:success) }
@@ -145,7 +145,7 @@ describe ConvocationsController do
         before(:each) do
           @request.env["SERVER_PROTOCOL"] = "http"
 
-          get :show, :id => convocation.id, :format => 'pdf'
+          get :show, :params => { :id => convocation.id, :format => 'pdf' }
         end
 
         it { should respond_with(:success) }
@@ -158,7 +158,7 @@ describe ConvocationsController do
       describe "GET :edit" do
 
         before(:each) do
-          get :edit, :id => convocation.id
+          get :edit, :params => { :id => convocation.id }
         end
 
         it { should respond_with(:success) }
@@ -169,8 +169,8 @@ describe ConvocationsController do
       describe "PATCH :update with bad data" do
 
         before(:each) do
-          patch :update, :id => convocation.id, :convocation => {:title => "", :date => I18n.localize(2.weeks.from_now), :place => "",
-                                                                :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s}
+          patch :update, :params => { :id => convocation.id, :convocation => {:title => "", :date => I18n.localize(2.weeks.from_now), :place => "",
+                                                                :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s} }
         end
 
         it { should respond_with(:success) }
@@ -181,8 +181,8 @@ describe ConvocationsController do
       describe "PATCH :update with good data" do
 
         before(:each) do
-          patch :update, :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
-                                                                :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s}
+          patch :update, :params => { :id => convocation.id, :convocation => {:title => "Test", :date => I18n.localize(2.weeks.from_now), :place => "Test lieu",
+                                                                :fireman_ids => [fireman.id.to_s], :uniform_id => uniform.id.to_s} }
         end
 
         it { should respond_with(:redirect) }
@@ -194,7 +194,7 @@ describe ConvocationsController do
       describe "DELETE :destroy" do
 
         before(:each) do
-          delete :destroy, :id => convocation.id
+          delete :destroy, :params => { :id => convocation.id }
         end
 
         it { should redirect_to(convocations_path) }
@@ -207,7 +207,7 @@ describe ConvocationsController do
         before(:each) do
           allow_any_instance_of(Station).to receive(:can_send_email?).and_return(true)
 
-          post :email, :id => convocation.id
+          post :email, :params => {:id => convocation.id}
         end
 
         it { should respond_with(:redirect) }
@@ -223,7 +223,7 @@ describe ConvocationsController do
           allow(controller).to receive(:render_to_string).with(any_args).and_return('erreur')
           allow_any_instance_of(Station).to receive(:can_send_email?).and_return(false)
 
-          post :email, :id => convocation.id
+          post :email, :params => { :id => convocation.id }
         end
 
         it { should respond_with(:redirect) }

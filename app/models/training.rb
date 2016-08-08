@@ -15,7 +15,7 @@ class Training < ActiveRecord::Base
 
   def check_associations
     unless self.firemen.empty?
-      self.errors[:base] << "Impossible de supprimer cette formation car elle a été effectuée par une ou plusieurs personnes." and return false
+      self.errors.add(:base, "Impossible de supprimer cette formation car elle a été effectuée par une ou plusieurs personnes.") and throw :abort
     end
   end
 

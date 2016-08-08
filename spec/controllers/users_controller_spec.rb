@@ -57,7 +57,7 @@ describe UsersController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :user => { :email => '' }
+        post :create, :params => { :user => { :email => '' } }
       end
 
       it { should respond_with(:success) }
@@ -68,7 +68,7 @@ describe UsersController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :user => { :email => 'raphael.emourgeon@gmail.com' }
+        post :create, :params => { :user => { :email => 'raphael.emourgeon@gmail.com' } }
       end
 
       it { should respond_with(:redirect) }
@@ -83,7 +83,7 @@ describe UsersController do
         # because rspec fails on render_to_string in controller
         allow(controller).to receive(:render_to_string).with(any_args).and_return('erreur')
 
-        delete :destroy, :id => user.id
+        delete :destroy, :params => { :id => user.id }
       end
 
       it { should respond_with(:redirect) }
@@ -99,7 +99,7 @@ describe UsersController do
       describe "DELETE :destroy for a non existing user" do
 
         before(:each) do
-          delete :destroy, :id => -1
+          delete :destroy, :params => { :id => -1 }
         end
 
         it { should respond_with(:redirect) }
@@ -111,7 +111,7 @@ describe UsersController do
       describe "DELETE :destroy" do
 
         before(:each) do
-          delete :destroy, :id => another_user.id
+          delete :destroy, :params => { :id => another_user.id }
         end
 
         it { should respond_with(:redirect) }

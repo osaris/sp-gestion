@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '5.0.0'
 
 gem 'mysql2'
 
@@ -45,7 +45,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-migrate-official'
-  gem 'rails-assets-jqueryui'
+  gem 'rails-assets-jqueryui', '1.11.4'
   gem 'rails-assets-jQuery-Timepicker-Addon'
   gem 'rails-assets-pwstrength-bootstrap'
   gem 'rails-assets-datatables'
@@ -58,6 +58,7 @@ source 'https://rails-assets.org' do
 end
 
 group :development do
+  gem 'puma'
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
@@ -75,4 +76,5 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end

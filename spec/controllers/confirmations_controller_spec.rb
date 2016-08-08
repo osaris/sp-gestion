@@ -17,7 +17,7 @@ describe ConfirmationsController do
       describe "GET :edit with good confirmation code" do
 
         before(:each) do
-          get :edit, :id => user.perishable_token
+          get :edit, :params => { :id => user.perishable_token }
         end
 
         it { should respond_with(:redirect) }
@@ -33,7 +33,7 @@ describe ConfirmationsController do
       describe "GET :edit with good confirmation code" do
 
         before(:each) do
-          get :edit, :id => user.perishable_token
+          get :edit, :params => { :id => user.perishable_token }
         end
 
         it { should respond_with(:success) }
@@ -44,9 +44,11 @@ describe ConfirmationsController do
       describe "POST :update with bad password" do
 
         before(:each) do
-          post :update, :id => user.perishable_token,
+          post :update, :params => {
+                        :id => user.perishable_token,
                         :user => {:password => '123',
                                   :password_confirmation => ''}
+                        }
         end
 
         it { should respond_with(:success) }
@@ -57,9 +59,11 @@ describe ConfirmationsController do
       describe "POST :update with good password" do
 
         before(:each) do
-          post :update, :id => user.perishable_token,
+          post :update, :params => {
+                        :id => user.perishable_token,
                         :user => {:password => '123456',
                                   :password_confirmation => '123456'}
+                        }
         end
 
         it { should respond_with(:redirect) }

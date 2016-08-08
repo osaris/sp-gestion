@@ -42,7 +42,7 @@ describe ProfilesController do
     describe "PATCH :update email with good data" do
 
       before(:each) do
-        patch :update, :user => { :new_email_tmp => 'test@test.com' }
+        patch :update, :params => { :user => { :new_email_tmp => 'test@test.com' } }
       end
 
       it { should respond_with(:redirect) }
@@ -54,7 +54,7 @@ describe ProfilesController do
     describe "PATCH :update email with bad data" do
 
       before(:each) do
-        patch :update, :user => { :new_email_tmp => '' }
+        patch :update, :params => { :user => { :new_email_tmp => '' } }
       end
 
       it { should respond_with(:success) }
@@ -65,7 +65,7 @@ describe ProfilesController do
     describe "PATCH :update password with good data" do
 
       before(:each) do
-        patch :update, :user => { :password => '123456', :password_confirmation => '123456' }
+        patch :update, :params => { :user => { :password => '123456', :password_confirmation => '123456' } }
       end
 
       it { should respond_with(:redirect) }
@@ -77,7 +77,7 @@ describe ProfilesController do
     describe "PATCH :update password with bad data" do
 
       before(:each) do
-        patch :update, :user => { :password => '123456', :password_confirmation => '' }
+        patch :update, :params => { :user => { :password => '123456', :password_confirmation => '' } }
       end
 
       it { should respond_with(:success) }

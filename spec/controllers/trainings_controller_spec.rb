@@ -28,7 +28,7 @@ describe TrainingsController do
     describe "GET :show for a non existing training" do
 
       before(:each) do
-        get :show, :id => -1
+        get :show, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -51,7 +51,7 @@ describe TrainingsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        post :create, :training => {:name => '', :short_name => 'test'}
+        post :create, :params => { :training => {:name => '', :short_name => 'test'} }
       end
 
       it { should respond_with(:success) }
@@ -62,7 +62,7 @@ describe TrainingsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        post :create, :training => attributes_for(:training)
+        post :create, :params => { :training => attributes_for(:training) }
       end
 
       it { should respond_with(:redirect) }
@@ -75,7 +75,7 @@ describe TrainingsController do
     describe "GET :show on existing training" do
 
       before(:each) do
-        get :show, :id => training.id
+        get :show, :params => { :id => training.id }
       end
 
       it { should respond_with(:success) }
@@ -86,7 +86,7 @@ describe TrainingsController do
     describe "GET :edit" do
 
       before(:each) do
-        get :edit, :id => training.id
+        get :edit, :params => { :id => training.id }
       end
 
       it { should respond_with(:success) }
@@ -97,7 +97,7 @@ describe TrainingsController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => training.id, :training => {:name => '', :short_name => 'test'}
+        patch :update, :params => { :id => training.id, :training => {:name => '', :short_name => 'test'} }
       end
 
       it { should respond_with(:success) }
@@ -108,7 +108,7 @@ describe TrainingsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => training.id, :training => attributes_for(:training)
+        patch :update, :params => { :id => training.id, :training => attributes_for(:training) }
       end
 
       it { should respond_with(:redirect) }
@@ -121,7 +121,7 @@ describe TrainingsController do
     describe "DELETE :destroy without association" do
 
       before(:each) do
-        delete :destroy, :id => training.id
+        delete :destroy, :params => { :id => training.id }
       end
 
       it { should redirect_to(trainings_path) }
@@ -134,7 +134,7 @@ describe TrainingsController do
       before(:each) do
         allow_any_instance_of(Training).to receive(:firemen).and_return(double(:empty? => false))
 
-        delete :destroy, :id => training.id
+        delete :destroy, :params => { :id => training.id }
       end
 
       it { should redirect_to(training_path(assigns(:training))) }

@@ -48,7 +48,7 @@ describe PasswordResetsController do
       before(:each) do
         expect_any_instance_of(UserMailer).to_not receive(:password_reset_instructions)
 
-        post :create, :email => 'test@test.com'
+        post :create, :params => { :email => 'test@test.com' }
       end
 
       it { should respond_with(:success) }
@@ -63,7 +63,7 @@ describe PasswordResetsController do
       before(:each) do
         expect_any_instance_of(UserMailer).to receive(:password_reset_instructions)
 
-        post :create, :email => user.email
+        post :create, :params => { :email => user.email }
       end
 
       it { should respond_with(:success) }
@@ -76,7 +76,7 @@ describe PasswordResetsController do
     describe "GET :edit with bad data" do
 
       before(:each) do
-        get :edit, :id => -1
+        get :edit, :params => { :id => -1 }
       end
 
       it { should respond_with(:redirect) }
@@ -88,7 +88,7 @@ describe PasswordResetsController do
     describe "GET :edit with good data" do
 
       before(:each) do
-        get :edit, :id => user.perishable_token
+        get :edit, :params => { :id => user.perishable_token }
       end
 
       it { should respond_with(:success) }
@@ -101,9 +101,9 @@ describe PasswordResetsController do
     describe "PATCH :update with bad data" do
 
       before(:each) do
-        patch :update, :id => user.perishable_token,
+        patch :update, :params => { :id => user.perishable_token,
                      :user => {:password => 'test',
-                               :password_confirmation => 'tes'}
+                               :password_confirmation => 'tes'} }
       end
 
       it { should respond_with(:success) }
@@ -114,9 +114,9 @@ describe PasswordResetsController do
     describe "PATCH :update with good data" do
 
       before(:each) do
-        patch :update, :id => user.perishable_token,
+        patch :update, :params => { :id => user.perishable_token,
                      :user => {:password => 'test2958',
-                               :password_confirmation => 'test2958'}
+                               :password_confirmation => 'test2958'} }
       end
 
       it { should respond_with(:redirect) }

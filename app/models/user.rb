@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
     if !params[:new_email_tmp].nil?
       if params[:new_email_tmp].blank?
         result = false
-        self.errors[:new_email_tmp] << "Il faut saisir une adresse email."
+        self.errors.add(:new_email_tmp, "Il faut saisir une adresse email.")
       else
         nb_users_with_same_email = self.station
                                        .users
@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
           deliver_new_email_instructions! if result
         else
           result = false
-          self.errors[:new_email_tmp] << "L'adresse email souhaitée est déjà utilisée."
+          self.errors.add(:new_email_tmp, "L'adresse email souhaitée est déjà utilisée.")
         end
       end
     else

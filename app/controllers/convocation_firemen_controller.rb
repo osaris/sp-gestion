@@ -2,7 +2,6 @@ class ConvocationFiremenController < BackController
 
   before_action :load_convocation, :except => [:accept]
   skip_before_action :require_user, :only => [:accept]
-  skip_before_action :require_html_request, :only => [:show, :show_all]
 
   def show
     @convocation_fireman = @convocation.convocation_firemen.find(params[:id])
@@ -23,7 +22,7 @@ class ConvocationFiremenController < BackController
     else
       flash.now[:error] = "Convocation échue ou non trouvée !"
     end
-    render(:text => '', :layout => 'login')
+    render(:html => '', :layout => 'login')
   end
 
   def edit_all

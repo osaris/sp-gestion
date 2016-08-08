@@ -31,7 +31,7 @@ describe UserSessionsController do
       describe "POST :create with good data" do
 
         before(:each) do
-          post :create, :user_session => {:email => @user.email, :password => 'test1234'}
+          post :create, :params => { :user_session => {:email => @user.email, :password => 'test1234'} }
         end
 
         it { should respond_with(:success) }
@@ -52,7 +52,7 @@ describe UserSessionsController do
       describe "POST :create with bad data" do
 
         before(:each) do
-          post :create, :user => {:login => 'test', :password => 'pass'}
+          post :create, :params => { :user => {:login => 'test', :password => 'pass'} }
         end
 
         it { should respond_with(:success) }
@@ -66,7 +66,7 @@ describe UserSessionsController do
       describe "POST :create with good data" do
 
         before(:each) do
-          post :create, :user_session => {:email => @user.email, :password => 'test1234'}
+          post :create, :params => { :user_session => {:email => @user.email, :password => 'test1234'} }
         end
 
         it { should respond_with(:redirect) }

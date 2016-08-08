@@ -59,7 +59,7 @@ describe AccountsController do
       before do
         login(create(:station_logo, :owner_id => user.id), user)
 
-        patch :update_settings, :station => { :remove_logo => '1' }
+        patch :update_settings, :params => { :station => { :remove_logo => '1' } }
       end
 
       it "delete logo station" do
@@ -75,7 +75,7 @@ describe AccountsController do
     before do
       login(create(:station, :owner_id => user.id), user)
 
-      patch :update_settings, :station => { :logo => logo }
+      patch :update_settings, :params => { :station => { :logo => logo } }
     end
 
     it "add logo to station" do
@@ -90,7 +90,7 @@ describe AccountsController do
     before do
       login(create(:station, :owner_id => user.id), user)
 
-      patch :update_settings, :station => { :logo => logo_txt }
+      patch :update_settings, :params => { :station => { :logo => logo_txt } }
     end
 
     it "doesn't add logo to station" do
@@ -106,7 +106,7 @@ describe AccountsController do
       login(create(:station, :owner_id => user.id), user)
       allow_any_instance_of(Station).to receive(:update_owner).and_return(true)
 
-      patch :update_owner, :station => { :owner_id => '' }
+      patch :update_owner, :params => { :station => { :owner_id => '' } }
     end
 
     it { should redirect_to(root_back_url) }
@@ -120,7 +120,7 @@ describe AccountsController do
       login(create(:station, :owner_id => user.id), user)
       allow_any_instance_of(Station).to receive(:update_owner).and_return(false)
 
-      patch :update_owner, :station => { :owner_id => '' }
+      patch :update_owner, :params => { :station => { :owner_id => '' } }
     end
 
     it { should redirect_to(root_back_url) }
