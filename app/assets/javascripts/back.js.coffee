@@ -2,11 +2,11 @@
 #= require jquery-migrate-official/src/migrate
 #= require jquery-ujs
 #= require jqueryui
-#= require jqueryui/ui/datepicker
+#= require jqueryui/ui/widgets/datepicker
 #= require jqueryui/ui/i18n/datepicker-fr
-#= require jqueryui/ui/slider
-#= require jqueryui/ui/accordion
-#= require jqueryui/ui/autocomplete
+#= require jqueryui/ui/widgets/slider
+#= require jqueryui/ui/widgets/accordion
+#= require jqueryui/ui/widgets/autocomplete
 #= require common
 #= require datatables
 #= require datatables-fixedcolumns

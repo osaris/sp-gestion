@@ -45,7 +45,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-migrate-official'
-  gem 'rails-assets-jqueryui', '1.11.4'
+  gem 'rails-assets-jqueryui'
   gem 'rails-assets-jQuery-Timepicker-Addon'
   gem 'rails-assets-pwstrength-bootstrap'
   gem 'rails-assets-datatables'
