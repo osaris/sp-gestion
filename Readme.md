@@ -15,11 +15,11 @@ Dependencies : [![Dependency Status](https://gemnasium.com/osaris/sp-gestion.png
 Prerequisites
 =============
 
-* Ruby 2.0.0 or greater
+* Ruby 2.2.5 or greater
 * Mysql
 * memcached
 * ImageMagick
-* HTTP server with ruby support (Pow, Apache/Nginx+Passenger, Webrick, Thin...)
+* HTTP server with ruby support (Passenger, Puma...)
 
 Setup
 =====
@@ -58,10 +58,12 @@ bundle install
 rake db:setup
 ```
 
-* setup local dns or host file for *.dev resolution (native with Pow) and configure sp-gestion.dev
-  Add 127.0.0.1       cpi-demo.sp-gestion.dev and 127.0.0.1  www.sp-gestion.dev in your hosts unless you have Pow
+* setup local dns for *.dev resolution or configure www.sp-gestion.dev and cpi-demo.sp-gestion.dev via hostfile
 * browse `www.sp-gestion.dev` for home
-* browse `demo.sp-gestion.dev` for a sample account (login : demo@sp-gestion.dev | pass : demospg)
+* browse `cpi-demo.sp-gestion.dev` for a sample account (login : demo@sp-gestion.dev | pass : demospg)
+
+You can switch `cpi-demo` (or any other account) to demo mode by setting to `true` the `demo` flag on the `Station` model. 
+Then you can generate demo data with `rake spg:reset_demo_stations`.  
 
 Emails
 ======
