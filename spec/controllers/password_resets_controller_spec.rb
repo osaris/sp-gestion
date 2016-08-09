@@ -46,8 +46,6 @@ describe PasswordResetsController do
     describe "POST :create with bad data" do
 
       before(:each) do
-        expect_any_instance_of(UserMailer).to_not receive(:password_reset_instructions)
-
         post :create, :params => { :email => 'test@test.com' }
       end
 
@@ -61,8 +59,6 @@ describe PasswordResetsController do
     describe "POST :create with good data" do
 
       before(:each) do
-        expect_any_instance_of(UserMailer).to receive(:password_reset_instructions)
-
         post :create, :params => { :email => user.email }
       end
 
