@@ -3,7 +3,7 @@
 #= require common
 #= require front/cufon-yui
 #= require front/Aller.font
-#= require front/slides.min.jquery
+#= require front/jquery.slides.min
 #= require front/front
 
 #= require_self

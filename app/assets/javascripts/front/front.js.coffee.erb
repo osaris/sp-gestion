@@ -4,23 +4,27 @@ Cufon.replace('h1#logo,h3,h4,h5,.process,#tagline')
 #######################################################
 
 slideshow = () ->
-  $('#slides').slides(
-    preload: true
-    play: 6000
-    hoverPause: true
-    preloadImage: "<%= asset_path('front/slides/loading.gif') %>"
-    animationStart: (current) ->
+  $('#slides').slidesjs(
+    navigation:
+      active: false
+    play:
+      interval: 6000
+      pauseOnHover: true
+      auto: true
+    callback:
+      start: (number) ->
+          $(".caption").animate
+            bottom: -75
+          , 100
+      complete: (number) ->
         $(".caption").animate
-          bottom: -25
-        , 100
-    animationComplete: (current) ->
-      $(".caption").animate
-        bottom: 0
-      , 200
-    slidesLoaded: ->
-      $(".caption").animate
-        bottom: 0
-      , 200 )
+          bottom: 0
+        , 200
+      loaded: ->
+        $(".caption").animate
+          bottom: 0
+        , 200 )
+
 
 Rails.register_init ['pages\\home'], () -> slideshow()
 
