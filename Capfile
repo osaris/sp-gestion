@@ -29,3 +29,6 @@ require 'rollbar/capistrano3'
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 
 Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
+
+require "capistrano/scm/git"
+install_plugin Capistrano::SCM::Git
