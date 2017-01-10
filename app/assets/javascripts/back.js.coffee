@@ -13,7 +13,7 @@
 #= require moment
 #= require moment-timezone/moment-timezone-with-data
 #= require fullcalendar
-#= require fullcalendar/lang/fr
+#= require fullcalendar/locale/fr
 #= require jQuery-Timepicker-Addon/jquery-ui-timepicker-addon
 #= require jQuery-Timepicker-Addon/i18n/jquery-ui-timepicker-fr
 #= require pwstrength-bootstrap

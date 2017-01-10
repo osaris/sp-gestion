@@ -7,7 +7,6 @@ set :application, 'sp-gestion.fr'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 set :deploy_to, "/home/path/to/application/#{fetch(:application)}"
-set :scm, :git
 
 set :repo_url, 'git@github.com:osaris/sp-gestion.git'
 set :branch, 'master'

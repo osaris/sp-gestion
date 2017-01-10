@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.0'
+gem 'rails', '5.0.1'
 
 gem 'mysql2'
 
@@ -13,15 +13,14 @@ gem 'aproxacs-s3sync'
 gem 'asset_sync'
 gem 'authlogic', :github => 'binarylogic/authlogic'
 gem 'cancancan'
-# TODO unlock this when a new version of carrierwave is released
-gem 'carrierwave', :github => 'carrierwaveuploader/carrierwave', :ref => 'c31f2e7e7afc223a2b85696f39156e383b758d51'
+gem 'carrierwave'
 gem 'coffee-rails'
 gem 'daemons'
 gem 'dalli'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'error_page_assets'
-gem 'fog'
+gem 'fog-aws'
 gem 'geocoder'
 gem 'highline'
 gem 'lazy_high_charts'
