@@ -43,6 +43,6 @@ production:
   reconnect: false
   database: spgestion_production
   pool: 5
-  username: root
+  username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost
