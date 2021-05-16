@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/binarylogic/authlogic.git
+  remote: https://github.com/binarylogic/authlogic.git
   revision: 1626495a8905473058aace25a92fb2abe143bd75
   specs:
     authlogic (3.5.0)
