@@ -62,8 +62,11 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
   gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
   gem 'letter_opener_web'
   gem 'rails-erd'
+  gem 'bcrypt_pbkdf'
+  gem 'ed25519'
 end
 
 group :test do

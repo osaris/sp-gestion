@@ -62,6 +62,7 @@ GEM
       fog-core
       mime-types
       unf
+    bcrypt_pbkdf (1.1.0)
     builder (3.2.2)
     cancancan (1.15.0)
     capistrano (3.7.1)
@@ -79,6 +80,9 @@ GEM
     capistrano-rails (1.2.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     carrierwave (1.0.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -108,6 +112,7 @@ GEM
       delayed_job (>= 3.0, < 5)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    ed25519 (1.2.4)
     email_spec (2.1.0)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
@@ -179,7 +184,7 @@ GEM
     mysql2 (0.4.5)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (4.0.1)
+    net-ssh (5.1.0)
     newrelic_rpm (3.17.2.327)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
@@ -194,7 +199,7 @@ GEM
       prawn (>= 0.6.0)
       rails (>= 3.1)
     public_suffix (2.0.5)
-    puma (3.6.2)
+    puma (3.7.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -340,11 +345,13 @@ DEPENDENCIES
   aproxacs-s3sync
   asset_sync
   authlogic!
+  bcrypt_pbkdf
   cancancan
   capistrano
   capistrano-bundler
   capistrano-passenger
   capistrano-rails
+  capistrano-rbenv
   carrierwave
   coffee-rails
   coveralls
@@ -353,6 +360,7 @@ DEPENDENCIES
   database_cleaner
   delayed_job
   delayed_job_active_record
+  ed25519
   email_spec
   error_page_assets
   factory_girl_rails
@@ -401,4 +409,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.13.7
+   1.17.3
