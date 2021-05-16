@@ -44,5 +44,5 @@ production:
   database: spgestion_production
   pool: 5
   username: root
-  password:
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost
