@@ -194,7 +194,7 @@ GEM
       prawn (>= 0.6.0)
       rails (>= 3.1)
     public_suffix (2.0.5)
-    puma (3.7.0)
+    puma (3.12.6)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
