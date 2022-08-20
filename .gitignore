@@ -1,6 +1,7 @@
 log
 tmp
 coverage
+core.*
 public/uploads
 config/newrelic.yml
 config/sp-gestion.yml
