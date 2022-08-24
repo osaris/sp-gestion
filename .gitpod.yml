@@ -7,7 +7,9 @@ tasks:
       rvm install $(cat .ruby-version)
       bundle install
       cp config/sp-gestion.sample.yml config/sp-gestion.yml
-    command: bin/rails server
+      rake db:setup
+    command: |
+      bin/rails server
 
 image:
   file: .gitpod.dockerfile
