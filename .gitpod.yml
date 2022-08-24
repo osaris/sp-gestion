@@ -4,7 +4,6 @@
 
 tasks:
   - init: |
-      rvm install $(cat .ruby-version)
       bundle install
       cp config/sp-gestion.sample.yml config/sp-gestion.yml
       rake db:setup

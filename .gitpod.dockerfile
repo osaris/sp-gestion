@@ -5,3 +5,5 @@ RUN sudo apt-get -y install graphviz
 RUN sudo apt-get -y install memcached
 
 RUN sudo service memcached start
+
+RUN rvm install 2.4.0
